@@ -1,29 +1,27 @@
-# Data Modal
+# Data Model
 
-The annotations emitted from LibCrowds Viewer are based on the [Web Annotations data model](https://www.w3.org/TR/annotation-model/).
-
-See [Annotation Modes](/annotations/README.md) for examples.
+The annotations emitted from LibCrowds Viewer are based on the [Web Annotations Data Model](https://www.w3.org/TR/annotation-model/), see See [Annotations](/annotations/README.md) for specific examples for each type of task.
 
 
 | Property       | Type             | Description                                                                                                                       |
 |----------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| @context       | String           | The JSON-LD context (always [http://www.w3.org/ns/anno.jsonld]http://www.w3.org/ns/anno.jsonld(http://www.w3.org/ns/anno.jsonld)) |
-| id             | String           | An automatically generated UUID                                                                                                   |
+| @context       | String           | The JSON-LD context (always '[http://www.w3.org/ns/anno.jsonld](http://www.w3.org/ns/anno.jsonld)')                                 |
+| id             | String           | An automatically generated UUID (to be replaced with an IRI by the client when the Annotation is stored)                          |
 | type           | String           | The class for Web Annotations (always 'Annotation')                                                                               |
-| motivation     | String           | The relationship between an Annotation and a Motivation                                                                           |
-| created        | String           | The time at which the resource was created                                                                                        |
-| creator        | String or Object | The agent responsible for creating the resource (human or software)                                                               |
+| motivation     | String           | The relationship between the Annotation and a Motivation                                                                          |
+| created        | String           | The time at which the Annotation was created                                                                                      |
+| creator        | String or Object | The agent responsible for creating the resource (generally a human)                                                               |
 | generated      | String           | The time at which the Annotation serialization was generated                                                                      |
 | generator      | String or Object | The agent responsible for generating the serialization of the Annotation (typically software)                                     |
-| modified       | String           | The time at which the resource was modified, after creation                                                                       |
-| target         | String or Object | The target of the resource being annotated                                                                                        |
-| body           | Object           | The relationship between an Annotation and its Body                                                                               |
+| modified       | String           | The time at which the Annotation was modified, after its creation                                                                 |
+| target         | String or Object | The target of the Annotation                                                                                                      |
+| body           | Object           | The relationship between the Annotation and its Body                                                                              |
 
 ## target
 
-The target is specified through the task configuration, see [Configuration](configuration.md) for details.
+The target is specified via the `target` property of each [task configuration](configuration.md#tasks).
 
-The String passed during task configuration will be used directly, unless a specific fragment of the image is also selected, in which case the target will be specified
+The String passed as the `target` will be used directly, unless a specific fragment of the image is selected, in which case the target will be specified
 with the following properties.
 
 | Property            | Type             | Description                                                                                                                       |
@@ -31,7 +29,7 @@ with the following properties.
 | source              | String           | The initial target                                                                                                                |
 | selector            | Object           | The relationship between the resource and a selector                                                                              |
 | selector.type       | String           | The class of the selector (always 'FragmentSelector')                                                                             |
-| selector.conformsTo | String           | The fragment selector syntax IRI (always 'http://www.w3.org/TR/media-frags/')                                                     |
+| selector.conformsTo | String           | The fragment selector syntax IRI (always '[http://www.w3.org/TR/media-frags/](http://www.w3.org/TR/media-frags/)')                |
 | selector.value      | String           | The contents of the fragment component                                                                                            |
 
 #### Example
@@ -49,7 +47,7 @@ with the following properties.
 
 ## body
 
-Annotation bodies will differ depending on task configuration, see [Configuration](configuration.md) and [Modes](modes.md) for details.
+The Annotation body will differ depending on the [task configuration](configuration.md#tasks).
 
 ### Tags
 

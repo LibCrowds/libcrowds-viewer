@@ -1,9 +1,9 @@
 
-# Transcribe Mode
-
-Generate Select Annotations by setting the task options `type` to  `transcribe`, see [Configuration](../configuration.md) for details.
+# Transcribe Annotations
 
 In transcribe mode a form schema is passed to the viewer along with optional coordinates to highlight regions of the image, such as those returned from a previous selection task, allowing for transcription of specific details found in the image.
+
+Generate Transcribe Annotations by setting the task options `type` to `transcribe`, see [Configuration](../configuration.md) for details.
 
 Note that the `form` task property is required when in `transcribe` mode. The `tag` and `classification` task properties are ignored and are instead taken from `form.model` and `form.classification`, respectively.
 
