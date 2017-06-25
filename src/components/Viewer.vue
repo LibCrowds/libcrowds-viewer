@@ -73,7 +73,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~bootstrap/scss/bootstrap';
 
 .viewer-container {
   height: 100%;
@@ -108,7 +107,7 @@ export default {
     background-color: rgba(0, 0, 0, 0.75);
     padding: 0 0.5rem;
 
-    @include media-breakpoint-up(lg) {
+    @media screen and (min-width: 992px) {
       padding: 0;
       flex-direction: column;
     }
@@ -125,7 +124,8 @@ export default {
       outline: none !important;
       opacity: 0.65;
 
-      @include hover-focus() {
+      &:hover,
+      &:focus {
         opacity: 1;
       }
     }
@@ -142,11 +142,11 @@ export default {
     overflow: hidden;
     display: none;
 
-    @include media-breakpoint-up(lg) {
+    @media screen and (min-width: 992px) {
         display: block;
     }
 
-    @include media-breakpoint-up(lg) {
+    @media screen and (min-width: 992px) {
         width: 25%;
     }
 
@@ -161,7 +161,7 @@ export default {
       border: 2px solid rgb(85, 85, 85);
       background-color: rgba(0, 0, 0, 0.75);
 
-      @include media-breakpoint-up(lg) {
+      @media screen and (min-width: 992px) {
         flex-direction: column;
       }
 
@@ -212,7 +212,7 @@ export default {
     background-color: rgba(0, 0, 0, 0.75);
     border-top: 2px solid rgb(85, 85, 85);
 
-    @include media-breakpoint-up(lg) {
+    @media screen and (min-width: 992px) {
       display: none;
     }
   }
@@ -243,7 +243,7 @@ export default {
 
   .viewer-modal {
     .modal-content {
-      border: 1px solid $gray-lighter;
+      border: 1px solid #F8F8F8;
     }
   }
 
@@ -253,19 +253,20 @@ export default {
   }
 
   .selection-overlay {
-    border: 2px solid $brand-info;
-    background-color: rgba($brand-info, 0.2);
+    border: 2px solid #3498DB;
+    background-color: rgba(#3498DB, 0.2);
     opacity: .6;
 
-    @include hover-focus() {
+    &:hover,
+    &:focus {
       opacity: 1;
     }
   }
 
   .highlight-overlay {
-    -webkit-box-shadow: 0 0 10px $brand-success;
-    box-shadow: 0 0 10px 3px $brand-success;
-    outline: 1px solid $brand-success;
+    -webkit-box-shadow: 0 0 10px #2ECC71;
+    box-shadow: 0 0 10px 3px #2ECC71;
+    outline: 1px solid #2ECC71;
   }
 }
 
