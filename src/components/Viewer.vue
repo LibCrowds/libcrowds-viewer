@@ -72,7 +72,7 @@ export default {
 }
 </script>
 
-<styles lang="scss">
+<style lang="scss">
 @import '~bootstrap/scss/bootstrap';
 
 .viewer-container {
