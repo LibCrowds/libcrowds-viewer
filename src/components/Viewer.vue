@@ -20,7 +20,7 @@ export default {
   props: {
     viewerOpts: {
       type: Object,
-      default: {}
+      default: () => {}
     }
   },
 
