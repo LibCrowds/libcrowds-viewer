@@ -2,6 +2,7 @@
 
 > IIIF-compatible image viewer component
 
+
 ## Build Setup
 
 ``` bash
@@ -15,4 +16,17 @@ npm run dev
 npm run build
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Usage
+
+``` js
+import Vue from 'vue';
+import LibcrowdsViewer from 'libcrowds-viewer';
+
+Vue.component('lc-viewer', LibcrowdsViewer);
+```
+
+You can now use the component like this:
+
+``` vue
+<lc-viewer></lc-viewer>
+```
