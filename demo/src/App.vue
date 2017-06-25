@@ -1,6 +1,9 @@
 <template>
   <div id="viewer">
-    <lc-viewer :options="options"></lc-viewer>
+    <lc-viewer
+      :options="options"
+      :tileSource="tileSource">
+    </lc-viewer>
   </div>
 </template>
 
@@ -8,7 +11,8 @@
 export default {
   data () {
     return {
-      options: {}
+      options: {},
+      tileSource: 'http://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json'
     }
   }
 }
