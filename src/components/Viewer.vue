@@ -13,15 +13,17 @@ import 'openseadragonselection/dist/openseadragonselection'
 export default {
   data: function () {
     return {
-      viewer: OpenSeadragon(this.normalizedViewerOpts)
+      viewer: null
     }
   },
 
   props: {
-    viewerOpts: {
-      type: Object,
-      default: () => {}
-    }
+    viewerOpts: Object,
+    tileSource: {
+      type: String,
+      required: true
+    },
+    manifest: String
   },
 
   components: {
@@ -29,10 +31,9 @@ export default {
   },
 
   computed: {
-    normalizedViewerOpts () {
+    normalizedViewerOpts: function () {
       const defaultOpts = {
-        element: this.$refs.viewer,
-        prefixUrl: '@/assets/openseadragon/images',
+        prefixUrl: '../static/images/',
         showNavigator: false,
         navigatorPosition: 'BOTTOM_LEFT',
         zoomInButton: 'zoom-in',
@@ -53,7 +54,7 @@ export default {
         },
         selectionEnabled: false,
         selectionConfig: {
-          prefixUrl: '@/assets/openseadragon/images',
+          prefixUrl: '../static/images/',
           restrictToImage: true,
           toggleButton: 'toggle-selection',
           keyboardShortcut: null,
@@ -72,17 +73,40 @@ export default {
       }
       return Object.assign(defaultOpts, this.viewerOpts)
     }
+  },
+
+  methods: {
+    loadTileSource () {
+      this.viewer.open({
+        type: 'image',
+        tileSource:  this.tileSource,
+        buildPyramid: false
+      });
+    }
+  },
+
+  watch: {
+    tileSource: function () {
+      this.loadTileSource()
+    }
+  },
+
+  mounted () {
+    let opts = this.normalizedViewerOpts
+    opts.element = this.$refs.viewer
+    this.viewer = OpenSeadragon(opts)
+    this.loadTileSource()
   }
 }
 </script>
 
 <style lang="scss">
 
-.viewer-container {
+#libcrowds-viewer {
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
+  width: auto;
   background-color: #000000;
 }
 
