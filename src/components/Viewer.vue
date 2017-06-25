@@ -1,19 +1,12 @@
 <template>
-<<<<<<< HEAD
   <div id="libcrowds-viewer">
     <div ref="viewer"></div>
     <metadata :manifest="manifest" v-if="manifest"></metadata>
-=======
-  <div id="project-content" class="d-flex flex-column h-100">
-    <div class="viewer-container">
-      <div ref="viewer" class="h-100"></div>
-    </div>
->>>>>>> parent of ba46ccd... Updates
   </div>
 </template>
 
 <script>
-import Metadata from './Metadata'
+import Metadata from './Metadata.vue'
 import OpenSeadragon from 'openseadragon'
 import 'openseadragonselection/dist/openseadragonselection'
 
