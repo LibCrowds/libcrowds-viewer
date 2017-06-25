@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <libcrowds-viewer :options="options"></libcrowds-viewer>
+  <div id="viewer">
+    <lc-viewer :options="options"></lc-viewer>
   </div>
 </template>
 

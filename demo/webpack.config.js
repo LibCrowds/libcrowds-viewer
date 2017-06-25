@@ -4,10 +4,9 @@ var webpack = require('webpack')
 module.exports = {
   entry: './src/main.js',
   output: {
-    path: path.join(__dirname, '__build__'),
-    filename: '[name].js',
-    chunkFilename: '[id].chunk.js',
-    publicPath: '/__build__/'
+    path: path.resolve(__dirname, './dist'),
+    publicPath: '/dist/',
+    filename: 'build.js'
   },
   module: {
     rules: [
@@ -42,7 +41,7 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      'libcrowds-viewer': path.resolve(__dirname, '../src/index.js')
+      'libcrowds-viewer': path.resolve(__dirname, '../src/main.js')
     }
   },
   devServer: {
