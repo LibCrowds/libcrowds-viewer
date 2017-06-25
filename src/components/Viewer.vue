@@ -1,10 +1,12 @@
 <template>
   <div id="libcrowds-viewer">
     <div ref="viewer"></div>
+    <metadata :manifest="manifest" v-if="manifest"></metadata>
   </div>
 </template>
 
 <script>
+import Metadata from './Metadata'
 import OpenSeadragon from 'openseadragon'
 import 'openseadragonselection/dist/openseadragonselection'
 
@@ -22,6 +24,10 @@ export default {
       required: true
     },
     manifest: String
+  },
+
+  components: {
+    Metadata
   },
 
   computed: {
