@@ -1,9 +1,6 @@
 .DS_Store
 node_modules/
-demo/node_modules/
 dist/
-static/openseadragon/*
-demo/dist/
 npm-debug.log
 yarn-error.log
 src/assets

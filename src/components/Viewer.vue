@@ -1,7 +1,14 @@
 <template>
+<<<<<<< HEAD
   <div id="libcrowds-viewer">
     <div ref="viewer"></div>
     <metadata :manifest="manifest" v-if="manifest"></metadata>
+=======
+  <div id="project-content" class="d-flex flex-column h-100">
+    <div class="viewer-container">
+      <div ref="viewer" class="h-100"></div>
+    </div>
+>>>>>>> parent of ba46ccd... Updates
   </div>
 </template>
 
@@ -13,17 +20,15 @@ import 'openseadragonselection/dist/openseadragonselection'
 export default {
   data: function () {
     return {
-      viewer: null
+      viewer: OpenSeadragon(this.normalizedViewerOpts)
     }
   },
 
   props: {
-    viewerOpts: Object,
-    tileSource: {
-      type: String,
-      required: true
-    },
-    manifest: String
+    viewerOpts: {
+      type: Object,
+      default: {}
+    }
   },
 
   components: {
@@ -31,9 +36,10 @@ export default {
   },
 
   computed: {
-    normalizedViewerOpts: function () {
+    normalizedViewerOpts () {
       const defaultOpts = {
-        prefixUrl: '../static/images/',
+        element: this.$refs.viewer,
+        prefixUrl: '@/assets/openseadragon/images',
         showNavigator: false,
         navigatorPosition: 'BOTTOM_LEFT',
         zoomInButton: 'zoom-in',
@@ -54,7 +60,7 @@ export default {
         },
         selectionEnabled: false,
         selectionConfig: {
-          prefixUrl: '../static/images/',
+          prefixUrl: '@/assets/openseadragon/images',
           restrictToImage: true,
           toggleButton: 'toggle-selection',
           keyboardShortcut: null,
@@ -73,40 +79,17 @@ export default {
       }
       return Object.assign(defaultOpts, this.viewerOpts)
     }
-  },
-
-  methods: {
-    loadTileSource () {
-      this.viewer.open({
-        type: 'image',
-        tileSource:  this.tileSource,
-        buildPyramid: false
-      });
-    }
-  },
-
-  watch: {
-    tileSource: function () {
-      this.loadTileSource()
-    }
-  },
-
-  mounted () {
-    let opts = this.normalizedViewerOpts
-    opts.element = this.$refs.viewer
-    this.viewer = OpenSeadragon(opts)
-    this.loadTileSource()
   }
 }
 </script>
 
 <style lang="scss">
 
-#libcrowds-viewer {
-  display: flex;
-  flex-direction: column;
+.viewer-container {
   height: 100%;
-  width: auto;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
   background-color: #000000;
 }
 
