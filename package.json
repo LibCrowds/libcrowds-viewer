@@ -5,8 +5,8 @@
   "author": "Alex Mendes <alexanderhmendes@gmail.com>",
   "private": true,
   "scripts": {
-    "copy:openseadragon": "cp -R node_modules/openseadragon/build/openseadragon/images ./src/assets/openseadragon/",
-    "copy:openseadragonselection": "cp -R node_modules/openseadragonselection/images ./src/assets/openseadragon/",
+    "copy:openseadragon": "cp -R node_modules/openseadragon/build/openseadragon/images ./src/assets/",
+    "copy:openseadragonselection": "cp -R node_modules/openseadragonselection/images ./src/assets/",
     "postinstall": "npm run copy:openseadragon && npm run copy:openseadragonselection",
     "dev": "cross-env NODE_ENV=development webpack-dev-server demo/ --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
