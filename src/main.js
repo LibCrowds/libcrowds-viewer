@@ -1,3 +1,3 @@
-import LibcrowdsViewer from './components/Viewer.vue';
+import LibcrowdsViewer from './components/Viewer.vue'
 
-export default LibcrowdsViewer;
+export default LibcrowdsViewer
