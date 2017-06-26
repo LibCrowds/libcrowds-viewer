@@ -1,49 +1,12 @@
 <template>
   <div id="lc-controls">
 
-    <button
-      :id="viewerOpts.zoomInButton"
-      data-toggle="tooltip"
-      title="Zoom in">
-      <icon name="plus-circle"></icon>
-    </button>
-
-    <button
-      :id="viewerOpts.zoomOutButton"
-      data-toggle="tooltip"
-      title="Zoom out">
-      <icon name="minus-circle"></icon>
-    </button>
-
-    <button
-      :id="viewerOpts.homeButton"
-      data-toggle="tooltip"
-      title="Reset zoom">
-      <icon name="refresh"></icon>
-    </button>
-
-    <button
-      :id="viewerOpts.fullPageButton"
-      data-toggle="tooltip"
-      title="Fullscreen">
-      <icon name="expand"></icon>
-    </button>
-
-    <button
-      :id="viewerOpts.helpButton"
-      data-toggle="tooltip"
-      title="Help"
-      @click="showHelpModal">
-      <icon name="question-circle"></icon>
-    </button>
-
-    <button
-      :id="viewerOpts.infoButton"
-      data-toggle="tooltip"
-      title="Details"
-      @click="showMetadataModal">
-      <icon name="info-circle"></icon>
-    </button>
+      <button
+        :id="b.id"
+        v-for="b in buttons"
+        class="hint--right hint--no-animate" :aria-label="b.tooltip">
+        <icon :name="b.icon"></icon>
+      </button>
 
   </div>
 </template>
@@ -67,37 +30,25 @@ export default {
   },
 
   props: {
-    viewerOpts: {
-      type: Object,
-      required: true
-    },
-    metadataModalId: {
-      type: String,
+    buttons: {
+      type: Array,
       required: true
     }
   },
 
   components: {
     Icon
-  },
-
-  methods: {
-    showMetadataModal () {
-      this.$root.$emit('show::modal', this.metadataModalId)
-    },
-    showHelpModal () {
-      this.$root.$emit('show::modal', this.viewerOpts.helpButton)
-    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '~hint.css';
+
 #lc-controls {
   display: flex;
   flex-direction: row;
-  top: 70px;
-  margin: 0.8rem;
+  margin: 1rem;
   position: absolute;
   z-index: 2;
   border-radius: 25px;
@@ -115,7 +66,7 @@ export default {
     opacity: 0.8;
     text-shadow: 0 0 5px #000000;
     font-size: 1.25rem;
-    padding: .5rem;
+    padding: .75rem;
     cursor: pointer;
     border: none;
     outline: none !important;

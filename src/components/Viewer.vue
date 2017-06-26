@@ -1,21 +1,17 @@
 <template>
   <div id="lc-viewer">
-    
-    <div ref="viewer"></div>
-    
-    <controls 
-      ref="controls"
-      :metadataModalId="metadataModalId"
-      :viewerOpts="normalizedViewerOpts">
-    </controls>
-    
+
+    <controls ref="controls" :buttons="controlButtons"></controls>
+
     <metadata-modal
+      v-if="manifest"
       :id="metadataModalId"
-      :show="showMetadataModal"
-      :manifest="manifest" 
-      v-if="manifest">
+      :manifest="manifest">
     </metadata-modal>
-    
+
+    <!-- Render viewer after all other components -->
+    <div ref="viewer"></div>
+
   </div>
 </template>
 
@@ -41,7 +37,10 @@ export default {
       type: String,
       required: true
     },
-    manifest: String,
+    manifest: {
+      type: String,
+      default: null
+    },
     confirmBeforeUnload : {
       type: Boolean,
       default: false
@@ -95,6 +94,44 @@ export default {
         returnPixelCoordinates: false
       }
       return Object.assign(defaultOpts, this.selectionOpts)
+    },
+    controlButtons: function () {
+      let buttons = [{
+        id: this.normalizedViewerOpts.zoomInButton,
+        tooltip: 'Zoom in',
+        icon: 'plus-circle'
+      },
+      {
+        id: this.normalizedViewerOpts.zoomOutButton,
+        tooltip: 'Zoom out',
+        icon: 'minus-circle'
+      },
+      {
+        id: this.normalizedViewerOpts.homeButton,
+        tooltip: 'Reset Zoom',
+        icon: 'refresh'
+      },
+      {
+        id: this.normalizedViewerOpts.fullPageButton,
+        tooltip: 'Fullscreen',
+        icon: 'expand'
+      },
+      {
+        id: this.normalizedViewerOpts.helpButton,
+        tooltip: 'Help',
+        icon: 'question-circle'
+      }]
+
+      // If
+      if (this.manifest) {
+        buttons.push({
+          id: this.normalizedViewerOpts.infoButton,
+          tooltip: 'Details',
+          icon: 'info-circle',
+          click: this.$root.$emit('show::modal', this.metadataModalId)
+        })
+      }
+      return buttons
     }
   },
 

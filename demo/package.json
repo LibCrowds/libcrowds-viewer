@@ -10,6 +10,8 @@
     "deploy": "npm run prepare && gh-pages -d dist/"
   },
   "dependencies": {
+    "balloon-css": "^0.4.0",
+    "hint.css": "^2.5.0",
     "vue": "^2.0.0",
     "vue-awesome": "^2.3.1"
   },

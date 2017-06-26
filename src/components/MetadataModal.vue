@@ -1,6 +1,6 @@
 <template>
   <div id="lc-metadata">
-    <modal 
+    <modal
       :id="id"
       title="Metadata">
       <ul id="manifest-md" v-for="m in manifestData.metadata">
