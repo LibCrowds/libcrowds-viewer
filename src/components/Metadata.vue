@@ -2,7 +2,10 @@
   <div id="metadata">
     <modal title="Metadata">
       <ul id="manifest-md" v-for="m in manifestData.metadata">
-        <li>{{ m.label }}</li>
+        <li>
+          <strong>{{ m.label }}:</strong>
+          &nbsp;
+          <span v-html="m.value"></span></li>
       </ul>
       <div id="rights">
         <img :src="manifestData.logo" />
@@ -26,7 +29,7 @@ export default {
 
   methods: {
     fetchManifest () {
-      axios.get(this.manifest).then(function (r) {
+      axios.get(this.manifest).then((r) => {
         this.manifestData = r.data
       }).catch(function (error) {
         console.log(error);
@@ -59,5 +62,9 @@ export default {
 #rights {
   text-align: center;
   margin: 2rem;
+}
+
+li {
+  margin: 0;
 }
 </style>
