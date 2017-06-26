@@ -6,7 +6,8 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "clean": "rimraf ./dist",
-    "deploy": "npm run clean && npm run build && gh-pages -d ."
+    "prepare": "npm run clean && npm run build && cp index.html dist/ && sed 's|dist/||g' dist/index.html",
+    "deploy": "npm run prepare && gh-pages -d dist/"
   },
   "dependencies": {
     "vue": "^2.0.0"
