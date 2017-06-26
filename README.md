@@ -3,11 +3,10 @@
 > IIIF-compatible image viewer Vue component
 
 Originally designed for the LibCrowds crowdsourcing platform, this component
-presents an image (loaded from a tile source) and provides options for users to
-mark and transcribe areas of that image, returning an object containing the
-user input.
+presents an image (loaded from a tile source) and provides options for users 
+to mark and transcribe areas of that image.
 
-[DEMO](https://libcrowds.github.io/libcrowds-viewer/)
+[**DEMO**](https://libcrowds.github.io/libcrowds-viewer/)
 
 ## Build Setup
 
@@ -31,5 +30,9 @@ Vue.component('lc-viewer', LibcrowdsViewer);
 You can now use the component like this:
 
 ``` vue
-<lc-viewer></lc-viewer>
+<lc-viewer tileSource="{scheme}://{server}{/prefix}/{identifier}/info.json"></lc-viewer>
 ```
+
+Where `tileSource` is a URI conforming to the IIIF Image Request URI Syntax, 
+see the [IIIF Image API (v2.1) documentation](http://iiif.io/api/image/2.1) 
+for details.
