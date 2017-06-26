@@ -2,6 +2,8 @@
 
 > A demo of libcrowds-viewer
 
+[DEMO](https://libcrowds.github.io/libcrowds-viewer/)
+
 ## Build Setup
 
 ``` bash
