@@ -1,5 +1,5 @@
 <template>
-  <div id="libcrowds-viewer">
+  <div id="lc-viewer">
     
     <div ref="viewer"></div>
     
@@ -124,12 +124,13 @@ export default {
 
 <style lang="scss">
 
-#libcrowds-viewer {
+#lc-viewer {
   display: flex;
   flex-direction: column;
   height: 100%;
   width: auto;
   background-color: #000000;
+  overflow: hidden;
 }
 
 .openseadragon-container {
