@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "balloon-css": "^0.4.0",
     "hint.css": "^2.5.0",
     "openseadragon": "^2.2.1",
     "openseadragonselection": "github:picturae/openseadragonselection",
