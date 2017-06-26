@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: './src/main.js',
@@ -44,7 +45,13 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+    new CopyPlugin([{
+      from: '../static',
+      to: './static'
+    }])
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {
