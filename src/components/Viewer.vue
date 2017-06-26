@@ -38,7 +38,7 @@ export default {
   computed: {
     normalizedViewerOpts: function () {
       const defaultOpts = {
-        prefixUrl: '../static/images/',
+        prefixUrl: '../static/openseadragon/',
         showNavigator: false,
         navigatorPosition: 'BOTTOM_LEFT',
         zoomInButton: 'zoom-in',
@@ -59,7 +59,7 @@ export default {
         },
         selectionEnabled: false,
         selectionConfig: {
-          prefixUrl: '../static/images/',
+          prefixUrl: '../static/openseadragon/',
           restrictToImage: true,
           toggleButton: 'toggle-selection',
           keyboardShortcut: null,
@@ -86,7 +86,7 @@ export default {
         type: 'image',
         tileSource:  this.tileSource,
         buildPyramid: false
-      });
+      })
     }
   },
 
@@ -116,7 +116,9 @@ export default {
 }
 
 .openseadragon-container {
-
+  height: 100vh;
+  min-height: 600px;
+    
   &.viewer-loading-icon {
     background: url('/static/svg/loading.svg') 50% 50% no-repeat !important;
   }
