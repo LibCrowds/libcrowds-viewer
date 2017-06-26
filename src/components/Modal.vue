@@ -1,5 +1,5 @@
 <template>
-  <div id="modal-template">
+  <div id="lc-modal-template">
     <transition name="modal" v-if="show">
       <div class="modal-mask">
         <div class="modal-wrapper">
@@ -55,7 +55,7 @@ export default {
 <style lang="scss" scoped>
 @import '../assets/style/settings';
 
-#modal-template {
+#lc-modal-template {
   .modal-mask {
     position: fixed;
     z-index: 9998;
