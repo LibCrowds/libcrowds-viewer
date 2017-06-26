@@ -19,11 +19,16 @@ export default {
 
   props: {
     viewerOpts: Object,
+    selectionOpts: Object,
     tileSource: {
       type: String,
       required: true
     },
-    manifest: String
+    manifest: String,
+    confirmBeforeUnload : {
+      type: Boolean,
+      default: false
+    }
   },
 
   components: {
@@ -59,19 +64,19 @@ export default {
           toggleButton: 'toggle-selection',
           keyboardShortcut: null,
           returnPixelCoordinates: false
-        },
-        confirmBeforeLeaving: true,
-        taskInputConfig: {
-          title: 'Task',
-          answerButtonText: 'Done',
-          showProgress: true,
-          showFavourites: true,
-          showTutorial: false,
-          showComments: true,
-          showPreview: true
         }
       }
       return Object.assign(defaultOpts, this.viewerOpts)
+    },
+    normalizedSelectionOpts: function () {
+      const defaultOpts = {
+        prefixUrl: '../static/images/',
+        restrictToImage: true,
+        toggleButton: 'toggle-selection',
+        keyboardShortcut: null,
+        returnPixelCoordinates: false
+      }
+      return Object.assign(defaultOpts, this.selectionOpts)
     }
   },
 
