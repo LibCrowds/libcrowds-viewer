@@ -5,8 +5,8 @@
   "author": "Alex Mendes <alexanderhmendes@gmail.com>",
   "private": true,
   "scripts": {
-    "copy:openseadragon": "cp -R node_modules/openseadragon/build/openseadragon/images ./static",
-    "copy:openseadragonselection": "cp -R node_modules/openseadragonselection/images ./static",
+    "copy:openseadragon": "cp -R node_modules/openseadragon/build/openseadragon/images ./static/openseadragon",
+    "copy:openseadragonselection": "cp -R node_modules/openseadragonselection/images ./static/openseadragon",
     "postinstall": "npm run copy:openseadragon && npm run copy:openseadragonselection",
     "lint": "eslint --ext .js,.vue src demo",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
