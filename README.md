@@ -1,6 +1,11 @@
 # libcrowds-viewer
 
-> IIIF-compatible image viewer component
+> IIIF-compatible image viewer Vue component
+
+Originally designed for the LibCrowds crowdsourcing platform, this component
+presents an image (loaded from a tile source) and provides options for users to
+mark and transcribe areas of that image, returning an object containing the
+user input.
 
 
 ## Build Setup
