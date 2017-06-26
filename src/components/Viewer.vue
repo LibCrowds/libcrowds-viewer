@@ -1,12 +1,24 @@
 <template>
   <div id="libcrowds-viewer">
+    
     <div ref="viewer"></div>
-    <metadata :manifest="manifest" v-if="manifest"></metadata>
+    
+    <controls 
+      :viewerOpts="normalizedViewerOpts"
+      @controlClick="handleControlClick">
+    </controls>
+    
+    <metadata 
+      :manifest="manifest" 
+      v-if="manifest">
+    </metadata>
+    
   </div>
 </template>
 
 <script>
 import Metadata from './Metadata.vue'
+import Controls from './Controls.vue'
 import OpenSeadragon from 'openseadragon'
 import 'openseadragonselection/dist/openseadragonselection'
 
@@ -32,7 +44,8 @@ export default {
   },
 
   components: {
-    Metadata
+    Metadata,
+    Controls
   },
 
   computed: {
@@ -87,6 +100,9 @@ export default {
         tileSource:  this.tileSource,
         buildPyramid: false
       })
+    },
+    handleControlClick (evt) {
+      console.log(evt)
     }
   },
 
@@ -129,41 +145,6 @@ export default {
 
   .openseadragon-message {
     color: #FFFFFF;
-  }
-
-  .viewer-controls {
-    display: flex;
-    flex-direction: row;
-    top: 70px;
-    margin: 0.8rem;
-    position: absolute;
-    z-index: 2;
-    border-radius: 25px;
-    background-color: rgba(0, 0, 0, 0.75);
-    padding: 0 0.5rem;
-
-    @media screen and (min-width: 992px) {
-      padding: 0;
-      flex-direction: column;
-    }
-
-    button {
-      background: none;
-      color: #FFFFFF;
-      opacity: 0.8;
-      text-shadow: 0 0 5px #000000;
-      font-size: 1.25rem;
-      padding: .5rem;
-      cursor: pointer;
-      border: none;
-      outline: none !important;
-      opacity: 0.65;
-
-      &:hover,
-      &:focus {
-        opacity: 1;
-      }
-    }
   }
 
   .viewer-sidebar-container {
