@@ -128,7 +128,9 @@ export default {
           id: this.normalizedViewerOpts.infoButton,
           tooltip: 'Details',
           icon: 'info-circle',
-          click: this.$root.$emit('show::modal', this.metadataModalId)
+          click: () => {
+            this.$root.$emit('show::modal', this.metadataModalId)
+          }
         })
       }
       return buttons

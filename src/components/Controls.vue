@@ -4,7 +4,9 @@
       <button
         :id="b.id"
         v-for="b in buttons"
-        class="hint--right hint--no-animate" :aria-label="b.tooltip">
+        class="hint--right hint--no-animate"
+        :aria-label="b.tooltip"
+        @click="handleClick(b.click)">
         <icon :name="b.icon"></icon>
       </button>
 
@@ -38,6 +40,14 @@ export default {
 
   components: {
     Icon
+  },
+
+  methods: {
+    handleClick (func) {
+      if (typeof func !== 'undefined') {
+        func()
+      }
+    }
   }
 }
 </script>
