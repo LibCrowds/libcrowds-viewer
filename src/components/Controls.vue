@@ -1,55 +1,61 @@
 <template>
   <div id="lc-controls">
-  
-    <button 
-      :id="viewerOpts.zoomOutButton" 
-      data-toggle="tooltip" 
+
+    <button
+      :id="viewerOpts.zoomInButton"
+      data-toggle="tooltip"
+      title="Zoom in">
+      <icon name="plus-circle"></icon>
+    </button>
+
+    <button
+      :id="viewerOpts.zoomOutButton"
+      data-toggle="tooltip"
       title="Zoom out">
-      -
+      <icon name="minus-circle"></icon>
     </button>
-    
-    <button 
-      :id="viewerOpts.homeButton" 
-      data-toggle="tooltip" 
+
+    <button
+      :id="viewerOpts.homeButton"
+      data-toggle="tooltip"
       title="Reset zoom">
-      0
+      <icon name="refresh"></icon>
     </button>
-    
+
     <button
       :id="viewerOpts.fullPageButton"
       data-toggle="tooltip"
       title="Fullscreen">
-      X
+      <icon name="expand"></icon>
     </button>
-    
-    <button 
-      :id="viewerOpts.zoomInButton" 
-      data-toggle="tooltip" 
-      title="Zoom in">
-      +
-    </button>
-    
-    <button 
-      :id="viewerOpts.helpButton" 
-      data-toggle="tooltip" 
+
+    <button
+      :id="viewerOpts.helpButton"
+      data-toggle="tooltip"
       title="Help"
       @click="showHelpModal">
-      ?
+      <icon name="question-circle"></icon>
     </button>
-    
-    <button 
+
+    <button
       :id="viewerOpts.infoButton"
       data-toggle="tooltip"
       title="Details"
       @click="showMetadataModal">
-      i
+      <icon name="info-circle"></icon>
     </button>
-    
-    
+
   </div>
 </template>
 
 <script>
+import Icon from 'vue-awesome/components/Icon.vue'
+import 'vue-awesome/icons/plus-circle'
+import 'vue-awesome/icons/minus-circle'
+import 'vue-awesome/icons/refresh'
+import 'vue-awesome/icons/expand'
+import 'vue-awesome/icons/question-circle'
+import 'vue-awesome/icons/info-circle'
 import axios from 'axios'
 import Modal from './Modal.vue'
 
@@ -70,7 +76,11 @@ export default {
       required: true
     }
   },
-  
+
+  components: {
+    Icon
+  },
+
   methods: {
     showMetadataModal () {
       this.$root.$emit('show::modal', this.metadataModalId)
