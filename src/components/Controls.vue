@@ -4,32 +4,28 @@
     <button 
       :id="viewerOpts.zoomOutButton" 
       data-toggle="tooltip" 
-      title="Zoom out"
-      @click="controlClicked">
+      title="Zoom out">
       -
     </button>
     
     <button 
       :id="viewerOpts.homeButton" 
       data-toggle="tooltip" 
-      title="Reset zoom"
-      @click="controlClicked">
+      title="Reset zoom">
       0
     </button>
     
     <button
       :id="viewerOpts.fullPageButton"
       data-toggle="tooltip"
-      title="Fullscreen"
-      @click="controlClicked">
+      title="Fullscreen">
       X
     </button>
     
     <button 
       :id="viewerOpts.zoomInButton" 
       data-toggle="tooltip" 
-      title="Zoom in"
-      @click="controlClicked">
+      title="Zoom in">
       +
     </button>
     
@@ -37,7 +33,7 @@
       :id="viewerOpts.helpButton" 
       data-toggle="tooltip" 
       title="Help"
-      @click="controlClicked">
+      @click="showHelpModal">
       ?
     </button>
     
@@ -45,7 +41,7 @@
       :id="viewerOpts.infoButton"
       data-toggle="tooltip"
       title="Details"
-      @click="controlClicked">
+      @click="showMetadataModal">
       i
     </button>
     
@@ -68,12 +64,19 @@ export default {
     viewerOpts: {
       type: Object,
       required: true
+    },
+    metadataModalId: {
+      type: String,
+      required: true
     }
   },
   
   methods: {
-    controlClicked (evt) {
-      this.$emit('controlClick', evt.target.id)
+    showMetadataModal () {
+      this.$root.$emit('show::modal', this.metadataModalId)
+    },
+    showHelpModal () {
+      this.$root.$emit('show::modal', this.viewerOpts.helpButton)
     }
   }
 }

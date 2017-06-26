@@ -1,6 +1,8 @@
 <template>
   <div id="lc-metadata">
-    <modal title="Metadata">
+    <modal 
+      :id="id"
+      title="Metadata">
       <ul id="manifest-md" v-for="m in manifestData.metadata">
         <li>
           <strong>{{ m.label }}:</strong>
@@ -39,6 +41,10 @@ export default {
 
   props: {
     manifest: {
+      type: String,
+      requried: true
+    },
+    id: {
       type: String,
       requried: true
     }

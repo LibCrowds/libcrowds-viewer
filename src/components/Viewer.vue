@@ -4,20 +4,22 @@
     <div ref="viewer"></div>
     
     <controls 
-      :viewerOpts="normalizedViewerOpts"
-      @controlClick="handleControlClick">
+      :metadataModalId="metadataModalId"
+      :viewerOpts="normalizedViewerOpts">
     </controls>
     
-    <metadata 
+    <metadata-modal
+      :id="metadataModalId"
+      :show="showMetadataModal"
       :manifest="manifest" 
       v-if="manifest">
-    </metadata>
+    </metadata-modal>
     
   </div>
 </template>
 
 <script>
-import Metadata from './Metadata.vue'
+import MetadataModal from './MetadataModal.vue'
 import Controls from './Controls.vue'
 import OpenSeadragon from 'openseadragon'
 import 'openseadragonselection/dist/openseadragonselection'
@@ -25,7 +27,9 @@ import 'openseadragonselection/dist/openseadragonselection'
 export default {
   data: function () {
     return {
-      viewer: null
+      viewer: null,
+      metadataModalId: 'lc-metadata-modal',
+      showMetadataModal: false
     }
   },
 
@@ -44,7 +48,7 @@ export default {
   },
 
   components: {
-    Metadata,
+    MetadataModal,
     Controls
   },
 
@@ -100,9 +104,6 @@ export default {
         tileSource:  this.tileSource,
         buildPyramid: false
       })
-    },
-    handleControlClick (evt) {
-      console.log(evt)
     }
   },
 

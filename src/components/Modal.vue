@@ -1,7 +1,9 @@
 <template>
-  <div id="lc-modal-template">
-    <transition name="modal" v-if="show">
-      <div class="modal-mask">
+  <div :id="id" class="modal" v-show="show"> 
+    <transition name="modal">
+      <div class="modal-mask"
+        @click="show = false"
+        @keyup.esc="show = false">
         <div class="modal-wrapper">
           <div class="modal-container">
 
@@ -39,15 +41,26 @@ export default {
       show: false
     }
   },
-
+  
   props: {
-    title: String
-  },
-
-  methods: {
-    close () {
-
+    title: String,
+    id: {
+      type: String,
+      requried: true
     }
+  },
+  
+  created() {
+    this.$root.$on('show::modal', (id, triggerEl) => {
+      if (id === this.id) {
+        this.show = true
+      }
+    });
+    this.$root.$on('hide::modal', id => {
+      if (id === this.id) {
+        this.show = false
+      }
+    })
   }
 }
 </script>
@@ -55,7 +68,11 @@ export default {
 <style lang="scss" scoped>
 @import '../assets/style/settings';
 
-#lc-modal-template {
+.modal {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
   .modal-mask {
     position: fixed;
     z-index: 9998;
