@@ -4,6 +4,7 @@
     <div ref="viewer"></div>
     
     <controls 
+      ref="controls"
       :metadataModalId="metadataModalId"
       :viewerOpts="normalizedViewerOpts">
     </controls>
@@ -104,6 +105,11 @@ export default {
         tileSource:  this.tileSource,
         buildPyramid: false
       })
+    },
+    attachControls () {
+      // TODO: this works for fullscreen controls but should possibly use
+      // https://openseadragon.github.io/docs/OpenSeadragon.Control.html
+      this.viewer.container.prepend(this.$refs.controls.$el)
     }
   },
 
@@ -118,6 +124,7 @@ export default {
     opts.element = this.$refs.viewer
     this.viewer = OpenSeadragon(opts)
     this.loadTileSource()
+    this.attachControls()
   }
 }
 </script>
@@ -136,10 +143,6 @@ export default {
 .openseadragon-container {
   height: 100vh;
   min-height: 600px;
-    
-  &.viewer-loading-icon {
-    background: url('/static/svg/loading.svg') 50% 50% no-repeat !important;
-  }
 
   .navbar {
     background-color: rgba(0, 0, 0, 0.75);
