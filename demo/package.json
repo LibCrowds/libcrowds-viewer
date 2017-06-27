@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "hint.css": "^2.5.0",
+    "normalize.css": "^7.0.0",
     "vue": "^2.0.0",
     "vue-awesome": "^2.3.1"
   },
