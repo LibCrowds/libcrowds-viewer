@@ -1,5 +1,5 @@
 <template>
-  <div id="lc-viewer">
+  <div id="lc-viewer" @click="confirmSelection">
 
     <controls ref="controls" :buttons="controlButtons"></controls>
 
@@ -9,6 +9,8 @@
       :manifest="manifest">
     </metadata-modal>
 
+    <overlay v-for="s in selections" :rect="s" :viewer="viewer"></overlay>
+
     <!-- Render viewer after all other components -->
     <div ref="viewer"></div>
 
@@ -17,6 +19,7 @@
 
 <script>
 import MetadataModal from './MetadataModal.vue'
+import Overlay from './Overlay.vue'
 import Controls from './Controls.vue'
 import OpenSeadragon from 'openseadragon'
 import 'openseadragonselection/dist/openseadragonselection'
@@ -26,6 +29,7 @@ export default {
     return {
       viewer: null,
       selector: null,
+      selections: [],
       metadataModalId: 'lc-metadata-modal',
       showMetadataModal: false
     }
@@ -50,7 +54,8 @@ export default {
 
   components: {
     MetadataModal,
-    Controls
+    Controls,
+    Overlay
   },
 
   computed: {
@@ -143,8 +148,15 @@ export default {
     },
     setupHandlers () {
       // Draw an overlay on selection confirmed
-      this.viewer.addHandler('selection', (selection) => {
-        this.drawOverlay(selection, 'selection-overlay')
+      this.viewer.addHandler('selection', (s) => {
+        // Convert Viewport to Image rect
+        const rect = new OpenSeadragon.Rect(s.x, s.y, s.width, s.height)
+        this.selections.push({
+          x: rect.x,
+          y: rect.y,
+          width: rect.width,
+          height: rect.height,
+        })
       })
 
       // Hide loading icon after tile drawn
@@ -182,12 +194,20 @@ export default {
           }
         })
       };
+    },
+    confirmSelection () {
+      this.selector.confirm()
+      this.selector.enable()
+      console.log(this.selections)
     }
   },
 
   watch: {
     tileSource: function () {
       this.loadTileSource()
+    },
+    selections: function () {
+
     }
   },
 
@@ -355,23 +375,11 @@ export default {
   .selection-box {
     transform: none !important;  /** Disable rotation */
     outline: 9999px solid rgba(#000000, .6);
-  }
 
-  .selection-overlay {
-    border: 2px solid #3498DB;
-    background-color: rgba(#3498DB, 0.2);
-    opacity: .6;
-
-    &:hover,
-    &:focus {
-      opacity: 1;
+    /** Hide buttons */
+    img {
+      display: none;
     }
-  }
-
-  .highlight-overlay {
-    -webkit-box-shadow: 0 0 10px #2ECC71;
-    box-shadow: 0 0 10px 3px #2ECC71;
-    outline: 1px solid #2ECC71;
   }
 }
 
