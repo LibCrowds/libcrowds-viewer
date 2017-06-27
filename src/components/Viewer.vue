@@ -148,9 +148,9 @@ export default {
       })
 
       // Hide loading icon after tile drawn
-      this.viewer.addHandler('tile-drawn', () => {
-        this.loading(false)
-      })
+      // this.viewer.addHandler('tile-drawn', () => {
+      //   this.loading(false)
+      // })
 
       // Don't focus on HUD after fullscreen toggled
       this.viewer.addHandler('full-screen', (evt) => {
