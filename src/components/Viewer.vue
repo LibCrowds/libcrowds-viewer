@@ -56,15 +56,12 @@ export default {
     normalizedViewerOpts: function () {
       const defaultOpts = {
         prefixUrl: '../static/openseadragon/',
-        showNavigator: false,
-        navigatorPosition: 'BOTTOM_LEFT',
         zoomInButton: 'zoom-in',
         zoomOutButton: 'zoom-out',
         homeButton: 'reset-zoom',
+        fullPageButton: 'fullscreen',
         helpButton: 'show-help-modal',
         infoButton: 'show-info-modal',
-        fullPageButton: 'fullscreen',
-        autoHideControls: false,
         gestureSettingsMouse: {
           clickToZoom: false
         },
