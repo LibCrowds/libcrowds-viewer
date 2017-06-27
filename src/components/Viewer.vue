@@ -140,6 +140,48 @@ export default {
       // TODO: this works for fullscreen controls but should possibly use
       // https://openseadragon.github.io/docs/OpenSeadragon.Control.html
       this.viewer.container.prepend(this.$refs.controls.$el)
+    },
+    setupHandlers () {
+      // Draw an overlay on selection confirmed
+      this.viewer.addHandler('selection', (selection) => {
+        this.drawOverlay(selection, 'selection-overlay')
+      })
+
+      // Hide loading icon after tile drawn
+      this.viewer.addHandler('tile-drawn', () => {
+        this.loading(false)
+      })
+
+      // Don't focus on HUD after fullscreen toggled
+      this.viewer.addHandler('full-screen', (evt) => {
+        document.querySelector('.openseadragon-canvas').focus()
+      })
+
+      // Convert a overlay back to a selection box on click
+      document.addEventListener('click taphold', (evt) => {
+        if (evt.target && 'selection-overlay' in evt.target.classList) {
+          this.convertOverlayToSelectionBox(evt.target.id)
+        }
+      })
+
+      // Confirm before leaving if any overlays have been drawn or forms filled
+      window.onbeforeunload = () => {
+        const msg = 'Unsaved changes will be lost.'
+        if (!this.confirmBeforeUnload) {
+          return null;
+        }
+
+        // TODO: Check for selection overlays only
+        if (this.viewer.currentOverlays.length) {
+          return msg
+        }
+
+        [].forEach.call(document.querySelectorAll('input'), function(input) {
+          if (input.value.length) {
+            return msg
+          }
+        })
+      };
     }
   },
 
@@ -166,6 +208,7 @@ export default {
 
     this.loadTileSource()
     this.attachControls()
+    this.setupHandlers()
   }
 }
 </script>
