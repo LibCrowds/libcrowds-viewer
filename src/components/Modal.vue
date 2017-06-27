@@ -1,6 +1,6 @@
 <template>
-  <div :id="id" class="modal" v-show="show"> 
-    <transition name="modal">
+  <transition name="modal">
+  <div :id="id" class="modal" v-show="show">
       <div class="modal-mask"
         @click="show = false"
         @keyup.esc="show = false">
@@ -30,8 +30,8 @@
           </div>
         </div>
       </div>
-    </transition>
   </div>
+  </transition>
 </template>
 
 <script>
@@ -41,7 +41,7 @@ export default {
       show: false
     }
   },
-  
+
   props: {
     title: String,
     id: {
@@ -49,7 +49,7 @@ export default {
       requried: true
     }
   },
-  
+
   created() {
     this.$root.$on('show::modal', (id, triggerEl) => {
       if (id === this.id) {
@@ -91,6 +91,8 @@ export default {
   }
 
   .modal-container {
+    display: flex;
+    flex-direction: column;
     color: #fff;
     background-color: $gray-dark;
     margin-top: 2em;
@@ -164,28 +166,19 @@ export default {
     display: inline-block;
     touch-action: manipulation;
   }
+}
 
-  /*
-   * The following styles are auto-applied to elements with
-   * transition="modal" when their visibility is toggled
-   * by Vue.js.
-   *
-   * You can easily play with the modal transition by editing
-   * these styles.
-   */
+.modal-enter {
+  opacity: 0;
+}
 
-  .modal-enter {
-    opacity: 0;
-  }
+.modal-leave-active {
+  opacity: 0;
+}
 
-  .modal-leave-active {
-    opacity: 0;
-  }
-
-  .modal-enter .modal-container,
-  .modal-leave-active .modal-container {
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
-  }
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: translateY(-10px) scale(0.9);
 }
 </style>
