@@ -25,6 +25,7 @@ export default {
   data: function () {
     return {
       viewer: null,
+      selector: null,
       metadataModalId: 'lc-metadata-modal',
       showMetadataModal: false
     }
@@ -71,14 +72,7 @@ export default {
         gestureSettingsPen: {
           dblClickToZoom: false
         },
-        selectionEnabled: false,
-        selectionConfig: {
-          prefixUrl: '../static/openseadragon/',
-          restrictToImage: true,
-          toggleButton: 'toggle-selection',
-          keyboardShortcut: null,
-          returnPixelCoordinates: false
-        }
+        selectionEnabled: false
       }
       return Object.assign(defaultOpts, this.viewerOpts)
     },
@@ -159,6 +153,17 @@ export default {
     let opts = this.normalizedViewerOpts
     opts.element = this.$refs.viewer
     this.viewer = OpenSeadragon(opts)
+
+    // Exposing these options would complicate things
+    this.selector = this.viewer.selection({
+      prefixUrl: '../static/openseadragon/',
+      restrictToImage: true,
+      keyboardShortcut: null,
+      returnPixelCoordinates: false
+    })
+
+    this.selector.enable()
+
     this.loadTileSource()
     this.attachControls()
   }
