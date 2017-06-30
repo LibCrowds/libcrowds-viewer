@@ -1,8 +1,7 @@
 <template>
-  <div 
-    :class="classObj"
-    ref="overlay" 
-    @click="handleClick">
+ <div
+   :class="cls"
+   ref="overlay">
   </div>
 </template>
 
@@ -17,9 +16,16 @@ export default {
       type: Object,
       required: true
     },
-    selection: {
-      type: Boolean,
-      default: false
+    type: {
+      type: String,
+      default: null
+    }
+  },
+
+  computed: {
+    cls: function () {
+      const type = this.type ? this.type : ''
+      return `overlay ${type}`
     }
   },
 
@@ -30,24 +36,6 @@ export default {
       location: new OpenSeadragon.Rect(this.rect.x, this.rect.y, 
                                        this.rect.width, this.rect.height)
     })
-  },
-
-  computed: {
-    classObj () {
-      return {
-        overlay: true,
-        selection: this.selection
-      }
-    }
-  },
-
-  methods: {
-    handleClick () {
-      this.$refs.overlay
-      if (this.selection) {
-        this.viewer.removeOverlay()
-      }
-    }
   }
 }
 </script>
@@ -56,6 +44,8 @@ export default {
 @import '../assets/style/settings';
 
 .overlay {
+  z-index: 100;
+
   &.selection {
     border: 2px solid #3498DB;
     background-color: rgba(#3498DB, 0.2);

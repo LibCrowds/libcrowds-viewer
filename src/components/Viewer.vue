@@ -9,12 +9,14 @@
       :manifest="manifest">
     </metadata-modal>
 
-    <overlay 
+    <overlay
       v-for="s in selections"
-      :selection="s.isSelection"
-      :rect="s"
+      :id="s.id"
       :key="s.id"
-      :viewer="viewer">
+      :type="s.type"
+      :rect="s"
+      :viewer="viewer"
+      @click="handleOverlayClick">
     </overlay>
 
     <!-- Render viewer after all other components -->
@@ -158,7 +160,8 @@ export default {
         // Convert Viewport to Image rect
         const rect = new OpenSeadragon.Rect(s.x, s.y, s.width, s.height)
         this.selections.push({
-          isSelection: true,
+          id: `overlay-${Date.now()}`,
+          type: 'selection',
           x: rect.x,
           y: rect.y,
           width: rect.width,
@@ -171,16 +174,13 @@ export default {
       //   this.loading(false)
       // })
 
+      window.addEventListener('click', function () {
+        
+      })
+
       // Don't focus on HUD after fullscreen toggled
       this.viewer.addHandler('full-screen', (evt) => {
         document.querySelector('.openseadragon-canvas').focus()
-      })
-
-      // Convert a overlay back to a selection box on click
-      document.addEventListener('click taphold', (evt) => {
-        if (evt.target && 'selection-overlay' in evt.target.classList) {
-          this.convertOverlayToSelectionBox(evt.target.id)
-        }
       })
 
       // Confirm before leaving if any overlays have been drawn or forms filled
@@ -204,8 +204,12 @@ export default {
     },
     confirmSelection () {
       this.selector.confirm()
-      this.selector.enable()
-      console.log(this.selections)
+    },
+    handleOverlayClick (evt) {
+      if (this.selection) {
+        this.viewer.removeOverlay(this.id)
+      }
+      evt.preventDefault()
     }
   },
 
@@ -228,7 +232,8 @@ export default {
       prefixUrl: '../static/openseadragon/',
       restrictToImage: true,
       keyboardShortcut: null,
-      returnPixelCoordinates: false
+      returnPixelCoordinates: false,
+      showConfirmDenyButtons: false
     })
 
     this.selector.enable()
@@ -254,10 +259,6 @@ export default {
 .openseadragon-container {
   height: 100vh;
   min-height: 600px;
-
-  .navbar {
-    background-color: rgba(0, 0, 0, 0.75);
-  }
 
   .openseadragon-message {
     color: #FFFFFF;
@@ -334,21 +335,6 @@ export default {
     }
   }
 
-  .viewer-footer {
-    color: #FFFFFF;
-    padding: 0.8rem;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    z-index: 2;
-    background-color: rgba(0, 0, 0, 0.75);
-    border-top: 2px solid rgb(85, 85, 85);
-
-    @media screen and (min-width: 992px) {
-      display: none;
-    }
-  }
-
   .viewer-hint {
     white-space: nowrap;
     position: absolute;
@@ -373,20 +359,9 @@ export default {
     }
   }
 
-  .viewer-modal {
-    .modal-content {
-      border: 1px solid #F8F8F8;
-    }
-  }
-
   .selection-box {
     transform: none !important;  /** Disable rotation */
     outline: 9999px solid rgba(#000000, .6);
-
-    /** Hide buttons */
-    img {
-      display: none;
-    }
   }
 }
 
