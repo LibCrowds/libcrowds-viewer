@@ -11,6 +11,7 @@
 
     <overlay 
       v-for="s in selections"
+      :selection="s.isSelection"
       :rect="s"
       :key="s.id"
       :viewer="viewer">
@@ -157,6 +158,7 @@ export default {
         // Convert Viewport to Image rect
         const rect = new OpenSeadragon.Rect(s.x, s.y, s.width, s.height)
         this.selections.push({
+          isSelection: true,
           x: rect.x,
           y: rect.y,
           width: rect.width,

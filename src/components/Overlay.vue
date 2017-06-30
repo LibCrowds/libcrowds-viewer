@@ -1,16 +1,13 @@
 <template>
-  <div class="overlay" ref="overlay">
-
+  <div 
+    :class="classObj"
+    ref="overlay" 
+    @click="handleClick">
   </div>
 </template>
 
 <script>
 export default {
-  data: function () {
-    return {
-    }
-  },
-
   props: {
     viewer: {
       type: Object,
@@ -19,6 +16,10 @@ export default {
     rect: {
       type: Object,
       required: true
+    },
+    selection: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -31,8 +32,22 @@ export default {
     })
   },
 
-  destroyed () {
+  computed: {
+    classObj () {
+      return {
+        overlay: true,
+        selection: this.selection
+      }
+    }
+  },
 
+  methods: {
+    handleClick () {
+      this.$refs.overlay
+      if (this.selection) {
+        this.viewer.removeOverlay()
+      }
+    }
   }
 }
 </script>
@@ -41,13 +56,15 @@ export default {
 @import '../assets/style/settings';
 
 .overlay {
-  border: 2px solid #3498DB;
-  background-color: rgba(#3498DB, 0.2);
-  opacity: .6;
+  &.selection {
+    border: 2px solid #3498DB;
+    background-color: rgba(#3498DB, 0.2);
+    opacity: .6;
 
-  &:hover,
-  &:focus {
-    opacity: 1;
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
   }
 }
 </style>
