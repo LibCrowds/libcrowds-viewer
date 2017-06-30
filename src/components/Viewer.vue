@@ -9,7 +9,12 @@
       :manifest="manifest">
     </metadata-modal>
 
-    <overlay v-for="s in selections" :rect="s" :viewer="viewer"></overlay>
+    <overlay 
+      v-for="s in selections"
+      :rect="s"
+      :key="s.id"
+      :viewer="viewer">
+    </overlay>
 
     <!-- Render viewer after all other components -->
     <div ref="viewer"></div>
