@@ -36,13 +36,14 @@ import MetadataModal from '@/components/MetadataModal.vue'
 import Overlay from '@/components/Overlay.vue'
 import Controls from '@/components/Controls.vue'
 import SelectionSidebar from '@/components/sidebars/Selection.vue'
+import { store } from '@/store.js'
 
 export default {
   data: function () {
     return {
       viewer: null,
       selector: null,
-      selections: [],
+      selections: store.state.selections,
       metadataModalId: 'lc-metadata-modal',
       showMetadataModal: false
     }
@@ -169,14 +170,15 @@ export default {
       this.viewer.addHandler('selection', (s) => {
         // Convert Viewport to Image rect
         const rect = new OpenSeadragon.Rect(s.x, s.y, s.width, s.height)
-        this.selections.push({
+        const selection = {
           id: `overlay-${Date.now()}`,
           type: 'selection',
           x: rect.x,
           y: rect.y,
           width: rect.width,
           height: rect.height,
-        })
+        }
+        store.commit('ADD_ITEM', { key: 'selections', value: selection })
       })
 
       // Hide loading icon after tile drawn
