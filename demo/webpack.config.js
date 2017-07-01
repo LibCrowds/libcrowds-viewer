@@ -42,7 +42,8 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      'libcrowds-viewer': path.resolve(__dirname, '../src/main.js')
+      'libcrowds-viewer': path.resolve(__dirname, '../src/main.js'),
+      '@': path.resolve(__dirname, '../src')
     }
   },
   devServer: {
