@@ -19,6 +19,10 @@
       @click="handleOverlayClick">
     </overlay>
 
+    <selection-sidebar
+      v-if="mode === 'selection'">
+    </selection-sidebar>
+
     <!-- Render viewer after all other components -->
     <div ref="viewer"></div>
 
@@ -26,11 +30,12 @@
 </template>
 
 <script>
-import MetadataModal from './MetadataModal.vue'
-import Overlay from './Overlay.vue'
-import Controls from './Controls.vue'
 import OpenSeadragon from 'openseadragon'
 import 'openseadragonselection/dist/openseadragonselection'
+import MetadataModal from '@/components/MetadataModal.vue'
+import Overlay from '@/components/Overlay.vue'
+import Controls from '@/components/Controls.vue'
+import SelectionSidebar from '@/components/sidebars/Selection.vue'
 
 export default {
   data: function () {
@@ -45,6 +50,10 @@ export default {
 
   props: {
     viewerOpts: Object,
+    mode: {
+      type: String,
+      default: 'selection'
+    },
     selectionOpts: Object,
     tileSource: {
       type: String,
@@ -63,7 +72,8 @@ export default {
   components: {
     MetadataModal,
     Controls,
-    Overlay
+    Overlay,
+    SelectionSidebar
   },
 
   computed: {
@@ -175,7 +185,7 @@ export default {
       // })
 
       window.addEventListener('click', function () {
-        
+
       })
 
       // Don't focus on HUD after fullscreen toggled
@@ -262,77 +272,6 @@ export default {
 
   .openseadragon-message {
     color: #FFFFFF;
-  }
-
-  .viewer-sidebar-container {
-    position: fixed;
-    z-index: 2;
-    right: 0;
-    top: 70px;
-    width: 35%;
-    height: calc(100% - 70px - 1.6rem);
-    margin: 0.8rem;
-    overflow: hidden;
-    display: none;
-
-    @media screen and (min-width: 992px) {
-        display: block;
-    }
-
-    @media screen and (min-width: 992px) {
-        width: 25%;
-    }
-
-    .viewer-sidebar {
-      position: absolute;
-      color: #FFFFFF;
-      overflow-y: auto;
-      overflow-x: hidden;
-      padding: 0.8rem;
-      width: 100%;
-      max-height: 100%;
-      border: 2px solid rgb(85, 85, 85);
-      background-color: rgba(0, 0, 0, 0.75);
-
-      @media screen and (min-width: 992px) {
-        flex-direction: column;
-      }
-
-      .sidebar-content {
-        padding-top: 0.8rem;
-      }
-
-      .viewer-sidebar-title {
-        font-size: 1rem;
-        margin-bottom: 0;
-        flex-direction: row;
-      }
-
-      .viewer-sidebar-toggle {
-        background: none;
-        border: none;
-        color: #FFFFFF;
-        float: right;
-        transition: transform 500ms;
-
-        &.collapsed {
-          transform: rotate(180deg);
-        }
-      }
-
-      .progress {
-        border: 1px solid #FFFFFF;
-        background-color: transparent;
-
-        .progress-bar {
-          background-color: #FFFFFF;
-        }
-      }
-
-      #preview-thumbnail {
-        height: 200px;
-      }
-    }
   }
 
   .viewer-hint {
