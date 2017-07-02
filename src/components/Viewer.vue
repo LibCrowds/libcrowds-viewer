@@ -1,5 +1,5 @@
 <template>
-  <div id="lc-viewer" @click="confirmSelection">
+  <div id="lc-viewer">
 
     <controls ref="controls" :buttons="controlButtons"></controls>
 
@@ -9,18 +9,9 @@
       :manifest="manifest">
     </metadata-modal>
 
-    <overlay
-      v-for="s in selections"
-      :id="s.id"
-      :key="s.id"
-      :type="s.type"
-      :rect="s"
-      :viewer="viewer"
-      @click="handleOverlayClick">
-    </overlay>
-
     <selection-sidebar
-      v-if="mode === 'selection'">
+      v-if="mode === 'selection'"
+      @confirm="confirm">
     </selection-sidebar>
 
     <!-- Render viewer after all other components -->
@@ -33,7 +24,6 @@
 import OpenSeadragon from 'openseadragon'
 import 'openseadragonselection/dist/openseadragonselection'
 import MetadataModal from '@/components/MetadataModal.vue'
-import Overlay from '@/components/Overlay.vue'
 import Controls from '@/components/Controls.vue'
 import SelectionSidebar from '@/components/sidebars/Selection.vue'
 import { store } from '@/store.js'
@@ -41,9 +31,6 @@ import { store } from '@/store.js'
 export default {
   data: function () {
     return {
-      viewer: null,
-      selector: null,
-      selections: store.state.selections,
       metadataModalId: 'lc-metadata-modal',
       showMetadataModal: false
     }
@@ -73,7 +60,6 @@ export default {
   components: {
     MetadataModal,
     Controls,
-    Overlay,
     SelectionSidebar
   },
 
@@ -154,7 +140,8 @@ export default {
 
   methods: {
     loadTileSource () {
-      this.viewer.open({
+      const viewer = store.state.viewer
+      viewer.open({
         type: 'image',
         tileSource:  this.tileSource,
         buildPyramid: false
@@ -163,22 +150,16 @@ export default {
     attachControls () {
       // TODO: this works for fullscreen controls but should possibly use
       // https://openseadragon.github.io/docs/OpenSeadragon.Control.html
-      this.viewer.container.prepend(this.$refs.controls.$el)
+      const viewer = store.state.viewer
+      viewer.container.prepend(this.$refs.controls.$el)
     },
     setupHandlers () {
       // Draw an overlay on selection confirmed
-      this.viewer.addHandler('selection', (s) => {
+      const viewer = store.state.viewer
+      viewer.addHandler('selection', (s) => {
         // Convert Viewport to Image rect
         const rect = new OpenSeadragon.Rect(s.x, s.y, s.width, s.height)
-        const selection = {
-          id: `overlay-${Date.now()}`,
-          type: 'selection',
-          x: rect.x,
-          y: rect.y,
-          width: rect.width,
-          height: rect.height,
-        }
-        store.commit('ADD_ITEM', { key: 'selections', value: selection })
+        this.addOverlay(rect, 'selection')
       })
 
       // Hide loading icon after tile drawn
@@ -191,7 +172,7 @@ export default {
       })
 
       // Don't focus on HUD after fullscreen toggled
-      this.viewer.addHandler('full-screen', (evt) => {
+      viewer.addHandler('full-screen', (evt) => {
         document.querySelector('.openseadragon-canvas').focus()
       })
 
@@ -203,7 +184,7 @@ export default {
         }
 
         // TODO: Check for selection overlays only
-        if (this.viewer.currentOverlays.length) {
+        if (viewer.currentOverlays.length) {
           return msg
         }
 
@@ -214,41 +195,52 @@ export default {
         })
       };
     },
-    confirmSelection () {
-      this.selector.confirm()
+    addOverlay(rect, cls) {
+      const viewer = store.state.viewer
+      const el = document.createElement('div')
+      el.id = `overlay-${Date.now()}`
+      el.classList.add('overlay')
+      el.classList.add(cls)
+      viewer.addOverlay({ element: el, location: rect })
+    },
+    editSelection() {
+
     },
     handleOverlayClick (evt) {
+      const viewer = store.state.viewer
       if (this.selection) {
-        this.viewer.removeOverlay(this.id)
+        viewer.removeOverlay(this.id)
       }
       evt.preventDefault()
+    },
+    confirm (obj) {
+      console.log(obj)
+      this.$emit('confirm', obj)
     }
   },
 
   watch: {
     tileSource: function () {
       this.loadTileSource()
-    },
-    selections: function () {
-
     }
   },
 
   mounted () {
     let opts = this.normalizedViewerOpts
     opts.element = this.$refs.viewer
-    this.viewer = OpenSeadragon(opts)
+
+    const viewer = OpenSeadragon(opts)
+    store.commit('SET_ITEM', { key: 'viewer', value: viewer })
 
     // Exposing these options would complicate things
-    this.selector = this.viewer.selection({
+    const selector = viewer.selection({
       prefixUrl: '../static/openseadragon/',
       restrictToImage: true,
       keyboardShortcut: null,
-      returnPixelCoordinates: false,
-      showConfirmDenyButtons: false
+      returnPixelCoordinates: false
     })
-
-    this.selector.enable()
+    store.commit('SET_ITEM', { key: 'selector', value: selector })
+    selector.enable()
 
     this.loadTileSource()
     this.attachControls()
@@ -303,6 +295,21 @@ export default {
   .selection-box {
     transform: none !important;  /** Disable rotation */
     outline: 9999px solid rgba(#000000, .6);
+  }
+
+  .overlay {
+    z-index: 50;
+
+    &.selection {
+      border: 2px solid #3498DB;
+      background-color: rgba(#3498DB, 0.2);
+      opacity: .6;
+
+      &:hover,
+      &:focus {
+        opacity: 1;
+      }
+    }
   }
 }
 

@@ -21,7 +21,7 @@
 
             <div class="modal-footer">
               <slot name="footer">
-                <button class="modal-default-button" @click="show = false">
+                <button @click="show = false">
                   OK
                 </button>
               </slot>
@@ -67,6 +67,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/style/settings';
+@import '../assets/style/partials/buttons';
 
 .modal {
   position: absolute;
@@ -154,17 +155,6 @@ export default {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-  }
-
-  .modal-default-button {
-    background-color: transparent;
-    border: 1px solid white;
-    color: white;
-    padding: 10px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    touch-action: manipulation;
   }
 }
 
