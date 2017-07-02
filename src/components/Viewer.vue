@@ -1,7 +1,10 @@
 <template>
   <div id="lc-viewer">
 
-    <controls ref="controls" :buttons="controlButtons"></controls>
+    <controls
+      ref="controls"
+      :buttons="controlButtons">
+    </controls>
 
     <metadata-modal
       v-if="manifest"
@@ -14,6 +17,19 @@
       @confirm="confirm">
     </selection-sidebar>
 
+    <div
+      class="selection-btn"
+      id="confirm-selection"
+      ref="confirmSelection">
+      <icon name="check-circle"></icon>
+    </div>
+    <div
+      class="selection-btn"
+      id="cancel-selection"
+      ref="cancelSelection">
+      <icon name="times-circle"></icon>
+    </div>
+
     <!-- Render viewer after all other components -->
     <div ref="viewer"></div>
 
@@ -21,6 +37,9 @@
 </template>
 
 <script>
+import Icon from 'vue-awesome/components/Icon.vue'
+import 'vue-awesome/icons/times-circle'
+import 'vue-awesome/icons/check-circle'
 import OpenSeadragon from 'openseadragon'
 import 'openseadragonselection/dist/openseadragonselection'
 import MetadataModal from '@/components/MetadataModal.vue'
@@ -60,7 +79,8 @@ export default {
   components: {
     MetadataModal,
     Controls,
-    SelectionSidebar
+    SelectionSidebar,
+    Icon
   },
 
   computed: {
@@ -223,12 +243,36 @@ export default {
 
     // Exposing these options would complicate things
     const selector = viewer.selection({
+      showConfirmDenyButtons: false,
       restrictToImage: true,
-      keyboardShortcut: null,
-      returnPixelCoordinates: false
+      returnPixelCoordinates: false,
+      navImages: {
+        selection: {
+          REST: null,
+          GROUP: null,
+          HOVER: null,
+          DOWN: null
+        }
+      }
     })
     store.commit('SET_ITEM', { key: 'selector', value: selector })
     selector.enable()
+    const confirmBtn = new OpenSeadragon.Button({
+      element: this.$refs.confirmSelection,
+      clickTimeThreshold: viewer.clickTimeThreshold,
+      clickDistThreshold: viewer.clickDistThreshold,
+      tooltip: 'Comfirm',
+      onRelease: selector.confirm.bind(selector)
+    })
+    selector.element.appendChild(this.$refs.confirmSelection);
+    const cancelBtn = new OpenSeadragon.Button({
+      element: this.$refs.cancelSelection,
+      clickTimeThreshold: viewer.clickTimeThreshold,
+      clickDistThreshold: viewer.clickDistThreshold,
+      tooltip: 'Delete',
+      onRelease: selector.cancel.bind(selector)
+    })
+    selector.element.appendChild(this.$refs.cancelSelection);
 
     this.loadTileSource()
     this.attachControls()
@@ -283,6 +327,23 @@ export default {
   .selection-box {
     transform: none !important;  /** Disable rotation */
     outline: 9999px solid rgba(#000000, .6);
+
+    .selection-btn {
+      color: #fff;
+      display: flex !important;
+      position: absolute !important;
+      right: 0;
+
+      &#confirm-selection {
+        bottom: 0;
+        transform: translateX(20px) translateY(15px);
+      }
+
+      &#cancel-selection {
+        top: 0;
+        transform: translateX(20px) translateY(-15px);
+      }
+    }
   }
 
   .overlay {
