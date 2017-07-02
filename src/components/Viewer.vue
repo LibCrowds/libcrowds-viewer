@@ -62,7 +62,11 @@ export default {
       default: 'selection'
     },
     selectionOpts: Object,
-    tileSource: {
+    baseUrl: {
+      type: String,
+      required: true
+    },
+    tileId: {
       type: String,
       required: true
     },
@@ -150,9 +154,10 @@ export default {
   methods: {
     loadTileSource () {
       const viewer = store.state.viewer
+      const tileSource = `${this.baseUrl}/${this.tileId}/info.json`
       viewer.open({
         type: 'image',
-        tileSource:  this.tileSource,
+        tileSource: tileSource,
         buildPyramid: false
       })
     },
@@ -229,7 +234,7 @@ export default {
   },
 
   watch: {
-    tileSource: function () {
+    tileId: function () {
       this.loadTileSource()
     }
   },
