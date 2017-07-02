@@ -66,7 +66,6 @@ export default {
   computed: {
     normalizedViewerOpts: function () {
       const defaultOpts = {
-        prefixUrl: '../static/openseadragon/',
         zoomInButton: 'zoom-in',
         zoomOutButton: 'zoom-out',
         homeButton: 'reset-zoom',
@@ -224,7 +223,6 @@ export default {
 
     // Exposing these options would complicate things
     const selector = viewer.selection({
-      prefixUrl: '../static/openseadragon/',
       restrictToImage: true,
       keyboardShortcut: null,
       returnPixelCoordinates: false
