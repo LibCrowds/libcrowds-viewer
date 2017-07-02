@@ -86,14 +86,6 @@ export default {
       }
       return Object.assign(defaultOpts, this.viewerOpts)
     },
-    normalizedSelectionOpts: function () {
-      const defaultOpts = {
-        prefixUrl: '../static/images/',
-        restrictToImage: true,
-        toggleButton: 'toggle-selection',
-        keyboardShortcut: null,
-        returnPixelCoordinates: false
-      }
       return Object.assign(defaultOpts, this.selectionOpts)
     },
     controlButtons: function () {
