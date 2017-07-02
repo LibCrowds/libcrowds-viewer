@@ -86,8 +86,6 @@ export default {
       }
       return Object.assign(defaultOpts, this.viewerOpts)
     },
-      return Object.assign(defaultOpts, this.selectionOpts)
-    },
     controlButtons: function () {
       let buttons = [{
         id: this.normalizedViewerOpts.zoomInButton,
