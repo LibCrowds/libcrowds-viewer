@@ -152,6 +152,8 @@ export default {
         fullPageButton: 'fullscreen',
         helpButton: 'show-help-modal',
         infoButton: 'show-info-modal',
+        panVertical: false,
+        panHorizontal: false,
         gestureSettingsMouse: {
           clickToZoom: false
         },
