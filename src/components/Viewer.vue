@@ -12,6 +12,12 @@
       :manifest="manifest">
     </metadata-modal>
 
+    <help-modal
+      v-if="showHelp"
+      :id="helpModalId"
+      :mode="mode">
+    </help-modal>
+
     <selection-sidebar
       v-if="mode === 'selection'"
       @confirm="confirm">
@@ -43,6 +49,7 @@ import 'vue-awesome/icons/check-circle'
 import OpenSeadragon from 'openseadragon'
 import 'openseadragonselection/dist/openseadragonselection'
 import MetadataModal from '@/components/modals/Metadata.vue'
+import HelpModal from '@/components/modals/Help.vue'
 import Controls from '@/components/Controls.vue'
 import SelectionSidebar from '@/components/sidebars/Selection.vue'
 import { store } from '@/store.js'
@@ -51,6 +58,7 @@ export default {
   data: function () {
     return {
       metadataModalId: 'lc-metadata-modal',
+      helpModalId: 'lc-help-modal',
       showMetadataModal: false
     }
   },
@@ -86,6 +94,7 @@ export default {
 
   components: {
     MetadataModal,
+    HelpModal,
     Controls,
     SelectionSidebar,
     Icon
@@ -139,7 +148,10 @@ export default {
         buttons.push({
           id: this.normalizedViewerOpts.helpButton,
           tooltip: 'Help',
-          icon: 'question-circle'
+          icon: 'question-circle',
+          click: () => {
+            this.$root.$emit('show::modal', this.helpModalId)
+          }
         })
       }
 
