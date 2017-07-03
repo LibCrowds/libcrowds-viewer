@@ -218,10 +218,6 @@ export default {
       //   this.loading(false)
       // })
 
-      window.addEventListener('click', function () {
-
-      })
-
       // Don't focus on HUD after fullscreen toggled
       viewer.addHandler('full-screen', (evt) => {
         document.querySelector('.openseadragon-canvas').focus()
@@ -287,9 +283,6 @@ export default {
       el.classList.add('overlay')
       el.classList.add(cls)
       viewer.addOverlay({ element: el, location: rect })
-    },
-    editSelection() {
-
     },
     handleOverlayClick (evt) {
       const viewer = store.state.viewer
