@@ -7,9 +7,12 @@
     </controls>
 
     <metadata-modal
-      v-if="manifest"
+      v-if="manifestId"
       :id="metadataModalId"
-      :manifest="manifest">
+      :scheme="scheme"
+      :server="server"
+      :presentation-api-prefix="presentationApiPrefix"
+      :manifestId="manifestId">
     </metadata-modal>
 
     <help-modal
@@ -69,26 +72,37 @@ export default {
       type: String,
       default: 'selection'
     },
-    selectionOpts: Object,
-    baseUrl: {
+    scheme: {
       type: String,
-      required: true
+      default: 'http'
     },
-    tileId: {
-      type: String,
-      required: true
-    },
-    manifest: {
+    server: {
       type: String,
       default: null
     },
-    showHelp: {
+    imageApiPrefix: {
       type: String,
-      default: true
+      default: null
+    },
+    presentationApiPrefix: {
+      type: String,
+      default: null
+    },
+    imageId: {
+      type: String,
+      default: null
+    },
+    manifestId: {
+      type: String,
+      default: null
     },
     confirmBeforeUnload : {
       type: Boolean,
       default: false
+    },
+    showHelp: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -155,7 +169,7 @@ export default {
         })
       }
 
-      if (this.manifest) {
+      if (this.manifestId) {
         buttons.push({
           id: this.normalizedViewerOpts.infoButton,
           tooltip: 'Details',
@@ -172,10 +186,14 @@ export default {
   methods: {
     loadTileSource () {
       const viewer = store.state.viewer
-      const tileSource = `${this.baseUrl}/${this.tileId}/info.json`
+      const url = `${this.scheme}://` + 
+                  `${this.server}/` + 
+                  `${this.imageApiPrefix}/` +
+                  `${this.imageId}/` + 
+                  `info.json`
       viewer.open({
         type: 'image',
-        tileSource: tileSource,
+        tileSource: url,
         buildPyramid: false
       })
     },

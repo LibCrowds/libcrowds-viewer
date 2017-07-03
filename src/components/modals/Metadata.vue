@@ -31,7 +31,12 @@ export default {
 
   methods: {
     fetchManifest () {
-      axios.get(this.manifest).then((r) => {
+      const url = `${this.scheme}://` + 
+                  `${this.server}/` + 
+                  `${this.presentationApiPrefix}/` +
+                  `${this.manifestId}/` + 
+                  `manifest.json`
+      axios.get(url).then((r) => {
         this.manifestData = r.data
       }).catch(function (error) {
         console.log(error);
@@ -40,13 +45,25 @@ export default {
   },
 
   props: {
-    manifest: {
-      type: String,
-      requried: true
-    },
     id: {
       type: String,
       requried: true
+    },
+    scheme: {
+      type: String,
+      required: true
+    },
+    server: {
+      type: String,
+      required: true
+    },
+    presentationApiPrefix: {
+      type: String,
+      required: true
+    },
+    manifestId: {
+      type: String,
+      required: true
     }
   },
 

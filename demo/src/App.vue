@@ -1,12 +1,15 @@
 <template>
   <div id="app">
-    <lc-viewer
-      :options="options"
-      :baseUrl="baseUrl"
-      :tileId="tileId"
-      :manifest="manifest"
-      @confirm="handleConfirm">
-    </lc-viewer>
+    <libcrowds-viewer
+      :mode="mode"
+      :scheme="scheme"
+      :server="server"
+      :image-api-prefix="imageApiPrefix"
+      :presentation-api-prefix="presentationApiPrefix"
+      :image-id="imageId"
+      :manifest-id="manifestId"
+      @submit="handleResponse">
+    </libcrowds-viewer>
   </div>
 </template>
 
@@ -14,17 +17,20 @@
 export default {
   data () {
     return {
-      options: {},
-      baseUrl: 'https://api.bl.uk/image/iiif',
-      tileId: 'ark:/81055/vdc_100022589157.0x000005',
-      manifest: 'https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json'
+      mode: 'selection',
+      scheme: "https",
+      server: "api.bl.uk",
+      imageApiPrefix: "image/iiif",
+      presentationApiPrefix: "metadata/iiif",
+      imageId: "ark:/81055/vdc_100022589157.0x000005",
+      manifestId: "ark:/81055/vdc_100022589158.0x000002"
     }
   },
 
   methods: {
-    handleConfirm (obj) {
+    handleResponse (obj) {
       const jsonStr = JSON.stringify(obj, null, 2)
-      const msg = `Selections confirmed:\n\n${jsonStr}`
+      const msg = `Selections submitted:\n\n${jsonStr}`
       alert(msg)
     }
   }
