@@ -4,7 +4,9 @@
       <ul>
         <li
           v-for="s in selections"
-          :key="s.id">
+          :key="s.id"
+          @mouseover="highlightSelection(s, true)"
+          @mouseleave="highlightSelection(s, false)">
           {{ s.id }}
           <div>
             <span @click="editSelection(s)">
@@ -76,6 +78,14 @@ export default {
                                                       bounds.height)
       selector.draw()
       selector.enable()
+    },
+    highlightSelection(selection, highlight) {
+      const el = document.querySelector(`#${selection.id}`)
+      if (highlight) {
+        el.classList.add('highlight')
+      } else {
+        el.classList.remove('highlight')
+      }
     },
     confirm () {
       this.$emit('confirm', this.selections)

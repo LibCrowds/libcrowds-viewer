@@ -368,6 +368,11 @@ export default {
         opacity: 1;
       }
     }
+
+    &.highlight {
+      border-color: #2ECC71;
+      background-color: rgba(#2ECC71, 0.2);
+    }
   }
 }
 
