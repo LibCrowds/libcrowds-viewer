@@ -325,13 +325,14 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../assets/style/settings';
 
 #lv-viewer {
   display: flex;
   flex-direction: column;
   height: 100%;
   width: auto;
-  background-color: #000000;
+  background-color: #000;
   overflow: hidden;
 }
 
@@ -361,7 +362,7 @@ export default {
   min-height: 600px;
 
   .openseadragon-message {
-    color: #FFFFFF;
+    color: #FFF;
   }
 
   .viewer-hint {
@@ -380,7 +381,7 @@ export default {
 
     .viewer-hint-text {
       padding: .5rem;
-      color: #FFFFFF;
+      color: #FFF;
       width: 400px;
       margin:0px auto;
       background-color: rgba(0, 0, 0, 0.75);
@@ -390,7 +391,7 @@ export default {
 
   .selection-box {
     transform: none !important;  /** Disable rotation */
-    outline: 9999px solid rgba(#000000, .6);
+    outline: 9999px solid rgba(#000, .6);
 
     .selection-btn {
       color: #fff;
@@ -414,8 +415,8 @@ export default {
     z-index: 50;
 
     &.selection {
-      border: 2px solid #3498DB;
-      background-color: rgba(#3498DB, 0.2);
+      border: 2px solid $blue;
+      background-color: rgba($blue, 0.2);
       opacity: .6;
 
       &:hover,
