@@ -1,5 +1,5 @@
 <template>
-  <div id="lv-metadata">
+  <div id="lv-metadata-modal">
     <modal
       :id="id"
       title="Metadata">
