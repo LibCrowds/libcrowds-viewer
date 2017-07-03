@@ -3,6 +3,5 @@ node_modules/
 demo/node_modules/
 dist/
 demo/dist/
-static/openseadragon/
 npm-debug.log
 yarn-error.log
