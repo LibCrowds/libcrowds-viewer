@@ -292,7 +292,6 @@ export default {
       evt.preventDefault()
     },
     submit (obj) {
-      console.log(obj)
       this.$emit('submit', obj)
     }
   },
