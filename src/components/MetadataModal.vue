@@ -20,7 +20,7 @@
 
 <script>
 import axios from 'axios'
-import Modal from './Modal.vue'
+import Modal from '@/components/Modal.vue'
 
 export default {
   data: function () {

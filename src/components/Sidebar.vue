@@ -51,8 +51,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/style/partials/buttons';
-
 .lv-sidebar {
   .lv-sidebar-wrapper {
     position: fixed;

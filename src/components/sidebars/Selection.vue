@@ -87,6 +87,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../assets/style/settings';
+@import '../../assets/style/partials/buttons';
 
 #lv-selection-sidebar {
   ul {
