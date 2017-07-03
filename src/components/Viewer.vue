@@ -74,6 +74,10 @@ export default {
       type: String,
       default: null
     },
+    showHelp: {
+      type: String,
+      default: true
+    },
     confirmBeforeUnload : {
       type: Boolean,
       default: false
@@ -131,7 +135,7 @@ export default {
         icon: 'expand'
       }]
 
-      if (this.help) {
+      if (this.showHelp) {
         buttons.push({
           id: this.normalizedViewerOpts.helpButton,
           tooltip: 'Help',
