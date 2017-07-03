@@ -160,8 +160,7 @@ export default {
         },
         gestureSettingsPen: {
           dblClickToZoom: false
-        },
-        selectionEnabled: false
+        }
       }
       return Object.assign(defaultOpts, this.viewerOpts)
     },
