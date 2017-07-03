@@ -61,8 +61,9 @@ more details of how a URI is constructed.
 | presentation-api-prefix | String        | null                 |
 | image-id                | String        | null                 |
 | manifest-id             | String        | null                 |
-| confirm-before-unload   | String        | false                |
-| show-help               | String        | true                 |
+| confirm-before-unload   | Boolean       | false                |
+| show-help               | Boolean       | true                 |
+| pan-by                  | Number        | 0.1                  |
 
 
 ### Events
