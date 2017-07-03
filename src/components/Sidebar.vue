@@ -50,7 +50,6 @@ export default {
 .lv-sidebar {
   color: #FFFFFF;
   overflow-y: auto;
-  padding: 0.8rem;
   max-height: 100%;
   border: 2px solid rgb(85, 85, 85);
   background-color: rgba(0, 0, 0, 0.75);
@@ -64,15 +63,20 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 0.6rem;
+    font-family: sans-serif;
+    letter-spacing: 1px;
 
     h4 {
       font-size: 1rem;
-      font-weight: 700;
       text-transform: uppercase;
-      margin-bottom: 0;
-      margin-top: 0;
+      margin: 0;
       flex-direction: row;
     }
+  }
+
+  .lv-sidebar-content {
+    padding: 0.6em;
   }
 
   .toggle {

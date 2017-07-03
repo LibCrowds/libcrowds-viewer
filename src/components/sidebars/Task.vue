@@ -6,11 +6,11 @@
       <button class="btn" @click="toggleCollapseNote" v-if="showNote">
         Add a note
       </button>
-      <div 
+      <div
         v-show="showNote"
         v-if="!collapseNote">
         <textarea
-          rows="3" 
+          rows="3"
           placeholder="Leave a note..."
           @input="updateNote">
         </textarea>
@@ -76,10 +76,13 @@ export default {
 #lv-task-sidebar {
   ul {
     overflow-y: auto;
-    height: 300px;
+    min-height: 100px;
+    max-height: 300px;
     list-style: none;
     padding: 0.8rem;
+    margin: 0;
     border: 1px solid $gray;
+
 
     li {
       display: flex;
@@ -93,10 +96,14 @@ export default {
     }
   }
 
+  h4 {
+    margin: 0;
+  }
+
   .btn {
     width: 100%;
     display: block;
-    margin-top: 1rem;
+    margin-top: 0.6rem;
   }
 
   svg {

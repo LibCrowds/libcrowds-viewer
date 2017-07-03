@@ -58,8 +58,10 @@ export default {
 
 #lv-selection-sidebar {
   ul {
+    margin: 0;
     overflow-y: auto;
-    height: 300px;
+    min-height: 100px;
+    max-height: 300px;
     list-style: none;
     padding: 0.8rem;
     border: 1px solid $gray;
