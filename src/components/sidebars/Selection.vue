@@ -91,7 +91,7 @@ export default {
 
 #lv-selection-sidebar {
   ul {
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 300px;
     list-style: none;
     padding: 0.8rem;
