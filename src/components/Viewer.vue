@@ -86,8 +86,7 @@ export default {
   data: function () {
     return {
       metadataModalId: 'lc-metadata-modal',
-      helpModalId: 'lc-help-modal',
-      showMetadataModal: false
+      helpModalId: 'lc-help-modal'
     }
   },
 
