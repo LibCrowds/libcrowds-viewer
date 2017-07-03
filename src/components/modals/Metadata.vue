@@ -3,16 +3,16 @@
     <modal
       :id="id"
       title="Metadata">
-      <ul id="manifest-md" v-for="m in manifestData.metadata">
+      <ul v-for="m in manifestData.metadata" :key="m.label">
         <li>
           <strong>{{ m.label }}:</strong>
           &nbsp;
           <span v-html="m.value"></span></li>
       </ul>
       <div id="rights">
-        <img :src="manifestData.logo" />
-        <p>{{ manifestData.attribution }}</p>
-        <p>{{ manifestData.license }}</p>
+        <img :src="manifestData.logo">
+        <p v-html="manifestData.attribution"></p>
+        <p v-html="manifestData.license"></p>
      </div>
     </modal>
   </div>
@@ -62,7 +62,8 @@ export default {
 
 <style lang="scss" scoped>
 #lv-metadata-modal {
-  #manifest-md {
+  ul {
+    padding-left: 0;
     list-style: none;
   }
 

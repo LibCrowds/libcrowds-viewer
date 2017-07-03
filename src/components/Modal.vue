@@ -65,7 +65,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../assets/style/settings';
 @import '../assets/style/partials/buttons';
 
@@ -97,7 +97,7 @@ export default {
     color: #fff;
     background-color: $gray-dark;
     margin-top: 2em;
-    max-height: 500px;
+    max-height: 600px;
     width: auto;
     margin: 0px auto;
     overflow: hidden;
@@ -143,7 +143,7 @@ export default {
   }
 
   .modal-body {
-    padding: 20px;
+    padding: 20px 30px;
     overflow: auto;
   }
 
