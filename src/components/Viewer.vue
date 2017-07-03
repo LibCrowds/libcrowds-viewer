@@ -31,7 +31,7 @@
     </div>
 
     <!-- Render viewer after all other components -->
-    <div ref="viewer"></div>
+    <div id="lv-viewer-container" ref="viewer"></div>
 
   </div>
 </template>
@@ -295,6 +295,10 @@ export default {
   width: auto;
   background-color: #000000;
   overflow: hidden;
+}
+
+#lv-viewer-container {
+  height: 100%;
 }
 
 .openseadragon-container {
