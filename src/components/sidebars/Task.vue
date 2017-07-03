@@ -6,7 +6,9 @@
       <button class="btn" @click="toggleCollapseNote" v-if="showNote">
         Add a note
       </button>
-      <div v-show="!collapseNote">
+      <div 
+        v-show="showNote"
+        v-if="!collapseNote">
         <textarea
           rows="3" 
           placeholder="Leave a note..."
@@ -105,6 +107,19 @@ export default {
     display: flex;
     margin-right: auto;
     margin-left: auto;
+  }
+
+  .slide-leave-active,
+  .slide-enter-active {
+    transition: 1s;
+  }
+  .slide-enter {
+    transform: translate3d(0, 100%, 0);
+    visibility: hidden;
+  }
+  .slide-leave-to {
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
   }
 }
 </style>

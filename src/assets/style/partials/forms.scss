@@ -1,16 +1,28 @@
 input,
 textarea {
-  margin: 0;
+  margin: 10px 0;
   display: block;
-  padding: 7px;
-  color: #525864;
-  background: white;
-  border: 1px solid;
-  border-color: #b3c0e2 #bcc5e2 #c0ccea;
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: #404446;
+  background-color: #fff;
+  background-image: none;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,0.15);
+  transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s;
+  touch-action: manipulation;
+  font-family: sans-serif;
+  box-sizing:border-box;
 
   &:focus {
     border-color: #46aefe;
     outline: none;
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);
   }
+}
+
+textarea {
+  overflow: auto;
 }
