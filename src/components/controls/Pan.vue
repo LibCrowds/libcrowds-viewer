@@ -3,6 +3,7 @@
 
     <controls
       position="bottom"
+      scale="1"
       :buttons="buttons">
     </controls>
 

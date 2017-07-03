@@ -8,7 +8,7 @@
         class="hint--right hint--no-animate"
         :aria-label="b.tooltip"
         @click="handleClick(b.click)">
-        <icon :name="b.icon" scale="1.25"></icon>
+        <icon :name="b.icon" :scale="scale"></icon>
       </button>
 
   </div>
@@ -44,6 +44,10 @@ export default {
     position: {
       type: String,
       default: 'TOP'
+    },
+    scale: {
+      type: Number,
+      default: 1.25
     }
   },
 
