@@ -230,7 +230,7 @@ export default {
         element: this.$refs.confirmSelection,
         clickTimeThreshold: viewer.clickTimeThreshold,
         clickDistThreshold: viewer.clickDistThreshold,
-        tooltip: 'Comfirm',
+        tooltip: 'Confirm',
         onRelease: selector.confirm.bind(selector)
       })
       selector.element.appendChild(this.$refs.confirmSelection)
