@@ -78,7 +78,6 @@ export default {
       selector.enable()
     },
     confirm () {
-      const viewer = store.state.viewer
       this.$emit('confirm', this.selections)
     }
   }
