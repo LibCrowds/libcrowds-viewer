@@ -1,5 +1,5 @@
 <template>
-  <div id="lv-controls">
+  <div ref="controls" class="lv-controls">
 
       <button
         :id="b.id"
@@ -22,6 +22,10 @@ import 'vue-awesome/icons/refresh'
 import 'vue-awesome/icons/expand'
 import 'vue-awesome/icons/question-circle'
 import 'vue-awesome/icons/info-circle'
+import 'vue-awesome/icons/chevron-up'
+import 'vue-awesome/icons/chevron-down'
+import 'vue-awesome/icons/chevron-left'
+import 'vue-awesome/icons/chevron-right'
 import axios from 'axios'
 import Modal from './Modal.vue'
 
@@ -36,6 +40,10 @@ export default {
     buttons: {
       type: Array,
       required: true
+    },
+    position: {
+      type: String,
+      default: 'TOP'
     }
   },
 
@@ -49,6 +57,11 @@ export default {
         func()
       }
     }
+  },
+
+  mounted () {
+    const pos = this.position.toLowerCase()
+    this.$refs.controls.classList.add(pos)
   }
 }
 </script>
@@ -56,7 +69,7 @@ export default {
 <style lang="scss" scoped>
 @import '~hint.css';
 
-#lv-controls {
+.lv-controls {
   display: flex;
   flex-direction: row;
   margin: 1rem;
@@ -69,6 +82,14 @@ export default {
   @media screen and (min-width: 992px) {
     padding: 0;
     flex-direction: column;
+  }
+
+  &.top {
+    top: 0;
+  }
+
+  &.bottom {
+    bottom: 0;
   }
 
   button {

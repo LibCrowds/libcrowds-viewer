@@ -2,8 +2,14 @@
   <div id="lv-viewer">
 
     <controls
-      ref="controls"
-      :buttons="controlButtons">
+      ref="viewer-controls"
+      :buttons="viewerControlButtons">
+    </controls>
+
+    <controls
+      ref="pan-controls"
+      position="bottom"
+      :buttons="panControlButtons">
     </controls>
 
     <metadata-modal
@@ -121,6 +127,10 @@ export default {
     showHelp: {
       type: Boolean,
       default: true
+    },
+    panBy: {
+      type: Number,
+      default: 0.1
     }
   },
 
@@ -155,7 +165,7 @@ export default {
       }
       return Object.assign(defaultOpts, this.viewerOpts)
     },
-    controlButtons: function () {
+    viewerControlButtons: function () {
       let buttons = [{
         id: this.normalizedViewerOpts.zoomInButton,
         tooltip: 'Zoom in',
@@ -165,11 +175,6 @@ export default {
         id: this.normalizedViewerOpts.zoomOutButton,
         tooltip: 'Zoom out',
         icon: 'minus-circle'
-      },
-      {
-        id: this.normalizedViewerOpts.homeButton,
-        tooltip: 'Reset Zoom',
-        icon: 'refresh'
       },
       {
         id: this.normalizedViewerOpts.fullPageButton,
@@ -199,6 +204,42 @@ export default {
         })
       }
       return buttons
+    },
+    panControlButtons: function () {
+      const viewer = store.state.viewer
+      let buttons = [{
+        id: 'move-up',
+        tooltip: 'Move up',
+        icon: 'chevron-up',
+        click: () => {
+          viewer.viewport.panBy(new OpenSeadragon.Point(0, -this.panBy))
+        }
+      },
+      {
+      id: 'move-down',
+        tooltip: 'Move down',
+        icon: 'chevron-down',
+        click: () => {
+          viewer.viewport.panBy(new OpenSeadragon.Point(0, this.panBy))
+        }
+      },
+      {
+      id: 'move-left',
+        tooltip: 'Move left',
+        icon: 'chevron-left',
+        click: () => {
+          viewer.viewport.panBy(new OpenSeadragon.Point(-this.panBy, 0))
+        }
+      },
+      {
+      id: 'move-right',
+        tooltip: 'Move right',
+        icon: 'chevron-right',
+        click: () => {
+          viewer.viewport.panBy(new OpenSeadragon.Point(this.panBy, 0))
+        }
+      }]
+      return buttons
     }
   },
 
@@ -220,7 +261,7 @@ export default {
       // TODO: this works for fullscreen controls but should possibly use
       // https://openseadragon.github.io/docs/OpenSeadragon.Control.html
       const viewer = store.state.viewer
-      viewer.container.prepend(this.$refs.controls.$el)
+      viewer.container.prepend(this.$refs.viewerControls.$el)
     },
     setupHandlers () {
       // Draw an overlay on selection confirmed
