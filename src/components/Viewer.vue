@@ -199,11 +199,9 @@ export default {
       viewer.container.prepend(this.$refs.panControls.$el)
     },
     handleHelpControlClick () {
-      console.log(this)
       this.$root.$emit('show::modal', this.helpModalId)
     },
     handleInfoControlClick () {
-      console.log(this)
       this.$root.$emit('show::modal', this.metadataModalId)
     },
     setupHandlers () {
