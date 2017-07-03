@@ -136,7 +136,6 @@ export default {
         icon: 'question-circle'
       }]
 
-      // If
       if (this.manifest) {
         buttons.push({
           id: this.normalizedViewerOpts.infoButton,
