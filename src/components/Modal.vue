@@ -1,9 +1,7 @@
 <template>
   <transition name="modal">
   <div :id="id" class="modal" v-show="show">
-      <div class="modal-mask"
-        @click="show = false"
-        @keyup.esc="show = false">
+      <div class="modal-mask">
         <div class="modal-wrapper">
           <div class="modal-container">
 
