@@ -174,20 +174,22 @@ export default {
         }
       }
       return Object.assign(defaultOpts, this.viewerOpts)
+    },
+    tileSource: function () {
+      return `${this.scheme}://` + 
+             `${this.server}/` + 
+             `${this.imageApiPrefix}/` +
+             `${this.imageId}/` + 
+             `info.json`
     }
   },
 
   methods: {
     loadTileSource () {
       const viewer = store.state.viewer
-      const url = `${this.scheme}://` + 
-                  `${this.server}/` + 
-                  `${this.imageApiPrefix}/` +
-                  `${this.imageId}/` + 
-                  `info.json`
       viewer.open({
         type: 'image',
-        tileSource: url,
+        tileSource: this.tileSource,
         buildPyramid: false
       })
     },
@@ -297,7 +299,7 @@ export default {
   },
 
   watch: {
-    tileId: function () {
+    tileSource: function () {
       this.loadTileSource()
     }
   },
