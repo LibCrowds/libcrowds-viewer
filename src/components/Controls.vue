@@ -4,6 +4,7 @@
       <button
         :id="b.id"
         v-for="b in buttons"
+        :key="b.id"
         class="hint--right hint--no-animate"
         :aria-label="b.tooltip"
         @click="handleClick(b.click)">
