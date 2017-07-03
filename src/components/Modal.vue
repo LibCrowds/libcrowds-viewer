@@ -101,7 +101,6 @@ export default {
     width: auto;
     margin: 0px auto;
     overflow: hidden;
-    font-size: 14px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
     border: 1px solid $gray-light;
     transition: all .3s ease;
