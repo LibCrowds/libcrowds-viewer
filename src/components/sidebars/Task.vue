@@ -4,7 +4,7 @@
       <h4>{{ objective }}</h4>
       <p>{{ guidance }}</p>
       <button class="btn" @click="submit">
-        Confirm
+        Submit
       </button>
     </sidebar>
   </div>
