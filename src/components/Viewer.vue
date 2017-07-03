@@ -209,6 +209,40 @@ export default {
         })
       };
     },
+    configureSelector () {
+      const viewer = store.state.viewer
+      const selector = viewer.selection({
+        showConfirmDenyButtons: false,
+        restrictToImage: true,
+        returnPixelCoordinates: false,
+        navImages: {
+          selection: {
+            REST: null,
+            GROUP: null,
+            HOVER: null,
+            DOWN: null
+          }
+        }
+      })
+      store.commit('SET_ITEM', { key: 'selector', value: selector })
+      selector.enable()
+      const confirmBtn = new OpenSeadragon.Button({
+        element: this.$refs.confirmSelection,
+        clickTimeThreshold: viewer.clickTimeThreshold,
+        clickDistThreshold: viewer.clickDistThreshold,
+        tooltip: 'Comfirm',
+        onRelease: selector.confirm.bind(selector)
+      })
+      selector.element.appendChild(this.$refs.confirmSelection)
+      const cancelBtn = new OpenSeadragon.Button({
+        element: this.$refs.cancelSelection,
+        clickTimeThreshold: viewer.clickTimeThreshold,
+        clickDistThreshold: viewer.clickDistThreshold,
+        tooltip: 'Delete',
+        onRelease: selector.cancel.bind(selector)
+      })
+      selector.element.appendChild(this.$refs.cancelSelection)
+    },
     addOverlay(rect, cls) {
       const viewer = store.state.viewer
       const el = document.createElement('div')
@@ -246,39 +280,7 @@ export default {
     const viewer = OpenSeadragon(opts)
     store.commit('SET_ITEM', { key: 'viewer', value: viewer })
 
-    // Exposing these options would complicate things
-    const selector = viewer.selection({
-      showConfirmDenyButtons: false,
-      restrictToImage: true,
-      returnPixelCoordinates: false,
-      navImages: {
-        selection: {
-          REST: null,
-          GROUP: null,
-          HOVER: null,
-          DOWN: null
-        }
-      }
-    })
-    store.commit('SET_ITEM', { key: 'selector', value: selector })
-    selector.enable()
-    const confirmBtn = new OpenSeadragon.Button({
-      element: this.$refs.confirmSelection,
-      clickTimeThreshold: viewer.clickTimeThreshold,
-      clickDistThreshold: viewer.clickDistThreshold,
-      tooltip: 'Comfirm',
-      onRelease: selector.confirm.bind(selector)
-    })
-    selector.element.appendChild(this.$refs.confirmSelection);
-    const cancelBtn = new OpenSeadragon.Button({
-      element: this.$refs.cancelSelection,
-      clickTimeThreshold: viewer.clickTimeThreshold,
-      clickDistThreshold: viewer.clickDistThreshold,
-      tooltip: 'Delete',
-      onRelease: selector.cancel.bind(selector)
-    })
-    selector.element.appendChild(this.$refs.cancelSelection);
-
+    this.configureSelector()
     this.loadTileSource()
     this.attachControls()
     this.setupHandlers()
