@@ -37,10 +37,9 @@ export default {
       const overlays = typeof viewer.currentOverlays !== 'undefined'
                          ? viewer.currentOverlays
                          : []
-      const selections  = overlays.filter(function (overlay) {
+      const selections = overlays.filter(function (overlay) {
         return overlay.element.classList.contains('selection')
-      })
-      return selections.map(function (s) {
+      }).map(function (s) {
         const bounds = s.getBounds(viewer.viewport)
         const vpRect = new OpenSeadragon.SelectionRect(bounds.x,
                                                        bounds.y,
@@ -51,6 +50,7 @@ export default {
           rect: viewer.viewport.viewportToImageRectangle(vpRect)
         }
       })
+      return selections
     }
   },
 
