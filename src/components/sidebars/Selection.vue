@@ -29,6 +29,9 @@ import 'vue-awesome/icons/pencil'
 import Sidebar from '@/components/Sidebar.vue'
 import { store } from '@/store.js'
 import getSelections from '@/utils/getSelections.js'
+import deleteSelection from '@/utils/deleteSelection.js'
+import editSelection from '@/utils/editSelection.js'
+import highlightSelection from '@/utils/highlightSelection.js'
 
 export default {
   computed: {
@@ -43,31 +46,9 @@ export default {
   },
 
   methods: {
-    deleteSelection (selection) {
-      const viewer = store.state.viewer
-      viewer.removeOverlay(selection.id)
-    },
-    editSelection (selection) {
-      const viewer = store.state.viewer
-      const selector = store.state.selector
-      const overlay = viewer.getOverlayById(selection.id)
-      const bounds = overlay.getBounds(viewer.viewport)
-      this.deleteSelection(selection)
-      selector.rect = new OpenSeadragon.SelectionRect(bounds.x,
-                                                      bounds.y,
-                                                      bounds.width,
-                                                      bounds.height)
-      selector.draw()
-      selector.enable()
-    },
-    highlightSelection(selection, highlight) {
-      const el = document.querySelector(`#${selection.id}`)
-      if (highlight) {
-        el.classList.add('highlight')
-      } else {
-        el.classList.remove('highlight')
-      }
-    }
+    deleteSelection,
+    editSelection,
+    highlightSelection
   }
 }
 </script>
