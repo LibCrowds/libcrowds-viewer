@@ -23,7 +23,7 @@
 
     <selection-sidebar
       v-if="mode === 'selection'"
-      @confirm="confirm">
+      @submit="submit">
     </selection-sidebar>
 
     <div
@@ -297,9 +297,9 @@ export default {
       }
       evt.preventDefault()
     },
-    confirm (obj) {
+    submit (obj) {
       console.log(obj)
-      this.$emit('confirm', obj)
+      this.$emit('submit', obj)
     }
   },
 

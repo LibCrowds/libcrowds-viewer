@@ -18,7 +18,7 @@
           </div>
         </li>
       </ul>
-      <button class="btn" @click="confirm">
+      <button class="btn" @click="submit">
         Confirm
       </button>
     </sidebar>
@@ -87,8 +87,8 @@ export default {
         el.classList.remove('highlight')
       }
     },
-    confirm () {
-      this.$emit('confirm', this.selections)
+    submit () {
+      this.$emit('submit', this.selections)
     }
   }
 }
