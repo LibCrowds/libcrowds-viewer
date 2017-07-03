@@ -62,6 +62,7 @@ containing the user input.
 | image-id                | String        | null                 |
 | manifest-id             | String        | null                 |
 | confirm-before-unload   | String        | false                |
+| show-help               | String        | true                 |
 
 
 ### Events
