@@ -15,9 +15,9 @@ export default {
   data () {
     return {
       options: {},
-      baseUrl: 'http://api.bl.uk/image/iiif',
+      baseUrl: 'https://api.bl.uk/image/iiif',
       tileId: 'ark:/81055/vdc_100022589157.0x000005',
-      manifest: 'http://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json'
+      manifest: 'https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json'
     }
   },
 
