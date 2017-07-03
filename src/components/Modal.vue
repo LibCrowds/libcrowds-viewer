@@ -21,7 +21,7 @@
 
             <div class="modal-footer">
               <slot name="footer">
-                <button @click="show = false">
+                <button class="btn" @click="show = false">
                   OK
                 </button>
               </slot>

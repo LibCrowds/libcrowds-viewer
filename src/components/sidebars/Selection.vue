@@ -16,7 +16,7 @@
           </div>
         </li>
       </ul>
-      <button @click="confirm">
+      <button class="btn" @click="confirm">
         Confirm
       </button>
     </sidebar>
