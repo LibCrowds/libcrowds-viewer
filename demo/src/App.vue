@@ -31,6 +31,7 @@ export default {
     handleResponse (obj) {
       const jsonStr = JSON.stringify(obj, null, 2)
       const msg = `Selections submitted:\n\n${jsonStr}`
+      console.log(obj)
       alert(msg)
     }
   }
