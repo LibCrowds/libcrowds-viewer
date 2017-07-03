@@ -129,12 +129,15 @@ export default {
         id: this.normalizedViewerOpts.fullPageButton,
         tooltip: 'Fullscreen',
         icon: 'expand'
-      },
-      {
-        id: this.normalizedViewerOpts.helpButton,
-        tooltip: 'Help',
-        icon: 'question-circle'
       }]
+
+      if (this.help) {
+        buttons.push({
+          id: this.normalizedViewerOpts.helpButton,
+          tooltip: 'Help',
+          icon: 'question-circle'
+        })
+      }
 
       if (this.manifest) {
         buttons.push({
