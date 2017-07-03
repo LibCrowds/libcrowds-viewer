@@ -1,16 +1,24 @@
 <template>
   <div id="lv-viewer">
 
-    <controls
-      ref="viewer-controls"
-      :buttons="viewerControlButtons">
-    </controls>
+    <viewer-controls
+      ref="viewerControls"
+      :showHelp="showHelp"
+      :showInfo="manifestId.length > 0"
+      :zoomInButton="normalizedViewerOpts.zoomInButton"
+      :zoomOutButton="normalizedViewerOpts.zoomOutButton"
+      :homeButton="normalizedViewerOpts.homeButton"
+      :fullPageButton="normalizedViewerOpts.fullPageButton"
+      :helpButton="normalizedViewerOpts.helpButton"
+      :infoButton="normalizedViewerOpts.infoButton"
+      @helpclicked="handleHelpControlClick"
+      @infoclicked="handleInfoControlClick">
+    </viewer-controls>
 
-    <controls
-      ref="pan-controls"
-      position="bottom"
-      :buttons="panControlButtons">
-    </controls>
+    <pan-controls
+      ref="panControls"
+      :panBy="panBy">
+    </pan-controls>
 
     <metadata-modal
       v-if="manifestId"
@@ -68,7 +76,8 @@ import OpenSeadragon from 'openseadragon'
 import 'openseadragonselection/dist/openseadragonselection'
 import MetadataModal from '@/components/modals/Metadata.vue'
 import HelpModal from '@/components/modals/Help.vue'
-import Controls from '@/components/Controls.vue'
+import ViewerControls from '@/components/controls/Viewer.vue'
+import PanControls from '@/components/controls/Pan.vue'
 import SelectionSidebar from '@/components/sidebars/Selection.vue'
 import TaskSidebar from '@/components/sidebars/Task.vue'
 import { store } from '@/store.js'
@@ -137,7 +146,8 @@ export default {
   components: {
     MetadataModal,
     HelpModal,
-    Controls,
+    ViewerControls,
+    PanControls,
     SelectionSidebar,
     TaskSidebar,
     Icon
@@ -149,9 +159,9 @@ export default {
         zoomInButton: 'zoom-in',
         zoomOutButton: 'zoom-out',
         homeButton: 'reset-zoom',
-        fullPageButton: 'fullscreen',
-        helpButton: 'show-help-modal',
-        infoButton: 'show-info-modal',
+        fullPageButton: 'toggle-fullscreen',
+        helpButton: 'show-help',
+        infoButton: 'show-info',
         panVertical: false,
         panHorizontal: false,
         gestureSettingsMouse: {
@@ -165,82 +175,6 @@ export default {
         }
       }
       return Object.assign(defaultOpts, this.viewerOpts)
-    },
-    viewerControlButtons: function () {
-      let buttons = [{
-        id: this.normalizedViewerOpts.zoomInButton,
-        tooltip: 'Zoom in',
-        icon: 'plus-circle'
-      },
-      {
-        id: this.normalizedViewerOpts.zoomOutButton,
-        tooltip: 'Zoom out',
-        icon: 'minus-circle'
-      },
-      {
-        id: this.normalizedViewerOpts.fullPageButton,
-        tooltip: 'Fullscreen',
-        icon: 'expand'
-      }]
-
-      if (this.showHelp) {
-        buttons.push({
-          id: this.normalizedViewerOpts.helpButton,
-          tooltip: 'Help',
-          icon: 'question-circle',
-          click: () => {
-            this.$root.$emit('show::modal', this.helpModalId)
-          }
-        })
-      }
-
-      if (this.manifestId) {
-        buttons.push({
-          id: this.normalizedViewerOpts.infoButton,
-          tooltip: 'Details',
-          icon: 'info-circle',
-          click: () => {
-            this.$root.$emit('show::modal', this.metadataModalId)
-          }
-        })
-      }
-      return buttons
-    },
-    panControlButtons: function () {
-      const viewer = store.state.viewer
-      let buttons = [{
-        id: 'move-up',
-        tooltip: 'Move up',
-        icon: 'chevron-up',
-        click: () => {
-          viewer.viewport.panBy(new OpenSeadragon.Point(0, -this.panBy))
-        }
-      },
-      {
-      id: 'move-down',
-        tooltip: 'Move down',
-        icon: 'chevron-down',
-        click: () => {
-          viewer.viewport.panBy(new OpenSeadragon.Point(0, this.panBy))
-        }
-      },
-      {
-      id: 'move-left',
-        tooltip: 'Move left',
-        icon: 'chevron-left',
-        click: () => {
-          viewer.viewport.panBy(new OpenSeadragon.Point(-this.panBy, 0))
-        }
-      },
-      {
-      id: 'move-right',
-        tooltip: 'Move right',
-        icon: 'chevron-right',
-        click: () => {
-          viewer.viewport.panBy(new OpenSeadragon.Point(this.panBy, 0))
-        }
-      }]
-      return buttons
     }
   },
 
@@ -263,6 +197,15 @@ export default {
       // https://openseadragon.github.io/docs/OpenSeadragon.Control.html
       const viewer = store.state.viewer
       viewer.container.prepend(this.$refs.viewerControls.$el)
+      viewer.container.prepend(this.$refs.panControls.$el)
+    },
+    handleHelpControlClick () {
+      console.log(this)
+      this.$root.$emit('show::modal', this.helpModalId)
+    },
+    handleInfoControlClick () {
+      console.log(this)
+      this.$root.$emit('show::modal', this.metadataModalId)
     },
     setupHandlers () {
       // Draw an overlay on selection confirmed
@@ -491,5 +434,4 @@ export default {
     }
   }
 }
-
 </style>
