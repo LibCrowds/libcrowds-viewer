@@ -3,6 +3,16 @@
     <sidebar title="Task">
       <h4>{{ objective }}</h4>
       <p>{{ guidance }}</p>
+      <button class="btn" @click="toggleCollapseNote" v-if="showNote">
+        Add a note
+      </button>
+      <div v-show="!collapseNote">
+        <textarea
+          rows="3" 
+          placeholder="Leave a note..."
+          @input="updateNote">
+        </textarea>
+      </div>
       <button class="btn" @click="submit">
         Submit
       </button>
@@ -11,10 +21,17 @@
 </template>
 
 <script>
+import { store } from '@/store'
 import Sidebar from '@/components/Sidebar.vue'
 import getData from '@/utils/getData'
 
 export default {
+  data: function () {
+    return {
+      collapseNote: true
+    }
+  },
+
   components: {
     Sidebar
   },
@@ -27,10 +44,20 @@ export default {
     guidance: {
       type: String,
       required: true
+    },
+    showNote: {
+      type: Boolean,
+      required: true
     }
   },
 
   methods: {
+    toggleCollapseNote () {
+      this.collapseNote = !this.collapseNote
+    },
+    updateNote (evt) {
+      store.commit('SET_ITEM', { key: 'note', value: evt.target.value })
+    },
     submit () {
       const data = getData()
       this.$emit('submit', data)
@@ -42,6 +69,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/style/settings';
 @import '../../assets/style/partials/buttons';
+@import '../../assets/style/partials/forms';
 
 #lv-task-sidebar {
   ul {
@@ -61,6 +89,12 @@ export default {
         margin-bottom: 0.75rem;
       }
     }
+  }
+
+  .btn {
+    width: 100%;
+    display: block;
+    margin-top: 1rem;
   }
 
   svg {

@@ -40,6 +40,7 @@
       <task-sidebar
         :objective="objective"
         :guidance="guidance"
+        :showNote="showNote"
         @submit="submit">
       </task-sidebar>
 
@@ -135,6 +136,10 @@ export default {
     showHelp: {
       type: Boolean,
       default: true
+    },
+    showNote: {
+      type: Boolean,
+      default: false
     },
     panBy: {
       type: Number,

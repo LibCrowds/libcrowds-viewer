@@ -63,6 +63,7 @@ more details of how a URI is constructed.
 | manifest-id             | String        | null                 |
 | confirm-before-unload   | Boolean       | false                |
 | show-help               | Boolean       | true                 |
+| show-note               | Boolean       | false                |
 | pan-by                  | Number        | 0.1                  |
 
 

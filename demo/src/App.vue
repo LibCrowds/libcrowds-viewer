@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <libcrowds-viewer
+      show-note
       :mode="mode"
       :objective="objective"
       :guidance="guidance"

@@ -3,6 +3,7 @@ import getSelections from '@/utils/getSelections.js'
 
 export default function () {
   return {
-    selections: getSelections()
+    selections: getSelections(),
+    note: store.state.note
   }
 }

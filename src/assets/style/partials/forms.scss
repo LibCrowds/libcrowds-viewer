@@ -1,0 +1,16 @@
+input,
+textarea {
+  margin: 0;
+  display: block;
+  padding: 7px;
+  color: #525864;
+  background: white;
+  border: 1px solid;
+  border-color: #b3c0e2 #bcc5e2 #c0ccea;
+
+  &:focus {
+    border-color: #46aefe;
+    outline: none;
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  }
+}
