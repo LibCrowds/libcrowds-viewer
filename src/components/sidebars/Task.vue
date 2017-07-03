@@ -12,6 +12,7 @@
 
 <script>
 import Sidebar from '@/components/Sidebar.vue'
+import getData from '@/utils/getData'
 
 export default {
   components: {
@@ -31,7 +32,8 @@ export default {
 
   methods: {
     submit () {
-      this.$emit('submit', {})
+      const data = getData()
+      this.$emit('submit', data)
     }
   }
 }
