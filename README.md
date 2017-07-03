@@ -48,10 +48,6 @@ See the documentation for the [IIIF Image API (v2.1)](http://iiif.io/api/image/2
 and [IIIF Presentation API (v2.1)](http://iiif.io/api/presentation/2.1/) for 
 more details of how a URI is constructed.
 
-There are currently two modes, *selection* and *transcription*, both of which
-should be pretty self-explanatory and both of which return a JSON response
-containing the user input.
-
 ### Properties
 
 | Property                | Type          | Default              |
