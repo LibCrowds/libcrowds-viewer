@@ -46,7 +46,7 @@ export default {
       default: 'top'
     },
     scale: {
-      type: Number,
+      type: [String, Number],
       default: 1.25
     },
     layout: {
