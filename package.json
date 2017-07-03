@@ -3,7 +3,6 @@
   "description": "IIIF-compatible image viewer component.",
   "version": "1.0.0",
   "author": "Alex Mendes <alexanderhmendes@gmail.com>",
-  "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue src demo",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
