@@ -8,7 +8,7 @@
         class="hint--right hint--no-animate"
         :aria-label="b.tooltip"
         @click="handleClick(b.click)">
-        <icon :name="b.icon"></icon>
+        <icon :name="b.icon" scale="1.25"></icon>
       </button>
 
   </div>
