@@ -43,11 +43,15 @@ export default {
     },
     position: {
       type: String,
-      default: 'TOP'
+      default: 'top'
     },
     scale: {
       type: Number,
       default: 1.25
+    },
+    layout: {
+      type: String,
+      default: 'row'
     }
   },
 
@@ -64,8 +68,8 @@ export default {
   },
 
   mounted () {
-    const pos = this.position.toLowerCase()
-    this.$refs.controls.classList.add(pos)
+    this.$refs.controls.classList.add(this.position)
+    this.$refs.controls.classList.add(this.layout)
   }
 }
 </script>
@@ -75,7 +79,6 @@ export default {
 
 .lv-controls {
   display: flex;
-  flex-direction: row;
   margin: 1rem;
   position: absolute;
   z-index: 2;
@@ -85,7 +88,6 @@ export default {
 
   @media screen and (min-width: 992px) {
     padding: 0;
-    flex-direction: column;
   }
 
   &.top {
@@ -94,6 +96,14 @@ export default {
 
   &.bottom {
     bottom: 0;
+  }
+
+  .row {
+    flex-direction: row;
+  }
+
+  .column {
+    flex-direction: column;
   }
 
   button {

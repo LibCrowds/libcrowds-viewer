@@ -3,6 +3,7 @@
 
     <controls
       position="top"
+      layout="row"
       :buttons="buttons">
     </controls>
 
