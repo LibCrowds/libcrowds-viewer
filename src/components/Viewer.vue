@@ -425,8 +425,8 @@ export default {
     }
 
     &.highlight {
-      border-color: #2ECC71;
-      background-color: rgba(#2ECC71, 0.2);
+      border-color: $green;
+      background-color: rgba($green, 0.2);
     }
   }
 }

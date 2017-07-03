@@ -1,3 +1,5 @@
+@import '../settings.scss';
+
 input,
 textarea {
   margin: 10px 0;
@@ -6,20 +8,20 @@ textarea {
   padding: 10px;
   font-size: 1rem;
   line-height: 1.25;
-  color: #404446;
+  color: $gray;
   background-color: #fff;
   background-image: none;
   background-clip: padding-box;
-  border: 1px solid rgba(0,0,0,0.15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s;
   touch-action: manipulation;
   font-family: sans-serif;
   box-sizing:border-box;
 
   &:focus {
-    border-color: #46aefe;
+    border-color: $blue;
     outline: none;
-    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    box-shadow: 0 0 5px rgba($blue, 0.5);
   }
 }
 

@@ -15,7 +15,7 @@
           @input="updateNote">
         </textarea>
       </div>
-      <button class="btn" @click="submit">
+      <button class="btn btn-green" @click="submit">
         Submit
       </button>
     </sidebar>
