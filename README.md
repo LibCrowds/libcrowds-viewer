@@ -32,6 +32,8 @@ You can now use the component like this:
 ``` vue
 <libcrowds-viewer
   mode="'selection'"
+  objective="'Mark the titles'"
+  guidance="'Draw a box around each play title'"
   scheme="http"
   server="api.bl.uk"
   image-api-prefix="image/iiif"
@@ -55,6 +57,8 @@ containing the user input.
 | Property                | Type          | Default              |
 |-------------------------|---------------|----------------------|
 | mode                    | String        | 'selection'          |
+| objective               | String        | null                 |
+| guidance                | String        | null                 |
 | scheme                  | String        | 'http'               |
 | server                  | String        | null                 |
 | image-api-prefix        | String        | null                 |

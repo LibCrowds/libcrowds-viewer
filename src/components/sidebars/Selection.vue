@@ -18,9 +18,6 @@
           </div>
         </li>
       </ul>
-      <button class="btn" @click="submit">
-        Confirm
-      </button>
     </sidebar>
   </div>
 </template>
@@ -86,9 +83,6 @@ export default {
       } else {
         el.classList.remove('highlight')
       }
-    },
-    submit () {
-      this.$emit('submit', this.selections)
     }
   }
 }

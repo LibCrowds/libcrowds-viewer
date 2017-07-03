@@ -1,19 +1,15 @@
 <template>
   <div class="lv-sidebar">
-    <div class="lv-sidebar-wrapper">
-      <div class="lv-sidebar-container">
-        <div class="lv-sidebar-header">
-          <h4>{{ title }}</h4>
-          <span
-            :class="toggleClassObj"
-            @click="toggleCollapse">
-            &#x25B2;
-          </span>
-        </div>
-        <div class="lv-sidebar-content" v-show="!contentCollapsed">
-          <slot></slot>
-        </div>
-      </div>
+    <div class="lv-sidebar-header">
+      <h4>{{ title }}</h4>
+      <span
+        :class="toggleClassObj"
+        @click="toggleCollapse">
+        &#x25B2;
+      </span>
+    </div>
+    <div class="lv-sidebar-content" v-show="!contentCollapsed">
+      <slot></slot>
     </div>
   </div>
 </template>
@@ -52,34 +48,16 @@ export default {
 
 <style lang="scss" scoped>
 .lv-sidebar {
-  .lv-sidebar-wrapper {
-    position: fixed;
-    z-index: 2;
-    right: 0;
-    width: 35%;
-    margin: 0.8rem;
-    overflow: hidden;
+  color: #FFFFFF;
+  overflow-y: auto;
+  padding: 0.8rem;
+  max-height: 100%;
+  border: 2px solid rgb(85, 85, 85);
+  background-color: rgba(0, 0, 0, 0.75);
+  margin-bottom: 1rem;
 
-    @media screen and (min-width: 992px) {
-      width: 25%;
-    }
-
-    @media screen and (min-width: 992px) {
-        width: 25%;
-    }
-  }
-
-  .lv-sidebar-container {
-    color: #FFFFFF;
-    overflow-y: auto;
-    padding: 0.8rem;
-    max-height: 100%;
-    border: 2px solid rgb(85, 85, 85);
-    background-color: rgba(0, 0, 0, 0.75);
-
-    @media screen and (min-width: 992px) {
-      flex-direction: column;
-    }
+  @media screen and (min-width: 992px) {
+    flex-direction: column;
   }
 
   .lv-sidebar-header {

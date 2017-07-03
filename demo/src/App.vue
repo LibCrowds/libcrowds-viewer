@@ -2,6 +2,8 @@
   <div id="app">
     <libcrowds-viewer
       :mode="mode"
+      :objective="objective"
+      :guidance="guidance"
       :scheme="scheme"
       :server="server"
       :image-api-prefix="imageApiPrefix"
@@ -17,6 +19,9 @@
 export default {
   data () {
     return {
+      mode: 'selection',
+      objective: 'Mark the play titles',
+      guidance: 'Draw a box around each play title, including any subtitles.',
       mode: 'selection',
       scheme: "https",
       server: "api.bl.uk",

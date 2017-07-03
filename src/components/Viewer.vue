@@ -21,10 +21,19 @@
       :mode="mode">
     </help-modal>
 
-    <selection-sidebar
-      v-if="mode === 'selection'"
-      @submit="submit">
-    </selection-sidebar>
+    <div id="lv-sidebars">
+
+      <task-sidebar
+        :objective="objective"
+        :guidance="guidance"
+        @submit="submit">
+      </task-sidebar>
+
+      <selection-sidebar
+        v-if="mode === 'selection'">
+      </selection-sidebar>
+
+    </div>
 
     <div
       class="selection-btn"
@@ -55,6 +64,7 @@ import MetadataModal from '@/components/modals/Metadata.vue'
 import HelpModal from '@/components/modals/Help.vue'
 import Controls from '@/components/Controls.vue'
 import SelectionSidebar from '@/components/sidebars/Selection.vue'
+import TaskSidebar from '@/components/sidebars/Task.vue'
 import { store } from '@/store.js'
 
 export default {
@@ -71,6 +81,14 @@ export default {
     mode: {
       type: String,
       default: 'selection'
+    },
+    objective: {
+      type: String,
+      default: null
+    },
+    guidance: {
+      type: String,
+      default: null
     },
     scheme: {
       type: String,
@@ -111,6 +129,7 @@ export default {
     HelpModal,
     Controls,
     SelectionSidebar,
+    TaskSidebar,
     Icon
   },
 
@@ -337,6 +356,23 @@ export default {
 
 #lv-viewer-container {
   height: 100%;
+}
+
+#lv-sidebars {
+  position: fixed;
+  z-index: 2;
+  right: 0;
+  width: 35%;
+  margin: 0.8rem;
+  overflow: hidden;
+
+  @media screen and (min-width: 992px) {
+    width: 25%;
+  }
+
+  @media screen and (min-width: 992px) {
+      width: 25%;
+  }
 }
 
 .openseadragon-container {
