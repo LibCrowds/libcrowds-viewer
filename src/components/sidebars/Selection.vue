@@ -28,7 +28,7 @@ import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/pencil'
 import Sidebar from '@/components/Sidebar.vue'
 import { store } from '@/store.js'
-import { getSelections } from '@/utils.js'
+import getSelections from '@/utils/getSelections.js'
 
 export default {
   computed: {

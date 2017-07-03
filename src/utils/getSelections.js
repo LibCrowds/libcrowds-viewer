@@ -1,6 +1,6 @@
 import { store } from '@/store.js'
 
-export const getSelections = function () {
+export default function () {
   const viewer = store.state.viewer
   const overlays = typeof viewer.currentOverlays !== 'undefined'
                      ? viewer.currentOverlays
