@@ -1,5 +1,5 @@
 <template>
-  <div id="lc-viewer">
+  <div id="lv-viewer">
 
     <controls
       ref="controls"
@@ -288,7 +288,7 @@ export default {
 
 <style lang="scss">
 
-#lc-viewer {
+#lv-viewer {
   display: flex;
   flex-direction: column;
   height: 100%;

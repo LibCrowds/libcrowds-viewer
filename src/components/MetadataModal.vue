@@ -1,5 +1,5 @@
 <template>
-  <div id="lc-metadata">
+  <div id="lv-metadata">
     <modal
       :id="id"
       title="Metadata">
@@ -60,17 +60,19 @@ export default {
 }
 </script>
 
-<style scoped>
-#manifest-md {
-  list-style: none;
-}
+<style lang="scss" scoped>
+#lv-metadata-modal {
+  #manifest-md {
+    list-style: none;
+  }
 
-#rights {
-  text-align: center;
-  margin: 2rem;
-}
+  #rights {
+    text-align: center;
+    margin: 2rem;
+  }
 
-li {
-  margin: 0;
+  li {
+    margin: 0;
+  }
 }
 </style>

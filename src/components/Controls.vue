@@ -1,5 +1,5 @@
 <template>
-  <div id="lc-controls">
+  <div id="lv-controls">
 
       <button
         :id="b.id"
@@ -55,7 +55,7 @@ export default {
 <style lang="scss" scoped>
 @import '~hint.css';
 
-#lc-controls {
+#lv-controls {
   display: flex;
   flex-direction: row;
   margin: 1rem;
