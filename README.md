@@ -24,15 +24,48 @@ npm run build
 import Vue from 'vue';
 import LibcrowdsViewer from 'libcrowds-viewer';
 
-Vue.component('lc-viewer', LibcrowdsViewer);
+Vue.component('libcrowds-viewer', LibcrowdsViewer);
 ```
 
 You can now use the component like this:
 
 ``` vue
-<lc-viewer tileSource="{scheme}://{server}{/prefix}/{identifier}/info.json"></lc-viewer>
+<libcrowds-viewer
+  mode="'selection'"
+  scheme="http"
+  server="api.bl.uk"
+  image-api-prefix="image/iiif"
+  presentation-api-prefix="metadata/iiif"
+  image-id="ark:/81055/vdc_100022589157.0x000005"
+  manifest-id="ark:/81055/vdc_100022589158.0x000002"
+  @submit="handleResponse">
+</libcrowds-viewer>
 ```
 
-Where `tileSource` is a URI conforming to the IIIF Image Request URI Syntax, 
-see the [IIIF Image API (v2.1) documentation](http://iiif.io/api/image/2.1) 
-for details.
+See the documentation for the [IIIF Image API (v2.1)](http://iiif.io/api/image/2.1)
+and [IIIF Presentation API (v2.1)](http://iiif.io/api/presentation/2.1/) for 
+more details of how a URI is constructed.
+
+There are currently two modes, *selection* and *transcription*, both of which
+should be pretty self-explanatory and both of which return a JSON response
+containing the user input.
+
+### Properties
+
+| Property                | Type          | Default              |
+|-------------------------|---------------|----------------------|
+| mode                    | String        | 'selection'          |
+| scheme                  | String        | 'http'               |
+| server                  | String        | null                 |
+| image-api-prefix        | String        | null                 |
+| presentation-api-prefix | String        | null                 |
+| image-id                | String        | null                 |
+| manifest-id             | String        | null                 |
+| confirm-before-unload   | String        | false                |
+
+
+### Events
+
+| Event         | Arguments     | Description          |
+|---------------|---------------|----------------------|
+| submit        | data          | User input confirmed |
