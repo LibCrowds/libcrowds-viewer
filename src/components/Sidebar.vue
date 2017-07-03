@@ -48,6 +48,7 @@ export default {
 
 <style lang="scss" scoped>
 .lv-sidebar {
+  font-size: 14px;
   color: #FFFFFF;
   overflow-y: auto;
   max-height: 100%;
@@ -68,7 +69,6 @@ export default {
     letter-spacing: 1px;
 
     h4 {
-      font-size: 1rem;
       text-transform: uppercase;
       margin: 0;
       flex-direction: row;

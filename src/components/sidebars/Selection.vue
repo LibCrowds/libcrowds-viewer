@@ -61,7 +61,7 @@ export default {
     margin: 0;
     overflow-y: auto;
     min-height: 100px;
-    max-height: 300px;
+    max-height: 250px;
     list-style: none;
     padding: 0.8rem;
     border: 1px solid $gray;
