@@ -366,30 +366,6 @@ export default {
     color: #FFF;
   }
 
-  .viewer-hint {
-    white-space: nowrap;
-    position: absolute;
-    pointer-events: none;
-    top: 80px;
-    width: 100%;
-    text-align: center;
-    opacity: 0;
-    transition: opacity 300ms;
-
-    &.show {
-      opacity: 1;
-    }
-
-    .viewer-hint-text {
-      padding: .5rem;
-      color: #FFF;
-      width: 400px;
-      margin:0px auto;
-      background-color: rgba(0, 0, 0, 0.75);
-      border-radius: 6px;
-    }
-  }
-
   .selection-box {
     transform: none !important;  /** Disable rotation */
     outline: 9999px solid rgba(#000, .6);
@@ -419,11 +395,6 @@ export default {
       border: 2px solid $blue;
       background-color: rgba($blue, 0.2);
       opacity: .6;
-
-      &:hover,
-      &:focus {
-        opacity: 1;
-      }
     }
 
     &.highlight {
