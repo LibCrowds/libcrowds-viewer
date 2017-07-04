@@ -70,6 +70,7 @@
 </template>
 
 <script>
+import uuid from 'uuid/v4'
 import Icon from 'vue-awesome/components/Icon.vue'
 import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/check-circle'
@@ -287,7 +288,7 @@ export default {
     addOverlay(rect, cls) {
       const viewer = store.state.viewer
       const el = document.createElement('div')
-      el.id = `overlay-${Date.now()}`
+      el.id = uuid()
       el.classList.add('overlay')
       el.classList.add(cls)
       viewer.addOverlay({ element: el, location: rect })
