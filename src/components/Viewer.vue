@@ -180,21 +180,22 @@ export default {
       }
       return Object.assign(defaultOpts, this.viewerOpts)
     },
-    tileSource: function () {
-      return `${this.scheme}://` + 
-             `${this.server}/` + 
-             `${this.imageApiPrefix}/` +
-             `${this.imageId}/` + 
-             `info.json`
+    imgSource: function () {
+      const imgSource = `${this.scheme}://` +
+                        `${this.server}/` +
+                        `${this.imageApiPrefix}/` +
+                        `${this.imageId}`
+      store.commit('SET_ITEM', { key: 'imgSource', value: imgSource })
+      return imgSource
     }
   },
 
   methods: {
-    loadTileSource () {
+    loadImage () {
       const viewer = store.state.viewer
       viewer.open({
         type: 'image',
-        tileSource: this.tileSource,
+        tileSource: `${this.imgSource}/info.json`,
         buildPyramid: false
       })
     },
@@ -304,8 +305,8 @@ export default {
   },
 
   watch: {
-    tileSource: function () {
-      this.loadTileSource()
+    imgSource: function () {
+      this.loadImage()
     }
   },
 
@@ -317,7 +318,7 @@ export default {
     store.commit('SET_ITEM', { key: 'viewer', value: viewer })
 
     this.configureSelector()
-    this.loadTileSource()
+    this.loadImage()
     this.attachControls()
     this.setupHandlers()
   }
