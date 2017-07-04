@@ -1,66 +1,68 @@
 <template>
   <div id="lv-viewer">
 
-    <viewer-controls
-      ref="viewerControls"
-      :showHelp="showHelp"
-      :showInfo="manifestId.length > 0"
-      :zoomInButton="normalizedViewerOpts.zoomInButton"
-      :zoomOutButton="normalizedViewerOpts.zoomOutButton"
-      :homeButton="normalizedViewerOpts.homeButton"
-      :fullPageButton="normalizedViewerOpts.fullPageButton"
-      :helpButton="normalizedViewerOpts.helpButton"
-      :infoButton="normalizedViewerOpts.infoButton"
-      @helpclicked="handleHelpControlClick"
-      @infoclicked="handleInfoControlClick">
-    </viewer-controls>
+    <div ref="hud">
 
-    <pan-controls
-      ref="panControls"
-      :panBy="panBy">
-    </pan-controls>
+      <viewer-controls
+        :showHelp="showHelp"
+        :showInfo="manifestId.length > 0"
+        :zoomInButton="normalizedViewerOpts.zoomInButton"
+        :zoomOutButton="normalizedViewerOpts.zoomOutButton"
+        :homeButton="normalizedViewerOpts.homeButton"
+        :fullPageButton="normalizedViewerOpts.fullPageButton"
+        :helpButton="normalizedViewerOpts.helpButton"
+        :infoButton="normalizedViewerOpts.infoButton"
+        @helpclicked="handleHelpControlClick"
+        @infoclicked="handleInfoControlClick">
+      </viewer-controls>
 
-    <metadata-modal
-      v-if="manifestId"
-      :id="metadataModalId"
-      :scheme="scheme"
-      :server="server"
-      :presentation-api-prefix="presentationApiPrefix"
-      :manifestId="manifestId">
-    </metadata-modal>
+      <pan-controls
+        :panBy="panBy">
+      </pan-controls>
 
-    <help-modal
-      v-if="showHelp"
-      :id="helpModalId"
-      :mode="mode">
-    </help-modal>
+      <metadata-modal
+        v-if="manifestId"
+        :id="metadataModalId"
+        :scheme="scheme"
+        :server="server"
+        :presentation-api-prefix="presentationApiPrefix"
+        :manifestId="manifestId">
+      </metadata-modal>
 
-    <div id="lv-sidebars">
+      <help-modal
+        v-if="showHelp"
+        :id="helpModalId"
+        :mode="mode">
+      </help-modal>
 
-      <task-sidebar
-        :objective="objective"
-        :guidance="guidance"
-        :showNote="showNote"
-        @submit="submit">
-      </task-sidebar>
+      <div id="lv-sidebars">
 
-      <selection-sidebar
-        v-if="mode === 'selection'">
-      </selection-sidebar>
+        <task-sidebar
+          :objective="objective"
+          :guidance="guidance"
+          :showNote="showNote"
+          @submit="submit">
+        </task-sidebar>
 
-    </div>
+        <selection-sidebar
+          v-if="mode === 'selection'">
+        </selection-sidebar>
 
-    <div
-      class="btn-selection"
-      id="confirm-selection"
-      ref="confirmSelection">
-      <icon name="check-circle"></icon>
-    </div>
-    <div
-      class="btn-selection"
-      id="cancel-selection"
-      ref="cancelSelection">
-      <icon name="times-circle"></icon>
+      </div>
+
+      <div
+        class="btn-selection"
+        id="confirm-selection"
+        ref="confirmSelection">
+        <icon name="check-circle"></icon>
+      </div>
+      <div
+        class="btn-selection"
+        id="cancel-selection"
+        ref="cancelSelection">
+        <icon name="times-circle"></icon>
+      </div>
+
     </div>
 
     <!-- Render viewer after all other components -->
@@ -204,8 +206,7 @@ export default {
       // TODO: this works for fullscreen controls but should possibly use
       // https://openseadragon.github.io/docs/OpenSeadragon.Control.html
       const viewer = store.state.viewer
-      viewer.container.prepend(this.$refs.viewerControls.$el)
-      viewer.container.prepend(this.$refs.panControls.$el)
+      viewer.container.prepend(this.$refs.hud)
     },
     handleHelpControlClick () {
       this.$root.$emit('show::modal', this.helpModalId)
