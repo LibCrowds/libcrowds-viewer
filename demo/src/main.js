@@ -1,3 +1,5 @@
+import 'es6-promise/auto'
+
 import Vue from 'vue'
 import LibcrowdsViewer from 'libcrowds-viewer'
 /* eslint-enable */

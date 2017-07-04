@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "es6-promise": "^4.1.1",
     "hint.css": "^2.5.0",
     "normalize.css": "^7.0.0",
     "openseadragon": "^2.2.1",
@@ -23,7 +24,7 @@
     "babel-core": "^6.0.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^6.4.1",
-    "babel-preset-env": "^1.5.2", 
+    "babel-preset-env": "^1.5.2",
     "cross-env": "^3.2.4",
     "css-loader": "^0.25.0",
     "eslint": "^4.1.0",

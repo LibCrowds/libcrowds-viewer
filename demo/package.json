@@ -7,9 +7,10 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "clean": "rimraf ./dist",
     "prepare": "npm run clean && npm run build && sed 's|dist/|libcrowds-viewer/|g' index.html > dist/index.html",
-    "deploy": "npm run prepare && gh-pages -d dist/"
+    "deploy": "gh-pages -d dist/"
   },
   "dependencies": {
+    "es6-promise": "^4.1.1",
     "hint.css": "^2.5.0",
     "normalize.css": "^7.0.0",
     "vue": "^2.3.4",
