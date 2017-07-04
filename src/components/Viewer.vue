@@ -348,14 +348,7 @@ export default {
   width: 35%;
   margin: 0.8rem;
   overflow: hidden;
-
-  @media screen and (min-width: 992px) {
-    width: 25%;
-  }
-
-  @media screen and (min-width: 992px) {
-      width: 25%;
-  }
+  max-width: 350px;
 }
 
 .openseadragon-container {
@@ -389,7 +382,7 @@ export default {
   }
 
   .overlay {
-    z-index: 50;
+    z-index: 5;
 
     &.selection {
       border: 2px solid $blue;

@@ -54,7 +54,7 @@ export default {
   max-height: 100%;
   border: 2px solid rgb(85, 85, 85);
   background-color: rgba(0, 0, 0, 0.75);
-  margin-bottom: 1rem;
+  margin: 1rem;
 
   @media screen and (min-width: 992px) {
     flex-direction: column;
