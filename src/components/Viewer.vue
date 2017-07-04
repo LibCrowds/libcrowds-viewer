@@ -51,13 +51,13 @@
     </div>
 
     <div
-      class="selection-btn"
+      class="btn-selection"
       id="confirm-selection"
       ref="confirmSelection">
       <icon name="check-circle"></icon>
     </div>
     <div
-      class="selection-btn"
+      class="btn-selection"
       id="cancel-selection"
       ref="cancelSelection">
       <icon name="times-circle"></icon>
@@ -328,6 +328,7 @@ export default {
 
 <style lang="scss">
 @import '../assets/style/settings';
+@import '../assets/style/partials/buttons';
 
 #lv-viewer {
   display: flex;
@@ -365,7 +366,7 @@ export default {
     z-index: 10;
     outline: 9999px solid rgba(#000, .6);
 
-    .selection-btn {
+    .btn-selection {
       color: #fff;
       display: flex !important;
       position: absolute !important;
