@@ -55,6 +55,14 @@ export default {
     Icon
   },
 
+  methods: {
+    handleClick (func) {
+      if (typeof func !== 'undefined') {
+        func()
+      }
+    }
+  },
+
   mounted () {
     this.$refs.controls.classList.add(this.position)
   }
