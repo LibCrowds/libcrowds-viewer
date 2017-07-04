@@ -11,10 +11,14 @@
             <img :src="getImageUri(s.rect)">
           </div>
           <div class="buttons">
-            <span @click="editSelection(s)">
+            <span
+              @click="editSelection(s)"
+              class="btn btn-control">
               <icon name="pencil"></icon>
             </span>
-            <span @click="deleteSelection(s)">
+            <span
+              @click="deleteSelection(s)"
+              class="btn btn-control">
               <icon name="times-circle"></icon>
             </span>
           </div>
@@ -59,6 +63,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../assets/style/settings';
+@import '../../assets/style/partials/buttons';
 
 #lv-selection-sidebar {
   ul {
@@ -84,10 +89,6 @@ export default {
     justify-content: flex-end;
     display: flex;
     flex: 0 0 33.3333%;
-
-    svg {
-      margin: 5px;
-    }
   }
 
   button {
