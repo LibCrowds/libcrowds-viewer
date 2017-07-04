@@ -256,15 +256,7 @@ export default {
       const selector = viewer.selection({
         showConfirmDenyButtons: false,
         restrictToImage: true,
-        returnPixelCoordinates: false,
-        navImages: {
-          selection: {
-            REST: null,
-            GROUP: null,
-            HOVER: null,
-            DOWN: null
-          }
-        }
+        returnPixelCoordinates: false
       })
       store.commit('SET_ITEM', { key: 'selector', value: selector })
       selector.enable()
