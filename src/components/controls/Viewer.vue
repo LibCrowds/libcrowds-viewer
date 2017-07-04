@@ -1,5 +1,5 @@
 <template>
-  <div class="lv-controls">
+  <div class="lv-viewer-controls">
 
     <controls
       position="top"
@@ -107,6 +107,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

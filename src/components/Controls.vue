@@ -45,9 +45,9 @@ export default {
       type: [String, Number],
       default: 1.25
     },
-    layout: {
+    position: {
       type: String,
-      default: 'row'
+      default: 'bottom'
     }
   },
 
@@ -55,16 +55,8 @@ export default {
     Icon
   },
 
-  methods: {
-    handleClick (func) {
-      if (typeof func !== 'undefined') {
-        func()
-      }
-    }
-  },
-
   mounted () {
-    this.$refs.controls.classList.add(this.layout)
+    this.$refs.controls.classList.add(this.position)
   }
 }
 </script>
@@ -86,12 +78,12 @@ export default {
     padding: 0;
   }
 
-  .row {
-    flex-direction: row;
+  &.bottom {
+    bottom: 0;
   }
 
-  .column {
-    flex-direction: column;
+  &.top {
+    top: 0;
   }
 }
 </style>
