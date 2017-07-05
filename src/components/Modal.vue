@@ -95,7 +95,7 @@ export default {
     color: #fff;
     background-color: $gray-dark;
     margin-top: 2em;
-    max-height: 600px;
+    max-height: calc(100vh - 4em);
     width: auto;
     margin: 0px auto;
     overflow: hidden;
