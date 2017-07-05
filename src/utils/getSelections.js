@@ -5,6 +5,7 @@ export default function () {
   const overlays = typeof viewer.currentOverlays !== 'undefined'
                      ? viewer.currentOverlays
                      : []
+  console.log(viewer, overlays)
   const selections = overlays.filter(function (overlay) {
     return overlay.element.classList.contains('selection')
   }).map(function (s) {
