@@ -9,7 +9,7 @@ module.exports = {
     publicPath: process.env.NODE_ENV === 'production'
                   ? './'
                   : '/',
-    filename: '[name].[chunkhash].js'
+    filename: '[name].[hash].js'
   },
   module: {
     rules: [
