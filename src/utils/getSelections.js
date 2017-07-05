@@ -18,5 +18,5 @@ export default function () {
       rect: viewer.viewport.viewportToImageRectangle(vpRect)
     }
   })
-  return selections
+  return selections.reverse()
 }

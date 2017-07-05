@@ -1,6 +1,8 @@
 @import '../settings.scss';
 
 .btn {
+  cursor: default;
+  font-size: 14px;
   background-color: transparent;
   border: 1px solid #fff;
   color: #fff;
@@ -13,5 +15,27 @@
   &.btn-green {
     background-color: $green;
     border-color: $green;
+
+    &:hover,
+    &:focus {
+      background-color: darken($green, 10%);
+      border-color: darken($green, 10%);
+    }
+  }
+
+  &.btn-control {
+    display: flex !important;
+    background: none;
+    text-shadow: 0 0 5px #000000;
+    font-size: 1.25rem;
+    padding: 0.5rem 0.75rem;
+    border: none;
+    outline: none !important;
+    opacity: 0.8;
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
   }
 }

@@ -1,66 +1,68 @@
 <template>
   <div id="lv-viewer">
 
-    <viewer-controls
-      ref="viewerControls"
-      :showHelp="showHelp"
-      :showInfo="manifestId.length > 0"
-      :zoomInButton="normalizedViewerOpts.zoomInButton"
-      :zoomOutButton="normalizedViewerOpts.zoomOutButton"
-      :homeButton="normalizedViewerOpts.homeButton"
-      :fullPageButton="normalizedViewerOpts.fullPageButton"
-      :helpButton="normalizedViewerOpts.helpButton"
-      :infoButton="normalizedViewerOpts.infoButton"
-      @helpclicked="handleHelpControlClick"
-      @infoclicked="handleInfoControlClick">
-    </viewer-controls>
+    <div ref="hud">
 
-    <pan-controls
-      ref="panControls"
-      :panBy="panBy">
-    </pan-controls>
+      <viewer-controls
+        :showHelp="showHelp"
+        :showInfo="manifestId.length > 0"
+        :zoomInButton="normalizedViewerOpts.zoomInButton"
+        :zoomOutButton="normalizedViewerOpts.zoomOutButton"
+        :homeButton="normalizedViewerOpts.homeButton"
+        :fullPageButton="normalizedViewerOpts.fullPageButton"
+        :helpButton="normalizedViewerOpts.helpButton"
+        :infoButton="normalizedViewerOpts.infoButton"
+        @helpclicked="handleHelpControlClick"
+        @infoclicked="handleInfoControlClick">
+      </viewer-controls>
 
-    <metadata-modal
-      v-if="manifestId"
-      :id="metadataModalId"
-      :scheme="scheme"
-      :server="server"
-      :presentation-api-prefix="presentationApiPrefix"
-      :manifestId="manifestId">
-    </metadata-modal>
+      <pan-controls
+        :panBy="panBy">
+      </pan-controls>
 
-    <help-modal
-      v-if="showHelp"
-      :id="helpModalId"
-      :mode="mode">
-    </help-modal>
+      <metadata-modal
+        v-if="manifestId"
+        :id="metadataModalId"
+        :scheme="scheme"
+        :server="server"
+        :presentation-api-prefix="presentationApiPrefix"
+        :manifestId="manifestId">
+      </metadata-modal>
 
-    <div id="lv-sidebars">
+      <help-modal
+        v-if="showHelp"
+        :id="helpModalId"
+        :mode="mode">
+      </help-modal>
 
-      <task-sidebar
-        :objective="objective"
-        :guidance="guidance"
-        :showNote="showNote"
-        @submit="submit">
-      </task-sidebar>
+      <div id="lv-sidebars">
 
-      <selection-sidebar
-        v-if="mode === 'selection'">
-      </selection-sidebar>
+        <task-sidebar
+          :objective="objective"
+          :guidance="guidance"
+          :showNote="showNote"
+          @submit="submit">
+        </task-sidebar>
 
-    </div>
+        <selection-sidebar
+          v-if="mode === 'selection'">
+        </selection-sidebar>
 
-    <div
-      class="selection-btn"
-      id="confirm-selection"
-      ref="confirmSelection">
-      <icon name="check-circle"></icon>
-    </div>
-    <div
-      class="selection-btn"
-      id="cancel-selection"
-      ref="cancelSelection">
-      <icon name="times-circle"></icon>
+      </div>
+
+      <div
+        class="btn-selection"
+        id="confirm-selection"
+        ref="confirmSelection">
+        <icon name="check-circle"></icon>
+      </div>
+      <div
+        class="btn-selection"
+        id="cancel-selection"
+        ref="cancelSelection">
+        <icon name="times-circle"></icon>
+      </div>
+
     </div>
 
     <!-- Render viewer after all other components -->
@@ -70,6 +72,7 @@
 </template>
 
 <script>
+import uuid from 'uuid/v4'
 import Icon from 'vue-awesome/components/Icon.vue'
 import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/check-circle'
@@ -180,21 +183,22 @@ export default {
       }
       return Object.assign(defaultOpts, this.viewerOpts)
     },
-    tileSource: function () {
-      return `${this.scheme}://` + 
-             `${this.server}/` + 
-             `${this.imageApiPrefix}/` +
-             `${this.imageId}/` + 
-             `info.json`
+    imgSource: function () {
+      const imgSource = `${this.scheme}://` +
+                        `${this.server}/` +
+                        `${this.imageApiPrefix}/` +
+                        `${this.imageId}`
+      store.commit('SET_ITEM', { key: 'imgSource', value: imgSource })
+      return imgSource
     }
   },
 
   methods: {
-    loadTileSource () {
+    loadImage () {
       const viewer = store.state.viewer
       viewer.open({
         type: 'image',
-        tileSource: this.tileSource,
+        tileSource: `${this.imgSource}/info.json`,
         buildPyramid: false
       })
     },
@@ -202,8 +206,7 @@ export default {
       // TODO: this works for fullscreen controls but should possibly use
       // https://openseadragon.github.io/docs/OpenSeadragon.Control.html
       const viewer = store.state.viewer
-      viewer.container.prepend(this.$refs.viewerControls.$el)
-      viewer.container.prepend(this.$refs.panControls.$el)
+      viewer.container.prepend(this.$refs.hud)
     },
     handleHelpControlClick () {
       this.$root.$emit('show::modal', this.helpModalId)
@@ -254,15 +257,7 @@ export default {
       const selector = viewer.selection({
         showConfirmDenyButtons: false,
         restrictToImage: true,
-        returnPixelCoordinates: false,
-        navImages: {
-          selection: {
-            REST: null,
-            GROUP: null,
-            HOVER: null,
-            DOWN: null
-          }
-        }
+        returnPixelCoordinates: false
       })
       store.commit('SET_ITEM', { key: 'selector', value: selector })
       selector.enable()
@@ -286,7 +281,7 @@ export default {
     addOverlay(rect, cls) {
       const viewer = store.state.viewer
       const el = document.createElement('div')
-      el.id = `overlay-${Date.now()}`
+      el.id = uuid()
       el.classList.add('overlay')
       el.classList.add(cls)
       viewer.addOverlay({ element: el, location: rect })
@@ -304,8 +299,8 @@ export default {
   },
 
   watch: {
-    tileSource: function () {
-      this.loadTileSource()
+    imgSource: function () {
+      this.loadImage()
     }
   },
 
@@ -317,7 +312,7 @@ export default {
     store.commit('SET_ITEM', { key: 'viewer', value: viewer })
 
     this.configureSelector()
-    this.loadTileSource()
+    this.loadImage()
     this.attachControls()
     this.setupHandlers()
   }
@@ -326,6 +321,7 @@ export default {
 
 <style lang="scss">
 @import '../assets/style/settings';
+@import '../assets/style/partials/buttons';
 
 #lv-viewer {
   display: flex;
@@ -347,14 +343,7 @@ export default {
   width: 35%;
   margin: 0.8rem;
   overflow: hidden;
-
-  @media screen and (min-width: 992px) {
-    width: 25%;
-  }
-
-  @media screen and (min-width: 992px) {
-      width: 25%;
-  }
+  max-width: 350px;
 }
 
 .openseadragon-container {
@@ -365,35 +354,12 @@ export default {
     color: #FFF;
   }
 
-  .viewer-hint {
-    white-space: nowrap;
-    position: absolute;
-    pointer-events: none;
-    top: 80px;
-    width: 100%;
-    text-align: center;
-    opacity: 0;
-    transition: opacity 300ms;
-
-    &.show {
-      opacity: 1;
-    }
-
-    .viewer-hint-text {
-      padding: .5rem;
-      color: #FFF;
-      width: 400px;
-      margin:0px auto;
-      background-color: rgba(0, 0, 0, 0.75);
-      border-radius: 6px;
-    }
-  }
-
   .selection-box {
     transform: none !important;  /** Disable rotation */
+    z-index: 10;
     outline: 9999px solid rgba(#000, .6);
 
-    .selection-btn {
+    .btn-selection {
       color: #fff;
       display: flex !important;
       position: absolute !important;
@@ -412,17 +378,12 @@ export default {
   }
 
   .overlay {
-    z-index: 50;
+    z-index: 5;
 
     &.selection {
       border: 2px solid $blue;
       background-color: rgba($blue, 0.2);
       opacity: .6;
-
-      &:hover,
-      &:focus {
-        opacity: 1;
-      }
     }
 
     &.highlight {

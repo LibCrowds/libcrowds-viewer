@@ -5,7 +5,7 @@
         :id="b.id"
         v-for="b in buttons"
         :key="b.id"
-        class="hint--right hint--no-animate"
+        class="hint--right hint--no-animate btn btn-control"
         :aria-label="b.tooltip"
         @click="handleClick(b.click)">
         <icon :name="b.icon" :scale="scale"></icon>
@@ -41,17 +41,13 @@ export default {
       type: Array,
       required: true
     },
-    position: {
-      type: String,
-      default: 'top'
-    },
     scale: {
       type: [String, Number],
       default: 1.25
     },
-    layout: {
+    position: {
       type: String,
-      default: 'row'
+      default: 'bottom'
     }
   },
 
@@ -69,13 +65,13 @@ export default {
 
   mounted () {
     this.$refs.controls.classList.add(this.position)
-    this.$refs.controls.classList.add(this.layout)
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '~hint.css';
+@import '../assets/style/partials/buttons';
 
 .lv-controls {
   display: flex;
@@ -90,38 +86,12 @@ export default {
     padding: 0;
   }
 
-  &.top {
-    top: 0;
-  }
-
   &.bottom {
     bottom: 0;
   }
 
-  .row {
-    flex-direction: row;
-  }
-
-  .column {
-    flex-direction: column;
-  }
-
-  button {
-    background: none;
-    color: #FFFFFF;
-    opacity: 0.8;
-    text-shadow: 0 0 5px #000000;
-    font-size: 1.25rem;
-    padding: .75rem;
-    cursor: pointer;
-    border: none;
-    outline: none !important;
-    opacity: 0.65;
-
-    &:hover,
-    &:focus {
-      opacity: 1;
-    }
+  &.top {
+    top: 0;
   }
 }
 </style>

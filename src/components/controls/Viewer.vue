@@ -1,5 +1,5 @@
 <template>
-  <div class="lv-controls">
+  <div class="lv-viewer-controls">
 
     <controls
       position="top"
@@ -57,7 +57,6 @@ export default {
   computed: {
     buttons: function () {
       const viewer = store.state.viewer
-      console.log(viewer.fullPageButton)
       let buttons = [
         {
           id: this.zoomInButton,
@@ -107,6 +106,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

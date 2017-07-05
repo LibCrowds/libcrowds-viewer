@@ -7,12 +7,18 @@
           :key="s.id"
           @mouseover="highlightSelection(s, true)"
           @mouseleave="highlightSelection(s, false)">
-          {{ s.id }}
-          <div>
-            <span @click="editSelection(s)">
+          <div class="thumbnail-container">
+            <img :src="getImageUri(s.rect)">
+          </div>
+          <div class="buttons">
+            <span
+              @click="editSelection(s)"
+              class="btn btn-control">
               <icon name="pencil"></icon>
             </span>
-            <span @click="deleteSelection(s)">
+            <span
+              @click="deleteSelection(s)"
+              class="btn btn-control">
               <icon name="times-circle"></icon>
             </span>
           </div>
@@ -32,6 +38,7 @@ import getSelections from '@/utils/getSelections.js'
 import deleteSelection from '@/utils/deleteSelection.js'
 import editSelection from '@/utils/editSelection.js'
 import highlightSelection from '@/utils/highlightSelection.js'
+import getImageUri from '@/utils/getImageUri.js'
 
 export default {
   computed: {
@@ -48,42 +55,59 @@ export default {
   methods: {
     deleteSelection,
     editSelection,
-    highlightSelection
+    highlightSelection,
+    getImageUri
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '../../assets/style/settings';
+@import '../../assets/style/partials/buttons';
 
 #lv-selection-sidebar {
   ul {
+    margin: 0;
     overflow-y: auto;
-    height: 300px;
+    min-height: 100px;
+    max-height: 250px;
     list-style: none;
-    padding: 0.8rem;
+    padding: 0;
     border: 1px solid $gray;
 
     li {
+      padding: 0.8rem;
       display: flex;
       flex-direction: row;
+      align-items: center;
       justify-content: space-between;
-      align-content: center;
-
-      &:not(:last-child) {
-        margin-bottom: 0.75rem;
-      }
+      border-bottom: 1px solid darken($gray, 25%);
     }
   }
 
-  svg {
-    margin-left: 5px;
+  .buttons {
+    justify-content: flex-end;
+    display: flex;
+    flex: 0 0 33.3333%;
   }
 
   button {
     display: flex;
     margin-right: auto;
     margin-left: auto;
+  }
+
+  .thumbnail-container {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex: 1 1 auto;
+    height: 50px;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
   }
 }
 </style>
