@@ -14,7 +14,7 @@ export default function () {
                                                     bounds.width,
                                                     bounds.height)
     return {
-      id: s.element.id,
+      id: s.element.dataset.selectionId,
       rect: viewer.viewport.viewportToImageRectangle(vpRect)
     }
   })

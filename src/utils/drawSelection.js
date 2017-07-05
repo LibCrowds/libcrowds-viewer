@@ -7,7 +7,7 @@ export default function (selection) {
                                       selection.width, selection.height)
   const viewer = store.state.viewer
   const el = document.createElement('div')
-  el.id = uuid()
+  el.dataset.selectionId = uuid()
   el.classList.add('overlay')
   el.classList.add('selection')
   viewer.addOverlay({ element: el, location: rect })
