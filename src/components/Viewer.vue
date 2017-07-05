@@ -72,7 +72,6 @@
 </template>
 
 <script>
-import uuid from 'uuid/v4'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/check-circle'
@@ -84,6 +83,7 @@ import ViewerControls from '@/components/controls/Viewer'
 import PanControls from '@/components/controls/Pan'
 import SelectionSidebar from '@/components/sidebars/Selection'
 import TaskSidebar from '@/components/sidebars/Task'
+import drawSelection from '@/utils/drawSelection'
 import { store } from '@/store'
 
 export default {
@@ -218,9 +218,7 @@ export default {
       // Draw an overlay on selection confirmed
       const viewer = store.state.viewer
       viewer.addHandler('selection', (s) => {
-        // Convert Viewport to Image rect
-        const rect = new OpenSeadragon.Rect(s.x, s.y, s.width, s.height)
-        this.addOverlay(rect, 'selection')
+        drawSelection(s)
       })
 
       // Hide loading icon after tile drawn
@@ -277,14 +275,6 @@ export default {
         onRelease: selector.cancel.bind(selector)
       })
       selector.element.appendChild(this.$refs.cancelSelection)
-    },
-    addOverlay(rect, cls) {
-      const viewer = store.state.viewer
-      const el = document.createElement('div')
-      el.id = uuid()
-      el.classList.add('overlay')
-      el.classList.add(cls)
-      viewer.addOverlay({ element: el, location: rect })
     },
     handleOverlayClick (evt) {
       const viewer = store.state.viewer
