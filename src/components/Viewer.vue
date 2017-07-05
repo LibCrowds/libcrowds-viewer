@@ -338,7 +338,6 @@ export default {
 
 .openseadragon-container {
   height: 100vh;
-  min-height: 600px;
 
   .openseadragon-message {
     color: #FFF;
