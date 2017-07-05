@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var HthmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: './src/main.js',
@@ -45,6 +46,11 @@ module.exports = {
       '@': path.resolve(__dirname, '../src')
     }
   },
+  plugins: [
+    new HthmlWebpackPlugin({
+      inject: true
+    })
+  ],
   devServer: {
     historyApiFallback: true,
     noInfo: true
