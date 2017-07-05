@@ -7,6 +7,7 @@ export const store = new Vuex.Store({
   state: {
     selector: {},
     viewer: {},
+    selections: [],
     imgSource: '',
     note: ''
   },
@@ -15,11 +16,21 @@ export const store = new Vuex.Store({
     SET_ITEM: (state, obj) => {
       state[obj.key] = obj.value
     },
-    DEL_ITEM: (state, obj) => {
+    ADD_ARRAY_ITEM: (state, obj) => {
+      state[obj.key].unshift(obj.value)
+    },
+    DEL_ARRAY_ITEM: (state, obj) => {
       state[obj.key].splice(obj.index, 1)
     },
-    ADD_ITEM: (state, obj) => {
-      state[obj.key].unshift(obj.value)
+  },
+
+  getters: {
+    getData: state => {
+      return {
+        selections: state.selections,
+        imgSource: state.imgSource,
+        note: state.note
+      }
     }
   }
 })

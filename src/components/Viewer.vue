@@ -83,8 +83,8 @@ import ViewerControls from '@/components/controls/Viewer'
 import PanControls from '@/components/controls/Pan'
 import SelectionSidebar from '@/components/sidebars/Selection'
 import TaskSidebar from '@/components/sidebars/Task'
-import drawSelection from '@/utils/drawSelection'
 import { store } from '@/store'
+import addSelection from '@/utils/addSelection'
 
 export default {
   data: function () {
@@ -215,10 +215,11 @@ export default {
       this.$root.$emit('show::modal', this.metadataModalId)
     },
     setupHandlers () {
-      // Draw an overlay on selection confirmed
       const viewer = store.state.viewer
-      viewer.addHandler('selection', (s) => {
-        drawSelection(s)
+
+      // Store confirmed selections
+      viewer.addHandler('selection', (selectionRect) => {
+        addSelection(selectionRect)
       })
 
       // Hide loading icon after tile drawn

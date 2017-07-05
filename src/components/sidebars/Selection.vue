@@ -8,7 +8,7 @@
           @mouseover="highlightSelection(s, true)"
           @mouseleave="highlightSelection(s, false)">
           <div class="thumbnail-container">
-            <img :src="getImageUri(s.rect)">
+            <img :src="getImageUri(s.imageRect)">
           </div>
           <div class="buttons">
             <span
@@ -34,16 +34,15 @@ import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/pencil'
 import Sidebar from '@/components/Sidebar'
 import { store } from '@/store'
-import getSelections from '@/utils/getSelections'
-import deleteSelection from '@/utils/deleteSelection'
 import editSelection from '@/utils/editSelection'
 import highlightSelection from '@/utils/highlightSelection'
+import deleteSelection from '@/utils/deleteSelection'
 import getImageUri from '@/utils/getImageUri'
 
 export default {
   computed: {
     selections () {
-      return getSelections()
+      return store.state.selections
     }
   },
 

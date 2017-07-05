@@ -25,7 +25,6 @@
 <script>
 import { store } from '@/store'
 import Sidebar from '@/components/Sidebar'
-import getData from '@/utils/getData'
 
 export default {
   data: function () {
@@ -61,7 +60,7 @@ export default {
       store.commit('SET_ITEM', { key: 'note', value: evt.target.value })
     },
     submit () {
-      const data = getData()
+      const data = store.getters.getData
       this.$emit('submit', data)
     }
   }
