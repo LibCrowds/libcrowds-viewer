@@ -28,13 +28,13 @@ export default {
 
   computed: {
     buttons: function () {
-      const viewer = store.state.viewer
       let buttons = [
         {
           id: 'pan-up',
           tooltip: 'Move up',
           icon: 'chevron-up',
           click: () => {
+            const viewer = store.state.viewer
             viewer.viewport.panBy(new OpenSeadragon.Point(0, -this.panBy))
           }
         },
@@ -43,6 +43,7 @@ export default {
           tooltip: 'Move down',
           icon: 'chevron-down',
           click: () => {
+            const viewer = store.state.viewer
             viewer.viewport.panBy(new OpenSeadragon.Point(0, this.panBy))
           }
         },
@@ -51,6 +52,7 @@ export default {
           tooltip: 'Move left',
           icon: 'chevron-left',
           click: () => {
+            const viewer = store.state.viewer
             viewer.viewport.panBy(new OpenSeadragon.Point(-this.panBy, 0))
           }
         },
@@ -59,6 +61,7 @@ export default {
           tooltip: 'Move right',
           icon: 'chevron-right',
           click: () => {
+            const viewer = store.state.viewer
             viewer.viewport.panBy(new OpenSeadragon.Point(this.panBy, 0))
           }
         }
