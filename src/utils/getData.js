@@ -1,5 +1,5 @@
-import { store } from '@/store.js'
-import getSelections from '@/utils/getSelections.js'
+import { store } from '@/store'
+import getSelections from '@/utils/getSelections'
 
 export default function () {
   return {

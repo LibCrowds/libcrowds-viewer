@@ -73,18 +73,18 @@
 
 <script>
 import uuid from 'uuid/v4'
-import Icon from 'vue-awesome/components/Icon.vue'
+import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/check-circle'
 import OpenSeadragon from 'openseadragon'
 import 'openseadragonselection/dist/openseadragonselection'
-import MetadataModal from '@/components/modals/Metadata.vue'
-import HelpModal from '@/components/modals/Help.vue'
-import ViewerControls from '@/components/controls/Viewer.vue'
-import PanControls from '@/components/controls/Pan.vue'
-import SelectionSidebar from '@/components/sidebars/Selection.vue'
-import TaskSidebar from '@/components/sidebars/Task.vue'
-import { store } from '@/store.js'
+import MetadataModal from '@/components/modals/Metadata'
+import HelpModal from '@/components/modals/Help'
+import ViewerControls from '@/components/controls/Viewer'
+import PanControls from '@/components/controls/Pan'
+import SelectionSidebar from '@/components/sidebars/Selection'
+import TaskSidebar from '@/components/sidebars/Task'
+import { store } from '@/store'
 
 export default {
   data: function () {

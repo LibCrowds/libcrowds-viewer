@@ -24,7 +24,7 @@
 
 <script>
 import { store } from '@/store'
-import Sidebar from '@/components/Sidebar.vue'
+import Sidebar from '@/components/Sidebar'
 import getData from '@/utils/getData'
 
 export default {

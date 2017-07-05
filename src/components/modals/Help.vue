@@ -14,7 +14,7 @@
         <h4>Selection mode</h4>
         <p>
           When using the viewer in selection mode an area of the image can
-          be selected by clicking (or tapping) on the image. The following 
+          be selected by clicking (or tapping) on the image. The following
           controls are provided to the right of the selection box:
         </p>
         <ul>
@@ -22,7 +22,7 @@
           <li><icon name="times-circle"></icon>Cancel selection</li>
         </ul>
         <p>
-          Once a selection has been confirmed it will appear in the 
+          Once a selection has been confirmed it will appear in the
           selections sidebar to the right of the screen, where the following
           controls are provided:
         </p>
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import Icon from 'vue-awesome/components/Icon.vue'
+import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/plus-circle'
 import 'vue-awesome/icons/minus-circle'
 import 'vue-awesome/icons/pencil'
@@ -46,7 +46,7 @@ import 'vue-awesome/icons/question-circle'
 import 'vue-awesome/icons/info-circle'
 import 'vue-awesome/icons/check-circle'
 import 'vue-awesome/icons/times-circle'
-import Modal from '@/components/Modal.vue'
+import Modal from '@/components/Modal'
 
 export default {
   data: function () {

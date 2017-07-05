@@ -20,7 +20,7 @@
 
 <script>
 import axios from 'axios'
-import Modal from '@/components/Modal.vue'
+import Modal from '@/components/Modal'
 
 export default {
   data: function () {
@@ -31,10 +31,10 @@ export default {
 
   methods: {
     fetchManifest () {
-      const url = `${this.scheme}://` + 
-                  `${this.server}/` + 
+      const url = `${this.scheme}://` +
+                  `${this.server}/` +
                   `${this.presentationApiPrefix}/` +
-                  `${this.manifestId}/` + 
+                  `${this.manifestId}/` +
                   `manifest.json`
       axios.get(url).then((r) => {
         this.manifestData = r.data

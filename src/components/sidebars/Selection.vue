@@ -29,16 +29,16 @@
 </template>
 
 <script>
-import Icon from 'vue-awesome/components/Icon.vue'
+import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/pencil'
-import Sidebar from '@/components/Sidebar.vue'
-import { store } from '@/store.js'
-import getSelections from '@/utils/getSelections.js'
-import deleteSelection from '@/utils/deleteSelection.js'
-import editSelection from '@/utils/editSelection.js'
-import highlightSelection from '@/utils/highlightSelection.js'
-import getImageUri from '@/utils/getImageUri.js'
+import Sidebar from '@/components/Sidebar'
+import { store } from '@/store'
+import getSelections from '@/utils/getSelections'
+import deleteSelection from '@/utils/deleteSelection'
+import editSelection from '@/utils/editSelection'
+import highlightSelection from '@/utils/highlightSelection'
+import getImageUri from '@/utils/getImageUri'
 
 export default {
   computed: {

@@ -1,4 +1,4 @@
-import { store } from '@/store.js'
+import { store } from '@/store'
 
 export default function (region = 'full', size = 'full', rotation = 0,
                          quality = 'default', format = 'jpg') {

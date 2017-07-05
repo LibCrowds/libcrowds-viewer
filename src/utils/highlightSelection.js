@@ -1,4 +1,4 @@
-import { store } from '@/store.js'
+import { store } from '@/store'
 
 export default function (selection, highlight) {
   const el = document.querySelector(`#${selection.id}`)

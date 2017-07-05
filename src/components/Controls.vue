@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Icon from 'vue-awesome/components/Icon.vue'
+import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/plus-circle'
 import 'vue-awesome/icons/minus-circle'
 import 'vue-awesome/icons/refresh'
@@ -27,7 +27,7 @@ import 'vue-awesome/icons/chevron-down'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
 import axios from 'axios'
-import Modal from './Modal.vue'
+import Modal from './Modal'
 
 export default {
   data: function () {

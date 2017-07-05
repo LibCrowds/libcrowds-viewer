@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Controls from '@/components/Controls.vue'
+import Controls from '@/components/Controls'
 import { store } from '@/store'
 
 export default {
