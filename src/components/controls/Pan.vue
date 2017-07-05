@@ -29,7 +29,6 @@ export default {
   computed: {
     buttons: function () {
       const viewer = store.state.viewer
-      console.log(viewer, viewer.viewport)
       let buttons = [
         {
           id: 'pan-up',
