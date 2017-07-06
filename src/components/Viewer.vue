@@ -368,7 +368,7 @@ export default {
   }
 
   .overlay {
-    z-index: 5;
+    z-index: 1;
 
     &.selection {
       border: 2px solid $blue;
