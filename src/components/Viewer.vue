@@ -236,7 +236,7 @@ export default {
       window.onbeforeunload = () => {
         const msg = 'Unsaved changes will be lost.'
         if (!this.confirmBeforeUnload) {
-          return null;
+          return;
         }
 
         // TODO: Check for selection overlays only
