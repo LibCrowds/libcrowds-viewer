@@ -40,9 +40,9 @@ import deleteSelection from '@/utils/deleteSelection'
 import getImageUri from '@/utils/getImageUri'
 
 export default {
-  computed: {
-    selections () {
-      return store.state.selections
+  data: function () {
+    return {
+      selections: []
     }
   },
 
@@ -56,6 +56,12 @@ export default {
     editSelection,
     highlightSelection,
     getImageUri
+  },
+
+  mounted () {
+    store.watch(store.getters.getSelections, selections => {
+      this.selections = selections
+    })
   }
 }
 </script>

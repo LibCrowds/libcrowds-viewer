@@ -31,6 +31,7 @@ export const store = new Vuex.Store({
         imgSource: state.imgSource,
         note: state.note
       }
-    }
+    },
+    getSelections: state => () => state.selections
   }
 })
