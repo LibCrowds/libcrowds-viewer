@@ -1,5 +1,7 @@
 # libcrowds-viewer
 
+[![npm version](https://badge.fury.io/js/libcrowds-viewer.svg)](https://badge.fury.io/js/libcrowds-viewer)
+
 > IIIF-compatible image viewer Vue component
 
 Originally designed for the LibCrowds crowdsourcing platform, this Vue.js
