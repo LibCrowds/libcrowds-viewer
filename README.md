@@ -10,13 +10,13 @@ and transcribe areas of that image.
 
 ## Install
 
-``` bash
+```bash
 npm install libcrowds-viewer --save
 ```
 
 ## Usage
 
-``` js
+```js
 import Vue from 'vue';
 import LibcrowdsViewer from 'libcrowds-viewer';
 
@@ -25,7 +25,7 @@ Vue.component('libcrowds-viewer', LibcrowdsViewer);
 
 You can now use the component like this:
 
-``` vue
+```vue
 <libcrowds-viewer
   scheme="http"
   server="api.bl.uk"
