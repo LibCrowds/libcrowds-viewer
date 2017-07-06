@@ -227,11 +227,6 @@ export default {
       //   this.loading(false)
       // })
 
-      // Don't focus on HUD after fullscreen toggled
-      viewer.addHandler('full-screen', (evt) => {
-        document.querySelector('.openseadragon-canvas').focus()
-      })
-
       // Confirm before leaving if any overlays have been drawn or forms filled
       window.onbeforeunload = () => {
         const msg = 'Unsaved changes will be lost.'
