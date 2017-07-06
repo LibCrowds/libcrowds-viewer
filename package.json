@@ -4,6 +4,14 @@
   "version": "1.0.0",
   "author": "Alex Mendes <alexanderhmendes@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LibCrowds/libcrowds-viewer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LibCrowds/libcrowds-viewer/issues"
+  },
+  "homepage": "https://github.com/LibCrowds/libcrowds-viewer",
   "scripts": {
     "test": "karma start karma.conf.js",
     "lint": "eslint --ext .js,.vue src demo",
