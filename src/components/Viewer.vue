@@ -206,7 +206,7 @@ export default {
       // TODO: this works for fullscreen controls but should possibly use
       // https://openseadragon.github.io/docs/OpenSeadragon.Control.html
       const viewer = store.state.viewer
-      viewer.container.prepend(this.$refs.hud)
+      viewer.container.appendChild(this.$refs.hud)
     },
     handleHelpControlClick () {
       this.$root.$emit('show::modal', this.helpModalId)
