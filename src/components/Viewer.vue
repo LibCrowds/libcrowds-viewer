@@ -272,13 +272,6 @@ export default {
       })
       selector.element.appendChild(this.$refs.cancelSelection)
     },
-    handleOverlayClick (evt) {
-      const viewer = store.state.viewer
-      if (this.selection) {
-        viewer.removeOverlay(this.id)
-      }
-      evt.preventDefault()
-    },
     submit (obj) {
       this.$emit('submit', obj)
     }
