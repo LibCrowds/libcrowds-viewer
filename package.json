@@ -7,8 +7,9 @@
   "scripts": {
     "test": "karma start karma.conf.js",
     "lint": "eslint --ext .js,.vue src demo",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "clean": "rimraf dist"
+    "build": "npm run clean && cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "clean": "rimraf dist",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "axios": "^0.16.2",
