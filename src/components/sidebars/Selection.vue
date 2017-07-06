@@ -110,6 +110,7 @@ export default {
     height: 50px;
 
     img {
+      flex: none;  /* IE fix */
       max-width: 100%;
       max-height: 100%;
     }
