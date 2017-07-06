@@ -8,14 +8,10 @@ and transcribe areas of that image.
 
 [**DEMO**](https://libcrowds.github.io/libcrowds-viewer/)
 
-## Build Setup
+## Install
 
 ``` bash
-# install dependencies
-npm install
-
-# build for production with minification
-npm run build
+npm install libcrowds-viewer --save
 ```
 
 ## Usage
