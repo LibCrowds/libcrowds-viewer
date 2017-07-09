@@ -306,7 +306,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: auto;
+  width: 100%;
   background-color: #000;
   overflow: hidden;
 }
