@@ -42,7 +42,7 @@ You can now use the component like this:
 
 | Property                | Type          | Default              | Description                     |
 |-------------------------|---------------|----------------------|---------------------------------|
-| mode                    | String        | 'selection'          | 'select' or 'transcribe'        |
+| mode                    | String        | 'select'             | 'select' or 'transcribe'        |
 | objective               | String        | null                 | Main task objective             |
 | guidance                | String        | null                 | Additional guidance             |
 | scheme                  | String        | 'http'               | 'http' or 'https' protocol      |
@@ -55,10 +55,62 @@ You can now use the component like this:
 | show-help               | Boolean       | true                 | Include the help modal          |
 | show-note               | Boolean       | false                | Include a notes input field     |
 | pan-by                  | Number        | 0.1                  | Multiplier by which to pan      |
+| form-schema             | Object        | null                 | See transcribe mode below       |
+| form-model              | Object        | null                 | See transcribe mode below       |
 
 See the documentation for the [IIIF Image API](http://iiif.io/api/image/2.1)
 and [IIIF Presentation API](http://iiif.io/api/presentation/2.1/) for
 more details of how a URI is constructed.
+
+#### Select Mode
+
+In select mode users can click and move their mouse across the image to highlight
+areas of the image. This mode requires the least configuration (a minimal example
+is provided above) and is useful for tagging images, or preparing for subsequent
+transcription.
+
+
+#### Transcribe Mode
+
+In transcribe mode a form schema and model is passed to the viewer, using the
+[vue-form-generator](https://github.com/icebob/vue-form-generator) syntax, for
+example:
+
+```vue
+formModel: {             
+  title: "",
+  date: ""
+  genre: []
+}
+
+formSchema: {
+  fields: [{
+    type: "input",
+    inputType: "text",
+    label: "Title",
+    model: "title",
+    placeholder: "Enter the title",
+    required: true
+  },
+  {
+    type: "input",
+    inputType: "date",
+    label: "Date",
+    model: "date"
+  },
+  {
+    type: "select",
+    label: "Genre",
+    model: "genre",
+    values: ["Comedy", "Tragedy", "Drama"]
+  }]
+}
+```
+
+Optionally, you can also pass an image region, such as that returned as
+`imageRect` when in select mode. This region will be highlighted when the
+viewer is loaded.
+
 
 ### Events
 
