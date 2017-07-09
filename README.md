@@ -79,7 +79,7 @@ example:
 ```vue
 formModel: {             
   title: "",
-  date: ""
+  date: "",
   genre: []
 }
 

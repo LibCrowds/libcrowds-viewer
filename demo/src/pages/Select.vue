@@ -20,7 +20,7 @@
 export default {
   data () {
     return {
-      mode: 'selection',
+      mode: 'select',
       objective: 'Mark the play titles',
       guidance: 'Draw a box around each play title, including any subtitles.',
       scheme: "https",

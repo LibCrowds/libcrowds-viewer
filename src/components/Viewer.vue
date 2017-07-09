@@ -45,8 +45,14 @@
         </task-sidebar>
 
         <selection-sidebar
-          v-if="mode === 'selection'">
+          v-if="mode === 'select'">
         </selection-sidebar>
+
+        <transcribe-sidebar
+          v-else-if="mode === 'transcribe'"
+          :model="formModel"
+          :schema="formSchema">
+        </transcribe-sidebar>
 
       </div>
 
@@ -81,7 +87,8 @@ import MetadataModal from '@/components/modals/Metadata'
 import HelpModal from '@/components/modals/Help'
 import ViewerControls from '@/components/controls/Viewer'
 import PanControls from '@/components/controls/Pan'
-import SelectionSidebar from '@/components/sidebars/Selection'
+import SelectSidebar from '@/components/sidebars/Select'
+import TranscribeSidebar from '@/components/sidebars/Transcribe'
 import TaskSidebar from '@/components/sidebars/Task'
 import { store } from '@/store'
 import addSelection from '@/utils/addSelection'
@@ -147,6 +154,14 @@ export default {
     panBy: {
       type: Number,
       default: 0.1
+    },
+    formModel: {
+      type: Object,
+      default: () => {}
+    },
+    formSchema: {
+      type: Object,
+      default: () => {}
     }
   },
 
@@ -155,7 +170,8 @@ export default {
     HelpModal,
     ViewerControls,
     PanControls,
-    SelectionSidebar,
+    SelectSidebar,
+    TranscribeSidebar,
     TaskSidebar,
     Icon
   },

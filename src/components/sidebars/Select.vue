@@ -1,5 +1,5 @@
 <template>
-  <div id="lv-selection-sidebar">
+  <div id="lv-select-sidebar">
     <sidebar title="Selections">
       <ul>
         <li
@@ -70,7 +70,7 @@ export default {
 @import '../../assets/style/settings';
 @import '../../assets/style/partials/buttons';
 
-#lv-selection-sidebar {
+#lv-select-sidebar {
   ul {
     margin: 0;
     overflow-y: auto;

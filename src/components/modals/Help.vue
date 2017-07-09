@@ -10,10 +10,10 @@
         <li><icon name="expand"></icon>Fullscreen</li>
         <li><icon name="question-circle"></icon>Help</li>
       </ul>
-      <div v-if="mode === 'selection'">
-        <h4>Selection mode</h4>
+      <div v-if="mode === 'select'">
+        <h4>Select mode</h4>
         <p>
-          When using the viewer in selection mode an area of the image can
+          When using the viewer in select mode an area of the image can
           be selected by clicking (or tapping) on the image. The following
           controls are provided to the right of the selection box:
         </p>

@@ -11,6 +11,8 @@
       :presentation-api-prefix="presentationApiPrefix"
       :image-id="imageId"
       :manifest-id="manifestId"
+      :formModal="formModel"
+      :formSchema="formSchema"
       @submit="handleResponse">
     </libcrowds-viewer>
   </div>
@@ -28,7 +30,34 @@ export default {
       imageApiPrefix: "image/iiif",
       presentationApiPrefix: "metadata/iiif",
       imageId: "ark:/81055/vdc_100022589157.0x000005",
-      manifestId: "ark:/81055/vdc_100022589158.0x000002"
+      manifestId: "ark:/81055/vdc_100022589158.0x000002",
+      formModel: {
+        title: "",
+        date: "",
+        genre: []
+      },
+      formSchema: {
+        fields: [{
+          type: "input",
+          inputType: "text",
+          label: "Title",
+          model: "title",
+          placeholder: "Enter the title",
+          required: true
+        },
+        {
+          type: "input",
+          inputType: "date",
+          label: "Date",
+          model: "date"
+        },
+        {
+          type: "select",
+          label: "Genre",
+          model: "genre",
+          values: ["Comedy", "Tragedy", "Drama"]
+        }]
+      }
     }
   },
 
