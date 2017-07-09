@@ -92,6 +92,7 @@ import TranscribeSidebar from '@/components/sidebars/Transcribe'
 import TaskSidebar from '@/components/sidebars/Task'
 import { store } from '@/store'
 import addSelection from '@/utils/addSelection'
+import drawOverlay from '@/utils/drawOverlay'
 
 export default {
   data: function () {
@@ -160,6 +161,10 @@ export default {
       default: () => {}
     },
     formSchema: {
+      type: Object,
+      default: () => {}
+    },
+    region: {
       type: Object,
       default: () => {}
     }
@@ -288,6 +293,11 @@ export default {
       })
       selector.element.appendChild(this.$refs.cancelSelection)
     },
+    highlightRegion () {
+      const rect = new OpenSeadragon.Rect(this.region.x, this.region.y,
+                                          this.region.width, this.region.height)
+      drawOverlay('highlight', rect, 'highlight')
+    },
     submit (obj) {
       this.$emit('submit', obj)
     }
@@ -310,6 +320,7 @@ export default {
     this.loadImage()
     this.attachControls()
     this.setupHandlers()
+    this.highlightRegion()
   }
 }
 </script>
@@ -381,8 +392,7 @@ export default {
     }
 
     &.highlight {
-      border-color: $green;
-      background-color: rgba($green, 0.2);
+      background-color: rgba($yellow, 0.35);
     }
   }
 }

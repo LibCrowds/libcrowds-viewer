@@ -33,10 +33,17 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../../assets/style/settings';
 
 #lv-transcribe-sidebar {
+  fieldset {
+    border: none;
+    padding: 0;
+  }
 
+  .form-group {
+    margin-bottom: 1rem;
+  }
 }
 </style>

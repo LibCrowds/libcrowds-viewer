@@ -13,6 +13,7 @@
       :manifest-id="manifestId"
       :formModal="formModel"
       :formSchema="formSchema"
+      :region="region"
       @submit="handleResponse">
     </libcrowds-viewer>
   </div>
@@ -57,6 +58,12 @@ export default {
           model: "genre",
           values: ["Comedy", "Tragedy", "Drama"]
         }]
+      },
+      region: {
+        height: 0.08912295856641607,
+        width: 0.717439816459651,
+        x: 0.1167712781644104,
+        y: 0.6194045620365919
       }
     }
   },

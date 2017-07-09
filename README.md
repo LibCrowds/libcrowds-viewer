@@ -57,6 +57,7 @@ You can now use the component like this:
 | pan-by                  | Number        | 0.1                  | Multiplier by which to pan      |
 | form-schema             | Object        | null                 | See transcribe mode below       |
 | form-model              | Object        | null                 | See transcribe mode below       |
+| region                  | Object        | null                 | See transcribe mode below       |
 
 See the documentation for the [IIIF Image API](http://iiif.io/api/image/2.1)
 and [IIIF Presentation API](http://iiif.io/api/presentation/2.1/) for
@@ -107,9 +108,8 @@ formSchema: {
 }
 ```
 
-Optionally, you can also pass an image region, such as that returned as
-`imageRect` when in select mode. This region will be highlighted when the
-viewer is loaded.
+Optionally, you can also pass a `region` to highlight, such as that returned by
+`imageRect` when in select mode.
 
 
 ### Events
