@@ -29,6 +29,7 @@ You can now use the component like this:
 
 ```vue
 <libcrowds-viewer
+  mode="select"
   scheme="http"
   server="api.bl.uk"
   image-api-prefix="image/iiif"
@@ -37,28 +38,27 @@ You can now use the component like this:
 </libcrowds-viewer>
 ```
 
-See the documentation for the [IIIF Image API (v2.1)](http://iiif.io/api/image/2.1)
-and [IIIF Presentation API (v2.1)](http://iiif.io/api/presentation/2.1/) for
-more details of how a URI is constructed.
-
 ### Properties
 
-| Property                | Type          | Default              |
-|-------------------------|---------------|----------------------|
-| mode                    | String        | 'selection'          |
-| objective               | String        | null                 |
-| guidance                | String        | null                 |
-| scheme                  | String        | 'http'               |
-| server                  | String        | null                 |
-| image-api-prefix        | String        | null                 |
-| presentation-api-prefix | String        | null                 |
-| image-id                | String        | null                 |
-| manifest-id             | String        | null                 |
-| confirm-before-unload   | Boolean       | false                |
-| show-help               | Boolean       | true                 |
-| show-note               | Boolean       | false                |
-| pan-by                  | Number        | 0.1                  |
+| Property                | Type          | Default              | Description                     |
+|-------------------------|---------------|----------------------|---------------------------------|
+| mode                    | String        | 'selection'          | 'select' or 'transcribe'        |
+| objective               | String        | null                 | Main task objective             |
+| guidance                | String        | null                 | Additional guidance             |
+| scheme                  | String        | 'http'               | 'http' or 'https' protocol      |
+| server                  | String        | null                 | The IIIF server                 |
+| image-api-prefix        | String        | null                 | Prefix for the Image API        |
+| presentation-api-prefix | String        | null                 | Prefix for the Presentation API |
+| image-id                | String        | null                 | Identifier for the image        |
+| manifest-id             | String        | null                 | Identifier for the manifest     |
+| confirm-before-unload   | Boolean       | false                | Confirm before leaving the page |
+| show-help               | Boolean       | true                 | Include the help modal          |
+| show-note               | Boolean       | false                | Include a notes input field     |
+| pan-by                  | Number        | 0.1                  | Multiplier by which to pan      |
 
+See the documentation for the [IIIF Image API](http://iiif.io/api/image/2.1)
+and [IIIF Presentation API](http://iiif.io/api/presentation/2.1/) for
+more details of how a URI is constructed.
 
 ### Events
 
