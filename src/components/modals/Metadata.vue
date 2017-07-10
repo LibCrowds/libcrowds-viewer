@@ -38,8 +38,6 @@ export default {
                   `manifest.json`
       axios.get(url).then((r) => {
         this.manifestData = r.data
-      }).catch(function (error) {
-        console.log(error);
       })
     }
   },
