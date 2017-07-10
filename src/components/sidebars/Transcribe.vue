@@ -20,6 +20,7 @@ export default {
   data: function () {
     return {
       formOptions: {
+        validateAfterLoad: true,
         validateAfterChanged: true
       }
     }
