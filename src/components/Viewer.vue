@@ -390,6 +390,11 @@ export default {
       border: 2px solid $blue;
       background-color: rgba($blue, 0.2);
       opacity: .6;
+
+      &.focus {
+        border-color: $green;
+        background-color: rgba($green, 0.35);
+      }
     }
 
     &.highlight {
