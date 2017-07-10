@@ -1,6 +1,7 @@
 @import '../settings.scss';
 
 input,
+select,
 textarea {
   margin: 10px 0;
   display: block;
@@ -8,7 +9,7 @@ textarea {
   padding: 10px;
   font-size: 1rem;
   line-height: 1.25;
-  color: $gray;
+  color: $gray-dark;
   background-color: #fff;
   background-image: none;
   background-clip: padding-box;
@@ -23,6 +24,13 @@ textarea {
     outline: none;
     box-shadow: 0 0 5px rgba($blue, 0.5);
   }
+}
+
+label {
+  text-transform: uppercase;
+  font-family: Arial, sans-serif;
+  font-size: $font-size-small;
+  letter-spacing: 1px;
 }
 
 textarea {
