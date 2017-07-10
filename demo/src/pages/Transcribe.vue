@@ -11,7 +11,7 @@
       :presentation-api-prefix="presentationApiPrefix"
       :image-id="imageId"
       :manifest-id="manifestId"
-      :formModal="formModel"
+      :formModel="formModel"
       :formSchema="formSchema"
       :region="region"
       @submit="handleResponse">
@@ -33,8 +33,8 @@ export default {
       imageId: "ark:/81055/vdc_100022589157.0x000005",
       manifestId: "ark:/81055/vdc_100022589158.0x000002",
       formModel: {
-        title: "",
-        date: "",
+        title: null,
+        date: null,
         genre: []
       },
       formSchema: {
