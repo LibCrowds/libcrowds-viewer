@@ -44,7 +44,9 @@ export default {
 
   methods: {
     onValidated: function (isValid, errors) {
-      store.state.form = this.model
+      store.state.form.model = this.model
+      store.state.form.isValid = isValid
+      store.state.form.errors = errors
     }
   }
 }

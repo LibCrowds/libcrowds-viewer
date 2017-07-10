@@ -8,7 +8,11 @@ export const store = new Vuex.Store({
     selector: {},
     viewer: {},
     selections: [],
-    form: {},
+    form: {
+      model: {},
+      errors: {},
+      isValid: true
+    },
     imgSource: '',
     note: ''
   },
