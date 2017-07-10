@@ -56,7 +56,6 @@ export default {
 
   computed: {
     buttons: function () {
-      const viewer = store.state.viewer
       let buttons = [
         {
           id: this.zoomInButton,
