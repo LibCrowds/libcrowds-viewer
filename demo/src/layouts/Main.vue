@@ -7,6 +7,7 @@
     <div>
       <button
         v-for="b in buttons"
+        :key="b.endpoint"
         @click="go(b.endpoint)">
         {{ b.text }}
       </button>
