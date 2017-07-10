@@ -10,7 +10,6 @@ textarea {
   font-size: 1rem;
   line-height: 1.25;
   color: $gray-dark;
-  background-color: #fff;
   background-image: none;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
@@ -35,4 +34,27 @@ label {
 
 textarea {
   overflow: auto;
+}
+
+.form-group {
+  &.show-errors {
+    &.error {
+      input,
+      select,
+      textarea {
+        border: 1px solid rgba($red, 0.75);
+      }
+    }
+
+    .errors {
+      display: block;
+      margin-top: 5px;
+      color: $red;
+      font-weight: bold;
+    }
+  }
+
+  .errors {
+    display: none;
+  }
 }
