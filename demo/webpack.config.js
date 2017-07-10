@@ -71,7 +71,8 @@ if (process.env.NODE_ENV === 'development') {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"development"',
-        BASE_URL: '""'
+        BASE_URL: '""',
+        GITHUB_URL: '"https://github.com/libcrowds/libcrowds-viewer"'
       }
     })
   ])
@@ -83,7 +84,8 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"',
-        BASE_URL: '"libcrowds-viewer/"'
+        BASE_URL: '"libcrowds-viewer/"',
+        GITHUB_URL: '"https://github.com/libcrowds/libcrowds-viewer"'
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
