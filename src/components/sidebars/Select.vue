@@ -12,12 +12,12 @@
           </div>
           <div class="buttons">
             <span
-              @click="editSelection(s)"
+              @click="editSelection(viewer, s)"
               class="btn btn-control">
               <icon name="pencil"></icon>
             </span>
             <span
-              @click="deleteSelection(s)"
+              @click="deleteSelection(viewer, s)"
               class="btn btn-control">
               <icon name="times-circle"></icon>
             </span>
@@ -43,6 +43,13 @@ export default {
   data: function () {
     return {
       selections: []
+    }
+  },
+
+  props: {
+    viewer: {
+      type: Object,
+      required: true
     }
   },
 

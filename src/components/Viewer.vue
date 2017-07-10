@@ -17,6 +17,7 @@
       </viewer-controls>
 
       <pan-controls
+        :viewer="viewer"
         :panBy="panBy">
       </pan-controls>
 
@@ -45,7 +46,8 @@
         </task-sidebar>
 
         <select-sidebar
-          v-if="mode === 'select'">
+          v-if="mode === 'select'"
+          :viewer="viewer">
         </select-sidebar>
 
         <transcribe-sidebar
@@ -97,6 +99,7 @@ import drawOverlay from '@/utils/drawOverlay'
 export default {
   data: function () {
     return {
+      viewer: {},
       metadataModalId: 'lc-metadata-modal',
       helpModalId: 'lc-help-modal'
     }
@@ -216,8 +219,7 @@ export default {
 
   methods: {
     loadImage () {
-      const viewer = store.state.viewer
-      viewer.open({
+      this.viewer.open({
         type: 'image',
         tileSource: `${this.imgSource}/info.json`,
         buildPyramid: false
@@ -226,8 +228,7 @@ export default {
     attachControls () {
       // TODO: this works for fullscreen controls but should possibly use
       // https://openseadragon.github.io/docs/OpenSeadragon.Control.html
-      const viewer = store.state.viewer
-      viewer.container.appendChild(this.$refs.hud)
+      this.viewer.container.appendChild(this.$refs.hud)
     },
     handleHelpControlClick () {
       this.$root.$emit('show::modal', this.helpModalId)
@@ -236,11 +237,9 @@ export default {
       this.$root.$emit('show::modal', this.metadataModalId)
     },
     setupHandlers () {
-      const viewer = store.state.viewer
-
       // Store confirmed selections
-      viewer.addHandler('selection', (selectionRect) => {
-        addSelection(selectionRect)
+      this.viewer.addHandler('selection', (selectionRect) => {
+        addSelection(this.viewer, selectionRect)
       })
 
       // Hide loading icon after tile drawn
@@ -256,7 +255,7 @@ export default {
         }
 
         // TODO: Check for selection overlays only
-        if (viewer.currentOverlays.length) {
+        if (this.viewer.currentOverlays.length) {
           return msg
         }
 
@@ -268,8 +267,7 @@ export default {
       };
     },
     configureSelector () {
-      const viewer = store.state.viewer
-      const selector = viewer.selection({
+      const selector = this.viewer.selection({
         showConfirmDenyButtons: false,
         restrictToImage: true,
         returnPixelCoordinates: false
@@ -278,16 +276,16 @@ export default {
       selector.enable()
       const confirmBtn = new OpenSeadragon.Button({
         element: this.$refs.confirmSelection,
-        clickTimeThreshold: viewer.clickTimeThreshold,
-        clickDistThreshold: viewer.clickDistThreshold,
+        clickTimeThreshold: this.viewer.clickTimeThreshold,
+        clickDistThreshold: this.viewer.clickDistThreshold,
         tooltip: 'Confirm',
         onRelease: selector.confirm.bind(selector)
       })
       selector.element.appendChild(this.$refs.confirmSelection)
       const cancelBtn = new OpenSeadragon.Button({
         element: this.$refs.cancelSelection,
-        clickTimeThreshold: viewer.clickTimeThreshold,
-        clickDistThreshold: viewer.clickDistThreshold,
+        clickTimeThreshold: this.viewer.clickTimeThreshold,
+        clickDistThreshold: this.viewer.clickDistThreshold,
         tooltip: 'Delete',
         onRelease: selector.cancel.bind(selector)
       })
@@ -299,7 +297,7 @@ export default {
                                             this.region.y,
                                             this.region.width,
                                             this.region.height)
-        drawOverlay('highlight', rect, 'highlight')
+        drawOverlay(this.viewer, 'highlight', rect, 'highlight')
       }
     },
     submit (obj) {
@@ -317,8 +315,7 @@ export default {
     let opts = this.normalizedViewerOpts
     opts.element = this.$refs.viewer
 
-    const viewer = OpenSeadragon(opts)
-    store.commit('SET_ITEM', { key: 'viewer', value: viewer })
+    this.viewer = OpenSeadragon(opts)
 
     this.configureSelector()
     this.loadImage()

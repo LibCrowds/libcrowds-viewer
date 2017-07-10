@@ -2,8 +2,8 @@ import uuid from 'uuid/v4'
 import { store } from '@/store'
 import drawOverlay from '@/utils/drawOverlay'
 
-export default function (selectionRect) {
-  const vp = store.state.viewer.viewport
+export default function (viewer, selectionRect) {
+  const vp = viewer.viewport
   const imgRect = vp.viewportToImageRectangle(selectionRect)
   const vpRect = vp.imageToViewportRectangle(imgRect)
   const el = document.createElement('div')
@@ -13,5 +13,5 @@ export default function (selectionRect) {
     imageRect: imgRect
   }
   store.commit('ADD_ARRAY_ITEM', { key: 'selections', value: selection })
-  drawOverlay(selection.id, selection.viewportRect, 'selection')
+  drawOverlay(viewer, selection.id, selection.viewportRect, 'selection')
 }

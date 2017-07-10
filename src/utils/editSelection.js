@@ -1,7 +1,7 @@
 import { store } from '@/store'
 import deleteSelection from '@/utils/deleteSelection'
 
-export default function (selection) {
+export default function (viewer, selection) {
   const selector = store.state.selector
   const rect = selection.viewportRect
   const selectionRect = new OpenSeadragon.SelectionRect(rect.x, rect.y,
@@ -9,5 +9,5 @@ export default function (selection) {
   selector.rect = selectionRect
   selector.draw()
   selector.enable()
-  deleteSelection(selection)
+  deleteSelection(viewer, selection)
 }
