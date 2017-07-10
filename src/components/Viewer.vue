@@ -294,9 +294,13 @@ export default {
       selector.element.appendChild(this.$refs.cancelSelection)
     },
     highlightRegion () {
-      const rect = new OpenSeadragon.Rect(this.region.x, this.region.y,
-                                          this.region.width, this.region.height)
-      drawOverlay('highlight', rect, 'highlight')
+      if (this.region) {
+        const rect = new OpenSeadragon.Rect(this.region.x,
+                                            this.region.y,
+                                            this.region.width,
+                                            this.region.height)
+        drawOverlay('highlight', rect, 'highlight')
+      }
     },
     submit (obj) {
       this.$emit('submit', obj)
