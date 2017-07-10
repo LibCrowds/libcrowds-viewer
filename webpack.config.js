@@ -6,7 +6,9 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'libcrowds-viewer.js'
+    filename: 'main.js',
+    library: 'libcrowds-viewer',
+    libraryTarget: 'umd'
   },
   module: {
     rules: [

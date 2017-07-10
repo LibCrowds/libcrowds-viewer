@@ -22,7 +22,7 @@ npm install libcrowds-viewer --save
 import Vue from 'vue';
 import LibcrowdsViewer from 'libcrowds-viewer';
 
-Vue.component('libcrowds-viewer', LibcrowdsViewer);
+Vue.use(LibcrowdsViewer);
 ```
 
 You can now use the component like this:
@@ -78,7 +78,7 @@ In transcribe mode a form schema and model is passed to the viewer, using the
 example:
 
 ```vue
-formModel: {             
+formModel: {
   title: "",
   date: "",
   genre: []
