@@ -35,6 +35,7 @@ export default {
 
 <style lang="scss">
 @import '../../assets/style/settings';
+@import '../../assets/style/partials/forms';
 
 #lv-transcribe-sidebar {
   fieldset {
