@@ -12,6 +12,7 @@
         {{ b.text }}
       </button>
     </div>
+    <slot></slot>
   </div>
 </template>
 
