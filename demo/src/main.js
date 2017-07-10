@@ -21,7 +21,7 @@ const routes = {
 new Vue({
   el: '#app',
   data: {
-    currentRoute: window.location.pathname
+    currentRoute: window.location.pathname.replace(process.env.BASE_URL, '')
   },
   computed: {
     ViewComponent () {

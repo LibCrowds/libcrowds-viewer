@@ -17,7 +17,7 @@ export default {
       buttons: [
         {
           text: 'Home',
-          endpoint: ''
+          endpoint: process.env.BASE_URL
         }
       ]
     }

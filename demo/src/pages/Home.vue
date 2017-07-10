@@ -17,11 +17,11 @@ export default {
       buttons: [
         {
           text: 'Select Mode',
-          endpoint: 'select'
+          endpoint: process.env.BASE_URL + 'select'
         },
         {
           text: 'Transcribe Mode',
-          endpoint: 'transcribe'
+          endpoint: process.env.BASE_URL + 'transcribe'
         }
       ]
     }
