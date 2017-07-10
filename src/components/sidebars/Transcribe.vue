@@ -44,6 +44,7 @@ export default {
 
   methods: {
     onValidated: function (isValid, errors) {
+      document.querySelector('.form-group').classList.remove('show-errors')
       store.state.form.model = this.model
       store.state.form.isValid = isValid
       store.state.form.errors = errors
