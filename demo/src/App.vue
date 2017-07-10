@@ -54,7 +54,6 @@ export default {
 
   methods: {
     changePage(page) {
-      console.log(page)
       this.page = page
     }
   }
