@@ -61,6 +61,7 @@ export default {
     },
     submit () {
       const data = store.getters.getData
+      document.querySelector('.form-group').classList.add('show-errors')
       this.$emit('submit', data)
     }
   }
