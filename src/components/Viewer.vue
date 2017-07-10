@@ -44,9 +44,9 @@
           @submit="submit">
         </task-sidebar>
 
-        <selection-sidebar
+        <select-sidebar
           v-if="mode === 'select'">
-        </selection-sidebar>
+        </select-sidebar>
 
         <transcribe-sidebar
           v-else-if="mode === 'transcribe'"
