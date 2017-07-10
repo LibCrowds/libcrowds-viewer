@@ -46,10 +46,6 @@ export default {
     onValidated: function (isValid, errors) {
       store.state.form = this.model
     }
-  },
-
-  created () {
-    store.state.form = this.model
   }
 }
 </script>
