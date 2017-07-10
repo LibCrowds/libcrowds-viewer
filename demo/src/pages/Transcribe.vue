@@ -35,7 +35,7 @@ export default {
       formModel: {
         title: null,
         date: null,
-        genre: []
+        genre: null
       },
       formSchema: {
         fields: [{
@@ -44,7 +44,8 @@ export default {
           label: "Title",
           model: "title",
           placeholder: "Enter the title",
-          required: true
+          required: true,
+          validator: "required"
         },
         {
           type: "input",
