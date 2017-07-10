@@ -1,5 +1,5 @@
 <template>
-  <div id="select-viewer">
+  <div id="transcribe-viewer">
     <libcrowds-viewer
       show-note
       :mode="mode"
@@ -81,7 +81,7 @@ export default {
 </script>
 
 <style lang="scss">
-#select-viewer {
+#transcribe-viewer {
   margin: 0;
   height: 100vh;
 }

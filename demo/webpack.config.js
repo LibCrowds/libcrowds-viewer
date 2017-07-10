@@ -1,6 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
-var HthmlWebpackPlugin = require('html-webpack-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: './src/main.js',
@@ -50,7 +50,7 @@ module.exports = {
     }
   },
   plugins: [
-    new HthmlWebpackPlugin({
+    new HtmlWebpackPlugin({
       inject: true,
       filename: 'index.html',
       template: 'index.html'
