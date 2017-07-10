@@ -3,7 +3,9 @@
     <sidebar title="Transcribe">
       <vue-form-generator
         :schema="schema"
-        :model="model">
+        :model="model"
+        :options="formOptions"
+        @validated="onValidated">
       </vue-form-generator>
     </sidebar>
   </div>
@@ -15,6 +17,14 @@ import Sidebar from '@/components/Sidebar'
 import { store } from '@/store'
 
 export default {
+  data: function () {
+    return {
+      formOptions: {
+        validateAfterChanged: true
+      }
+    }
+  },
+
   components: {
     Sidebar,
     "vue-form-generator": VueFormGenerator.component
@@ -29,6 +39,16 @@ export default {
       type: Object,
       required: true
     }
+  },
+
+  methods: {
+    onValidated: function (isValid, errors) {
+      store.state.form = this.model
+    }
+  },
+
+  created () {
+    store.state.form = this.model
   }
 }
 </script>

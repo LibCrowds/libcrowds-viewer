@@ -8,6 +8,7 @@ export const store = new Vuex.Store({
     selector: {},
     viewer: {},
     selections: [],
+    form: {},
     imgSource: '',
     note: ''
   },
@@ -29,7 +30,8 @@ export const store = new Vuex.Store({
       return {
         selections: state.selections,
         imgSource: state.imgSource,
-        note: state.note
+        note: state.note,
+        form: state.form
       }
     },
     getSelections: state => () => state.selections
