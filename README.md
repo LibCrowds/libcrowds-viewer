@@ -45,13 +45,14 @@ You can now use the component like this (see below for example tasks):
 | show-help               | Boolean       | true                 | Include the help modal          |
 | show-note               | Boolean       | false                | Include a notes input field     |
 | pan-by                  | Number        | 0.1                  | Multiplier by which to pan      |
-| form-schema             | Object        | null                 | See transcribe mode below       |
-| form-model              | Object        | null                 | See transcribe mode below       |
-| region                  | Object        | null                 | See transcribe mode below       |
 
-See the documentation for the [IIIF Image API](http://iiif.io/api/image/2.1)
-and [IIIF Presentation API](http://iiif.io/api/presentation/2.1/) for
-more details of how a URI is constructed.
+### Events
+
+| Event         | Arguments     | Description          |
+|---------------|---------------|----------------------|
+| submit        | data          | User input confirmed |
+
+### Modes
 
 #### Select Mode
 
@@ -59,7 +60,7 @@ In select mode users can click and move their mouse to highlight areas of the
 image. This mode requires is useful for tagging images, potentially preparing
 them for subsequent transcription.
 
-**Example task:**
+Example task:
 
 ```js
 {
@@ -77,7 +78,7 @@ them for subsequent transcription.
 In transcribe mode a form schema and model is passed to the viewer, using the
 [vue-form-generator](https://github.com/icebob/vue-form-generator) syntax.
 
-**Example task:**
+Example task:
 
 ```js
 {
@@ -125,10 +126,3 @@ In transcribe mode a form schema and model is passed to the viewer, using the
   ]
 }
 ```
-
-
-### Events
-
-| Event         | Arguments     | Description          |
-|---------------|---------------|----------------------|
-| submit        | data          | User input confirmed |
