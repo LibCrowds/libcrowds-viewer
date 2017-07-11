@@ -43,6 +43,7 @@ You can now use the component like this (see below for example tasks):
 | tasks                   | String        | null                 | An array of tasks               |
 | confirm-before-unload   | Boolean       | false                | Confirm before leaving the page |
 | show-help               | Boolean       | true                 | Include the help modal          |
+| show-info               | Boolean       | true                 | Include the metadata modal      |
 | show-note               | Boolean       | false                | Include a notes input field     |
 | pan-by                  | Number        | 0.1                  | Multiplier by which to pan      |
 
@@ -62,13 +63,13 @@ them for subsequent transcription.
 
 Example task:
 
-```js
+```json
 {
-  index: 1,
-  objective: 'Tag all of the titles',
-  guidance: 'Draw a box around each title, including any subtitles.',
-  tileSource: 'https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json',
-  manifest: 'https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json'
+  "index": 1,
+  "objective": "Tag all of the titles",
+  "guidance": "Draw a box around each title, including any subtitles",
+  "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+  "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json"
 }
 ```
 
@@ -80,48 +81,48 @@ In transcribe mode a form schema and model is passed to the viewer, using the
 
 Example task:
 
-```js
+```json
 {
-  index: 1,
-  objective: 'Tag all of the titles',
-  guidance: 'Draw a box around each title, including any subtitles.',
-  tileSource: 'https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json',
-  manifest: 'https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json',
-  formModel: {
-    title: "",
-    date: "",
-    genre: []
+  "index": 1,
+  "objective": "Transcribe the required info",
+  "guidance": "Write everything exactly as you see on the page.",
+  "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+  "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+  "formModel": {
+    "title": "",
+    "date": "",
+    "genre": []
   },
-  formSchema: {
-    fields: [
+  "formSchema": {
+    "fields": [
       {
-        type: "input",
-        inputType: "text",
-        label: "Title",
-        model: "title",
-        placeholder: "Enter the title",
-        required: true
+        "type": "input",
+        "inputType": "text",
+        "label": "Title",
+        "model": "title",
+        "placeholder": "Enter the title",
+        "required": true
       },
       {
-        type: "input",
-        inputType: "date",
-        label: "Date",
-        model: "date"
+        "type": "input",
+        "inputType": "date",
+        "label": "Date",
+        "model": "date"
       },
       {
-        type: "select",
-        label: "Genre",
-        model: "genre",
-        values: ["Comedy", "Tragedy", "Drama"]
+        "type": "select",
+        "label": "Genre",
+        "model": "genre",
+        "values": ["Comedy", "Tragedy", "Drama"]
       }
     ]
   },
-  regions: [
+  "regions": [
     {
-      x: 100
-      y: 100
-      width: 100
-      height: 100
+      "x": 100,
+      "y": 100,
+      "width": 100,
+      "height": 100
     }
   ]
 }

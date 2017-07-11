@@ -3,32 +3,20 @@
     <libcrowds-viewer
       show-note
       :mode="mode"
-      :objective="objective"
-      :guidance="guidance"
-      :scheme="scheme"
-      :server="server"
-      :image-api-prefix="imageApiPrefix"
-      :presentation-api-prefix="presentationApiPrefix"
-      :image-id="imageId"
-      :manifest-id="manifestId"
+      :tasks="tasks"
       @submit="handleResponse">
     </libcrowds-viewer>
   </div>
 </template>
 
 <script>
+import tasks from '../data/select-tasks'
+
 export default {
   data () {
     return {
       mode: 'select',
-      objective: 'Mark the play titles',
-      guidance: 'Draw a box around each play title, including any subtitles.',
-      scheme: "https",
-      server: "api.bl.uk",
-      imageApiPrefix: "image/iiif",
-      presentationApiPrefix: "metadata/iiif",
-      imageId: "ark:/81055/vdc_100022589157.0x000005",
-      manifestId: "ark:/81055/vdc_100022589158.0x000002"
+      tasks: tasks
     }
   },
 

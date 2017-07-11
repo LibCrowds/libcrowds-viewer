@@ -1,0 +1,134 @@
+[
+  {
+    "index": 1,
+    "objective": "Transcribe the required info",
+    "guidance": "Write everything exactly as you see on the page.",
+    "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+    "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "formModel": {
+      "title": "",
+      "date": "",
+      "genre": []
+    },
+    "formSchema": {
+      "fields": [
+        {
+          "type": "input",
+          "inputType": "text",
+          "label": "Title",
+          "model": "title",
+          "placeholder": "Enter the title",
+          "required": true
+        },
+        {
+          "type": "input",
+          "inputType": "date",
+          "label": "Date",
+          "model": "date"
+        },
+        {
+          "type": "select",
+          "label": "Genre",
+          "model": "genre",
+          "values": ["Comedy", "Tragedy", "Drama"]
+        }
+      ]
+    },
+    "regions": [
+      {
+        "x": 100,
+        "y": 100,
+        "width": 100,
+        "height": 100
+      }
+    ]
+  },
+  {
+    "index": 2,
+    "objective": "Transcribe the required info",
+    "guidance": "Write everything exactly as you see on the page.",
+    "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000006/info.json",
+    "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "formModel": {
+      "title": "",
+      "date": "",
+      "genre": []
+    },
+    "formSchema": {
+      "fields": [
+        {
+          "type": "input",
+          "inputType": "text",
+          "label": "Title",
+          "model": "title",
+          "placeholder": "Enter the title",
+          "required": true
+        },
+        {
+          "type": "input",
+          "inputType": "date",
+          "label": "Date",
+          "model": "date"
+        },
+        {
+          "type": "select",
+          "label": "Genre",
+          "model": "genre",
+          "values": ["Comedy", "Tragedy", "Drama"]
+        }
+      ]
+    },
+    "regions": [
+      {
+        "x": 100,
+        "y": 100,
+        "width": 100,
+        "height": 100
+      }
+    ]
+  },
+  {
+    "index": 3,
+    "objective": "Transcribe the required info",
+    "guidance": "Write everything exactly as you see on the page.",
+    "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "formModel": {
+      "title": "",
+      "date": "",
+      "genre": []
+    },
+    "formSchema": {
+      "fields": [
+        {
+          "type": "input",
+          "inputType": "text",
+          "label": "Title",
+          "model": "title",
+          "placeholder": "Enter the title",
+          "required": true
+        },
+        {
+          "type": "input",
+          "inputType": "date",
+          "label": "Date",
+          "model": "date"
+        },
+        {
+          "type": "select",
+          "label": "Genre",
+          "model": "genre",
+          "values": ["Comedy", "Tragedy", "Drama"]
+        }
+      ]
+    },
+    "regions": [
+      {
+        "x": 100,
+        "y": 100,
+        "width": 100,
+        "height": 100
+      }
+    ]
+  }
+]
