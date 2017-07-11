@@ -7,6 +7,7 @@ export const store = new Vuex.Store({
   state: {
     selector: {},
     selections: [],
+    tasks: [],
     form: {
       model: {},
       errors: {},

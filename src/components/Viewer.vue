@@ -45,7 +45,7 @@
           :objective="objective"
           :guidance="guidance"
           :showNote="showNote"
-          @submit="submit">
+          @submit="submitTask">
         </task-sidebar>
         -->
 
@@ -54,11 +54,13 @@
           :viewer="viewer">
         </select-sidebar>
 
+        <!--
         <transcribe-sidebar
           v-else-if="mode === 'transcribe'"
           :model="formModel"
           :schema="formSchema">
         </transcribe-sidebar>
+        -->
 
       </div>
 
@@ -186,13 +188,6 @@ export default {
   },
 
   methods: {
-    loadImage () {
-      this.viewer.open({
-        type: 'image',
-        tileSource: `${this.imgSource}/info.json`,
-        buildPyramid: false
-      })
-    },
     attachControls () {
       // TODO: this works for fullscreen controls but should possibly use
       // https://openseadragon.github.io/docs/OpenSeadragon.Control.html
@@ -268,14 +263,44 @@ export default {
         drawOverlay(this.viewer, 'highlight', rect, 'highlight')
       }
     },
-    submit (obj) {
+
+    /**
+     * Update tasks shared state.
+     *
+     * If the current task has been removed switch to the next available task.
+     */
+    updateTasks() {
+      const currentTasks = store.state.tasks
+      const oldTasks = currentTasks.filter( function( el ) {
+        return this.tasks.indexOf( el ) < 0
+      })
+      const newTasks = this.tasks.filter( function( el ) {
+        return currentTasks.indexOf( el ) < 0
+      })
+      for (let t of oldTasks) {
+        const item = this.viewer.world.getItemAt(t.index)
+        this.viewer.world.removeItem(item)
+      }
+      for (let t of newTasks) {
+        this.viewer.addTiledImage({
+          index: t.index,
+          tileSource: t.tileSource
+        })
+      }
+      store.commit('SET_ITEM', { key: 'tasks', value: this.tasks })
+    },
+
+    /**
+     * Emit the submit event with the current task data.
+     */
+    submitTask (obj) {
       this.$emit('submit', obj)
     }
   },
 
   watch: {
-    imgSource: function () {
-      this.loadImage()
+    tasks: function () {
+      updateTasks()
     }
   },
 
@@ -286,10 +311,10 @@ export default {
     this.viewer = OpenSeadragon(opts)
 
     this.configureSelector()
-    this.loadImage()
     this.attachControls()
     this.setupHandlers()
     this.highlightRegion()
+    this.updateTasks()
   }
 }
 </script>
