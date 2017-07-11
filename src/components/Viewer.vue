@@ -54,6 +54,11 @@
           :viewer="viewer">
         </select-sidebar>
 
+        <browse-sidebar
+          v-if="showBrowse"
+          :tasks="tasks">
+        </browse-sidebar>
+
         <!--
         <transcribe-sidebar
           v-else-if="mode === 'transcribe'"
@@ -97,6 +102,7 @@ import ViewerControls from '@/components/controls/Viewer'
 import PanControls from '@/components/controls/Pan'
 import SelectSidebar from '@/components/sidebars/Select'
 import TranscribeSidebar from '@/components/sidebars/Transcribe'
+import BrowseSidebar from '@/components/sidebars/Browse'
 import TaskSidebar from '@/components/sidebars/Task'
 import { store } from '@/store'
 import addSelection from '@/utils/addSelection'
@@ -137,6 +143,10 @@ export default {
       type: Boolean,
       default: false
     },
+    showBrowse: {
+      type: Boolean,
+      default: true
+    },
     panBy: {
       type: Number,
       default: 0.1
@@ -151,6 +161,7 @@ export default {
     SelectSidebar,
     TranscribeSidebar,
     TaskSidebar,
+    BrowseSidebar,
     Icon
   },
 
@@ -287,6 +298,7 @@ export default {
           tileSource: t.tileSource
         })
       }
+      console.log(this.viewer.world.getItemCount())
       store.commit('SET_ITEM', { key: 'tasks', value: this.tasks })
     },
 
