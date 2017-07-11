@@ -47,12 +47,28 @@ export default {
         id: 'strip',
         panVertical: false,
         panHorizontal: false,
-        maxZoomLevel: 1,
-        maxZoomLevel: 1,
         showNavigationControl: false,
         sequenceMode: true,
         previousButton: 'lv-browse-previous',
         nextButton: 'lv-browse-next',
+        gestureSettingsMouse: {
+          scrollToZoom: false,
+          clickToZoom: false,
+        },
+        gestureSettingsTouch: {
+          dblClickToZoom: false,
+          pinchToZoom: false,
+          flickEnabled: false
+        },
+        gestureSettingsPen: {
+          clickToZoom: false
+        },
+        gestureSettingsUnknown: {
+          scrollToZoom: false,
+          dblClickToZoom: false,
+          pinchToZoom: false,
+          flickEnabled: false
+        },
         tileSources: this.tasks.map(function (t) {
           return t.tileSource
         })
