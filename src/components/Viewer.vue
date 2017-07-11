@@ -5,7 +5,7 @@
 
       <viewer-controls
         :showHelp="showHelp"
-        :showInfo="manifestId.length > 0"
+        :showInfo="showInfo"
         :zoomInButton="normalizedViewerOpts.zoomInButton"
         :zoomOutButton="normalizedViewerOpts.zoomOutButton"
         :homeButton="normalizedViewerOpts.homeButton"
@@ -21,6 +21,7 @@
         :panBy="panBy">
       </pan-controls>
 
+      <!--
       <metadata-modal
         v-if="manifestId"
         :id="metadataModalId"
@@ -29,6 +30,7 @@
         :presentation-api-prefix="presentationApiPrefix"
         :manifestId="manifestId">
       </metadata-modal>
+      -->
 
       <help-modal
         v-if="showHelp"
@@ -38,12 +40,14 @@
 
       <div id="lv-sidebars">
 
+        <!--
         <task-sidebar
           :objective="objective"
           :guidance="guidance"
           :showNote="showNote"
           @submit="submit">
         </task-sidebar>
+        -->
 
         <select-sidebar
           v-if="mode === 'select'"
@@ -111,43 +115,19 @@ export default {
       type: String,
       default: 'selection'
     },
-    objective: {
-      type: String,
-      default: null
-    },
-    guidance: {
-      type: String,
-      default: null
-    },
-    scheme: {
-      type: String,
-      default: 'http'
-    },
-    server: {
-      type: String,
-      default: null
-    },
-    imageApiPrefix: {
-      type: String,
-      default: null
-    },
-    presentationApiPrefix: {
-      type: String,
-      default: null
-    },
-    imageId: {
-      type: String,
-      default: null
-    },
-    manifestId: {
-      type: String,
-      default: null
+    tasks: {
+      type: Array,
+      default: []
     },
     confirmBeforeUnload : {
       type: Boolean,
       default: false
     },
     showHelp: {
+      type: Boolean,
+      default: true
+    },
+    showInfo: {
       type: Boolean,
       default: true
     },
@@ -158,18 +138,6 @@ export default {
     panBy: {
       type: Number,
       default: 0.1
-    },
-    formModel: {
-      type: Object,
-      default: () => {}
-    },
-    formSchema: {
-      type: Object,
-      default: () => {}
-    },
-    region: {
-      type: Object,
-      default: () => {}
     }
   },
 
