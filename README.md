@@ -25,15 +25,12 @@ import LibcrowdsViewer from 'libcrowds-viewer';
 Vue.use(LibcrowdsViewer);
 ```
 
-You can now use the component like this:
+You can now use the component like this (see below for example tasks):
 
 ```vue
 <libcrowds-viewer
   mode="select"
-  scheme="http"
-  server="api.bl.uk"
-  image-api-prefix="image/iiif"
-  image-id="ark:/81055/vdc_100022589157.0x000005"
+  :tasks="tasks"
   @submit="handleResponse">
 </libcrowds-viewer>
 ```
@@ -43,14 +40,7 @@ You can now use the component like this:
 | Property                | Type          | Default              | Description                     |
 |-------------------------|---------------|----------------------|---------------------------------|
 | mode                    | String        | 'select'             | 'select' or 'transcribe'        |
-| objective               | String        | null                 | Main task objective             |
-| guidance                | String        | null                 | Additional guidance             |
-| scheme                  | String        | 'http'               | 'http' or 'https' protocol      |
-| server                  | String        | null                 | The IIIF server                 |
-| image-api-prefix        | String        | null                 | Prefix for the Image API        |
-| presentation-api-prefix | String        | null                 | Prefix for the Presentation API |
-| image-id                | String        | null                 | Identifier for the image        |
-| manifest-id             | String        | null                 | Identifier for the manifest     |
+| tasks                   | String        | null                 | An array of tasks               |
 | confirm-before-unload   | Boolean       | false                | Confirm before leaving the page |
 | show-help               | Boolean       | true                 | Include the help modal          |
 | show-note               | Boolean       | false                | Include a notes input field     |
@@ -65,51 +55,76 @@ more details of how a URI is constructed.
 
 #### Select Mode
 
-In select mode users can click and move their mouse across the image to highlight
-areas of the image. This mode requires the least configuration (a minimal example
-is provided above) and is useful for tagging images, or preparing for subsequent
-transcription.
+In select mode users can click and move their mouse to highlight areas of the
+image. This mode requires is useful for tagging images, potentially preparing
+them for subsequent transcription.
+
+**Example task:**
+
+```js
+{
+  index: 1,
+  objective: 'Tag all of the titles',
+  guidance: 'Draw a box around each title, including any subtitles.',
+  tileSource: 'https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json',
+  manifest: 'https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json'
+}
+```
 
 
 #### Transcribe Mode
 
 In transcribe mode a form schema and model is passed to the viewer, using the
-[vue-form-generator](https://github.com/icebob/vue-form-generator) syntax, for
-example:
+[vue-form-generator](https://github.com/icebob/vue-form-generator) syntax.
 
-```vue
-formModel: {
-  title: "",
-  date: "",
-  genre: []
-}
+**Example task:**
 
-formSchema: {
-  fields: [{
-    type: "input",
-    inputType: "text",
-    label: "Title",
-    model: "title",
-    placeholder: "Enter the title",
-    required: true
+```js
+{
+  index: 1,
+  objective: 'Tag all of the titles',
+  guidance: 'Draw a box around each title, including any subtitles.',
+  tileSource: 'https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json',
+  manifest: 'https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json',
+  formModel: {
+    title: "",
+    date: "",
+    genre: []
   },
-  {
-    type: "input",
-    inputType: "date",
-    label: "Date",
-    model: "date"
+  formSchema: {
+    fields: [
+      {
+        type: "input",
+        inputType: "text",
+        label: "Title",
+        model: "title",
+        placeholder: "Enter the title",
+        required: true
+      },
+      {
+        type: "input",
+        inputType: "date",
+        label: "Date",
+        model: "date"
+      },
+      {
+        type: "select",
+        label: "Genre",
+        model: "genre",
+        values: ["Comedy", "Tragedy", "Drama"]
+      }
+    ]
   },
-  {
-    type: "select",
-    label: "Genre",
-    model: "genre",
-    values: ["Comedy", "Tragedy", "Drama"]
-  }]
+  regions: [
+    {
+      x: 100
+      y: 100
+      width: 100
+      height: 100
+    }
+  ]
 }
 ```
-
-Optionally, you can also pass a `region` to highlight, such as that returned by
-`imageRect` when in select mode.
 
 
 ### Events
