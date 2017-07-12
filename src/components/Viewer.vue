@@ -130,7 +130,10 @@ export default {
     viewerOpts: Object,
     mode: {
       type: String,
-      required: true
+      required: true,
+      validator: value => {
+        return value in ['select', 'transcribe']
+      }
     },
     taskOpts: {
       type: Array,
