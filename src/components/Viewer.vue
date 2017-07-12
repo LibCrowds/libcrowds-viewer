@@ -222,11 +222,6 @@ export default {
         addSelection(this.currentTask, selectionRect)
       })
 
-      // Hide loading icon after tile drawn
-      // this.viewer.addHandler('tile-drawn', () => {
-      //   this.loading(false)
-      // })
-
       // Confirm before leaving if any overlays have been drawn or forms filled
       window.onbeforeunload = () => {
         const msg = 'Unsaved changes will be lost.'
