@@ -55,7 +55,7 @@ export default {
   methods: {
 
     /**
-     * Fetch the manifest.
+     * Fetch the manifest and load data.
      */
     fetchManifest () {
       this.manifestData = {}
