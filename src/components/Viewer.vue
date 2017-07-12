@@ -242,7 +242,13 @@ export default {
         })
       };
     },
+
+    /**
+     * Configure the area selector.
+     */
     configureSelector () {
+
+      // Initialise the selector
       const selector = this.viewer.selection({
         showConfirmDenyButtons: false,
         restrictToImage: true,
@@ -250,7 +256,9 @@ export default {
       })
       store.commit('SET_ITEM', { key: 'selector', value: selector })
       selector.enable()
-      const confirmBtn = new OpenSeadragon.Button({
+
+      // Add the confirm button
+      new OpenSeadragon.Button({
         element: this.$refs.confirmSelection,
         clickTimeThreshold: this.viewer.clickTimeThreshold,
         clickDistThreshold: this.viewer.clickDistThreshold,
@@ -258,6 +266,8 @@ export default {
         onRelease: selector.confirm.bind(selector)
       })
       selector.element.appendChild(this.$refs.confirmSelection)
+
+      // Add the cancel button
       const cancelBtn = new OpenSeadragon.Button({
         element: this.$refs.cancelSelection,
         clickTimeThreshold: this.viewer.clickTimeThreshold,
@@ -267,6 +277,10 @@ export default {
       })
       selector.element.appendChild(this.$refs.cancelSelection)
     },
+
+    /**
+     * Highlight a region of the current image.
+     */
     highlightRegion () {
       if (this.region) {
         const rect = new OpenSeadragon.Rect(this.region.x,
@@ -307,9 +321,7 @@ export default {
   mounted () {
     let opts = this.normalizedViewerOpts
     opts.element = this.$refs.viewer
-
     this.viewer = OpenSeadragon(opts)
-
     this.configureSelector()
     this.attachControls()
     this.setupHandlers()
