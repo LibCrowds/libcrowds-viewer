@@ -259,7 +259,6 @@ export default {
         restrictToImage: true,
         returnPixelCoordinates: false
       })
-      store.commit('SET_ITEM', { key: 'selector', value: selector })
       selector.enable()
 
       // Add the confirm button
