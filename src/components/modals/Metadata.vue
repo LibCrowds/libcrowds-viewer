@@ -1,25 +1,27 @@
 <template>
   <div id="lv-metadata-modal">
-    <modal
-      :id="id"
-      title="Metadata">
-      <ul v-for="m in manifestData.metadata" :key="m.label">
+    <modal :id="id" title="Metadata">
+
+      <ul v-for="item in manifestData.metadata" :key="item.label">
         <li>
-          <strong>{{ m.label }}:</strong>
+          <strong>{{ item.label }}:</strong>
           &nbsp;
-          <span v-html="m.value"></span></li>
+          <span v-html="item.value"></span></li>
       </ul>
+
       <div id="rights">
         <img :src="manifestData.logo">
         <p v-html="manifestData.attribution"></p>
         <p v-html="manifestData.license"></p>
      </div>
+
     </modal>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import Task from '@/task'
 import Modal from '@/components/Modal'
 
 export default {
@@ -29,44 +31,31 @@ export default {
     }
   },
 
-  methods: {
-    fetchManifest () {
-      const url = `${this.scheme}://` +
-                  `${this.server}/` +
-                  `${this.presentationApiPrefix}/` +
-                  `${this.manifestId}/` +
-                  `manifest.json`
-      axios.get(url).then((r) => {
-        this.manifestData = r.data
-      })
-    }
-  },
-
   props: {
     id: {
       type: String,
       requried: true
     },
-    scheme: {
-      type: String,
-      required: true
-    },
-    server: {
-      type: String,
-      required: true
-    },
-    presentationApiPrefix: {
-      type: String,
-      required: true
-    },
-    manifestId: {
-      type: String,
+    task: {
+      type: Task,
       required: true
     }
   },
 
   components: {
     Modal
+  },
+
+  methods: {
+
+    /**
+     * Fetch the manifest.
+     */
+    fetchManifest () {
+      axios.get(this.task.manifest).then((r) => {
+        this.manifestData = r.data
+      })
+    }
   },
 
   created () {

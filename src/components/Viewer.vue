@@ -21,16 +21,11 @@
         :panBy="panBy">
       </pan-controls>
 
-      <!--
       <metadata-modal
-        v-if="manifestId"
-        :id="metadataModalId"
-        :scheme="scheme"
-        :server="server"
-        :presentation-api-prefix="presentationApiPrefix"
-        :manifestId="manifestId">
+        v-if="currentTask && showInfo"
+        :task="currentTask"
+        :id="metadataModalId">
       </metadata-modal>
-      -->
 
       <!--
       <help-modal
