@@ -2,17 +2,22 @@
   <div id="lv-metadata-modal">
     <modal :id="id" title="Metadata">
 
-      <ul v-for="item in metadata" :key="item.label">
-        <li>
-          <strong>{{ item.label }}:</strong>
-          <span v-html="item.value"></span></li>
-      </ul>
+      <span v-if="hasData">
+        <ul v-for="item in metadata" :key="item.label">
+          <li>
+            <strong>{{ item.label }}:</strong>
+            <span v-html="item.value"></span></li>
+        </ul>
+        <div class="center">
+          <img v-if="logo" :src="logo">
+          <p v-if="attribution" v-html="attribution"></p>
+          <a :href="license" v-if="license" v-html="license"></a>
+      </div>
+    </span>
 
-      <div id="rights">
-        <img v-if="logo" :src="logo">
-        <p v-if="attribution" v-html="attribution"></p>
-        <a :href="license" v-if="license" v-html="license"></a>
-     </div>
+    <span v-else>
+      <p class="center">No metadata loaded</p>
+    </span>
 
     </modal>
   </div>
@@ -52,13 +57,30 @@ export default {
     Modal
   },
 
+  computed: {
+    hasData: function () {
+      return (this.metadata.length > 0 ||
+              this.logo !== null ||
+              this.attribution !== null ||
+              this.license !== null)
+    }
+  },
+
   methods: {
 
     /**
      * Fetch the manifest and load data.
      */
     fetchManifest () {
-      this.manifestData = {}
+      this.metadata = []
+      this.logo = null
+      this.attribution = null
+      this.license = null
+
+      if (!this.task.manifest.length) {
+        return
+      }
+
       axios.get(this.task.manifest).then((r) => {
         this.metadata = r.data.metadata.map((item) => {
           if (typeof item.value === 'object') {
@@ -106,7 +128,7 @@ export default {
     list-style: none;
   }
 
-  #rights {
+  .center {
     text-align: center;
     margin: 2rem;
   }
