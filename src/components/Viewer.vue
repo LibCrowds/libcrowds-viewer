@@ -58,13 +58,11 @@
         </select-sidebar>
         -->
 
-        <!--
         <browse-sidebar
           v-if="showBrowse"
           :tasks="tasks"
           @taskselected="setCurrentTask">
         </browse-sidebar>
-        -->
 
         <!--
         <transcribe-sidebar
