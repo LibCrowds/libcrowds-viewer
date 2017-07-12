@@ -5,7 +5,7 @@
 
       <viewer-controls
         :showHelp="showHelp"
-        :showInfo="showInfo"
+        :showInfo="showInfoModal"
         :zoomInButton="viewerOpts.zoomInButton"
         :zoomOutButton="viewerOpts.zoomOutButton"
         :homeButton="viewerOpts.homeButton"
@@ -22,7 +22,7 @@
       </pan-controls>
 
       <metadata-modal
-        v-if="showInfo && currentTask && 'manifest' in currentTask"
+        v-if="showInfoModal"
         :task="currentTask"
         :id="metadataModalId">
       </metadata-modal>
@@ -200,6 +200,9 @@ export default {
       return this.taskOpts.map(function (opts) {
         return new Task(opts)
       })
+    },
+    showInfoModal: function () {
+      return this.showInfo && this.currentTask && 'manifest' in this.currentTask
     }
   },
 
