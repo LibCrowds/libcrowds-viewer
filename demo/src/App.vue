@@ -1,16 +1,16 @@
 <template>
   <div id="app">
 
-    <div id="home-container" v-if="!mode.length">
+    <div id="home-container" v-if="!showViewer">
       <h1>LibCrowds Viewer</h1>
       <p class="lead">
         IIIF-compatible image viewer Vue component.
       </p>
       <div>
-        <button @click="showViewer('select')">
+        <button @click="setViewerMode('select')">
           Select Mode
         </button>
-        <button @click="showViewer('transcribe')">
+        <button @click="setViewerMode('transcribe')">
           Transcribe Mode
         </button>
       </div>
@@ -43,7 +43,8 @@ export default {
     return {
       page: 'home',
       mode: '',
-      taskOpts: []
+      taskOpts: [],
+      showViewer: false
     }
   },
 
@@ -58,13 +59,14 @@ export default {
   },
 
   methods: {
-    showViewer(mode) {
+    setViewerMode(mode) {
       if (mode === 'select') {
         this.tasks = selectTasks
       } else if (mode === 'transcribe') {
         this.tasks = transcribeTasks
       }
       this.mode = mode
+      this.showViewer = true
     },
     handleResponse (obj) {
       const jsonStr = JSON.stringify(obj, null, 2)
