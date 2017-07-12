@@ -1,15 +1,18 @@
 <template>
   <div id="lv-task-sidebar">
     <sidebar title="Task">
+
       <h4>{{ task.objective }}</h4>
       <p>{{ task.guidance }}</p>
+
       <button
         v-if="showNote"
         class="btn btn-block"
         @click="toggleCollapseNote">
         Add a note
       </button>
-      <div
+
+      <transition name="fade-height"
         v-show="showNote"
         v-if="!collapseNote">
         <textarea
@@ -18,12 +21,14 @@
           placeholder="Leave a note..."
           @input="updateNote">
         </textarea>
-      </div>
+      </transition>
+
       <button
         class="btn btn-block btn-green"
         @click="submit">
         Submit
       </button>
+
     </sidebar>
   </div>
 </template>
@@ -93,24 +98,15 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/style/settings';
 @import '../../assets/style/partials/buttons';
-@import '../../assets/style/partials/forms';
+@import '../../assets/style/partials/transitions';
 
 #lv-task-sidebar {
   h4 {
     margin: 0;
   }
 
-  .slide-leave-active,
-  .slide-enter-active {
-    transition: 1s;
-  }
-  .slide-enter {
-    transform: translate3d(0, 100%, 0);
-    visibility: hidden;
-  }
-  .slide-leave-to {
-    transform: translate3d(0, -100%, 0);
-    visibility: visible;
+  textarea {
+    margin-top: 0.6rem;
   }
 }
 </style>
