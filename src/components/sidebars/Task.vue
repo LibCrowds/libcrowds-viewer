@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import { store } from '@/store'
 import Sidebar from '@/components/Sidebar'
 
 export default {

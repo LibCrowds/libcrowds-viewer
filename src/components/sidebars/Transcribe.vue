@@ -14,7 +14,6 @@
 <script>
 import VueFormGenerator from "vue-form-generator"
 import Sidebar from '@/components/Sidebar'
-import { store } from '@/store'
 
 export default {
   data: function () {

@@ -12,7 +12,6 @@
 
 <script>
 import Controls from '@/components/Controls'
-import { store } from '@/store'
 
 export default {
   props: {

@@ -1,5 +1,5 @@
+import OpenSeadragon from 'openseadragon'
 import uuid from 'uuid/v4'
-import { store } from '@/store'
 import drawOverlay from '@/utils/drawOverlay'
 
 export default function (viewer, selectionRect) {
@@ -12,6 +12,6 @@ export default function (viewer, selectionRect) {
     viewportRect: vpRect,
     imageRect: imgRect
   }
-  store.commit('ADD_ARRAY_ITEM', { key: 'selections', value: selection })
+  // store.commit('ADD_ARRAY_ITEM', { key: 'selections', value: selection })
   drawOverlay(viewer, selection.id, selection.viewportRect, 'selection')
 }

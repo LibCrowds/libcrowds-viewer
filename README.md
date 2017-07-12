@@ -88,10 +88,11 @@ emitted from the viewer.
 | objective               | String | \<optional> | The main objective                                                                   |
 | guidance                | String | \<optional> | Additional guidance                                                                  |
 | form                    | Object | \<optional> | Form schema and model for use in transcription tasks                                 |
-| regions                 | Object | \<optional> | Coordinates identifying particular regions of the image                              |
+| regions                 | Array  | \<optional> | Coordinates identifying regions of the image                                         |
+| note                    | String | \<optional> | Additional note about the image                                                      |
 
 
-#### Example
+#### Full Example
 
 ```json
 {
@@ -129,7 +130,8 @@ emitted from the viewer.
           "values": ["Comedy", "Tragedy", "Drama"]
         }
       ]
-    }
+    },
+    "errors": []
   },
   "regions": [
     {
@@ -138,7 +140,8 @@ emitted from the viewer.
       "width": 100,
       "height": 100
     }
-  ]
+  ],
+  "note": "This is a really cool image"
 }
 ```
 

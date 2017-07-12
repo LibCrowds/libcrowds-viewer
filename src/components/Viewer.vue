@@ -32,11 +32,13 @@
       </metadata-modal>
       -->
 
+      <!--
       <help-modal
         v-if="showHelp"
         :id="helpModalId"
         :mode="mode">
       </help-modal>
+      -->
 
       <div id="lv-sidebars">
 
@@ -49,16 +51,20 @@
         </task-sidebar>
         -->
 
+        <!--
         <select-sidebar
           v-if="mode === 'select'"
           :viewer="viewer">
         </select-sidebar>
+        -->
 
+        <!--
         <browse-sidebar
           v-if="showBrowse"
           :tasks="tasks"
           @taskselected="setCurrentTask">
         </browse-sidebar>
+        -->
 
         <!--
         <transcribe-sidebar
@@ -105,7 +111,7 @@ import SelectSidebar from '@/components/sidebars/Select'
 import TranscribeSidebar from '@/components/sidebars/Transcribe'
 import BrowseSidebar from '@/components/sidebars/Browse'
 import TaskSidebar from '@/components/sidebars/Task'
-import { store } from '@/store'
+import Task from '@/task'
 import addSelection from '@/utils/addSelection'
 import drawOverlay from '@/utils/drawOverlay'
 
@@ -115,7 +121,8 @@ export default {
       viewer: {},
       metadataModalId: 'lc-metadata-modal',
       helpModalId: 'lc-help-modal',
-      currentTask: null
+      currentTask: null,
+      tasks: []
     }
   },
 
@@ -125,7 +132,7 @@ export default {
       type: String,
       default: 'selection'
     },
-    tasks: {
+    taskOpts: {
       type: Array,
       default: []
     },
@@ -168,6 +175,11 @@ export default {
   },
 
   computed: {
+    tasks: function () {
+      return this.taskOpts.map(function (opts) {
+        return new Task(opts)
+      })
+    },
     normalizedViewerOpts: function () {
       const defaultOpts = {
         zoomInButton: 'zoom-in',
@@ -189,14 +201,6 @@ export default {
         }
       }
       return Object.assign(defaultOpts, this.viewerOpts)
-    },
-    imgSource: function () {
-      const imgSource = `${this.scheme}://` +
-                        `${this.server}/` +
-                        `${this.imageApiPrefix}/` +
-                        `${this.imageId}`
-      store.commit('SET_ITEM', { key: 'imgSource', value: imgSource })
-      return imgSource
     }
   },
 
@@ -215,7 +219,7 @@ export default {
     setupHandlers () {
       // Store confirmed selections
       this.viewer.addHandler('selection', (selectionRect) => {
-        addSelection(this.viewer, selectionRect)
+        addSelection(this.currentTask, selectionRect)
       })
 
       // Hide loading icon after tile drawn
@@ -326,6 +330,8 @@ export default {
     this.attachControls()
     this.setupHandlers()
     this.highlightRegion()
+
+    console.log(this.tasks)
     this.setCurrentTask(this.tasks[0])
   }
 }

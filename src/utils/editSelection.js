@@ -1,4 +1,3 @@
-import { store } from '@/store'
 import deleteSelection from '@/utils/deleteSelection'
 
 export default function (viewer, selection) {

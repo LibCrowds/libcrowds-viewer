@@ -1,5 +1,3 @@
-import { store } from '@/store'
-
 export default function (selection, highlight) {
   const query = `.selection[data-id="${selection.id}"]`
   const el = document.querySelector(query)
