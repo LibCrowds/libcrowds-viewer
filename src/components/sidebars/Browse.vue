@@ -43,7 +43,7 @@ export default {
 
   methods: {
     update() {
-      this.viewer = OpenSeadragon({
+      const viewer = OpenSeadragon({
         id: 'strip',
         panVertical: false,
         panHorizontal: false,
@@ -72,6 +72,10 @@ export default {
         tileSources: this.tasks.map(function (t) {
           return t.tileSource
         })
+      })
+      viewer.addHandler('canvas-click', () => {
+        let task = this.tasks[viewer.currentPage()]
+        this.$emit('taskselected', task)
       })
     }
   },

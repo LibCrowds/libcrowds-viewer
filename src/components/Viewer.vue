@@ -56,7 +56,8 @@
 
         <browse-sidebar
           v-if="showBrowse"
-          :tasks="tasks">
+          :tasks="tasks"
+          @taskselected="setCurrentTask">
         </browse-sidebar>
 
         <!--
@@ -113,7 +114,8 @@ export default {
     return {
       viewer: {},
       metadataModalId: 'lc-metadata-modal',
-      helpModalId: 'lc-help-modal'
+      helpModalId: 'lc-help-modal',
+      currentTask: null
     }
   },
 
@@ -276,29 +278,10 @@ export default {
     },
 
     /**
-     * Update tasks shared state.
-     *
-     * If the current task has been removed switch to the next available task.
+     * Set the current task.
      */
-    updateTasks() {
-      const currentTasks = store.state.tasks
-      const oldTasks = currentTasks.filter( function( el ) {
-        return this.tasks.indexOf( el ) < 0
-      })
-      const newTasks = this.tasks.filter( function( el ) {
-        return currentTasks.indexOf( el ) < 0
-      })
-      for (let t of oldTasks) {
-        const item = this.viewer.world.getItemAt(t.index)
-        this.viewer.world.removeItem(item)
-      }
-      for (let t of newTasks) {
-        this.viewer.addTiledImage({
-          index: t.index,
-          tileSource: t.tileSource
-        })
-      }
-      store.commit('SET_ITEM', { key: 'tasks', value: this.tasks })
+    setCurrentTask (task) {
+      this.currentTask = task
     },
 
     /**
@@ -309,9 +292,15 @@ export default {
     }
   },
 
-  watch: {
-    tasks: function () {
-      updateTasks()
+  watch : {
+
+    /**
+     * Display the current task in the main viewer.
+     */
+    currentTask: function () {
+      this.viewer.addTiledImage({
+        tileSource: this.currentTask.tileSource
+      })
     }
   },
 
@@ -325,7 +314,7 @@ export default {
     this.attachControls()
     this.setupHandlers()
     this.highlightRegion()
-    this.updateTasks()
+    this.setCurrentTask(this.tasks[0])
   }
 }
 </script>
