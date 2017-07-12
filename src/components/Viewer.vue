@@ -132,8 +132,8 @@ export default {
           dblClickToZoom: false
         }
       },
-      metadataModalId: 'lc-metadata-modal',
-      helpModalId: 'lc-help-modal',
+      metadataModalId: 'lv-metadata-modal',
+      helpModalId: 'lv-help-modal',
       currentTask: null
     }
   },
