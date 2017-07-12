@@ -327,9 +327,7 @@ export default {
      * Display the current task in the main viewer.
      */
     currentTask: function () {
-      this.viewer.addTiledImage({
-        tileSource: this.currentTask.tileSource
-      })
+      this.viewer.open(this.currentTask.tileSource)
     }
   },
 
