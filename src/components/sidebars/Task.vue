@@ -1,8 +1,8 @@
 <template>
   <div id="lv-task-sidebar">
     <sidebar title="Task">
-      <h4>{{ objective }}</h4>
-      <p>{{ guidance }}</p>
+      <h4>{{ task.objective }}</h4>
+      <p>{{ task.guidance }}</p>
       <button class="btn" @click="toggleCollapseNote" v-if="showNote">
         Add a note
       </button>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import Task from '@/task'
 import Sidebar from '@/components/Sidebar'
 
 export default {
@@ -37,12 +38,8 @@ export default {
   },
 
   props: {
-    objective: {
-      type: String,
-      required: true
-    },
-    guidance: {
-      type: String,
+    task: {
+      type: Task,
       required: true
     },
     showNote: {
@@ -52,16 +49,26 @@ export default {
   },
 
   methods: {
+
+    /**
+     * Toggle the collapsing of the note input.
+     */
     toggleCollapseNote () {
       this.collapseNote = !this.collapseNote
     },
+
+    /**
+     * Emit the noteupdated event with the note value.
+     */
     updateNote (evt) {
-      store.commit('SET_ITEM', { key: 'note', value: evt.target.value })
+      this.$emit('noteupdated', evt.target.value)
     },
+
+    /**
+     * Emit the submit event with the task.
+     */
     submit () {
-      const data = store.getters.getData
-      document.querySelector('.form-group').classList.add('show-errors')
-      this.$emit('submit', data)
+      this.$emit('submit', this.task)
     }
   }
 }

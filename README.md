@@ -45,6 +45,7 @@ You can now use the component like this:
 | show-info               | Boolean       | true                 | Include the metadata modal      |
 | show-note               | Boolean       | false                | Include a notes input field     |
 | show-browse             | Boolean       | true                 | Include the browse sidebar      |
+| show-form-errors        | Boolean       | true                 | Show form errors on submit      |
 | pan-by                  | Number        | 0.1                  | Multiplier by which to pan      |
 
 ### Events

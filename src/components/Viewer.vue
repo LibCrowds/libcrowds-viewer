@@ -42,14 +42,13 @@
 
       <div id="lv-sidebars">
 
-        <!--
         <task-sidebar
-          :objective="objective"
-          :guidance="guidance"
+          v-if="currentTask"
+          :task="currentTask"
           :showNote="showNote"
+          @noteupdated="updateNote"
           @submit="submitTask">
         </task-sidebar>
-        -->
 
         <!--
         <select-sidebar
@@ -179,6 +178,10 @@ export default {
       type: Boolean,
       default: true
     },
+    showFormErrors: {
+      type: Boolean,
+      default: true
+    },
     panBy: {
       type: Number,
       default: 0.1
@@ -298,10 +301,25 @@ export default {
     },
 
     /**
-     * Emit the submit event with the current task data.
+     * Update the note and emit the update event with the current task.
      */
-    submitTask (obj) {
-      this.$emit('submit', obj)
+    updateNote (note) {
+      this.currentTask.note = note
+      this.$emit('update', this.currentTask)
+    },
+
+    /**
+     * Emit submit event with a task object.
+     */
+    submitTask (task) {
+      // Show form errors if enabled and in transcribe mode
+      if (this.showFormErrors && this.mode === 'transcribe') {
+        const formGroups = document.querySelector('.form-group')
+        if (formGroups.length) {
+          formGroups.classList.add('show-errors')
+        }
+      }
+      this.$emit('submit', task)
     }
   },
 
