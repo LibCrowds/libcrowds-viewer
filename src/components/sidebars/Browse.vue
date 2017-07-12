@@ -4,18 +4,16 @@
 
       <div id="strip"></div>
 
-      <div
-        class="btn-nav"
-        id="lv-browse-previous"
-        ref="confirmSelection">
+      <button
+        class="btn btn-hud"
+        id="lv-browse-previous">
         <icon name="chevron-left"></icon>
-      </div>
-      <div
-        class="btn-nav"
-        id="lv-browse-next"
-        ref="cancelSelection">
+      </button>
+      <button
+        class="btn btn-hud"
+        id="lv-browse-next">
         <icon name="chevron-right"></icon>
-      </div>
+      </button>
 
     </sidebar>
   </div>
@@ -105,16 +103,26 @@ export default {
     height: 100%;
   }
 
-  .btn-nav {
+  #lv-browse-next,
+  #lv-browse-previous {
+    margin: 0;
     position: absolute !important;
     top: 45%;
+  }
 
-    &#lv-browse-previous {
-      left: 1em;
+  #lv-browse-previous {
+    left: 1em;
+
+    svg {
+      margin-right: 2px;
     }
+  }
 
-    &#lv-browse-next {
-      right: 1em;
+  #lv-browse-next {
+    right: 1em;
+
+    svg {
+      margin-left: 2px;
     }
   }
 }

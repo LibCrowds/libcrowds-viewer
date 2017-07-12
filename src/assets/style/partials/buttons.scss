@@ -45,4 +45,21 @@
     width: 100%;
     display: block;
   }
+
+  &.btn-hud {
+    display: flex !important;
+    justify-content: center;
+    height: 32px;
+    width: 32px;
+    border: none;
+    padding: 5px;
+    z-index: 2;
+    border-radius: 25px;
+    background-color: rgba(0, 0, 0, 0.75);
+
+    svg {
+      display: flex;
+      opacity: 0.8;
+    }
+  }
 }
