@@ -8,29 +8,22 @@
   },
   {
     "id": 4,
-    "objective": "Tag all of the titles",
-    "guidance": "Draw a box around each title, including any subtitles",
-    "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000006/info.json",
-    "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json"
+    "objective": "Tag all of the actors",
+    "guidance": "Draw a box around each actor, including any subtitles",
+    "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589091.0x000003/info.json",
+    "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json"
   },
   {
     "id": 7,
-    "objective": "Tag all of the titles",
-    "guidance": "Draw a box around each title, including any subtitles",
-    "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
-    "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json"
+    "objective": "Tag all of images on the page",
+    "guidance": "Draw a box around each image",
+    "tileSource": "http://www.e-codices.unifr.ch/loris/vad/vad-0342/vad-0342_002.jp2/info.json",
+    "manifest": "http://www.e-codices.unifr.ch/metadata/iiif/vad-0342/manifest.json"
   },
   {
     "id": 8,
-    "objective": "Tag all of the titles",
-    "guidance": "Draw a box around each title, including any subtitles",
-    "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000008/info.json",
-    "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json"
-  },
-  {
-    "id": 9,
-    "objective": "Tag all of the titles",
-    "guidance": "Draw a box around each title, including any subtitles",
-    "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000009/info.json"
+    "objective": "Tag all of the faces",
+    "guidance": "Draw a box around each face",
+    "tileSource": "https://images.britishart.yale.edu/iiif/c0b22208-1eab-4b5e-8bc2-a18390f003b4/info.json"
   }
 ]
