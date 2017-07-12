@@ -6,12 +6,12 @@
       <viewer-controls
         :showHelp="showHelp"
         :showInfo="showInfo"
-        :zoomInButton="normalizedViewerOpts.zoomInButton"
-        :zoomOutButton="normalizedViewerOpts.zoomOutButton"
-        :homeButton="normalizedViewerOpts.homeButton"
-        :fullPageButton="normalizedViewerOpts.fullPageButton"
-        :helpButton="normalizedViewerOpts.helpButton"
-        :infoButton="normalizedViewerOpts.infoButton"
+        :zoomInButton="viewerOpts.zoomInButton"
+        :zoomOutButton="viewerOpts.zoomOutButton"
+        :homeButton="viewerOpts.homeButton"
+        :fullPageButton="viewerOpts.fullPageButton"
+        :helpButton="viewerOpts.helpButton"
+        :infoButton="viewerOpts.infoButton"
         @helpclicked="handleHelpControlClick"
         @infoclicked="handleInfoControlClick">
       </viewer-controls>
@@ -92,7 +92,7 @@
     </div>
 
     <!-- Render viewer after all other components -->
-    <div id="lv-viewer-container" ref="viewer"></div>
+    <div :id="viewerOpts.id"></div>
 
   </div>
 </template>
@@ -119,6 +119,26 @@ export default {
   data: function () {
     return {
       viewer: {},
+      viewerOpts: {
+        id: 'lv-viewer-container',
+        zoomInButton: 'zoom-in',
+        zoomOutButton: 'zoom-out',
+        homeButton: 'reset-zoom',
+        fullPageButton: 'toggle-fullscreen',
+        helpButton: 'show-help',
+        infoButton: 'show-info',
+        panVertical: false,
+        panHorizontal: false,
+        gestureSettingsMouse: {
+          clickToZoom: false
+        },
+        gestureSettingsTouch: {
+          dblClickToZoom: false
+        },
+        gestureSettingsPen: {
+          dblClickToZoom: false
+        }
+      },
       metadataModalId: 'lc-metadata-modal',
       helpModalId: 'lc-help-modal',
       currentTask: null
@@ -126,7 +146,6 @@ export default {
   },
 
   props: {
-    viewerOpts: Object,
     mode: {
       type: String,
       required: true,
@@ -185,28 +204,6 @@ export default {
       return this.taskOpts.map(function (opts) {
         return new Task(opts)
       })
-    },
-    normalizedViewerOpts: function () {
-      const defaultOpts = {
-        zoomInButton: 'zoom-in',
-        zoomOutButton: 'zoom-out',
-        homeButton: 'reset-zoom',
-        fullPageButton: 'toggle-fullscreen',
-        helpButton: 'show-help',
-        infoButton: 'show-info',
-        panVertical: false,
-        panHorizontal: false,
-        gestureSettingsMouse: {
-          clickToZoom: false
-        },
-        gestureSettingsTouch: {
-          dblClickToZoom: false
-        },
-        gestureSettingsPen: {
-          dblClickToZoom: false
-        }
-      }
-      return Object.assign(defaultOpts, this.viewerOpts)
     }
   },
 
@@ -323,9 +320,9 @@ export default {
   },
 
   mounted () {
-    let opts = this.normalizedViewerOpts
-    opts.element = this.$refs.viewer
-    this.viewer = OpenSeadragon(opts)
+    // Initialise the main viewer after the DOM is loaded
+    this.viewer = OpenSeadragon(this.viewerOpts)
+
     this.configureSelector()
     this.attachControls()
     this.setupHandlers()
