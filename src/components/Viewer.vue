@@ -134,7 +134,7 @@ export default {
     },
     taskOpts: {
       type: Array,
-      default: []
+      required: true
     },
     confirmBeforeUnload : {
       type: Boolean,
