@@ -24,7 +24,7 @@
       <libcrowds-viewer
         show-note
         :mode="mode"
-        :tasks="tasks"
+        :taskOpts="taskOpts"
         @submit="handleResponse">
       </libcrowds-viewer>
     </div>
@@ -43,7 +43,7 @@ export default {
     return {
       page: 'home',
       mode: '',
-      tasks: []
+      taskOpts: []
     }
   },
 
