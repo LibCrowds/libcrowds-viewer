@@ -130,7 +130,7 @@ export default {
     viewerOpts: Object,
     mode: {
       type: String,
-      default: 'selection'
+      required: true
     },
     taskOpts: {
       type: Array,
