@@ -96,34 +96,8 @@ export default {
 @import '../../assets/style/partials/forms';
 
 #lv-task-sidebar {
-  ul {
-    overflow-y: auto;
-    min-height: 100px;
-    max-height: 300px;
-    list-style: none;
-    padding: 0.8rem;
-    margin: 0;
-    border: 1px solid $gray;
-
-
-    li {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-content: center;
-
-      &:not(:last-child) {
-        margin-bottom: 0.75rem;
-      }
-    }
-  }
-
   h4 {
     margin: 0;
-  }
-
-  svg {
-    margin-left: 5px;
   }
 
   .slide-leave-active,
