@@ -24,6 +24,7 @@
       <metadata-modal
         v-if="showInfoModal"
         :task="currentTask"
+        :lang="lang"
         :id="metadataModalId">
       </metadata-modal>
 
@@ -180,6 +181,10 @@ export default {
     panBy: {
       type: Number,
       default: 0.1
+    },
+    lang: {
+      type: String,
+      default: 'en'
     }
   },
 

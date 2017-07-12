@@ -2,7 +2,7 @@
   <div id="lv-metadata-modal">
     <modal :id="id" title="Metadata">
 
-      <ul v-for="item in manifestData.metadata" :key="item.label">
+      <ul v-for="item in metadata" :key="item.label">
         <li>
           <strong>{{ item.label }}:</strong>
           &nbsp;
@@ -10,9 +10,9 @@
       </ul>
 
       <div id="rights">
-        <img :src="manifestData.logo">
-        <p v-html="manifestData.attribution"></p>
-        <p v-html="manifestData.license"></p>
+        <img v-if="logo" :src="logo">
+        <p v-if="attribution" v-html="attribution"></p>
+        <a :href="license" v-if="license" v-html="license"></a>
      </div>
 
     </modal>
@@ -27,7 +27,10 @@ import Modal from '@/components/Modal'
 export default {
   data: function () {
     return {
-      manifestData: {}
+      metadata: [],
+      logo: null,
+      attribution: null,
+      license: null
     }
   },
 
@@ -39,6 +42,10 @@ export default {
     task: {
       type: Task,
       required: true
+    },
+    lang: {
+      type: String,
+      default: 'en'
     }
   },
 
@@ -54,8 +61,26 @@ export default {
     fetchManifest () {
       this.manifestData = {}
       axios.get(this.task.manifest).then((r) => {
-        this.manifestData = r.data
+        this.metadata = r.data.metadata.map((item) => {
+          if (typeof item.value === 'object') {
+            item.value = this.getValueInLang(item.value)
+          }
+          return item
+        })
+        this.logo = r.data.logo
+        this.attribution = r.data.attribution
+        this.license = r.data.license
       })
+    },
+
+    /**
+     * Return a metadata value in the chosen language, if available.
+     */
+    getValueInLang (values) {
+      const filtered = values.filter((value) => {
+        return value['@language'] === this.lang
+      })
+      return filtered.length ? filtered[0]['@value'] : ''
     }
   },
 

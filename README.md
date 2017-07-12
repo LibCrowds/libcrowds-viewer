@@ -36,17 +36,18 @@ You can now use the component like this:
 
 ### Properties
 
-| Property                | Type          | Default              | Description                     |
-|-------------------------|---------------|----------------------|---------------------------------|
-| mode                    | String        | 'select'             | 'select' or 'transcribe'        |
-| taskOpts                | String        | null                 | An array of task options        |
-| confirm-before-unload   | Boolean       | false                | Confirm before leaving the page |
-| show-help               | Boolean       | true                 | Include the help modal          |
-| show-info               | Boolean       | true                 | Include the metadata modal      |
-| show-note               | Boolean       | false                | Include a notes input field     |
-| show-browse             | Boolean       | true                 | Include the browse sidebar      |
-| show-form-errors        | Boolean       | true                 | Show form errors on submit      |
-| pan-by                  | Number        | 0.1                  | Multiplier by which to pan      |
+| Property                | Type          | Default              | Description                                      |
+|-------------------------|---------------|----------------------|--------------------------------------------------|
+| mode                    | String        | 'select'             | 'select' or 'transcribe'                         |
+| taskOpts                | String        | null                 | An array of task options                         |
+| confirm-before-unload   | Boolean       | false                | Confirm before leaving the page                  |
+| show-help               | Boolean       | true                 | Include the help modal                           |
+| show-info               | Boolean       | true                 | Include the metadata modal                       |
+| show-note               | Boolean       | false                | Include a notes input field                      |
+| show-browse             | Boolean       | true                 | Include the browse sidebar                       |
+| show-form-errors        | Boolean       | true                 | Show form errors on submit                       |
+| pan-by                  | Number        | 0.1                  | Multiplier by which to pan                       |
+| lang                    | String        | 'en'                 | Language for manifest metadata (where available) |
 
 ### Events
 
