@@ -2,6 +2,7 @@
 
 .btn {
   cursor: default;
+  margin-top: 0.6rem;
   font-size: 14px;
   background-color: transparent;
   border: 1px solid #fff;
@@ -37,5 +38,10 @@
     &:focus {
       opacity: 1;
     }
+  }
+
+  &.btn-block {
+    width: 100%;
+    display: block;
   }
 }

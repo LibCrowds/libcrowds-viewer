@@ -3,7 +3,10 @@
     <sidebar title="Task">
       <h4>{{ task.objective }}</h4>
       <p>{{ task.guidance }}</p>
-      <button class="btn" @click="toggleCollapseNote" v-if="showNote">
+      <button
+        v-if="showNote"
+        class="btn btn-block"
+        @click="toggleCollapseNote">
         Add a note
       </button>
       <div
@@ -16,7 +19,9 @@
           @input="updateNote">
         </textarea>
       </div>
-      <button class="btn btn-green" @click="submit">
+      <button
+        class="btn btn-block btn-green"
+        @click="submit">
         Submit
       </button>
     </sidebar>
@@ -117,20 +122,8 @@ export default {
     margin: 0;
   }
 
-  .btn {
-    width: 100%;
-    display: block;
-    margin-top: 0.6rem;
-  }
-
   svg {
     margin-left: 5px;
-  }
-
-  button {
-    display: flex;
-    margin-right: auto;
-    margin-left: auto;
   }
 
   .slide-leave-active,
