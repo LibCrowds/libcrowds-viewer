@@ -5,7 +5,6 @@
       <ul v-for="item in metadata" :key="item.label">
         <li>
           <strong>{{ item.label }}:</strong>
-          &nbsp;
           <span v-html="item.value"></span></li>
       </ul>
 
