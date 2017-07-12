@@ -298,7 +298,6 @@ export default {
           tileSource: t.tileSource
         })
       }
-      console.log(this.viewer.world.getItemCount())
       store.commit('SET_ITEM', { key: 'tasks', value: this.tasks })
     },
 
