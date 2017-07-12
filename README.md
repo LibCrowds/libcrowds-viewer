@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/libcrowds-viewer.svg)](https://badge.fury.io/js/libcrowds-viewer)
 
-> IIIF-compatible image viewer Vue component
+> IIIF-compatible image viewer Vue component for microtasks
 
 Originally designed for the LibCrowds crowdsourcing platform, this Vue.js
 component presents a zoomable image and provides options for users to mark
@@ -30,8 +30,7 @@ You can now use the component like this:
 ```vue
 <libcrowds-viewer
   mode="select"
-  :tasks="tasks"
-  @submit="handleResponse">
+  :taskOpts="[{ id: 1, tileSource: 'http://www.example.org/image-service/abcd1234/info.json' }]">
 </libcrowds-viewer>
 ```
 
@@ -40,7 +39,7 @@ You can now use the component like this:
 | Property                | Type          | Default              | Description                     |
 |-------------------------|---------------|----------------------|---------------------------------|
 | mode                    | String        | 'select'             | 'select' or 'transcribe'        |
-| tasks                   | String        | null                 | An array of task options        |
+| taskOpts                | String        | null                 | An array of task options        |
 | confirm-before-unload   | Boolean       | false                | Confirm before leaving the page |
 | show-help               | Boolean       | true                 | Include the help modal          |
 | show-info               | Boolean       | true                 | Include the metadata modal      |
@@ -73,7 +72,7 @@ users to transcribe specific details found in the image.
 
 ### Tasks
 
-The core data structure for libcrowds-viewer is the Task object. An array of
+The core data structure for LibCrowds Viewer is the Task object. An array of
 Task options is passed to the viewer as a property and from each item in this
 array a new Task object is created. These Tasks are updated within the viewer
 with data such as area selection and form input data, with the update events
