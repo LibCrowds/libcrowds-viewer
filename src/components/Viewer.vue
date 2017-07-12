@@ -22,7 +22,7 @@
       </pan-controls>
 
       <metadata-modal
-        v-if="currentTask && showInfo"
+        v-if="showInfo && currentTask && 'manifest' in currentTask"
         :task="currentTask"
         :id="metadataModalId">
       </metadata-modal>

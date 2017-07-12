@@ -52,9 +52,20 @@ export default {
      * Fetch the manifest.
      */
     fetchManifest () {
+      this.manifestData = {}
       axios.get(this.task.manifest).then((r) => {
         this.manifestData = r.data
       })
+    }
+  },
+
+  watch: {
+
+    /**
+     * Update the manifest when the task changes.
+     */
+    task: function () {
+      this.fetchManifest()
     }
   },
 
