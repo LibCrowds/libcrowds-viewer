@@ -248,7 +248,7 @@ export default {
     },
 
     /**
-     * Configure the area selector.
+     * Configure the area selector for the main viewer.
      */
     configureSelector () {
 
