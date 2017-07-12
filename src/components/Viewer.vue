@@ -132,13 +132,15 @@ export default {
       type: String,
       required: true,
       validator: value => {
-        return value in ['select', 'transcribe']
+        const validModes = ['select', 'transcribe']
+        return validModes.indexOf(value) > -1
       }
     },
     taskOpts: {
       type: Array,
       required: true,
       validator: value => {
+        console.log(value)
         return value.length
       }
     },
