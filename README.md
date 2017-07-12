@@ -25,7 +25,7 @@ import LibcrowdsViewer from 'libcrowds-viewer';
 Vue.use(LibcrowdsViewer);
 ```
 
-You can now use the component like this (see below for example tasks):
+You can now use the component like this:
 
 ```vue
 <libcrowds-viewer
@@ -40,7 +40,7 @@ You can now use the component like this (see below for example tasks):
 | Property                | Type          | Default              | Description                     |
 |-------------------------|---------------|----------------------|---------------------------------|
 | mode                    | String        | 'select'             | 'select' or 'transcribe'        |
-| tasks                   | String        | null                 | An array of tasks               |
+| tasks                   | String        | null                 | An array of task options        |
 | confirm-before-unload   | Boolean       | false                | Confirm before leaving the page |
 | show-help               | Boolean       | true                 | Include the help modal          |
 | show-info               | Boolean       | true                 | Include the metadata modal      |
@@ -56,67 +56,81 @@ You can now use the component like this (see below for example tasks):
 
 ### Modes
 
+LibCrowds Viewer currently provides the following modes.
+
 #### Select Mode
 
 In select mode users can click and move their mouse to highlight areas of the
-image. This mode requires is useful for tagging images, potentially preparing
+image. This mode is useful for tagging images and potentially preparing
 them for subsequent transcription.
-
-Example task:
-
-```json
-{
-  "index": 1,
-  "objective": "Tag all of the titles",
-  "guidance": "Draw a box around each title, including any subtitles",
-  "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
-  "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json"
-}
-```
-
 
 #### Transcribe Mode
 
-In transcribe mode a form schema and model is passed to the viewer, using the
-[vue-form-generator](https://github.com/icebob/vue-form-generator) syntax.
+In transcribe mode a form schema and model is passed to the viewer (using the
+[vue-form-generator](https://github.com/icebob/vue-form-generator) syntax),
+along with optional coordinates to highlight regions of the image. This allows
+users to transcribe specific details found in the image.
 
-Example task:
+### Tasks
+
+The core data structure for libcrowds-viewer is the Task object. An array of
+Task options is passed to the viewer as a property and from each item in this
+array a new Task object is created. These Tasks are updated within the viewer
+with data such as area selection and form input data, with the update events
+emitted from the viewer.
+
+#### Task properties
+
+| Property                | Type   | Attributes  | Description                                                                          |
+|-------------------------|--------|-------------|--------------------------------------------------------------------------------------|
+| id                      | String |             | Task identifier                                                                      |
+| tileSource              | String |             | Tile source URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/))            |
+| manifest                | String | \<optional> | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/)) |
+| objective               | String | \<optional> | The main objective                                                                   |
+| guidance                | String | \<optional> | Additional guidance                                                                  |
+| form                    | Object | \<optional> | Form schema and model for use in transcription tasks                                 |
+| regions                 | Object | \<optional> | Coordinates identifying particular regions of the image                              |
+
+
+#### Example
 
 ```json
 {
-  "index": 1,
-  "objective": "Transcribe the required info",
-  "guidance": "Write everything exactly as you see on the page.",
+  "id": 123,
   "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
   "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
-  "formModel": {
-    "title": "",
-    "date": "",
-    "genre": []
-  },
-  "formSchema": {
-    "fields": [
-      {
-        "type": "input",
-        "inputType": "text",
-        "label": "Title",
-        "model": "title",
-        "placeholder": "Enter the title",
-        "required": true
-      },
-      {
-        "type": "input",
-        "inputType": "date",
-        "label": "Date",
-        "model": "date"
-      },
-      {
-        "type": "select",
-        "label": "Genre",
-        "model": "genre",
-        "values": ["Comedy", "Tragedy", "Drama"]
-      }
-    ]
+  "objective": "Transcribe the required info",
+  "guidance": "Write everything exactly as you see on the page.",
+  "form": {
+    "formModel": {
+      "title": "",
+      "date": "",
+      "genre": []
+    },
+    "formSchema": {
+      "fields": [
+        {
+          "type": "input",
+          "inputType": "text",
+          "label": "Title",
+          "model": "title",
+          "placeholder": "Enter the title",
+          "required": true
+        },
+        {
+          "type": "input",
+          "inputType": "date",
+          "label": "Date",
+          "model": "date"
+        },
+        {
+          "type": "select",
+          "label": "Genre",
+          "model": "genre",
+          "values": ["Comedy", "Tragedy", "Drama"]
+        }
+      ]
+    }
   },
   "regions": [
     {
@@ -128,3 +142,5 @@ Example task:
   ]
 }
 ```
+
+For more (including simpler) example tasks see [demo/src/data](demo/src/data).
