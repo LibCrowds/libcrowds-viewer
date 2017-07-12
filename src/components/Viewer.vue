@@ -121,8 +121,7 @@ export default {
       viewer: {},
       metadataModalId: 'lc-metadata-modal',
       helpModalId: 'lc-help-modal',
-      currentTask: null,
-      tasks: []
+      currentTask: null
     }
   },
 
