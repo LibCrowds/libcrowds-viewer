@@ -10,6 +10,7 @@
         v-show="showNote"
         v-if="!collapseNote">
         <textarea
+          ref="note"
           rows="3"
           placeholder="Leave a note..."
           @input="updateNote">
@@ -69,6 +70,16 @@ export default {
      */
     submit () {
       this.$emit('submit', this.task)
+    }
+  },
+
+  watch: {
+
+    /**
+     * Clear the note field when the task changes.
+     */
+    task: function () {
+      this.$refs.note.value = ""
     }
   }
 }
