@@ -140,7 +140,6 @@ export default {
       type: Array,
       required: true,
       validator: value => {
-        console.log(value)
         return value.length
       }
     },

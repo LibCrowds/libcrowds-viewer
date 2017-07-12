@@ -61,9 +61,9 @@ export default {
   methods: {
     setViewerMode(mode) {
       if (mode === 'select') {
-        this.tasks = selectTasks
+        this.taskOpts = selectTasks
       } else if (mode === 'transcribe') {
-        this.tasks = transcribeTasks
+        this.taskOpts = transcribeTasks
       }
       this.mode = mode
       this.showViewer = true
