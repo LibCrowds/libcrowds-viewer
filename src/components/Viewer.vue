@@ -28,13 +28,11 @@
         :id="metadataModalId">
       </metadata-modal>
 
-      <!--
       <help-modal
         v-if="showHelp"
         :id="helpModalId"
         :mode="mode">
       </help-modal>
-      -->
 
       <div id="lv-sidebars">
 
@@ -46,12 +44,10 @@
           @submit="submitTask">
         </task-sidebar>
 
-        <!--
         <select-sidebar
           v-if="mode === 'select'"
           :viewer="viewer">
         </select-sidebar>
-        -->
 
         <browse-sidebar
           v-if="showBrowse"
