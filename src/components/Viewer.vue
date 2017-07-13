@@ -46,7 +46,9 @@
 
         <select-sidebar
           v-if="mode === 'select'"
-          :tags="tags">
+          :tags="tags"
+          @edit="editTag"
+          @delete="deleteTag">
         </select-sidebar>
 
         <browse-sidebar
@@ -103,11 +105,13 @@ import TaskSidebar from '@/components/sidebars/Task'
 import Task from '@/task'
 import drawOverlay from '@/utils/drawOverlay'
 import getImageUri from '@/utils/getImageUri'
+import extractRectFromImageUri from '@/utils/extractRectFromImageUri'
 
 export default {
   data: function () {
     return {
       viewer: {},
+      selector: {},
       viewerOpts: {
         id: 'lv-viewer-container',
         zoomInButton: 'zoom-in',
@@ -262,12 +266,12 @@ export default {
     configureSelector () {
 
       // Initialise the selector
-      const selector = this.viewer.selection({
+      this.selector = this.viewer.selection({
         showConfirmDenyButtons: false,
         restrictToImage: true,
         returnPixelCoordinates: false
       })
-      selector.enable()
+      this.selector.enable()
 
       // Add the confirm button
       new OpenSeadragon.Button({
@@ -275,9 +279,9 @@ export default {
         clickTimeThreshold: this.viewer.clickTimeThreshold,
         clickDistThreshold: this.viewer.clickDistThreshold,
         tooltip: 'Confirm',
-        onRelease: selector.confirm.bind(selector)
+        onRelease: this.selector.confirm.bind(this.selector)
       })
-      selector.element.appendChild(this.$refs.confirmSelection)
+      this.selector.element.appendChild(this.$refs.confirmSelection)
 
       // Add the cancel button
       const cancelBtn = new OpenSeadragon.Button({
@@ -285,9 +289,9 @@ export default {
         clickTimeThreshold: this.viewer.clickTimeThreshold,
         clickDistThreshold: this.viewer.clickDistThreshold,
         tooltip: 'Delete',
-        onRelease: selector.cancel.bind(selector)
+        onRelease: this.selector.cancel.bind(this.selector)
       })
-      selector.element.appendChild(this.$refs.cancelSelection)
+      this.selector.element.appendChild(this.$refs.cancelSelection)
     },
 
     /**
@@ -330,6 +334,48 @@ export default {
         }
       }
       this.$emit('submit', task)
+    },
+
+    /**
+     * Delete an overlay.
+     * @param {String} id
+     *   The ID of the overlay.
+     */
+    deleteOverlay (id) {
+      const query = `.overlay[data-id="${id}"]`
+      const el = document.querySelector(query)
+      this.viewer.removeOverlay(el)
+    },
+
+    /**
+     * Remove a tag and enable the selector in the same location.
+     * @param {Annotation} tag
+     *   The tag to edit
+     */
+    editTag (tag) {
+      const vp = this.viewer.viewport
+      const imgRect = extractRectFromImageUri(tag.target.selector.value)
+      const vpRect = vp.imageToViewportRectangle(imgRect)
+      const selectionRect = new OpenSeadragon.SelectionRect(vpRect.x,
+                                                            vpRect.y,
+                                                            vpRect.width,
+                                                            vpRect.height)
+
+      this.selector.rect = selectionRect
+      this.selector.draw()
+      this.selector.enable()
+      this.deleteTag(tag)
+      this.$emit('update', this.currentTask)
+    },
+
+    /**
+     * Delete a tag.
+     * @param {Annotation} tag
+     *   The tag to delete
+     */
+    deleteTag (tag) {
+      this.currentTask.deleteAnnotation(tag.id)
+      this.deleteOverlay(tag.id)
     }
   },
 

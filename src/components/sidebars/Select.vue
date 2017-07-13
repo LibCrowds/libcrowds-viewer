@@ -12,12 +12,12 @@
           </div>
           <div class="buttons">
             <span
-              @click="editSelection(viewer, s)"
+              @click="editTag(tag)"
               class="btn btn-control">
               <icon name="pencil"></icon>
             </span>
             <span
-              @click="deleteSelection(viewer, s)"
+              @click="deleteTag(tag)"
               class="btn btn-control">
               <icon name="times-circle"></icon>
             </span>
@@ -35,9 +35,7 @@ import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/pencil'
 import Sidebar from '@/components/Sidebar'
-import editSelection from '@/utils/editSelection'
 import highlightOverlay from '@/utils/highlightOverlay'
-import deleteSelection from '@/utils/deleteSelection'
 
 export default {
   props: {
@@ -53,9 +51,13 @@ export default {
   },
 
   methods: {
-    deleteSelection,
-    editSelection,
-    highlightOverlay
+    highlightOverlay,
+    editTag (tag) {
+      this.$emit('edit', tag)
+    },
+    deleteTag (tag) {
+      this.$emit('delete', tag)
+    }
   }
 }
 </script>

@@ -96,6 +96,21 @@ class Task {
     this.annotations.push(anno)
     return anno
   }
+
+  /**
+   * Delete an Annotation by ID.
+   * @param {String} id
+   *   The ID of the Annotation to delete.
+   */
+  deleteAnnotation (id) {
+    const filteredAnnos = this.annotations.filter(function(anno) {
+      return anno.id !== id
+    })
+    if (filteredAnnos.length === this.annotations.length) {
+      throw Error('No Annotation exists with that ID')
+    }
+    this.annotations = filteredAnnos
+  }
 }
 
 export default Task
