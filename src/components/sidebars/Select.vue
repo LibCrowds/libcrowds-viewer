@@ -3,12 +3,12 @@
     <sidebar title="Selections">
       <ul>
         <li
-          v-for="s in selections"
-          :key="s.id"
-          @mouseover="highlightSelection(s, true)"
-          @mouseleave="highlightSelection(s, false)">
+          v-for="tag in tags"
+          :key="tag.id"
+          @mouseover="highlightTag(tag, true)"
+          @mouseleave="highlightTag(tag, false)">
           <div class="thumbnail-container">
-            <img :src="getImageUri(s.imageRect)">
+            <img :src="tag.target.selector.value">
           </div>
           <div class="buttons">
             <span
@@ -38,22 +38,11 @@ import Sidebar from '@/components/Sidebar'
 import editSelection from '@/utils/editSelection'
 import highlightSelection from '@/utils/highlightSelection'
 import deleteSelection from '@/utils/deleteSelection'
-import getImageUri from '@/utils/getImageUri'
 
 export default {
-  data: function () {
-    return {
-      selections: []
-    }
-  },
-
   props: {
-    viewer: {
-      type: OpenSeadragon.Viewer,
-      required: true
-    },
-    task: {
-      type: Task,
+    tags: {
+      type: Array,
       required: true
     }
   },
@@ -66,26 +55,7 @@ export default {
   methods: {
     deleteSelection,
     editSelection,
-    highlightSelection,
-    getImageUri
-  },
-
-  computed: {
-    selections: function () {
-      return tasks.regions
-    }
-  },
-
-  watch: {
-
-    /**
-     * Update the selections list when the task changes.
-     */
-    task: function () {
-      this.selections.regions.filter((region) => {
-        return region.type = 'selection'
-      })
-    }
+    highlightSelection
   }
 }
 </script>

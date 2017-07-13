@@ -46,7 +46,7 @@
 
         <select-sidebar
           v-if="mode === 'select'"
-          :viewer="viewer">
+          :tags="tags">
         </select-sidebar>
 
         <browse-sidebar
@@ -101,8 +101,8 @@ import TranscribeSidebar from '@/components/sidebars/Transcribe'
 import BrowseSidebar from '@/components/sidebars/Browse'
 import TaskSidebar from '@/components/sidebars/Task'
 import Task from '@/task'
-import addSelection from '@/utils/addSelection'
 import drawOverlay from '@/utils/drawOverlay'
+import getImageUri from '@/utils/getImageUri'
 
 export default {
   data: function () {
@@ -130,7 +130,8 @@ export default {
       },
       metadataModalId: 'lv-metadata-modal',
       helpModalId: 'lv-help-modal',
-      currentTask: null
+      currentTask: null,
+      tags: []
     }
   },
 
@@ -217,9 +218,22 @@ export default {
       this.$root.$emit('show::modal', this.metadataModalId)
     },
     setupHandlers () {
-      // Store confirmed selections
+
+      /**
+       * Add a tag and draw the overlay when a selection is made.
+       */
       this.viewer.addHandler('selection', (selectionRect) => {
-        addSelection(this.currentTask, selectionRect)
+        const vp = this.viewer.viewport
+        const imgRect = vp.viewportToImageRectangle(selectionRect)
+        const vpRect = vp.imageToViewportRectangle(imgRect)
+        const imageUri = getImageUri({
+          imgSource: this.currentTask.tileSource,
+          region: imgRect
+        })
+        const tag = this.currentTask.addTag(imageUri)
+        this.tags.push(tag)
+        console.log(tag)
+        drawOverlay(this.viewer, tag.id, vpRect, 'selection')
       })
 
       // Confirm before leaving if any overlays have been drawn or forms filled

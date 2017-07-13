@@ -11,6 +11,7 @@ class Task {
     manifest = '',
     objective = '',
     guidance = '',
+    tag = '',
     form = {},
     regions = [],
     annotations = []
@@ -20,6 +21,7 @@ class Task {
     this.manifest = manifest
     this.objective = objective
     this.guidance = guidance
+    this.tag = tag
     this.form = form
     this.regions = regions
     this.annotations = annotations
@@ -72,6 +74,27 @@ class Task {
       return
     }
     this._addComment(text)
+  }
+
+  /**
+   * Add and return a tag.
+   * @param {String} fragmentURI
+   *   The IIIF image region.
+   */
+  addTag (fragmentURI) {
+    const anno = new Annotation('tagging', this.tileSource)
+    anno.target.selector = {
+      type: 'FragmentSelector',
+      value: fragmentURI,
+      conformsTo: 'http://iiif.io/api/image/2.1/#region'
+    }
+    anno.addBody({
+      purpose: 'tagging',
+      type: 'TextualBody',
+      value: this.tag
+    })
+    this.annotations.push(anno)
+    return anno
   }
 }
 

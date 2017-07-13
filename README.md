@@ -96,6 +96,7 @@ emitted from the viewer.
 | form                    | Object | \<optional> | Form schema and model for use in transcription tasks                                 |
 | regions                 | Array  | \<optional> | Coordinates identifying regions of the image                                         |
 | note                    | String | \<optional> | Additional note about the image                                                      |
+| tag                     | String | \<optional> | The tag to add when in select mode                                                   |
 
 #### Simple Example
 

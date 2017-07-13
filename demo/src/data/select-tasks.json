@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "tag": "title",
     "objective": "Tag all of the titles",
     "guidance": "Draw a box around each title, including any subtitles",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
@@ -8,6 +9,7 @@
   },
   {
     "id": 4,
+    "tag": "actor",
     "objective": "Tag all of the actors",
     "guidance": "Draw a box around each actor, including any subtitles",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589091.0x000003/info.json",
