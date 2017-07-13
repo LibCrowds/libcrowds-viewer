@@ -5,8 +5,8 @@
         <li
           v-for="tag in tags"
           :key="tag.id"
-          @mouseover="highlightTag(tag, true)"
-          @mouseleave="highlightTag(tag, false)">
+          @mouseover="highlightOverlay(tag.id, true)"
+          @mouseleave="highlightOverlay(tag.id, false)">
           <div class="thumbnail-container">
             <img :src="tag.target.selector.value">
           </div>
@@ -36,7 +36,7 @@ import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/pencil'
 import Sidebar from '@/components/Sidebar'
 import editSelection from '@/utils/editSelection'
-import highlightSelection from '@/utils/highlightSelection'
+import highlightOverlay from '@/utils/highlightOverlay'
 import deleteSelection from '@/utils/deleteSelection'
 
 export default {
@@ -55,7 +55,7 @@ export default {
   methods: {
     deleteSelection,
     editSelection,
-    highlightSelection
+    highlightOverlay
   }
 }
 </script>
