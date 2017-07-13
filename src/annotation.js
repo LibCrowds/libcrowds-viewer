@@ -6,7 +6,7 @@ import uuid from 'uuid/v4'
  * See https://www.w3.org/TR/annotation-model/
  *
  * Note that as the viewer is not currently responsible for storing the
- * annotations the id is auto-generated as a random UUID, which can later be
+ * annotations the id is generated as a random UUID. This can later be
  * updated by the client should they decide to send the data to their own
  * annotation server.
  * @param {String} motivation
@@ -22,11 +22,31 @@ class Annotation {
     this['id'] = uuid()
     this.type = 'Annotation'
     this.motivation = motivation
-    this.created = new Date()
+    this.created = new Date().toISOString()
     this.target = {
       id: targetId,
       type: 'Image'
     }
+  }
+
+  /**
+   * Set or update an item where more than one value is allowed.
+   * @param {*} root
+   *   The root attribute for which key should be set to value.
+   * @param {String} key
+   *   The attribute of root for which to add value.
+   * @param {*} value
+   *   The value to be set for key.
+   */
+  _setMultiItem(root, key, value) {
+    if (typeof root[key] === 'undefined') {
+      root[key] = value
+    } else if (Array.isArray(root[key])) {
+      root[key].push(value)
+    } else {
+      root[key] = [root[key], value]
+    }
+    this.modified = new Date().toISOString()
   }
 
   /**
@@ -42,6 +62,7 @@ class Annotation {
       name: name,
       nick: nick
     }
+    this.modified = new Date().toISOString()
   }
 
   /**
@@ -58,15 +79,17 @@ class Annotation {
       name: name,
       homepage: homepage
     }
-    this.generated = new Date()
+    this.generated = new Date().toISOString()
   }
 
   /**
-   * Set the target of the annotation
-   * @param {String} id
-   *
+   * Add a body to the annotation.
+   * @param {*} obj
+   *   The body to be added.
    */
-  setTarget(id) {
-
+  addBody(obj) {
+    this._setMultiItem(this, 'body', obj)
   }
 }
+
+export default Annotation

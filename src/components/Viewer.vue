@@ -299,8 +299,8 @@ export default {
     /**
      * Update the note and emit the update event with the current task.
      */
-    updateNote (note) {
-      this.currentTask.note = note
+    updateNote (text) {
+      this.currentTask.updateComment(text)
       this.$emit('update', this.currentTask)
     },
 
@@ -337,8 +337,6 @@ export default {
     this.attachControls()
     this.setupHandlers()
     this.highlightRegion()
-
-    console.log(this.tasks)
     this.setCurrentTask(this.tasks[0])
   }
 }

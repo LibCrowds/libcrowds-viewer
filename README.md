@@ -97,6 +97,17 @@ emitted from the viewer.
 | regions                 | Array  | \<optional> | Coordinates identifying regions of the image                                         |
 | note                    | String | \<optional> | Additional note about the image                                                      |
 
+#### Simple Example
+
+The minimum set of options that must be passed to the viewer is simply `mode`
+and `tileSource`.
+
+```json
+{
+  "mode": "select",
+  "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json"
+}
+```
 
 #### Full Example
 
@@ -147,7 +158,7 @@ emitted from the viewer.
       "height": 100
     }
   ],
-  "note": "This is a really cool image"
+  "annotations": []
 }
 ```
 
