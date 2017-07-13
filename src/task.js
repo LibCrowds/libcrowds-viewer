@@ -1,5 +1,6 @@
 /**
  * Represents a task that can be updated with all associated user input.
+ *
  */
 class Task {
 
@@ -11,7 +12,8 @@ class Task {
     guidance = '',
     form = {},
     regions = [],
-    note = ''
+    note = '',
+    annotations: []
   }) {
     this.id = id
     this.tileSource = tileSource

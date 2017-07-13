@@ -8,6 +8,10 @@ Originally designed for the LibCrowds crowdsourcing platform, this Vue.js
 component presents a zoomable image and provides options for users to mark
 and transcribe areas of that image.
 
+User input is serialised according to the
+[W3C Web Annotations spec](https://www.w3.org/annotation/) and returned via
+events.
+
 [**DEMO**](https://libcrowds.github.io/libcrowds-viewer/)
 
 ## Install

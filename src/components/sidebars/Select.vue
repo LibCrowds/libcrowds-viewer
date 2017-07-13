@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import OpenSeadragon from 'openseadragon'
+import Task from '@/task'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/pencil'
@@ -47,7 +49,11 @@ export default {
 
   props: {
     viewer: {
-      type: Object,
+      type: OpenSeadragon.Viewer,
+      required: true
+    },
+    task: {
+      type: Task,
       required: true
     }
   },
@@ -64,10 +70,22 @@ export default {
     getImageUri
   },
 
-  mounted () {
-    store.watch(store.getters.getSelections, selections => {
-      this.selections = selections
-    })
+  computed: {
+    selections: function () {
+      return tasks.regions
+    }
+  },
+
+  watch: {
+
+    /**
+     * Update the selections list when the task changes.
+     */
+    task: function () {
+      this.selections.regions.filter((region) => {
+        return region.type = 'selection'
+      })
+    }
   }
 }
 </script>
