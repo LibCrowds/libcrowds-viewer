@@ -83,6 +83,29 @@ class Annotation {
   }
 
   /**
+   * Add a tag.
+   * @param {String} tag
+   *   A plain text value.
+   * @param {*} fragmentURI
+   *   The IIIF image region.
+   */
+  addTag (tag, fragmentURI = null) {
+    if (fragmentURI) {
+      anno.target.selector = {
+        type: 'FragmentSelector',
+        value: fragmentURI,
+        conformsTo: 'http://iiif.io/api/image/2/context.json'
+      }
+    }
+
+    anno.addBody({
+      type: 'TextualBody',
+      purpose: 'tagging',
+      value: tag
+    })
+  }
+
+  /**
    * Add a body to the annotation.
    * @param {*} obj
    *   The body to be added.

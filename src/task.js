@@ -84,21 +84,7 @@ class Task {
    */
   addTag (tag, fragmentURI = null) {
     const anno = new Annotation('describing', this.tileSource)
-
-    if (fragmentURI) {
-      anno.target.selector = {
-        type: 'FragmentSelector',
-        value: fragmentURI,
-        conformsTo: 'http://iiif.io/api/image'
-      }
-    }
-
-    anno.addBody({
-      type: 'TextualBody',
-      purpose: 'tagging',
-      value: tag
-    })
-
+    anno.addTag(tag, fragmentURI = null)
     this.annotations.push(anno)
     return anno
   }
