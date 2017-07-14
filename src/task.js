@@ -79,27 +79,33 @@ class Task {
 
   /**
    * Add a tag.
+   * @param {String} value
+   *   Plain text value for the tag.
    * @param {String} fragmentURI
    *   The IIIF image region.
    */
-  addTag (tag, fragmentURI = null) {
+  tag (value, fragmentURI = null) {
     const anno = new Annotation('tagging', this.tileSource)
     anno.addTag(tag, fragmentURI = null)
     this.annotations.push(anno)
     return anno
   }
 
-  describe(description, tag = null, fragmentURI = null) {
-    anno.addBody({
-      type: 'TextualBody',
-      purpose: 'describing',
-      value: description,
-      format: 'text/plain'
-    })
-
-    if (tag) {
-      this.addTag(tag, fragmentURI)
-    }
+  /**
+   * Add a description
+   * @param {String} value
+   *   Plain text value for the description.
+   * @param {String} tag
+   *   Plain text value for the tag.
+   * @param {String} fragmentURI
+   *   The IIIF image region.
+   */
+  describe (value, tag, fragmentURI = null) {
+    const anno = new Annotation('describing', this.tileSource)
+    anno.addDescription(value)
+    anno.addTag(tag, fragmentURI = null)
+    this.annotations.push(anno)
+    return anno
   }
 
   /**

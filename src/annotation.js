@@ -91,17 +91,33 @@ class Annotation {
    */
   addTag (tag, fragmentURI = null) {
     if (fragmentURI) {
-      anno.target.selector = {
+      this.target.selector = {
         type: 'FragmentSelector',
         value: fragmentURI,
         conformsTo: 'http://iiif.io/api/image/2/context.json'
       }
     }
 
-    anno.addBody({
+    this.addBody({
       type: 'TextualBody',
       purpose: 'tagging',
       value: tag
+    })
+  }
+
+  /**
+   * Add a description
+   * @param {String} description
+   *   A plain text value.
+   * @param {*} fragmentURI
+   *   The IIIF image region.
+   */
+  addDescription (description) {
+    this.addBody({
+      type: 'TextualBody',
+      purpose: 'describing',
+      value: description,
+      format: 'text/plain'
     })
   }
 
