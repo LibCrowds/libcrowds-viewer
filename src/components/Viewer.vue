@@ -207,22 +207,36 @@ export default {
   },
 
   methods: {
+
+    /**
+     * Attach controls to the viewer container for fullscreen mode.
+     */
     attachControls () {
-      // TODO: this works for fullscreen controls but should possibly use
+      // TODO: this works but should possibly use
       // https://openseadragon.github.io/docs/OpenSeadragon.Control.html
       this.viewer.container.appendChild(this.$refs.hud)
     },
+
+    /**
+     * Emit the show model event when help control clicked.
+     */
     handleHelpControlClick () {
       this.$root.$emit('show::modal', this.helpModalId)
     },
+
+    /**
+     * Emit the show model event when info control clicked.
+     */
     handleInfoControlClick () {
       this.$root.$emit('show::modal', this.metadataModalId)
     },
+
+    /**
+     * Setup event handlers.
+     */
     setupHandlers () {
 
-      /**
-       * Add a tag and draw the overlay when a selection is made.
-       */
+      // Add a tag and draw the overlay when a selection is made.
       this.viewer.addHandler('selection', (selectionRect) => {
         const vp = this.viewer.viewport
         const imgRect = vp.viewportToImageRectangle(selectionRect)
@@ -304,6 +318,8 @@ export default {
 
     /**
      * Set the current task.
+     * @param {Task} task.
+     *   The task.
      */
     setCurrentTask (task) {
       this.currentTask = task
@@ -311,6 +327,10 @@ export default {
 
     /**
      * Update the note and emit the update event with the task.
+     * @param {Task} task.
+     *   The task.
+     * @param {String} text.
+     *   The text.
      */
     updateNote (task, text) {
       task.updateComment(text)
@@ -333,6 +353,8 @@ export default {
 
     /**
      * Emit submit event with a task object.
+     * @param {Task} task.
+     *   The task.
      */
     submitTask (task) {
       // Show form errors if enabled and in transcribe mode
@@ -348,7 +370,7 @@ export default {
     /**
      * Delete an overlay.
      * @param {String} id
-     *   The ID of the overlay.
+     *   The overlay ID.
      */
     deleteOverlay (id) {
       const query = `.overlay[data-id="${id}"]`
@@ -392,13 +414,10 @@ export default {
   },
 
   watch : {
-
-    /**
-     * Display the current task in the main viewer.
-     */
     currentTask: function () {
+      // Open the current task image.
       this.viewer.open(this.currentTask.tileSource)
-      // Initialise selector
+      // Initialise selector when in select mode.
       if (this.mode === 'select') {
         this.configureSelector()
       }
@@ -408,6 +427,7 @@ export default {
   mounted () {
     // Initialise the main viewer after the DOM is loaded
     this.viewer = OpenSeadragon(this.viewerOpts)
+
     this.attachControls()
     this.setupHandlers()
     this.highlightRegion()
