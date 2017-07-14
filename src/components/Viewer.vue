@@ -382,10 +382,10 @@ export default {
      * Remove a tag and enable the selector in the same location.
      * @param {Task} task
      *   The task that the tag belongs to.
-     * @param {Annotation} tag
-     *   The tag to edit.
+     * @param {String} id
+     *   The tag ID.
      */
-    editTag (task, tag) {
+    editTag (task, id) {
       const vp = this.viewer.viewport
       const imgRect = extractRectFromImageUri(tag.target.selector.value)
       const vpRect = vp.imageToViewportRectangle(imgRect)
@@ -396,7 +396,7 @@ export default {
       this.selector.rect = selectionRect
       this.selector.draw()
       this.selector.enable()
-      this.deleteTag(task, tag)
+      this.deleteTag(task, id)
       this.$emit('update', task)
     },
 
@@ -404,10 +404,10 @@ export default {
      * Delete a tag.
      * @param {Task} task
      *   The task that the tag belongs to.
-     * @param {Annotation} tag
-     *   The tag to delete
+     * @param {String} id
+     *   The tag ID.
      */
-    deleteTag (task, tag) {
+    deleteTag (task, id) {
       task.deleteAnnotation(tag.id)
       this.deleteOverlay(tag.id)
     }

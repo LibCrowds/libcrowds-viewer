@@ -58,10 +58,10 @@ export default {
   methods: {
     highlightOverlay,
     editTag (tag) {
-      this.$emit('edit', this.task, tag)
+      this.$emit('edit', this.task, tag.id)
     },
     deleteTag (tag) {
-      this.$emit('delete', this.task, tag)
+      this.$emit('delete', this.task, tag.id)
     }
   }
 }
