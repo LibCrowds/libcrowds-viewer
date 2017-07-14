@@ -63,7 +63,7 @@ class Task {
   }
 
   /**
-   * Update the comment (assumes one comment per image).
+   * Update the comment (assumes one per image).
    * @param {String} text
    *   The comment value.
    */
@@ -78,7 +78,7 @@ class Task {
   }
 
   /**
-   * Add and return a tag.
+   * Add a tag.
    * @param {String} fragmentURI
    *   The IIIF image region.
    */

@@ -19,6 +19,7 @@
           ref="note"
           rows="3"
           placeholder="Leave a note..."
+          v-model="note"
           @input="updateNote">
         </textarea>
       </transition>
@@ -59,6 +60,13 @@ export default {
     }
   },
 
+  computed: {
+    note: function () {
+      const comments = this.task.getAnnotationsByMotivation('commenting')
+      return comments.length ? comments[0].body.value : ''
+    }
+  },
+
   methods: {
 
     /**
@@ -72,7 +80,7 @@ export default {
      * Emit the noteupdated event with the note value.
      */
     updateNote (evt) {
-      this.$emit('noteupdated', evt.target.value)
+      this.$emit('noteupdated', this.task, evt.target.value)
     },
 
     /**
@@ -80,16 +88,6 @@ export default {
      */
     submit () {
       this.$emit('submit', this.task)
-    }
-  },
-
-  watch: {
-
-    /**
-     * Clear the note field when the task changes.
-     */
-    task: function () {
-      this.$refs.note.value = ""
     }
   }
 }

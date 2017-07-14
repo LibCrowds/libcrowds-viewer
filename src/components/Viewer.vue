@@ -318,11 +318,11 @@ export default {
     },
 
     /**
-     * Update the note and emit the update event with the current task.
+     * Update the note and emit the update event with the task.
      */
-    updateNote (text) {
-      this.currentTask.updateComment(text)
-      this.$emit('update', this.currentTask)
+    updateNote (task, text) {
+      task.updateComment(text)
+      this.$emit('update', task)
     },
 
     /**
