@@ -43,7 +43,7 @@ export default {
   methods: {
     onValidated: function (isValid, errors) {
       document.querySelector('.form-group').classList.remove('show-errors')
-      this.$emit('update', this.form, errors)
+      this.$emit('update', this.task, this.form, errors)
     }
   }
 }

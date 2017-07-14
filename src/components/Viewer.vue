@@ -53,7 +53,8 @@
 
         <transcribe-sidebar
           v-if="currentTask && mode === 'transcribe'"
-          :task="currentTask">
+          :task="currentTask"
+          @update="updateForm">
         </transcribe-sidebar>
 
         <browse-sidebar
@@ -314,6 +315,20 @@ export default {
     updateNote (task, text) {
       task.updateComment(text)
       this.$emit('update', task)
+    },
+
+    /**
+     * Update the form for a task and add associated annotations.
+     * @param {Task} task.
+     *   The task.
+     * @param {Object} form
+     *   The updated form.
+     * @param {Array} errors
+     *   Form errors.
+     */
+    updateForm (task, form, errors) {
+      form.errors = errors
+      task.form = form
     },
 
     /**
