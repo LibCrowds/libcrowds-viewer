@@ -6,12 +6,12 @@
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
     "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
-      "formModel": {
+      "model": {
         "title": "",
         "date": "",
         "genre": []
       },
-      "formSchema": {
+      "schema": {
         "fields": [
           {
             "type": "input",
@@ -52,12 +52,12 @@
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000006/info.json",
     "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
-      "formModel": {
+      "model": {
         "title": "",
         "date": "",
         "genre": []
       },
-      "formSchema": {
+      "schema": {
         "fields": [
           {
             "type": "input",
@@ -98,12 +98,12 @@
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
-      "formModel": {
+      "model": {
         "title": "",
         "date": "",
         "genre": []
       },
-      "formSchema": {
+      "schema": {
         "fields": [
           {
             "type": "input",

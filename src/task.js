@@ -12,7 +12,7 @@ class Task {
     objective = '',
     guidance = '',
     tag = '',
-    form = {},
+    form = { model: {}, schema: {}, errors: [] },
     regions = [],
     annotations = []
   }) {

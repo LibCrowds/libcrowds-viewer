@@ -57,13 +57,10 @@
           @taskselected="setCurrentTask">
         </browse-sidebar>
 
-        <!--
         <transcribe-sidebar
-          v-else-if="mode === 'transcribe'"
-          :model="formModel"
-          :schema="formSchema">
+          v-if="currentTask && mode === 'transcribe'"
+          :task="currentTask">
         </transcribe-sidebar>
-        -->
 
       </div>
 
