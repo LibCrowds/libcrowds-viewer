@@ -7,9 +7,9 @@
     "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
-        "title": "",
+        "title": null,
         "date": null,
-        "genre": []
+        "genre": null
       },
       "schema": {
         "fields": [
@@ -53,9 +53,9 @@
     "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
-        "title": "",
+        "title": null,
         "date": null,
-        "genre": []
+        "genre": null
       },
       "schema": {
         "fields": [
@@ -99,9 +99,9 @@
     "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
-        "title": "",
+        "title": null,
         "date": null,
-        "genre": []
+        "genre": null
       },
       "schema": {
         "fields": [
