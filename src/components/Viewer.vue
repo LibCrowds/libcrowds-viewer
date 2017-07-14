@@ -386,14 +386,16 @@ export default {
      */
     currentTask: function () {
       this.viewer.open(this.currentTask.tileSource)
+      // Initialise selector
+      if (this.mode === 'select') {
+        this.configureSelector()
+      }
     }
   },
 
   mounted () {
     // Initialise the main viewer after the DOM is loaded
     this.viewer = OpenSeadragon(this.viewerOpts)
-
-    this.configureSelector()
     this.attachControls()
     this.setupHandlers()
     this.highlightRegion()
