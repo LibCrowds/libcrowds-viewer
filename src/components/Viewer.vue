@@ -51,16 +51,16 @@
           @delete="deleteTag">
         </select-sidebar>
 
+        <transcribe-sidebar
+          v-if="currentTask && mode === 'transcribe'"
+          :task="currentTask">
+        </transcribe-sidebar>
+
         <browse-sidebar
           v-if="showBrowse"
           :tasks="tasks"
           @taskselected="setCurrentTask">
         </browse-sidebar>
-
-        <transcribe-sidebar
-          v-if="currentTask && mode === 'transcribe'"
-          :task="currentTask">
-        </transcribe-sidebar>
 
       </div>
 
