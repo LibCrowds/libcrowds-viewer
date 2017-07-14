@@ -142,6 +142,19 @@ class Task {
   }
 
   /**
+   * Return an Annotation.
+   * @param {*} id
+   *   The Annotation ID.
+   */
+  getAnnotation (id) {
+    const filtered = this.annotations.filter(function(anno) {
+      return anno.id === id
+    })
+    const idx = this.annotations.indexOf(filtered[0])
+    return this.annotations[idx]
+  }
+
+  /**
    * Delete an Annotation by ID.
    * @param {String} id
    *   The ID of the Annotation to delete.
