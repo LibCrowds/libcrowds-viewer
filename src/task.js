@@ -83,7 +83,7 @@ class Task {
    *   The IIIF image region.
    */
   addTag (tag, fragmentURI = null) {
-    const anno = new Annotation('describing', this.tileSource)
+    const anno = new Annotation('tagging', this.tileSource)
     anno.addTag(tag, fragmentURI = null)
     this.annotations.push(anno)
     return anno
