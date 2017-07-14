@@ -134,8 +134,7 @@ export default {
       },
       metadataModalId: 'lv-metadata-modal',
       helpModalId: 'lv-help-modal',
-      currentTask: null,
-      tags: []
+      currentTask: null
     }
   },
 
@@ -206,6 +205,12 @@ export default {
       return this.taskOpts.map(function (opts) {
         return new Task(opts)
       })
+    },
+    tags: function () {
+      if (!this.currentTask) {
+        return []
+      }
+      return this.currentTask.getAnnotationsByMotivation('tagging')
     }
   },
 
@@ -235,8 +240,6 @@ export default {
           region: imgRect
         })
         const tag = this.currentTask.addTag(imageUri)
-        this.tags.push(tag)
-        console.log(tag)
         drawOverlay(this.viewer, tag.id, vpRect, 'selection')
       })
 

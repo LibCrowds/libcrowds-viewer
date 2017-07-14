@@ -28,10 +28,11 @@ class Task {
   }
 
   /**
-   * Return an annotation by motivation.
+   * Return annotations by motivation.
    * @param {String} motivation
+   *   The motivation.
    */
-  _getAnnotationsByMotivation (motivation) {
+  getAnnotationsByMotivation (motivation) {
     const filteredAnnos = this.annotations.filter(function(anno) {
       return anno.motivation = motivation
     })
@@ -67,7 +68,7 @@ class Task {
    *   The comment value.
    */
   updateComment (text) {
-    let annos = this._getAnnotationsByMotivation('commenting')
+    let annos = this.getAnnotationsByMotivation('commenting')
     if (annos.length) {
       annos[0].modified = new Date().toISOString()
       annos[0].body.value = text
