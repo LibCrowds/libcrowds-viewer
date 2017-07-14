@@ -84,9 +84,9 @@ class Task {
    * @param {String} fragmentURI
    *   The IIIF image region.
    */
-  tag (value, fragmentURI = null) {
+  addTag (value, fragmentURI = null) {
     const anno = new Annotation('tagging', this.tileSource)
-    anno.addTag(tag, fragmentURI = null)
+    anno.addTag(this.tag, fragmentURI = null)
     this.annotations.push(anno)
     return anno
   }

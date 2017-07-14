@@ -245,7 +245,7 @@ export default {
           imgSource: this.currentTask.tileSource,
           region: imgRect
         })
-        const tag = this.currentTask.addTag(imageUri)
+        const tag = this.currentTask.addTag(this.currentTask.tag, imageUri)
         drawOverlay(this.viewer, tag.id, vpRect, 'selection')
       })
 
