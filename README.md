@@ -90,7 +90,7 @@ emitted from the viewer.
 |-------------------------|--------|-------------|----------------------------------------------------------------------------------------------------------------|
 | id                      | String |             | Task identifier                                                                                                |
 | imgInfoUri              | String |             | Image info URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/#image-information-request-uri-syntax/)) |
-| manifest                | String | \<optional> | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/))                           |
+| manifestUri             | String | \<optional> | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/#resource-structure))        |
 | objective               | String | \<optional> | The main objective                                                                                             |
 | guidance                | String | \<optional> | Additional guidance                                                                                            |
 | form                    | Object | \<optional> | Form schema and model for use in transcription tasks                                                           |
@@ -116,7 +116,7 @@ and `imgInfoUri`.
 {
   "id": 123,
   "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
-  "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+  "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
   "objective": "Transcribe the required info",
   "guidance": "Write everything exactly as you see on the page.",
   "form": {

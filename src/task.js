@@ -8,7 +8,7 @@ class Task {
   constructor ({
     id,
     imgInfoUri,
-    manifest = '',
+    manifestUri = '',
     objective = '',
     guidance = '',
     tag = '',
@@ -18,7 +18,7 @@ class Task {
   }) {
     this.id = id
     this.imgInfoUri = imgInfoUri
-    this.manifest = manifest
+    this.manifestUri = manifestUri
     this.objective = objective
     this.guidance = guidance
     this.tag = tag

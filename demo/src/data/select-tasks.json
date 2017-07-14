@@ -5,7 +5,7 @@
     "objective": "Tag all of the titles",
     "guidance": "Draw a box around each title, including any subtitles",
     "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
-    "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json"
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json"
   },
   {
     "id": 4,
@@ -13,14 +13,14 @@
     "objective": "Tag all of the actors",
     "guidance": "Draw a box around each actor, including any subtitles",
     "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589091.0x000003/info.json",
-    "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json"
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json"
   },
   {
     "id": 7,
     "objective": "Tag all of images on the page",
     "guidance": "Draw a box around each image",
     "imgInfoUri": "http://www.e-codices.unifr.ch/loris/vad/vad-0342/vad-0342_002.jp2/info.json",
-    "manifest": "http://www.e-codices.unifr.ch/metadata/iiif/vad-0342/manifest.json"
+    "manifestUri": "http://www.e-codices.unifr.ch/metadata/iiif/vad-0342/manifest.json"
   },
   {
     "id": 8,

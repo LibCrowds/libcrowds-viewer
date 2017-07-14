@@ -77,11 +77,11 @@ export default {
       this.attribution = null
       this.license = null
 
-      if (!this.task.manifest.length) {
+      if (!this.task.manifestUri.length) {
         return
       }
 
-      axios.get(this.task.manifest).then((r) => {
+      axios.get(this.task.manifestUri).then((r) => {
         this.metadata = r.data.metadata.map((item) => {
           if (typeof item.value === 'object') {
             item.value = this.getValueInLang(item.value)
