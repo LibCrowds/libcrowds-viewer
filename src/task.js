@@ -83,7 +83,7 @@ class Task {
    *   The IIIF image region.
    */
   addTag (fragmentURI = null) {
-    const anno = new Annotation('tagging', this.tileSource)
+    const anno = new Annotation('describing', this.tileSource)
 
     if (fragmentURI) {
       anno.target.selector = {
@@ -102,7 +102,7 @@ class Task {
     return anno
   }
 
-  addDescription
+  addDescription()
 
   /**
    * Delete an Annotation by ID.
