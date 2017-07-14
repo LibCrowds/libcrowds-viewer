@@ -9,6 +9,8 @@ export default function (imageUri) {
   const uriParts = imageUri.split('/')
   const regionStr = uriParts[uriParts.length - 4]
   const regionParts = regionStr.split(',')
-  return new OpenSeadragon.Rect(regionParts[0], regionParts[1], regionParts[2],
-                                regionParts[3])
+  return new OpenSeadragon.Rect(Number(regionParts[0]),
+                                Number(regionParts[1]),
+                                Number(regionParts[2]),
+                                Number(regionParts[3]))
 }

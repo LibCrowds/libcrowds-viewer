@@ -360,7 +360,6 @@ export default {
                                                             vpRect.y,
                                                             vpRect.width,
                                                             vpRect.height)
-
       this.selector.rect = selectionRect
       this.selector.draw()
       this.selector.enable()
