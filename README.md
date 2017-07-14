@@ -34,7 +34,7 @@ You can now use the component like this:
 ```vue
 <libcrowds-viewer
   mode="select"
-  :taskOpts="[{ id: 1, tileSource: 'http://www.example.org/image-service/abcd1234/info.json' }]">
+  :taskOpts="[{ id: 1, imgInfoUri: 'http://www.example.org/image-service/abcd1234/info.json' }]">
 </libcrowds-viewer>
 ```
 
@@ -86,27 +86,27 @@ emitted from the viewer.
 
 #### Task properties
 
-| Property                | Type   | Attributes  | Description                                                                          |
-|-------------------------|--------|-------------|--------------------------------------------------------------------------------------|
-| id                      | String |             | Task identifier                                                                      |
-| tileSource              | String |             | Tile source URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/))            |
-| manifest                | String | \<optional> | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/)) |
-| objective               | String | \<optional> | The main objective                                                                   |
-| guidance                | String | \<optional> | Additional guidance                                                                  |
-| form                    | Object | \<optional> | Form schema and model for use in transcription tasks                                 |
-| regions                 | Array  | \<optional> | Coordinates identifying regions of the image                                         |
-| note                    | String | \<optional> | Additional note about the image                                                      |
-| tag                     | String | \<optional> | The tag to add when in select mode                                                   |
+| Property                | Type   | Attributes  | Description                                                                                                    |
+|-------------------------|--------|-------------|----------------------------------------------------------------------------------------------------------------|
+| id                      | String |             | Task identifier                                                                                                |
+| imgInfoUri              | String |             | Image info URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/#image-information-request-uri-syntax/)) |
+| manifest                | String | \<optional> | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/))                           |
+| objective               | String | \<optional> | The main objective                                                                                             |
+| guidance                | String | \<optional> | Additional guidance                                                                                            |
+| form                    | Object | \<optional> | Form schema and model for use in transcription tasks                                                           |
+| regions                 | Array  | \<optional> | Coordinates identifying regions of the image                                                                   |
+| note                    | String | \<optional> | Additional note about the image                                                                                |
+| tag                     | String | \<optional> | The tag to add when in select mode                                                                             |
 
 #### Simple Example
 
 The minimum set of options that must be passed to the viewer is simply `mode`
-and `tileSource`.
+and `imgInfoUri`.
 
 ```json
 {
   "mode": "select",
-  "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json"
+  "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json"
 }
 ```
 
@@ -115,7 +115,7 @@ and `tileSource`.
 ```json
 {
   "id": 123,
-  "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+  "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
   "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
   "objective": "Transcribe the required info",
   "guidance": "Write everything exactly as you see on the page.",

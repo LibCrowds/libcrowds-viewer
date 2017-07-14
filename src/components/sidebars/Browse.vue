@@ -68,7 +68,7 @@ export default {
           flickEnabled: false
         },
         tileSources: this.tasks.map(function (t) {
-          return t.tileSource
+          return t.imgInfoUri
         })
       })
       viewer.addHandler('canvas-click', () => {

@@ -242,7 +242,7 @@ export default {
         const imgRect = vp.viewportToImageRectangle(selectionRect)
         const vpRect = vp.imageToViewportRectangle(imgRect)
         const imageUri = getImageUri({
-          imgSource: this.currentTask.tileSource,
+          imgSource: this.currentTask.imgInfoUri,
           region: imgRect
         })
         const tag = this.currentTask.addTag(this.currentTask.tag, imageUri)
@@ -416,7 +416,7 @@ export default {
   watch : {
     currentTask: function () {
       // Open the current task image.
-      this.viewer.open(this.currentTask.tileSource)
+      this.viewer.open(this.currentTask.imgInfoUri)
       // Initialise selector when in select mode.
       if (this.mode === 'select') {
         this.configureSelector()

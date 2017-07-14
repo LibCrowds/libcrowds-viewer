@@ -7,7 +7,7 @@ class Task {
 
   constructor ({
     id,
-    tileSource,
+    imageInfoUri,
     manifest = '',
     objective = '',
     guidance = '',
@@ -17,7 +17,7 @@ class Task {
     annotations = []
   }) {
     this.id = id
-    this.tileSource = tileSource
+    this.imageInfo = imageInfo
     this.manifest = manifest
     this.objective = objective
     this.guidance = guidance
@@ -52,7 +52,7 @@ class Task {
    *   The comment value.
    */
   _addComment (text) {
-    let anno = new Annotation('commenting', this.tileSource)
+    let anno = new Annotation('commenting', this.imgInfoUri)
     anno.addBody({
       type: 'TextualBody',
       value: text,
@@ -85,7 +85,7 @@ class Task {
    *   The IIIF image region.
    */
   addTag (value, fragmentURI = null) {
-    const anno = new Annotation('tagging', this.tileSource)
+    const anno = new Annotation('tagging', this.imgInfoUri)
     anno.addTag(this.tag, fragmentURI)
     this.annotations.push(anno)
     return anno
@@ -116,7 +116,7 @@ class Task {
    *   The IIIF image region.
    */
   describe (value, tag, fragmentURI = null) {
-    const anno = new Annotation('describing', this.tileSource)
+    const anno = new Annotation('describing', this.imgInfoUri)
     anno.addDescription(value)
     anno.addTag(tag, fragmentURI = null)
     this.annotations.push(anno)
