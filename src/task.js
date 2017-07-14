@@ -7,7 +7,7 @@ class Task {
 
   constructor ({
     id,
-    imageInfoUri,
+    imgInfoUri,
     manifest = '',
     objective = '',
     guidance = '',
@@ -17,7 +17,7 @@ class Task {
     annotations = []
   }) {
     this.id = id
-    this.imageInfo = imageInfo
+    this.imgInfoUri = imgInfoUri
     this.manifest = manifest
     this.objective = objective
     this.guidance = guidance
@@ -25,6 +25,24 @@ class Task {
     this.form = form
     this.regions = regions
     this.annotations = annotations
+    this.imgInfo = this.fetchImageInfo(this.imgInfoUri)
+  }
+
+  /**
+   * Fetch the image info.
+   * @param {String} uri
+   *   The image info URI.
+   */
+  fetchImageInfo (uri) {
+    fetch(uri, {
+      method: 'get'
+    }).then((response) => {
+      return response.json()
+    }).then((data) => {
+      this.imgInfo = data
+    }).catch(function(err) {
+      throw Error('Could not retrieve image info')
+    });
   }
 
   /**
