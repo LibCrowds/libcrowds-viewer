@@ -338,7 +338,7 @@ export default {
     },
 
     /**
-     * Update the form for a task and add associated annotations.
+     * Update the form for a task and associated annotations.
      * @param {Task} task.
      *   The task.
      * @param {Object} form
@@ -408,8 +408,8 @@ export default {
      *   The tag ID.
      */
     deleteTag (task, id) {
-      task.deleteAnnotation(tag.id)
-      this.deleteOverlay(tag.id)
+      task.deleteAnnotation(id)
+      this.deleteOverlay(id)
     }
   },
 
