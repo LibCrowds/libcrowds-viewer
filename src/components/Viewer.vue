@@ -271,16 +271,16 @@ export default {
 
     /**
      * Configure the area selector for the main viewer.
+     *
+     * TODO: Lose this dependency!
      */
     configureSelector () {
-
       // Initialise the selector
       this.selector = this.viewer.selection({
         showConfirmDenyButtons: false,
         restrictToImage: true,
         returnPixelCoordinates: false
       })
-      this.selector.enable()
 
       // Add the confirm button
       new OpenSeadragon.Button({
@@ -396,7 +396,6 @@ export default {
                                                             vpRect.height)
       this.selector.rect = selectionRect
       this.selector.draw()
-      this.selector.enable()
       this.deleteTag(task, id)
       this.$emit('update', task)
     },
@@ -418,9 +417,11 @@ export default {
     currentTask: function () {
       // Open the current task image.
       this.viewer.open(this.currentTask.imgInfoUri)
-      // Initialise selector when in select mode.
+      // Enable selector when in select mode.
       if (this.mode === 'select') {
-        this.configureSelector()
+        this.selector.enable()
+      } else {
+        this.selector.disable()
       }
     }
   },
@@ -432,6 +433,7 @@ export default {
     this.attachControls()
     this.setupHandlers()
     this.highlightRegion()
+    this.configureSelector()
     this.setCurrentTask(this.tasks[0])
   }
 }
