@@ -70,9 +70,8 @@ export default {
     },
     handleResponse (obj) {
       const jsonStr = JSON.stringify(obj, null, 2)
-      const msg = `User input (also logged to console):\n\n${jsonStr}`
       console.log(jsonStr)
-      alert(msg)
+      alert('User input logged to console')
     }
   }
 }
