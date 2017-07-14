@@ -86,7 +86,7 @@ class Task {
    */
   addTag (value, fragmentURI = null) {
     const anno = new Annotation('tagging', this.tileSource)
-    anno.addTag(this.tag, fragmentURI = null)
+    anno.addTag(this.tag, fragmentURI)
     this.annotations.push(anno)
     return anno
   }
