@@ -86,7 +86,7 @@ class Task {
     anno.target.selector = {
       type: 'FragmentSelector',
       value: fragmentURI,
-      conformsTo: 'http://iiif.io/api/image/2.1/#region'
+      conformsTo: 'http://iiif.io/api/image'
     }
     anno.addBody({
       purpose: 'tagging',
