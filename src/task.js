@@ -42,7 +42,7 @@ class Task {
       this.imgInfo = data
     }).catch(function(err) {
       throw Error('Could not retrieve image info')
-    });
+    })
   }
 
   /**
