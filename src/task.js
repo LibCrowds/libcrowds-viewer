@@ -34,7 +34,7 @@ class Task {
    */
   getAnnotationsByMotivation (motivation) {
     const filteredAnnos = this.annotations.filter(function(anno) {
-      return anno.motivation = motivation
+      return anno.motivation === motivation
     })
 
     const annoList = []
