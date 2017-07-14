@@ -65,6 +65,34 @@ class Task {
   }
 
   /**
+   * Return an Annotation.
+   * @param {*} id
+   *   The Annotation ID.
+   */
+  getAnnotation (id) {
+    const filtered = this.annotations.filter(function(anno) {
+      return anno.id === id
+    })
+    const idx = this.annotations.indexOf(filtered[0])
+    return this.annotations[idx]
+  }
+
+  /**
+   * Delete an Annotation by ID.
+   * @param {String} id
+   *   The ID of the Annotation to delete.
+   */
+  deleteAnnotation (id) {
+    const filteredAnnos = this.annotations.filter(function(anno) {
+      return anno.id !== id
+    })
+    if (filteredAnnos.length === this.annotations.length) {
+      throw Error('No Annotation exists with that ID')
+    }
+    this.annotations = filteredAnnos
+  }
+
+  /**
    * Add a comment.
    * @param {String} text
    *   The comment value.
@@ -139,34 +167,6 @@ class Task {
     anno.addTag(tag, fragmentURI = null)
     this.annotations.push(anno)
     return anno
-  }
-
-  /**
-   * Return an Annotation.
-   * @param {*} id
-   *   The Annotation ID.
-   */
-  getAnnotation (id) {
-    const filtered = this.annotations.filter(function(anno) {
-      return anno.id === id
-    })
-    const idx = this.annotations.indexOf(filtered[0])
-    return this.annotations[idx]
-  }
-
-  /**
-   * Delete an Annotation by ID.
-   * @param {String} id
-   *   The ID of the Annotation to delete.
-   */
-  deleteAnnotation (id) {
-    const filteredAnnos = this.annotations.filter(function(anno) {
-      return anno.id !== id
-    })
-    if (filteredAnnos.length === this.annotations.length) {
-      throw Error('No Annotation exists with that ID')
-    }
-    this.annotations = filteredAnnos
   }
 }
 
