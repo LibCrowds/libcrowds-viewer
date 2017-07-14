@@ -8,7 +8,7 @@
     "form": {
       "model": {
         "title": "",
-        "date": "",
+        "date": null,
         "genre": []
       },
       "schema": {
@@ -54,7 +54,7 @@
     "form": {
       "model": {
         "title": "",
-        "date": "",
+        "date": null,
         "genre": []
       },
       "schema": {
@@ -100,7 +100,7 @@
     "form": {
       "model": {
         "title": "",
-        "date": "",
+        "date": null,
         "genre": []
       },
       "schema": {
