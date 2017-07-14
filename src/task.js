@@ -82,13 +82,17 @@ class Task {
    * @param {String} fragmentURI
    *   The IIIF image region.
    */
-  addTag (fragmentURI) {
+  addTag (fragmentURI = null) {
     const anno = new Annotation('tagging', this.tileSource)
-    anno.target.selector = {
-      type: 'FragmentSelector',
-      value: fragmentURI,
-      conformsTo: 'http://iiif.io/api/image'
+
+    if (fragmentURI) {
+      anno.target.selector = {
+        type: 'FragmentSelector',
+        value: fragmentURI,
+        conformsTo: 'http://iiif.io/api/image'
+      }
     }
+
     anno.addBody({
       purpose: 'tagging',
       type: 'TextualBody',
@@ -97,6 +101,8 @@ class Task {
     this.annotations.push(anno)
     return anno
   }
+
+  addDescription
 
   /**
    * Delete an Annotation by ID.
