@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import OpenSeadragon from 'openseadragon'
 import Task from '@/task'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/times-circle'
@@ -39,8 +38,8 @@ import highlightOverlay from '@/utils/highlightOverlay'
 
 export default {
   props: {
-    tags: {
-      type: Array,
+    task: {
+      type: Task,
       required: true
     }
   },
@@ -50,13 +49,19 @@ export default {
     Sidebar
   },
 
+  computed: {
+    tags: function () {
+      return this.task.getAnnotationsByMotivation('tagging')
+    }
+  },
+
   methods: {
     highlightOverlay,
     editTag (tag) {
-      this.$emit('edit', tag)
+      this.$emit('edit', this.task, tag)
     },
     deleteTag (tag) {
-      this.$emit('delete', tag)
+      this.$emit('delete', this.task, tag)
     }
   }
 }

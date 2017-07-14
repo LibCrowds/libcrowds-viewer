@@ -45,8 +45,8 @@
         </task-sidebar>
 
         <select-sidebar
-          v-if="mode === 'select'"
-          :tags="tags"
+          v-if="currentTask && mode === 'select'"
+          :task="currentTask"
           @edit="editTag"
           @delete="deleteTag">
         </select-sidebar>
@@ -205,12 +205,6 @@ export default {
       return this.taskOpts.map(function (opts) {
         return new Task(opts)
       })
-    },
-    tags: function () {
-      if (!this.currentTask) {
-        return []
-      }
-      return this.currentTask.getAnnotationsByMotivation('tagging')
     }
   },
 
@@ -352,10 +346,12 @@ export default {
 
     /**
      * Remove a tag and enable the selector in the same location.
+     * @param {Task} task
+     *   The task that the tag belongs to.
      * @param {Annotation} tag
-     *   The tag to edit
+     *   The tag to edit.
      */
-    editTag (tag) {
+    editTag (task, tag) {
       const vp = this.viewer.viewport
       const imgRect = extractRectFromImageUri(tag.target.selector.value)
       const vpRect = vp.imageToViewportRectangle(imgRect)
@@ -366,17 +362,19 @@ export default {
       this.selector.rect = selectionRect
       this.selector.draw()
       this.selector.enable()
-      this.deleteTag(tag)
-      this.$emit('update', this.currentTask)
+      this.deleteTag(task, tag)
+      this.$emit('update', task)
     },
 
     /**
      * Delete a tag.
+     * @param {Task} task
+     *   The task that the tag belongs to.
      * @param {Annotation} tag
      *   The tag to delete
      */
-    deleteTag (tag) {
-      this.currentTask.deleteAnnotation(tag.id)
+    deleteTag (task, tag) {
+      task.deleteAnnotation(tag.id)
       this.deleteOverlay(tag.id)
     }
   },
