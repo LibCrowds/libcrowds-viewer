@@ -97,7 +97,7 @@ class Task {
       format: 'text/plain'
     })
 
-    if (tag)
+    if (tag) {
       this.addTag(tag, fragmentURI)
     }
   }
