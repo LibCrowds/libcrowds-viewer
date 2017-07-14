@@ -52,14 +52,14 @@ class Task {
    *   The comment value.
    */
   _addComment (text) {
-    let comment = new Annotation('commenting', this.tileSource)
-    comment.addBody({
+    let anno = new Annotation('commenting', this.tileSource)
+    anno.addBody({
       type: 'TextualBody',
       value: text,
       purpose: 'commenting',
       format: 'text/plain'
     })
-    this.annotations.push(comment)
+    this.annotations.push(anno)
   }
 
   /**
