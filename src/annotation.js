@@ -90,7 +90,6 @@ class Annotation {
    *   The IIIF image region.
    */
   addTag (tag, fragmentURI = null) {
-    console.log(tag, fragmentURI)
     if (fragmentURI) {
       this.target.selector = {
         type: 'FragmentSelector',
