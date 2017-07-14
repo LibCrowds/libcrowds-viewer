@@ -82,7 +82,7 @@ class Task {
    * @param {String} fragmentURI
    *   The IIIF image region.
    */
-  addTag (fragmentURI = null) {
+  addTag (tag, fragmentURI = null) {
     const anno = new Annotation('describing', this.tileSource)
 
     if (fragmentURI) {
@@ -94,15 +94,27 @@ class Task {
     }
 
     anno.addBody({
-      purpose: 'tagging',
       type: 'TextualBody',
-      value: this.tag
+      purpose: 'tagging',
+      value: tag
     })
+
     this.annotations.push(anno)
     return anno
   }
 
-  addDescription()
+  describe(description, tag = null, fragmentURI = null) {
+    anno.addBody({
+      type: 'TextualBody',
+      purpose: 'describing',
+      value: description,
+      format: 'text/plain'
+    })
+
+    if (tag)
+      this.addTag(tag, fragmentURI)
+    }
+  }
 
   /**
    * Delete an Annotation by ID.
