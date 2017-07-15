@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Task from '@/task'
 import Modal from '@/components/Modal'
 
@@ -81,7 +80,11 @@ export default {
         return
       }
 
-      axios.get(this.task.manifestUri).then((r) => {
+      fetch(this.task.manifestUri, {
+        method: 'get'
+      }).then((response) => {
+        return response.json()
+      }).then((data) => {
         this.metadata = r.data.metadata.map((item) => {
           if (typeof item.value === 'object') {
             item.value = this.getValueInLang(item.value)
@@ -91,6 +94,8 @@ export default {
         this.logo = r.data.logo
         this.attribution = r.data.attribution
         this.license = r.data.license
+      }).catch(function(err) {
+        throw Error('Could not retrieve the manifest')
       })
     },
 
