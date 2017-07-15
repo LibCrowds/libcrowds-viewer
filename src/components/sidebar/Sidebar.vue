@@ -4,7 +4,7 @@
       <h4>{{ title }}</h4>
       <span
         :class="toggleClassObj"
-        @click="toggleCollapse">
+        @click="toggleContentCollapse">
         &#x25B2;
       </span>
     </div>
@@ -19,13 +19,13 @@
       <button
         v-if="showNote"
         class="btn btn-block"
-        @click="toggleCollapseNote">
+        @click="toggleeNoteCollapse">
         Add a note
       </button>
 
       <transition name="fade-height"
         v-show="showNote"
-        v-if="!collapseNote">
+        v-if="!noteCollapsed">
         <textarea
           ref="note"
           rows="3"
@@ -52,7 +52,7 @@ export default {
   data: function () {
     return {
       contentCollapsed: false,
-      collapseNote: true
+      noteCollapsed: true
     }
   },
 
@@ -85,14 +85,19 @@ export default {
   },
 
   methods: {
-    toggleCollapse () {
+    /**
+     * Toggle the collapsing of the content.
+     */
+
+    toggleContentCollapse () {
       this.contentCollapsed = !this.contentCollapsed
     },
+
     /**
      * Toggle the collapsing of the note input.
      */
-    toggleCollapseNote () {
-      this.collapseNote = !this.collapseNote
+    toggleeNoteCollapse () {
+      this.noteCollapsed = !this.noteCollapsed
     },
 
     /**
