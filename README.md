@@ -8,7 +8,7 @@ Originally designed for the LibCrowds crowdsourcing platform, this Vue.js
 component presents a zoomable image and provides options for users to mark
 and transcribe areas of that image.
 
-The input is an array of options used to configure tasks that are presented to
+An array of options is used to configure tasks that are presented to
 the user. The output from these tasks is serialised according to the
 [W3C Web Annotations spec](https://www.w3.org/annotation/) and returned via
 events.
@@ -34,29 +34,29 @@ You can now use the component like this:
 
 ```vue
 <libcrowds-viewer
-  :taskOpts="[{ mode: 'select', imgInfoUri: 'http://www.example.org/image-service/abcd1234/info.json' }]">
+  :task-opts="[{ mode: 'select', imgInfoUri: 'http://www.example.org/image-service/abcd1234/info.json' }]">
 </libcrowds-viewer>
 ```
 
 ### Properties
 
-| Property                | Type          | Default              | Description                                      |
-|-------------------------|---------------|----------------------|--------------------------------------------------|
-| taskOpts                | String        | null                 | An array of task options                         |
-| confirm-before-unload   | Boolean       | false                | Confirm before leaving the page                  |
-| show-help               | Boolean       | true                 | Include the help modal                           |
-| show-info               | Boolean       | true                 | Include the metadata modal                       |
-| show-note               | Boolean       | false                | Include a notes input field                      |
-| show-browse             | Boolean       | true                 | Include the browse sidebar                       |
-| show-form-errors        | Boolean       | true                 | Show form errors on submit                       |
-| pan-by                  | Number        | 0.1                  | Multiplier by which to pan                       |
-| lang                    | String        | 'en'                 | Language for manifest metadata (where available) |
+| Property                | Type          | Default | Description                                      |
+|-------------------------|---------------|---------|--------------------------------------------------|
+| task-opts               | String        | null    | An array of task options                         |
+| pan-by                  | Number        | 0.1     | Multiplier by which to pan                       |
+| lang                    | String        | 'en'    | Language for manifest metadata (where available) |
+| confirm-before-unload   | Boolean       | false   | Confirm before leaving the page                  |
+| show-help               | Boolean       | true    | Include the help modal                           |
+| show-info               | Boolean       | true    | Include the metadata modal                       |
+| show-note               | Boolean       | false   | Include the note input                           |
+| show-browse             | Boolean       | true    | Include the browse sidebar                       |
+| show-form-errors        | Boolean       | true    | Show form errors on submit                       |
 
 ### Events
 
 | Event         | Arguments     | Description          |
 |---------------|---------------|----------------------|
-| submit        | annotations   | User input confirmed |
+| submit        | task          | User input confirmed |
 | update        | annotation    | Annotation updated   |
 | create        | annotation    | Annotation created   |
 | delete        | annotation    | Annotation deleted   |
@@ -82,14 +82,15 @@ which are created from the task options passed to the viewer.
 
 ## Modes
 
-LibCrowds Viewer currently provides the following modes.
+LibCrowds Viewer currently provides the following modes, each configurable via
+the task options passed to the viewer.
 
 ### Select Mode
 
 In select mode users can use their mouse (or finger) to tag areas of the image,
 potentially preparing them for subsequent transcription.
 
-Note that the `tag` property is required in `select` mode.
+Note that the `tag` property is required when in `select` mode.
 
 #### Full example
 
@@ -109,10 +110,10 @@ Note that the `tag` property is required in `select` mode.
 
 In transcribe mode a form schema is passed to the viewer along with optional
 coordinates to highlight regions of the image (such as those returned from a
-previous selection task), allowing for transcription of specific details found
+previous selection task) allowing for transcription of specific details found
 in the image.
 
-Note that the `form` property is required in `transcribe` mode.
+Note that the `form` property is required when in `transcribe` mode.
 
 #### Full example
 
