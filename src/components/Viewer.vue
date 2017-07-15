@@ -52,7 +52,7 @@
         </select-sidebar>
 
         <transcribe-sidebar
-          v-if="currentTask && currentTask.mode === 'select'"
+          v-if="currentTask && currentTask.mode === 'transcribe'"
           :task="currentTask"
           @update="updateForm">
         </transcribe-sidebar>
