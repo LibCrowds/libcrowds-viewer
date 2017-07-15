@@ -31,7 +31,7 @@
       <help-modal
         v-if="showHelp"
         :id="helpModalId"
-        :mode="mode">
+        :mode="currentTask.mode">
       </help-modal>
 
       <div id="lv-sidebars">
