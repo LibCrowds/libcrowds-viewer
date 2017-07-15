@@ -85,15 +85,15 @@ export default {
       }).then((response) => {
         return response.json()
       }).then((data) => {
-        this.metadata = r.data.metadata.map((item) => {
+        this.metadata = data.metadata.map((item) => {
           if (typeof item.value === 'object') {
             item.value = this.getValueInLang(item.value)
           }
           return item
         })
-        this.logo = r.data.logo
-        this.attribution = r.data.attribution
-        this.license = r.data.license
+        this.logo = data.logo
+        this.attribution = data.attribution
+        this.license = data.license
       }).catch(function(err) {
         throw Error('Could not retrieve the manifest')
       })
