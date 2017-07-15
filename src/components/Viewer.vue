@@ -34,24 +34,22 @@
         :mode="currentTask.mode">
       </help-modal>
 
-      <sidebar id="lv-sidebar" title="Task">
-        <task-sidebar-item
-          v-if="currentTask"
-          :task="currentTask"
-          :showNote="showNote"
-          @noteupdated="updateNote"
-          @submit="submitTask">
-        </task-sidebar-item>
+      <sidebar id="lv-sidebar"
+        v-if="currentTask"
+        :task="currentTask"
+        :showNote="showNote"
+        @noteupdated="updateNote"
+        @submit="submitTask">
 
         <select-sidebar-item
-          v-if="currentTask && currentTask.mode === 'select'"
+          v-if="currentTask.mode === 'select'"
           :task="currentTask"
           @edit="editTag"
           @delete="deleteTag">
         </select-sidebar-item>
 
         <transcribe-sidebar-item
-          v-if="currentTask && currentTask.mode === 'transcribe'"
+          v-if="currentTask.mode === 'transcribe'"
           :task="currentTask"
           @update="updateForm">
         </transcribe-sidebar-item>
@@ -61,6 +59,7 @@
           :tasks="tasks"
           @taskselected="setCurrentTask">
         </browse-sidebar-item>
+
       </sidebar>
 
       <div
@@ -98,7 +97,6 @@ import Sidebar from '@/components/sidebar/Sidebar'
 import SelectSidebarItem from '@/components/sidebar/items/Select'
 import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
 import BrowseSidebarItem from '@/components/sidebar/items/Browse'
-import TaskSidebarItem from '@/components/sidebar/items/Task'
 import Task from '@/task'
 import drawOverlay from '@/utils/drawOverlay'
 import getImageUri from '@/utils/getImageUri'
@@ -183,7 +181,6 @@ export default {
     ViewerControls,
     PanControls,
     Sidebar,
-    TaskSidebarItem,
     SelectSidebarItem,
     TranscribeSidebarItem,
     BrowseSidebarItem,
