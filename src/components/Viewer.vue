@@ -45,14 +45,14 @@
         </task-sidebar>
 
         <select-sidebar
-          v-if="currentTask && mode === 'select'"
+          v-if="currentTask && currentTask.mode === 'select'"
           :task="currentTask"
           @edit="editTag"
           @delete="deleteTag">
         </select-sidebar>
 
         <transcribe-sidebar
-          v-if="currentTask && mode === 'transcribe'"
+          v-if="currentTask && currentTask.mode === 'select'"
           :task="currentTask"
           @update="updateForm">
         </transcribe-sidebar>
@@ -137,14 +137,6 @@ export default {
   },
 
   props: {
-    mode: {
-      type: String,
-      required: true,
-      validator: value => {
-        const validModes = ['select', 'transcribe']
-        return validModes.indexOf(value) > -1
-      }
-    },
     taskOpts: {
       type: Array,
       required: true,
@@ -358,7 +350,7 @@ export default {
      */
     submitTask (task) {
       // Show form errors if enabled and in transcribe mode
-      if (this.showFormErrors && this.mode === 'transcribe') {
+      if (this.showFormErrors && this.currentTask.mode === 'transcribe') {
         const formGroups = document.querySelector('.form-group')
         if (formGroups.length) {
           formGroups.classList.add('show-errors')
@@ -418,7 +410,7 @@ export default {
       // Open the current task image.
       this.viewer.open(this.currentTask.imgInfoUri)
       // Enable selector when in select mode.
-      if (this.mode === 'select') {
+      if (this.currentTask.mode === 'select') {
         this.selector.enable()
       } else {
         this.selector.disable()
