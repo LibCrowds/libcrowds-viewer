@@ -19,7 +19,6 @@
 
     <div id="viewer-container" v-else>
       <libcrowds-viewer
-        show-note
         :task-opts="taskOpts"
         @submit="handleResponse">
       </libcrowds-viewer>

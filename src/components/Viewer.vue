@@ -158,7 +158,7 @@ export default {
     },
     showNote: {
       type: Boolean,
-      default: false
+      default: true
     },
     showBrowse: {
       type: Boolean,
