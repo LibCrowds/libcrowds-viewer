@@ -103,6 +103,10 @@ export default {
     margin: 0;
   }
 
+  button {
+    margin-top: 0.6rem;
+  }
+
   textarea {
     margin-top: 0.6rem;
   }
