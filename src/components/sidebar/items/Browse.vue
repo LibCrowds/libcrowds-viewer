@@ -2,18 +2,20 @@
   <div id="lv-sidebar-browse-item">
     <h4>Browse</h4>
 
-    <div id="strip"></div>
+    <div class="container">
+      <div id="strip"></div>
 
-    <button
-      class="btn btn-hud"
-      id="lv-browse-previous">
-      <icon name="chevron-left"></icon>
-    </button>
-    <button
-      class="btn btn-hud"
-      id="lv-browse-next">
-      <icon name="chevron-right"></icon>
-    </button>
+      <button
+        class="btn btn-hud"
+        id="lv-browse-previous">
+        <icon name="chevron-left"></icon>
+      </button>
+      <button
+        class="btn btn-hud"
+        id="lv-browse-next">
+        <icon name="chevron-right"></icon>
+      </button>
+    </div>
 
   </div>
 </template>
@@ -95,31 +97,36 @@ export default {
   position: relative;
   height: 250px;
 
-  #strip {
+  .container {
     height: 100%;
+    position: relative;
   }
+}
 
-  #lv-browse-next,
-  #lv-browse-previous {
-    margin: 0;
-    position: absolute !important;
-    top: 45%;
+#strip {
+  height: 100%;
+}
+
+#lv-browse-next,
+#lv-browse-previous {
+  margin: 0;
+  position: absolute !important;
+  top: 45%;
+}
+
+#lv-browse-previous {
+  left: 0;
+
+  svg {
+    margin-right: 2px;
   }
+}
 
-  #lv-browse-previous {
-    left: 0;
+#lv-browse-next {
+  right: 0;
 
-    svg {
-      margin-right: 2px;
-    }
-  }
-
-  #lv-browse-next {
-    right: 0;
-
-    svg {
-      margin-left: 2px;
-    }
+  svg {
+    margin-left: 2px;
   }
 }
 </style>
