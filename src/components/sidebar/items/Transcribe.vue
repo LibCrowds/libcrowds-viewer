@@ -1,20 +1,19 @@
 <template>
-  <div id="lv-transcribe-sidebar">
-    <sidebar title="Transcribe">
-      <vue-form-generator
-        :schema="task.form.schema"
-        :model="task.form.model"
-        :options="formOptions"
-        @validated="onValidated">
-      </vue-form-generator>
-    </sidebar>
+  <div id="lv-sidebar-transcribe-item">
+
+    <vue-form-generator
+      :schema="task.form.schema"
+      :model="task.form.model"
+      :options="formOptions"
+      @validated="onValidated">
+    </vue-form-generator>
+
   </div>
 </template>
 
 <script>
 import Task from '@/task'
 import VueFormGenerator from "vue-form-generator"
-import Sidebar from '@/components/Sidebar'
 
 export default {
   data: function () {
@@ -29,7 +28,6 @@ export default {
   },
 
   components: {
-    Sidebar,
     "vue-form-generator": VueFormGenerator.component
   },
 
@@ -50,10 +48,10 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../assets/style/settings';
-@import '../../assets/style/partials/forms';
+@import '../../../assets/style/settings';
+@import '../../../assets/style/partials/forms';
 
-#lv-transcribe-sidebar {
+#lv-sidebar-transcribe-item {
   fieldset {
     border: none;
     padding: 0;

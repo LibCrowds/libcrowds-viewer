@@ -1,21 +1,19 @@
 <template>
-  <div id="lv-browse-sidebar">
-    <sidebar title="Browse">
+  <div id="lv-sidebar-browse-item">
 
-      <div id="strip"></div>
+    <div id="strip"></div>
 
-      <button
-        class="btn btn-hud"
-        id="lv-browse-previous">
-        <icon name="chevron-left"></icon>
-      </button>
-      <button
-        class="btn btn-hud"
-        id="lv-browse-next">
-        <icon name="chevron-right"></icon>
-      </button>
+    <button
+      class="btn btn-hud"
+      id="lv-browse-previous">
+      <icon name="chevron-left"></icon>
+    </button>
+    <button
+      class="btn btn-hud"
+      id="lv-browse-next">
+      <icon name="chevron-right"></icon>
+    </button>
 
-    </sidebar>
   </div>
 </template>
 
@@ -24,12 +22,10 @@ import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
 import OpenSeadragon from 'openseadragon'
-import Sidebar from '@/components/Sidebar'
 
 export default {
   components: {
-    Icon,
-    Sidebar
+    Icon
   },
 
   props: {
@@ -91,9 +87,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../assets/style/partials/buttons';
+@import '../../../assets/style/partials/buttons';
 
-#lv-browse-sidebar {
+#lv-sidebar-browse-item {
   .lv-sidebar-content {
     position: relative;
     height: 250px;

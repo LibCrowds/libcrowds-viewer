@@ -1,52 +1,45 @@
 <template>
-  <div id="lv-task-sidebar">
-    <sidebar title="Task">
+  <div id="lv-sidebar-task-item">
 
-      <h4>{{ task.objective }}</h4>
-      <p>{{ task.guidance }}</p>
+    <h4>{{ task.objective }}</h4>
+    <p>{{ task.guidance }}</p>
 
-      <button
-        v-if="showNote"
-        class="btn btn-block"
-        @click="toggleCollapseNote">
-        Add a note
-      </button>
+    <button
+      v-if="showNote"
+      class="btn btn-block"
+      @click="toggleCollapseNote">
+      Add a note
+    </button>
 
-      <transition name="fade-height"
-        v-show="showNote"
-        v-if="!collapseNote">
-        <textarea
-          ref="note"
-          rows="3"
-          placeholder="Leave a note..."
-          v-model="note"
-          @input="updateNote">
-        </textarea>
-      </transition>
+    <transition name="fade-height"
+      v-show="showNote"
+      v-if="!collapseNote">
+      <textarea
+        ref="note"
+        rows="3"
+        placeholder="Leave a note..."
+        v-model="note"
+        @input="updateNote">
+      </textarea>
+    </transition>
 
-      <button
-        class="btn btn-block btn-green"
-        @click="submit">
-        Submit
-      </button>
+    <button
+      class="btn btn-block btn-green"
+      @click="submit">
+      Submit
+    </button>
 
-    </sidebar>
   </div>
 </template>
 
 <script>
 import Task from '@/task'
-import Sidebar from '@/components/Sidebar'
 
 export default {
   data: function () {
     return {
       collapseNote: true
     }
-  },
-
-  components: {
-    Sidebar
   },
 
   props: {
@@ -94,11 +87,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/style/settings';
-@import '../../assets/style/partials/buttons';
-@import '../../assets/style/partials/transitions';
+@import '../../../assets/style/settings';
+@import '../../../assets/style/partials/buttons';
+@import '../../../assets/style/partials/transitions';
 
-#lv-task-sidebar {
+#lv-sidebar-task-item {
   h4 {
     margin: 0;
   }
