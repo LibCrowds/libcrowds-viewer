@@ -6,6 +6,7 @@ import Annotation from '@/annotation'
 class Task {
 
   constructor ({
+    mode,
     id,
     imgInfoUri,
     manifestUri = '',
@@ -16,6 +17,7 @@ class Task {
     regions = [],
     annotations = []
   }) {
+    this.mode = mode
     this.id = id
     this.imgInfoUri = imgInfoUri
     this.manifestUri = manifestUri
