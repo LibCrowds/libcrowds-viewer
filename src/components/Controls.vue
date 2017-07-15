@@ -26,7 +26,6 @@ import 'vue-awesome/icons/chevron-up'
 import 'vue-awesome/icons/chevron-down'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
-import axios from 'axios'
 import Modal from './Modal'
 
 export default {
