@@ -92,6 +92,8 @@ export default {
 @import '../../../assets/style/partials/transitions';
 
 #lv-sidebar-task-item {
+  margin-bottom: 0.6rem;
+  
   h4 {
     margin: 0;
   }

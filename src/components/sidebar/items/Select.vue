@@ -1,6 +1,6 @@
 <template>
   <div id="lv-sidebar-select-item">
-
+    <h4>Selections</h4>
     <ul>
       <li
         v-for="tag in tags"
@@ -73,7 +73,7 @@ export default {
   ul {
     margin: 0;
     overflow-y: auto;
-    min-height: 100px;
+    height: 250px;
     max-height: 250px;
     list-style: none;
     padding: 0;
@@ -93,6 +93,10 @@ export default {
     justify-content: flex-end;
     display: flex;
     flex: 0 0 33.3333%;
+  }
+
+  h4 {
+    margin-bottom: 0.6em;
   }
 
   button {

@@ -449,12 +449,12 @@ export default {
 }
 
 #lv-sidebar {
-  position: fixed;
+  position: absolute;
   z-index: 2;
+  top: 0;
   right: 0;
   width: 35%;
   margin: 0.8rem;
-  overflow: hidden;
   max-width: 350px;
 }
 

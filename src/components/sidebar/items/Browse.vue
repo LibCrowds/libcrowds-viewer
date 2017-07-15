@@ -1,5 +1,6 @@
 <template>
   <div id="lv-sidebar-browse-item">
+    <h4>Browse</h4>
 
     <div id="strip"></div>
 
@@ -90,10 +91,9 @@ export default {
 @import '../../../assets/style/partials/buttons';
 
 #lv-sidebar-browse-item {
-  .lv-sidebar-content {
-    position: relative;
-    height: 250px;
-  }
+  margin-top: 1rem;
+  position: relative;
+  height: 250px;
 
   #strip {
     height: 100%;
@@ -107,7 +107,7 @@ export default {
   }
 
   #lv-browse-previous {
-    left: 1em;
+    left: 0;
 
     svg {
       margin-right: 2px;
@@ -115,7 +115,7 @@ export default {
   }
 
   #lv-browse-next {
-    right: 1em;
+    right: 0;
 
     svg {
       margin-left: 2px;

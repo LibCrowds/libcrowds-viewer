@@ -50,8 +50,8 @@ export default {
 .lv-sidebar {
   font-size: 14px;
   color: #FFFFFF;
-  overflow-y: auto;
-  max-height: 100%;
+  overflow-y: hidden;
+  max-height: calc(100vh - 2rem);
   border: 2px solid rgb(85, 85, 85);
   background-color: rgba(0, 0, 0, 0.75);
   margin: 1rem;
@@ -76,7 +76,10 @@ export default {
   }
 
   .lv-sidebar-content {
+    max-height: 80vh;
+    position: relative;
     padding: 0.6em;
+    overflow-y: auto;
   }
 
   .toggle {
