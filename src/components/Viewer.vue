@@ -29,7 +29,7 @@
       </metadata-modal>
 
       <help-modal
-        v-if="showHelp"
+        v-if="currentTask && showHelp"
         :id="helpModalId"
         :mode="currentTask.mode">
       </help-modal>
