@@ -1,16 +1,16 @@
 <template>
   <div id="app">
 
-    <div class="container" v-show="page === 'home'">
+    <div id="home-container" v-if="!showViewer">
       <h1>LibCrowds Viewer</h1>
       <p class="lead">
         IIIF-compatible image viewer Vue component.
       </p>
       <div>
-        <button @click="changePage('select')">
+        <button @click="setViewerMode('select')">
           Select Mode
         </button>
-        <button @click="changePage('transcribe')">
+        <button @click="setViewerMode('transcribe')">
           Transcribe Mode
         </button>
       </div>
@@ -20,9 +20,14 @@
       </a>
     </div>
 
-    <select-viewer v-show="page === 'select'"></select-viewer>
-
-    <transcribe-viewer v-show="page === 'transcribe'"></transcribe-viewer>
+    <div id="viewer-container" v-else>
+      <libcrowds-viewer
+        show-note
+        :mode="mode"
+        :taskOpts="taskOpts"
+        @submit="handleResponse">
+      </libcrowds-viewer>
+    </div>
 
   </div>
 </template>
@@ -30,13 +35,16 @@
 <script>
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/github'
-import SelectViewer from './components/Select'
-import TranscribeViewer from './components/Transcribe'
+import selectTasks from './data/select-tasks'
+import transcribeTasks from './data/transcribe-tasks'
 
 export default {
   data: function () {
     return {
-      page: 'home'
+      page: 'home',
+      mode: '',
+      taskOpts: [],
+      showViewer: false
     }
   },
 
@@ -47,21 +55,30 @@ export default {
   },
 
   components: {
-    Icon,
-    SelectViewer,
-    TranscribeViewer
+    Icon
   },
 
   methods: {
-    changePage(page) {
-      this.page = page
+    setViewerMode(mode) {
+      if (mode === 'select') {
+        this.taskOpts = selectTasks
+      } else if (mode === 'transcribe') {
+        this.taskOpts = transcribeTasks
+      }
+      this.mode = mode
+      this.showViewer = true
+    },
+    handleResponse (obj) {
+      const jsonStr = JSON.stringify(obj, null, 2)
+      console.log(jsonStr)
+      alert('User input logged to console')
     }
   }
 }
 </script>
 
 <style lang="scss">
-.container {
+#home-container {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   background-color: #F8F8F8;
@@ -71,42 +88,47 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
 
-h1 {
-  margin: 0;
-  font-weight: 200;
-}
-
-p.lead {
-  font-weight: bold;
-  color: #5F5F5F;
-}
-
-button {
-  color: white;
-  background: #59ABE3;
-  padding: 12px 26px;
-  margin: 0.5rem;
-  letter-spacing: 0.8px;
-  font-size: 1.2rem;
-  border: none;
-}
-
-#doc-link {
-  display: flex;
-  align-items: center;
-  margin-top: 2em;
-  text-decoration: none;
-
-  svg {
-    margin-right: 5px;
+  h1 {
+    margin: 0;
+    font-weight: 200;
   }
 
-  .text {
-    font-size: 0.85rem;
+  p.lead {
+    font-weight: bold;
     color: #5F5F5F;
-    font-family: Arial, Helvetica, sans-serif;
   }
+
+  button {
+    color: white;
+    background: #59ABE3;
+    padding: 12px 26px;
+    margin: 0.5rem;
+    letter-spacing: 0.8px;
+    font-size: 1.2rem;
+    border: none;
+  }
+
+  #doc-link {
+    display: flex;
+    align-items: center;
+    margin-top: 2em;
+    text-decoration: none;
+
+    svg {
+      margin-right: 5px;
+    }
+
+    .text {
+      font-size: 0.85rem;
+      color: #5F5F5F;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  }
+}
+
+#viewer-container {
+  margin: 0;
+  height: 100vh;
 }
 </style>

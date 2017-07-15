@@ -3,21 +3,21 @@
     <sidebar title="Selections">
       <ul>
         <li
-          v-for="s in selections"
-          :key="s.id"
-          @mouseover="highlightSelection(s, true)"
-          @mouseleave="highlightSelection(s, false)">
+          v-for="tag in tags"
+          :key="tag.id"
+          @mouseover="highlightOverlay(tag.id, true)"
+          @mouseleave="highlightOverlay(tag.id, false)">
           <div class="thumbnail-container">
-            <img :src="getImageUri(s.imageRect)">
+            <img :src="tag.target.selector.value">
           </div>
           <div class="buttons">
             <span
-              @click="editSelection(viewer, s)"
+              @click="editTag(tag)"
               class="btn btn-control">
               <icon name="pencil"></icon>
             </span>
             <span
-              @click="deleteSelection(viewer, s)"
+              @click="deleteTag(tag)"
               class="btn btn-control">
               <icon name="times-circle"></icon>
             </span>
@@ -29,26 +29,17 @@
 </template>
 
 <script>
+import Task from '@/task'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/pencil'
 import Sidebar from '@/components/Sidebar'
-import { store } from '@/store'
-import editSelection from '@/utils/editSelection'
-import highlightSelection from '@/utils/highlightSelection'
-import deleteSelection from '@/utils/deleteSelection'
-import getImageUri from '@/utils/getImageUri'
+import highlightOverlay from '@/utils/highlightOverlay'
 
 export default {
-  data: function () {
-    return {
-      selections: []
-    }
-  },
-
   props: {
-    viewer: {
-      type: Object,
+    task: {
+      type: Task,
       required: true
     }
   },
@@ -58,17 +49,20 @@ export default {
     Sidebar
   },
 
-  methods: {
-    deleteSelection,
-    editSelection,
-    highlightSelection,
-    getImageUri
+  computed: {
+    tags: function () {
+      return this.task.getAnnotationsByMotivation('tagging')
+    }
   },
 
-  mounted () {
-    store.watch(store.getters.getSelections, selections => {
-      this.selections = selections
-    })
+  methods: {
+    highlightOverlay,
+    editTag (tag) {
+      this.$emit('edit', this.task, tag.id)
+    },
+    deleteTag (tag) {
+      this.$emit('delete', this.task, tag.id)
+    }
   }
 }
 </script>

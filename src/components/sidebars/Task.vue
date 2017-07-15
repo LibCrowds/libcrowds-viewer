@@ -1,29 +1,41 @@
 <template>
   <div id="lv-task-sidebar">
     <sidebar title="Task">
-      <h4>{{ objective }}</h4>
-      <p>{{ guidance }}</p>
-      <button class="btn" @click="toggleCollapseNote" v-if="showNote">
+
+      <h4>{{ task.objective }}</h4>
+      <p>{{ task.guidance }}</p>
+
+      <button
+        v-if="showNote"
+        class="btn btn-block"
+        @click="toggleCollapseNote">
         Add a note
       </button>
-      <div
+
+      <transition name="fade-height"
         v-show="showNote"
         v-if="!collapseNote">
         <textarea
+          ref="note"
           rows="3"
           placeholder="Leave a note..."
+          v-model="note"
           @input="updateNote">
         </textarea>
-      </div>
-      <button class="btn btn-green" @click="submit">
+      </transition>
+
+      <button
+        class="btn btn-block btn-green"
+        @click="submit">
         Submit
       </button>
+
     </sidebar>
   </div>
 </template>
 
 <script>
-import { store } from '@/store'
+import Task from '@/task'
 import Sidebar from '@/components/Sidebar'
 
 export default {
@@ -38,12 +50,8 @@ export default {
   },
 
   props: {
-    objective: {
-      type: String,
-      required: true
-    },
-    guidance: {
-      type: String,
+    task: {
+      type: Task,
       required: true
     },
     showNote: {
@@ -52,17 +60,34 @@ export default {
     }
   },
 
+  computed: {
+    note: function () {
+      const comments = this.task.getAnnotationsByMotivation('commenting')
+      return comments.length ? comments[0].body.value : ''
+    }
+  },
+
   methods: {
+
+    /**
+     * Toggle the collapsing of the note input.
+     */
     toggleCollapseNote () {
       this.collapseNote = !this.collapseNote
     },
+
+    /**
+     * Emit the noteupdated event with the note value.
+     */
     updateNote (evt) {
-      store.commit('SET_ITEM', { key: 'note', value: evt.target.value })
+      this.$emit('noteupdated', this.task, evt.target.value)
     },
+
+    /**
+     * Emit the submit event with the task.
+     */
     submit () {
-      const data = store.getters.getData
-      document.querySelector('.form-group').classList.add('show-errors')
-      this.$emit('submit', data)
+      this.$emit('submit', this.task)
     }
   }
 }
@@ -71,62 +96,15 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/style/settings';
 @import '../../assets/style/partials/buttons';
-@import '../../assets/style/partials/forms';
+@import '../../assets/style/partials/transitions';
 
 #lv-task-sidebar {
-  ul {
-    overflow-y: auto;
-    min-height: 100px;
-    max-height: 300px;
-    list-style: none;
-    padding: 0.8rem;
-    margin: 0;
-    border: 1px solid $gray;
-
-
-    li {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-content: center;
-
-      &:not(:last-child) {
-        margin-bottom: 0.75rem;
-      }
-    }
-  }
-
   h4 {
     margin: 0;
   }
 
-  .btn {
-    width: 100%;
-    display: block;
+  textarea {
     margin-top: 0.6rem;
-  }
-
-  svg {
-    margin-left: 5px;
-  }
-
-  button {
-    display: flex;
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  .slide-leave-active,
-  .slide-enter-active {
-    transition: 1s;
-  }
-  .slide-enter {
-    transform: translate3d(0, 100%, 0);
-    visibility: hidden;
-  }
-  .slide-leave-to {
-    transform: translate3d(0, -100%, 0);
-    visibility: visible;
   }
 }
 </style>

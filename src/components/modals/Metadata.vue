@@ -1,44 +1,40 @@
 <template>
   <div id="lv-metadata-modal">
-    <modal
-      :id="id"
-      title="Metadata">
-      <ul v-for="m in manifestData.metadata" :key="m.label">
-        <li>
-          <strong>{{ m.label }}:</strong>
-          &nbsp;
-          <span v-html="m.value"></span></li>
-      </ul>
-      <div id="rights">
-        <img :src="manifestData.logo">
-        <p v-html="manifestData.attribution"></p>
-        <p v-html="manifestData.license"></p>
-     </div>
+    <modal :id="id" title="Metadata">
+
+      <span v-if="hasData">
+        <ul v-for="item in metadata" :key="item.label">
+          <li>
+            <strong>{{ item.label }}:</strong>
+            <span v-html="item.value"></span></li>
+        </ul>
+        <div class="center">
+          <img v-if="logo" :src="logo">
+          <p v-if="attribution" v-html="attribution"></p>
+          <a :href="license" v-if="license" v-html="license"></a>
+      </div>
+    </span>
+
+    <span v-else>
+      <p class="center">No metadata loaded</p>
+    </span>
+
     </modal>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import Task from '@/task'
 import Modal from '@/components/Modal'
 
 export default {
   data: function () {
     return {
-      manifestData: {}
-    }
-  },
-
-  methods: {
-    fetchManifest () {
-      const url = `${this.scheme}://` +
-                  `${this.server}/` +
-                  `${this.presentationApiPrefix}/` +
-                  `${this.manifestId}/` +
-                  `manifest.json`
-      axios.get(url).then((r) => {
-        this.manifestData = r.data
-      })
+      metadata: [],
+      logo: null,
+      attribution: null,
+      license: null
     }
   },
 
@@ -47,26 +43,76 @@ export default {
       type: String,
       requried: true
     },
-    scheme: {
-      type: String,
+    task: {
+      type: Task,
       required: true
     },
-    server: {
+    lang: {
       type: String,
-      required: true
-    },
-    presentationApiPrefix: {
-      type: String,
-      required: true
-    },
-    manifestId: {
-      type: String,
-      required: true
+      default: 'en'
     }
   },
 
   components: {
     Modal
+  },
+
+  computed: {
+    hasData: function () {
+      return (this.metadata.length > 0 ||
+              this.logo !== null ||
+              this.attribution !== null ||
+              this.license !== null)
+    }
+  },
+
+  methods: {
+
+    /**
+     * Fetch the manifest and load data.
+     */
+    fetchManifest () {
+      this.metadata = []
+      this.logo = null
+      this.attribution = null
+      this.license = null
+
+      if (!this.task.manifestUri.length) {
+        return
+      }
+
+      axios.get(this.task.manifestUri).then((r) => {
+        this.metadata = r.data.metadata.map((item) => {
+          if (typeof item.value === 'object') {
+            item.value = this.getValueInLang(item.value)
+          }
+          return item
+        })
+        this.logo = r.data.logo
+        this.attribution = r.data.attribution
+        this.license = r.data.license
+      })
+    },
+
+    /**
+     * Return a metadata value in the chosen language, if available.
+     */
+    getValueInLang (values) {
+      const filtered = values.filter((value) => {
+        return value['@language'] === this.lang
+      })
+      return filtered.length ? filtered[0]['@value'] : ''
+    }
+  },
+
+  watch: {
+
+    /**
+     * Update the manifest when the task changes.
+     */
+    task: function () {
+      this.fetchManifest()
+    }
   },
 
   created () {
@@ -82,7 +128,7 @@ export default {
     list-style: none;
   }
 
-  #rights {
+  .center {
     text-align: center;
     margin: 2rem;
   }

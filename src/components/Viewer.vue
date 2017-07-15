@@ -5,13 +5,13 @@
 
       <viewer-controls
         :showHelp="showHelp"
-        :showInfo="manifestId.length > 0"
-        :zoomInButton="normalizedViewerOpts.zoomInButton"
-        :zoomOutButton="normalizedViewerOpts.zoomOutButton"
-        :homeButton="normalizedViewerOpts.homeButton"
-        :fullPageButton="normalizedViewerOpts.fullPageButton"
-        :helpButton="normalizedViewerOpts.helpButton"
-        :infoButton="normalizedViewerOpts.infoButton"
+        :showInfo="showInfo"
+        :zoomInButton="viewerOpts.zoomInButton"
+        :zoomOutButton="viewerOpts.zoomOutButton"
+        :homeButton="viewerOpts.homeButton"
+        :fullPageButton="viewerOpts.fullPageButton"
+        :helpButton="viewerOpts.helpButton"
+        :infoButton="viewerOpts.infoButton"
         @helpclicked="handleHelpControlClick"
         @infoclicked="handleInfoControlClick">
       </viewer-controls>
@@ -22,12 +22,10 @@
       </pan-controls>
 
       <metadata-modal
-        v-if="manifestId"
-        :id="metadataModalId"
-        :scheme="scheme"
-        :server="server"
-        :presentation-api-prefix="presentationApiPrefix"
-        :manifestId="manifestId">
+        v-if="currentTask"
+        :task="currentTask"
+        :lang="lang"
+        :id="metadataModalId">
       </metadata-modal>
 
       <help-modal
@@ -39,22 +37,31 @@
       <div id="lv-sidebars">
 
         <task-sidebar
-          :objective="objective"
-          :guidance="guidance"
+          v-if="currentTask"
+          :task="currentTask"
           :showNote="showNote"
-          @submit="submit">
+          @noteupdated="updateNote"
+          @submit="submitTask">
         </task-sidebar>
 
         <select-sidebar
-          v-if="mode === 'select'"
-          :viewer="viewer">
+          v-if="currentTask && mode === 'select'"
+          :task="currentTask"
+          @edit="editTag"
+          @delete="deleteTag">
         </select-sidebar>
 
         <transcribe-sidebar
-          v-else-if="mode === 'transcribe'"
-          :model="formModel"
-          :schema="formSchema">
+          v-if="currentTask && mode === 'transcribe'"
+          :task="currentTask"
+          @update="updateForm">
         </transcribe-sidebar>
+
+        <browse-sidebar
+          v-if="showBrowse"
+          :tasks="tasks"
+          @taskselected="setCurrentTask">
+        </browse-sidebar>
 
       </div>
 
@@ -74,7 +81,7 @@
     </div>
 
     <!-- Render viewer after all other components -->
-    <div id="lv-viewer-container" ref="viewer"></div>
+    <div :id="viewerOpts.id"></div>
 
   </div>
 </template>
@@ -91,102 +98,20 @@ import ViewerControls from '@/components/controls/Viewer'
 import PanControls from '@/components/controls/Pan'
 import SelectSidebar from '@/components/sidebars/Select'
 import TranscribeSidebar from '@/components/sidebars/Transcribe'
+import BrowseSidebar from '@/components/sidebars/Browse'
 import TaskSidebar from '@/components/sidebars/Task'
-import { store } from '@/store'
-import addSelection from '@/utils/addSelection'
+import Task from '@/task'
 import drawOverlay from '@/utils/drawOverlay'
+import getImageUri from '@/utils/getImageUri'
+import extractRectFromImageUri from '@/utils/extractRectFromImageUri'
 
 export default {
   data: function () {
     return {
       viewer: {},
-      metadataModalId: 'lc-metadata-modal',
-      helpModalId: 'lc-help-modal'
-    }
-  },
-
-  props: {
-    viewerOpts: Object,
-    mode: {
-      type: String,
-      default: 'selection'
-    },
-    objective: {
-      type: String,
-      default: null
-    },
-    guidance: {
-      type: String,
-      default: null
-    },
-    scheme: {
-      type: String,
-      default: 'http'
-    },
-    server: {
-      type: String,
-      default: null
-    },
-    imageApiPrefix: {
-      type: String,
-      default: null
-    },
-    presentationApiPrefix: {
-      type: String,
-      default: null
-    },
-    imageId: {
-      type: String,
-      default: null
-    },
-    manifestId: {
-      type: String,
-      default: null
-    },
-    confirmBeforeUnload : {
-      type: Boolean,
-      default: false
-    },
-    showHelp: {
-      type: Boolean,
-      default: true
-    },
-    showNote: {
-      type: Boolean,
-      default: false
-    },
-    panBy: {
-      type: Number,
-      default: 0.1
-    },
-    formModel: {
-      type: Object,
-      default: () => {}
-    },
-    formSchema: {
-      type: Object,
-      default: () => {}
-    },
-    region: {
-      type: Object,
-      default: () => {}
-    }
-  },
-
-  components: {
-    MetadataModal,
-    HelpModal,
-    ViewerControls,
-    PanControls,
-    SelectSidebar,
-    TranscribeSidebar,
-    TaskSidebar,
-    Icon
-  },
-
-  computed: {
-    normalizedViewerOpts: function () {
-      const defaultOpts = {
+      selector: {},
+      viewerOpts: {
+        id: 'lv-viewer-container',
         zoomInButton: 'zoom-in',
         zoomOutButton: 'zoom-out',
         homeButton: 'reset-zoom',
@@ -204,48 +129,125 @@ export default {
         gestureSettingsPen: {
           dblClickToZoom: false
         }
+      },
+      metadataModalId: 'lv-metadata-modal',
+      helpModalId: 'lv-help-modal',
+      currentTask: null
+    }
+  },
+
+  props: {
+    mode: {
+      type: String,
+      required: true,
+      validator: value => {
+        const validModes = ['select', 'transcribe']
+        return validModes.indexOf(value) > -1
       }
-      return Object.assign(defaultOpts, this.viewerOpts)
     },
-    imgSource: function () {
-      const imgSource = `${this.scheme}://` +
-                        `${this.server}/` +
-                        `${this.imageApiPrefix}/` +
-                        `${this.imageId}`
-      store.commit('SET_ITEM', { key: 'imgSource', value: imgSource })
-      return imgSource
+    taskOpts: {
+      type: Array,
+      required: true,
+      validator: value => {
+        return value.length
+      }
+    },
+    confirmBeforeUnload : {
+      type: Boolean,
+      default: false
+    },
+    showHelp: {
+      type: Boolean,
+      default: true
+    },
+    showInfo: {
+      type: Boolean,
+      default: true
+    },
+    showNote: {
+      type: Boolean,
+      default: false
+    },
+    showBrowse: {
+      type: Boolean,
+      default: true
+    },
+    showFormErrors: {
+      type: Boolean,
+      default: true
+    },
+    panBy: {
+      type: Number,
+      default: 0.1
+    },
+    lang: {
+      type: String,
+      default: 'en'
+    }
+  },
+
+  components: {
+    MetadataModal,
+    HelpModal,
+    ViewerControls,
+    PanControls,
+    SelectSidebar,
+    TranscribeSidebar,
+    TaskSidebar,
+    BrowseSidebar,
+    Icon
+  },
+
+  computed: {
+    tasks: function () {
+      return this.taskOpts.map(function (opts) {
+        return new Task(opts)
+      })
     }
   },
 
   methods: {
-    loadImage () {
-      this.viewer.open({
-        type: 'image',
-        tileSource: `${this.imgSource}/info.json`,
-        buildPyramid: false
-      })
-    },
+
+    /**
+     * Attach controls to the viewer container for fullscreen mode.
+     */
     attachControls () {
-      // TODO: this works for fullscreen controls but should possibly use
+      // TODO: this works but should possibly use
       // https://openseadragon.github.io/docs/OpenSeadragon.Control.html
       this.viewer.container.appendChild(this.$refs.hud)
     },
+
+    /**
+     * Emit the show model event when help control clicked.
+     */
     handleHelpControlClick () {
       this.$root.$emit('show::modal', this.helpModalId)
     },
+
+    /**
+     * Emit the show model event when info control clicked.
+     */
     handleInfoControlClick () {
       this.$root.$emit('show::modal', this.metadataModalId)
     },
-    setupHandlers () {
-      // Store confirmed selections
-      this.viewer.addHandler('selection', (selectionRect) => {
-        addSelection(this.viewer, selectionRect)
-      })
 
-      // Hide loading icon after tile drawn
-      // this.viewer.addHandler('tile-drawn', () => {
-      //   this.loading(false)
-      // })
+    /**
+     * Setup event handlers.
+     */
+    setupHandlers () {
+
+      // Add a tag and draw the overlay when a selection is made.
+      this.viewer.addHandler('selection', (selectionRect) => {
+        const vp = this.viewer.viewport
+        const imgRect = vp.viewportToImageRectangle(selectionRect)
+        const vpRect = vp.imageToViewportRectangle(imgRect)
+        const imageUri = getImageUri({
+          imgSource: this.currentTask.imgInfoUri,
+          region: imgRect
+        })
+        const tag = this.currentTask.addTag(this.currentTask.tag, imageUri)
+        drawOverlay(this.viewer, tag.id, vpRect, 'selection')
+      })
 
       // Confirm before leaving if any overlays have been drawn or forms filled
       window.onbeforeunload = () => {
@@ -264,33 +266,46 @@ export default {
             return msg
           }
         })
-      };
+      }
     },
+
+    /**
+     * Configure the area selector for the main viewer.
+     *
+     * TODO: Lose this dependency!
+     */
     configureSelector () {
-      const selector = this.viewer.selection({
+      // Initialise the selector
+      this.selector = this.viewer.selection({
         showConfirmDenyButtons: false,
         restrictToImage: true,
         returnPixelCoordinates: false
       })
-      store.commit('SET_ITEM', { key: 'selector', value: selector })
-      selector.enable()
-      const confirmBtn = new OpenSeadragon.Button({
+
+      // Add the confirm button
+      new OpenSeadragon.Button({
         element: this.$refs.confirmSelection,
         clickTimeThreshold: this.viewer.clickTimeThreshold,
         clickDistThreshold: this.viewer.clickDistThreshold,
         tooltip: 'Confirm',
-        onRelease: selector.confirm.bind(selector)
+        onRelease: this.selector.confirm.bind(this.selector)
       })
-      selector.element.appendChild(this.$refs.confirmSelection)
+      this.selector.element.appendChild(this.$refs.confirmSelection)
+
+      // Add the cancel button
       const cancelBtn = new OpenSeadragon.Button({
         element: this.$refs.cancelSelection,
         clickTimeThreshold: this.viewer.clickTimeThreshold,
         clickDistThreshold: this.viewer.clickDistThreshold,
         tooltip: 'Delete',
-        onRelease: selector.cancel.bind(selector)
+        onRelease: this.selector.cancel.bind(this.selector)
       })
-      selector.element.appendChild(this.$refs.cancelSelection)
+      this.selector.element.appendChild(this.$refs.cancelSelection)
     },
+
+    /**
+     * Highlight a region of the current image.
+     */
     highlightRegion () {
       if (this.region) {
         const rect = new OpenSeadragon.Rect(this.region.x,
@@ -300,28 +315,126 @@ export default {
         drawOverlay(this.viewer, 'highlight', rect, 'highlight')
       }
     },
-    submit (obj) {
-      this.$emit('submit', obj)
+
+    /**
+     * Set the current task.
+     * @param {Task} task.
+     *   The task.
+     */
+    setCurrentTask (task) {
+      this.currentTask = task
+    },
+
+    /**
+     * Update the note and emit the update event with the task.
+     * @param {Task} task.
+     *   The task.
+     * @param {String} text.
+     *   The text.
+     */
+    updateNote (task, text) {
+      task.updateComment(text)
+      this.$emit('update', task)
+    },
+
+    /**
+     * Update the form for a task and associated annotations.
+     * @param {Task} task.
+     *   The task.
+     * @param {Object} form
+     *   The updated form.
+     * @param {Array} errors
+     *   Form errors.
+     */
+    updateForm (task, form, errors) {
+      form.errors = errors
+      task.form = form
+    },
+
+    /**
+     * Emit submit event with a task object.
+     * @param {Task} task.
+     *   The task.
+     */
+    submitTask (task) {
+      // Show form errors if enabled and in transcribe mode
+      if (this.showFormErrors && this.mode === 'transcribe') {
+        const formGroups = document.querySelector('.form-group')
+        if (formGroups.length) {
+          formGroups.classList.add('show-errors')
+        }
+      }
+      this.$emit('submit', task)
+    },
+
+    /**
+     * Delete an overlay.
+     * @param {String} id
+     *   The overlay ID.
+     */
+    deleteOverlay (id) {
+      const query = `.overlay[data-id="${id}"]`
+      const el = document.querySelector(query)
+      this.viewer.removeOverlay(el)
+    },
+
+    /**
+     * Remove a tag and enable the selector in the same location.
+     * @param {Task} task
+     *   The task that the tag belongs to.
+     * @param {String} id
+     *   The tag ID.
+     */
+    editTag (task, id) {
+      const vp = this.viewer.viewport
+      const tag = task.getAnnotation(id)
+      const imgRect = extractRectFromImageUri(tag.target.selector.value)
+      const vpRect = vp.imageToViewportRectangle(imgRect)
+      const selectionRect = new OpenSeadragon.SelectionRect(vpRect.x,
+                                                            vpRect.y,
+                                                            vpRect.width,
+                                                            vpRect.height)
+      this.selector.rect = selectionRect
+      this.selector.draw()
+      this.deleteTag(task, id)
+      this.$emit('update', task)
+    },
+
+    /**
+     * Delete a tag.
+     * @param {Task} task
+     *   The task that the tag belongs to.
+     * @param {String} id
+     *   The tag ID.
+     */
+    deleteTag (task, id) {
+      task.deleteAnnotation(id)
+      this.deleteOverlay(id)
     }
   },
 
-  watch: {
-    imgSource: function () {
-      this.loadImage()
+  watch : {
+    currentTask: function () {
+      // Open the current task image.
+      this.viewer.open(this.currentTask.imgInfoUri)
+      // Enable selector when in select mode.
+      if (this.mode === 'select') {
+        this.selector.enable()
+      } else {
+        this.selector.disable()
+      }
     }
   },
 
   mounted () {
-    let opts = this.normalizedViewerOpts
-    opts.element = this.$refs.viewer
+    // Initialise the main viewer after the DOM is loaded
+    this.viewer = OpenSeadragon(this.viewerOpts)
 
-    this.viewer = OpenSeadragon(opts)
-
-    this.configureSelector()
-    this.loadImage()
     this.attachControls()
     this.setupHandlers()
     this.highlightRegion()
+    this.configureSelector()
+    this.setCurrentTask(this.tasks[0])
   }
 }
 </script>

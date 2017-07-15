@@ -2,8 +2,8 @@
   <div id="lv-transcribe-sidebar">
     <sidebar title="Transcribe">
       <vue-form-generator
-        :schema="schema"
-        :model="model"
+        :schema="form.schema"
+        :model="form.model"
         :options="formOptions"
         @validated="onValidated">
       </vue-form-generator>
@@ -12,9 +12,9 @@
 </template>
 
 <script>
+import Task from '@/task'
 import VueFormGenerator from "vue-form-generator"
 import Sidebar from '@/components/Sidebar'
-import { store } from '@/store'
 
 export default {
   data: function () {
@@ -22,7 +22,9 @@ export default {
       formOptions: {
         validateAfterLoad: true,
         validateAfterChanged: true
-      }
+      },
+      // To avoid modifying parent state
+      form: JSON.parse(JSON.stringify(this.task.form))
     }
   },
 
@@ -32,12 +34,8 @@ export default {
   },
 
   props: {
-    model: {
-      type: Object,
-      required: true
-    },
-    schema: {
-      type: Object,
+    task: {
+      type: Task,
       required: true
     }
   },
@@ -45,9 +43,7 @@ export default {
   methods: {
     onValidated: function (isValid, errors) {
       document.querySelector('.form-group').classList.remove('show-errors')
-      store.state.form.model = this.model
-      store.state.form.isValid = isValid
-      store.state.form.errors = errors
+      this.$emit('update', this.task, this.form, errors)
     }
   }
 }

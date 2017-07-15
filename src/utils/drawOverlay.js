@@ -1,5 +1,3 @@
-import { store } from '@/store'
-
 export default function (viewer, id, rect, cls) {
   if (!viewer.addOverlay) {
     return

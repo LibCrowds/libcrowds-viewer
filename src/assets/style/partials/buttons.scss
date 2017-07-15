@@ -2,6 +2,7 @@
 
 .btn {
   cursor: default;
+  margin-top: 0.6rem;
   font-size: 14px;
   background-color: transparent;
   border: 1px solid #fff;
@@ -32,10 +33,33 @@
     border: none;
     outline: none !important;
     opacity: 0.8;
+    margin: 0;
 
     &:hover,
     &:focus {
       opacity: 1;
+    }
+  }
+
+  &.btn-block {
+    width: 100%;
+    display: block;
+  }
+
+  &.btn-hud {
+    display: flex !important;
+    justify-content: center;
+    height: 32px;
+    width: 32px;
+    border: none;
+    padding: 5px;
+    z-index: 2;
+    border-radius: 25px;
+    background-color: rgba(0, 0, 0, 0.75);
+
+    svg {
+      display: flex;
+      opacity: 0.8;
     }
   }
 }
