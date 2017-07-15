@@ -8,7 +8,8 @@ Originally designed for the LibCrowds crowdsourcing platform, this Vue.js
 component presents a zoomable image and provides options for users to mark
 and transcribe areas of that image.
 
-User input is serialised according to the
+The input is an array of options used to configure tasks that are presented to
+the user. The output from these tasks is serialised according to the
 [W3C Web Annotations spec](https://www.w3.org/annotation/) and returned via
 events.
 
@@ -33,8 +34,7 @@ You can now use the component like this:
 
 ```vue
 <libcrowds-viewer
-  mode="select"
-  :taskOpts="[{ id: 1, imgInfoUri: 'http://www.example.org/image-service/abcd1234/info.json' }]">
+  :taskOpts="[{ mode: 'select', imgInfoUri: 'http://www.example.org/image-service/abcd1234/info.json' }]">
 </libcrowds-viewer>
 ```
 
@@ -42,7 +42,6 @@ You can now use the component like this:
 
 | Property                | Type          | Default              | Description                                      |
 |-------------------------|---------------|----------------------|--------------------------------------------------|
-| mode                    | String        | 'select'             | 'select' or 'transcribe'                         |
 | taskOpts                | String        | null                 | An array of task options                         |
 | confirm-before-unload   | Boolean       | false                | Confirm before leaving the page                  |
 | show-help               | Boolean       | true                 | Include the help modal                           |
@@ -57,75 +56,81 @@ You can now use the component like this:
 
 | Event         | Arguments     | Description          |
 |---------------|---------------|----------------------|
-| submit        | data          | User input confirmed |
+| submit        | annotations   | User input confirmed |
+| update        | annotation    | Annotation updated   |
+| create        | annotation    | Annotation created   |
+| delete        | annotation    | Annotation deleted   |
 
-### Modes
+## Tasks
 
-LibCrowds Viewer currently provides the following modes.
+The core data structure for LibCrowds Viewer is the Task object, an array of
+which are created from the task options passed to the viewer.
 
-#### Select Mode
-
-In select mode users can click and move their mouse to highlight areas of the
-image. This mode is useful for tagging images and potentially preparing
-them for subsequent transcription.
-
-#### Transcribe Mode
-
-In transcribe mode a form schema and model is passed to the viewer (using the
-[vue-form-generator](https://github.com/icebob/vue-form-generator) syntax),
-along with optional coordinates to highlight regions of the image. This allows
-users to transcribe specific details found in the image.
-
-### Tasks
-
-The core data structure for LibCrowds Viewer is the Task object. An array of
-Task options is passed to the viewer as a property and from each item in this
-array a new Task object is created. These Tasks are updated within the viewer
-with data such as area selection and form input data, with the update events
-emitted from the viewer.
-
-#### Task properties
+### Task properties
 
 | Property                | Type   | Attributes  | Description                                                                                                    |
 |-------------------------|--------|-------------|----------------------------------------------------------------------------------------------------------------|
-| id                      | String |             | Task identifier                                                                                                |
+| mode                    | String |             | `'select'` or `'transcribe'`                                                                                   |
 | imgInfoUri              | String |             | Image info URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/#image-information-request-uri-syntax/)) |
 | manifestUri             | String | \<optional> | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/#resource-structure))        |
+| id                      | String | \<optional> | Task identifier                                                                                                |
 | objective               | String | \<optional> | The main objective                                                                                             |
 | guidance                | String | \<optional> | Additional guidance                                                                                            |
-| form                    | Object | \<optional> | Form schema and model for use in transcription tasks                                                           |
-| regions                 | Array  | \<optional> | Coordinates identifying regions of the image                                                                   |
-| note                    | String | \<optional> | Additional note about the image                                                                                |
-| tag                     | String | \<optional> | The tag to add when in select mode                                                                             |
+| form                    | Object | \<optional> | Model and schema for `transcribe` mode (see [vue-form-generator](https://github.com/icebob/vue-form-generator))|
+| highlight               | Array  | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
+| tag                     | String | \<optional> | The tag to add when in `select` mode                                                                           |
 
-#### Simple Example
+## Modes
 
-The minimum set of options that must be passed to the viewer is simply `mode`
-and `imgInfoUri`.
+LibCrowds Viewer currently provides the following modes.
+
+### Select Mode
+
+In select mode users can use their mouse (or finger) to tag areas of the image,
+potentially preparing them for subsequent transcription.
+
+Note that the `tag` property is required in `select` mode.
+
+#### Full example
 
 ```json
 {
-  "mode": "select",
-  "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json"
+  "mode": "transcribe",
+  "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+  "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+  "id": 123,
+  "tag": "title",
+  "objective": "Tag all of the titles",
+  "guidance": "Draw a box around each title, including any subtitles"
 }
 ```
 
-#### Full Example
+### Transcribe Mode
+
+In transcribe mode a form schema is passed to the viewer along with optional
+coordinates to highlight regions of the image (such as those returned from a
+previous selection task), allowing for transcription of specific details found
+in the image.
+
+Note that the `form` property is required in `transcribe` mode.
+
+#### Full example
 
 ```json
 {
-  "id": 123,
+  "mode": "transcribe",
   "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
   "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+  "id": 123,
   "objective": "Transcribe the required info",
   "guidance": "Write everything exactly as you see on the page.",
   "form": {
-    "formModel": {
+    "model": {
       "title": "",
       "date": "",
       "genre": []
     },
-    "formSchema": {
+    "schema": {
       "fields": [
         {
           "type": "input",
@@ -148,19 +153,15 @@ and `imgInfoUri`.
           "values": ["Comedy", "Tragedy", "Drama"]
         }
       ]
-    },
-    "errors": []
+    }
   },
-  "regions": [
+  "highlight": [
     {
       "x": 100,
       "y": 100,
       "width": 100,
       "height": 100
     }
-  ],
-  "annotations": []
+  ]
 }
 ```
-
-For more (including simpler) example tasks see [demo/src/data](demo/src/data).
