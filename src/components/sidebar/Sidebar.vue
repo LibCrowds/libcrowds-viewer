@@ -168,6 +168,7 @@ export default {
 
     textarea {
       margin-top: 0.6rem;
+      margin-bottom: 0.6rem;
     }
   }
 
