@@ -7,11 +7,8 @@
         IIIF-compatible image viewer Vue component.
       </p>
       <div>
-        <button @click="setViewerMode('select')">
-          Select Mode
-        </button>
-        <button @click="setViewerMode('transcribe')">
-          Transcribe Mode
+        <button @click="showViewer = true">
+          Try it
         </button>
       </div>
       <a :href="githubUrl" id="doc-link">
@@ -23,8 +20,7 @@
     <div id="viewer-container" v-else>
       <libcrowds-viewer
         show-note
-        :mode="mode"
-        :taskOpts="taskOpts"
+        :task-opts="taskOpts"
         @submit="handleResponse">
       </libcrowds-viewer>
     </div>
@@ -35,15 +31,12 @@
 <script>
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/github'
-import selectTasks from './data/select-tasks'
-import transcribeTasks from './data/transcribe-tasks'
+import tasks from './tasks'
 
 export default {
   data: function () {
     return {
-      page: 'home',
-      mode: '',
-      taskOpts: [],
+      taskOpts: tasks,
       showViewer: false
     }
   },
@@ -59,15 +52,6 @@ export default {
   },
 
   methods: {
-    setViewerMode(mode) {
-      if (mode === 'select') {
-        this.taskOpts = selectTasks
-      } else if (mode === 'transcribe') {
-        this.taskOpts = transcribeTasks
-      }
-      this.mode = mode
-      this.showViewer = true
-    },
     handleResponse (obj) {
       const jsonStr = JSON.stringify(obj, null, 2)
       console.log(jsonStr)

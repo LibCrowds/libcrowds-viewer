@@ -1,0 +1,84 @@
+[
+  {
+    "id": 1,
+    "tag": "title",
+    "mode": "select",
+    "objective": "Tag all of the titles",
+    "guidance": "Draw a box around each title, including any subtitles",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json"
+  },
+  {
+    "id": 4,
+    "tag": "actor",
+    "mode": "select",
+    "objective": "Tag all of the actors",
+    "guidance": "Draw a box around each actor, including any subtitles",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589091.0x000003/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json"
+  },
+  {
+    "id": 7,
+    "tag": "image",
+    "mode": "select",
+    "objective": "Tag all of images on the page",
+    "guidance": "Draw a box around each image",
+    "imgInfoUri": "http://www.e-codices.unifr.ch/loris/vad/vad-0342/vad-0342_002.jp2/info.json",
+    "manifestUri": "http://www.e-codices.unifr.ch/metadata/iiif/vad-0342/manifest.json"
+  },
+  {
+    "id": 8,
+    "tag": "face",
+    "mode": "select",
+    "objective": "Tag all of the faces",
+    "guidance": "Draw a box around each face",
+    "imgInfoUri": "https://images.britishart.yale.edu/iiif/c0b22208-1eab-4b5e-8bc2-a18390f003b4/info.json"
+  },
+  {
+    "id": 1,
+    "mode": "transcribe",
+    "objective": "Transcribe the required info",
+    "guidance": "Write everything exactly as you see on the page.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "title": null,
+        "date": null,
+        "genre": null
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Title",
+            "model": "title",
+            "placeholder": "Enter the title",
+            "required": true
+          },
+          {
+            "type": "input",
+            "inputType": "date",
+            "label": "Date",
+            "model": "date"
+          },
+          {
+            "type": "select",
+            "label": "Genre",
+            "model": "genre",
+            "values": ["Comedy", "Tragedy", "Drama"]
+          }
+        ]
+      }
+    },
+    "regions": [
+      {
+        "x": 100,
+        "y": 100,
+        "width": 100,
+        "height": 100
+      }
+    ]
+  }
+]

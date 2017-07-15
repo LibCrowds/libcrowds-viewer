@@ -2,8 +2,8 @@
   <div id="lv-transcribe-sidebar">
     <sidebar title="Transcribe">
       <vue-form-generator
-        :schema="form.schema"
-        :model="form.model"
+        :schema="task.form.schema"
+        :model="task.form.model"
         :options="formOptions"
         @validated="onValidated">
       </vue-form-generator>
