@@ -12,8 +12,8 @@ class Task {
     manifestUri = '',
     objective = '',
     guidance = '',
-    tag = '',
-    form = { model: {}, schema: {}, errors: [] },
+    tag,
+    form,
     regions = [],
     annotations = []
   }) {
@@ -28,7 +28,38 @@ class Task {
     this.regions = regions
     this.annotations = annotations
     this.imgInfo = this.fetchImageInfo(this.imgInfoUri)
+
+    // Validate
+    const validModes = ['select', 'transcribe']
+    const baseMsg = 'Failed to initialise task - '
+
+    if (this.mode === undefined) {
+      throw new Error(`${baseMsg} mode is required`)
+    }
+
+    if (validModes.indexOf(this.mode) < 0) {
+      throw new Error(`${baseMsg} mode must be one of ${validModes}`)
+    }
+
+    if (this.imgInfoUri === undefined) {
+      throw new Error(`${baseMsg} imgInfoUri is required`)
+    }
+
+    if (this.mode === 'select' && !this.tag) {
+      throw new Error(`${baseMsg} tag is required when in select mode`)
+    }
+
+    if (this.mode === 'transcribe' && !this.form) {
+      throw new Error(`${baseMsg} tag is required when in select mode`)
+    }
   }
+
+  /**
+   * Check that a task is configured correctly
+   */
+   validate () {
+
+   }
 
   /**
    * Fetch the image info.
