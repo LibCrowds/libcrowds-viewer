@@ -48,7 +48,7 @@ You can now use the component like this:
 | confirm-before-unload   | Boolean       | false   | Confirm before leaving the page                  |
 | show-help               | Boolean       | true    | Include the help modal                           |
 | show-info               | Boolean       | true    | Include the metadata modal                       |
-| show-note               | Boolean       | false   | Include the note input                           |
+| show-note               | Boolean       | true    | Include the note input                           |
 | show-browse             | Boolean       | true    | Include the browse sidebar                       |
 | show-form-errors        | Boolean       | true    | Show form errors on submit                       |
 
