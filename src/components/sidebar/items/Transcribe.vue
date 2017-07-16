@@ -52,6 +52,8 @@ export default {
 @import '../../../assets/style/partials/forms';
 
 #lv-sidebar-transcribe-item {
+  margin-top: 1rem;
+
   fieldset {
     border: none;
     padding: 0;
