@@ -128,8 +128,12 @@ class Task {
    * Add a and return a comment Annotation.
    * @param {String} text
    *   The comment value.
+   * @param {Object} creator
+   *   The Annotation creator.
+   * @param {Object} generator
+   *   The Annotation generator.
    */
-  addComment (text) {
+  addComment ({text, creator = null, generator = null}) {
     let anno = new Annotation('commenting', this.imgInfo)
     anno.addBody({
       type: 'TextualBody',
@@ -137,6 +141,12 @@ class Task {
       purpose: 'commenting',
       format: 'text/plain'
     })
+    if (creator) {
+      anno.setCreator(creator)
+    }
+    if (generator) {
+      anno.setGenerator(generator)
+    }
     this.annotations.push(anno)
     return anno
   }
@@ -147,10 +157,20 @@ class Task {
    *   Plain text value for the tag.
    * @param {String} fragmentURI
    *   The IIIF image region.
+   * @param {Object} creator
+   *   The Annotation creator.
+   * @param {Object} generator
+   *   The Annotation generator.
    */
-  addTag (value, fragmentURI = null) {
+  addTag ({value, fragmentURI = null, creator = null, generator = null}) {
     const anno = new Annotation('tagging', this.imgInfo)
     anno.addTag(this.tag, this.imgInfo, fragmentURI)
+    if (creator) {
+      anno.setCreator(creator)
+    }
+    if (generator) {
+      anno.setGenerator(generator)
+    }
     this.annotations.push(anno)
     return anno
   }
@@ -163,11 +183,21 @@ class Task {
    *   Plain text value for the tag.
    * @param {String} fragmentURI
    *   The IIIF image region.
+   * @param {Object} creator
+   *   The Annotation creator.
+   * @param {Object} generator
+   *   The Annotation generator.
    */
-  describe (value, tag, fragmentURI = null) {
+  describe ({value, fragmentURI = null, creator = null, generator = null}) {
     const anno = new Annotation('describing', this.imgInfo)
     anno.addDescription(value)
     anno.addTag(tag, fragmentURI = null)
+    if (creator) {
+      anno.setCreator(creator)
+    }
+    if (generator) {
+      anno.setGenerator(generator)
+    }
     this.annotations.push(anno)
     return anno
   }
