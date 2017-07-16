@@ -117,6 +117,18 @@ Note that the `tag` property is required when in `select` mode.
   "type": "Annotation",
   "motivation": "tagging",
   "created": "2017-07-16T00:44:28.454Z",
+  "creator": {
+    "id": "http://example.org/user1",
+    "type": "Person",
+    "name": "My Pseudonym",
+    "nickname": "pseudo"
+  },
+  "generator": {
+    "id": "http://example.org/client1",
+    "type": "Software",
+    "name": "Code v2.1",
+    "homepage": "http://example.org/client1/homepage1"
+  },
   "target": {
     "id": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005",
     "width": 2433,
@@ -208,6 +220,18 @@ Note that the `form` property is required when in `transcribe` mode.
   "type": "Annotation",
   "motivation": "describing",
   "created": "2017-07-16T13:53:18.795Z",
+  "creator": {
+    "id": "http://example.org/user1",
+    "type": "Person",
+    "name": "My Pseudonym",
+    "nickname": "pseudo"
+  },
+  "generator": {
+    "id": "http://example.org/client1",
+    "type": "Software",
+    "name": "Code v2.1",
+    "homepage": "http://example.org/client1/homepage1"
+  },
   "target": {
     "id": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005",
     "width": 2433,
