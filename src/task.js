@@ -171,21 +171,6 @@ class Task {
   }
 
   /**
-   * Update a description.
-   * @param {String} text
-   *   The comment value.
-   */
-  updateComment (text) {
-    let annos = this.getAnnotationsByMotivation('commenting')
-    if (annos.length) {
-      annos[0].modified = new Date().toISOString()
-      annos[0].body.value = text
-      return
-    }
-    this._addComment(text)
-  }
-
-  /**
    * Add a description
    * @param {String} value
    *   Plain text value for the description.
