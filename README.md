@@ -118,6 +118,7 @@ Note that the `tag` property is required when in `select` mode.
   "target": {
     "id": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
     "type": "Image",
+    "format" : "image/jpeg",
     "selector": {
       "type": "FragmentSelector",
       "value": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/291,1498,1737,244/full/0/default.jpg",

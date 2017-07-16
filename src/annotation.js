@@ -25,7 +25,8 @@ class Annotation {
     this.created = new Date().toISOString()
     this.target = {
       id: targetId,
-      type: 'Image'
+      type: 'Image',
+      format: 'image/jpeg'
     }
   }
 
