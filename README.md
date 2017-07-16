@@ -92,7 +92,7 @@ potentially preparing them for subsequent transcription.
 
 Note that the `tag` property is required when in `select` mode.
 
-#### Full example
+#### Example task
 
 ```json
 {
@@ -106,6 +106,33 @@ Note that the `tag` property is required when in `select` mode.
 }
 ```
 
+#### Example annotation
+
+```json
+{
+  "@context": "http://www.w3.org/ns/anno.jsonld",
+  "id": "d008efa2-42e5-494e-b463-c7b9b6744b67",
+  "type": "Annotation",
+  "motivation": "tagging",
+  "created": "2017-07-16T00:44:28.454Z",
+  "target": {
+    "id": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+    "type": "Image",
+    "selector": {
+      "type": "FragmentSelector",
+      "value": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/291,1498,1737,244/full/0/default.jpg",
+      "conformsTo": "http://iiif.io/api/image/2/context.json"
+    }
+  },
+  "body": {
+    "type": "TextualBody",
+    "purpose": "tagging",
+    "value": "title"
+  },
+  "modified": "2017-07-16T00:44:28.454Z"
+}
+```
+
 ### Transcribe Mode
 
 In transcribe mode a form schema is passed to the viewer along with optional
@@ -115,7 +142,7 @@ in the image.
 
 Note that the `form` property is required when in `transcribe` mode.
 
-#### Full example
+#### Example task
 
 ```json
 {
@@ -165,4 +192,10 @@ Note that the `form` property is required when in `transcribe` mode.
     }
   ]
 }
+```
+
+#### Example annotation
+
+```json
+
 ```
