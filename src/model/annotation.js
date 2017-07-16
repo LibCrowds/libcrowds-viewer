@@ -44,45 +44,12 @@ class Annotation {
   _setMultiItem(root, key, value) {
     if (typeof root[key] === 'undefined') {
       root[key] = value
-    } else if (Array.isArray(root[key])) {
+    } else if (Array.isArray(root[key]) && root[key].indexOf(value) < 0) {
       root[key].push(value)
     } else {
       root[key] = [root[key], value]
     }
     this.modified = new Date().toISOString()
-  }
-
-  /**
-   * Set the agent responsible for creating the resource.
-   * @param {String} id
-   * @param {String} name
-   * @param {String} nick
-   */
-  setCreator(id, type, name, nick) {
-    this.creator = {
-      id: id,
-      type: type,
-      name: name,
-      nick: nick
-    }
-    this.modified = new Date().toISOString()
-  }
-
-  /**
-   * Set the agent responsible for generating the serialization of the
-   * Annotation.
-   * @param {String} id
-   * @param {String} name
-   * @param {String} homepage
-   */
-  setGenerator(id, type, name, homepage) {
-    this.generator = {
-      id: id,
-      type: type,
-      name: name,
-      homepage: homepage
-    }
-    this.generated = new Date().toISOString()
   }
 
   /**
@@ -127,12 +94,30 @@ class Annotation {
   }
 
   /**
-   * Add a body to the annotation.
-   * @param {*} obj
+   * Add a Body to the Annotation.
+   * @param {Object} opts
+   *   The Body to be added.
+   */
+  addBody(opts) {
+    this._setMultiItem(this, 'body', opts)
+  }
+
+  /**
+   * Add a creator to the Annotation.
+   * @param {Object} opts
    *   The body to be added.
    */
-  addBody(obj) {
-    this._setMultiItem(this, 'body', obj)
+  addCreator(opts) {
+    this._setMultiItem(this, 'creator', opts)
+  }
+
+  /**
+   * Add a generator to the Annotation.
+   * @param {Object} opts
+   *   The generator to be added.
+   */
+  addGenerator(opts) {
+    this._setMultiItem(this, 'generator', opts)
   }
 
   /**

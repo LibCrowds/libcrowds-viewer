@@ -68,17 +68,19 @@ which are created from the task options passed to the viewer.
 
 ### Task properties
 
-| Property                | Type   | Attributes  | Description                                                                                                    |
-|-------------------------|--------|-------------|----------------------------------------------------------------------------------------------------------------|
-| mode                    | String |             | `'select'` or `'transcribe'`                                                                                   |
-| imgInfoUri              | String |             | Image info URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/#image-information-request-uri-syntax/)) |
-| manifestUri             | String | \<optional> | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/#resource-structure))        |
-| id                      | String | \<optional> | Task identifier                                                                                                |
-| objective               | String | \<optional> | The main objective                                                                                             |
-| guidance                | String | \<optional> | Additional guidance                                                                                            |
-| form                    | Object | \<optional> | Model and schema for `transcribe` mode (see [vue-form-generator](https://github.com/icebob/vue-form-generator))|
-| highlight               | Array  | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
-| tag                     | String | \<optional> | The tag to add when in `select` mode                                                                           |
+| Property    | Type   | Attributes  | Description                                                                                                    |
+|-------------|--------|-------------|----------------------------------------------------------------------------------------------------------------|
+| mode        | String |             | `'select'` or `'transcribe'`                                                                                   |
+| imgInfoUri  | String |             | Image info URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/#image-information-request-uri-syntax/)) |
+| manifestUri | String | \<optional> | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/#resource-structure))        |
+| id          | String | \<optional> | Task identifier                                                                                                |
+| objective   | String | \<optional> | The main objective                                                                                             |
+| guidance    | String | \<optional> | Additional guidance                                                                                            |
+| form        | Object | \<optional> | Model and schema for `transcribe` mode (see [vue-form-generator](https://github.com/icebob/vue-form-generator))|
+| highlight   | Array  | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
+| tag         | String | \<optional> | The tag to add when in `select` mode                                                                           |
+| creator     | Object | \<optional> | The Annotation creator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/))              |
+| generator   | Object | \<optional> | The Annotation generator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/))            |
 
 ## Modes
 
@@ -115,6 +117,18 @@ Note that the `tag` property is required when in `select` mode.
   "type": "Annotation",
   "motivation": "tagging",
   "created": "2017-07-16T00:44:28.454Z",
+  "creator": {
+    "id": "http://example.org/user1",
+    "type": "Person",
+    "name": "My Pseudonym",
+    "nickname": "pseudo"
+  },
+  "generator": {
+    "id": "http://example.org/client1",
+    "type": "Software",
+    "name": "Code v2.1",
+    "homepage": "http://example.org/client1/homepage1"
+  },
   "target": {
     "id": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005",
     "width": 2433,
@@ -206,6 +220,18 @@ Note that the `form` property is required when in `transcribe` mode.
   "type": "Annotation",
   "motivation": "describing",
   "created": "2017-07-16T13:53:18.795Z",
+  "creator": {
+    "id": "http://example.org/user1",
+    "type": "Person",
+    "name": "My Pseudonym",
+    "nickname": "pseudo"
+  },
+  "generator": {
+    "id": "http://example.org/client1",
+    "type": "Software",
+    "name": "Code v2.1",
+    "homepage": "http://example.org/client1/homepage1"
+  },
   "target": {
     "id": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005",
     "width": 2433,
