@@ -242,7 +242,12 @@ export default {
           imgSource: this.currentTask.imgInfoUri,
           region: imgRect
         })
-        const anno = this.currentTask.addTag(this.currentTask.tag, imageUri)
+        const anno = this.currentTask.addTag({
+          value: this.currentTask.tag, 
+          fragmentURI: imageUri, 
+          creator: this.creator, 
+          generator: this.generator
+        })
         drawOverlay(this.viewer, anno.id, vpRect, 'selection')
         this.$emit('create', this.currentTask, anno)
       })
@@ -340,7 +345,11 @@ export default {
         annos[0].body.value = text
         this.$emit('update', task, annos[0])
       } else {
-        let anno = task.addComment(text)
+        let anno = task.addComment({
+          value: text,
+          creator: this.creator,
+          generator: this.generator
+        })
         this.$emit('create', task, anno)
       }
     },
@@ -362,7 +371,12 @@ export default {
           bodies[0].value = form.model[prop]
           this.$emit('update', task, anno)
         } else if(task.imgInfo !== undefined) {
-          const anno = task.describe(form.model[prop], prop)
+          const anno = task.describe({
+            value: form.model[prop], 
+            tag: prop,
+            creator: this.creator,
+            generator: this.generator
+          })
           form.annotations[prop] = anno
           this.$emit('create', task, anno)
         }

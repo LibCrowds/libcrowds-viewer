@@ -142,10 +142,10 @@ class Task {
       format: 'text/plain'
     })
     if (creator) {
-      anno.setCreator(creator)
+      anno.addCreator(creator)
     }
     if (generator) {
-      anno.setGenerator(generator)
+      anno.addGenerator(generator)
     }
     this.annotations.push(anno)
     return anno
@@ -166,10 +166,10 @@ class Task {
     const anno = new Annotation('tagging', this.imgInfo)
     anno.addTag(this.tag, this.imgInfo, fragmentURI)
     if (creator) {
-      anno.setCreator(creator)
+      anno.addCreator(creator)
     }
     if (generator) {
-      anno.setGenerator(generator)
+      anno.addGenerator(generator)
     }
     this.annotations.push(anno)
     return anno
@@ -188,15 +188,15 @@ class Task {
    * @param {Object} generator
    *   The Annotation generator.
    */
-  describe ({value, fragmentURI = null, creator = null, generator = null}) {
+  describe ({value, tag, fragmentURI = null, creator = null, generator = null}) {
     const anno = new Annotation('describing', this.imgInfo)
     anno.addDescription(value)
     anno.addTag(tag, fragmentURI = null)
     if (creator) {
-      anno.setCreator(creator)
+      anno.addCreator(creator)
     }
     if (generator) {
-      anno.setGenerator(generator)
+      anno.addGenerator(generator)
     }
     this.annotations.push(anno)
     return anno
