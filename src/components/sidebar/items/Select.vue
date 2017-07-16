@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import Task from '@/task'
+import Task from '@/model/task'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/pencil'
