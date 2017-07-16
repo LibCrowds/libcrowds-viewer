@@ -343,6 +343,12 @@ export default {
       } else if (annos.length) {
         annos[0].modified = new Date().toISOString()
         annos[0].body.value = text
+        if (this.creator) {
+          anno.addCreator(this.creator)
+        }
+        if (this.generator) {
+          anno.addGenerator(this.generator)
+        }
         this.$emit('update', task, annos[0])
       } else {
         let anno = task.addComment({
@@ -369,6 +375,12 @@ export default {
           const anno = form.annotations[prop]
           const bodies = anno.searchBodies({ purpose: 'describing' })
           bodies[0].value = form.model[prop]
+          if (this.creator) {
+            anno.addCreator(this.creator)
+          }
+          if (this.generator) {
+            anno.addGenerator(this.generator)
+          }
           this.$emit('update', task, anno)
         } else if(task.imgInfo !== undefined) {
           const anno = task.describe({
