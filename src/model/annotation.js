@@ -53,6 +53,21 @@ class Annotation {
   }
 
   /**
+   * Update modified, creator and generator.
+   * @param {Object} opts
+   *   The creator and generator.
+   */
+  modify ({ creator = null, generator = null }) {
+    this.modified = new Date().toISOString()
+    if (creator) {
+      this.addCreator(this.creator)
+    }
+    if (generator) {
+      this.addGenerator(this.generator)
+    }
+  }
+
+  /**
    * Add a tag.
    * @param {String} tag
    *   A plain text value.
