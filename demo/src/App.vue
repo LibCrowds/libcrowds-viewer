@@ -20,6 +20,8 @@
     <div id="viewer-container" v-else>
       <libcrowds-viewer
         :task-opts="taskOpts"
+        :creator="creator"
+        :generator="generator"
         @create="handleCreate"
         @update="handleUpdate"
         @delete="handleDelete"
@@ -39,7 +41,19 @@ export default {
   data: function () {
     return {
       taskOpts: tasks,
-      showViewer: false
+      showViewer: false,
+      creator: {
+        id: "http://example.org/user1",
+        type: "Person",
+        name: "My Pseudonym",
+        nickname: "pseudo"
+      },
+      generator: {
+        id: "http://example.org/client1",
+        type: "Software",
+        name: "Code v2.1",
+        homepage: "http://example.org/client1/homepage1"
+      }
     }
   },
 
