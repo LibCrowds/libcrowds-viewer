@@ -5,27 +5,23 @@ class Form {
 
   constructor ({
     model,
-    fields,
-    errors = [],
-    annotations = []
+    schema,
   }) {
     this.model = model
-    this.schema = {
-      fields: fields
-    }
+    this.schema = schema
     this.formOptions = {
       validateAfterLoad: true,
       validateAfterChanged: true
     }
-    this.errors = errors
-    this.annotations = annotations
+    this.errors = []
+    this.annotations = {}
 
-    if (this.model === undefined) {
+    if (model === undefined) {
       throw new Error('model is required')
     }
 
-    if (this.fields === undefined) {
-      throw new Error('fields is required')
+    if (schema === undefined) {
+      throw new Error('schema is required')
     }
   }
 }

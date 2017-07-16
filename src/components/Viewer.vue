@@ -349,6 +349,7 @@ export default {
     updateForm (task, form, errors) {
       form.errors = errors
       task.form = form
+      console.log(form)
     },
 
     /**

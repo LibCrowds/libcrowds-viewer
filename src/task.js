@@ -1,4 +1,5 @@
 import Annotation from '@/annotation'
+import Form from '@/model/form'
 
 /**
  * Represents a task to be updated with user input as annotations.
@@ -13,7 +14,7 @@ class Task {
     objective = '',
     guidance = '',
     tag,
-    form,
+    form = null,
     regions = [],
     annotations = []
   }) {
@@ -49,17 +50,14 @@ class Task {
       throw new Error(`${baseMsg} tag is required when in select mode`)
     }
 
-    if (this.mode === 'transcribe' && !this.form) {
-      throw new Error(`${baseMsg} tag is required when in select mode`)
+    if (mode === 'transcribe') {
+      try {
+        this.form = new Form(this.form)
+      } catch (err) {
+        throw new Error(`${baseMsg} ${err}`)
+      }
     }
   }
-
-  /**
-   * Check that a task is configured correctly
-   */
-   validate () {
-
-   }
 
   /**
    * Fetch the image info.
