@@ -1,30 +1,30 @@
 <template>
-  <div id="lv-select-sidebar">
-    <sidebar title="Selections">
-      <ul>
-        <li
-          v-for="tag in tags"
-          :key="tag.id"
-          @mouseover="highlightOverlay(tag.id, true)"
-          @mouseleave="highlightOverlay(tag.id, false)">
-          <div class="thumbnail-container">
-            <img :src="tag.target.selector.value">
-          </div>
-          <div class="buttons">
-            <span
-              @click="editTag(tag)"
-              class="btn btn-control">
-              <icon name="pencil"></icon>
-            </span>
-            <span
-              @click="deleteTag(tag)"
-              class="btn btn-control">
-              <icon name="times-circle"></icon>
-            </span>
-          </div>
-        </li>
-      </ul>
-    </sidebar>
+  <div id="lv-sidebar-select-item">
+    <h4>Selections</h4>
+    <ul>
+      <li
+        v-for="tag in tags"
+        :key="tag.id"
+        @mouseover="highlightOverlay(tag.id, true)"
+        @mouseleave="highlightOverlay(tag.id, false)">
+        <div class="thumbnail-container">
+          <img :src="tag.target.selector.value">
+        </div>
+        <div class="buttons">
+          <span
+            @click="editTag(tag)"
+            class="btn btn-control">
+            <icon name="pencil"></icon>
+          </span>
+          <span
+            @click="deleteTag(tag)"
+            class="btn btn-control">
+            <icon name="times-circle"></icon>
+          </span>
+        </div>
+      </li>
+    </ul>
+
   </div>
 </template>
 
@@ -33,7 +33,6 @@ import Task from '@/task'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/pencil'
-import Sidebar from '@/components/Sidebar'
 import highlightOverlay from '@/utils/highlightOverlay'
 
 export default {
@@ -45,8 +44,7 @@ export default {
   },
 
   components: {
-    Icon,
-    Sidebar
+    Icon
   },
 
   computed: {
@@ -68,14 +66,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/style/settings';
-@import '../../assets/style/partials/buttons';
+@import '../../../assets/style/settings';
+@import '../../../assets/style/partials/buttons';
 
-#lv-select-sidebar {
+#lv-sidebar-select-item {
   ul {
     margin: 0;
     overflow-y: auto;
-    min-height: 100px;
+    height: 250px;
     max-height: 250px;
     list-style: none;
     padding: 0;
@@ -95,6 +93,10 @@ export default {
     justify-content: flex-end;
     display: flex;
     flex: 0 0 33.3333%;
+  }
+
+  h4 {
+    margin-bottom: 0.6em;
   }
 
   button {

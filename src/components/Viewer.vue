@@ -34,36 +34,33 @@
         :mode="currentTask.mode">
       </help-modal>
 
-      <div id="lv-sidebars">
+      <sidebar id="lv-sidebar"
+        v-if="currentTask"
+        :task="currentTask"
+        :showNote="showNote"
+        @noteupdated="updateNote"
+        @submit="submitTask">
 
-        <task-sidebar
-          v-if="currentTask"
-          :task="currentTask"
-          :showNote="showNote"
-          @noteupdated="updateNote"
-          @submit="submitTask">
-        </task-sidebar>
-
-        <select-sidebar
-          v-if="currentTask && currentTask.mode === 'select'"
+        <select-sidebar-item
+          v-if="currentTask.mode === 'select'"
           :task="currentTask"
           @edit="editTag"
           @delete="deleteTag">
-        </select-sidebar>
+        </select-sidebar-item>
 
-        <transcribe-sidebar
-          v-if="currentTask && currentTask.mode === 'transcribe'"
+        <transcribe-sidebar-item
+          v-if="currentTask.mode === 'transcribe'"
           :task="currentTask"
           @update="updateForm">
-        </transcribe-sidebar>
+        </transcribe-sidebar-item>
 
-        <browse-sidebar
+        <browse-sidebar-item
           v-if="showBrowse"
           :tasks="tasks"
           @taskselected="setCurrentTask">
-        </browse-sidebar>
+        </browse-sidebar-item>
 
-      </div>
+      </sidebar>
 
       <div
         class="btn-selection"
@@ -96,10 +93,10 @@ import MetadataModal from '@/components/modals/Metadata'
 import HelpModal from '@/components/modals/Help'
 import ViewerControls from '@/components/controls/Viewer'
 import PanControls from '@/components/controls/Pan'
-import SelectSidebar from '@/components/sidebars/Select'
-import TranscribeSidebar from '@/components/sidebars/Transcribe'
-import BrowseSidebar from '@/components/sidebars/Browse'
-import TaskSidebar from '@/components/sidebars/Task'
+import Sidebar from '@/components/sidebar/Sidebar'
+import SelectSidebarItem from '@/components/sidebar/items/Select'
+import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
+import BrowseSidebarItem from '@/components/sidebar/items/Browse'
 import Task from '@/task'
 import drawOverlay from '@/utils/drawOverlay'
 import getImageUri from '@/utils/getImageUri'
@@ -183,10 +180,10 @@ export default {
     HelpModal,
     ViewerControls,
     PanControls,
-    SelectSidebar,
-    TranscribeSidebar,
-    TaskSidebar,
-    BrowseSidebar,
+    Sidebar,
+    SelectSidebarItem,
+    TranscribeSidebarItem,
+    BrowseSidebarItem,
     Icon
   },
 
@@ -448,13 +445,13 @@ export default {
   height: 100%;
 }
 
-#lv-sidebars {
-  position: fixed;
+#lv-sidebar {
+  position: absolute;
   z-index: 2;
+  top: 0;
   right: 0;
   width: 35%;
   margin: 0.8rem;
-  overflow: hidden;
   max-width: 350px;
 }
 

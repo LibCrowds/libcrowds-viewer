@@ -1,7 +1,8 @@
 <template>
-  <div id="lv-browse-sidebar">
-    <sidebar title="Browse">
+  <div id="lv-sidebar-browse-item">
+    <h4>Browse</h4>
 
+    <div class="container">
       <div id="strip"></div>
 
       <button
@@ -14,8 +15,8 @@
         id="lv-browse-next">
         <icon name="chevron-right"></icon>
       </button>
+    </div>
 
-    </sidebar>
   </div>
 </template>
 
@@ -24,12 +25,10 @@ import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
 import OpenSeadragon from 'openseadragon'
-import Sidebar from '@/components/Sidebar'
 
 export default {
   components: {
-    Icon,
-    Sidebar
+    Icon
   },
 
   props: {
@@ -91,39 +90,43 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../assets/style/partials/buttons';
+@import '../../../assets/style/partials/buttons';
 
-#lv-browse-sidebar {
-  .lv-sidebar-content {
-    position: relative;
-    height: 250px;
-  }
+#lv-sidebar-browse-item {
+  margin-top: 1rem;
+  position: relative;
+  height: 250px;
 
-  #strip {
+  .container {
     height: 100%;
+    position: relative;
   }
+}
 
-  #lv-browse-next,
-  #lv-browse-previous {
-    margin: 0;
-    position: absolute !important;
-    top: 45%;
+#strip {
+  height: 100%;
+}
+
+#lv-browse-next,
+#lv-browse-previous {
+  margin: 0;
+  position: absolute !important;
+  top: 45%;
+}
+
+#lv-browse-previous {
+  left: 0;
+
+  svg {
+    margin-right: 2px;
   }
+}
 
-  #lv-browse-previous {
-    left: 1em;
+#lv-browse-next {
+  right: 0;
 
-    svg {
-      margin-right: 2px;
-    }
-  }
-
-  #lv-browse-next {
-    right: 1em;
-
-    svg {
-      margin-left: 2px;
-    }
+  svg {
+    margin-left: 2px;
   }
 }
 </style>
