@@ -14,10 +14,14 @@ import uuid from 'uuid/v4'
  *   https://www.w3.org/TR/annotation-model/#motivation-and-purpose
  * @param {Object} imgInfo
  *   The IIIF image info.
+ * @param {Object} creator
+ *   The creator.
+ * @param {Object} generator
+ *   The generator.
  */
 class Annotation {
 
-  constructor (motivation, imgInfo) {
+  constructor (motivation, imgInfo, creator = null, generator = null) {
     this['@context'] = 'http://www.w3.org/ns/anno.jsonld'
     this['id'] = uuid()
     this.type = 'Annotation'
@@ -29,6 +33,12 @@ class Annotation {
       height: imgInfo.height,
       type: 'Image',
       format: 'image/jpeg'
+    }
+    if (creator) {
+      this.addCreator(this.creator)
+    }
+    if (generator) {
+      this.addGenerator(this.generator)
     }
   }
 

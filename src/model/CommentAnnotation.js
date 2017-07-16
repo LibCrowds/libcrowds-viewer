@@ -4,7 +4,7 @@ import Annotation from '@/model/annotation'
  * Represents a Web Annotation used for comments.
  * @param {Object} imgInfo
  *   The IIIF image info.
- * @param {String} text
+ * @param {String} value
  *   The comment value.
  * @param {Object} creator
  *   The Annotation creator.
@@ -19,19 +19,13 @@ class CommentAnnotation extends Annotation {
     creator = null, 
     generator = null
   }) {
-    super('commenting', imgInfo)
+    super('commenting', imgInfo, creator, generator)
     this.addBody({
       type: 'TextualBody',
-      value: text,
+      value: value,
       purpose: 'commenting',
       format: 'text/plain'
     })
-    if (creator) {
-      this.addCreator(creator)
-    }
-    if (generator) {
-      this.addGenerator(generator)
-    }
   }
 }
 
