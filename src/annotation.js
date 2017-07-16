@@ -12,20 +12,23 @@ import uuid from 'uuid/v4'
  * @param {String} motivation
  *   A motivation from the following section of the spec.
  *   https://www.w3.org/TR/annotation-model/#motivation-and-purpose
- * @param {String} targetId
- *   The target ID of the annotation (i.e. the IIIF image source).
+ * @param {Object} imgInfo
+ *   The IIIF image info.
  */
 class Annotation {
 
-  constructor (motivation, targetId) {
+  constructor (motivation, imgInfo) {
     this['@context'] = 'http://www.w3.org/ns/anno.jsonld'
     this['id'] = uuid()
     this.type = 'Annotation'
     this.motivation = motivation
     this.created = new Date().toISOString()
     this.target = {
-      id: targetId,
-      type: 'Image'
+      id: imgInfo['id'] || imgInfo['@id'],
+      width: imgInfo.width,
+      height: imgInfo.height,
+      type: 'Image',
+      format: 'image/jpeg'
     }
   }
 
@@ -86,15 +89,17 @@ class Annotation {
    * Add a tag.
    * @param {String} tag
    *   A plain text value.
+   * @param {Object} imgInfo
+   *   The IIIF image info.
    * @param {*} fragmentURI
    *   The IIIF image region.
    */
-  addTag (tag, fragmentURI = null) {
+  addTag (tag, imgInfo, fragmentURI = null) {
     if (fragmentURI) {
       this.target.selector = {
         type: 'FragmentSelector',
         value: fragmentURI,
-        conformsTo: 'http://iiif.io/api/image/2/context.json'
+        conformsTo: imgInfo.protocol
       }
     }
 
@@ -128,6 +133,37 @@ class Annotation {
    */
   addBody(obj) {
     this._setMultiItem(this, 'body', obj)
+  }
+
+  /**
+   * Return matching bodies filtered at root level by filters.
+   * @param {*} filters 
+   *   Array of key-value pairs on which to search.
+   */
+  searchBodies (filters) {
+    if (Array.isArray(this.body)) {
+      const filtered = this.body.filter(function(item) {
+        for (let prop in filters) {
+          if (item[prop] !== filters[prop]) {
+            return false
+          }
+        }
+        return true
+      })
+      const bodies = []
+      for (let item of filtered) {
+        const idx = this.body.indexOf(item)
+        bodies.push(this.body[idx])
+      }
+      return bodies
+    } else if (this.body !== undefined) {
+      for (let prop in filters) {
+        if (this.body[prop] !== filters[prop]) {
+          return []
+        }
+      }
+      return this.body
+    }
   }
 }
 

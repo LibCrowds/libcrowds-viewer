@@ -1,4 +1,5 @@
 import Annotation from '@/annotation'
+import Form from '@/model/form'
 
 /**
  * Represents a task to be updated with user input as annotations.
@@ -13,7 +14,7 @@ class Task {
     objective = '',
     guidance = '',
     tag,
-    form,
+    form = null,
     regions = [],
     annotations = []
   }) {
@@ -27,7 +28,8 @@ class Task {
     this.form = form
     this.regions = regions
     this.annotations = annotations
-    this.imgInfo = this.fetchImageInfo(this.imgInfoUri)
+    
+    this.fetchImageInfo(this.imgInfoUri)
 
     // Validate
     const validModes = ['select', 'transcribe']
@@ -49,17 +51,14 @@ class Task {
       throw new Error(`${baseMsg} tag is required when in select mode`)
     }
 
-    if (this.mode === 'transcribe' && !this.form) {
-      throw new Error(`${baseMsg} tag is required when in select mode`)
+    if (mode === 'transcribe') {
+      try {
+        this.form = new Form(this.form)
+      } catch (err) {
+        throw new Error(`${baseMsg} ${err}`)
+      }
     }
   }
-
-  /**
-   * Check that a task is configured correctly
-   */
-   validate () {
-
-   }
 
   /**
    * Fetch the image info.
@@ -126,12 +125,12 @@ class Task {
   }
 
   /**
-   * Add a comment.
+   * Add a and return a comment Annotation.
    * @param {String} text
    *   The comment value.
    */
-  _addComment (text) {
-    let anno = new Annotation('commenting', this.imgInfoUri)
+  addComment (text) {
+    let anno = new Annotation('commenting', this.imgInfo)
     anno.addBody({
       type: 'TextualBody',
       value: text,
@@ -139,21 +138,7 @@ class Task {
       format: 'text/plain'
     })
     this.annotations.push(anno)
-  }
-
-  /**
-   * Update the comment (assumes one per image).
-   * @param {String} text
-   *   The comment value.
-   */
-  updateComment (text) {
-    let annos = this.getAnnotationsByMotivation('commenting')
-    if (annos.length) {
-      annos[0].modified = new Date().toISOString()
-      annos[0].body.value = text
-      return
-    }
-    this._addComment(text)
+    return anno
   }
 
   /**
@@ -164,25 +149,10 @@ class Task {
    *   The IIIF image region.
    */
   addTag (value, fragmentURI = null) {
-    const anno = new Annotation('tagging', this.imgInfoUri)
-    anno.addTag(this.tag, fragmentURI)
+    const anno = new Annotation('tagging', this.imgInfo)
+    anno.addTag(this.tag, this.imgInfo, fragmentURI)
     this.annotations.push(anno)
     return anno
-  }
-
-  /**
-   * Update a description.
-   * @param {String} text
-   *   The comment value.
-   */
-  updateComment (text) {
-    let annos = this.getAnnotationsByMotivation('commenting')
-    if (annos.length) {
-      annos[0].modified = new Date().toISOString()
-      annos[0].body.value = text
-      return
-    }
-    this._addComment(text)
   }
 
   /**
@@ -195,7 +165,7 @@ class Task {
    *   The IIIF image region.
    */
   describe (value, tag, fragmentURI = null) {
-    const anno = new Annotation('describing', this.imgInfoUri)
+    const anno = new Annotation('describing', this.imgInfo)
     anno.addDescription(value)
     anno.addTag(tag, fragmentURI = null)
     this.annotations.push(anno)

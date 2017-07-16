@@ -54,12 +54,12 @@ You can now use the component like this:
 
 ### Events
 
-| Event         | Arguments     | Description          |
-|---------------|---------------|----------------------|
-| submit        | task          | User input confirmed |
-| update        | annotation    | Annotation updated   |
-| create        | annotation    | Annotation created   |
-| delete        | annotation    | Annotation deleted   |
+| Event         | Arguments        | Description          |
+|---------------|------------------|----------------------|
+| submit        | task             | User input confirmed |
+| update        | task, annotation | Annotation updated   |
+| create        | task, annotation | Annotation created   |
+| delete        | task, annotation | Annotation deleted   |
 
 ## Tasks
 
@@ -92,7 +92,7 @@ potentially preparing them for subsequent transcription.
 
 Note that the `tag` property is required when in `select` mode.
 
-#### Full example
+#### Example task
 
 ```json
 {
@@ -106,6 +106,36 @@ Note that the `tag` property is required when in `select` mode.
 }
 ```
 
+#### Example annotation
+
+```jsonld
+{
+  "@context": "http://www.w3.org/ns/anno.jsonld",
+  "id": "d008efa2-42e5-494e-b463-c7b9b6744b67",
+  "type": "Annotation",
+  "motivation": "tagging",
+  "created": "2017-07-16T00:44:28.454Z",
+  "target": {
+    "id": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005",
+    "width": 2433,
+    "height": 3838,
+    "type": "Image",
+    "format" : "image/jpeg",
+    "selector": {
+      "type": "FragmentSelector",
+      "value": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/291,1498,1737,244/full/0/default.jpg",
+      "conformsTo": "http://iiif.io/api/image"
+    }
+  },
+  "body": {
+    "type": "TextualBody",
+    "purpose": "tagging",
+    "value": "title"
+  },
+  "modified": "2017-07-16T00:44:28.454Z"
+}
+```
+
 ### Transcribe Mode
 
 In transcribe mode a form schema is passed to the viewer along with optional
@@ -115,7 +145,7 @@ in the image.
 
 Note that the `form` property is required when in `transcribe` mode.
 
-#### Full example
+#### Example task
 
 ```json
 {
@@ -164,5 +194,38 @@ Note that the `form` property is required when in `transcribe` mode.
       "height": 100
     }
   ]
+}
+```
+
+#### Example annotation
+
+```jsonld
+{
+  "@context": "http://www.w3.org/ns/anno.jsonld",
+  "id": "45e07a8b-82c2-4fb3-a746-068aad1fab11",
+  "type": "Annotation",
+  "motivation": "describing",
+  "created": "2017-07-16T13:53:18.795Z",
+  "target": {
+    "id": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005",
+    "width": 2433,
+    "height": 3838,
+    "type": "Image",
+    "format": "image/jpeg"
+  },
+  "body": [
+    {
+      "type": "TextualBody",
+      "purpose": "describing",
+      "value": "The Devil to Pay",
+      "format": "text/plain"
+    },
+    {
+      "type": "TextualBody",
+      "purpose": "tagging",
+      "value": "title"
+    }
+  ],
+  "modified": "2017-07-16T13:53:18.795Z"
 }
 ```

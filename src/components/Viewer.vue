@@ -234,8 +234,9 @@ export default {
           imgSource: this.currentTask.imgInfoUri,
           region: imgRect
         })
-        const tag = this.currentTask.addTag(this.currentTask.tag, imageUri)
-        drawOverlay(this.viewer, tag.id, vpRect, 'selection')
+        const anno = this.currentTask.addTag(this.currentTask.tag, imageUri)
+        drawOverlay(this.viewer, anno.id, vpRect, 'selection')
+        this.$emit('create', this.currentTask, anno)
       })
 
       // Confirm before leaving if any overlays have been drawn or forms filled
@@ -315,15 +316,25 @@ export default {
     },
 
     /**
-     * Update the note and emit the update event with the task.
+     * Update the note and emit the relevant event.
      * @param {Task} task.
      *   The task.
      * @param {String} text.
      *   The text.
      */
     updateNote (task, text) {
-      task.updateComment(text)
-      this.$emit('update', task)
+      let annos = task.getAnnotationsByMotivation('commenting')
+      if (annos.length && text.length === 0) {
+        task.deleteAnnotation(annos[0].id)
+        this.$emit('delete', task, annos[0])
+      } else if (annos.length) {
+        annos[0].modified = new Date().toISOString()
+        annos[0].body.value = text
+        this.$emit('update', task, annos[0])
+      } else {
+        let anno = task.addComment(text)
+        this.$emit('create', task, anno)
+      }
     },
 
     /**
@@ -336,6 +347,18 @@ export default {
      *   Form errors.
      */
     updateForm (task, form, errors) {
+      for (let prop in form.model) {
+        if (Object.keys(form.annotations).indexOf(prop) > -1) {
+          const anno = form.annotations[prop]
+          const bodies = anno.searchBodies({ purpose: 'describing' })
+          bodies[0].value = form.model[prop]
+          this.$emit('update', task, anno)
+        } else if(task.imgInfo !== undefined) {
+          const anno = task.describe(form.model[prop], prop)
+          form.annotations[prop] = anno
+          this.$emit('create', task, anno)
+        }
+      }
       form.errors = errors
       task.form = form
     },
@@ -386,7 +409,6 @@ export default {
       this.selector.rect = selectionRect
       this.selector.draw()
       this.deleteTag(task, id)
-      this.$emit('update', task)
     },
 
     /**
@@ -397,8 +419,10 @@ export default {
      *   The tag ID.
      */
     deleteTag (task, id) {
+      const anno = task.getAnnotation(id)
       task.deleteAnnotation(id)
       this.deleteOverlay(id)
+      this.$emit('delete', task, anno)
     }
   },
 

@@ -20,7 +20,10 @@
     <div id="viewer-container" v-else>
       <libcrowds-viewer
         :task-opts="taskOpts"
-        @submit="handleResponse">
+        @create="handleCreate"
+        @update="handleUpdate"
+        @delete="handleDelete"
+        @submit="handleSubmit">
       </libcrowds-viewer>
     </div>
 
@@ -51,7 +54,16 @@ export default {
   },
 
   methods: {
-    handleResponse (obj) {
+    handleCreate (task, annotation) {
+      console.log('CREATE', task, annotation)
+    },
+    handleUpdate (task, annotation) {
+      console.log('UPDATE', task, annotation)
+    },
+    handleDelete (task, annotation) {
+      console.log('DELETE', task, annotation)
+    },
+    handleSubmit (obj) {
       const jsonStr = JSON.stringify(obj, null, 2)
       console.log(jsonStr)
       alert('User input logged to console')
