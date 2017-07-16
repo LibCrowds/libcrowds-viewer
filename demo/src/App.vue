@@ -22,6 +22,8 @@
         :task-opts="taskOpts"
         :creator="creator"
         :generator="generator"
+        :annotations="annotations"
+        @taskchange="handleTaskChange"
         @create="handleCreate"
         @update="handleUpdate"
         @delete="handleDelete"
@@ -36,6 +38,7 @@
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/github'
 import tasks from './tasks'
+import annotations from './annotations'
 
 export default {
   data: function () {
@@ -53,7 +56,8 @@ export default {
         type: "Software",
         name: "Code v2.1",
         homepage: "http://example.org/client1/homepage1"
-      }
+      },
+      annotations: annotations
     }
   },
 
@@ -68,14 +72,34 @@ export default {
   },
 
   methods: {
+    guid() {
+      function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+      }
+      return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+    },
+    handleTaskChange (task) {
+      console.log('TASK CHANGED', task)
+    },
     handleCreate (task, annotation) {
-      console.log('CREATE', task, annotation)
+      annotation.id = this.guid()
+      this.annotations.push(annotation)
     },
     handleUpdate (task, annotation) {
-      console.log('UPDATE', task, annotation)
+      const filtered = this.annotations.filter(function(anno) {
+        return anno.id === annotation.id
+      })
+      const idx = this.annotations.indexOf(filtered[0])
+      let originalAnno = this.annotations[idx]
+      originalAnno = annotation
     },
     handleDelete (task, annotation) {
-      console.log('DELETE', task, annotation)
+      this.annotations = this.annotations.filter(function(anno) {
+        return anno.id !== id
+      })
     },
     handleSubmit (obj) {
       const jsonStr = JSON.stringify(obj, null, 2)
