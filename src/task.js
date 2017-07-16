@@ -28,7 +28,8 @@ class Task {
     this.form = form
     this.regions = regions
     this.annotations = annotations
-    this.imgInfo = this.fetchImageInfo(this.imgInfoUri)
+    
+    this.fetchImageInfo(this.imgInfoUri)
 
     // Validate
     const validModes = ['select', 'transcribe']

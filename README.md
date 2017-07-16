@@ -199,6 +199,33 @@ Note that the `form` property is required when in `transcribe` mode.
 
 #### Example annotation
 
-```json
-
+```jsonld
+{
+  "@context": "http://www.w3.org/ns/anno.jsonld",
+  "id": "45e07a8b-82c2-4fb3-a746-068aad1fab11",
+  "type": "Annotation",
+  "motivation": "describing",
+  "created": "2017-07-16T13:53:18.795Z",
+  "target": {
+    "id": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005",
+    "width": 2433,
+    "height": 3838,
+    "type": "Image",
+    "format": "image/jpeg"
+  },
+  "body": [
+    {
+      "type": "TextualBody",
+      "purpose": "describing",
+      "value": "The Devil to Pay",
+      "format": "text/plain"
+    },
+    {
+      "type": "TextualBody",
+      "purpose": "tagging",
+      "value": "title"
+    }
+  ],
+  "modified": "2017-07-16T13:53:18.795Z"
+}
 ```

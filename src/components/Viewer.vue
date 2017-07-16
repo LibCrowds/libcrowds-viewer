@@ -347,9 +347,20 @@ export default {
      *   Form errors.
      */
     updateForm (task, form, errors) {
+      for (let prop in form.model) {
+        if (Object.keys(form.annotations).indexOf(prop) > -1) {
+          const anno = form.annotations[prop]
+          const bodies = anno.searchBodies({ purpose: 'describing' })
+          bodies[0].value = form.model[prop]
+          this.$emit('update', task, anno)
+        } else if(task.imgInfo !== undefined) {
+          const anno = task.describe(form.model[prop], prop)
+          form.annotations[prop] = anno
+          this.$emit('create', task, anno)
+        }
+      }
       form.errors = errors
       task.form = form
-      console.log(form)
     },
 
     /**
