@@ -98,6 +98,7 @@ import SelectSidebarItem from '@/components/sidebar/items/Select'
 import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
 import BrowseSidebarItem from '@/components/sidebar/items/Browse'
 import Task from '@/model/task'
+import CommentAnnotation from '@/model/CommentAnnotation'
 import drawOverlay from '@/utils/drawOverlay'
 import getImageUri from '@/utils/getImageUri'
 import extractRectFromImageUri from '@/utils/extractRectFromImageUri'
@@ -351,12 +352,15 @@ export default {
         }
         this.$emit('update', task, annos[0])
       } else {
-        let anno = task.addComment({
-          value: text,
-          creator: this.creator,
-          generator: this.generator
+        task.fetchImageInfo().then((info) => {
+          let anno = new CommentAnnotation({
+            imgInfo: info,
+            value: text,
+            creator: this.creator,
+            generator: this.generator
+          })
+          this.$emit('create', task, anno)
         })
-        this.$emit('create', task, anno)
       }
     },
 

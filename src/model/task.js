@@ -29,7 +29,9 @@ class Task {
     this.regions = regions
     this.annotations = annotations
     
-    this.fetchImageInfo(this.imgInfoUri)
+    this.fetchImageInfo().then((info) => {
+      this.imgInfo = info
+    })
 
     // Validate
     const validModes = ['select', 'transcribe']
@@ -62,16 +64,12 @@ class Task {
 
   /**
    * Fetch the image info.
-   * @param {String} uri
-   *   The image info URI.
    */
-  fetchImageInfo (uri) {
-    fetch(uri, {
+  fetchImageInfo () {
+    return fetch(this.imgInfoUri, {
       method: 'get'
     }).then((response) => {
       return response.json()
-    }).then((data) => {
-      this.imgInfo = data
     }).catch(function(err) {
       throw Error('Could not retrieve image info')
     })
