@@ -126,11 +126,11 @@ class Task {
   }
 
   /**
-   * Add a comment.
+   * Add a and return a comment Annotation.
    * @param {String} text
    *   The comment value.
    */
-  _addComment (text) {
+  addComment (text) {
     let anno = new Annotation('commenting', this.imgInfoUri)
     anno.addBody({
       type: 'TextualBody',
@@ -139,21 +139,7 @@ class Task {
       format: 'text/plain'
     })
     this.annotations.push(anno)
-  }
-
-  /**
-   * Update the comment (assumes one per image).
-   * @param {String} text
-   *   The comment value.
-   */
-  updateComment (text) {
-    let annos = this.getAnnotationsByMotivation('commenting')
-    if (annos.length) {
-      annos[0].modified = new Date().toISOString()
-      annos[0].body.value = text
-      return
-    }
-    this._addComment(text)
+    return anno
   }
 
   /**

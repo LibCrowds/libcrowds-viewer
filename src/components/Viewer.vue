@@ -316,15 +316,25 @@ export default {
     },
 
     /**
-     * Update the note and emit the update event with the task.
+     * Update the note and emit the relevant event.
      * @param {Task} task.
      *   The task.
      * @param {String} text.
      *   The text.
      */
     updateNote (task, text) {
-      task.updateComment(text)
-      this.$emit('update', task)
+      let annos = task.getAnnotationsByMotivation('commenting')
+      if (annos.length && text.length === 0) {
+        task.deleteAnnotation(annos[0].id)
+        this.$emit('delete', task, annos[0])
+      } else if (annos.length) {
+        annos[0].modified = new Date().toISOString()
+        annos[0].body.value = text
+        this.$emit('update', task, annos[0])
+      } else {
+        let anno = task.addComment(text)
+        this.$emit('create', task, anno)
+      }
     },
 
     /**
