@@ -344,10 +344,10 @@ export default {
         annos[0].modified = new Date().toISOString()
         annos[0].body.value = text
         if (this.creator) {
-          anno.addCreator(this.creator)
+          annos[0].addCreator(this.creator)
         }
         if (this.generator) {
-          anno.addGenerator(this.generator)
+          annos[0].addGenerator(this.generator)
         }
         this.$emit('update', task, annos[0])
       } else {
