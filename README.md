@@ -108,7 +108,7 @@ Note that the `tag` property is required when in `select` mode.
 
 #### Example annotation
 
-```json
+```jsonld
 {
   "@context": "http://www.w3.org/ns/anno.jsonld",
   "id": "d008efa2-42e5-494e-b463-c7b9b6744b67",
@@ -116,13 +116,15 @@ Note that the `tag` property is required when in `select` mode.
   "motivation": "tagging",
   "created": "2017-07-16T00:44:28.454Z",
   "target": {
-    "id": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+    "id": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005",
+    "width": 2433,
+    "height": 3838,
     "type": "Image",
     "format" : "image/jpeg",
     "selector": {
       "type": "FragmentSelector",
       "value": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/291,1498,1737,244/full/0/default.jpg",
-      "conformsTo": "http://iiif.io/api/image/2/context.json"
+      "conformsTo": "http://iiif.io/api/image"
     }
   },
   "body": {

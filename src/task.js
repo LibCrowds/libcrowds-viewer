@@ -151,7 +151,7 @@ class Task {
    */
   addTag (value, fragmentURI = null) {
     const anno = new Annotation('tagging', this.imgInfo)
-    anno.addTag(this.tag, fragmentURI)
+    anno.addTag(this.tag, this.imgInfo, fragmentURI)
     this.annotations.push(anno)
     return anno
   }

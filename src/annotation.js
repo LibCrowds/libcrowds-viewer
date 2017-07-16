@@ -89,15 +89,17 @@ class Annotation {
    * Add a tag.
    * @param {String} tag
    *   A plain text value.
+   * @param {Object} imgInfo
+   *   The IIIF image info.
    * @param {*} fragmentURI
    *   The IIIF image region.
    */
-  addTag (tag, fragmentURI = null) {
+  addTag (tag, imgInfo, fragmentURI = null) {
     if (fragmentURI) {
       this.target.selector = {
         type: 'FragmentSelector',
         value: fragmentURI,
-        conformsTo: 'http://iiif.io/api/image/2/context.json'
+        conformsTo: imgInfo.protocol
       }
     }
 
