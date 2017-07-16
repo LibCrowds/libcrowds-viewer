@@ -54,12 +54,12 @@ You can now use the component like this:
 
 ### Events
 
-| Event         | Arguments     | Description          |
-|---------------|---------------|----------------------|
-| submit        | task          | User input confirmed |
-| update        | annotation    | Annotation updated   |
-| create        | annotation    | Annotation created   |
-| delete        | annotation    | Annotation deleted   |
+| Event         | Arguments        | Description          |
+|---------------|------------------|----------------------|
+| submit        | task             | User input confirmed |
+| update        | task, annotation | Annotation updated   |
+| create        | task, annotation | Annotation created   |
+| delete        | task, annotation | Annotation deleted   |
 
 ## Tasks
 
