@@ -172,6 +172,14 @@ export default {
     lang: {
       type: String,
       default: 'en'
+    },
+    creator: {
+      type: Object,
+      default: null
+    },
+    generator: {
+      type: Object,
+      default: null
     }
   },
 

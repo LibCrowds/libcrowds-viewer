@@ -68,17 +68,19 @@ which are created from the task options passed to the viewer.
 
 ### Task properties
 
-| Property                | Type   | Attributes  | Description                                                                                                    |
-|-------------------------|--------|-------------|----------------------------------------------------------------------------------------------------------------|
-| mode                    | String |             | `'select'` or `'transcribe'`                                                                                   |
-| imgInfoUri              | String |             | Image info URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/#image-information-request-uri-syntax/)) |
-| manifestUri             | String | \<optional> | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/#resource-structure))        |
-| id                      | String | \<optional> | Task identifier                                                                                                |
-| objective               | String | \<optional> | The main objective                                                                                             |
-| guidance                | String | \<optional> | Additional guidance                                                                                            |
-| form                    | Object | \<optional> | Model and schema for `transcribe` mode (see [vue-form-generator](https://github.com/icebob/vue-form-generator))|
-| highlight               | Array  | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
-| tag                     | String | \<optional> | The tag to add when in `select` mode                                                                           |
+| Property    | Type   | Attributes  | Description                                                                                                    |
+|-------------|--------|-------------|----------------------------------------------------------------------------------------------------------------|
+| mode        | String |             | `'select'` or `'transcribe'`                                                                                   |
+| imgInfoUri  | String |             | Image info URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/#image-information-request-uri-syntax/)) |
+| manifestUri | String | \<optional> | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/#resource-structure))        |
+| id          | String | \<optional> | Task identifier                                                                                                |
+| objective   | String | \<optional> | The main objective                                                                                             |
+| guidance    | String | \<optional> | Additional guidance                                                                                            |
+| form        | Object | \<optional> | Model and schema for `transcribe` mode (see [vue-form-generator](https://github.com/icebob/vue-form-generator))|
+| highlight   | Array  | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
+| tag         | String | \<optional> | The tag to add when in `select` mode                                                                           |
+| creator     | Object | \<optional> | The Annotation creator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/))              |
+| generator   | Object | \<optional> | The Annotation generator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/))            |
 
 ## Modes
 
