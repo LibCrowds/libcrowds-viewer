@@ -234,8 +234,9 @@ export default {
           imgSource: this.currentTask.imgInfoUri,
           region: imgRect
         })
-        const tag = this.currentTask.addTag(this.currentTask.tag, imageUri)
-        drawOverlay(this.viewer, tag.id, vpRect, 'selection')
+        const anno = this.currentTask.addTag(this.currentTask.tag, imageUri)
+        drawOverlay(this.viewer, anno.id, vpRect, 'selection')
+        this.$emit('create', this.currentTask, anno)
       })
 
       // Confirm before leaving if any overlays have been drawn or forms filled
@@ -386,7 +387,6 @@ export default {
       this.selector.rect = selectionRect
       this.selector.draw()
       this.deleteTag(task, id)
-      this.$emit('update', task)
     },
 
     /**
@@ -397,8 +397,10 @@ export default {
      *   The tag ID.
      */
     deleteTag (task, id) {
+      const anno = task.getAnnotation(id)
       task.deleteAnnotation(id)
       this.deleteOverlay(id)
+      this.$emit('delete', task, anno)
     }
   },
 
