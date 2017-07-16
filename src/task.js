@@ -131,7 +131,7 @@ class Task {
    *   The comment value.
    */
   addComment (text) {
-    let anno = new Annotation('commenting', this.imgInfoUri)
+    let anno = new Annotation('commenting', this.imgInfo)
     anno.addBody({
       type: 'TextualBody',
       value: text,
@@ -150,7 +150,7 @@ class Task {
    *   The IIIF image region.
    */
   addTag (value, fragmentURI = null) {
-    const anno = new Annotation('tagging', this.imgInfoUri)
+    const anno = new Annotation('tagging', this.imgInfo)
     anno.addTag(this.tag, fragmentURI)
     this.annotations.push(anno)
     return anno
@@ -166,7 +166,7 @@ class Task {
    *   The IIIF image region.
    */
   describe (value, tag, fragmentURI = null) {
-    const anno = new Annotation('describing', this.imgInfoUri)
+    const anno = new Annotation('describing', this.imgInfo)
     anno.addDescription(value)
     anno.addTag(tag, fragmentURI = null)
     this.annotations.push(anno)

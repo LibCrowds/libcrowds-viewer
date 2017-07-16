@@ -12,19 +12,19 @@ import uuid from 'uuid/v4'
  * @param {String} motivation
  *   A motivation from the following section of the spec.
  *   https://www.w3.org/TR/annotation-model/#motivation-and-purpose
- * @param {String} targetId
- *   The target ID of the annotation (i.e. the IIIF image source).
+ * @param {Object} imgInfo
+ *   The IIIF image info.
  */
 class Annotation {
 
-  constructor (motivation, targetId) {
+  constructor (motivation, imgInfo) {
     this['@context'] = 'http://www.w3.org/ns/anno.jsonld'
     this['id'] = uuid()
     this.type = 'Annotation'
     this.motivation = motivation
     this.created = new Date().toISOString()
     this.target = {
-      id: targetId,
+      id: imgInfo['id'] || imgInfo['@id'],
       type: 'Image',
       format: 'image/jpeg'
     }
