@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import Task from '@/task'
+import Task from '@/model/task'
 import VueFormGenerator from "vue-form-generator"
 
 export default {
