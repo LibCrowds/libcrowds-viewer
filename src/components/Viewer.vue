@@ -255,7 +255,6 @@ export default {
             generator: this.generator
           })
           this.currentTask.annotations.push(anno)
-          drawOverlay(this.viewer, anno.id, vpRect, 'selection')
           this.$emit('create', this.currentTask, anno)
         })
       })
@@ -277,6 +276,28 @@ export default {
             return msg
           }
         })
+      }
+    },
+
+    /**
+     * Redraw all selection overlays for a task.
+     * @param {Task} task.
+     *   The task.
+     */
+    drawSelectionOverlays (task) {
+      const vp = this.viewer.viewport
+      let annos = filterAnnotations({
+        annotations: task.annotations,
+        motivation: 'tagging'
+      })
+      if (!annos.length) {
+        return
+      }
+      this.viewer.clearOverlays()
+      for (let anno of annos) {
+        const imgRect = extractRectFromImageUri(anno.target.selector.value)
+        const vpRect = vp.imageToViewportRectangle(imgRect)
+        drawOverlay(this.viewer, anno.id, vpRect, 'selection')
       }
     },
 
@@ -471,19 +492,34 @@ export default {
       task.deleteAnnotation(id)
       this.deleteOverlay(id)
       this.$emit('delete', task, anno)
+    },
+
+    /**
+     * Configure selection mode.
+     * @param {Task} task
+     *   The task.
+     */
+    configureSelectionMode (task) {
+      if (task.mode === 'select') {
+        this.selector.enable()
+        this.drawSelectionOverlays(this.currentTask)
+      } else {
+        this.selector.disable()
+      }
     }
   },
 
   watch : {
     currentTask: {
-      handler: function () {
-        // Open the current task image.
-        this.viewer.open(this.currentTask.imgInfoUri)
-        // Enable selector when in select mode.
-        if (this.currentTask.mode === 'select') {
-          this.selector.enable()
+      handler: function (oldVal, newVal) {
+        // Update the task image if it has changed
+        if (!oldVal || !newVal || oldVal.imgInfoUri !== newVal.imgInfoUri) {
+          this.viewer.open({
+            tileSource: this.currentTask.imgInfoUri,
+            success: () => this.configureSelectionMode(this.currentTask)
+          })
         } else {
-          this.selector.disable()
+          this.configureSelectionMode(this.currentTask)
         }
       },
       deep: true
