@@ -532,7 +532,7 @@ export default {
 
   .selection-box {
     transform: none !important;  /** Disable rotation */
-    z-index: 10;
+    z-index: 1;
     outline: 9999px solid rgba(#000, .6);
 
     .btn-selection {
