@@ -1,4 +1,3 @@
-import Annotation from '@/model/Annotation'
 import Form from '@/model/Form'
 
 /**
