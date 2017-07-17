@@ -475,15 +475,18 @@ export default {
   },
 
   watch : {
-    currentTask: function () {
-      // Open the current task image.
-      this.viewer.open(this.currentTask.imgInfoUri)
-      // Enable selector when in select mode.
-      if (this.currentTask.mode === 'select') {
-        this.selector.enable()
-      } else {
-        this.selector.disable()
-      }
+    currentTask: {
+      handler: function () {
+        // Open the current task image.
+        this.viewer.open(this.currentTask.imgInfoUri)
+        // Enable selector when in select mode.
+        if (this.currentTask.mode === 'select') {
+          this.selector.enable()
+        } else {
+          this.selector.disable()
+        }
+      },
+      deep: true
     }
   },
 
