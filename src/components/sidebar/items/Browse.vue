@@ -79,7 +79,7 @@ export default {
 
   watch: {
     tasks: function () {
-      update()
+      this.update()
     }
   },
 
