@@ -8,7 +8,7 @@
  *   The value to match.
  */
 function filterBy (annotations, key, value) {
-  const filtered = annotations.filter(function(anno) {
+  const filtered = annotations.filter(function (anno) {
     return anno[key] === value
   })
 

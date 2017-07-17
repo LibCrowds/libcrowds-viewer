@@ -12,11 +12,10 @@ import Annotation from '@/model/Annotation'
  *   The Annotation generator.
  */
 class CommentAnnotation extends Annotation {
-
   constructor ({
     imgInfo,
     value,
-    creator = null, 
+    creator = null,
     generator = null
   }) {
     super('commenting', imgInfo, creator, generator)

@@ -9,7 +9,7 @@
  * @param {String} cls
  *   Additional overlay class.
  */
-export default function (viewer, id, rect, cls = "") {
+export default function (viewer, id, rect, cls = '') {
   if (!viewer.addOverlay) {
     return
   }

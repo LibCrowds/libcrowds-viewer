@@ -16,13 +16,12 @@ import Annotation from '@/model/Annotation'
  *   The Annotation generator.
  */
 class DescriptionAnnotation extends Annotation {
-
   constructor ({
     imgInfo,
     value,
-    tag = null, 
+    tag = null,
     fragmentURI = null,
-    creator = null, 
+    creator = null,
     generator = null
   }) {
     super('describing', imgInfo, creator, generator)

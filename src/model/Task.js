@@ -4,7 +4,6 @@ import Form from '@/model/Form'
  * Represents a task to be updated with user input as annotations.
  */
 class Task {
-
   constructor ({
     mode,
     id,
@@ -65,8 +64,8 @@ class Task {
       method: 'get'
     }).then((response) => {
       return response.json()
-    }).catch(function(err) {
-      throw Error('Could not retrieve image info')
+    }).catch(function (err) {
+      throw Error(`Could not retrieve image info: ${err}`)
     })
   }
 
@@ -76,7 +75,7 @@ class Task {
    *   The Annotation ID.
    */
   getAnnotation (id) {
-    const filtered = this.annotations.filter(function(anno) {
+    const filtered = this.annotations.filter(function (anno) {
       return anno.id === id
     })
     const idx = this.annotations.indexOf(filtered[0])
@@ -89,7 +88,7 @@ class Task {
    *   The ID of the Annotation to delete.
    */
   deleteAnnotation (id) {
-    const filteredAnnos = this.annotations.filter(function(anno) {
+    const filteredAnnos = this.annotations.filter(function (anno) {
       return anno.id !== id
     })
     if (filteredAnnos.length === this.annotations.length) {
