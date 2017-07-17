@@ -14,6 +14,7 @@ module.exports = function (config) {
     webpackMiddleware: {
       noInfo: true
     },
+    browserNoActivityTimeout: 60000,
     coverageReporter: {
       dir: './coverage',
       reporters: [
