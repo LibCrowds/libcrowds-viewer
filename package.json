@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/LibCrowds/libcrowds-viewer",
   "scripts": {
-    "test": "karma start karma.conf.js",
+    "test": "cross-env NODE_ENV=test && karma start karma.conf.js",
     "lint": "eslint --ext .js,.vue src demo",
     "build": "npm run clean && cross-env NODE_ENV=production webpack --progress --hide-modules",
     "clean": "rimraf dist"

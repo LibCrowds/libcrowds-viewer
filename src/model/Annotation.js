@@ -9,14 +9,14 @@ import uuid from 'uuid/v4'
  * annotations the id is generated as a random UUID. This can later be
  * updated by the client should they decide to send the data to their own
  * annotation server.
- * @param {String} options.motivation
+ * @param {String} motivation
  *   A motivation from the following section of the spec.
  *   https://www.w3.org/TR/annotation-model/#motivation-and-purpose
- * @param {Object} options.imgInfo
+ * @param {Object} imgInfo
  *   The IIIF image info.
- * @param {Object} options.creator
+ * @param {Object} creator
  *   The Annotation creator.
- * @param {Object} options.generator
+ * @param {Object} generator
  *   The Annotation generator.
  */
 class Annotation {
@@ -76,11 +76,24 @@ class Annotation {
    *   The value to be set for key.
    */
   _setMultiItem (root, key, value) {
-    if (typeof root[key] === 'undefined') {
+    if (root[key] === undefined) {
+      // Set the item if none exists
       root[key] = value
-    } else if (Array.isArray(root[key]) && root[key].indexOf(value) < 0) {
-      root[key].push(value)
+    } else if (root[key].id === value.id) {
+      // Update the item if IDs match
+      root[key] = value
+    } else if (Array.isArray(root[key])) {
+      // Add unique items to an array (and update any with the same ID)
+      for (let item of root[key]) {
+        if (item.id === root[key].id) {
+          item = value
+        } else {
+          root[key].push(value)
+        }
+      }
     } else {
+      // Create new array if both items are unique
+      console.log('Creating array')
       root[key] = [root[key], value]
     }
     this.modified = new Date().toISOString()

@@ -6,9 +6,7 @@ describe('drawOverlay', () => {
 
   beforeEach(() => {
     viewer = {
-      addOverlay: function(obj) {
-        return
-      }
+      addOverlay: function(obj) {}
     }
     spyOn(viewer, 'addOverlay')
   })
