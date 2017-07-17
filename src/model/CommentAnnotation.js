@@ -15,7 +15,7 @@ class CommentAnnotation extends Annotation {
 
   constructor ({
     imgInfo,
-    text,
+    value,
     creator = null, 
     generator = null
   }) {

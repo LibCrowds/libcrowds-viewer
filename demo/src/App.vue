@@ -22,7 +22,6 @@
         :task-opts="taskOpts"
         :creator="creator"
         :generator="generator"
-        :annotations="annotations"
         @taskchange="handleTaskChange"
         @create="handleCreate"
         @update="handleUpdate"
@@ -38,7 +37,6 @@
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/github'
 import tasks from './tasks'
-import annotations from './annotations'
 
 export default {
   data: function () {
@@ -56,8 +54,7 @@ export default {
         type: "Software",
         name: "Code v2.1",
         homepage: "http://example.org/client1/homepage1"
-      },
-      annotations: annotations
+      }
     }
   },
 
@@ -72,37 +69,20 @@ export default {
   },
 
   methods: {
-    guid() {
-      function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-          .toString(16)
-          .substring(1);
-      }
-      return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-        s4() + '-' + s4() + s4() + s4();
-    },
     handleTaskChange (task) {
-      console.log('TASK CHANGED', task)
+      console.log('Task changed', task)
     },
     handleCreate (task, annotation) {
-      annotation.id = this.guid()
-      this.annotations.push(annotation)
+      console.log('Annotation created', task, annotation)
     },
     handleUpdate (task, annotation) {
-      const filtered = this.annotations.filter(function(anno) {
-        return anno.id === annotation.id
-      })
-      const idx = this.annotations.indexOf(filtered[0])
-      let originalAnno = this.annotations[idx]
-      originalAnno = annotation
+      console.log('Annotation updated', task, annotation)
     },
     handleDelete (task, annotation) {
-      this.annotations = this.annotations.filter(function(anno) {
-        return anno.id !== id
-      })
+      console.log('Annotation deleted', task, annotation)
     },
-    handleSubmit (obj) {
-      const jsonStr = JSON.stringify(obj, null, 2)
+    handleSubmit (task) {
+      const jsonStr = JSON.stringify(task, null, 2)
       console.log(jsonStr)
       alert('User input logged to console')
     }
