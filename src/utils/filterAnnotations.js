@@ -16,7 +16,7 @@ function filterBy (annotations, key, value) {
   for (let anno of filtered) {
     const idx = annotations.indexOf(anno)
     const originalAnno = annotations[idx]
-    annoList.push(anno)
+    annoList.push(originalAnno)
   }
   return annoList
 }
