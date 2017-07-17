@@ -305,14 +305,13 @@ export default {
      * TODO: Lose this dependency!
      */
     configureSelector () {
-      // Initialise the selector
       this.selector = this.viewer.selection({
         showConfirmDenyButtons: false,
         restrictToImage: true,
         returnPixelCoordinates: false
       })
 
-      // Add the confirm button
+      /* eslint-disable no-new */
       new OpenSeadragon.Button({
         element: this.$refs.confirmSelection,
         clickTimeThreshold: this.viewer.clickTimeThreshold,
@@ -322,7 +321,7 @@ export default {
       })
       this.selector.element.appendChild(this.$refs.confirmSelection)
 
-      // Add the cancel button
+      /* eslint-disable no-new */
       const cancelBtn = new OpenSeadragon.Button({
         element: this.$refs.cancelSelection,
         clickTimeThreshold: this.viewer.clickTimeThreshold,

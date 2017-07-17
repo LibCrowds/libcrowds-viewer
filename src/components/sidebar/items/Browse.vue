@@ -39,7 +39,7 @@ export default {
   },
 
   methods: {
-    update() {
+    update () {
       const viewer = OpenSeadragon({
         id: 'strip',
         panVertical: false,
@@ -50,7 +50,7 @@ export default {
         nextButton: 'lv-browse-next',
         gestureSettingsMouse: {
           scrollToZoom: false,
-          clickToZoom: false,
+          clickToZoom: false
         },
         gestureSettingsTouch: {
           dblClickToZoom: false,
