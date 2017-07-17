@@ -104,6 +104,7 @@ import CommentAnnotation from '@/model/CommentAnnotation'
 import drawOverlay from '@/utils/drawOverlay'
 import getImageUri from '@/utils/getImageUri'
 import extractRectFromImageUri from '@/utils/extractRectFromImageUri'
+import filterAnnotations from '@/utils/filterAnnotations'
 
 export default {
   data: function () {
@@ -248,9 +249,9 @@ export default {
         this.currentTask.fetchImageInfo().then((info) => {
           let anno = new TagAnnotation({
             imgInfo: info,
-            value: this.currentTask.tag, 
-            fragmentURI: imageUri, 
-            creator: this.creator, 
+            value: this.currentTask.tag,
+            fragmentURI: imageUri,
+            creator: this.creator,
             generator: this.generator
           })
           this.currentTask.annotations.push(anno)
@@ -343,7 +344,10 @@ export default {
      *   The text.
      */
     updateNote (task, text) {
-      let annos = task.getAnnotationsByMotivation('commenting')
+      let annos = filterAnnotations({
+        annotations: task.annotations,
+        motivation: 'commenting'
+      })
       if (annos.length && text.length === 0) {
         task.deleteAnnotation(annos[0].id)
         this.$emit('delete', task, annos[0])
@@ -392,7 +396,7 @@ export default {
           this.currentTask.fetchImageInfo().then((info) => {
             let anno = new DescriptionAnnotation({
               imgInfo: info,
-              value: form.model[prop], 
+              value: form.model[prop],
               tag: prop,
               creator: this.creator,
               generator: this.generator

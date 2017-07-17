@@ -71,25 +71,6 @@ class Task {
   }
 
   /**
-   * Return annotations by motivation.
-   * @param {String} motivation
-   *   The motivation.
-   */
-  getAnnotationsByMotivation (motivation) {
-    const filteredAnnos = this.annotations.filter(function(anno) {
-      return anno.motivation === motivation
-    })
-
-    const annoList = []
-    for (let filteredAnno of filteredAnnos) {
-      const idx = this.annotations.indexOf(filteredAnno)
-      const originalAnno = this.annotations[idx]
-      annoList.push(originalAnno)
-    }
-    return annoList
-  }
-
-  /**
    * Return an Annotation.
    * @param {*} id
    *   The Annotation ID.
