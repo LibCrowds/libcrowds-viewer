@@ -245,7 +245,7 @@ export default {
           imgSource: this.currentTask.imgInfoUri,
           region: imgRect
         })
-        task.fetchImageInfo().then((info) => {
+        this.currentTask.fetchImageInfo().then((info) => {
           let anno = new TagAnnotation({
             imgInfo: info,
             value: this.currentTask.tag, 
