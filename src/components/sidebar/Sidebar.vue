@@ -47,6 +47,7 @@
 
 <script>
 import Task from '@/model/Task'
+import filterAnnotations from '@/utils/filterAnnotations'
 
 export default {
   data: function () {
@@ -79,11 +80,11 @@ export default {
       }
     },
     note: function () {
-      const annotatios = filterAnnotations({
+      const annotations = filterAnnotations({
         annotations: this.task.annotations,
         motivation: 'commenting'
       })
-      return annotatios.length ? annotatios[0].body.value : ''
+      return annotations.length ? annotations[0].body.value : ''
     }
   },
 

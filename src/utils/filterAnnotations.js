@@ -27,7 +27,7 @@ export default function ({
 }) {
   let filtered = annotations
   if (motivation) {
-    annotations = filterBy(annotations, 'motivation', motivation)
+    filtered = filterBy(annotations, 'motivation', motivation)
   }
   return filtered
 }
