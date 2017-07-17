@@ -17,7 +17,8 @@ module.exports = {
         loader: 'eslint-loader',
         enforce: 'pre',
         include: [
-          path.resolve(__dirname, 'src')
+          path.resolve(__dirname, 'src'),
+          path.resolve(__dirname, 'demo')
         ],
         options: {
           formatter: require('eslint-friendly-formatter')
