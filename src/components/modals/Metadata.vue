@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import Task from '@/model/task'
+import Task from '@/model/Task'
 import Modal from '@/components/Modal'
 
 export default {

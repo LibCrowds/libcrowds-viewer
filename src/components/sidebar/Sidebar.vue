@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import Task from '@/model/task'
+import Task from '@/model/Task'
 
 export default {
   data: function () {
