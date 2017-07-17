@@ -46,7 +46,7 @@ describe('Annotation', () => {
     }
     const creatorTwo = {
       name: 'me',
-      id: 'http://example.com/user1',
+      id: 'http://example.com/user1'
     }
     anno.addCreator(creatorOne)
     anno.addCreator(creatorTwo)
@@ -61,7 +61,7 @@ describe('Annotation', () => {
     }
     const creatorTwo = {
       name: 'newname',
-      id: 'http://example.com/user1',
+      id: 'http://example.com/user1'
     }
     anno.addCreator(creatorOne)
     anno.addCreator(creatorTwo)
