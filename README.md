@@ -113,7 +113,10 @@ Note that the `tag` property is required when in `select` mode.
 
 ```jsonld
 {
-  "@context": "http://www.w3.org/ns/anno.jsonld",
+  "@context": [
+    "http://www.w3.org/ns/anno.jsonld",
+    "http://iiif.io/api/image/2/context.json"
+  ],
   "id": "d008efa2-42e5-494e-b463-c7b9b6744b67",
   "type": "Annotation",
   "motivation": "tagging",
@@ -216,7 +219,10 @@ Note that the `form` property is required when in `transcribe` mode.
 
 ```jsonld
 {
-  "@context": "http://www.w3.org/ns/anno.jsonld",
+  "@context": [
+    "http://www.w3.org/ns/anno.jsonld",
+    "http://iiif.io/api/image/2/context.json"
+  ],
   "id": "45e07a8b-82c2-4fb3-a746-068aad1fab11",
   "type": "Annotation",
   "motivation": "describing",

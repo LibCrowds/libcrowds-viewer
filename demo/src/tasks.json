@@ -9,7 +9,10 @@
     "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "annotations": [
       {
-        "@context": "http://www.w3.org/ns/anno.jsonld",
+        "@context": [
+          "http://www.w3.org/ns/anno.jsonld",
+          "http://iiif.io/api/image/2/context.json"
+        ],
         "id": "d008efa2-42e5-494e-b463-c7b9b6744b67",
         "type": "Annotation",
         "motivation": "tagging",
