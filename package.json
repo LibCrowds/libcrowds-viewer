@@ -17,8 +17,7 @@
     "test": "karma start karma.conf.js",
     "lint": "eslint --ext .js,.vue src demo",
     "build": "npm run clean && cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "clean": "rimraf dist",
-    "prepublish": "npm run build"
+    "clean": "rimraf dist"
   },
   "dependencies": {
     "es6-object-assign": "^1.1.0",
