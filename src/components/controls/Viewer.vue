@@ -4,6 +4,7 @@
     <controls
       position="top"
       layout="row"
+      hint-position="bottom"
       :buttons="buttons">
     </controls>
 
