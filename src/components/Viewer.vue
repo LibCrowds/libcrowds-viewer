@@ -362,6 +362,7 @@ export default {
             creator: this.creator,
             generator: this.generator
           })
+          task.annotations.push(anno)
           this.$emit('create', task, anno)
         })
       }
