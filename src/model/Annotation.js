@@ -22,7 +22,10 @@ import uuid from 'uuid/v4'
 class Annotation {
 
   constructor (motivation, imgInfo, creator = null, generator = null) {
-    this['@context'] = 'http://www.w3.org/ns/anno.jsonld'
+    this['@context'] = [
+      'http://www.w3.org/ns/anno.jsonld',
+      imgInfo['context'] || imgInfo['@context']
+    ]
     this['id'] = uuid()
     this.type = 'Annotation'
     this.motivation = motivation
