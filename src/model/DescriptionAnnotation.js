@@ -1,4 +1,4 @@
-import Annotation from '@/model/annotation'
+import Annotation from '@/model/Annotation'
 
 /**
  * Represents a Web Annotation used for descriptions.
