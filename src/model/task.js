@@ -1,5 +1,5 @@
 import Annotation from '@/model/Annotation'
-import Form from '@/model/form'
+import Form from '@/model/Form'
 
 /**
  * Represents a task to be updated with user input as annotations.
