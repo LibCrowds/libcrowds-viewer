@@ -18,7 +18,12 @@ class CommentAnnotation extends Annotation {
     creator = null,
     generator = null
   }) {
-    super('commenting', imgInfo, creator, generator)
+    super({
+      motivation: 'commenting',
+      imgInfo: imgInfo,
+      creator: creator,
+      generator: generator
+    })
     this.addBody({
       type: 'TextualBody',
       value: value,

@@ -9,18 +9,23 @@ import uuid from 'uuid/v4'
  * annotations the id is generated as a random UUID. This can later be
  * updated by the client should they decide to send the data to their own
  * annotation server.
- * @param {String} motivation
+ * @param {String} options.motivation
  *   A motivation from the following section of the spec.
  *   https://www.w3.org/TR/annotation-model/#motivation-and-purpose
- * @param {Object} imgInfo
+ * @param {Object} options.imgInfo
  *   The IIIF image info.
- * @param {Object} creator
+ * @param {Object} options.creator
  *   The Annotation creator.
- * @param {Object} generator
+ * @param {Object} options.generator
  *   The Annotation generator.
  */
 class Annotation {
-  constructor (motivation, imgInfo, creator = null, generator = null) {
+  constructor ({
+    motivation,
+    imgInfo,
+    creator = null,
+    generator = null
+  }) {
     this['@context'] = [
       'http://www.w3.org/ns/anno.jsonld',
       imgInfo['context'] || imgInfo['@context']

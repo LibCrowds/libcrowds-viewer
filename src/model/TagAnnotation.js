@@ -21,7 +21,12 @@ class TagAnnotation extends Annotation {
     creator = null,
     generator = null
   }) {
-    super('tagging', imgInfo, creator, generator)
+    super({
+      motivation: 'tagging',
+      imgInfo: imgInfo,
+      creator: creator,
+      generator: generator
+    })
     this.addTag(value, imgInfo, fragmentURI)
   }
 }
