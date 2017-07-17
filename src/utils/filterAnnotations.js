@@ -21,6 +21,11 @@ function filterBy (annotations, key, value) {
   return annoList
 }
 
+/**
+ * Filter annotations.
+ * @param {Object} opts
+ *   The properties to filter by.
+ */
 export default function ({
   annotations,
   motivation = null
