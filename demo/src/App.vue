@@ -44,16 +44,16 @@ export default {
       taskOpts: tasks,
       showViewer: false,
       creator: {
-        id: "http://example.org/user1",
-        type: "Person",
-        name: "My Pseudonym",
-        nickname: "pseudo"
+        id: 'http://example.org/user1',
+        type: 'Person',
+        name: 'My Pseudonym',
+        nickname: 'pseudo'
       },
       generator: {
-        id: "http://example.org/client1",
-        type: "Software",
-        name: "Code v2.1",
-        homepage: "http://example.org/client1/homepage1"
+        id: 'http://example.org/client1',
+        type: 'Software',
+        name: 'Code v2.1',
+        homepage: 'http://example.org/client1/homepage1'
       }
     }
   },

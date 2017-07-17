@@ -16,16 +16,20 @@ import Annotation from '@/model/Annotation'
  *   The Annotation generator.
  */
 class DescriptionAnnotation extends Annotation {
-
   constructor ({
     imgInfo,
     value,
-    tag = null, 
+    tag = null,
     fragmentURI = null,
-    creator = null, 
+    creator = null,
     generator = null
   }) {
-    super('describing', imgInfo, creator, generator)
+    super({
+      motivation: 'describing',
+      imgInfo: imgInfo,
+      creator: creator,
+      generator: generator
+    })
     this.addDescription(value)
     if (tag) {
       this.addTag(tag, fragmentURI)

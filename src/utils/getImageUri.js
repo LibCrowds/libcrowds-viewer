@@ -16,8 +16,8 @@ export default function ({
 
   const source = imgSource.replace('/info.json', '')
   const regStr = typeof region === 'object'
-                   ? `${region.x},${region.y},${region.width},${region.height}`
-                   : region
+    ? `${region.x},${region.y},${region.width},${region.height}`
+    : region
 
   return `${source}/${regStr}/${size}/${rotation}/${quality}.${format}`
 }

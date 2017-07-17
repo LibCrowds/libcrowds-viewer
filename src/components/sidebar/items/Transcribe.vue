@@ -13,7 +13,7 @@
 
 <script>
 import Task from '@/model/Task'
-import VueFormGenerator from "vue-form-generator"
+import VueFormGenerator from 'vue-form-generator'
 
 export default {
   data: function () {
@@ -28,7 +28,7 @@ export default {
   },
 
   components: {
-    "vue-form-generator": VueFormGenerator.component
+    'vue-form-generator': VueFormGenerator.component
   },
 
   props: {

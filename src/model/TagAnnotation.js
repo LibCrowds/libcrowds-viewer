@@ -14,15 +14,19 @@ import Annotation from '@/model/Annotation'
  *   The Annotation generator.
  */
 class TagAnnotation extends Annotation {
-
   constructor ({
     imgInfo,
-    value, 
-    fragmentURI = null, 
-    creator = null, 
+    value,
+    fragmentURI = null,
+    creator = null,
     generator = null
   }) {
-    super('tagging', imgInfo, creator, generator)
+    super({
+      motivation: 'tagging',
+      imgInfo: imgInfo,
+      creator: creator,
+      generator: generator
+    })
     this.addTag(value, imgInfo, fragmentURI)
   }
 }

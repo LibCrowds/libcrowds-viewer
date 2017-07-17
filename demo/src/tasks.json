@@ -65,8 +65,8 @@
     "mode": "select",
     "objective": "Tag all of images on the page",
     "guidance": "Draw a box around each image",
-    "imgInfoUri": "http://www.e-codices.unifr.ch/loris/vad/vad-0342/vad-0342_002.jp2/info.json",
-    "manifestUri": "http://www.e-codices.unifr.ch/metadata/iiif/vad-0342/manifest.json"
+    "imgInfoUri": "https://www.e-codices.unifr.ch/loris/vad/vad-0342/vad-0342_002.jp2/info.json",
+    "manifestUri": "https://www.e-codices.unifr.ch/metadata/iiif/vad-0342/manifest.json"
   },
   {
     "id": 8,

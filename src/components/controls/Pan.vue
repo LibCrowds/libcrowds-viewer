@@ -12,6 +12,7 @@
 
 <script>
 import Controls from '@/components/Controls'
+import OpenSeadragon from 'openseadragon'
 
 export default {
   props: {

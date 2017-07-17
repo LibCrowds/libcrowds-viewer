@@ -39,7 +39,7 @@ export default {
   },
 
   methods: {
-    update() {
+    update () {
       const viewer = OpenSeadragon({
         id: 'strip',
         panVertical: false,
@@ -50,7 +50,7 @@ export default {
         nextButton: 'lv-browse-next',
         gestureSettingsMouse: {
           scrollToZoom: false,
-          clickToZoom: false,
+          clickToZoom: false
         },
         gestureSettingsTouch: {
           dblClickToZoom: false,
@@ -66,8 +66,8 @@ export default {
           pinchToZoom: false,
           flickEnabled: false
         },
-        tileSources: this.tasks.map(function (t) {
-          return t.imgInfoUri
+        tileSources: this.tasks.map((task) => {
+          return task.imgInfoUri
         })
       })
       viewer.addHandler('canvas-click', () => {
@@ -79,7 +79,7 @@ export default {
 
   watch: {
     tasks: function () {
-      update()
+      this.update()
     }
   },
 

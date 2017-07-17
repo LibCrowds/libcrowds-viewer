@@ -2,10 +2,9 @@
  * Represents a transcription form.
  */
 class Form {
-
   constructor ({
     model,
-    schema,
+    schema
   }) {
     this.model = model
     this.schema = schema

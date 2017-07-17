@@ -48,12 +48,12 @@ export default {
     }
   },
 
-  created() {
+  created () {
     this.$root.$on('show::modal', (id, triggerEl) => {
       if (id === this.id) {
         this.show = true
       }
-    });
+    })
     this.$root.$on('hide::modal', id => {
       if (id === this.id) {
         this.show = false

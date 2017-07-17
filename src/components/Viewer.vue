@@ -145,7 +145,7 @@ export default {
         return value.length
       }
     },
-    confirmBeforeUnload : {
+    confirmBeforeUnload: {
       type: Boolean,
       default: false
     },
@@ -236,12 +236,10 @@ export default {
      * Setup event handlers.
      */
     setupHandlers () {
-
       // Add a tag and draw the overlay when a selection is made.
       this.viewer.addHandler('selection', (selectionRect) => {
         const vp = this.viewer.viewport
         const imgRect = vp.viewportToImageRectangle(selectionRect)
-        const vpRect = vp.imageToViewportRectangle(imgRect)
         const imageUri = getImageUri({
           imgSource: this.currentTask.imgInfoUri,
           region: imgRect
@@ -263,7 +261,7 @@ export default {
       window.onbeforeunload = () => {
         const msg = 'Unsaved changes will be lost.'
         if (!this.confirmBeforeUnload) {
-          return;
+          return
         }
 
         // TODO: Check for selection overlays only
@@ -271,7 +269,7 @@ export default {
           return msg
         }
 
-        [].forEach.call(document.querySelectorAll('input'), function(input) {
+        [].forEach.call(document.querySelectorAll('input'), function (input) {
           if (input.value.length) {
             return msg
           }
@@ -307,14 +305,13 @@ export default {
      * TODO: Lose this dependency!
      */
     configureSelector () {
-      // Initialise the selector
       this.selector = this.viewer.selection({
         showConfirmDenyButtons: false,
         restrictToImage: true,
         returnPixelCoordinates: false
       })
 
-      // Add the confirm button
+      /* eslint-disable no-new */
       new OpenSeadragon.Button({
         element: this.$refs.confirmSelection,
         clickTimeThreshold: this.viewer.clickTimeThreshold,
@@ -324,8 +321,8 @@ export default {
       })
       this.selector.element.appendChild(this.$refs.confirmSelection)
 
-      // Add the cancel button
-      const cancelBtn = new OpenSeadragon.Button({
+      /* eslint-disable no-new */
+      new OpenSeadragon.Button({
         element: this.$refs.cancelSelection,
         clickTimeThreshold: this.viewer.clickTimeThreshold,
         clickDistThreshold: this.viewer.clickDistThreshold,
@@ -340,10 +337,12 @@ export default {
      */
     highlightRegion () {
       if (this.region) {
-        const rect = new OpenSeadragon.Rect(this.region.x,
-                                            this.region.y,
-                                            this.region.width,
-                                            this.region.height)
+        const rect = new OpenSeadragon.Rect(
+          this.region.x,
+          this.region.y,
+          this.region.width,
+          this.region.height
+        )
         drawOverlay(this.viewer, 'highlight', rect, 'highlight')
       }
     },
@@ -376,7 +375,7 @@ export default {
         annos[0].body.value = text
         annos[0].modify({
           creator: this.creator,
-          generator: this.generator,
+          generator: this.generator
         })
         this.$emit('update', task, annos[0])
       } else {
@@ -410,7 +409,7 @@ export default {
           bodies[0].value = form.model[prop]
           anno.modify({
             creator: this.creator,
-            generator: this.generator,
+            generator: this.generator
           })
           this.$emit('update', task, anno)
         } else {
@@ -471,10 +470,12 @@ export default {
       const tag = task.getAnnotation(id)
       const imgRect = extractRectFromImageUri(tag.target.selector.value)
       const vpRect = vp.imageToViewportRectangle(imgRect)
-      const selectionRect = new OpenSeadragon.SelectionRect(vpRect.x,
-                                                            vpRect.y,
-                                                            vpRect.width,
-                                                            vpRect.height)
+      const selectionRect = new OpenSeadragon.SelectionRect(
+        vpRect.x,
+        vpRect.y,
+        vpRect.width,
+        vpRect.height
+      )
       this.selector.rect = selectionRect
       this.selector.draw()
       this.deleteTag(task, id)
@@ -509,7 +510,7 @@ export default {
     }
   },
 
-  watch : {
+  watch: {
     currentTask: {
       handler: function (oldVal, newVal) {
         // Update the task image if it has changed

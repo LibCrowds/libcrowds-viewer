@@ -20,8 +20,12 @@ import uuid from 'uuid/v4'
  *   The Annotation generator.
  */
 class Annotation {
-
-  constructor (motivation, imgInfo, creator = null, generator = null) {
+  constructor ({
+    motivation,
+    imgInfo,
+    creator = null,
+    generator = null
+  }) {
     this['@context'] = [
       'http://www.w3.org/ns/anno.jsonld',
       imgInfo['context'] || imgInfo['@context']
@@ -52,7 +56,7 @@ class Annotation {
    * @param {Object} generator
    *   The Annotation generator.
    */
-  modify (creator = null, generator = null) {
+  modify ({creator = null, generator = null}) {
     this.modified = new Date().toISOString()
     if (creator) {
       this.addCreator(creator)
@@ -71,12 +75,24 @@ class Annotation {
    * @param {*} value
    *   The value to be set for key.
    */
-  _setMultiItem(root, key, value) {
-    if (typeof root[key] === 'undefined') {
+  _setMultiItem (root, key, value) {
+    if (root[key] === undefined) {
+      // Set the item if none exists
       root[key] = value
-    } else if (Array.isArray(root[key]) && root[key].indexOf(value) < 0) {
-      root[key].push(value)
+    } else if (root[key].id === value.id) {
+      // Update the item if IDs match
+      root[key] = value
+    } else if (Array.isArray(root[key])) {
+      // Add unique items to an array (and update any with the same ID)
+      for (let item of root[key]) {
+        if (item.id === root[key].id) {
+          item = value
+        } else {
+          root[key].push(value)
+        }
+      }
     } else {
+      // Create new array if both items are unique
       root[key] = [root[key], value]
     }
     this.modified = new Date().toISOString()
@@ -128,7 +144,7 @@ class Annotation {
    * @param {Object} opts
    *   The Body to be added.
    */
-  addBody(opts) {
+  addBody (opts) {
     this._setMultiItem(this, 'body', opts)
   }
 
@@ -137,7 +153,7 @@ class Annotation {
    * @param {Object} opts
    *   The body to be added.
    */
-  addCreator(opts) {
+  addCreator (opts) {
     this._setMultiItem(this, 'creator', opts)
   }
 
@@ -146,18 +162,18 @@ class Annotation {
    * @param {Object} opts
    *   The generator to be added.
    */
-  addGenerator(opts) {
+  addGenerator (opts) {
     this._setMultiItem(this, 'generator', opts)
   }
 
   /**
    * Return matching bodies filtered at root level by filters.
-   * @param {*} filters 
+   * @param {*} filters
    *   Array of key-value pairs on which to search.
    */
   searchBodies (filters) {
     if (Array.isArray(this.body)) {
-      const filtered = this.body.filter(function(item) {
+      const filtered = this.body.filter(function (item) {
         for (let prop in filters) {
           if (item[prop] !== filters[prop]) {
             return false

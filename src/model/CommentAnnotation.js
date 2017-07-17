@@ -12,14 +12,18 @@ import Annotation from '@/model/Annotation'
  *   The Annotation generator.
  */
 class CommentAnnotation extends Annotation {
-
   constructor ({
     imgInfo,
     value,
-    creator = null, 
+    creator = null,
     generator = null
   }) {
-    super('commenting', imgInfo, creator, generator)
+    super({
+      motivation: 'commenting',
+      imgInfo: imgInfo,
+      creator: creator,
+      generator: generator
+    })
     this.addBody({
       type: 'TextualBody',
       value: value,

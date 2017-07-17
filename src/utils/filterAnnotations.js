@@ -8,7 +8,7 @@
  *   The value to match.
  */
 function filterBy (annotations, key, value) {
-  const filtered = annotations.filter(function(anno) {
+  const filtered = annotations.filter(function (anno) {
     return anno[key] === value
   })
 
@@ -16,18 +16,23 @@ function filterBy (annotations, key, value) {
   for (let anno of filtered) {
     const idx = annotations.indexOf(anno)
     const originalAnno = annotations[idx]
-    annoList.push(anno)
+    annoList.push(originalAnno)
   }
   return annoList
 }
 
+/**
+ * Filter annotations.
+ * @param {Object} opts
+ *   The properties to filter by.
+ */
 export default function ({
   annotations,
   motivation = null
 }) {
   let filtered = annotations
   if (motivation) {
-    annotations = filterBy(annotations, 'motivation', motivation)
+    filtered = filterBy(annotations, 'motivation', motivation)
   }
   return filtered
 }
