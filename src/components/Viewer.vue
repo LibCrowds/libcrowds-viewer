@@ -322,7 +322,7 @@ export default {
       this.selector.element.appendChild(this.$refs.confirmSelection)
 
       /* eslint-disable no-new */
-      const cancelBtn = new OpenSeadragon.Button({
+      new OpenSeadragon.Button({
         element: this.$refs.cancelSelection,
         clickTimeThreshold: this.viewer.clickTimeThreshold,
         clickDistThreshold: this.viewer.clickDistThreshold,
