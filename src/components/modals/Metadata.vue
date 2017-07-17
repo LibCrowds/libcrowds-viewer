@@ -94,8 +94,8 @@ export default {
         this.logo = data.logo
         this.attribution = data.attribution
         this.license = data.license
-      }).catch(function(err) {
-        throw Error('Could not retrieve the manifest')
+      }).catch(function (err) {
+        throw Error(`Could not retrieve the manifest: ${err}`)
       })
     },
 

@@ -5,13 +5,11 @@ import Viewer from './components/Viewer.vue'
 import 'normalize.css'
 
 export default {
-  install(Vue) {
+  install (Vue) {
     if (this.installed) {
       return
     }
-
     this.installed = true
-
     Vue.component('libcrowds-viewer', Viewer)
   }
 }
