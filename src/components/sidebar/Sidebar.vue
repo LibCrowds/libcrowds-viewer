@@ -79,8 +79,11 @@ export default {
       }
     },
     note: function () {
-      const comments = this.task.getAnnotationsByMotivation('commenting')
-      return comments.length ? comments[0].body.value : ''
+      const annotatios = filterAnnotations({
+        annotations: this.task.annotations,
+        motivation: 'commenting'
+      })
+      return annotatios.length ? annotatios[0].body.value : ''
     }
   },
 

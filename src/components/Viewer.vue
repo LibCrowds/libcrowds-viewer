@@ -104,6 +104,7 @@ import CommentAnnotation from '@/model/CommentAnnotation'
 import drawOverlay from '@/utils/drawOverlay'
 import getImageUri from '@/utils/getImageUri'
 import extractRectFromImageUri from '@/utils/extractRectFromImageUri'
+import filterAnnotations from '@/utils/filterAnnotations'
 
 export default {
   data: function () {
@@ -248,13 +249,12 @@ export default {
         this.currentTask.fetchImageInfo().then((info) => {
           let anno = new TagAnnotation({
             imgInfo: info,
-            value: this.currentTask.tag, 
-            fragmentURI: imageUri, 
-            creator: this.creator, 
+            value: this.currentTask.tag,
+            fragmentURI: imageUri,
+            creator: this.creator,
             generator: this.generator
           })
           this.currentTask.annotations.push(anno)
-          drawOverlay(this.viewer, anno.id, vpRect, 'selection')
           this.$emit('create', this.currentTask, anno)
         })
       })
@@ -276,6 +276,28 @@ export default {
             return msg
           }
         })
+      }
+    },
+
+    /**
+     * Redraw all selection overlays for a task.
+     * @param {Task} task.
+     *   The task.
+     */
+    drawSelectionOverlays (task) {
+      const vp = this.viewer.viewport
+      let annos = filterAnnotations({
+        annotations: task.annotations,
+        motivation: 'tagging'
+      })
+      if (!annos.length) {
+        return
+      }
+      this.viewer.clearOverlays()
+      for (let anno of annos) {
+        const imgRect = extractRectFromImageUri(anno.target.selector.value)
+        const vpRect = vp.imageToViewportRectangle(imgRect)
+        drawOverlay(this.viewer, anno.id, vpRect, 'selection')
       }
     },
 
@@ -343,7 +365,10 @@ export default {
      *   The text.
      */
     updateNote (task, text) {
-      let annos = task.getAnnotationsByMotivation('commenting')
+      let annos = filterAnnotations({
+        annotations: task.annotations,
+        motivation: 'commenting'
+      })
       if (annos.length && text.length === 0) {
         task.deleteAnnotation(annos[0].id)
         this.$emit('delete', task, annos[0])
@@ -392,7 +417,7 @@ export default {
           this.currentTask.fetchImageInfo().then((info) => {
             let anno = new DescriptionAnnotation({
               imgInfo: info,
-              value: form.model[prop], 
+              value: form.model[prop],
               tag: prop,
               creator: this.creator,
               generator: this.generator
@@ -467,19 +492,37 @@ export default {
       task.deleteAnnotation(id)
       this.deleteOverlay(id)
       this.$emit('delete', task, anno)
+    },
+
+    /**
+     * Configure selection mode.
+     * @param {Task} task
+     *   The task.
+     */
+    configureSelectionMode (task) {
+      if (task.mode === 'select') {
+        this.selector.enable()
+        this.drawSelectionOverlays(this.currentTask)
+      } else {
+        this.selector.disable()
+      }
     }
   },
 
   watch : {
-    currentTask: function () {
-      // Open the current task image.
-      this.viewer.open(this.currentTask.imgInfoUri)
-      // Enable selector when in select mode.
-      if (this.currentTask.mode === 'select') {
-        this.selector.enable()
-      } else {
-        this.selector.disable()
-      }
+    currentTask: {
+      handler: function (oldVal, newVal) {
+        // Update the task image if it has changed
+        if (!oldVal || !newVal || oldVal.imgInfoUri !== newVal.imgInfoUri) {
+          this.viewer.open({
+            tileSource: this.currentTask.imgInfoUri,
+            success: () => this.configureSelectionMode(this.currentTask)
+          })
+        } else {
+          this.configureSelectionMode(this.currentTask)
+        }
+      },
+      deep: true
     }
   },
 
