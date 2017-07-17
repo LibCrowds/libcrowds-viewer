@@ -3,7 +3,6 @@
 [![npm version](https://badge.fury.io/js/libcrowds-viewer.svg)](https://badge.fury.io/js/libcrowds-viewer)
 [![Build Status](https://travis-ci.org/LibCrowds/libcrowds-viewer.svg?branch=master)](https://travis-ci.org/LibCrowds/libcrowds-viewer)
 [![dependencies Status](https://david-dm.org/LibCrowds/libcrowds-viewer/status.svg)](https://david-dm.org/LibCrowds/libcrowds-viewer)
-[![devDependencies Status](https://david-dm.org/LibCrowds/libcrowds-viewer/dev-status.svg)](https://david-dm.org/LibCrowds/libcrowds-viewer?type=dev)
 
 > IIIF-compatible image viewer Vue component for microtasks
 
