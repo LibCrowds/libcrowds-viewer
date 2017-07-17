@@ -24,7 +24,12 @@ class DescriptionAnnotation extends Annotation {
     creator = null,
     generator = null
   }) {
-    super('describing', imgInfo, creator, generator)
+    super({
+      motivation: 'describing',
+      imgInfo: imgInfo,
+      creator: creator,
+      generator: generator
+    })
     this.addDescription(value)
     if (tag) {
       this.addTag(tag, fragmentURI)
