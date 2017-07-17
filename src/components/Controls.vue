@@ -5,7 +5,7 @@
         :id="b.id"
         v-for="b in buttons"
         :key="b.id"
-        class="hint--right hint--no-animate btn btn-control"
+        :class="`hint--${hintPosition} hint--no-animate btn btn-control`"
         :aria-label="b.tooltip"
         @click="handleClick(b.click)">
         <icon :name="b.icon" :scale="scale"></icon>
@@ -44,6 +44,10 @@ export default {
       default: 1.25
     },
     position: {
+      type: String,
+      default: 'bottom'
+    },
+    hintPosition: {
       type: String,
       default: 'bottom'
     }

@@ -4,6 +4,7 @@
     <controls
       position="bottom"
       scale="1"
+      hint-position="top"
       :buttons="buttons">
     </controls>
 
