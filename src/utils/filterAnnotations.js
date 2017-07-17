@@ -18,7 +18,6 @@ function filterBy (annotations, key, value) {
     const originalAnno = annotations[idx]
     annoList.push(anno)
   }
-  console.log(annoList)
   return annoList
 }
 
