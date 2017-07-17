@@ -15,14 +15,17 @@ import uuid from 'uuid/v4'
  * @param {Object} imgInfo
  *   The IIIF image info.
  * @param {Object} creator
- *   The creator.
+ *   The Annotation creator.
  * @param {Object} generator
- *   The generator.
+ *   The Annotation generator.
  */
 class Annotation {
 
   constructor (motivation, imgInfo, creator = null, generator = null) {
-    this['@context'] = 'http://www.w3.org/ns/anno.jsonld'
+    this['@context'] = [
+      'http://www.w3.org/ns/anno.jsonld',
+      imgInfo['context'] || imgInfo['@context']
+    ]
     this['id'] = uuid()
     this.type = 'Annotation'
     this.motivation = motivation
@@ -35,10 +38,27 @@ class Annotation {
       format: 'image/jpeg'
     }
     if (creator) {
-      this.addCreator(this.creator)
+      this.addCreator(creator)
     }
     if (generator) {
-      this.addGenerator(this.generator)
+      this.addGenerator(generator)
+    }
+  }
+
+  /**
+   * Update the modified time and add creator and generator.
+   * @param {Object} creator
+   *   The Annotation creator.
+   * @param {Object} generator
+   *   The Annotation generator.
+   */
+  modify (creator = null, generator = null) {
+    this.modified = new Date().toISOString()
+    if (creator) {
+      this.addCreator(creator)
+    }
+    if (generator) {
+      this.addGenerator(generator)
     }
   }
 
@@ -60,21 +80,6 @@ class Annotation {
       root[key] = [root[key], value]
     }
     this.modified = new Date().toISOString()
-  }
-
-  /**
-   * Update modified, creator and generator.
-   * @param {Object} opts
-   *   The creator and generator.
-   */
-  modify ({ creator = null, generator = null }) {
-    this.modified = new Date().toISOString()
-    if (creator) {
-      this.addCreator(this.creator)
-    }
-    if (generator) {
-      this.addGenerator(this.generator)
-    }
   }
 
   /**

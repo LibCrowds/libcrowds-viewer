@@ -97,7 +97,9 @@ import Sidebar from '@/components/sidebar/Sidebar'
 import SelectSidebarItem from '@/components/sidebar/items/Select'
 import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
 import BrowseSidebarItem from '@/components/sidebar/items/Browse'
-import Task from '@/model/task'
+import Task from '@/model/Task'
+import TagAnnotation from '@/model/TagAnnotation'
+import DescriptionAnnotation from '@/model/DescriptionAnnotation'
 import CommentAnnotation from '@/model/CommentAnnotation'
 import drawOverlay from '@/utils/drawOverlay'
 import getImageUri from '@/utils/getImageUri'
@@ -243,14 +245,18 @@ export default {
           imgSource: this.currentTask.imgInfoUri,
           region: imgRect
         })
-        const anno = this.currentTask.addTag({
-          value: this.currentTask.tag, 
-          fragmentURI: imageUri, 
-          creator: this.creator, 
-          generator: this.generator
+        this.currentTask.fetchImageInfo().then((info) => {
+          let anno = new TagAnnotation({
+            imgInfo: info,
+            value: this.currentTask.tag, 
+            fragmentURI: imageUri, 
+            creator: this.creator, 
+            generator: this.generator
+          })
+          this.currentTask.annotations.push(anno)
+          drawOverlay(this.viewer, anno.id, vpRect, 'selection')
+          this.$emit('create', this.currentTask, anno)
         })
-        drawOverlay(this.viewer, anno.id, vpRect, 'selection')
-        this.$emit('create', this.currentTask, anno)
       })
 
       // Confirm before leaving if any overlays have been drawn or forms filled
@@ -356,6 +362,7 @@ export default {
             creator: this.creator,
             generator: this.generator
           })
+          task.annotations.push(anno)
           this.$emit('create', task, anno)
         })
       }
@@ -376,20 +383,24 @@ export default {
           const anno = form.annotations[prop]
           const bodies = anno.searchBodies({ purpose: 'describing' })
           bodies[0].value = form.model[prop]
-          annos[0].modify({
+          anno.modify({
             creator: this.creator,
             generator: this.generator,
           })
           this.$emit('update', task, anno)
-        } else if(task.imgInfo !== undefined) {
-          const anno = task.describe({
-            value: form.model[prop], 
-            tag: prop,
-            creator: this.creator,
-            generator: this.generator
+        } else {
+          this.currentTask.fetchImageInfo().then((info) => {
+            let anno = new DescriptionAnnotation({
+              imgInfo: info,
+              value: form.model[prop], 
+              tag: prop,
+              creator: this.creator,
+              generator: this.generator
+            })
+            form.annotations[prop] = anno
+            task.annotations.push(anno)
+            this.$emit('create', task, anno)
           })
-          form.annotations[prop] = anno
-          this.$emit('create', task, anno)
         }
       }
       form.errors = errors

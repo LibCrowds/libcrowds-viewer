@@ -1,5 +1,4 @@
-import Annotation from '@/model/annotation'
-import Form from '@/model/form'
+import Form from '@/model/Form'
 
 /**
  * Represents a task to be updated with user input as annotations.
@@ -28,10 +27,6 @@ class Task {
     this.form = form
     this.regions = regions
     this.annotations = annotations
-    
-    this.fetchImageInfo().then((info) => {
-      this.imgInfo = info
-    })
 
     // Validate
     const validModes = ['select', 'transcribe']
@@ -120,84 +115,6 @@ class Task {
       throw Error('No Annotation exists with that ID')
     }
     this.annotations = filteredAnnos
-  }
-
-  /**
-   * Add a and return a comment Annotation.
-   * @param {String} text
-   *   The comment value.
-   * @param {Object} creator
-   *   The Annotation creator.
-   * @param {Object} generator
-   *   The Annotation generator.
-   */
-  addComment ({text, creator = null, generator = null}) {
-    let anno = new Annotation('commenting', this.imgInfo)
-    anno.addBody({
-      type: 'TextualBody',
-      value: text,
-      purpose: 'commenting',
-      format: 'text/plain'
-    })
-    if (creator) {
-      anno.addCreator(creator)
-    }
-    if (generator) {
-      anno.addGenerator(generator)
-    }
-    this.annotations.push(anno)
-    return anno
-  }
-
-  /**
-   * Add a tag.
-   * @param {String} value
-   *   Plain text value for the tag.
-   * @param {String} fragmentURI
-   *   The IIIF image region.
-   * @param {Object} creator
-   *   The Annotation creator.
-   * @param {Object} generator
-   *   The Annotation generator.
-   */
-  addTag ({value, fragmentURI = null, creator = null, generator = null}) {
-    const anno = new Annotation('tagging', this.imgInfo)
-    anno.addTag(this.tag, this.imgInfo, fragmentURI)
-    if (creator) {
-      anno.addCreator(creator)
-    }
-    if (generator) {
-      anno.addGenerator(generator)
-    }
-    this.annotations.push(anno)
-    return anno
-  }
-
-  /**
-   * Add a description
-   * @param {String} value
-   *   Plain text value for the description.
-   * @param {String} tag
-   *   Plain text value for the tag.
-   * @param {String} fragmentURI
-   *   The IIIF image region.
-   * @param {Object} creator
-   *   The Annotation creator.
-   * @param {Object} generator
-   *   The Annotation generator.
-   */
-  describe ({value, tag, fragmentURI = null, creator = null, generator = null}) {
-    const anno = new Annotation('describing', this.imgInfo)
-    anno.addDescription(value)
-    anno.addTag(tag, fragmentURI = null)
-    if (creator) {
-      anno.addCreator(creator)
-    }
-    if (generator) {
-      anno.addGenerator(generator)
-    }
-    this.annotations.push(anno)
-    return anno
   }
 }
 

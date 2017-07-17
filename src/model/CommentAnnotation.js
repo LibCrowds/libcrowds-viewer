@@ -1,4 +1,4 @@
-import Annotation from '@/model/annotation'
+import Annotation from '@/model/Annotation'
 
 /**
  * Represents a Web Annotation used for comments.
@@ -15,7 +15,7 @@ class CommentAnnotation extends Annotation {
 
   constructor ({
     imgInfo,
-    text,
+    value,
     creator = null, 
     generator = null
   }) {
