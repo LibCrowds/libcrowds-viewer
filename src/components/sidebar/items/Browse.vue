@@ -66,8 +66,8 @@ export default {
           pinchToZoom: false,
           flickEnabled: false
         },
-        tileSources: this.tasks.map(function (t) {
-          return t.imgInfoUri
+        tileSources: this.tasks.map((task) => {
+          return task.imgInfoUri
         })
       })
       viewer.addHandler('canvas-click', () => {
