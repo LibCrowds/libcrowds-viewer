@@ -28,7 +28,7 @@ export default {
   },
 
   components: {
-    "vue-form-generator": VueFormGenerator.component
+    'vue-form-generator': VueFormGenerator.component
   },
 
   props: {
