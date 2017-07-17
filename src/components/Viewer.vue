@@ -240,7 +240,6 @@ export default {
       this.viewer.addHandler('selection', (selectionRect) => {
         const vp = this.viewer.viewport
         const imgRect = vp.viewportToImageRectangle(selectionRect)
-        const vpRect = vp.imageToViewportRectangle(imgRect)
         const imageUri = getImageUri({
           imgSource: this.currentTask.imgInfoUri,
           region: imgRect
