@@ -56,7 +56,7 @@ class Annotation {
    * @param {Object} generator
    *   The Annotation generator.
    */
-  modify (creator = null, generator = null) {
+  modify ({creator = null, generator = null}) {
     this.modified = new Date().toISOString()
     if (creator) {
       this.addCreator(creator)
@@ -93,7 +93,6 @@ class Annotation {
       }
     } else {
       // Create new array if both items are unique
-      console.log('Creating array')
       root[key] = [root[key], value]
     }
     this.modified = new Date().toISOString()
