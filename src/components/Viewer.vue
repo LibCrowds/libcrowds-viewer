@@ -383,20 +383,24 @@ export default {
           const anno = form.annotations[prop]
           const bodies = anno.searchBodies({ purpose: 'describing' })
           bodies[0].value = form.model[prop]
-          annos[0].modify({
+          anno.modify({
             creator: this.creator,
             generator: this.generator,
           })
           this.$emit('update', task, anno)
-        } else if(task.imgInfo !== undefined) {
-          const anno = task.describe({
-            value: form.model[prop], 
-            tag: prop,
-            creator: this.creator,
-            generator: this.generator
+        } else {
+          this.currentTask.fetchImageInfo().then((info) => {
+            let anno = new DescriptionAnnotation({
+              imgInfo: info,
+              value: form.model[prop], 
+              tag: prop,
+              creator: this.creator,
+              generator: this.generator
+            })
+            form.annotations[prop] = anno
+            task.annotations.push(anno)
+            this.$emit('create', task, anno)
           })
-          form.annotations[prop] = anno
-          this.$emit('create', task, anno)
         }
       }
       form.errors = errors
