@@ -1,4 +1,15 @@
-export default function (viewer, id, rect, cls) {
+/**
+ * Draw an overlay.
+ * @param {Object} viewer
+ *   The viewer.
+ * @param {String} id
+ *   An ID for the overlay.
+ * @param {Object} rect
+ *   Overlay coordinates.
+ * @param {String} cls
+ *   Additional overlay class.
+ */
+export default function (viewer, id, rect, cls = "") {
   if (!viewer.addOverlay) {
     return
   }

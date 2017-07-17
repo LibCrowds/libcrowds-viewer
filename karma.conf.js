@@ -4,14 +4,14 @@ module.exports = function (config) {
   config.set({
     browsers: ['PhantomJS'],
     frameworks: ['jasmine'],
-    files: ['test/index.js'],
+    files: ['test/**/*.js'],
     preprocessors: {
-      'test/index.js': ['webpack']
+      'test/**/*.js': ['webpack']
     },
+    singleRun: true,
     webpack: webpackConfig,
     webpackMiddleware: {
       noInfo: true
-    },
-    singleRun: true
+    }
   })
 }
