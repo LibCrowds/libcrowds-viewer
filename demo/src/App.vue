@@ -41,7 +41,7 @@ import tasks from './tasks'
 export default {
   data: function () {
     return {
-      taskOpts: tasks,
+      taskOpts: [],
       showViewer: false,
       creator: {
         id: 'http://example.org/user1',

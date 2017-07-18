@@ -133,6 +133,7 @@ export default {
       },
       metadataModalId: 'lv-metadata-modal',
       helpModalId: 'lv-help-modal',
+      tasks: [],
       currentTask: null
     }
   },
@@ -197,14 +198,6 @@ export default {
     TranscribeSidebarItem,
     BrowseSidebarItem,
     Icon
-  },
-
-  computed: {
-    tasks: function () {
-      return this.taskOpts.map(function (opts) {
-        return new Task(opts)
-      })
-    }
   },
 
   methods: {
@@ -522,6 +515,14 @@ export default {
         } else {
           this.configureSelectionMode(this.currentTask)
         }
+      },
+      deep: true
+    },
+    taskOpts: {
+      handler: function (oldVal, newVal) {
+        tasks = this.taskOpts.map(function (opts) {
+          return new Task(opts)
+        })
       },
       deep: true
     }
