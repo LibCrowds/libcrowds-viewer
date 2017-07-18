@@ -516,7 +516,7 @@ export default {
       deep: true
     },
     taskOpts: {
-      handler: function (oldVal, newVal) {
+      handler: function () {
         const previousTask = this.currentTask
         this.tasks = this.taskOpts.map(function (opts) {
           return new Task(opts)
