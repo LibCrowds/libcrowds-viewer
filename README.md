@@ -42,17 +42,19 @@ You can now use the component like this:
 
 ### Properties
 
-| Property                | Type          | Default | Description                                      |
-|-------------------------|---------------|---------|--------------------------------------------------|
-| task-opts               | String        | null    | An array of task options                         |
-| pan-by                  | Number        | 0.1     | Multiplier by which to pan                       |
-| lang                    | String        | 'en'    | Language for manifest metadata (where available) |
-| confirm-before-unload   | Boolean       | false   | Confirm before leaving the page                  |
-| show-help               | Boolean       | true    | Include the help modal                           |
-| show-info               | Boolean       | true    | Include the metadata modal                       |
-| show-note               | Boolean       | true    | Include the note input                           |
-| show-browse             | Boolean       | true    | Include the browse sidebar                       |
-| show-form-errors        | Boolean       | true    | Show form errors on submit                       |
+| Property                | Type    | Default | Description                                                                                         |
+|-------------------------|---------|---------|-----------------------------------------------------------------------------------------------------|
+| task-opts               | String  | null    | An array of task options                                                                            |
+| pan-by                  | Number  | 0.1     | Multiplier by which to pan                                                                          |
+| lang                    | String  | 'en'    | Language for manifest metadata (where available)                                                    |
+| confirm-before-unload   | Boolean | false   | Confirm before leaving the page                                                                     |
+| show-help               | Boolean | true    | Include the help modal                                                                              |
+| show-info               | Boolean | true    | Include the metadata modal                                                                          |
+| show-note               | Boolean | true    | Include the note input                                                                              |
+| show-browse             | Boolean | true    | Include the browse sidebar                                                                          |
+| show-form-errors        | Boolean | true    | Show form errors on submit                                                                          |
+| creator                 | Object  | null    | The Annotation creator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/))   |
+| generator               | Object  | null    | The Annotation generator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)) |
 
 ### Events
 
@@ -82,8 +84,6 @@ which are created from the task options passed to the viewer.
 | form        | Object | \<optional> | Model and schema for `transcribe` mode (see [vue-form-generator](https://github.com/icebob/vue-form-generator))|
 | highlight   | Array  | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
 | tag         | String | \<optional> | The tag to add when in `select` mode                                                                           |
-| creator     | Object | \<optional> | The Annotation creator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/))              |
-| generator   | Object | \<optional> | The Annotation generator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/))            |
 
 ## Modes
 
