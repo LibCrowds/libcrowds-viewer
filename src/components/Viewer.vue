@@ -517,9 +517,13 @@ export default {
     },
     taskOpts: {
       handler: function (oldVal, newVal) {
-        tasks = this.taskOpts.map(function (opts) {
+        const previousTask = this.currentTask
+        this.tasks = this.taskOpts.map(function (opts) {
           return new Task(opts)
         })
+        if (!previousTask && this.tasks.length > 0) {
+          this.setCurrentTask(this.tasks[0])
+        }
       },
       deep: true
     }
