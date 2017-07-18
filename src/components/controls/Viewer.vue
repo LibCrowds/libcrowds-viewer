@@ -11,10 +11,17 @@
 </template>
 
 <script>
+import Clipboard from 'clipboard'
 import Task from '@/model/Task'
 import Controls from '@/components/Controls'
 
 export default {
+  data: function () {
+    return {
+      imgLink: null
+    }
+  },
+
   props: {
     task: {
       type: Task,
@@ -25,6 +32,10 @@ export default {
       required: true
     },
     showInfo: {
+      type: Boolean,
+      required: true
+    },
+    showShare: {
       type: Boolean,
       required: true
     },
@@ -118,8 +129,37 @@ export default {
           }
         })
       }
+
+      if (this.showShare) {
+        let tooltip = 'Share image'
+        buttons.push({
+          id: 'lv-share-btn',
+          tooltip: tooltip,
+          icon: 'share-alt',
+          click: (evt) => {
+            let clipboard = new Clipboard('#lv-share-btn', {
+              text: (trigger) => {
+                trigger.setAttribute('aria-label', 'URL Copied!')
+                trigger.addEventListener('mouseleave', () => {
+                  trigger.setAttribute('aria-label', tooltip)
+                  clipboard.destroy()
+                })
+                return this.imgLink
+              }
+            })
+          }
+        })
+      }
+
       return buttons
     }
+  },
+
+  created () {
+    this.task.fetchImageInfo().then((info) => {
+      const id = info['@id']
+      this.imgLink = `${id}/full/full/0/default.jpg`
+    })
   }
 }
 </script>

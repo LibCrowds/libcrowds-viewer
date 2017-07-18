@@ -54,6 +54,7 @@ You can now use the component like this:
 | show-browse             | Boolean | true    | Include the browse sidebar                                                                          |
 | show-form-errors        | Boolean | true    | Show form errors on submit                                                                          |
 | show-like               | Boolean | false   | Show the like button                                                                                |
+| show-share              | Boolean | true    | Show the share button                                                                               |
 | creator                 | Object  | null    | The Annotation creator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/))   |
 | generator               | Object  | null    | The Annotation generator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)) |
 

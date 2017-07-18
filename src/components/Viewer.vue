@@ -9,6 +9,7 @@
         :showHelp="showHelp"
         :showInfo="showInfo"
         :showLike="showLike"
+        :showShare="showShare"
         :zoomInButton="viewerOpts.zoomInButton"
         :zoomOutButton="viewerOpts.zoomOutButton"
         :homeButton="viewerOpts.homeButton"
@@ -190,6 +191,10 @@ export default {
     showLike: {
       type: Boolean,
       default: false
+    },
+    showShare: {
+      type: Boolean,
+      default: true
     }
   },
 

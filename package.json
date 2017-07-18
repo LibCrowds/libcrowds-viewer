@@ -20,6 +20,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
+    "clipboard": "^1.7.1",
     "es6-object-assign": "^1.1.0",
     "es6-promise": "^4.1.1",
     "hint.css": "^2.5.0",
