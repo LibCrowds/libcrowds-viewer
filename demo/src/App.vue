@@ -41,7 +41,7 @@ import tasks from './tasks'
 export default {
   data: function () {
     return {
-      taskOpts: [],
+      taskOpts: tasks,
       showViewer: false,
       creator: {
         id: 'http://example.org/user1',
@@ -86,13 +86,6 @@ export default {
       console.log(jsonStr)
       alert('User input logged to console')
     }
-  },
-
-  mounted () {
-    // Simple proof of concept for loading more tasks
-    setTimeout(() => {
-      this.taskOpts = tasks
-    }, 3000)
   }
 }
 </script>
