@@ -11,15 +11,24 @@
 </template>
 
 <script>
+import Task from '@/model/Task'
 import Controls from '@/components/Controls'
 
 export default {
   props: {
+    task: {
+      type: Task,
+      required: true
+    },
     showHelp: {
       type: Boolean,
       required: true
     },
     showInfo: {
+      type: Boolean,
+      required: true
+    },
+    showLike: {
       type: Boolean,
       required: true
     },
@@ -96,6 +105,16 @@ export default {
           icon: 'info-circle',
           click: () => {
             this.$emit('infoclicked')
+          }
+        })
+      }
+
+      if (this.showLike) {
+        buttons.push({
+          tooltip: !this.task.liked ? 'Like' : 'Unlike',
+          icon: !this.task.liked ? 'thumbs-up' : 'thumbs-down',
+          click: () => {
+            this.$emit('likeclicked', this.task, !this.task.liked)
           }
         })
       }

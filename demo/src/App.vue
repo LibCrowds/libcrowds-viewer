@@ -19,6 +19,7 @@
 
     <div id="viewer-container" v-else>
       <libcrowds-viewer
+        :show-like="showLike"
         :task-opts="taskOpts"
         :creator="creator"
         :generator="generator"
@@ -54,7 +55,8 @@ export default {
         type: 'Software',
         name: 'Code v2.1',
         homepage: 'http://example.org/client1/homepage1'
-      }
+      },
+      showLike: true
     }
   },
 

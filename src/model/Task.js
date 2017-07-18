@@ -14,6 +14,7 @@ class Task {
     tag,
     form = null,
     regions = [],
+    liked = false,
     annotations = []
   }) {
     this.mode = mode
@@ -25,6 +26,7 @@ class Task {
     this.tag = tag
     this.form = form
     this.regions = regions
+    this.liked = liked
     this.annotations = annotations
 
     // Validate

@@ -4,8 +4,11 @@
     <div ref="hud">
 
       <viewer-controls
+        v-if="currentTask"
+        :task="currentTask"
         :showHelp="showHelp"
         :showInfo="showInfo"
+        :showLike="showLike"
         :zoomInButton="viewerOpts.zoomInButton"
         :zoomOutButton="viewerOpts.zoomOutButton"
         :homeButton="viewerOpts.homeButton"
@@ -13,7 +16,8 @@
         :helpButton="viewerOpts.helpButton"
         :infoButton="viewerOpts.infoButton"
         @helpclicked="handleHelpControlClick"
-        @infoclicked="handleInfoControlClick">
+        @infoclicked="handleInfoControlClick"
+        @likeclicked="handleLikeControlClick">
       </viewer-controls>
 
       <pan-controls
@@ -182,6 +186,10 @@ export default {
     generator: {
       type: Object,
       default: null
+    },
+    showLike: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -220,6 +228,14 @@ export default {
      */
     handleInfoControlClick () {
       this.$root.$emit('show::modal', this.metadataModalId)
+    },
+
+    /**
+     * Emit the taskliked event.
+     */
+    handleLikeControlClick (task, status) {
+      task.liked = status
+      this.$emit('taskliked', task)
     },
 
     /**
@@ -497,6 +513,19 @@ export default {
       } else {
         this.selector.disable()
       }
+    },
+
+    /**
+     * Generate tasks from task options.
+     */
+    loadTasks () {
+      const previousTask = this.currentTask
+      this.tasks = this.taskOpts.map(function (opts) {
+        return new Task(opts)
+      })
+      if (!previousTask && this.tasks.length > 0) {
+        this.setCurrentTask(this.tasks[0])
+      }
     }
   },
 
@@ -517,13 +546,7 @@ export default {
     },
     taskOpts: {
       handler: function () {
-        const previousTask = this.currentTask
-        this.tasks = this.taskOpts.map(function (opts) {
-          return new Task(opts)
-        })
-        if (!previousTask && this.tasks.length > 0) {
-          this.setCurrentTask(this.tasks[0])
-        }
+        this.loadTasks()
       },
       deep: true
     }
@@ -537,6 +560,7 @@ export default {
     this.setupHandlers()
     this.highlightRegion()
     this.configureSelector()
+    this.loadTasks()
   }
 }
 </script>
