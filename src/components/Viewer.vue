@@ -4,8 +4,11 @@
     <div ref="hud">
 
       <viewer-controls
+        v-if="currentTask"
+        :task="currentTask"
         :showHelp="showHelp"
         :showInfo="showInfo"
+        :showLike="showLike"
         :zoomInButton="viewerOpts.zoomInButton"
         :zoomOutButton="viewerOpts.zoomOutButton"
         :homeButton="viewerOpts.homeButton"
@@ -13,7 +16,8 @@
         :helpButton="viewerOpts.helpButton"
         :infoButton="viewerOpts.infoButton"
         @helpclicked="handleHelpControlClick"
-        @infoclicked="handleInfoControlClick">
+        @infoclicked="handleInfoControlClick"
+        @likeclicked="handleLikeControlClick">
       </viewer-controls>
 
       <pan-controls
@@ -182,6 +186,10 @@ export default {
     generator: {
       type: Object,
       default: null
+    },
+    showLike: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -220,6 +228,13 @@ export default {
      */
     handleInfoControlClick () {
       this.$root.$emit('show::modal', this.metadataModalId)
+    },
+
+    /**
+     * Emit the taskliked event.
+     */
+    handleLikeControlClick (task) {
+      this.$emit('taskliked', task)
     },
 
     /**

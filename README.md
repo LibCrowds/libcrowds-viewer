@@ -53,6 +53,7 @@ You can now use the component like this:
 | show-note               | Boolean | true    | Include the note input                                                                              |
 | show-browse             | Boolean | true    | Include the browse sidebar                                                                          |
 | show-form-errors        | Boolean | true    | Show form errors on submit                                                                          |
+| show-like               | Boolean | false   | Show the like button                                                                                |
 | creator                 | Object  | null    | The Annotation creator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/))   |
 | generator               | Object  | null    | The Annotation generator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)) |
 
@@ -65,6 +66,7 @@ You can now use the component like this:
 | create        | task, annotation | Annotation created   |
 | delete        | task, annotation | Annotation deleted   |
 | taskchange    | task             | Task changed         |
+| taskliked     | task             | Task liked/unliked   |
 
 ## Tasks
 
@@ -73,17 +75,18 @@ which are created from the task options passed to the viewer.
 
 ### Task properties
 
-| Property    | Type   | Attributes  | Description                                                                                                    |
-|-------------|--------|-------------|----------------------------------------------------------------------------------------------------------------|
-| mode        | String |             | `'select'` or `'transcribe'`                                                                                   |
-| imgInfoUri  | String |             | Image info URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/#image-information-request-uri-syntax/)) |
-| manifestUri | String | \<optional> | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/#resource-structure))        |
-| id          | String | \<optional> | Task identifier                                                                                                |
-| objective   | String | \<optional> | The main objective                                                                                             |
-| guidance    | String | \<optional> | Additional guidance                                                                                            |
-| form        | Object | \<optional> | Model and schema for `transcribe` mode (see [vue-form-generator](https://github.com/icebob/vue-form-generator))|
-| highlight   | Array  | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
-| tag         | String | \<optional> | The tag to add when in `select` mode                                                                           |
+| Property    | Type    | Attributes  | Description                                                                                                    |
+|-------------|---------|-------------|----------------------------------------------------------------------------------------------------------------|
+| mode        | String  |             | `'select'` or `'transcribe'`                                                                                   |
+| imgInfoUri  | String  |             | Image info URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/#image-information-request-uri-syntax/)) |
+| manifestUri | String  | \<optional> | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/#resource-structure))        |
+| id          | String  | \<optional> | Task identifier                                                                                                |
+| objective   | String  | \<optional> | The main objective                                                                                             |
+| guidance    | String  | \<optional> | Additional guidance                                                                                            |
+| form        | Object  | \<optional> | Model and schema for `transcribe` mode (see [vue-form-generator](https://github.com/icebob/vue-form-generator))|
+| highlight   | Array   | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
+| tag         | String  | \<optional> | The tag to add when in `select` mode                                                                           |
+| liked       | Boolean | \<optional> | Task liked (see the viewer property `show-like`)                                                               |
 
 ## Modes
 
