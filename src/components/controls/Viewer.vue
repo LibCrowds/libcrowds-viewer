@@ -28,6 +28,10 @@ export default {
       type: Boolean,
       required: true
     },
+    showShare: {
+      type: Boolean,
+      required: true
+    },
     showLike: {
       type: Boolean,
       required: true
@@ -118,6 +122,18 @@ export default {
           }
         })
       }
+
+      if (this.showShare) {
+        console.log('ok')
+        buttons.push({
+          tooltip: 'Share',
+          icon: 'share-alt',
+          click: () => {
+            this.$emit('shareclicked')
+          }
+        })
+      }
+
       return buttons
     }
   }
