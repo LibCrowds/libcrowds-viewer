@@ -112,7 +112,7 @@ export default {
       if (this.showLike) {
         buttons.push({
           id: this.likeButton,
-          tooltip: 'Like',
+          tooltip: this.task.liked ? 'Like' : 'Unlike',
           icon: this.task.liked ? 'thumbs-up' : 'thumbs-down',
           click: () => {
             this.$emit('likeclicked')
