@@ -141,10 +141,7 @@ export default {
   props: {
     taskOpts: {
       type: Array,
-      required: true,
-      validator: value => {
-        return value.length
-      }
+      required: true
     },
     confirmBeforeUnload: {
       type: Boolean,
