@@ -233,7 +233,8 @@ export default {
     /**
      * Emit the taskliked event.
      */
-    handleLikeControlClick (task) {
+    handleLikeControlClick (task, status) {
+      task.liked = status
       this.$emit('taskliked', task)
     },
 
