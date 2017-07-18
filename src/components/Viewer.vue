@@ -533,7 +533,6 @@ export default {
     this.setupHandlers()
     this.highlightRegion()
     this.configureSelector()
-    this.setCurrentTask(this.tasks[0])
   }
 }
 </script>
