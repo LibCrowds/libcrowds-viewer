@@ -140,10 +140,10 @@ export default {
             let clipboard = new Clipboard('#lv-share-btn', {
               text: (trigger) => {
                 trigger.setAttribute('aria-label', 'URL Copied!')
-                setTimeout(() => {
+                trigger.addEventListener('mouseleave', () => {
                   trigger.setAttribute('aria-label', tooltip)
-                  this.destroy()
-                }, 2500)
+                  clipboard.destroy()
+                })
                 return this.imgLink
               }
             })
