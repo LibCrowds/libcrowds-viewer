@@ -133,6 +133,7 @@ export default {
       },
       metadataModalId: 'lv-metadata-modal',
       helpModalId: 'lv-help-modal',
+      tasks: [],
       currentTask: null
     }
   },
@@ -140,10 +141,7 @@ export default {
   props: {
     taskOpts: {
       type: Array,
-      required: true,
-      validator: value => {
-        return value.length
-      }
+      required: true
     },
     confirmBeforeUnload: {
       type: Boolean,
@@ -197,14 +195,6 @@ export default {
     TranscribeSidebarItem,
     BrowseSidebarItem,
     Icon
-  },
-
-  computed: {
-    tasks: function () {
-      return this.taskOpts.map(function (opts) {
-        return new Task(opts)
-      })
-    }
   },
 
   methods: {
@@ -524,6 +514,18 @@ export default {
         }
       },
       deep: true
+    },
+    taskOpts: {
+      handler: function () {
+        const previousTask = this.currentTask
+        this.tasks = this.taskOpts.map(function (opts) {
+          return new Task(opts)
+        })
+        if (!previousTask && this.tasks.length > 0) {
+          this.setCurrentTask(this.tasks[0])
+        }
+      },
+      deep: true
     }
   },
 
@@ -535,7 +537,6 @@ export default {
     this.setupHandlers()
     this.highlightRegion()
     this.configureSelector()
-    this.setCurrentTask(this.tasks[0])
   }
 }
 </script>
