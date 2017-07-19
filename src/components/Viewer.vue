@@ -152,7 +152,7 @@ export default {
       type: Boolean,
       default: false
     },
-    markComplete: {
+    disableComplete: {
       type: Boolean,
       default: true
     },
@@ -519,7 +519,7 @@ export default {
      *   The task.
      */
     configureSelectionMode (task) {
-      if (task.mode === 'select') {
+      if (task.mode === 'select' && !task.complete) {
         this.selector.enable()
         this.drawSelectionOverlays(this.currentTask)
       } else {
