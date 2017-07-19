@@ -152,6 +152,10 @@ export default {
       type: Boolean,
       default: false
     },
+    removeOnSubmit: {
+      type: Boolean,
+      default: false
+    },
     showHelp: {
       type: Boolean,
       default: true

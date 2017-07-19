@@ -42,21 +42,22 @@ You can now use the component like this:
 
 ### Properties
 
-| Property                | Type    | Default | Description                                                                                         |
-|-------------------------|---------|---------|-----------------------------------------------------------------------------------------------------|
-| task-opts               | String  | null    | An array of task options                                                                            |
-| pan-by                  | Number  | 0.1     | Multiplier by which to pan                                                                          |
-| lang                    | String  | 'en'    | Language for manifest metadata (where available)                                                    |
-| confirm-before-unload   | Boolean | false   | Confirm before leaving the page                                                                     |
-| show-help               | Boolean | true    | Include the help modal                                                                              |
-| show-info               | Boolean | true    | Include the metadata modal                                                                          |
-| show-note               | Boolean | true    | Include the note input                                                                              |
-| show-browse             | Boolean | true    | Include the browse sidebar                                                                          |
-| show-form-errors        | Boolean | true    | Show form errors on submit                                                                          |
-| show-like               | Boolean | false   | Show the like button                                                                                |
-| show-share              | Boolean | true    | Show the share button                                                                               |
-| creator                 | Object  | null    | The Annotation creator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/))   |
-| generator               | Object  | null    | The Annotation generator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)) |
+| Property              | Type    | Default | Description                                                                                         |
+|-----------------------|---------|---------|-----------------------------------------------------------------------------------------------------|
+| task-opts             | String  | null    | An array of task options                                                                            |
+| pan-by                | Number  | 0.1     | Multiplier by which to pan                                                                          |
+| lang                  | String  | 'en'    | Language for manifest metadata (where available)                                                    |
+| confirm-before-unload | Boolean | false   | Confirm before leaving the page                                                                     |
+| remove-on-submit      | Boolean | false   | Remove tasks after submission                                                                       |
+| show-help             | Boolean | true    | Include the help modal                                                                              |
+| show-info             | Boolean | true    | Include the metadata modal                                                                          |
+| show-note             | Boolean | true    | Include the note input                                                                              |
+| show-browse           | Boolean | true    | Include the browse sidebar                                                                          |
+| show-form-errors      | Boolean | true    | Show form errors on submit                                                                          |
+| show-like             | Boolean | false   | Show the like button                                                                                |
+| show-share            | Boolean | true    | Show the share button                                                                               |
+| creator               | Object  | null    | The Annotation creator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/))   |
+| generator             | Object  | null    | The Annotation generator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)) |
 
 ### Events
 
@@ -129,6 +130,7 @@ Note that the `tag` property is required when in `select` mode.
   "type": "Annotation",
   "motivation": "tagging",
   "created": "2017-07-16T00:44:28.454Z",
+  "generated": "2017-07-16T00:44:28.454Z",
   "creator": {
     "id": "http://example.org/user1",
     "type": "Person",
@@ -249,6 +251,7 @@ taken from `form.model` and `form.classification`, respectively.
   "type": "Annotation",
   "motivation": "describing",
   "created": "2017-07-16T13:53:18.795Z",
+  "generated": "2017-07-16T13:53:18.795Z",
   "creator": {
     "id": "http://example.org/user1",
     "type": "Person",
