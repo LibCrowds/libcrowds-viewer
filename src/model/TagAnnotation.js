@@ -12,6 +12,8 @@ import Annotation from '@/model/Annotation'
  *   The Annotation creator.
  * @param {Object} generator
  *   The Annotation generator.
+ * @param {String} classification
+ *   A classification.
  */
 class TagAnnotation extends Annotation {
   constructor ({
@@ -19,7 +21,8 @@ class TagAnnotation extends Annotation {
     value,
     fragmentURI = null,
     creator = null,
-    generator = null
+    generator = null,
+    classification = null
   }) {
     super({
       motivation: 'tagging',
@@ -28,6 +31,9 @@ class TagAnnotation extends Annotation {
       generator: generator
     })
     this.addTag(value, imgInfo, fragmentURI)
+    if (classification) {
+      this.addClassification(classification)
+    }
   }
 }
 
