@@ -47,6 +47,8 @@ class Annotation {
     if (generator) {
       this._setMultiItem(this, 'generator', generator)
     }
+    this.created = new Date().toISOString()
+    this.generated = new Date().toISOString()
   }
 
   /**
