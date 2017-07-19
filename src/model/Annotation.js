@@ -85,12 +85,12 @@ class Annotation {
     } else if (Array.isArray(root[key])) {
       // Add unique items to an array (and update any with the same ID)
       for (let item of root[key]) {
-        if (item.id === root[key].id) {
-          item = value
-        } else {
-          root[key].push(value)
+        if (item.id && value.id && item.id === value.id) {
+          root[key][root[key].indexOf(item)] = value
+          return
         }
       }
+      root[key].push(value)
     } else {
       // Create new array if both items are unique
       root[key] = [root[key], value]
