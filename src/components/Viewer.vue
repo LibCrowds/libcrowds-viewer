@@ -522,7 +522,6 @@ export default {
     configureSelectionMode (task) {
       if (task.mode === 'select' && !(task.complete && this.disableComplete)) {
         this.selector.enable()
-        this.drawSelectionOverlays(this.currentTask)
       } else {
         this.selector.disable()
       }
@@ -545,14 +544,19 @@ export default {
   watch: {
     currentTask: {
       handler: function (oldVal, newVal) {
+        function configure () {
+          this.configureSelectionMode(this.currentTask)
+          this.drawSelectionOverlays(this.currentTask)
+        }
+
         // Update the task image if it has changed
         if (!oldVal || !newVal || oldVal.imgInfoUri !== newVal.imgInfoUri) {
           this.viewer.open({
             tileSource: this.currentTask.imgInfoUri,
-            success: () => this.configureSelectionMode(this.currentTask)
+            success: () => configure()
           })
         } else {
-          this.configureSelectionMode(this.currentTask)
+          success: () => configure()
         }
       },
       deep: true
