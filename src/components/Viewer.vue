@@ -152,9 +152,9 @@ export default {
       type: Boolean,
       default: false
     },
-    removeOnSubmit: {
+    markComplete: {
       type: Boolean,
-      default: false
+      default: true
     },
     showHelp: {
       type: Boolean,
@@ -462,6 +462,10 @@ export default {
         }
       }
       this.$emit('submit', task)
+      console.log(this.markComplete)
+      if (this.markComplete) {
+
+      }
     },
 
     /**

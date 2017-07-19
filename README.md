@@ -48,7 +48,7 @@ You can now use the component like this:
 | pan-by                | Number  | 0.1     | Multiplier by which to pan                                                                          |
 | lang                  | String  | 'en'    | Language for manifest metadata (where available)                                                    |
 | confirm-before-unload | Boolean | false   | Confirm before leaving the page                                                                     |
-| remove-on-submit      | Boolean | false   | Remove tasks after submission                                                                       |
+| mark-complete         | Boolean | false   | Mark tasks as complete once submitted                                                               |
 | show-help             | Boolean | true    | Include the help modal                                                                              |
 | show-info             | Boolean | true    | Include the metadata modal                                                                          |
 | show-note             | Boolean | true    | Include the note input                                                                              |
