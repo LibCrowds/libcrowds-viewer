@@ -155,7 +155,7 @@ export default {
     },
     disableComplete: {
       type: Boolean,
-      default: true
+      default: false
     },
     showHelp: {
       type: Boolean,
