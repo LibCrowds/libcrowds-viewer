@@ -432,7 +432,7 @@ export default {
               tag: prop,
               creator: this.creator,
               generator: this.generator,
-              classification: task.classification
+              classification: form.classification[prop]
             })
             form.annotations[prop] = anno
             task.annotations.push(anno)

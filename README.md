@@ -176,8 +176,9 @@ coordinates to highlight regions of the image (such as those returned from a
 previous selection task) allowing for transcription of specific details found
 in the image.
 
-Note that the `form` property is required when in `transcribe` mode. Also, as
-the tags are created from the model keys the `tag` property is ignored.
+Note that the `form` task property is required when in `transcribe` mode. The 
+`tag` and `classification` task properties are ignored and are instead
+taken from `form.model` and `form.classification`, respectively.
 
 #### Example task
 
@@ -195,6 +196,10 @@ the tags are created from the model keys the `tag` property is ignored.
       "title": "",
       "date": "",
       "genre": []
+    },
+    "classification": {
+      "title": "http://purl.org/dc/terms/title",
+      "date": "http://purl.org/dc/terms/date"
     },
     "schema": {
       "fields": [
