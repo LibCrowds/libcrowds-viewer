@@ -645,9 +645,9 @@ export default {
 
 #lv-browse-next,
 #lv-browse-previous {
+  margin: 1rem;
   height: 3rem;
   width: 3rem;
-  margin: 0;
   position: absolute !important;
   top: calc(50% - 1.5rem);
 }

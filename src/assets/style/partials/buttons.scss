@@ -60,5 +60,9 @@
       display: flex;
       opacity: 0.8;
     }
+
+    &[disabled] {
+      opacity: 0.2;
+    }
   }
 }
