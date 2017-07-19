@@ -261,7 +261,8 @@ export default {
             value: this.currentTask.tag,
             fragmentURI: imageUri,
             creator: this.creator,
-            generator: this.generator
+            generator: this.generator,
+            classification: this.currentTask.classification
           })
           this.currentTask.annotations.push(anno)
           this.$emit('create', this.currentTask, anno)
@@ -430,7 +431,8 @@ export default {
               value: form.model[prop],
               tag: prop,
               creator: this.creator,
-              generator: this.generator
+              generator: this.generator,
+              classification: form.classification[prop]
             })
             form.annotations[prop] = anno
             task.annotations.push(anno)

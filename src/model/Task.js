@@ -12,6 +12,7 @@ class Task {
     objective = '',
     guidance = '',
     tag,
+    classification,
     form = null,
     regions = [],
     liked = false,
@@ -24,6 +25,7 @@ class Task {
     this.objective = objective
     this.guidance = guidance
     this.tag = tag
+    this.classification = classification
     this.form = form
     this.regions = regions
     this.liked = liked

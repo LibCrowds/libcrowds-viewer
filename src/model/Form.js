@@ -4,10 +4,12 @@
 class Form {
   constructor ({
     model,
-    schema
+    schema,
+    classification
   }) {
     this.model = model
     this.schema = schema
+    this.classification = classification || {}
     this.formOptions = {
       validateAfterLoad: true,
       validateAfterChanged: true

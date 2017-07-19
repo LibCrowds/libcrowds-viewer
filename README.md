@@ -88,6 +88,7 @@ which are created from the task options passed to the viewer.
 | highlight   | Array   | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
 | tag         | String  | \<optional> | The tag to add when in `select` mode                                                                           |
 | liked       | Boolean | \<optional> | Task liked (see the viewer property `show-like`)                                                               |
+| classify    | String  | \<optional> | A SpecificResource to classify the target as (e.g. [foaf:Person](http://xmlns.com/foaf/spec/#term_Person))     |                                                                       |
 
 ## Modes
 
@@ -110,6 +111,7 @@ Note that the `tag` property is required when in `select` mode.
   "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
   "id": 123,
   "tag": "title",
+  "classify": "http://purl.org/dc/terms/title",
   "objective": "Tag all of the titles",
   "guidance": "Draw a box around each title, including any subtitles"
 }
@@ -151,11 +153,18 @@ Note that the `tag` property is required when in `select` mode.
       "conformsTo": "http://iiif.io/api/image"
     }
   },
-  "body": {
-    "type": "TextualBody",
-    "purpose": "tagging",
-    "value": "title"
-  },
+  "body": [
+    {
+      "type": "TextualBody",
+      "purpose": "tagging",
+      "value": "title"
+    },
+    {
+      "type": "SpecificResource",
+      "purpose": "classifying",
+      "value": "http://purl.org/dc/terms/title"
+    }
+  ]
   "modified": "2017-07-16T00:44:28.454Z"
 }
 ```
@@ -167,7 +176,9 @@ coordinates to highlight regions of the image (such as those returned from a
 previous selection task) allowing for transcription of specific details found
 in the image.
 
-Note that the `form` property is required when in `transcribe` mode.
+Note that the `form` task property is required when in `transcribe` mode. The 
+`tag` and `classification` task properties are ignored and are instead
+taken from `form.model` and `form.classification`, respectively.
 
 #### Example task
 
@@ -179,11 +190,16 @@ Note that the `form` property is required when in `transcribe` mode.
   "id": 123,
   "objective": "Transcribe the required info",
   "guidance": "Write everything exactly as you see on the page.",
+  "classify": "http://purl.org/dc/terms/title",
   "form": {
     "model": {
       "title": "",
       "date": "",
       "genre": []
+    },
+    "classification": {
+      "title": "http://purl.org/dc/terms/title",
+      "date": "http://purl.org/dc/terms/date"
     },
     "schema": {
       "fields": [
@@ -263,6 +279,11 @@ Note that the `form` property is required when in `transcribe` mode.
       "type": "TextualBody",
       "purpose": "tagging",
       "value": "title"
+    },
+    {
+      "type": "SpecificResource",
+      "purpose": "classifying",
+      "value": "http://purl.org/dc/terms/title"
     }
   ],
   "modified": "2017-07-16T13:53:18.795Z"

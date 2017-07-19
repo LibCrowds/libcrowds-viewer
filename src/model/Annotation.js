@@ -100,14 +100,14 @@ class Annotation {
 
   /**
    * Add a tag.
-   * @param {String} tag
+   * @param {String} value
    *   A plain text value.
    * @param {Object} imgInfo
    *   The IIIF image info.
    * @param {*} fragmentURI
    *   The IIIF image region.
    */
-  addTag (tag, imgInfo, fragmentURI = null) {
+  addTag (value, imgInfo, fragmentURI = null) {
     if (fragmentURI) {
       this.target.selector = {
         type: 'FragmentSelector',
@@ -119,23 +119,36 @@ class Annotation {
     this.addBody({
       type: 'TextualBody',
       purpose: 'tagging',
-      value: tag
+      value: value
     })
   }
 
   /**
    * Add a description
-   * @param {String} description
+   * @param {String} value
    *   A plain text value.
    * @param {*} fragmentURI
    *   The IIIF image region.
    */
-  addDescription (description) {
+  addDescription (value) {
     this.addBody({
       type: 'TextualBody',
       purpose: 'describing',
-      value: description,
+      value: value,
       format: 'text/plain'
+    })
+  }
+
+  /**
+   * Add a classification.
+   * @param {String} value
+   *   The value of the resource.
+   */
+  addClassification (value) {
+    this.addBody({
+      type: 'SpecificResource',
+      purpose: 'classifying',
+      value: value
     })
   }
 
