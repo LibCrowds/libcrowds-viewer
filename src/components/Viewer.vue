@@ -60,12 +60,6 @@
           @update="updateForm">
         </transcribe-sidebar-item>
 
-        <browse-sidebar-item
-          v-if="showBrowse"
-          :tasks="tasks"
-          @taskselected="setCurrentTask">
-        </browse-sidebar-item>
-
       </sidebar>
 
       <button
@@ -114,7 +108,6 @@ import PanControls from '@/components/controls/Pan'
 import Sidebar from '@/components/sidebar/Sidebar'
 import SelectSidebarItem from '@/components/sidebar/items/Select'
 import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
-import BrowseSidebarItem from '@/components/sidebar/items/Browse'
 import Task from '@/model/Task'
 import TagAnnotation from '@/model/TagAnnotation'
 import DescriptionAnnotation from '@/model/DescriptionAnnotation'
@@ -184,10 +177,6 @@ export default {
       type: Boolean,
       default: true
     },
-    showBrowse: {
-      type: Boolean,
-      default: true
-    },
     showFormErrors: {
       type: Boolean,
       default: true
@@ -226,7 +215,6 @@ export default {
     Sidebar,
     SelectSidebarItem,
     TranscribeSidebarItem,
-    BrowseSidebarItem,
     Icon
   },
 
