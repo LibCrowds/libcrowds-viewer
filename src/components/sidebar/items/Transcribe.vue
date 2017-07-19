@@ -41,6 +41,14 @@ export default {
   methods: {
     onValidated: function (isValid, errors) {
       document.querySelector('.form-group').classList.remove('show-errors')
+      // Replace the empty string with null for date fields
+      // to avoid Invalid Date in fecha.format
+      this.form.schema.fields.forEach((field) => {
+        if (field.inputType === 'date' && this.form.model[field.model] === '') {
+          this.form.model[field.model] = null
+        }
+      })
+
       this.$emit('update', this.task, this.form, errors)
     }
   }
