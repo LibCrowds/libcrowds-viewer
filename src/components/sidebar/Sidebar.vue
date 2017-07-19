@@ -122,9 +122,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/style/settings';
-@import '../../assets/style/partials/buttons';
-@import '../../assets/style/partials/transitions';
+@import '~style/settings';
+@import '~style/partials/buttons';
+@import '~style/partials/transitions';
 
 .lv-sidebar {
   font-size: 14px;
