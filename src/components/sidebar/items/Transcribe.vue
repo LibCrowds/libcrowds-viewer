@@ -48,8 +48,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../../assets/style/settings';
-@import '../../../assets/style/partials/forms';
+@import '~style/settings';
+@import '~style/partials/forms';
 
 #lv-sidebar-transcribe-item {
   margin-top: 1rem;

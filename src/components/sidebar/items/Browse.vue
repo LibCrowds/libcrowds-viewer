@@ -90,7 +90,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../../assets/style/partials/buttons';
+@import '~style/partials/buttons';
 
 #lv-sidebar-browse-item {
   margin-top: 1rem;

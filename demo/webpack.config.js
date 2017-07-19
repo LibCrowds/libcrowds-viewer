@@ -44,7 +44,8 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       'libcrowds-viewer': path.resolve(__dirname, '../src/main.js'),
-      '@': path.resolve(__dirname, '../src')
+      '@': path.resolve(__dirname, '../src'),
+      style: path.resolve(__dirname, '../src/assets/style/')
     }
   },
   plugins: [

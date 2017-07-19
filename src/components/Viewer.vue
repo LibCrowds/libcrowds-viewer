@@ -571,8 +571,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/style/settings';
-@import '../assets/style/partials/buttons';
+@import '~style/settings';
+@import '~style/partials/buttons';
 
 #lv-viewer {
   display: flex;

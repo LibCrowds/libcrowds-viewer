@@ -70,8 +70,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../assets/style/settings';
-@import '../../../assets/style/partials/buttons';
+@import '~style/settings';
+@import '~style/partials/buttons';
 
 #lv-sidebar-select-item {
   ul {

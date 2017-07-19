@@ -76,7 +76,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~hint.css';
-@import '../assets/style/partials/buttons';
+@import '~style/partials/buttons';
 
 .lv-controls {
   display: flex;
