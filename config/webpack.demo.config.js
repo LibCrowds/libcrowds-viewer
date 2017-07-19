@@ -5,7 +5,7 @@ var baseConfig = require('./webpack.base.config')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = merge(baseConfig, {
-  entry: '../demo/src/main.js',
+  entry: path.resolve(__dirname, '../demo/src/main.js'),
   output: {
     path: path.resolve(__dirname, '../demo/dist'),
     publicPath: process.env.NODE_ENV === 'production' ? '../demo' : '/',
