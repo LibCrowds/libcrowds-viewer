@@ -75,12 +75,14 @@
         <icon name="times-circle"></icon>
       </button>
       <button
+        :disabled="previousBtnDisabled"
         class="btn btn-hud"
         id="lv-browse-previous"
         @click="previousTask">
         <icon name="chevron-left" scale="1.5"></icon>
       </button>
       <button
+        :disabled="nextBtnDisabled"
         class="btn btn-hud"
         id="lv-browse-next"
         @click="nextTask">
@@ -215,6 +217,21 @@ export default {
     SelectSidebarItem,
     TranscribeSidebarItem,
     Icon
+  },
+
+  computed: {
+    previousBtnDisabled: function () {
+      if (!this.currentTask) {
+        return true
+      }
+      return !(this.tasks.indexOf(this.currentTask) > 0)
+    },
+    nextBtnDisabled: function () {
+      if (!this.currentTask) {
+        return true
+      }
+      return this.tasks.indexOf(this.currentTask) >= this.tasks.length - 1
+    }
   },
 
   methods: {
