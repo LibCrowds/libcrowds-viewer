@@ -461,11 +461,8 @@ export default {
           formGroups.classList.add('show-errors')
         }
       }
+      task.complete = true
       this.$emit('submit', task)
-      console.log(this.markComplete)
-      if (this.markComplete) {
-
-      }
     },
 
     /**
