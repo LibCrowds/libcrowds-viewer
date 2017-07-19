@@ -5,8 +5,6 @@ module.exports = function (config) {
     browsers: ['PhantomJS'],
     frameworks: ['jasmine'],
     files: [
-      '../../node_modules/es6-promise/dist/es6-promise.auto.js',
-      '../../node_modules/babel-polyfill/dist/polyfill.js',
       'test/index.js'
     ],
     reporters: ['spec', 'coverage'],

@@ -68,12 +68,17 @@ describe('Annotation', () => {
   it('adds further multi-items to existing array', () => {
     anno.key = [itemOne, itemTwo]
     anno._setMultiItem(anno, 'key', itemThree)
-    expect(anno.key).toBe([itemOne, itemTwo, itemThree])
+    expect(anno.key.length).toBe(3)
+    expect(anno.key[0]).toBe(itemOne)
+    expect(anno.key[1]).toBe(itemTwo)
+    expect(anno.key[2]).toBe(itemThree)
   })
 
-  // it('update multi-items in existing array', () => {
-  //   anno.key = [itemOne, itemTwo]
-  //   anno._setMultiItem(anno, 'key', updatedItemOne)
-  //   expect(anno.key).toBe([updatedItemOne, itemTwo])
-  // })
+  it('update multi-items in existing array', () => {
+    anno.key = [itemOne, itemTwo]
+    anno._setMultiItem(anno, 'key', updatedItemOne)
+    expect(anno.key.length).toBe(2)
+    expect(anno.key[0]).toBe(updatedItemOne)
+    expect(anno.key[1]).toBe(itemTwo)
+  })
 })
