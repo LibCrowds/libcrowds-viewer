@@ -90,6 +90,10 @@
         "date": null,
         "genre": null
       },
+      "classification": {
+        "title": "http://purl.org/dc/terms/title",
+        "date": "http://purl.org/dc/terms/date"
+      },
       "schema": {
         "fields": [
           {
