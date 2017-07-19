@@ -68,18 +68,28 @@
 
       </sidebar>
 
-      <div
+      <button
         class="btn-selection"
         id="confirm-selection"
         ref="confirmSelection">
         <icon name="check-circle"></icon>
-      </div>
-      <div
+      </button>
+      <button
         class="btn-selection"
         id="cancel-selection"
         ref="cancelSelection">
         <icon name="times-circle"></icon>
-      </div>
+      </button>
+      <button
+        class="btn btn-hud"
+        id="lv-browse-previous">
+        <icon name="chevron-left" scale="1.5"></icon>
+      </button>
+      <button
+        class="btn btn-hud"
+        id="lv-browse-next">
+        <icon name="chevron-right" scale="1.5"></icon>
+      </button>
 
     </div>
 
@@ -93,6 +103,8 @@
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/check-circle'
+import 'vue-awesome/icons/chevron-left'
+import 'vue-awesome/icons/chevron-right'
 import OpenSeadragon from 'openseadragon'
 import 'openseadragonselection/dist/openseadragonselection'
 import MetadataModal from '@/components/modals/Metadata'
@@ -125,6 +137,8 @@ export default {
         fullPageButton: 'toggle-fullscreen',
         helpButton: 'show-help',
         infoButton: 'show-info',
+        previousButton: 'lv-browse-previous',
+        nextButton: 'lv-browse-next',
         panVertical: false,
         panHorizontal: false,
         gestureSettingsMouse: {
@@ -135,7 +149,8 @@ export default {
         },
         gestureSettingsPen: {
           dblClickToZoom: false
-        }
+        },
+        sequenceMode: true
       },
       metadataModalId: 'lv-metadata-modal',
       helpModalId: 'lv-help-modal',
@@ -538,30 +553,33 @@ export default {
       if (!previousTask && this.tasks.length > 0) {
         this.setCurrentTask(this.tasks[0])
       }
+    },
+
+    /**
+     * Initialise the viewer.
+     */
+    loadViewer () {
+      const opts = JSON.parse(JSON.stringify(this.viewerOpts))
+      opts.tileSources = this.taskOpts.map(function (task) {
+        return task.imgInfoUri
+      })
+      console.log(opts)
+      this.viewer = new OpenSeadragon.Viewer(opts)
+      console.log(this.viewer)
     }
   },
 
   watch: {
     currentTask: {
       handler: function (oldVal, newVal) {
-        // Update the task image if it has changed
-        if (!oldVal || !newVal || oldVal.imgInfoUri !== newVal.imgInfoUri) {
-          this.viewer.open({
-            tileSource: this.currentTask.imgInfoUri,
-            success: () => {
-              this.configureSelectionMode(this.currentTask)
-              this.drawSelectionOverlays(this.currentTask)
-            }
-          })
-        } else {
-          this.configureSelectionMode(this.currentTask)
-          this.drawSelectionOverlays(this.currentTask)
-        }
+        this.configureSelectionMode(this.currentTask)
+        this.drawSelectionOverlays(this.currentTask)
       },
       deep: true
     },
     taskOpts: {
       handler: function () {
+        this.loadViewer()
         this.loadTasks()
       },
       deep: true
@@ -569,14 +587,12 @@ export default {
   },
 
   mounted () {
-    // Initialise the main viewer after the DOM is loaded
-    this.viewer = OpenSeadragon(this.viewerOpts)
-
+    this.loadViewer()
+    this.loadTasks()
     this.attachControls()
     this.setupHandlers()
     this.highlightRegion()
     this.configureSelector()
-    this.loadTasks()
   }
 }
 </script>
@@ -606,6 +622,31 @@ export default {
   width: 35%;
   margin: 0.8rem;
   max-width: 350px;
+}
+
+#lv-browse-next,
+#lv-browse-previous {
+  height: 3rem;
+  width: 3rem;
+  margin: 0;
+  position: absolute !important;
+  top: calc(50% - 1.5rem);
+}
+
+#lv-browse-previous {
+  left: 0;
+
+  svg {
+    margin-right: 2px;
+  }
+}
+
+#lv-browse-next {
+  right: 0;
+
+  svg {
+    margin-left: 2px;
+  }
 }
 
 .openseadragon-container {
