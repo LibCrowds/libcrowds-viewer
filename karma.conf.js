@@ -5,10 +5,12 @@ module.exports = function (config) {
     browsers: ['PhantomJS'],
     frameworks: ['jasmine'],
     files: [
+      'src/**/*.js',
       'test/index.js'
     ],
     reporters: ['spec', 'coverage'],
     preprocessors: {
+      'src/**/*.js': ['webpack', 'coverage'],
       'test/index.js': ['webpack', 'sourcemap']
     },
     singleRun: true,
