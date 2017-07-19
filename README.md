@@ -89,7 +89,8 @@ which are created from the task options passed to the viewer.
 | highlight   | Array   | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
 | tag         | String  | \<optional> | The tag to add when in `select` mode                                                                           |
 | liked       | Boolean | \<optional> | Task liked (see the viewer property `show-like`)                                                               |
-| classify    | String  | \<optional> | A SpecificResource to classify the target as (e.g. [foaf:Person](http://xmlns.com/foaf/spec/#term_Person))     |                                                                       |
+| classify    | String  | \<optional> | A SpecificResource to classify the target as (e.g. [foaf:Person](http://xmlns.com/foaf/spec/#term_Person))     |
+| complete    | Boolean | \<optional> | Mark the task as complete                                                                                      |
 
 ## Modes
 
