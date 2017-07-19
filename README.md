@@ -77,20 +77,20 @@ which are created from the task options passed to the viewer.
 
 ### Task properties
 
-| Property    | Type    | Attributes  | Description                                                                                                    |
-|-------------|---------|-------------|----------------------------------------------------------------------------------------------------------------|
-| mode        | String  |             | `'select'` or `'transcribe'`                                                                                   |
-| imgInfoUri  | String  |             | Image info URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/#image-information-request-uri-syntax/)) |
-| manifestUri | String  | \<optional> | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/#resource-structure))        |
-| id          | String  | \<optional> | Task identifier                                                                                                |
-| objective   | String  | \<optional> | The main objective                                                                                             |
-| guidance    | String  | \<optional> | Additional guidance                                                                                            |
-| form        | Object  | \<optional> | Model and schema for `transcribe` mode (see [vue-form-generator](https://github.com/icebob/vue-form-generator))|
-| highlight   | Array   | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
-| tag         | String  | \<optional> | The tag to add when in `select` mode                                                                           |
-| liked       | Boolean | \<optional> | Task liked (see the viewer property `show-like`)                                                               |
-| classify    | String  | \<optional> | A SpecificResource to classify the target as (e.g. [foaf:Person](http://xmlns.com/foaf/spec/#term_Person))     |
-| complete    | Boolean | \<optional> | Mark the task as complete                                                                                      |
+| Property       | Type    | Attributes  | Description                                                                                                    |
+|----------------|---------|-------------|----------------------------------------------------------------------------------------------------------------|
+| mode           | String  |             | `'select'` or `'transcribe'`                                                                                   |
+| imgInfoUri     | String  |             | Image info URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/#image-information-request-uri-syntax/)) |
+| manifestUri    | String  | \<optional> | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/#resource-structure))        |
+| id             | String  | \<optional> | Task identifier                                                                                                |
+| objective      | String  | \<optional> | The main objective                                                                                             |
+| guidance       | String  | \<optional> | Additional guidance                                                                                            |
+| form           | Object  | \<optional> | Model and schema for `transcribe` mode (see [vue-form-generator](https://github.com/icebob/vue-form-generator))|
+| highlight      | Array   | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
+| tag            | String  | \<optional> | The tag to add when in `select` mode                                                                           |
+| liked          | Boolean | \<optional> | Task liked (see the viewer property `show-like`)                                                               |
+| classification | String  | \<optional> | A SpecificResource to classify the target as (e.g. [foaf:Person](http://xmlns.com/foaf/spec/#term_Person))     |
+| complete       | Boolean | \<optional> | Mark the task as complete                                                                                      |
 
 ## Modes
 
