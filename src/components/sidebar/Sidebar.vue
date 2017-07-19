@@ -9,7 +9,10 @@
       </span>
     </div>
 
-    <div class="lv-sidebar-content" v-show="!contentCollapsed">
+    <div
+      class="lv-sidebar-content"
+      v-show="!contentCollapsed"
+      v-if="!task.complete">
       <h4>{{ task.objective }}</h4>
       <p>{{ task.guidance }}</p>
       <slot></slot>
@@ -17,7 +20,7 @@
 
     <div class="lv-sidebar-footer">
       <button
-        v-if="showNote"
+        v-if="disableComplete && !task.complete && showNote"
         class="btn btn-block"
         @click="toggleeNoteCollapse">
         Add a note
@@ -27,6 +30,7 @@
         v-show="showNote"
         v-if="!noteCollapsed">
         <textarea
+          v-if="disableComplete && !task.complete"
           ref="note"
           rows="3"
           placeholder="Leave a note..."
@@ -36,10 +40,15 @@
       </transition>
 
       <button
+        v-if="disableComplete && !task.complete"
         class="btn btn-block btn-green"
         @click="submit">
         Submit
       </button>
+
+      <p id="task-complete" v-if="task.complete && disableComplete">
+        Task completed!
+      </p>
     </div>
 
   </div>
@@ -67,6 +76,10 @@ export default {
       required: true
     },
     showNote: {
+      type: Boolean,
+      required: true
+    },
+    disableComplete: {
       type: Boolean,
       required: true
     }
@@ -192,6 +205,11 @@ export default {
     &.active {
       transform: rotate(180deg);
     }
+  }
+
+  #task-complete {
+    font-size: 1.2rem;
+    text-align: center;
   }
 }
 </style>
