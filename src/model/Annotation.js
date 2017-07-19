@@ -77,12 +77,15 @@ class Annotation {
    */
   _setMultiItem (root, key, value) {
     if (root[key] === undefined) {
+      console.log('1')
       // Set the item if none exists
       root[key] = value
-    } else if (root[key].id === value.id) {
-      // Update the item if IDs match
+    } else if (root[key].id && value.id && root[key].id === value.id) {
+      console.log('2')
+      // Update the item if IDs exist and match
       root[key] = value
     } else if (Array.isArray(root[key])) {
+      console.log('3')
       // Add unique items to an array (and update any with the same ID)
       for (let item of root[key]) {
         if (item.id === root[key].id) {
@@ -92,6 +95,7 @@ class Annotation {
         }
       }
     } else {
+      console.log('4')
       // Create new array if both items are unique
       root[key] = [root[key], value]
     }
