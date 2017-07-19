@@ -14,6 +14,8 @@ import Annotation from '@/model/Annotation'
  *   The Annotation creator.
  * @param {Object} generator
  *   The Annotation generator.
+ * @param {String} classification
+ *   A classification.
  */
 class DescriptionAnnotation extends Annotation {
   constructor ({
@@ -22,7 +24,8 @@ class DescriptionAnnotation extends Annotation {
     tag = null,
     fragmentURI = null,
     creator = null,
-    generator = null
+    generator = null,
+    classification = null
   }) {
     super({
       motivation: 'describing',
@@ -33,6 +36,9 @@ class DescriptionAnnotation extends Annotation {
     this.addDescription(value)
     if (tag) {
       this.addTag(tag, fragmentURI)
+    }
+    if (classification) {
+      this.addClassification(classification)
     }
   }
 }
