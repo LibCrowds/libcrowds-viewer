@@ -76,12 +76,14 @@
       </button>
       <button
         class="btn btn-hud"
-        id="lv-browse-previous">
+        id="lv-browse-previous"
+        @click="previousTask">
         <icon name="chevron-left" scale="1.5"></icon>
       </button>
       <button
         class="btn btn-hud"
-        id="lv-browse-next">
+        id="lv-browse-next"
+        @click="nextTask">
         <icon name="chevron-right" scale="1.5"></icon>
       </button>
 
@@ -130,8 +132,6 @@ export default {
         fullPageButton: 'toggle-fullscreen',
         helpButton: 'show-help',
         infoButton: 'show-info',
-        previousButton: 'lv-browse-previous',
-        nextButton: 'lv-browse-next',
         panVertical: false,
         panHorizontal: false,
         gestureSettingsMouse: {
@@ -142,8 +142,7 @@ export default {
         },
         gestureSettingsPen: {
           dblClickToZoom: false
-        },
-        sequenceMode: true
+        }
       },
       metadataModalId: 'lv-metadata-modal',
       helpModalId: 'lv-help-modal',
@@ -377,6 +376,22 @@ export default {
     },
 
     /**
+     * Go to the next task.
+     */
+    previousTask () {
+      const index = this.tasks.indexOf(this.currentTask)
+      this.currentTask = this.tasks[index - 1]
+    },
+
+    /**
+     * Go to the next task.
+     */
+    nextTask () {
+      const index = this.tasks.indexOf(this.currentTask)
+      this.currentTask = this.tasks[index + 1]
+    },
+
+    /**
      * Update the note and emit the relevant event.
      * @param {Task} task.
      *   The task.
@@ -541,33 +556,30 @@ export default {
       if (!previousTask && this.tasks.length > 0) {
         this.setCurrentTask(this.tasks[0])
       }
-    },
-
-    /**
-     * Initialise the viewer.
-     */
-    loadViewer () {
-      const opts = JSON.parse(JSON.stringify(this.viewerOpts))
-      opts.tileSources = this.taskOpts.map(function (task) {
-        return task.imgInfoUri
-      })
-      console.log(opts)
-      this.viewer = new OpenSeadragon.Viewer(opts)
-      console.log(this.viewer)
     }
   },
 
   watch: {
     currentTask: {
       handler: function (oldVal, newVal) {
-        this.configureSelectionMode(this.currentTask)
-        this.drawSelectionOverlays(this.currentTask)
+        // Update the task image if it has changed
+        if (!oldVal || !newVal || oldVal.imgInfoUri !== newVal.imgInfoUri) {
+          this.viewer.open({
+            tileSource: this.currentTask.imgInfoUri,
+            success: () => {
+              this.configureSelectionMode(this.currentTask)
+              this.drawSelectionOverlays(this.currentTask)
+            }
+          })
+        } else {
+          this.configureSelectionMode(this.currentTask)
+          this.drawSelectionOverlays(this.currentTask)
+        }
       },
       deep: true
     },
     taskOpts: {
       handler: function () {
-        this.loadViewer()
         this.loadTasks()
       },
       deep: true
@@ -575,7 +587,9 @@ export default {
   },
 
   mounted () {
-    this.loadViewer()
+    // Initialise the main viewer after the DOM is loaded
+    this.viewer = OpenSeadragon(this.viewerOpts)
+
     this.loadTasks()
     this.attachControls()
     this.setupHandlers()
