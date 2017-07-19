@@ -43,6 +43,7 @@
         v-if="currentTask"
         :task="currentTask"
         :showNote="showNote"
+        :disableComplete="disableComplete"
         @noteupdated="updateNote"
         @submit="submitTask">
 
@@ -149,6 +150,10 @@ export default {
       required: true
     },
     confirmBeforeUnload: {
+      type: Boolean,
+      default: false
+    },
+    disableComplete: {
       type: Boolean,
       default: false
     },
@@ -457,6 +462,7 @@ export default {
           formGroups.classList.add('show-errors')
         }
       }
+      task.complete = true
       this.$emit('submit', task)
     },
 
@@ -514,7 +520,7 @@ export default {
      *   The task.
      */
     configureSelectionMode (task) {
-      if (task.mode === 'select') {
+      if (task.mode === 'select' && !(task.complete && this.disableComplete)) {
         this.selector.enable()
         this.drawSelectionOverlays(this.currentTask)
       } else {

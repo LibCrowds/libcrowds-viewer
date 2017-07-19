@@ -42,21 +42,22 @@ You can now use the component like this:
 
 ### Properties
 
-| Property                | Type    | Default | Description                                                                                         |
-|-------------------------|---------|---------|-----------------------------------------------------------------------------------------------------|
-| task-opts               | String  | null    | An array of task options                                                                            |
-| pan-by                  | Number  | 0.1     | Multiplier by which to pan                                                                          |
-| lang                    | String  | 'en'    | Language for manifest metadata (where available)                                                    |
-| confirm-before-unload   | Boolean | false   | Confirm before leaving the page                                                                     |
-| show-help               | Boolean | true    | Include the help modal                                                                              |
-| show-info               | Boolean | true    | Include the metadata modal                                                                          |
-| show-note               | Boolean | true    | Include the note input                                                                              |
-| show-browse             | Boolean | true    | Include the browse sidebar                                                                          |
-| show-form-errors        | Boolean | true    | Show form errors on submit                                                                          |
-| show-like               | Boolean | false   | Show the like button                                                                                |
-| show-share              | Boolean | true    | Show the share button                                                                               |
-| creator                 | Object  | null    | The Annotation creator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/))   |
-| generator               | Object  | null    | The Annotation generator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)) |
+| Property              | Type    | Default | Description                                                                                         |
+|-----------------------|---------|---------|-----------------------------------------------------------------------------------------------------|
+| task-opts             | String  | null    | An array of task options                                                                            |
+| pan-by                | Number  | 0.1     | Multiplier by which to pan                                                                          |
+| lang                  | String  | 'en'    | Language for manifest metadata (where available)                                                    |
+| confirm-before-unload | Boolean | false   | Confirm before leaving the page                                                                     |
+| disable-complete      | Boolean | false   | Disable completed tasks to prevent multiple submission                                              |
+| show-help             | Boolean | true    | Include the help modal                                                                              |
+| show-info             | Boolean | true    | Include the metadata modal                                                                          |
+| show-note             | Boolean | true    | Include the note input                                                                              |
+| show-browse           | Boolean | true    | Include the browse sidebar                                                                          |
+| show-form-errors      | Boolean | true    | Show form errors on submit                                                                          |
+| show-like             | Boolean | false   | Show the like button                                                                                |
+| show-share            | Boolean | true    | Show the share button                                                                               |
+| creator               | Object  | null    | The Annotation creator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/))   |
+| generator             | Object  | null    | The Annotation generator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)) |
 
 ### Events
 
@@ -76,19 +77,20 @@ which are created from the task options passed to the viewer.
 
 ### Task properties
 
-| Property    | Type    | Attributes  | Description                                                                                                    |
-|-------------|---------|-------------|----------------------------------------------------------------------------------------------------------------|
-| mode        | String  |             | `'select'` or `'transcribe'`                                                                                   |
-| imgInfoUri  | String  |             | Image info URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/#image-information-request-uri-syntax/)) |
-| manifestUri | String  | \<optional> | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/#resource-structure))        |
-| id          | String  | \<optional> | Task identifier                                                                                                |
-| objective   | String  | \<optional> | The main objective                                                                                             |
-| guidance    | String  | \<optional> | Additional guidance                                                                                            |
-| form        | Object  | \<optional> | Model and schema for `transcribe` mode (see [vue-form-generator](https://github.com/icebob/vue-form-generator))|
-| highlight   | Array   | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
-| tag         | String  | \<optional> | The tag to add when in `select` mode                                                                           |
-| liked       | Boolean | \<optional> | Task liked (see the viewer property `show-like`)                                                               |
-| classify    | String  | \<optional> | A SpecificResource to classify the target as (e.g. [foaf:Person](http://xmlns.com/foaf/spec/#term_Person))     |                                                                       |
+| Property       | Type    | Attributes  | Description                                                                                                    |
+|----------------|---------|-------------|----------------------------------------------------------------------------------------------------------------|
+| mode           | String  |             | `'select'` or `'transcribe'`                                                                                   |
+| imgInfoUri     | String  |             | Image info URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/#image-information-request-uri-syntax/)) |
+| manifestUri    | String  | \<optional> | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/#resource-structure))        |
+| id             | String  | \<optional> | Task identifier                                                                                                |
+| objective      | String  | \<optional> | The main objective                                                                                             |
+| guidance       | String  | \<optional> | Additional guidance                                                                                            |
+| form           | Object  | \<optional> | Model and schema for `transcribe` mode (see [vue-form-generator](https://github.com/icebob/vue-form-generator))|
+| highlight      | Array   | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
+| tag            | String  | \<optional> | The tag to add when in `select` mode                                                                           |
+| liked          | Boolean | \<optional> | Task liked (see the viewer property `show-like`)                                                               |
+| classification | String  | \<optional> | A SpecificResource to classify the target as (e.g. [foaf:Person](http://xmlns.com/foaf/spec/#term_Person))     |
+| complete       | Boolean | \<optional> | Mark the task as complete                                                                                      |
 
 ## Modes
 
@@ -129,6 +131,7 @@ Note that the `tag` property is required when in `select` mode.
   "type": "Annotation",
   "motivation": "tagging",
   "created": "2017-07-16T00:44:28.454Z",
+  "generated": "2017-07-16T00:44:28.454Z",
   "creator": {
     "id": "http://example.org/user1",
     "type": "Person",
@@ -249,6 +252,7 @@ taken from `form.model` and `form.classification`, respectively.
   "type": "Annotation",
   "motivation": "describing",
   "created": "2017-07-16T13:53:18.795Z",
+  "generated": "2017-07-16T13:53:18.795Z",
   "creator": {
     "id": "http://example.org/user1",
     "type": "Person",

@@ -8,7 +8,7 @@ module.exports = merge(baseConfig, {
   entry: path.resolve(__dirname, '../demo/src/main.js'),
   output: {
     path: path.resolve(__dirname, '../demo/dist'),
-    publicPath: process.env.NODE_ENV === 'production' ? '../demo' : '/',
+    publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
     filename: '[name].[hash].js'
   },
   resolve: {
@@ -23,7 +23,7 @@ module.exports = merge(baseConfig, {
   plugins: [
     new HtmlWebpackPlugin({
       inject: true,
-      filename: 'demo/index.html',
+      filename: 'index.html',
       template: 'demo/index.html'
     })
   ],

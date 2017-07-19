@@ -16,7 +16,8 @@ class Task {
     form = null,
     regions = [],
     liked = false,
-    annotations = []
+    annotations = [],
+    complete = false
   }) {
     this.mode = mode
     this.id = id
@@ -30,6 +31,7 @@ class Task {
     this.regions = regions
     this.liked = liked
     this.annotations = annotations
+    this.complete = complete
 
     // Validate
     const validModes = ['select', 'transcribe']
