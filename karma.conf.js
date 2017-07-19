@@ -1,12 +1,16 @@
-const webpackConfig = require('./webpack.config.js')
+const webpackConfig = require('./config/webpack.test.config.js')
 
 module.exports = function (config) {
   config.set({
     browsers: ['PhantomJS'],
-    frameworks: ['jasmine', 'phantomjs-shim'],
-    files: ['test/index.js'],
+    frameworks: ['jasmine'],
+    files: [
+      'src/**/*.js',
+      'test/index.js'
+    ],
     reporters: ['spec', 'coverage'],
     preprocessors: {
+      'src/**/*.js': ['webpack', 'coverage'],
       'test/index.js': ['webpack', 'sourcemap']
     },
     singleRun: true,
@@ -14,7 +18,7 @@ module.exports = function (config) {
     webpackMiddleware: {
       noInfo: true
     },
-    browserNoActivityTimeout: 60000,
+    browserNoActivityTimeout: 20000,
     coverageReporter: {
       dir: './coverage',
       reporters: [

@@ -1,43 +1,15 @@
 var path = require('path')
 var webpack = require('webpack')
+var merge = require('webpack-merge')
+var baseConfig = require('./webpack.base.config')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
-module.exports = {
-  entry: './src/main.js',
+module.exports = merge(baseConfig, {
+  entry: path.resolve(__dirname, '../demo/src/main.js'),
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
+    path: path.resolve(__dirname, '../demo/dist'),
+    publicPath: process.env.NODE_ENV === 'production' ? '../demo' : '/',
     filename: '[name].[hash].js'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
-            // the "scss" and "sass" values for the lang attribute to the right configs here.
-            // other preprocessors should work out of the box, no loader config like this necessary.
-            'scss': 'vue-style-loader!css-loader!sass-loader',
-            'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
-          }
-          // other vue-loader options go here
-        }
-      },
-      {
-        test: /\.css$/,
-        loader: [
-          'style-loader',
-          'css-loader'
-        ]
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      }
-    ]
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -51,19 +23,16 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       inject: true,
-      filename: 'index.html',
-      template: 'index.html'
+      filename: 'demo/index.html',
+      template: 'demo/index.html'
     })
   ],
   devServer: {
     historyApiFallback: true,
     noInfo: true
   },
-  performance: {
-    hints: false
-  },
   devtool: '#eval-source-map'
-}
+})
 
 if (process.env.NODE_ENV === 'development') {
   module.exports.plugins = (module.exports.plugins || []).concat([

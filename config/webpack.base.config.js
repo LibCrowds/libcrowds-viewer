@@ -4,7 +4,7 @@ var webpack = require('webpack')
 module.exports = {
   entry: './src/main.js',
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, '../dist'),
     publicPath: '/dist/',
     filename: 'main.js',
     library: 'libcrowds-viewer',
@@ -16,9 +16,10 @@ module.exports = {
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
+        exclude: /node_modules/,
         include: [
-          path.resolve(__dirname, 'src'),
-          path.resolve(__dirname, 'demo')
+          path.resolve(__dirname, '../src'),
+          path.resolve(__dirname, '../demo')
         ],
         options: {
           formatter: require('eslint-friendly-formatter')
@@ -50,8 +51,8 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [
-          path.resolve(__dirname, 'src'),
-          path.resolve(__dirname, 'test')
+          path.resolve(__dirname, '../src'),
+          path.resolve(__dirname, '../test')
         ],
       },
       {
@@ -67,37 +68,11 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': path.resolve(__dirname, 'src'),
-      style: path.resolve(__dirname, 'src/assets/style/')
+      '@': path.resolve(__dirname, '../src'),
+      style: path.resolve(__dirname, '../src/assets/style/')
     }
-  },
-  devServer: {
-    historyApiFallback: true,
-    noInfo: true
   },
   performance: {
     hints: false
-  },
-  devtool: '#eval-source-map'
-}
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
-  // http://vue-loader.vuejs.org/en/workflow/production.html
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    })
-  ])
+  }
 }
