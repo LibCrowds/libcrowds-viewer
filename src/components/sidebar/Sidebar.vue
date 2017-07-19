@@ -12,7 +12,7 @@
     <div
       class="lv-sidebar-content"
       v-show="!contentCollapsed"
-      v-if="!task.complete">
+      v-if="!(disableComplete && task.complete)">
       <h4>{{ task.objective }}</h4>
       <p>{{ task.guidance }}</p>
       <slot></slot>
@@ -20,7 +20,7 @@
 
     <div class="lv-sidebar-footer">
       <button
-        v-if="disableComplete && !task.complete && showNote"
+        v-if="!(disableComplete && task.complete) && showNote"
         class="btn btn-block"
         @click="toggleeNoteCollapse">
         Add a note
@@ -30,7 +30,7 @@
         v-show="showNote"
         v-if="!noteCollapsed">
         <textarea
-          v-if="disableComplete && !task.complete"
+          v-if="!(disableComplete && task.complete)"
           ref="note"
           rows="3"
           placeholder="Leave a note..."
@@ -40,7 +40,7 @@
       </transition>
 
       <button
-        v-if="disableComplete && !task.complete"
+        v-if="!(disableComplete && task.complete)"
         class="btn btn-block btn-green"
         @click="submit">
         Submit
