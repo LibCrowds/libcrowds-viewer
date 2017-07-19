@@ -305,10 +305,10 @@ export default {
         annotations: task.annotations,
         motivation: 'tagging'
       })
+      this.viewer.clearOverlays()
       if (!annos.length) {
         return
       }
-      this.viewer.clearOverlays()
       for (let anno of annos) {
         const imgRect = extractRectFromImageUri(anno.target.selector.value)
         const vpRect = vp.imageToViewportRectangle(imgRect)
@@ -522,7 +522,6 @@ export default {
     configureSelectionMode (task) {
       if (task.mode === 'select' && !(task.complete && this.disableComplete)) {
         this.selector.enable()
-        this.drawSelectionOverlays(this.currentTask)
       } else {
         this.selector.disable()
       }
@@ -549,10 +548,14 @@ export default {
         if (!oldVal || !newVal || oldVal.imgInfoUri !== newVal.imgInfoUri) {
           this.viewer.open({
             tileSource: this.currentTask.imgInfoUri,
-            success: () => this.configureSelectionMode(this.currentTask)
+            success: () => {
+              this.configureSelectionMode(this.currentTask)
+              this.drawSelectionOverlays(this.currentTask)
+            }
           })
         } else {
           this.configureSelectionMode(this.currentTask)
+          this.drawSelectionOverlays(this.currentTask)
         }
       },
       deep: true
