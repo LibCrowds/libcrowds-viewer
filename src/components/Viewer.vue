@@ -262,7 +262,7 @@ export default {
             fragmentURI: imageUri,
             creator: this.creator,
             generator: this.generator,
-            classify: this.currentTask.classify
+            classification: this.currentTask.classification
           })
           this.currentTask.annotations.push(anno)
           this.$emit('create', this.currentTask, anno)
