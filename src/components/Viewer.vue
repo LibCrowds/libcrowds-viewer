@@ -43,6 +43,7 @@
         v-if="currentTask"
         :task="currentTask"
         :showNote="showNote"
+        :disableComplete="disableComplete"
         @noteupdated="updateNote"
         @submit="submitTask">
 
