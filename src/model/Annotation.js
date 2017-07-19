@@ -42,10 +42,10 @@ class Annotation {
       format: 'image/jpeg'
     }
     if (creator) {
-      this.addCreator(creator)
+      this._setMultiItem(this, 'creator', creator)
     }
     if (generator) {
-      this.addGenerator(generator)
+      this._setMultiItem(this, 'generator', generator)
     }
   }
 
@@ -59,10 +59,10 @@ class Annotation {
   modify ({creator = null, generator = null}) {
     this.modified = new Date().toISOString()
     if (creator) {
-      this.addCreator(creator)
+      this._setMultiItem(this, 'creator', creator)
     }
     if (generator) {
-      this.addGenerator(generator)
+      this._setMultiItem(this, 'generator', generator)
     }
   }
 
@@ -103,7 +103,7 @@ class Annotation {
   }
 
   /**
-   * Add a tag.
+   * Add a tag to the Body and set the fragement selector, if provided.
    * @param {String} value
    *   A plain text value.
    * @param {Object} imgInfo
@@ -120,7 +120,7 @@ class Annotation {
       }
     }
 
-    this.addBody({
+    this._setMultiItem(this, 'body', {
       type: 'TextualBody',
       purpose: 'tagging',
       value: value
@@ -128,14 +128,14 @@ class Annotation {
   }
 
   /**
-   * Add a description
+   * Add a description to the Body.
    * @param {String} value
    *   A plain text value.
    * @param {*} fragmentURI
    *   The IIIF image region.
    */
   addDescription (value) {
-    this.addBody({
+    this._setMultiItem(this, 'body', {
       type: 'TextualBody',
       purpose: 'describing',
       value: value,
@@ -144,43 +144,16 @@ class Annotation {
   }
 
   /**
-   * Add a classification.
+   * Add a classification to the Body
    * @param {String} value
    *   The value of the resource.
    */
   addClassification (value) {
-    this.addBody({
+    this._setMultiItem(this, 'body', {
       type: 'SpecificResource',
       purpose: 'classifying',
       value: value
     })
-  }
-
-  /**
-   * Add a Body to the Annotation.
-   * @param {Object} opts
-   *   The Body to be added.
-   */
-  addBody (opts) {
-    this._setMultiItem(this, 'body', opts)
-  }
-
-  /**
-   * Add a creator to the Annotation.
-   * @param {Object} opts
-   *   The body to be added.
-   */
-  addCreator (opts) {
-    this._setMultiItem(this, 'creator', opts)
-  }
-
-  /**
-   * Add a generator to the Annotation.
-   * @param {Object} opts
-   *   The generator to be added.
-   */
-  addGenerator (opts) {
-    this._setMultiItem(this, 'generator', opts)
   }
 
   /**
