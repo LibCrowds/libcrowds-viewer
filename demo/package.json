@@ -11,12 +11,7 @@
   "dependencies": {
     "es6-object-assign": "^1.1.0",
     "es6-promise": "^4.1.1",
-    "hint.css": "^2.5.0",
-    "normalize.css": "^7.0.0",
-    "vue": "^2.3.4",
-    "vue-awesome": "^2.3.1",
-    "vue-form-generator": "^2.0.0",
-    "vuex": "^2.3.1"
+    "vue": "^2.3.4"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
