@@ -2,6 +2,7 @@
   {
     "id": 1,
     "tag": "title",
+    "classify": "http://purl.org/dc/terms/title",
     "mode": "select",
     "objective": "Tag all of the titles",
     "guidance": "Draw a box around each title, including any subtitles",
