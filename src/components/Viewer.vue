@@ -43,7 +43,6 @@
         v-if="currentTask"
         :task="currentTask"
         :showNote="showNote"
-        :disableComplete="disableComplete"
         @noteupdated="updateNote"
         @submit="submitTask">
 
@@ -305,10 +304,10 @@ export default {
         annotations: task.annotations,
         motivation: 'tagging'
       })
+      this.viewer.clearOverlays()
       if (!annos.length) {
         return
       }
-      this.viewer.clearOverlays()
       for (let anno of annos) {
         const imgRect = extractRectFromImageUri(anno.target.selector.value)
         const vpRect = vp.imageToViewportRectangle(imgRect)
@@ -544,19 +543,18 @@ export default {
   watch: {
     currentTask: {
       handler: function (oldVal, newVal) {
-        function configure () {
-          this.configureSelectionMode(this.currentTask)
-          this.drawSelectionOverlays(this.currentTask)
-        }
-
         // Update the task image if it has changed
         if (!oldVal || !newVal || oldVal.imgInfoUri !== newVal.imgInfoUri) {
           this.viewer.open({
             tileSource: this.currentTask.imgInfoUri,
-            success: () => configure()
+            success: () => {
+              this.configureSelectionMode(this.currentTask)
+              this.drawSelectionOverlays(this.currentTask)
+            }
           })
         } else {
-          success: () => configure()
+          this.configureSelectionMode(this.currentTask)
+          this.drawSelectionOverlays(this.currentTask)
         }
       },
       deep: true
