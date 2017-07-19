@@ -144,7 +144,7 @@ class Annotation {
    * @param {String} value
    *   The value of the resource.
    */
-  addClassification (tag) {
+  addClassification (value) {
     this.addBody({
       type: 'SpecificResource',
       purpose: 'classifying',
