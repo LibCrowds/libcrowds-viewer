@@ -24,12 +24,7 @@ class CommentAnnotation extends Annotation {
       creator: creator,
       generator: generator
     })
-    this.addBody({
-      type: 'TextualBody',
-      value: value,
-      purpose: 'commenting',
-      format: 'text/plain'
-    })
+    this.addComment(value)
   }
 }
 

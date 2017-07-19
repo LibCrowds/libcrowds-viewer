@@ -153,6 +153,20 @@ class Annotation {
   }
 
   /**
+   * Add a comment to the Body
+   * @param {String} value
+   *   The value of the resource.
+   */
+  addComment (value) {
+    this._setMultiItem(this, 'body', {
+      type: 'TextualBody',
+      value: value,
+      purpose: 'commenting',
+      format: 'text/plain'
+    })
+  }
+
+  /**
    * Return matching bodies filtered at root level by filters.
    * @param {*} filters
    *   Array of key-value pairs on which to search.
