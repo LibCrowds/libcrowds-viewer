@@ -91,8 +91,13 @@
         :task="currentTask"
         @update="updateForm">
       </transcribe-sidebar-item>
-
     </sidebar>
+
+    <selection-box
+      v-if="currentTask && currentTask.mode === 'select'"
+      :viewer="viewer"
+      @selection="handleSelection">
+    </selection-box>
 
   </div>
 </template>
@@ -104,7 +109,6 @@ import 'vue-awesome/icons/check-circle'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
 import OpenSeadragon from 'openseadragon'
-import 'openseadragonselection/dist/openseadragonselection'
 import MetadataModal from '@/components/modals/Metadata'
 import HelpModal from '@/components/modals/Help'
 import ViewerControls from '@/components/controls/Viewer'
@@ -112,6 +116,7 @@ import PanControls from '@/components/controls/Pan'
 import Sidebar from '@/components/sidebar/Sidebar'
 import SelectSidebarItem from '@/components/sidebar/items/Select'
 import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
+import SelectionBox from '@/components/SelectionBox'
 import Task from '@/model/Task'
 import TagAnnotation from '@/model/TagAnnotation'
 import DescriptionAnnotation from '@/model/DescriptionAnnotation'
@@ -218,6 +223,7 @@ export default {
     Sidebar,
     SelectSidebarItem,
     TranscribeSidebarItem,
+    SelectionBox,
     Icon
   },
 
@@ -268,31 +274,33 @@ export default {
     },
 
     /**
+     * Draw overlay and add tag when a selection is made.
+     */
+    handleSelection (selectionRect) {
+      const vp = this.viewer.viewport
+      const imgRect = vp.viewportToImageRectangle(selectionRect)
+      const imageUri = getImageUri({
+        imgSource: this.currentTask.imgInfoUri,
+        region: imgRect
+      })
+      this.currentTask.fetchImageInfo().then((info) => {
+        let anno = new TagAnnotation({
+          imgInfo: info,
+          value: this.currentTask.tag,
+          fragmentURI: imageUri,
+          creator: this.creator,
+          generator: this.generator,
+          classification: this.currentTask.classification
+        })
+        this.currentTask.annotations.push(anno)
+        this.$emit('create', this.currentTask, anno)
+      })
+    },
+
+    /**
      * Setup event handlers.
      */
     setupHandlers () {
-      // Add a tag and draw the overlay when a selection is made.
-      this.viewer.addHandler('selection', (selectionRect) => {
-        const vp = this.viewer.viewport
-        const imgRect = vp.viewportToImageRectangle(selectionRect)
-        const imageUri = getImageUri({
-          imgSource: this.currentTask.imgInfoUri,
-          region: imgRect
-        })
-        this.currentTask.fetchImageInfo().then((info) => {
-          let anno = new TagAnnotation({
-            imgInfo: info,
-            value: this.currentTask.tag,
-            fragmentURI: imageUri,
-            creator: this.creator,
-            generator: this.generator,
-            classification: this.currentTask.classification
-          })
-          this.currentTask.annotations.push(anno)
-          this.$emit('create', this.currentTask, anno)
-        })
-      })
-
       // Confirm before leaving if any overlays have been drawn or forms filled
       window.onbeforeunload = () => {
         const msg = 'Unsaved changes will be lost.'
@@ -584,12 +592,10 @@ export default {
           this.viewer.open({
             tileSource: this.currentTask.imgInfoUri,
             success: () => {
-              this.configureSelectionMode(this.currentTask)
               this.drawSelectionOverlays(this.currentTask)
             }
           })
         } else {
-          this.configureSelectionMode(this.currentTask)
           this.drawSelectionOverlays(this.currentTask)
         }
       },
@@ -610,7 +616,6 @@ export default {
     this.loadTasks()
     this.setupHandlers()
     this.highlightRegion()
-    this.configureSelector()
   }
 }
 </script>
