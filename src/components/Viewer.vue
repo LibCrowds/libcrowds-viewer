@@ -39,29 +39,6 @@
         :mode="currentTask.mode">
       </help-modal>
 
-      <sidebar
-        v-if="currentTask"
-        :task="currentTask"
-        :showNote="showNote"
-        :disableComplete="disableComplete"
-        @noteupdated="updateNote"
-        @submit="submitTask">
-
-        <select-sidebar-item
-          v-if="currentTask.mode === 'select'"
-          :task="currentTask"
-          @edit="editTag"
-          @delete="deleteTag">
-        </select-sidebar-item>
-
-        <transcribe-sidebar-item
-          v-if="currentTask.mode === 'transcribe'"
-          :task="currentTask"
-          @update="updateForm">
-        </transcribe-sidebar-item>
-
-      </sidebar>
-
       <button
         class="btn-selection"
         id="confirm-selection"
@@ -91,8 +68,30 @@
 
     </div>
 
-    <!-- Render viewer after all other components -->
     <div :id="viewerOpts.id"></div>
+
+    <sidebar
+      v-if="currentTask"
+      :task="currentTask"
+      :showNote="showNote"
+      :disableComplete="disableComplete"
+      @noteupdated="updateNote"
+      @submit="submitTask">
+
+      <select-sidebar-item
+        v-if="currentTask.mode === 'select'"
+        :task="currentTask"
+        @edit="editTag"
+        @delete="deleteTag">
+      </select-sidebar-item>
+
+      <transcribe-sidebar-item
+        v-if="currentTask.mode === 'transcribe'"
+        :task="currentTask"
+        @update="updateForm">
+      </transcribe-sidebar-item>
+
+    </sidebar>
 
   </div>
 </template>
@@ -622,7 +621,7 @@ export default {
 
 #lv-viewer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 100%;
   width: 100%;
   background-color: #000;
@@ -630,7 +629,7 @@ export default {
 }
 
 #lv-viewer-container {
-  height: 100%;
+  flex: 1 1 auto;
 }
 
 #lv-browse-next,
@@ -639,7 +638,7 @@ export default {
   height: 3rem;
   width: 3rem;
   position: absolute !important;
-  top: calc(50% - 1.5rem);
+  top: calc(50% - 2rem);
 }
 
 #lv-browse-previous {
