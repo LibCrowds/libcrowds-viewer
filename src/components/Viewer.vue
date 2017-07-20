@@ -40,18 +40,6 @@
         </help-modal>
 
         <button
-          class="btn-selection"
-          id="confirm-selection"
-          ref="confirmSelection">
-          <icon name="check-circle"></icon>
-        </button>
-        <button
-          class="btn-selection"
-          id="cancel-selection"
-          ref="cancelSelection">
-          <icon name="times-circle"></icon>
-        </button>
-        <button
           :disabled="previousBtnDisabled"
           class="btn btn-hud"
           id="lv-browse-previous"
@@ -104,8 +92,6 @@
 
 <script>
 import Icon from 'vue-awesome/components/Icon'
-import 'vue-awesome/icons/times-circle'
-import 'vue-awesome/icons/check-circle'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
 import OpenSeadragon from 'openseadragon'
@@ -341,39 +327,6 @@ export default {
         const vpRect = vp.imageToViewportRectangle(imgRect)
         drawOverlay(this.viewer, anno.id, vpRect, 'selection')
       }
-    },
-
-    /**
-     * Configure the area selector for the main viewer.
-     *
-     * TODO: Lose this dependency!
-     */
-    configureSelector () {
-      this.selector = this.viewer.selection({
-        showConfirmDenyButtons: false,
-        restrictToImage: true,
-        returnPixelCoordinates: false
-      })
-
-      /* eslint-disable no-new */
-      new OpenSeadragon.Button({
-        element: this.$refs.confirmSelection,
-        clickTimeThreshold: this.viewer.clickTimeThreshold,
-        clickDistThreshold: this.viewer.clickDistThreshold,
-        tooltip: 'Confirm',
-        onRelease: this.selector.confirm.bind(this.selector)
-      })
-      this.selector.element.appendChild(this.$refs.confirmSelection)
-
-      /* eslint-disable no-new */
-      new OpenSeadragon.Button({
-        element: this.$refs.cancelSelection,
-        clickTimeThreshold: this.viewer.clickTimeThreshold,
-        clickDistThreshold: this.viewer.clickDistThreshold,
-        tooltip: 'Delete',
-        onRelease: this.selector.cancel.bind(this.selector)
-      })
-      this.selector.element.appendChild(this.$refs.cancelSelection)
     },
 
     /**
@@ -677,29 +630,6 @@ export default {
 
   .openseadragon-message {
     color: #FFF;
-  }
-
-  .selection-box {
-    transform: none !important;  /** Disable rotation */
-    z-index: 1;
-    outline: 9999px solid rgba(#000, .6);
-
-    .btn-selection {
-      color: #fff;
-      display: flex !important;
-      position: absolute !important;
-      right: 0;
-
-      &#confirm-selection {
-        bottom: 0;
-        transform: translateX(20px) translateY(15px);
-      }
-
-      &#cancel-selection {
-        top: 0;
-        transform: translateX(20px) translateY(-15px);
-      }
-    }
   }
 
   .overlay {

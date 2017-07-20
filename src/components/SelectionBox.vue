@@ -1,11 +1,26 @@
 <template>
-  <div ref="box" class="lv-selection-box">
-
+  <div id="lv-selection-box">
+    <div class="selection-box" ref="box"></div>
+    <button
+      class="btn-selection"
+      id="confirm-selection"
+      ref="confirmSelection">
+      <icon name="check-circle"></icon>
+    </button>
+    <button
+      class="btn-selection"
+      id="cancel-selection"
+      ref="cancelSelection">
+      <icon name="times-circle"></icon>
+    </button>
   </div>
 </template>
 
 <script>
 import OpenSeadragon from 'openseadragon'
+import Icon from 'vue-awesome/components/Icon'
+import 'vue-awesome/icons/times-circle'
+import 'vue-awesome/icons/check-circle'
 
 export default {
   data: function () {
@@ -29,6 +44,10 @@ export default {
       type: Object,
       required: true
     }
+  },
+
+  components: {
+    Icon
   },
 
   methods: {
@@ -89,13 +108,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.lv-selection-box {
-  display: block;
-  border: 1px dotted #000;
-  position: absolute;
+#lv-selection-box {
+  .selection-box {
+    display: block;
+    position: absolute;
+    border: 1px dotted #000;
+    z-index: 1;
+  }
 
   &.hidden {
     display: none;
+  }
+
+  .btn-selection {
+    color: #fff;
+    display: flex !important;
+    position: absolute !important;
+    right: 0;
+
+    &#confirm-selection {
+      bottom: 0;
+      transform: translateX(20px) translateY(15px);
+    }
+
+    &#cancel-selection {
+      top: 0;
+      transform: translateX(20px) translateY(-15px);
+    }
   }
 }
 
