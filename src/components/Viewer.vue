@@ -624,6 +624,9 @@ export default {
   flex-direction: row;
   height: 100%;
   width: 100%;
+  left: 0;
+  margin: 0;
+  top: 0;
 }
 
 #lv-viewer-wrapper {
