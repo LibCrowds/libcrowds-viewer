@@ -27,6 +27,14 @@ export default {
       type: Task,
       required: true
     },
+    viewer: {
+      type: Object,
+      required: true
+    },
+    zoomBy: {
+      type: Number,
+      required: true
+    },
     showHelp: {
       type: Boolean,
       required: true
@@ -41,22 +49,6 @@ export default {
     },
     showLike: {
       type: Boolean,
-      required: true
-    },
-    zoomInButton: {
-      type: String,
-      required: true
-    },
-    zoomOutButton: {
-      type: String,
-      required: true
-    },
-    homeButton: {
-      type: String,
-      required: true
-    },
-    fullPageButton: {
-      type: String,
       required: true
     },
     helpButton: {
@@ -74,27 +66,45 @@ export default {
   },
 
   computed: {
+    // We're handling the zoom and fullscreen functionality ourselves here
+    // as other controls rely on the current task being passed in and therefore
+    // this component could be rendered after the viewer and the default method
+    // of passing the button IDs won't work.
     buttons: function () {
       let buttons = [
         {
-          id: this.zoomInButton,
           tooltip: 'Zoom in',
-          icon: 'plus-circle'
+          icon: 'plus-circle',
+          click: () => {
+            const currentZoom = this.viewer.viewport.getZoom(true)
+            const zoomTo = currentZoom + (currentZoom * this.zoomBy)
+            this.viewer.viewport.zoomTo(zoomTo)
+          }
         },
         {
-          id: this.zoomOutButton,
           tooltip: 'Zoom out',
-          icon: 'minus-circle'
+          icon: 'minus-circle',
+          click: () => {
+            const currentZoom = this.viewer.viewport.getZoom(true)
+            const zoomTo = currentZoom - (currentZoom * this.zoomBy)
+            this.viewer.viewport.zoomTo(zoomTo)
+          }
         },
         {
-          id: this.homeButton,
           tooltip: 'Reset zoom',
-          icon: 'refresh'
+          icon: 'refresh',
+          click: () => {
+            const homeZoom = this.viewer.viewport.getHomeZoom()
+            this.viewer.viewport.zoomTo(homeZoom)
+          }
         },
         {
-          id: this.fullPageButton,
           tooltip: 'Fullscreen',
-          icon: 'expand'
+          icon: 'expand',
+          click: () => {
+            const isFullPage = this.viewer.isFullPage()
+            this.viewer.setFullScreen(!isFullPage)
+          }
         }
       ]
 

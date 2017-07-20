@@ -46,6 +46,7 @@ You can now use the component like this:
 |-----------------------|---------|---------|-----------------------------------------------------------------------------------------------------|
 | task-opts             | String  | null    | An array of task options                                                                            |
 | pan-by                | Number  | 0.1     | Multiplier by which to pan                                                                          |
+| zoom-by               | Number  | 0.1     | Multiplier by which to zoom                                                                         |
 | lang                  | String  | 'en'    | Language for manifest metadata (where available)                                                    |
 | confirm-before-unload | Boolean | false   | Confirm before leaving the page                                                                     |
 | disable-complete      | Boolean | false   | Disable completed tasks to prevent multiple submission                                              |

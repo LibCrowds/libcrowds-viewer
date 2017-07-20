@@ -6,14 +6,12 @@
       <viewer-controls
         v-if="currentTask"
         :task="currentTask"
+        :viewer="viewer"
+        :zoomBy="zoomBy"
         :showHelp="showHelp"
         :showInfo="showInfo"
         :showLike="showLike"
         :showShare="showShare"
-        :zoomInButton="viewerOpts.zoomInButton"
-        :zoomOutButton="viewerOpts.zoomOutButton"
-        :homeButton="viewerOpts.homeButton"
-        :fullPageButton="viewerOpts.fullPageButton"
         :helpButton="viewerOpts.helpButton"
         :infoButton="viewerOpts.infoButton"
         @helpclicked="handleHelpControlClick"
@@ -127,10 +125,7 @@ export default {
       selector: {},
       viewerOpts: {
         id: 'lv-viewer-container',
-        zoomInButton: 'zoom-in',
-        zoomOutButton: 'zoom-out',
-        homeButton: 'reset-zoom',
-        fullPageButton: 'toggle-fullscreen',
+        showNavigationControl: false,
         helpButton: 'show-help',
         infoButton: 'show-info',
         panVertical: false,
@@ -182,6 +177,10 @@ export default {
       default: true
     },
     panBy: {
+      type: Number,
+      default: 0.1
+    },
+    zoomBy: {
       type: Number,
       default: 0.1
     },
