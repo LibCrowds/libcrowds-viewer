@@ -1,4 +1,5 @@
 import Form from '@/model/Form'
+import Overlay from '@/model/Overlay'
 
 /**
  * Represents a task to be updated with user input as annotations.
@@ -32,6 +33,9 @@ class Task {
     this.liked = liked
     this.annotations = annotations
     this.complete = complete
+
+    // Overlays are established at runtime
+    this.overlays = {}
 
     // Validate
     const validModes = ['select', 'transcribe']
@@ -101,6 +105,24 @@ class Task {
       throw Error('No Annotation exists with that ID')
     }
     this.annotations = filteredAnnos
+  }
+
+  /**
+   * Add or update an overlay for the task.
+   * @param {String} id
+   *   An ID.
+   * @param {Object} rect
+   *   An OpenSeadragon viewport rectangle.
+   * @param {String} shape
+   *   The type of shape ('rect' or 'circle').
+   */
+  storeOverlay (id, rect, shape) {
+    if (id in this.overlays) {
+      this.overlays[id].rect = rect
+      this.overlays[id].shape = shape
+      return
+    }
+    this.overlays[id] = new Overlay(id, rect, shape)
   }
 }
 

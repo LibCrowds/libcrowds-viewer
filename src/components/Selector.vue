@@ -42,10 +42,6 @@ export default {
     viewer: {
       type: Object,
       required: true
-    },
-    overlays: {
-      type: Object,
-      required: true
     }
   },
 
@@ -85,7 +81,7 @@ export default {
   mounted () {
     this.viewer.addHandler('canvas-drag-end', (obj) => {
       this.selecting = false
-      this.$emit('selection', this.rect)
+      this.$emit('selection', this.rect, this.selecting)
     })
 
     this.viewer.addHandler('canvas-drag', (obj) => {
@@ -100,7 +96,8 @@ export default {
       this.x2 = obj.position.x
       this.y2 = obj.position.y
       this.calc()
-      this.$emit('selecting', this.rect)
+      console.log('selecting')
+      this.$emit('selection', this.rect, this.selecting)
     })
   }
 }

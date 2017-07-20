@@ -57,7 +57,11 @@
 
       <div :id="viewerOpts.id"></div>
 
-      <surface :viewer="viewer" :overlays="overlays"></surface>
+      <surface
+        v-if="currentTask"
+        :task="currentTask"
+        :viewer="viewer">
+      </surface>
 
     </div>
 
@@ -141,8 +145,7 @@ export default {
       metadataModalId: 'lv-metadata-modal',
       helpModalId: 'lv-help-modal',
       tasks: [],
-      currentTask: null,
-      overlays: {}
+      currentTask: null
     }
   },
 
@@ -272,6 +275,7 @@ export default {
      *   True if selecting, false otherwise.
      */
     handleSelection (rect, isSelecting) {
+      console.log(rect, isSelecting)
       const vp = this.viewer.viewport
       const imgRect = vp.viewportToImageRectangle(rect)
       const imageUri = getImageUri({
@@ -288,6 +292,7 @@ export default {
           classification: this.currentTask.classification
         })
         this.currentTask.annotations.push(anno)
+        this.currentTask.storeOverlay(anno.id, rect)
         this.$emit('create', this.currentTask, anno)
       })
     },
@@ -327,7 +332,6 @@ export default {
         annotations: task.annotations,
         motivation: 'tagging'
       })
-      this.viewer.clearOverlays()
       if (!annos.length) {
         return
       }
@@ -342,15 +346,16 @@ export default {
      * Highlight a region of the current image.
      */
     highlightRegion () {
-      if (this.region) {
-        const rect = new OpenSeadragon.Rect(
-          this.region.x,
-          this.region.y,
-          this.region.width,
-          this.region.height
-        )
-        drawOverlay(this.viewer, 'highlight', rect, 'highlight')
-      }
+      // if (this.region) {
+      //   const rect = new OpenSeadragon.Rect(
+      //     this.region.x,
+      //     this.region.y,
+      //     this.region.width,
+      //     this.region.height
+      //   )
+      //   // Use task.addOverlay when refactoring the highlight method
+      //   // drawOverlay(this.viewer, 'highlight', rect, 'highlight')
+      // }
     },
 
     /**
@@ -552,13 +557,8 @@ export default {
         // Update the task image if it has changed
         if (!oldVal || !newVal || oldVal.imgInfoUri !== newVal.imgInfoUri) {
           this.viewer.open({
-            tileSource: this.currentTask.imgInfoUri,
-            success: () => {
-              this.drawSelectionOverlays(this.currentTask)
-            }
+            tileSource: this.currentTask.imgInfoUri
           })
-        } else {
-          this.drawSelectionOverlays(this.currentTask)
         }
       },
       deep: true

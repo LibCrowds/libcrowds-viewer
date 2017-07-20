@@ -10,6 +10,7 @@
 
 <script>
 import Snap from 'snapsvg'
+import Task from '@/model/Task'
 
 export default {
   data: function () {
@@ -21,6 +22,10 @@ export default {
   props: {
     viewer: {
       type: Object,
+      required: true
+    },
+    task: {
+      type: Task,
       required: true
     }
   },
@@ -46,6 +51,15 @@ export default {
       this.snap.rect(elRect.x, elRect.y, elRect.width, elRect.height)
     }
 
+  },
+
+  watch: {
+    task: {
+      handler: function () {
+        console.log(this.overlays)
+      },
+      deep: true
+    }
   },
 
   mounted () {
