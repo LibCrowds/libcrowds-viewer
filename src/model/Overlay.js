@@ -13,8 +13,8 @@ class Overlay {
     rect,
     shape = 'rect'
   }) {
-    this.id = rect
-    this.schema = schema
+    this.id = id
+    this.rect = rect
     this.shape = shape
   }
 }
