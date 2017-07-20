@@ -1,5 +1,5 @@
 <template>
-  <div id="lv-selection-box">
+  <div id="lv-selector">
     <div class="selection-box" ref="box"></div>
     <button
       class="btn-selection"
@@ -108,7 +108,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#lv-selection-box {
+#lv-selector {
   .selection-box {
     display: block;
     position: absolute;

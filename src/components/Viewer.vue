@@ -81,11 +81,11 @@
       </transcribe-sidebar-item>
     </sidebar>
 
-    <selection-box
+    <selector
       v-if="currentTask && currentTask.mode === 'select'"
       :viewer="viewer"
       @selection="handleSelection">
-    </selection-box>
+    </selector>
 
   </div>
 </template>
@@ -102,7 +102,7 @@ import PanControls from '@/components/controls/Pan'
 import Sidebar from '@/components/sidebar/Sidebar'
 import SelectSidebarItem from '@/components/sidebar/items/Select'
 import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
-import SelectionBox from '@/components/SelectionBox'
+import Selector from '@/components/Selector'
 import Task from '@/model/Task'
 import TagAnnotation from '@/model/TagAnnotation'
 import DescriptionAnnotation from '@/model/DescriptionAnnotation'
@@ -209,7 +209,7 @@ export default {
     Sidebar,
     SelectSidebarItem,
     TranscribeSidebarItem,
-    SelectionBox,
+    Selector,
     Icon
   },
 
