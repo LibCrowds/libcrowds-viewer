@@ -14,10 +14,10 @@
         :showShare="showShare"
         :helpButton="viewerOpts.helpButton"
         :infoButton="viewerOpts.infoButton"
-        @helpclicked="handleHelpControlClick"
-        @infoclicked="handleInfoControlClick"
-        @likeclicked="handleLikeControlClick"
-        @fullscreenclicked="handleFullScreenControlClick">
+        @helpclicked="emitShowHelp"
+        @infoclicked="emitShowInfo"
+        @likeclicked="emitTaskLiked"
+        @fullscreenclicked="toggleFullScreen">
       </viewer-controls>
 
       <pan-controls
@@ -246,31 +246,31 @@ export default {
     },
 
     /**
-     * Emit the show model event when help control clicked.
+     * Emit the show model event for the help modal.
      */
-    handleHelpControlClick () {
+    emitShowHelp () {
       this.$root.$emit('show::modal', this.helpModalId)
     },
 
     /**
-     * Emit the show model event when info control clicked.
+     * Emit the show model event for the info modal.
      */
-    handleInfoControlClick () {
+    emitShowInfo () {
       this.$root.$emit('show::modal', this.metadataModalId)
     },
 
     /**
      * Emit the taskliked event.
      */
-    handleLikeControlClick (task, status) {
+    emitTaskLiked (task, status) {
       task.liked = status
-      this.$emit('taskliked', task)
+      this.$emit('taskliked', status)
     },
 
     /**
-     * Emit the fullscreen event.
+     * Toggle fullscreen mode.
      */
-    handleFullScreenControlClick () {
+    toggleFullScreen () {
       const el = this.$refs.container
       toggleFullScreen(el)
     },
