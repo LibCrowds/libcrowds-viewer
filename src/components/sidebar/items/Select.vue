@@ -74,11 +74,14 @@ export default {
 @import '~style/partials/buttons';
 
 #lv-sidebar-select-item {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+
   ul {
     margin: 0;
     overflow-y: auto;
-    height: 250px;
-    max-height: 250px;
+    flex: 1 1 auto;
     list-style: none;
     padding: 0;
     border: 1px solid $gray;

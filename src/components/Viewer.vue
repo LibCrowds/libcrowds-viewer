@@ -39,7 +39,7 @@
         :mode="currentTask.mode">
       </help-modal>
 
-      <sidebar id="lv-sidebar"
+      <sidebar
         v-if="currentTask"
         :task="currentTask"
         :showNote="showNote"
@@ -631,16 +631,6 @@ export default {
 
 #lv-viewer-container {
   height: 100%;
-}
-
-#lv-sidebar {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  right: 0;
-  width: 35%;
-  margin: 0.8rem;
-  max-width: 350px;
 }
 
 #lv-browse-next,
