@@ -1,3 +1,4 @@
+require('babel-polyfill')
 var webpack = require('webpack')
 var merge = require('webpack-merge')
 var baseConfig = require('./webpack.base.config')
