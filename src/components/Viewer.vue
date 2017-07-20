@@ -235,16 +235,6 @@ export default {
   },
 
   methods: {
-
-    /**
-     * Attach controls to the viewer container for fullscreen mode.
-     */
-    attachControls () {
-      // TODO: this works but should possibly use
-      // https://openseadragon.github.io/docs/OpenSeadragon.Control.html
-      this.viewer.container.appendChild(this.$refs.hud)
-    },
-
     /**
      * Emit the show model event for the help modal.
      */
@@ -616,7 +606,6 @@ export default {
     this.viewer = OpenSeadragon(this.viewerOpts)
 
     this.loadTasks()
-    this.attachControls()
     this.setupHandlers()
     this.highlightRegion()
     this.configureSelector()
