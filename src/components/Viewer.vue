@@ -1,73 +1,75 @@
 <template>
   <div id="lv-viewer" ref="container">
 
-    <div ref="hud">
+    <div id="lv-viewer-wrapper">
 
-      <viewer-controls
-        v-if="currentTask"
-        :task="currentTask"
-        :viewer="viewer"
-        :zoomBy="zoomBy"
-        :showHelp="showHelp"
-        :showInfo="showInfo"
-        :showLike="showLike"
-        :showShare="showShare"
-        :helpButton="viewerOpts.helpButton"
-        :infoButton="viewerOpts.infoButton"
-        @helpclicked="emitShowHelp"
-        @infoclicked="emitShowInfo"
-        @likeclicked="emitTaskLiked"
-        @fullscreenclicked="toggleFullScreen">
-      </viewer-controls>
+      <div id="hud" ref="hud">
+        <viewer-controls
+          v-if="currentTask"
+          :task="currentTask"
+          :viewer="viewer"
+          :zoomBy="zoomBy"
+          :showHelp="showHelp"
+          :showInfo="showInfo"
+          :showLike="showLike"
+          :showShare="showShare"
+          :helpButton="viewerOpts.helpButton"
+          :infoButton="viewerOpts.infoButton"
+          @helpclicked="emitShowHelp"
+          @infoclicked="emitShowInfo"
+          @likeclicked="emitTaskLiked"
+          @fullscreenclicked="toggleFullScreen">
+        </viewer-controls>
 
-      <pan-controls
-        :viewer="viewer"
-        :panBy="panBy">
-      </pan-controls>
+        <pan-controls
+          :viewer="viewer"
+          :panBy="panBy">
+        </pan-controls>
 
-      <metadata-modal
-        v-if="currentTask"
-        :task="currentTask"
-        :lang="lang"
-        :id="metadataModalId">
-      </metadata-modal>
+        <metadata-modal
+          v-if="currentTask"
+          :task="currentTask"
+          :lang="lang"
+          :id="metadataModalId">
+        </metadata-modal>
 
-      <help-modal
-        v-if="currentTask && showHelp"
-        :id="helpModalId"
-        :mode="currentTask.mode">
-      </help-modal>
+        <help-modal
+          v-if="currentTask && showHelp"
+          :id="helpModalId"
+          :mode="currentTask.mode">
+        </help-modal>
 
-      <button
-        class="btn-selection"
-        id="confirm-selection"
-        ref="confirmSelection">
-        <icon name="check-circle"></icon>
-      </button>
-      <button
-        class="btn-selection"
-        id="cancel-selection"
-        ref="cancelSelection">
-        <icon name="times-circle"></icon>
-      </button>
-      <button
-        :disabled="previousBtnDisabled"
-        class="btn btn-hud"
-        id="lv-browse-previous"
-        @click="previousTask">
-        <icon name="chevron-left" scale="1.5"></icon>
-      </button>
-      <button
-        :disabled="nextBtnDisabled"
-        class="btn btn-hud"
-        id="lv-browse-next"
-        @click="nextTask">
-        <icon name="chevron-right" scale="1.5"></icon>
-      </button>
+        <button
+          class="btn-selection"
+          id="confirm-selection"
+          ref="confirmSelection">
+          <icon name="check-circle"></icon>
+        </button>
+        <button
+          class="btn-selection"
+          id="cancel-selection"
+          ref="cancelSelection">
+          <icon name="times-circle"></icon>
+        </button>
+        <button
+          :disabled="previousBtnDisabled"
+          class="btn btn-hud"
+          id="lv-browse-previous"
+          @click="previousTask">
+          <icon name="chevron-left" scale="1.5"></icon>
+        </button>
+        <button
+          :disabled="nextBtnDisabled"
+          class="btn btn-hud"
+          id="lv-browse-next"
+          @click="nextTask">
+          <icon name="chevron-right" scale="1.5"></icon>
+        </button>
+      </div>
+
+      <div :id="viewerOpts.id"></div>
 
     </div>
-
-    <div :id="viewerOpts.id"></div>
 
     <sidebar
       v-if="currentTask"
@@ -622,8 +624,14 @@ export default {
   flex-direction: row;
   height: 100%;
   width: 100%;
+}
+
+#lv-viewer-wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
   background-color: #000;
-  overflow: hidden;
 }
 
 #lv-viewer-container {
