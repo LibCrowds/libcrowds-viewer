@@ -605,7 +605,7 @@ export default {
 
   mounted () {
     // Initialise the main viewer after the DOM is loaded
-    this.viewer = OpenSeadragon(this.viewerOpts)
+    this.viewer = new OpenSeadragon.Viewer(this.viewerOpts)
 
     this.loadTasks()
     this.setupHandlers()
