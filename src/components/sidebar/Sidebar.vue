@@ -1,5 +1,5 @@
 <template>
-  <div class="lv-sidebar">
+  <div id="lv-sidebar">
     <div class="lv-sidebar-header">
       <h4>{{ title }}</h4>
       <span
@@ -139,14 +139,15 @@ export default {
 @import '~style/partials/buttons';
 @import '~style/partials/transitions';
 
-.lv-sidebar {
+#lv-sidebar {
+  z-index: 2;
+  top: 0;
+  right: 0;
+  width: 280px;
   font-size: 14px;
   color: #FFFFFF;
-  overflow-y: hidden;
-  max-height: calc(100vh - 2rem);
-  border: 2px solid rgb(85, 85, 85);
-  background-color: rgba(0, 0, 0, 0.75);
-  margin: 1rem;
+  height: 100%;
+  background-color: $gray-dark;
   display: flex;
   flex-direction: column;
 
@@ -158,7 +159,7 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0.6rem;
+    padding: 1.5rem 1.5rem 0.75rem 1.5rem;
     font-family: sans-serif;
     letter-spacing: 1px;
 
@@ -170,19 +171,24 @@ export default {
   }
 
   .lv-sidebar-content {
-    max-height: 80vh;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
     position: relative;
-    padding: 0.6em;
+    padding: 0.75rem 1.5rem 1.5rem 1.5rem;
     overflow-y: auto;
 
     h4 {
       margin: 0;
+      font-family: Arial;
+      font-weight: 200;
+      letter-spacing: 0.5px;
     }
   }
 
   .lv-sidebar-footer {
-    padding: 0.6rem;
-    border-top: 1px solid $gray;
+    padding: 1.5rem;
+    border-top: 1px solid lighten($gray-dark, 10%);
 
     button:not(:last-child) {
       margin-bottom: 0.6rem;

@@ -2,6 +2,7 @@
   <div id="lv-sidebar-transcribe-item">
 
     <vue-form-generator
+      id="lv-form"
       :schema="task.form.schema"
       :model="task.form.model"
       :options="formOptions"
@@ -60,6 +61,9 @@ export default {
 @import '~style/partials/forms';
 
 #lv-sidebar-transcribe-item {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
   margin-top: 1rem;
 
   fieldset {
@@ -70,5 +74,9 @@ export default {
   .form-group {
     margin-bottom: 1rem;
   }
+}
+
+#lv-form {
+  flex: 1 1 auto;
 }
 </style>

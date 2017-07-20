@@ -52,7 +52,6 @@ You can now use the component like this:
 | show-help             | Boolean | true    | Include the help modal                                                                              |
 | show-info             | Boolean | true    | Include the metadata modal                                                                          |
 | show-note             | Boolean | true    | Include the note input                                                                              |
-| show-browse           | Boolean | true    | Include the browse sidebar                                                                          |
 | show-form-errors      | Boolean | true    | Show form errors on submit                                                                          |
 | show-like             | Boolean | false   | Show the like button                                                                                |
 | show-share            | Boolean | true    | Show the share button                                                                               |

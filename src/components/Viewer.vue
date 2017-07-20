@@ -39,52 +39,59 @@
         :mode="currentTask.mode">
       </help-modal>
 
-      <sidebar id="lv-sidebar"
-        v-if="currentTask"
-        :task="currentTask"
-        :showNote="showNote"
-        :disableComplete="disableComplete"
-        @noteupdated="updateNote"
-        @submit="submitTask">
-
-        <select-sidebar-item
-          v-if="currentTask.mode === 'select'"
-          :task="currentTask"
-          @edit="editTag"
-          @delete="deleteTag">
-        </select-sidebar-item>
-
-        <transcribe-sidebar-item
-          v-if="currentTask.mode === 'transcribe'"
-          :task="currentTask"
-          @update="updateForm">
-        </transcribe-sidebar-item>
-
-        <browse-sidebar-item
-          v-if="showBrowse"
-          :tasks="tasks"
-          @taskselected="setCurrentTask">
-        </browse-sidebar-item>
-
-      </sidebar>
-
-      <div
+      <button
         class="btn-selection"
         id="confirm-selection"
         ref="confirmSelection">
         <icon name="check-circle"></icon>
-      </div>
-      <div
+      </button>
+      <button
         class="btn-selection"
         id="cancel-selection"
         ref="cancelSelection">
         <icon name="times-circle"></icon>
-      </div>
+      </button>
+      <button
+        :disabled="previousBtnDisabled"
+        class="btn btn-hud"
+        id="lv-browse-previous"
+        @click="previousTask">
+        <icon name="chevron-left" scale="1.5"></icon>
+      </button>
+      <button
+        :disabled="nextBtnDisabled"
+        class="btn btn-hud"
+        id="lv-browse-next"
+        @click="nextTask">
+        <icon name="chevron-right" scale="1.5"></icon>
+      </button>
 
     </div>
 
-    <!-- Render viewer after all other components -->
     <div :id="viewerOpts.id"></div>
+
+    <sidebar
+      v-if="currentTask"
+      :task="currentTask"
+      :showNote="showNote"
+      :disableComplete="disableComplete"
+      @noteupdated="updateNote"
+      @submit="submitTask">
+
+      <select-sidebar-item
+        v-if="currentTask.mode === 'select'"
+        :task="currentTask"
+        @edit="editTag"
+        @delete="deleteTag">
+      </select-sidebar-item>
+
+      <transcribe-sidebar-item
+        v-if="currentTask.mode === 'transcribe'"
+        :task="currentTask"
+        @update="updateForm">
+      </transcribe-sidebar-item>
+
+    </sidebar>
 
   </div>
 </template>
@@ -93,6 +100,8 @@
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/check-circle'
+import 'vue-awesome/icons/chevron-left'
+import 'vue-awesome/icons/chevron-right'
 import OpenSeadragon from 'openseadragon'
 import 'openseadragonselection/dist/openseadragonselection'
 import MetadataModal from '@/components/modals/Metadata'
@@ -102,7 +111,6 @@ import PanControls from '@/components/controls/Pan'
 import Sidebar from '@/components/sidebar/Sidebar'
 import SelectSidebarItem from '@/components/sidebar/items/Select'
 import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
-import BrowseSidebarItem from '@/components/sidebar/items/Browse'
 import Task from '@/model/Task'
 import TagAnnotation from '@/model/TagAnnotation'
 import DescriptionAnnotation from '@/model/DescriptionAnnotation'
@@ -169,10 +177,6 @@ export default {
       type: Boolean,
       default: true
     },
-    showBrowse: {
-      type: Boolean,
-      default: true
-    },
     showFormErrors: {
       type: Boolean,
       default: true
@@ -211,8 +215,22 @@ export default {
     Sidebar,
     SelectSidebarItem,
     TranscribeSidebarItem,
-    BrowseSidebarItem,
     Icon
+  },
+
+  computed: {
+    previousBtnDisabled: function () {
+      if (!this.currentTask) {
+        return true
+      }
+      return !(this.tasks.indexOf(this.currentTask) > 0)
+    },
+    nextBtnDisabled: function () {
+      if (!this.currentTask) {
+        return true
+      }
+      return this.tasks.indexOf(this.currentTask) >= this.tasks.length - 1
+    }
   },
 
   methods: {
@@ -371,6 +389,22 @@ export default {
      */
     setCurrentTask (task) {
       this.currentTask = task
+    },
+
+    /**
+     * Go to the next task.
+     */
+    previousTask () {
+      const index = this.tasks.indexOf(this.currentTask)
+      this.currentTask = this.tasks[index - 1]
+    },
+
+    /**
+     * Go to the next task.
+     */
+    nextTask () {
+      const index = this.tasks.indexOf(this.currentTask)
+      this.currentTask = this.tasks[index + 1]
     },
 
     /**
@@ -572,11 +606,11 @@ export default {
     // Initialise the main viewer after the DOM is loaded
     this.viewer = OpenSeadragon(this.viewerOpts)
 
+    this.loadTasks()
     this.attachControls()
     this.setupHandlers()
     this.highlightRegion()
     this.configureSelector()
-    this.loadTasks()
   }
 }
 </script>
@@ -587,7 +621,7 @@ export default {
 
 #lv-viewer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 100%;
   width: 100%;
   background-color: #000;
@@ -595,17 +629,32 @@ export default {
 }
 
 #lv-viewer-container {
-  height: 100%;
+  flex: 1 1 auto;
 }
 
-#lv-sidebar {
-  position: absolute;
-  z-index: 2;
-  top: 0;
+#lv-browse-next,
+#lv-browse-previous {
+  margin: 1rem;
+  height: 3rem;
+  width: 3rem;
+  position: absolute !important;
+  top: calc(50% - 2rem);
+}
+
+#lv-browse-previous {
+  left: 0;
+
+  svg {
+    margin-right: 2px;
+  }
+}
+
+#lv-browse-next {
   right: 0;
-  width: 35%;
-  margin: 0.8rem;
-  max-width: 350px;
+
+  svg {
+    margin-left: 2px;
+  }
 }
 
 .openseadragon-container {
