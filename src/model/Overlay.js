@@ -19,4 +19,4 @@ class Overlay {
   }
 }
 
-export default Form
+export default Overlay
