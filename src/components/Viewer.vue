@@ -87,12 +87,6 @@
       </transcribe-sidebar-item>
     </sidebar>
 
-    <selector
-      v-if="currentTask && currentTask.mode === 'select'"
-      :viewer="viewer"
-      @selection="handleSelection">
-    </selector>
-
   </div>
 </template>
 
@@ -108,12 +102,12 @@ import PanControls from '@/components/controls/Pan'
 import Sidebar from '@/components/sidebar/Sidebar'
 import SelectSidebarItem from '@/components/sidebar/items/Select'
 import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
-import Selector from '@/components/Selector'
 import Surface from '@/components/Surface'
 import Task from '@/model/Task'
 import TagAnnotation from '@/model/TagAnnotation'
 import DescriptionAnnotation from '@/model/DescriptionAnnotation'
 import CommentAnnotation from '@/model/CommentAnnotation'
+import Selector from '@/model/Selector'
 import drawOverlay from '@/utils/drawOverlay'
 import getImageUri from '@/utils/getImageUri'
 import extractRectFromImageUri from '@/utils/extractRectFromImageUri'
@@ -216,7 +210,6 @@ export default {
     Sidebar,
     SelectSidebarItem,
     TranscribeSidebarItem,
-    Selector,
     Surface,
     Icon
   },
@@ -525,11 +518,11 @@ export default {
     },
 
     /**
-     * Configure selection mode.
+     * Enable or disable the selector depending on the task.
      * @param {Task} task
      *   The task.
      */
-    configureSelectionMode (task) {
+    configureSelector (task) {
       if (task.mode === 'select' && !(task.complete && this.disableComplete)) {
         this.selector.enable()
       } else {
@@ -560,6 +553,7 @@ export default {
             tileSource: this.currentTask.imgInfoUri
           })
         }
+        this.configureSelector(this.currentTask)
       },
       deep: true
     },
@@ -572,8 +566,9 @@ export default {
   },
 
   mounted () {
-    // Initialise the main viewer after the DOM is loaded
+    // Initialise after the DOM is loaded
     this.viewer = new OpenSeadragon.Viewer(this.viewerOpts)
+    this.selector = new Selector(this.viewer)
 
     this.loadTasks()
     this.setupHandlers()
