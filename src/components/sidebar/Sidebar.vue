@@ -1,17 +1,28 @@
 <template>
-  <div id="lv-sidebar">
-    <div class="lv-sidebar-header">
+  <div id="lv-sidebar" ref="sidebar">
+
+    <div
+      ref="showsidebar"
+      id="show-sidebar"
+      class="delay"
+      @click="toggleSidebarCollapse">
+      <span>
+        &#x25C0;
+      </span>
+      Show {{ title }}
+    </div>
+
+    <div
+      class="lv-sidebar-header">
       <h4>{{ title }}</h4>
       <span
-        :class="toggleClassObj"
-        @click="toggleContentCollapse">
-        &#x25B2;
+        @click="toggleSidebarCollapse">
+        &#x25B6;
       </span>
     </div>
 
     <div
       class="lv-sidebar-content"
-      v-show="!contentCollapsed"
       v-if="!(disableComplete && task.complete)">
       <h4>{{ task.objective }}</h4>
       <p>{{ task.guidance }}</p>
@@ -55,13 +66,14 @@
 </template>
 
 <script>
+import Icon from 'vue-awesome/components/Icon'
+import 'vue-awesome/icons/tasks'
 import Task from '@/model/Task'
 import filterAnnotations from '@/utils/filterAnnotations'
 
 export default {
   data: function () {
     return {
-      contentCollapsed: false,
       noteCollapsed: true
     }
   },
@@ -85,13 +97,11 @@ export default {
     }
   },
 
+  components: {
+    Icon
+  },
+
   computed: {
-    toggleClassObj: function () {
-      return {
-        toggle: true,
-        active: this.contentCollapsed
-      }
-    },
     note: function () {
       const annotations = filterAnnotations({
         annotations: this.task.annotations,
@@ -106,8 +116,8 @@ export default {
      * Toggle the collapsing of the content.
      */
 
-    toggleContentCollapse () {
-      this.contentCollapsed = !this.contentCollapsed
+    toggleSidebarCollapse () {
+      this.$refs.sidebar.classList.toggle('collapsed')
     },
 
     /**
@@ -150,13 +160,43 @@ export default {
   background-color: $gray-dark;
   display: flex;
   flex-direction: column;
+  transition: width 350ms;
 
   @media screen and (min-width: 992px) {
     flex-direction: column;
   }
 
+  &.collapsed {
+    width: 0px;
+
+    #show-sidebar {
+      background-color: $gray-dark;
+      transform: translateX(0);
+      padding: 0.5rem;
+    }
+  }
+
+  #show-sidebar {
+    cursor: default;
+    position: fixed;
+    right: 0;
+    top: 1rem;
+    font-size: 0.85rem;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transform: translateX(100%);
+    transition: transform 200ms;
+
+    &.delay {
+      -webkit-transition-delay: 450ms;
+      transition-delay: 450ms;
+    }
+  }
+
   .lv-sidebar-header {
     display: flex;
+    width: calc(280px - 3rem);
     flex-direction: row;
     justify-content: space-between;
     padding: 1.5rem 1.5rem 0.75rem 1.5rem;
@@ -173,6 +213,7 @@ export default {
   .lv-sidebar-content {
     flex: 1 1 auto;
     display: flex;
+    width: calc(280px - 3rem);
     flex-direction: column;
     position: relative;
     padding: 0.75rem 1.5rem 1.5rem 1.5rem;
@@ -188,6 +229,7 @@ export default {
 
   .lv-sidebar-footer {
     padding: 1.5rem;
+    width: calc(280px - 3rem);
     border-top: 1px solid lighten($gray-dark, 10%);
 
     button:not(:last-child) {
@@ -207,10 +249,6 @@ export default {
     color: #FFFFFF;
     float: right;
     transition: transform 500ms;
-
-    &.active {
-      transform: rotate(180deg);
-    }
   }
 
   #task-complete {
