@@ -1,5 +1,5 @@
 <template>
-  <div id="lv-viewer">
+  <div id="lv-viewer" ref="container">
 
     <div ref="hud">
 
@@ -16,7 +16,8 @@
         :infoButton="viewerOpts.infoButton"
         @helpclicked="handleHelpControlClick"
         @infoclicked="handleInfoControlClick"
-        @likeclicked="handleLikeControlClick">
+        @likeclicked="handleLikeControlClick"
+        @fullscreenclicked="handleFullScreenControlClick">
       </viewer-controls>
 
       <pan-controls
@@ -117,6 +118,7 @@ import drawOverlay from '@/utils/drawOverlay'
 import getImageUri from '@/utils/getImageUri'
 import extractRectFromImageUri from '@/utils/extractRectFromImageUri'
 import filterAnnotations from '@/utils/filterAnnotations'
+import toggleFullScreen from '@/utils/toggleFullScreen'
 
 export default {
   data: function () {
@@ -263,6 +265,14 @@ export default {
     handleLikeControlClick (task, status) {
       task.liked = status
       this.$emit('taskliked', task)
+    },
+
+    /**
+     * Emit the fullscreen event.
+     */
+    handleFullScreenControlClick () {
+      const el = this.$refs.container
+      toggleFullScreen(el)
     },
 
     /**
