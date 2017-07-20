@@ -1,7 +1,6 @@
 <template>
   <div id="lv-selector">
-    <div class="selection-box" ref="box"></div>
-    <button
+    <!--<button
       class="btn-selection"
       id="confirm-selection"
       ref="confirmSelection">
@@ -12,7 +11,7 @@
       id="cancel-selection"
       ref="cancelSelection">
       <icon name="times-circle"></icon>
-    </button>
+    </button>-->
   </div>
 </template>
 
@@ -43,6 +42,10 @@ export default {
     viewer: {
       type: Object,
       required: true
+    },
+    overlays: {
+      type: Object,
+      required: true
     }
   },
 
@@ -51,6 +54,7 @@ export default {
   },
 
   methods: {
+
     calc () {
       const vp = this.viewer.viewport
 
@@ -75,33 +79,28 @@ export default {
         vpTopLeft.x - vpBottomRight.x,
         vpTopLeft.y - vpBottomRight.y
       )
-      console.log(this.rect)
-
-      this.$refs.box.style.left = `${x3}px`
-      this.$refs.box.style.top = `${y3}px`
-      this.$refs.box.style.width = `${x4 - x3}px`
-      this.$refs.box.style.height = `${y4 - y3}px`
     }
   },
 
   mounted () {
     this.viewer.addHandler('canvas-drag-end', (obj) => {
       this.selecting = false
-      this.$refs.box.style.display = 'none'
       this.$emit('selection', this.rect)
     })
 
     this.viewer.addHandler('canvas-drag', (obj) => {
       if (!this.selecting) {
+        // Set starting coordinates
         this.x1 = obj.position.x
         this.y1 = obj.position.y
         this.selecting = true
-        this.$refs.box.style.display = 'block'
         return
       }
+      // Calcuate coordinates while dragging
       this.x2 = obj.position.x
       this.y2 = obj.position.y
       this.calc()
+      this.$emit('selecting', this.rect)
     })
   }
 }
@@ -109,17 +108,6 @@ export default {
 
 <style lang="scss" scoped>
 #lv-selector {
-  .selection-box {
-    display: block;
-    position: absolute;
-    border: 1px dotted #000;
-    z-index: 1;
-  }
-
-  &.hidden {
-    display: none;
-  }
-
   .btn-selection {
     color: #fff;
     display: flex !important;

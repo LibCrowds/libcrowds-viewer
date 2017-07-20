@@ -57,6 +57,8 @@
 
       <div :id="viewerOpts.id"></div>
 
+      <surface :viewer="viewer" :overlays="overlays"></surface>
+
     </div>
 
     <sidebar
@@ -103,6 +105,7 @@ import Sidebar from '@/components/sidebar/Sidebar'
 import SelectSidebarItem from '@/components/sidebar/items/Select'
 import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
 import Selector from '@/components/Selector'
+import Surface from '@/components/Surface'
 import Task from '@/model/Task'
 import TagAnnotation from '@/model/TagAnnotation'
 import DescriptionAnnotation from '@/model/DescriptionAnnotation'
@@ -138,7 +141,8 @@ export default {
       metadataModalId: 'lv-metadata-modal',
       helpModalId: 'lv-help-modal',
       tasks: [],
-      currentTask: null
+      currentTask: null,
+      overlays: {}
     }
   },
 
@@ -210,6 +214,7 @@ export default {
     SelectSidebarItem,
     TranscribeSidebarItem,
     Selector,
+    Surface,
     Icon
   },
 
@@ -261,10 +266,14 @@ export default {
 
     /**
      * Draw overlay and add tag when a selection is made.
+     * @param {rect} rect
+     *   The selection rectangle.
+     * @param {Boolean} isSelecting
+     *   True if selecting, false otherwise.
      */
-    handleSelection (selectionRect) {
+    handleSelection (rect, isSelecting) {
       const vp = this.viewer.viewport
-      const imgRect = vp.viewportToImageRectangle(selectionRect)
+      const imgRect = vp.viewportToImageRectangle(rect)
       const imageUri = getImageUri({
         imgSource: this.currentTask.imgInfoUri,
         region: imgRect
