@@ -182,7 +182,7 @@ export default {
     },
     zoomBy: {
       type: Number,
-      default: 0.1
+      default: 0.2
     },
     lang: {
       type: String,
