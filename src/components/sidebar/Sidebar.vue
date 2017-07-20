@@ -147,7 +147,6 @@ export default {
   font-size: 14px;
   color: #FFFFFF;
   height: 100%;
-  border-left: 1px solid lighten($gray-dark, 10%);
   background-color: $gray-dark;
   display: flex;
   flex-direction: column;
@@ -160,7 +159,7 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0.6rem;
+    padding: 1.5rem 1.5rem 0.75rem 1.5rem;
     font-family: sans-serif;
     letter-spacing: 1px;
 
@@ -176,17 +175,20 @@ export default {
     display: flex;
     flex-direction: column;
     position: relative;
-    padding: 0.6em;
+    padding: 0.75rem 1.5rem 1.5rem 1.5rem;
     overflow-y: auto;
 
     h4 {
       margin: 0;
+      font-family: Arial;
+      font-weight: 200;
+      letter-spacing: 0.5px;
     }
   }
 
   .lv-sidebar-footer {
-    padding: 0.6rem;
-    border-top: 1px solid $gray;
+    padding: 1.5rem;
+    border-top: 1px solid lighten($gray-dark, 10%);
 
     button:not(:last-child) {
       margin-bottom: 0.6rem;
