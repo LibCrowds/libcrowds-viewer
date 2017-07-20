@@ -1,24 +1,25 @@
 <template>
   <div id="lv-sidebar" ref="sidebar">
 
-    <div
+    <button
       ref="showsidebar"
       id="show-sidebar"
-      class="delay"
+      class="btn-toggle delay"
       @click="toggleSidebarCollapse">
       <span>
         &#x25C0;
       </span>
       Show {{ title }}
-    </div>
+    </button>
 
     <div
       class="lv-sidebar-header">
       <h4>{{ title }}</h4>
-      <span
+      <button
+        class="btn-toggle"
         @click="toggleSidebarCollapse">
         &#x25B6;
-      </span>
+      </button>
     </div>
 
     <div
@@ -118,6 +119,7 @@ export default {
 
     toggleSidebarCollapse () {
       this.$refs.sidebar.classList.toggle('collapsed')
+      this.$refs.showsidebar.blur()
     },
 
     /**
@@ -242,12 +244,11 @@ export default {
     }
   }
 
-  .toggle {
+  .btn-toggle {
     cursor: default;
     background: none;
     border: none;
     color: #FFFFFF;
-    float: right;
     transition: transform 500ms;
   }
 
