@@ -31,13 +31,17 @@ function exitFullscreen (el) {
 /**
  * Toggle fullscreen mode.
  * @param {Object} el
- * The element to be put in full screen.
- * @param {Boolean} toggle
+ *   The element to put in fullscreen mode.
  */
-export default function (el, toggle) {
-  if (toggle) {
-    enterFullscreen(el)
+export default function (el) {
+  const isFullScreen = (
+    document.fullscreenElement ||
+    document.mozFullScreenElement ||
+    document.webkitFullscreenElement
+  )
+  if (isFullScreen) {
+    exitFullscreen(el)
     return
   }
-  exitFullscreen(el)
+  enterFullscreen(el)
 }
