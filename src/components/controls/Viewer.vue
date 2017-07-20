@@ -102,8 +102,7 @@ export default {
           tooltip: 'Fullscreen',
           icon: 'expand',
           click: () => {
-            const isFullPage = this.viewer.isFullPage()
-            this.viewer.setFullScreen(!isFullPage)
+            this.$emit('fullscreenclicked')
           }
         }
       ]
