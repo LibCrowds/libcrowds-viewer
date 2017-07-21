@@ -57,12 +57,6 @@
 
       <div :id="viewerOpts.id"></div>
 
-      <overlay-canvas
-        v-if="currentTask"
-        :task="currentTask"
-        :viewer="viewer">
-      </overlay-canvas>
-
     </div>
 
     <sidebar
@@ -102,7 +96,7 @@ import PanControls from '@/components/controls/Pan'
 import Sidebar from '@/components/sidebar/Sidebar'
 import SelectSidebarItem from '@/components/sidebar/items/Select'
 import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
-import OverlayCanvas from '@/components/OverlayCanvas'
+import OverlayCanvas from '@/model/OverlayCanvas'
 import Task from '@/model/Task'
 import TagAnnotation from '@/model/TagAnnotation'
 import DescriptionAnnotation from '@/model/DescriptionAnnotation'
@@ -118,7 +112,7 @@ export default {
     return {
       viewer: {},
       selector: {},
-      overlays: [],
+      overlayCanvas: {},
       viewerOpts: {
         id: 'lv-viewer-container',
         showNavigationControl: false,
@@ -210,7 +204,6 @@ export default {
     Sidebar,
     SelectSidebarItem,
     TranscribeSidebarItem,
-    OverlayCanvas,
     Icon
   },
 
@@ -286,6 +279,7 @@ export default {
         })
         this.currentTask.annotations.push(anno)
         this.currentTask.storeOverlay(anno.id, rect)
+        this.overlayCanvas.redraw()
         this.$emit('create', this.currentTask, anno)
       })
     },
@@ -527,6 +521,7 @@ export default {
       } else {
         this.selector.disable()
       }
+      this.overlayCanvas.loadTask(task)
     },
 
     /**
@@ -570,6 +565,7 @@ export default {
     // Initialise after the DOM is loaded
     this.viewer = new OpenSeadragon.Viewer(this.viewerOpts)
     this.selector = new Selector(this.viewer)
+    this.overlayCanvas = new OverlayCanvas(this.viewer)
 
     this.loadTasks()
     this.setupHandlers()
