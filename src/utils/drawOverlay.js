@@ -19,8 +19,8 @@ export default function (viewer, id, rect, type = '') {
   el.classList.add('overlay')
   el.style.zIndex = '1'
   if (type === 'selection') {
-    el.style.border = '2px solid #3498DB'
-    el.style.backgroundColor = 'rgba(#3498DB, 0.2)'
+    el.style.border = '2px solid rgb(52, 152, 219)'
+    el.style.backgroundColor = 'rgba(52, 152, 219, 0.2)'
     el.style.opacity = '.6'
   }
   viewer.addOverlay({ element: el, location: rect })
