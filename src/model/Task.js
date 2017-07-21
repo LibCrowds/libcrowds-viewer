@@ -35,7 +35,7 @@ class Task {
     this.complete = complete
 
     // Overlays are established at runtime
-    this.overlays = {}
+    this.overlays = []
 
     // Validate
     const validModes = ['select', 'transcribe']
@@ -109,20 +109,20 @@ class Task {
 
   /**
    * Add or update an overlay for the task.
-   * @param {String} id
-   *   An ID.
-   * @param {Object} rect
-   *   An OpenSeadragon viewport rectangle.
-   * @param {String} shape
-   *   The type of shape ('rect' or 'circle').
+   * @param {Overlay} overlay
+   *  The overlay.
    */
-  storeOverlay (id, rect, shape) {
-    if (id in this.overlays) {
-      this.overlays[id].rect = rect
-      this.overlays[id].shape = shape
-      return
+  storeOverlay (id, rect) {
+    let updated = false
+    this.overlays.forEach(function (item, i, array) {
+      if (array[i].id === id) {
+        array[i] = new Overlay({ id: id, rect: rect })
+        updated = true
+      }
+    })
+    if (!updated) {
+      this.overlays.push(new Overlay({ id: id, rect: rect }))
     }
-    this.overlays[id] = new Overlay(id, rect, shape)
   }
 }
 

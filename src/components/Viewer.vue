@@ -108,7 +108,6 @@ import TagAnnotation from '@/model/TagAnnotation'
 import DescriptionAnnotation from '@/model/DescriptionAnnotation'
 import CommentAnnotation from '@/model/CommentAnnotation'
 import Selector from '@/model/Selector'
-import drawOverlay from '@/utils/drawOverlay'
 import getImageUri from '@/utils/getImageUri'
 import extractRectFromImageUri from '@/utils/extractRectFromImageUri'
 import filterAnnotations from '@/utils/filterAnnotations'
@@ -119,6 +118,7 @@ export default {
     return {
       viewer: {},
       selector: {},
+      overlays: [],
       viewerOpts: {
         id: 'lv-viewer-container',
         showNavigationControl: false,
@@ -325,13 +325,11 @@ export default {
         annotations: task.annotations,
         motivation: 'tagging'
       })
-      if (!annos.length) {
-        return
-      }
+
       for (let anno of annos) {
         const imgRect = extractRectFromImageUri(anno.target.selector.value)
         const vpRect = vp.imageToViewportRectangle(imgRect)
-        drawOverlay(this.viewer, anno.id, vpRect, 'selection')
+        task.storeOverlay(anno.id, vpRect)
       }
     },
 
@@ -518,13 +516,14 @@ export default {
     },
 
     /**
-     * Enable or disable the selector depending on the task.
+     * Mode specific configuration for a task.
      * @param {Task} task
      *   The task.
      */
-    configureSelector (task) {
+    configureMode (task) {
       if (task.mode === 'select' && !(task.complete && this.disableComplete)) {
         this.selector.enable()
+        this.drawSelectionOverlays(task)
       } else {
         this.selector.disable()
       }
@@ -550,10 +549,12 @@ export default {
         // Update the task image if it has changed
         if (!oldVal || !newVal || oldVal.imgInfoUri !== newVal.imgInfoUri) {
           this.viewer.open({
-            tileSource: this.currentTask.imgInfoUri
+            tileSource: this.currentTask.imgInfoUri,
+            success: () => this.configureMode(this.currentTask)
           })
+        } else {
+          this.configureMode(this.currentTask)
         }
-        this.configureSelector(this.currentTask)
       },
       deep: true
     },

@@ -9,8 +9,7 @@ import Task from '@/model/Task'
 export default {
   data: function () {
     return {
-      paperScope: null,
-      rectangles: {}
+      paperScope: null
     }
   },
 
@@ -36,28 +35,39 @@ export default {
     },
 
     /**
-     *
+     * Create a rectangle in the paper scope from a viewport rectangle.
+     * @param {Object} rect
+     *   An OpenSeadragon viewport rectangle.
      */
-    handleResize () {
-      console.log('resize')
-      // const newSize = new this.paperScope.Size(
-      //   this.canvas.width,
-      //   this.canvas.height
-      // )
-      // this.paperScope.view.viewSize = new this.paperScope.Size(this.canvas.width, this.canvas.height)
+    viewportToPaperRectangle (rect) {
+      const vp = this.viewer.viewport
+      const elRect = vp.viewportToViewerElementRectangle(rect)
+      console.log(vp.viewportToImageRectangle(vp.viewerElementToViewportRectangle(elRect)))
+      const path = new this.paperScope.Path.Rectangle(elRect)
+      path.fillColor = 'rgba(0, 255, 6, 0.2)'
     },
 
     /**
-     * Draw a rectangle.
+     *
+     */
+    resize () {
+      const vp = this.viewer.viewport
+      let center = vp.viewportToWindowCoordinates(vp.getCenter(true))
+      this.paperScope.view.center = new paper.Point(center.x, center.y)
+    },
+
+    /**
+     * Draw all overlays.
      * @param {String} id
      *   An ID.
      * @param {Object} rect
      *   The rect to draw.
      */
-    drawRect (id, rect) {
-      const vp = this.viewer.viewport
-      const elRect = vp.viewportToViewerElementRectangle(rect)
-      this.snap.rect(elRect.x, elRect.y, elRect.width, elRect.height)
+    draw () {
+      for (let overlay of this.task.overlays) {
+        this.viewportToPaperRectangle(overlay.rect)
+      }
+      this.paperScope.view.draw()
     }
 
   },
@@ -65,22 +75,21 @@ export default {
   watch: {
     task: {
       handler: function () {
-        console.log(this.overlays)
+        this.draw()
       },
       deep: true
     }
   },
 
-  ready: function () {
-    window.addEventListener('resize', this.handleResize)
-  },
-
-  beforeDestroy: function () {
-    window.removeEventListener('resize', this.handleResize)
+  beforeDestroy () {
+    window.removeEventListener('resize', this.resize)
   },
 
   mounted () {
+    window.addEventListener('resize', this.resize)
     this.setupPaperScope()
+    this.resize()
+    this.draw()
   }
 }
 </script>
