@@ -81,6 +81,12 @@
       </transcribe-sidebar-item>
     </sidebar>
 
+    <selector
+      v-if="currentTask && currentTask.mode === 'select'"
+      :viewer="viewer"
+      @selection="handleSelection">
+    </selector>
+
   </div>
 </template>
 
@@ -96,23 +102,21 @@ import PanControls from '@/components/controls/Pan'
 import Sidebar from '@/components/sidebar/Sidebar'
 import SelectSidebarItem from '@/components/sidebar/items/Select'
 import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
-import OverlayCanvas from '@/model/OverlayCanvas'
+import Selector from '@/components/Selector'
 import Task from '@/model/Task'
 import TagAnnotation from '@/model/TagAnnotation'
 import DescriptionAnnotation from '@/model/DescriptionAnnotation'
 import CommentAnnotation from '@/model/CommentAnnotation'
-import Selector from '@/model/Selector'
 import getImageUri from '@/utils/getImageUri'
 import extractRectFromImageUri from '@/utils/extractRectFromImageUri'
 import filterAnnotations from '@/utils/filterAnnotations'
 import toggleFullScreen from '@/utils/toggleFullScreen'
+import drawOverlay from '@/utils/drawOverlay'
 
 export default {
   data: function () {
     return {
       viewer: {},
-      selector: {},
-      overlayCanvas: {},
       viewerOpts: {
         id: 'lv-viewer-container',
         showNavigationControl: false,
@@ -202,6 +206,7 @@ export default {
     ViewerControls,
     PanControls,
     Sidebar,
+    Selector,
     SelectSidebarItem,
     TranscribeSidebarItem,
     Icon
@@ -261,7 +266,6 @@ export default {
      *   True if selecting, false otherwise.
      */
     handleSelection (rect, isSelecting) {
-      console.log(rect, isSelecting)
       const vp = this.viewer.viewport
       const imgRect = vp.viewportToImageRectangle(rect)
       const imageUri = getImageUri({
@@ -278,8 +282,7 @@ export default {
           classification: this.currentTask.classification
         })
         this.currentTask.annotations.push(anno)
-        this.currentTask.storeOverlay(anno.id, rect)
-        this.overlayCanvas.redraw()
+        drawOverlay(this.viewer, anno.id, rect, 'selection')
         this.$emit('create', this.currentTask, anno)
       })
     },
@@ -516,12 +519,8 @@ export default {
      */
     configureMode (task) {
       if (task.mode === 'select' && !(task.complete && this.disableComplete)) {
-        this.selector.enable()
         this.drawSelectionOverlays(task)
-      } else {
-        this.selector.disable()
       }
-      this.overlayCanvas.loadTask(task)
     },
 
     /**
@@ -564,8 +563,6 @@ export default {
   mounted () {
     // Initialise after the DOM is loaded
     this.viewer = new OpenSeadragon.Viewer(this.viewerOpts)
-    this.selector = new Selector(this.viewer)
-    this.overlayCanvas = new OverlayCanvas(this.viewer)
 
     this.loadTasks()
     this.setupHandlers()
