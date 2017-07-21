@@ -57,11 +57,11 @@
 
       <div :id="viewerOpts.id"></div>
 
-      <surface
+      <overlay-canvas
         v-if="currentTask"
         :task="currentTask"
         :viewer="viewer">
-      </surface>
+      </overlay-canvas>
 
     </div>
 
@@ -102,7 +102,7 @@ import PanControls from '@/components/controls/Pan'
 import Sidebar from '@/components/sidebar/Sidebar'
 import SelectSidebarItem from '@/components/sidebar/items/Select'
 import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
-import Surface from '@/components/Surface'
+import OverlayCanvas from '@/components/OverlayCanvas'
 import Task from '@/model/Task'
 import TagAnnotation from '@/model/TagAnnotation'
 import DescriptionAnnotation from '@/model/DescriptionAnnotation'
@@ -210,7 +210,7 @@ export default {
     Sidebar,
     SelectSidebarItem,
     TranscribeSidebarItem,
-    Surface,
+    OverlayCanvas,
     Icon
   },
 

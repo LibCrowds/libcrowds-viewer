@@ -1,20 +1,15 @@
 <template>
-  <svg
-    ref="surface"
-    width="100%"
-    height="100%"
-    preserveAspectRatio="none"
-    fill="none">
-  </svg>
+  <canvas id="overlay-canvas"></canvas>
 </template>
 
 <script>
-import Snap from 'snapsvg'
+import paper from 'paper'
 import Task from '@/model/Task'
 
 export default {
   data: function () {
     return {
+      paperScope: null,
       rectangles: {}
     }
   },
@@ -32,10 +27,24 @@ export default {
 
   methods: {
     /**
-     * Create an SVG drawing surface over the viewer container.
+     * Setup the paper scope.
      */
-    createDrawingSurface () {
-      this.snap = Snap(this.$refs.surface)
+    setupPaperScope () {
+      this.paperScope = new paper.PaperScope()
+      this.paperScope.setup('overlay-canvas')
+      this.paperScope.activate()
+    },
+
+    /**
+     *
+     */
+    handleResize () {
+      console.log('resize')
+      // const newSize = new this.paperScope.Size(
+      //   this.canvas.width,
+      //   this.canvas.height
+      // )
+      // this.paperScope.view.viewSize = new this.paperScope.Size(this.canvas.width, this.canvas.height)
     },
 
     /**
@@ -62,14 +71,24 @@ export default {
     }
   },
 
+  ready: function () {
+    window.addEventListener('resize', this.handleResize)
+  },
+
+  beforeDestroy: function () {
+    window.removeEventListener('resize', this.handleResize)
+  },
+
   mounted () {
-    this.createDrawingSurface()
+    this.setupPaperScope()
   }
 }
 </script>
 
 <style scoped>
-svg {
+#overlay-canvas {
   position: absolute;
+  width: 100%;
+  height: 100%;
 }
 </style>
