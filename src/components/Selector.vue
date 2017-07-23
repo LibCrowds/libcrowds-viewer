@@ -59,6 +59,9 @@ export default {
       )
     },
 
+    /**
+     * Calculate and draw the rectangle.
+     */
     calculate () {
       // Calculte remaining pixel coordinates
       const x3 = Math.min(this.x1, this.x2)
@@ -77,35 +80,51 @@ export default {
 
       // Create a viewport rect
       this.rect = this.viewer.viewport.viewerElementToViewportRectangle(wRect)
-    }
-  },
+    },
 
-  mounted () {
-    this.viewer.addHandler('canvas-drag-end', (obj) => {
+    /**
+     * Start a new selection when the canvas is dragged.
+     */
+    onCanvasDrag (e) {
+      const delta = this.viewer.viewport.deltaPointsFromPixels(e.delta, true)
+      const end = this.viewer.viewport.pointFromPixel(e.position, true)
+      const start = new OpenSeadragon.Point(end.x - delta.x, end.y - delta.y)
+      const pointIsInImage = this.isPointInImage(start)
+      if (pointIsInImage) {
+        if (!this.selecting) {
+          this.selecting = true
+          this.x1 = e.position.x
+          this.y1 = e.position.y
+          this.$refs.box.style.display = 'block'
+          return
+        }
+        this.x2 = e.position.x
+        this.y2 = e.position.y
+        this.calculate()
+      }
+    },
+
+    /**
+     * End the selection.
+     */
+    onCanvasDragEnd () {
       if (this.rect) {
         this.selecting = false
         this.$refs.box.style.display = 'none'
         this.$emit('selection', this.rect)
         this.rect = null
       }
-    })
-    this.viewer.addHandler('canvas-drag', (obj) => {
-      var delta = this.viewer.viewport.deltaPointsFromPixels(obj.delta, true)
-      var end = this.viewer.viewport.pointFromPixel(obj.position, true)
-      var start = new OpenSeadragon.Point(end.x - delta.x, end.y - delta.y)
-      const pointIsInImage = this.isPointInImage(start)
-      if (pointIsInImage) {
-        if (!this.selecting) {
-          this.x1 = obj.position.x
-          this.y1 = obj.position.y
-          this.selecting = true
-          this.$refs.box.style.display = 'block'
-          return
-        }
-        this.x2 = obj.position.x
-        this.y2 = obj.position.y
-        this.calculate()
-      }
+    }
+  },
+
+  mounted () {
+    /* eslint-disable no-new */
+    new OpenSeadragon.MouseTracker({
+      element: this.viewer.canvas,
+      clickTimeThreshold: this.viewer.clickTimeThreshold,
+      clickDistThreshold: this.viewer.clickDistThreshold,
+      dragHandler: OpenSeadragon.delegate(this, this.onOutsideDrag),
+      dragEndHandler: OpenSeadragon.delegate(this, this.onOutsideDragEnd)
     })
   }
 }
