@@ -329,6 +329,7 @@ export default {
         const imgRect = extractRectFromImageUri(anno.target.selector.value)
         const vpRect = vp.imageToViewportRectangle(imgRect)
         task.storeOverlay(anno.id, vpRect)
+        drawOverlay(this.viewer, anno.id, vpRect, 'selection')
       }
     },
 
