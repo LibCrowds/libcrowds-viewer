@@ -265,10 +265,8 @@ export default {
      * Draw overlay and add tag when a selection is made.
      * @param {rect} rect
      *   The selection rectangle.
-     * @param {Boolean} isSelecting
-     *   True if selecting, false otherwise.
      */
-    handleSelection (rect, isSelecting) {
+    handleSelection (rect) {
       const vp = this.viewer.viewport
       const imgRect = vp.viewportToImageRectangle(rect)
       const imageUri = getImageUri({
