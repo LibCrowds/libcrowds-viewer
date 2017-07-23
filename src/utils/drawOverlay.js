@@ -1,5 +1,5 @@
 /**
- * Draw an overlay.
+ * Draw and return an overlay.
  * @param {Object} viewer
  *   The viewer.
  * @param {String} id
@@ -34,4 +34,5 @@ export default function (viewer, id, rect, type = '') {
     })
   }
   viewer.addOverlay({ element: el, location: rect })
+  return el
 }

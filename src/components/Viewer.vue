@@ -329,7 +329,10 @@ export default {
         const imgRect = extractRectFromImageUri(anno.target.selector.value)
         const vpRect = vp.imageToViewportRectangle(imgRect)
         task.storeOverlay(anno.id, vpRect)
-        drawOverlay(this.viewer, anno.id, vpRect, 'selection')
+        const overlay = drawOverlay(this.viewer, anno.id, vpRect, 'selection')
+        overlay.addEventListener('click', (evt) => {
+          this.editTag(task, anno.id)
+        })
       }
     },
 
