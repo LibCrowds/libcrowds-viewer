@@ -123,8 +123,8 @@ export default {
       element: this.viewer.canvas,
       clickTimeThreshold: this.viewer.clickTimeThreshold,
       clickDistThreshold: this.viewer.clickDistThreshold,
-      dragHandler: OpenSeadragon.delegate(this, this.onOutsideDrag),
-      dragEndHandler: OpenSeadragon.delegate(this, this.onOutsideDragEnd)
+      dragHandler: OpenSeadragon.delegate(this, this.onCanvasDrag),
+      dragEndHandler: OpenSeadragon.delegate(this, this.onCanvasDragEnd)
     })
   }
 }
