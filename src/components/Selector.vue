@@ -1,6 +1,28 @@
 <template>
   <div id="lv-selector">
-    <div class="selection-box" ref="box"></div>
+
+    <div class="lv-selector-box" ref="box">
+
+      <span class="border border-top" ref="border-top">
+        <span class="handle"></span>
+      </span>
+      <span class="border border-right" ref="border-right">
+        <span class="handle"></span>
+      </span>
+      <span class="border border-bottom" ref="border-bottom">
+        <span class="handle"></span>
+      </span>
+      <span class="border border-left" ref="border-left">
+        <span class="handle"></span>
+      </span>
+
+      <span class="corner corner-top-right" ref="corner-top-right"></span>
+      <span class="corner corner-bottom-right" ref="corner-bottom-right"></span>
+      <span class="corner corner-bottom-left" ref="corner-bottom-left"></span>
+      <span class="corner corner-top-left" ref="corner-top-left"></span>
+
+    </div>
+
     <button
       class="btn-selection"
       id="confirm-selection"
@@ -47,7 +69,7 @@ export default {
 
   methods: {
     /**
-     * Check if a point is within the image.
+     * Return true if a viewport point is within the image, false otherwise.
      */
     isPointInImage (point) {
       var bounds = this.viewer.world.getHomeBounds()
@@ -57,6 +79,18 @@ export default {
         point.y >= 0 &&
         point.y <= bounds.height
       )
+    },
+
+    /**
+     * Draw the current rectangle.
+     */
+    draw () {
+      const vp = this.viewer.viewport
+      const wRect = vp.viewportToViewerElementRectangle(this.rect)
+      this.$refs.box.style.left = `${wRect.x}px`
+      this.$refs.box.style.top = `${wRect.y}px`
+      this.$refs.box.style.width = `${wRect.width}px`
+      this.$refs.box.style.height = `${wRect.height}px`
     },
 
     /**
@@ -72,12 +106,6 @@ export default {
       // Create a window rect
       const wRect = new OpenSeadragon.Rect(x3, y3, x4 - x3, y4 - y3)
 
-      // Style the selection box
-      this.$refs.box.style.left = `${wRect.x}px`
-      this.$refs.box.style.top = `${wRect.y}px`
-      this.$refs.box.style.width = `${wRect.width}px`
-      this.$refs.box.style.height = `${wRect.height}px`
-
       // Create a viewport rect
       this.rect = this.viewer.viewport.viewerElementToViewportRectangle(wRect)
     },
@@ -86,10 +114,10 @@ export default {
      * Start a new selection when the canvas is dragged.
      */
     onCanvasDrag (e) {
-      const delta = this.viewer.viewport.deltaPointsFromPixels(e.delta, true)
-      const end = this.viewer.viewport.pointFromPixel(e.position, true)
-      const start = new OpenSeadragon.Point(end.x - delta.x, end.y - delta.y)
-      const pointIsInImage = this.isPointInImage(start)
+      const vp = this.viewer.viewport
+      const wPoint = new OpenSeadragon.Point(e.position.x, e.position.y)
+      const vpPoint = vp.viewerElementToViewportCoordinates(wPoint)
+      const pointIsInImage = this.isPointInImage(vpPoint)
       if (pointIsInImage) {
         if (!this.selecting) {
           this.selecting = true
@@ -101,6 +129,7 @@ export default {
         this.x2 = e.position.x
         this.y2 = e.position.y
         this.calculate()
+        this.draw()
       }
     },
 
@@ -110,10 +139,68 @@ export default {
     onCanvasDragEnd () {
       if (this.rect) {
         this.selecting = false
-        this.$refs.box.style.display = 'none'
-        this.$emit('selection', this.rect)
-        this.rect = null
+        // this.$refs.box.style.display = 'none'
+        // this.$emit('selection', this.rect)
+        // this.rect = null
       }
+    },
+
+    /**
+     * Resize a rectangle from the borders.
+     */
+    onBorderDrag (position, evt) {
+      const vp = this.viewer.viewport
+      const wPoint = new OpenSeadragon.Point(evt.position.x, evt.position.y)
+      const delta = vp.deltaPointsFromPixels(wPoint)
+      switch (position) {
+        case 'top':
+          this.rect.y += delta.y
+          this.rect.height -= delta.y
+          break
+        case 'right':
+          this.rect.width += delta.x
+          break
+        case 'bottom':
+          this.rect.height += delta.y
+          break
+        case 'left':
+          this.rect.x += delta.x
+          this.rect.width -= delta.x
+          break
+      }
+      this.draw()
+    },
+
+    /**
+     * Resize a rectangle from the corners.
+     */
+    onCornerDrag (position, evt) {
+      const vp = this.viewer.viewport
+      const wPoint = new OpenSeadragon.Point(evt.position.x, evt.position.y)
+      const delta = vp.deltaPointsFromPixels(wPoint)
+      switch (position) {
+        case 'top-right':
+          this.rect.y += delta.y
+          this.rect.height -= delta.y
+          this.rect.width += delta.x
+          break
+        case 'bottom-right':
+          this.rect.width += delta.x
+          this.rect.height += delta.y
+          break
+        case 'bottom-left':
+          this.rect.height += delta.y
+          this.rect.x += delta.x
+          this.rect.width -= delta.x
+          break
+        case 'top-left':
+          this.rect.y += delta.y
+          this.rect.height -= delta.y
+          this.rect.x += delta.x
+          this.rect.width -= delta.x
+          break
+      }
+      this.draw()
     }
   },
 
@@ -126,6 +213,54 @@ export default {
       dragHandler: OpenSeadragon.delegate(this, this.onCanvasDrag),
       dragEndHandler: OpenSeadragon.delegate(this, this.onCanvasDragEnd)
     })
+
+    /* eslint-disable no-new */
+    new OpenSeadragon.MouseTracker({
+      element: this.$refs['border-top'],
+      dragHandler: this.onBorderDrag.bind(this, 'top')
+    })
+
+    /* eslint-disable no-new */
+    new OpenSeadragon.MouseTracker({
+      element: this.$refs['border-right'],
+      dragHandler: this.onBorderDrag.bind(this, 'right')
+    })
+
+    /* eslint-disable no-new */
+    new OpenSeadragon.MouseTracker({
+      element: this.$refs['border-bottom'],
+      dragHandler: this.onBorderDrag.bind(this, 'bottom')
+    })
+
+    /* eslint-disable no-new */
+    new OpenSeadragon.MouseTracker({
+      element: this.$refs['border-left'],
+      dragHandler: this.onBorderDrag.bind(this, 'left')
+    })
+
+    /* eslint-disable no-new */
+    new OpenSeadragon.MouseTracker({
+      element: this.$refs['corner-top-right'],
+      dragHandler: this.onCornerDrag.bind(this, 'top-right')
+    })
+
+    /* eslint-disable no-new */
+    new OpenSeadragon.MouseTracker({
+      element: this.$refs['corner-bottom-right'],
+      dragHandler: this.onCornerDrag.bind(this, 'bottom-right')
+    })
+
+    /* eslint-disable no-new */
+    new OpenSeadragon.MouseTracker({
+      element: this.$refs['corner-bottom-left'],
+      dragHandler: this.onCornerDrag.bind(this, 'bottom-left')
+    })
+
+    /* eslint-disable no-new */
+    new OpenSeadragon.MouseTracker({
+      element: this.$refs['corner-top-left'],
+      dragHandler: this.onCornerDrag.bind(this, 'top-left')
+    })
   }
 }
 </script>
@@ -134,13 +269,99 @@ export default {
 @import '~style/settings';
 
 #lv-selector {
-  .selection-box {
-    border: 2px solid $blue;
+  .lv-selector-box {
     background-color: rgba($blue, 0.2);
     opacity: .6;
     display: block;
     position: absolute;
     z-index: 1;
+
+    .border {
+      background: $blue;
+      position: absolute;
+      height: 2px;
+      width: 2px;
+
+      &.border-top {
+        width: 100%;
+        top: 0;
+
+        .handle {
+          cursor: ns-resize;
+        }
+      }
+
+      &.border-right {
+        height: 100%;
+        right: 0;
+
+        .handle {
+          cursor: ew-resize;
+        }
+      }
+
+      &.border-bottom {
+        width: 100%;
+        bottom: 0;
+
+        .handle {
+          cursor: ns-resize;
+        }
+      }
+
+      &.border-left {
+        height: 100%;
+        left: 0;
+
+        .handle {
+          cursor: ew-resize;
+        }
+      }
+
+      .handle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 4px;
+        height: 4px;
+        margin: -3px 0 0 -3px;
+        background: #FFF;
+        border: 1px solid $blue;
+      }
+    }
+
+    .corner {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #FFF;
+      border: 1px solid $blue;
+
+      &.corner-top-right {
+        top: -2px;
+        right: -2px;
+        cursor: nesw-resize;
+      }
+
+      &.corner-bottom-right {
+        bottom: -2px;
+        right: -2px;
+        cursor: nwse-resize;
+      }
+
+      &.corner-bottom-left {
+        bottom: -2px;
+        left: -2px;
+        cursor: nesw-resize;
+      }
+
+      &.corner-top-left {
+        top: -2px;
+        left: -2px;
+        cursor: nwse-resize;
+      }
+    }
+
   }
   &.hidden {
     display: none;
@@ -159,5 +380,7 @@ export default {
       transform: translateX(20px) translateY(-15px);
     }
   }
+
+
 }
 </style>
