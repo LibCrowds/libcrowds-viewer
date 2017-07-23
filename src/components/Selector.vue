@@ -147,6 +147,16 @@ export default {
     },
 
     /**
+     * Move selection box when dragged.
+     */
+    onSelectorBoxDrag (evt) {
+      var delta = this.viewer.viewport.deltaPointsFromPixels(evt.delta, true)
+      this.rect.x += delta.x
+      this.rect.y += delta.y
+      this.draw()
+    },
+
+    /**
      * Confirm the selection.
      */
     confirm () {
@@ -234,6 +244,14 @@ export default {
   },
 
   mounted () {
+    /* eslint-disable no-new */
+    new OpenSeadragon.MouseTracker({
+      element: this.$refs.box,
+      clickTimeThreshold: this.viewer.clickTimeThreshold,
+      clickDistThreshold: this.viewer.clickDistThreshold,
+      dragHandler: OpenSeadragon.delegate(this, this.onSelectorBoxDrag)
+    })
+
     /* eslint-disable no-new */
     new OpenSeadragon.MouseTracker({
       element: this.viewer.canvas,
