@@ -64,7 +64,9 @@ export default {
       x2: 0,
       y2: 0,
       selecting: false,
-      rect: null
+      rect: null,
+      minWidth: 10,
+      minHeight: 10
     }
   },
 
@@ -149,14 +151,34 @@ export default {
     },
 
     /**
+     * Return true if a rect is the minimum width, false otherwise.
+     * @param {Rect} rect
+     *   The viewport rectangle.
+     */
+    isMinWidth (rect) {
+      const vp = this.viewer.viewport
+      const wRect = vp.viewportToViewerElementRectangle(rect)
+      return wRect.width >= this.minWidth
+    },
+
+    /**
+     * Return true if a rect is the minimum height, false otherwise.
+     * @param {Rect} rect
+     *   The viewport rectangle.
+     */
+    isMinHeight (rect) {
+      const vp = this.viewer.viewport
+      const wRect = vp.viewportToViewerElementRectangle(rect)
+      return wRect.height >= this.minHeight
+    },
+
+    /**
      * Fixes negative width/height.
      */
     normalize () {
       if (this.rect) {
         var fixed = this.rect.clone()
         if (fixed.width < 0) {
-          console.log('true')
-          console.log(fixed)
           fixed.x += fixed.width
           fixed.width *= -1
         }
@@ -302,6 +324,13 @@ export default {
       if (!(this.isRectInImage(this.rect))) {
         this.rect = oldRect
       }
+      if (!(this.isMinWidth(this.rect))) {
+        this.rect.width = oldRect.width
+        this.rect.x = oldRect.x
+      }
+      if (!(this.isMinHeight(this.rect))) {
+        this.rect.height = oldRect.height
+      }
       this.draw()
     },
 
@@ -342,15 +371,21 @@ export default {
       if (!(this.isRectInImage(this.rect))) {
         this.rect = oldRect
       }
+      if (!(this.isMinWidth(this.rect))) {
+        this.rect.width = oldRect.width
+      }
+      if (!(this.isMinHeight(this.rect))) {
+        this.rect.height = oldRect.height
+      }
       this.draw()
     },
 
     /**
-     * Handle confirm on enter, cancel on escape.
+     * Handle key presses.
      * @param {Object} evt
      *   The mouse tracker event.
      */
-    onKeyPress (evt) {
+    onKeyUp (evt) {
       var key = evt.keyCode ? evt.keyCode : evt.charCode
       if (key === 13) {
         this.confirm()
@@ -426,7 +461,7 @@ export default {
       dragHandler: this.onCornerDrag.bind(this, 'top-left')
     })
 
-    window.addEventListener('keyup', this.onKeyPress)
+    window.addEventListener('keyup', this.onKeyUp)
 
     this.viewer.addHandler('open', this.draw)
     this.viewer.addHandler('animation', this.draw)
@@ -435,7 +470,7 @@ export default {
   },
 
   beforeDestroy () {
-    window.removeEventListener('keyup', this.onKeyPress)
+    window.removeEventListener('keyup', this.onKeyUp)
     this.viewer.removeHandler('open', this.draw)
     this.viewer.removeHandler('animation', this.draw)
     this.viewer.removeHandler('resize', this.draw)
