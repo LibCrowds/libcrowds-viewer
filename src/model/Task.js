@@ -34,9 +34,6 @@ class Task {
     this.annotations = annotations
     this.complete = complete
 
-    // Overlays are established at runtime
-    this.overlays = []
-
     // Validate
     const validModes = ['select', 'transcribe']
     const baseMsg = 'Failed to initialise task - '
@@ -105,25 +102,6 @@ class Task {
       throw Error('No Annotation exists with that ID')
     }
     this.annotations = filteredAnnos
-  }
-
-  /**
-   * Add or update an overlay for the task.
-   * @param {Overlay} overlay
-   *  The overlay.
-   */
-  storeOverlay (id, rect) {
-    let updated = false
-    let overlay = new Overlay({ id: id, rect: rect })
-    this.overlays.forEach(function (item, i, array) {
-      if (array[i].id === id) {
-        array[i] = overlay
-        updated = true
-      }
-    })
-    if (!updated) {
-      this.overlays.push(overlay)
-    }
   }
 }
 

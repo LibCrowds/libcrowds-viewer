@@ -88,7 +88,6 @@ export default {
             this.selectionRect.width,
             this.selectionRect.height
           )
-          console.log(this.rect)
           this.draw()
         } else {
           this.rect = null

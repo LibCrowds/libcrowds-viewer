@@ -328,7 +328,6 @@ export default {
       for (let anno of annos) {
         const imgRect = extractRectFromImageUri(anno.target.selector.value)
         const vpRect = vp.imageToViewportRectangle(imgRect)
-        task.storeOverlay(anno.id, vpRect)
         const overlay = drawOverlay(this.viewer, anno.id, vpRect, 'selection')
         overlay.addEventListener('click', (evt) => {
           this.editTag(task, anno.id)
@@ -471,17 +470,6 @@ export default {
     },
 
     /**
-     * Delete an overlay.
-     * @param {String} id
-     *   The overlay ID.
-     */
-    deleteOverlay (id) {
-      const query = `.overlay[data-id="${id}"]`
-      const el = document.querySelector(query)
-      this.viewer.removeOverlay(el)
-    },
-
-    /**
      * Remove a tag and enable the selector in the same location.
      * @param {Task} task
      *   The task that the tag belongs to.
@@ -513,7 +501,7 @@ export default {
     deleteTag (task, id) {
       const anno = task.getAnnotation(id)
       task.deleteAnnotation(id)
-      this.deleteOverlay(id)
+      task.deleteOverlay(id)
       this.$emit('delete', task, anno)
     },
 
