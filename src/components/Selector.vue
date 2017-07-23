@@ -30,12 +30,7 @@ export default {
       x2: 0,
       y2: 0,
       selecting: false,
-      rect: {
-        x: 0,
-        y: 0,
-        width: 0,
-        height: 0
-      }
+      rect: null
     }
   },
 
@@ -51,7 +46,20 @@ export default {
   },
 
   methods: {
-    calc () {
+    /**
+     * Check if a point is within the image.
+     */
+    isPointInImage (point) {
+      var bounds = this.viewer.world.getHomeBounds()
+      return (
+        point.x >= 0 &&
+        point.x <= bounds.width &&
+        point.y >= 0 &&
+        point.y <= bounds.height
+      )
+    },
+
+    calculate () {
       // Calculte remaining pixel coordinates
       const x3 = Math.min(this.x1, this.x2)
       const x4 = Math.max(this.x1, this.x2)
@@ -74,21 +82,30 @@ export default {
 
   mounted () {
     this.viewer.addHandler('canvas-drag-end', (obj) => {
-      this.selecting = false
-      this.$refs.box.style.display = 'none'
-      this.$emit('selection', this.rect)
+      if (this.rect) {
+        this.selecting = false
+        this.$refs.box.style.display = 'none'
+        this.$emit('selection', this.rect)
+        this.rect = null
+      }
     })
     this.viewer.addHandler('canvas-drag', (obj) => {
-      if (!this.selecting) {
-        this.x1 = obj.position.x
-        this.y1 = obj.position.y
-        this.selecting = true
-        this.$refs.box.style.display = 'block'
-        return
+      var delta = this.viewer.viewport.deltaPointsFromPixels(obj.delta, true)
+      var end = this.viewer.viewport.pointFromPixel(obj.position, true)
+      var start = new OpenSeadragon.Point(end.x - delta.x, end.y - delta.y)
+      const pointIsInImage = this.isPointInImage(start)
+      if (pointIsInImage) {
+        if (!this.selecting) {
+          this.x1 = obj.position.x
+          this.y1 = obj.position.y
+          this.selecting = true
+          this.$refs.box.style.display = 'block'
+          return
+        }
+        this.x2 = obj.position.x
+        this.y2 = obj.position.y
+        this.calculate()
       }
-      this.x2 = obj.position.x
-      this.y2 = obj.position.y
-      this.calc()
     })
   }
 }
