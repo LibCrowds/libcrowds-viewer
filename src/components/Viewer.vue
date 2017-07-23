@@ -267,6 +267,7 @@ export default {
      *   The selection rectangle.
      */
     handleSelection (rect) {
+      console.log('selection made')
       const vp = this.viewer.viewport
       const imgRect = vp.viewportToImageRectangle(rect)
       const imageUri = getImageUri({
@@ -538,8 +539,6 @@ export default {
             tileSource: this.currentTask.imgInfoUri,
             success: () => this.configureMode(this.currentTask)
           })
-        } else {
-          this.configureMode(this.currentTask)
         }
       },
       deep: true
