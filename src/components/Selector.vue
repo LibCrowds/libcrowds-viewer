@@ -85,12 +85,14 @@ export default {
      * Draw the current rectangle.
      */
     draw () {
-      const vp = this.viewer.viewport
-      const wRect = vp.viewportToViewerElementRectangle(this.rect)
-      this.$refs.box.style.left = `${wRect.x}px`
-      this.$refs.box.style.top = `${wRect.y}px`
-      this.$refs.box.style.width = `${wRect.width}px`
-      this.$refs.box.style.height = `${wRect.height}px`
+      if (this.rect) {
+        const vp = this.viewer.viewport
+        const wRect = vp.viewportToViewerElementRectangle(this.rect)
+        this.$refs.box.style.left = `${wRect.x}px`
+        this.$refs.box.style.top = `${wRect.y}px`
+        this.$refs.box.style.width = `${wRect.width}px`
+        this.$refs.box.style.height = `${wRect.height}px`
+      }
     },
 
     /**
@@ -261,6 +263,18 @@ export default {
       element: this.$refs['corner-top-left'],
       dragHandler: this.onCornerDrag.bind(this, 'top-left')
     })
+
+    this.viewer.addHandler('open', this.draw())
+    this.viewer.addHandler('animation', this.draw())
+    this.viewer.addHandler('resize', this.draw())
+    this.viewer.addHandler('rotate', this.draw())
+  },
+
+  beforeDestroy () {
+    this.viewer.removeHandler('open', this.draw())
+    this.viewer.removeHandler('animation', this.draw())
+    this.viewer.removeHandler('resize', this.draw())
+    this.viewer.removeHandler('rotate', this.draw())
   }
 }
 </script>
