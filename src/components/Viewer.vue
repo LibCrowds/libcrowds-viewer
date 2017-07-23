@@ -113,6 +113,7 @@ import extractRectFromImageUri from '@/utils/extractRectFromImageUri'
 import filterAnnotations from '@/utils/filterAnnotations'
 import toggleFullScreen from '@/utils/toggleFullScreen'
 import drawOverlay from '@/utils/drawOverlay'
+import deleteOverlay from '@/utils/deleteOverlay'
 
 export default {
   data: function () {
@@ -501,7 +502,7 @@ export default {
     deleteTag (task, id) {
       const anno = task.getAnnotation(id)
       task.deleteAnnotation(id)
-      task.deleteOverlay(id)
+      deleteOverlay(this.viewer, id)
       this.$emit('delete', task, anno)
     },
 
