@@ -284,7 +284,7 @@ export default {
           classification: this.currentTask.classification
         })
         this.currentTask.annotations.push(anno)
-        drawOverlay(this.viewer, anno.id, rect, 'selection')
+        this.drawSelectionOverlay(this.currentTask, anno)
         this.$emit('create', this.currentTask, anno)
       })
     },
@@ -314,25 +314,20 @@ export default {
     },
 
     /**
-     * Redraw all selection overlays for a task.
-     * @param {Task} task.
-     *   The task.
+     * Draw a selection overlays from an annotation.
+     * @param {Task} task
+     *   The Task.
+     * @param {Annotation} annotation
+     *   The Annotation.
      */
-    drawSelectionOverlays (task) {
+    drawSelectionOverlay (task, anno) {
       const vp = this.viewer.viewport
-      let annos = filterAnnotations({
-        annotations: task.annotations,
-        motivation: 'tagging'
+      const imgRect = extractRectFromImageUri(anno.target.selector.value)
+      const vpRect = vp.imageToViewportRectangle(imgRect)
+      const overlay = drawOverlay(this.viewer, anno.id, vpRect, 'selection')
+      overlay.addEventListener('click', (evt) => {
+        this.editTag(task, anno.id)
       })
-
-      for (let anno of annos) {
-        const imgRect = extractRectFromImageUri(anno.target.selector.value)
-        const vpRect = vp.imageToViewportRectangle(imgRect)
-        const overlay = drawOverlay(this.viewer, anno.id, vpRect, 'selection')
-        overlay.addEventListener('click', (evt) => {
-          this.editTag(task, anno.id)
-        })
-      }
     },
 
     /**
@@ -512,7 +507,14 @@ export default {
      */
     configureMode (task) {
       if (task.mode === 'select' && !(task.complete && this.disableComplete)) {
-        this.drawSelectionOverlays(task)
+        // Draw all tags as selection overlays
+        let annos = filterAnnotations({
+          annotations: task.annotations,
+          motivation: 'tagging'
+        })
+        for (let anno of annos) {
+          this.drawSelectionOverlay(task, anno)
+        }
       }
     },
 
