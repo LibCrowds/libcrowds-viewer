@@ -109,6 +109,8 @@ export default {
   methods: {
     /**
      * Return true if a viewport point is within the image, false otherwise.
+     * @param {Point} point
+     *   The point.
      */
     isPointInImage (point) {
       var bounds = this.viewer.world.getHomeBounds()
@@ -118,6 +120,49 @@ export default {
         point.y >= 0 &&
         point.y <= bounds.height
       )
+    },
+
+    /**
+     * Return true if a rect is within the image, false otherwise.
+     * @param {Rect} rect
+     *   The viewport rectangle.
+     */
+    isRectInImage (rect) {
+      const bounds = this.viewer.world.getHomeBounds()
+      const bRect = new OpenSeadragon.Rect(0, 0, bounds.width, bounds.height)
+      const normRect = this.normalize(rect)
+      const corners = [
+        rect.getTopLeft(),
+        rect.getTopRight(),
+        rect.getBottomRight(),
+        rect.getBottomLeft()
+      ]
+      const areaEnd = bRect.getBottomRight()
+      for (let i = 0; i < 4; i++) {
+        if (corners[i].x < bRect.x || corners[i].x > areaEnd.x ||
+          corners[i].y < bRect.y || corners[i].y > areaEnd.y) {
+          return false
+        }
+      }
+      return true
+    },
+
+    /**
+     * Fixes negative width/height.
+     * @param {Rect} rect
+     *   The viewport rect.
+     */
+    normalize (rect) {
+      var fixed = rect.clone()
+      if (fixed.width < 0) {
+        fixed.x += fixed.width
+        fixed.width *= -1
+      }
+      if (fixed.height < 0) {
+        fixed.y += fixed.height
+        fixed.height *= -1
+      }
+      return fixed
     },
 
     /**
@@ -162,21 +207,23 @@ export default {
 
     /**
      * Start a new selection when the canvas is dragged.
+     * @param {Object} evt
+     *   The mouse tracker event.
      */
-    onCanvasDrag (e) {
+    onCanvasDrag (evt) {
       const vp = this.viewer.viewport
-      const wPoint = new OpenSeadragon.Point(e.position.x, e.position.y)
+      const wPoint = new OpenSeadragon.Point(evt.position.x, evt.position.y)
       const vpPoint = vp.viewerElementToViewportCoordinates(wPoint)
       const pointIsInImage = this.isPointInImage(vpPoint)
       if (pointIsInImage) {
         if (!this.selecting) {
           this.selecting = true
-          this.x1 = e.position.x
-          this.y1 = e.position.y
+          this.x1 = evt.position.x
+          this.y1 = evt.position.y
           return
         }
-        this.x2 = e.position.x
-        this.y2 = e.position.y
+        this.x2 = evt.position.x
+        this.y2 = evt.position.y
         this.calculate()
         this.draw()
       }
@@ -184,11 +231,17 @@ export default {
 
     /**
      * Move selection box when dragged.
+     * @param {Object} evt
+     *   The mouse tracker event.
      */
     onSelectorBoxDrag (evt) {
-      var delta = this.viewer.viewport.deltaPointsFromPixels(evt.delta, true)
+      const delta = this.viewer.viewport.deltaPointsFromPixels(evt.delta, true)
+      const oldRect = this.rect.clone()
       this.rect.x += delta.x
       this.rect.y += delta.y
+      if (!(this.isRectInImage(this.rect))) {
+        this.rect = oldRect
+      }
       this.draw()
     },
 
@@ -220,11 +273,16 @@ export default {
 
     /**
      * Resize a rectangle from the borders.
+     * @param {String} position
+     *   The border position.
+     * @param {Object} evt
+     *   The mouse tracker event.
      */
     onBorderDrag (position, evt) {
       const vp = this.viewer.viewport
       const wPoint = new OpenSeadragon.Point(evt.position.x, evt.position.y)
       const delta = vp.deltaPointsFromPixels(wPoint)
+      const oldRect = this.rect.clone()
       switch (position) {
         case 'top':
           this.rect.y += delta.y
@@ -241,16 +299,24 @@ export default {
           this.rect.width -= delta.x
           break
       }
+      if (!(this.isRectInImage(this.rect))) {
+        this.rect = oldRect
+      }
       this.draw()
     },
 
     /**
      * Resize a rectangle from the corners.
+     * @param {String} position
+     *   The corner position.
+     * @param {Object} evt
+     *   The mouse tracker event.
      */
     onCornerDrag (position, evt) {
       const vp = this.viewer.viewport
       const wPoint = new OpenSeadragon.Point(evt.position.x, evt.position.y)
       const delta = vp.deltaPointsFromPixels(wPoint)
+      const oldRect = this.rect.clone()
       switch (position) {
         case 'top-right':
           this.rect.y += delta.y
@@ -273,11 +339,16 @@ export default {
           this.rect.width -= delta.x
           break
       }
+      if (!(this.isRectInImage(this.rect))) {
+        this.rect = oldRect
+      }
       this.draw()
     },
 
     /**
      * Handle confirm on enter, cancel on escape.
+     * @param {Object} evt
+     *   The mouse tracker event.
      */
     onKeyPress (evt) {
       var key = evt.keyCode ? evt.keyCode : evt.charCode
