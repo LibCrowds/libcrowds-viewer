@@ -13,7 +13,6 @@ export default function (viewer, id, rect, type = '') {
   if (!viewer.addOverlay) {
     return
   }
-  console.log('overlayRect', rect)
   const el = document.createElement('div')
   el.dataset.id = id
   el.classList.add('overlay')

@@ -114,14 +114,15 @@ class Task {
    */
   storeOverlay (id, rect) {
     let updated = false
+    let overlay = new Overlay({ id: id, rect: rect })
     this.overlays.forEach(function (item, i, array) {
       if (array[i].id === id) {
-        array[i] = new Overlay({ id: id, rect: rect })
+        array[i] = overlay
         updated = true
       }
     })
     if (!updated) {
-      this.overlays.push(new Overlay({ id: id, rect: rect }))
+      this.overlays.push(overlay)
     }
   }
 }

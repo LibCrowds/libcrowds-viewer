@@ -246,6 +246,21 @@ export default {
           break
       }
       this.draw()
+    },
+
+    /**
+     * Handle confirm on enter, cancel on escape.
+     */
+    onKeyPress (evt) {
+      var key = evt.keyCode ? evt.keyCode : evt.charCode
+      console.log('press')
+      if (key === 13) {
+        console.log('confirm')
+        this.confirm()
+      } else if (key === 27) {
+        console.log('cancel')
+        this.cancel()
+      }
     }
   },
 
@@ -315,6 +330,8 @@ export default {
       dragHandler: this.onCornerDrag.bind(this, 'top-left')
     })
 
+    window.addEventListener('keyup', this.onKeyPress)
+
     this.viewer.addHandler('open', this.draw())
     this.viewer.addHandler('animation', this.draw())
     this.viewer.addHandler('resize', this.draw())
@@ -322,6 +339,7 @@ export default {
   },
 
   beforeDestroy () {
+    window.removeEventListener('keyup', this.onKeyPress)
     this.viewer.removeHandler('open', this.draw())
     this.viewer.removeHandler('animation', this.draw())
     this.viewer.removeHandler('resize', this.draw())
