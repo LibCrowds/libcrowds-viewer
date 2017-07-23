@@ -630,24 +630,5 @@ export default {
   .openseadragon-message {
     color: #FFF;
   }
-
-  .overlay {
-    z-index: 1;
-
-    &.selection {
-      border: 2px solid $blue;
-      background-color: rgba($blue, 0.2);
-      opacity: .6;
-
-      &.focus {
-        border-color: $green;
-        background-color: rgba($green, 0.35);
-      }
-    }
-
-    &.highlight {
-      background-color: rgba($yellow, 0.35);
-    }
-  }
 }
 </style>
