@@ -40,18 +40,6 @@
         </help-modal>
 
         <button
-          class="btn-selection"
-          id="confirm-selection"
-          ref="confirmSelection">
-          <icon name="check-circle"></icon>
-        </button>
-        <button
-          class="btn-selection"
-          id="cancel-selection"
-          ref="cancelSelection">
-          <icon name="times-circle"></icon>
-        </button>
-        <button
           :disabled="previousBtnDisabled"
           class="btn btn-hud"
           id="lv-browse-previous"
@@ -91,20 +79,24 @@
         :task="currentTask"
         @update="updateForm">
       </transcribe-sidebar-item>
-
     </sidebar>
+
+    <selector
+      v-if="currentTask && currentTask.mode === 'select'"
+      :viewer="viewer"
+      :task="currentTask"
+      :selectionRect="selectionRect"
+      @selection="handleSelection">
+    </selector>
 
   </div>
 </template>
 
 <script>
 import Icon from 'vue-awesome/components/Icon'
-import 'vue-awesome/icons/times-circle'
-import 'vue-awesome/icons/check-circle'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
 import OpenSeadragon from 'openseadragon'
-import 'openseadragonselection/dist/openseadragonselection'
 import MetadataModal from '@/components/modals/Metadata'
 import HelpModal from '@/components/modals/Help'
 import ViewerControls from '@/components/controls/Viewer'
@@ -112,21 +104,23 @@ import PanControls from '@/components/controls/Pan'
 import Sidebar from '@/components/sidebar/Sidebar'
 import SelectSidebarItem from '@/components/sidebar/items/Select'
 import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
+import Selector from '@/components/Selector'
 import Task from '@/model/Task'
 import TagAnnotation from '@/model/TagAnnotation'
 import DescriptionAnnotation from '@/model/DescriptionAnnotation'
 import CommentAnnotation from '@/model/CommentAnnotation'
-import drawOverlay from '@/utils/drawOverlay'
 import getImageUri from '@/utils/getImageUri'
 import extractRectFromImageUri from '@/utils/extractRectFromImageUri'
 import filterAnnotations from '@/utils/filterAnnotations'
 import toggleFullScreen from '@/utils/toggleFullScreen'
+import drawOverlay from '@/utils/drawOverlay'
+import deleteOverlay from '@/utils/deleteOverlay'
 
 export default {
   data: function () {
     return {
       viewer: {},
-      selector: {},
+      selectionRect: {},
       viewerOpts: {
         id: 'lv-viewer-container',
         showNavigationControl: false,
@@ -216,6 +210,7 @@ export default {
     ViewerControls,
     PanControls,
     Sidebar,
+    Selector,
     SelectSidebarItem,
     TranscribeSidebarItem,
     Icon
@@ -268,31 +263,38 @@ export default {
     },
 
     /**
+     * Draw overlay and add tag when a selection is made.
+     * @param {Task} task
+     *   The task.
+     * @param {Object} rect
+     *   The viewport rectangle.
+     */
+    handleSelection (task, rect) {
+      const vp = this.viewer.viewport
+      const imgRect = vp.viewportToImageRectangle(rect)
+      const imageUri = getImageUri({
+        imgSource: task.imgInfoUri,
+        region: imgRect
+      })
+      task.fetchImageInfo().then((info) => {
+        let anno = new TagAnnotation({
+          imgInfo: info,
+          value: task.tag,
+          fragmentURI: imageUri,
+          creator: this.creator,
+          generator: this.generator,
+          classification: task.classification
+        })
+        task.annotations.push(anno)
+        this.drawSelectionOverlay(task, anno)
+        this.$emit('create', task, anno)
+      })
+    },
+
+    /**
      * Setup event handlers.
      */
     setupHandlers () {
-      // Add a tag and draw the overlay when a selection is made.
-      this.viewer.addHandler('selection', (selectionRect) => {
-        const vp = this.viewer.viewport
-        const imgRect = vp.viewportToImageRectangle(selectionRect)
-        const imageUri = getImageUri({
-          imgSource: this.currentTask.imgInfoUri,
-          region: imgRect
-        })
-        this.currentTask.fetchImageInfo().then((info) => {
-          let anno = new TagAnnotation({
-            imgInfo: info,
-            value: this.currentTask.tag,
-            fragmentURI: imageUri,
-            creator: this.creator,
-            generator: this.generator,
-            classification: this.currentTask.classification
-          })
-          this.currentTask.annotations.push(anno)
-          this.$emit('create', this.currentTask, anno)
-        })
-      })
-
       // Confirm before leaving if any overlays have been drawn or forms filled
       window.onbeforeunload = () => {
         const msg = 'Unsaved changes will be lost.'
@@ -314,73 +316,36 @@ export default {
     },
 
     /**
-     * Redraw all selection overlays for a task.
-     * @param {Task} task.
-     *   The task.
+     * Draw a selection overlays from an annotation.
+     * @param {Task} task
+     *   The Task.
+     * @param {Annotation} annotation
+     *   The Annotation.
      */
-    drawSelectionOverlays (task) {
+    drawSelectionOverlay (task, anno) {
       const vp = this.viewer.viewport
-      let annos = filterAnnotations({
-        annotations: task.annotations,
-        motivation: 'tagging'
+      const imgRect = extractRectFromImageUri(anno.target.selector.value)
+      const vpRect = vp.imageToViewportRectangle(imgRect)
+      const overlay = drawOverlay(this.viewer, anno.id, vpRect, 'selection')
+      overlay.addEventListener('click', (evt) => {
+        this.editTag(task, anno.id)
       })
-      this.viewer.clearOverlays()
-      if (!annos.length) {
-        return
-      }
-      for (let anno of annos) {
-        const imgRect = extractRectFromImageUri(anno.target.selector.value)
-        const vpRect = vp.imageToViewportRectangle(imgRect)
-        drawOverlay(this.viewer, anno.id, vpRect, 'selection')
-      }
-    },
-
-    /**
-     * Configure the area selector for the main viewer.
-     *
-     * TODO: Lose this dependency!
-     */
-    configureSelector () {
-      this.selector = this.viewer.selection({
-        showConfirmDenyButtons: false,
-        restrictToImage: true,
-        returnPixelCoordinates: false
-      })
-
-      /* eslint-disable no-new */
-      new OpenSeadragon.Button({
-        element: this.$refs.confirmSelection,
-        clickTimeThreshold: this.viewer.clickTimeThreshold,
-        clickDistThreshold: this.viewer.clickDistThreshold,
-        tooltip: 'Confirm',
-        onRelease: this.selector.confirm.bind(this.selector)
-      })
-      this.selector.element.appendChild(this.$refs.confirmSelection)
-
-      /* eslint-disable no-new */
-      new OpenSeadragon.Button({
-        element: this.$refs.cancelSelection,
-        clickTimeThreshold: this.viewer.clickTimeThreshold,
-        clickDistThreshold: this.viewer.clickDistThreshold,
-        tooltip: 'Delete',
-        onRelease: this.selector.cancel.bind(this.selector)
-      })
-      this.selector.element.appendChild(this.$refs.cancelSelection)
     },
 
     /**
      * Highlight a region of the current image.
      */
     highlightRegion () {
-      if (this.region) {
-        const rect = new OpenSeadragon.Rect(
-          this.region.x,
-          this.region.y,
-          this.region.width,
-          this.region.height
-        )
-        drawOverlay(this.viewer, 'highlight', rect, 'highlight')
-      }
+      // if (this.region) {
+      //   const rect = new OpenSeadragon.Rect(
+      //     this.region.x,
+      //     this.region.y,
+      //     this.region.width,
+      //     this.region.height
+      //   )
+      //   // Use task.addOverlay when refactoring the highlight method
+      //   // drawOverlay(this.viewer, 'highlight', rect, 'highlight')
+      // }
     },
 
     /**
@@ -502,17 +467,6 @@ export default {
     },
 
     /**
-     * Delete an overlay.
-     * @param {String} id
-     *   The overlay ID.
-     */
-    deleteOverlay (id) {
-      const query = `.overlay[data-id="${id}"]`
-      const el = document.querySelector(query)
-      this.viewer.removeOverlay(el)
-    },
-
-    /**
      * Remove a tag and enable the selector in the same location.
      * @param {Task} task
      *   The task that the tag belongs to.
@@ -524,14 +478,13 @@ export default {
       const tag = task.getAnnotation(id)
       const imgRect = extractRectFromImageUri(tag.target.selector.value)
       const vpRect = vp.imageToViewportRectangle(imgRect)
-      const selectionRect = new OpenSeadragon.SelectionRect(
+      const rect = new OpenSeadragon.Rect(
         vpRect.x,
         vpRect.y,
         vpRect.width,
         vpRect.height
       )
-      this.selector.rect = selectionRect
-      this.selector.draw()
+      this.selectionRect = rect
       this.deleteTag(task, id)
     },
 
@@ -545,20 +498,25 @@ export default {
     deleteTag (task, id) {
       const anno = task.getAnnotation(id)
       task.deleteAnnotation(id)
-      this.deleteOverlay(id)
+      deleteOverlay(this.viewer, id)
       this.$emit('delete', task, anno)
     },
 
     /**
-     * Configure selection mode.
+     * Mode specific configuration for a task.
      * @param {Task} task
      *   The task.
      */
-    configureSelectionMode (task) {
+    configureMode (task) {
       if (task.mode === 'select' && !(task.complete && this.disableComplete)) {
-        this.selector.enable()
-      } else {
-        this.selector.disable()
+        // Draw all tags as selection overlays
+        let annos = filterAnnotations({
+          annotations: task.annotations,
+          motivation: 'tagging'
+        })
+        for (let anno of annos) {
+          this.drawSelectionOverlay(task, anno)
+        }
       }
     },
 
@@ -583,14 +541,8 @@ export default {
         if (!oldVal || !newVal || oldVal.imgInfoUri !== newVal.imgInfoUri) {
           this.viewer.open({
             tileSource: this.currentTask.imgInfoUri,
-            success: () => {
-              this.configureSelectionMode(this.currentTask)
-              this.drawSelectionOverlays(this.currentTask)
-            }
+            success: () => this.configureMode(this.currentTask)
           })
-        } else {
-          this.configureSelectionMode(this.currentTask)
-          this.drawSelectionOverlays(this.currentTask)
         }
       },
       deep: true
@@ -604,13 +556,12 @@ export default {
   },
 
   mounted () {
-    // Initialise the main viewer after the DOM is loaded
+    // Initialise after the DOM is loaded
     this.viewer = new OpenSeadragon.Viewer(this.viewerOpts)
 
     this.loadTasks()
     this.setupHandlers()
     this.highlightRegion()
-    this.configureSelector()
   }
 }
 </script>
@@ -668,52 +619,10 @@ export default {
 }
 
 .openseadragon-container {
-  height: 100vh;
+  height: 100%;
 
   .openseadragon-message {
     color: #FFF;
-  }
-
-  .selection-box {
-    transform: none !important;  /** Disable rotation */
-    z-index: 1;
-    outline: 9999px solid rgba(#000, .6);
-
-    .btn-selection {
-      color: #fff;
-      display: flex !important;
-      position: absolute !important;
-      right: 0;
-
-      &#confirm-selection {
-        bottom: 0;
-        transform: translateX(20px) translateY(15px);
-      }
-
-      &#cancel-selection {
-        top: 0;
-        transform: translateX(20px) translateY(-15px);
-      }
-    }
-  }
-
-  .overlay {
-    z-index: 1;
-
-    &.selection {
-      border: 2px solid $blue;
-      background-color: rgba($blue, 0.2);
-      opacity: .6;
-
-      &.focus {
-        border-color: $green;
-        background-color: rgba($green, 0.35);
-      }
-    }
-
-    &.highlight {
-      background-color: rgba($yellow, 0.35);
-    }
   }
 }
 </style>

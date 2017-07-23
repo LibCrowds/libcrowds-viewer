@@ -9,8 +9,10 @@ export default function (id, highlight) {
   const query = `.overlay[data-id="${id}"]`
   const el = document.querySelector(query)
   if (highlight) {
-    el.classList.add('focus')
+    el.style.borderColor = '#4DAF7C'
+    el.style.backgroundColor = 'rgba(77, 175, 124, 0.2)'
   } else {
-    el.classList.remove('focus')
+    el.style.borderColor = 'rgb(52, 152, 219)'
+    el.style.backgroundColor = 'rgba(52, 152, 219, 0.2)'
   }
 }
