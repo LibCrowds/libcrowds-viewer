@@ -211,6 +211,10 @@ export default {
      */
     undraw () {
       this.$refs.box.style.display = 'none'
+      this.$refs.box.style.left = `0px`
+      this.$refs.box.style.top = `0px`
+      this.$refs.box.style.width = `0px`
+      this.$refs.box.style.height = `0px`
       this.rect = null
     },
 
@@ -485,7 +489,6 @@ export default {
 #lv-selector {
   .lv-selector-box {
     background-color: rgba($blue, 0.2);
-    display: block;
     position: absolute;
     z-index: 1;
 
