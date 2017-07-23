@@ -10,16 +10,16 @@
           <img :src="tag.target.selector.value">
         </div>
         <div class="buttons">
-          <span
+          <button
             @click="editTag(tag)"
             class="btn btn-control">
             <icon name="pencil"></icon>
-          </span>
-          <span
+          </button>
+          <button
             @click="deleteTag(tag)"
             class="btn btn-control">
             <icon name="times-circle"></icon>
-          </span>
+          </button>
         </div>
       </li>
     </ul>
@@ -101,10 +101,15 @@ export default {
     flex: 0 0 33.3333%;
   }
 
-  button {
+  .btn {
     display: flex;
     margin-right: auto;
     margin-left: auto;
+
+    &:last-child {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
   .thumbnail-container {
