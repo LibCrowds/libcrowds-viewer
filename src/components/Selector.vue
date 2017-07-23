@@ -71,6 +71,30 @@ export default {
     viewer: {
       type: Object,
       required: true
+    },
+    selectionRect: {
+      type: Object,
+      required: true
+    }
+  },
+
+  watch: {
+    selectionRect: {
+      handler: function (oldVal, newVal) {
+        if (Object.keys(this.selectionRect).length > 0) {
+          this.rect = new OpenSeadragon.Rect(
+            this.selectionRect.x,
+            this.selectionRect.y,
+            this.selectionRect.width,
+            this.selectionRect.height
+          )
+          console.log(this.rect)
+          this.draw()
+        } else {
+          this.rect = null
+        }
+      },
+      deep: true
     }
   },
 
@@ -103,6 +127,7 @@ export default {
         this.$refs.box.style.top = `${wRect.y}px`
         this.$refs.box.style.width = `${wRect.width}px`
         this.$refs.box.style.height = `${wRect.height}px`
+        this.$refs.box.style.display = 'block'
       }
     },
 
@@ -144,7 +169,6 @@ export default {
           this.selecting = true
           this.x1 = e.position.x
           this.y1 = e.position.y
-          this.$refs.box.style.display = 'block'
           return
         }
         this.x2 = e.position.x
@@ -253,12 +277,9 @@ export default {
      */
     onKeyPress (evt) {
       var key = evt.keyCode ? evt.keyCode : evt.charCode
-      console.log('press')
       if (key === 13) {
-        console.log('confirm')
         this.confirm()
       } else if (key === 27) {
-        console.log('cancel')
         this.cancel()
       }
     }

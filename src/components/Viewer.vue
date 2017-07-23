@@ -84,6 +84,7 @@
     <selector
       v-if="currentTask && currentTask.mode === 'select'"
       :viewer="viewer"
+      :selectionRect="selectionRect"
       @selection="handleSelection">
     </selector>
 
@@ -117,6 +118,7 @@ export default {
   data: function () {
     return {
       viewer: {},
+      selectionRect: {},
       viewerOpts: {
         id: 'lv-viewer-container',
         showNavigationControl: false,
@@ -487,14 +489,13 @@ export default {
       const tag = task.getAnnotation(id)
       const imgRect = extractRectFromImageUri(tag.target.selector.value)
       const vpRect = vp.imageToViewportRectangle(imgRect)
-      const selectionRect = new OpenSeadragon.Rect(
+      const rect = new OpenSeadragon.Rect(
         vpRect.x,
         vpRect.y,
         vpRect.width,
         vpRect.height
       )
-      this.selector.rect = selectionRect
-      this.selector.draw()
+      this.selectionRect = rect
       this.deleteTag(task, id)
     },
 
