@@ -21,28 +21,39 @@
       <span class="corner corner-bottom-left" ref="corner-bottom-left"></span>
       <span class="corner corner-top-left" ref="corner-top-left"></span>
 
-    </div>
+      <div class="selection-buttons">
+        <button
+          class="btn-selection"
+          id="cancel-selection"
+          ref="cancelSelection"
+          @click="cancel">
+          <icon label="Cancel">
+            <icon name="circle"></icon>
+            <icon name="times" class="icon-white" scale="0.8"></icon>
+          </icon>
+        </button>
+        <button
+          class="btn-selection"
+          id="confirm-selection"
+          ref="confirmSelection"
+          @click="confirm">
+          <icon label="Confirm">
+            <icon name="circle"></icon>
+            <icon name="check" class="icon-white" scale="0.8"></icon>
+          </icon>
+        </button>
+      </div>
 
-    <button
-      class="btn-selection"
-      id="confirm-selection"
-      ref="confirmSelection">
-      <icon name="check-circle"></icon>
-    </button>
-    <button
-      class="btn-selection"
-      id="cancel-selection"
-      ref="cancelSelection">
-      <icon name="times-circle"></icon>
-    </button>
+    </div>
   </div>
 </template>
 
 <script>
 import OpenSeadragon from 'openseadragon'
 import Icon from 'vue-awesome/components/Icon'
-import 'vue-awesome/icons/times-circle'
-import 'vue-awesome/icons/check-circle'
+import 'vue-awesome/icons/circle'
+import 'vue-awesome/icons/times'
+import 'vue-awesome/icons/check'
 
 export default {
   data: function () {
@@ -136,14 +147,30 @@ export default {
     },
 
     /**
+     * Confirm the selection.
+     */
+    confirm () {
+      if (this.rect) {
+        this.$refs.box.style.display = 'none'
+        this.$emit('selection', this.rect)
+        this.rect = null
+      }
+    },
+
+    /**
+     * Cancel the selection.
+     */
+    cancel () {
+      this.$refs.box.style.display = 'none'
+      this.rect = null
+    },
+
+    /**
      * End the selection.
      */
     onCanvasDragEnd () {
       if (this.rect) {
         this.selecting = false
-        // this.$refs.box.style.display = 'none'
-        // this.$emit('selection', this.rect)
-        // this.rect = null
       }
     },
 
@@ -285,7 +312,6 @@ export default {
 #lv-selector {
   .lv-selector-box {
     background-color: rgba($blue, 0.2);
-    opacity: .6;
     display: block;
     position: absolute;
     z-index: 1;
@@ -375,26 +401,43 @@ export default {
         cursor: nwse-resize;
       }
     }
+  }
 
-  }
-  &.hidden {
-    display: none;
-  }
-  .btn-selection {
-    color: #fff;
-    display: flex !important;
-    position: absolute !important;
+  .selection-buttons {
+    bottom: 0;
     right: 0;
-    &#confirm-selection {
-      bottom: 0;
-      transform: translateX(20px) translateY(15px);
-    }
-    &#cancel-selection {
-      top: 0;
-      transform: translateX(20px) translateY(-15px);
+    transform: translateY(105%);
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+
+    .btn-selection {
+      border: none;
+      background: none;
+      display: flex;
+      align-items: center;
+      font-size: 0.85rem;
+      padding: 2px;
+      height: 16px;
+      width: 16px;
+
+      &#cancel-selection {
+        color: $red;
+      }
+
+      &#confirm-selection {
+        color: $green;
+      }
+
+      .icon-white {
+        color: #FFF;
+      }
+
+      &:hover,
+      &:focus {
+        opacity: 1;
+      }
     }
   }
-
-
 }
 </style>
