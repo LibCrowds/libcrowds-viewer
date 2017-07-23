@@ -382,8 +382,8 @@ export default {
     .border {
       background: $blue;
       position: absolute;
-      height: 2px;
-      width: 2px;
+      height: 1px;
+      width: 1px;
       margin: 0px;
       padding: 0px;
 
