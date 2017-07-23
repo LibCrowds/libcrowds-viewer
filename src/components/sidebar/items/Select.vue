@@ -11,11 +11,6 @@
         </div>
         <div class="buttons">
           <span
-            @click="editTag(tag)"
-            class="btn btn-control">
-            <icon name="pencil"></icon>
-          </span>
-          <span
             @click="deleteTag(tag)"
             class="btn btn-control">
             <icon name="times-circle"></icon>
@@ -58,9 +53,6 @@ export default {
 
   methods: {
     highlightOverlay,
-    editTag (tag) {
-      this.$emit('edit', this.task, tag.id)
-    },
     deleteTag (tag) {
       this.$emit('delete', this.task, tag.id)
     }

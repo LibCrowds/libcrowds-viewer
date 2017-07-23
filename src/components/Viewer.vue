@@ -487,7 +487,7 @@ export default {
       const tag = task.getAnnotation(id)
       const imgRect = extractRectFromImageUri(tag.target.selector.value)
       const vpRect = vp.imageToViewportRectangle(imgRect)
-      const selectionRect = new OpenSeadragon.SelectionRect(
+      const selectionRect = new OpenSeadragon.Rect(
         vpRect.x,
         vpRect.y,
         vpRect.width,
