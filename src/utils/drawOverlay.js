@@ -21,7 +21,8 @@ export default function (viewer, id, rect, type = '') {
   if (type === 'selection') {
     el.style.border = '2px solid rgb(52, 152, 219)'
     el.style.backgroundColor = 'rgba(52, 152, 219, 0.2)'
-    el.style.opacity = '.6'
+    el.style.boxSizing = 'border-box'
+    el.style.opacity = '.8'
   }
   viewer.addOverlay({ element: el, location: rect })
 }

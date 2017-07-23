@@ -107,6 +107,14 @@ export default {
     },
 
     /**
+     * Undraw the rectangle.
+     */
+    undraw () {
+      this.$refs.box.style.display = 'none'
+      this.rect = null
+    },
+
+    /**
      * Calculate and draw the rectangle.
      */
     calculate () {
@@ -161,9 +169,8 @@ export default {
      */
     confirm () {
       if (this.rect) {
-        this.$refs.box.style.display = 'none'
         this.$emit('selection', this.rect)
-        this.rect = null
+        this.undraw()
       }
     },
 
@@ -171,8 +178,7 @@ export default {
      * Cancel the selection.
      */
     cancel () {
-      this.$refs.box.style.display = 'none'
-      this.rect = null
+      this.undraw()
     },
 
     /**
@@ -339,6 +345,8 @@ export default {
       position: absolute;
       height: 2px;
       width: 2px;
+      margin: 0px;
+      padding: 0px;
 
       &.border-top {
         width: 100%;
@@ -449,11 +457,6 @@ export default {
 
       .icon-white {
         color: #FFF;
-      }
-
-      &:hover,
-      &:focus {
-        opacity: 1;
       }
     }
   }
