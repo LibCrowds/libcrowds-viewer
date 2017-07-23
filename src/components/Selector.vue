@@ -332,18 +332,18 @@ export default {
 
     window.addEventListener('keyup', this.onKeyPress)
 
-    this.viewer.addHandler('open', this.draw())
-    this.viewer.addHandler('animation', this.draw())
-    this.viewer.addHandler('resize', this.draw())
-    this.viewer.addHandler('rotate', this.draw())
+    this.viewer.addHandler('open', this.draw)
+    this.viewer.addHandler('animation', this.draw)
+    this.viewer.addHandler('resize', this.draw)
+    this.viewer.addHandler('rotate', this.draw)
   },
 
   beforeDestroy () {
     window.removeEventListener('keyup', this.onKeyPress)
-    this.viewer.removeHandler('open', this.draw())
-    this.viewer.removeHandler('animation', this.draw())
-    this.viewer.removeHandler('resize', this.draw())
-    this.viewer.removeHandler('rotate', this.draw())
+    this.viewer.removeHandler('open', this.draw)
+    this.viewer.removeHandler('animation', this.draw)
+    this.viewer.removeHandler('resize', this.draw)
+    this.viewer.removeHandler('rotate', this.draw)
   }
 }
 </script>
