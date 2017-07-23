@@ -1,5 +1,4 @@
 import Form from '@/model/Form'
-import Overlay from '@/model/Overlay'
 
 /**
  * Represents a task to be updated with user input as annotations.
