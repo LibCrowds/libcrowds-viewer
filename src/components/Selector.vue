@@ -132,10 +132,10 @@ export default {
       const bRect = new OpenSeadragon.Rect(0, 0, bounds.width, bounds.height)
       const normRect = this.normalize(rect)
       const corners = [
-        rect.getTopLeft(),
-        rect.getTopRight(),
-        rect.getBottomRight(),
-        rect.getBottomLeft()
+        normRect.getTopLeft(),
+        normRect.getTopRight(),
+        normRect.getBottomRight(),
+        normRect.getBottomLeft()
       ]
       const areaEnd = bRect.getBottomRight()
       for (let i = 0; i < 4; i++) {
