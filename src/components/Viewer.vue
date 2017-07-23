@@ -84,6 +84,7 @@
     <selector
       v-if="currentTask && currentTask.mode === 'select'"
       :viewer="viewer"
+      :task="currentTask"
       :selectionRect="selectionRect"
       @selection="handleSelection">
     </selector>
@@ -263,29 +264,30 @@ export default {
 
     /**
      * Draw overlay and add tag when a selection is made.
-     * @param {rect} rect
-     *   The selection rectangle.
+     * @param {Task} task
+     *   The task.
+     * @param {Object} rect
+     *   The viewport rectangle.
      */
-    handleSelection (rect) {
-      console.log('selection made')
+    handleSelection (task, rect) {
       const vp = this.viewer.viewport
       const imgRect = vp.viewportToImageRectangle(rect)
       const imageUri = getImageUri({
-        imgSource: this.currentTask.imgInfoUri,
+        imgSource: task.imgInfoUri,
         region: imgRect
       })
-      this.currentTask.fetchImageInfo().then((info) => {
+      task.fetchImageInfo().then((info) => {
         let anno = new TagAnnotation({
           imgInfo: info,
-          value: this.currentTask.tag,
+          value: task.tag,
           fragmentURI: imageUri,
           creator: this.creator,
           generator: this.generator,
-          classification: this.currentTask.classification
+          classification: task.classification
         })
-        this.currentTask.annotations.push(anno)
-        this.drawSelectionOverlay(this.currentTask, anno)
-        this.$emit('create', this.currentTask, anno)
+        task.annotations.push(anno)
+        this.drawSelectionOverlay(task, anno)
+        this.$emit('create', task, anno)
       })
     },
 

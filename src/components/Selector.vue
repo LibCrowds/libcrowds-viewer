@@ -54,6 +54,7 @@ import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/circle'
 import 'vue-awesome/icons/times'
 import 'vue-awesome/icons/check'
+import Task from '@/model/Task'
 
 export default {
   data: function () {
@@ -70,6 +71,10 @@ export default {
   props: {
     viewer: {
       type: Object,
+      required: true
+    },
+    task: {
+      type: Task,
       required: true
     },
     selectionRect: {
@@ -192,7 +197,7 @@ export default {
      */
     confirm () {
       if (this.rect) {
-        this.$emit('selection', this.rect)
+        this.$emit('selection', this.task, this.rect)
         this.undraw()
       }
     },
