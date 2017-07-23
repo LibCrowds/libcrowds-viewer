@@ -23,6 +23,16 @@ export default function (viewer, id, rect, type = '') {
     el.style.backgroundColor = 'rgba(52, 152, 219, 0.2)'
     el.style.boxSizing = 'border-box'
     el.style.opacity = '.8'
+
+    el.addEventListener('mouseover', function () {
+      el.style.border = '2px solid #4DAF7C'
+      el.style.backgroundColor = 'rgba(77, 175, 124, 0.2)'
+    })
+
+    el.addEventListener('mouseout', function () {
+      el.style.border = '2px solid rgb(52, 152, 219)'
+      el.style.backgroundColor = 'rgba(52, 152, 219, 0.2)'
+    })
   }
   viewer.addOverlay({ element: el, location: rect })
 }
