@@ -93,6 +93,7 @@ export default {
             this.selectionRect.width,
             this.selectionRect.height
           )
+          this.selecting = true
           this.draw()
         } else {
           this.rect = null
@@ -128,14 +129,14 @@ export default {
      *   The viewport rectangle.
      */
     isRectInImage (rect) {
+      this.normalize()
       const bounds = this.viewer.world.getHomeBounds()
       const bRect = new OpenSeadragon.Rect(0, 0, bounds.width, bounds.height)
-      const normRect = this.normalize(rect)
       const corners = [
-        normRect.getTopLeft(),
-        normRect.getTopRight(),
-        normRect.getBottomRight(),
-        normRect.getBottomLeft()
+        this.rect.getTopLeft(),
+        this.rect.getTopRight(),
+        this.rect.getBottomRight(),
+        this.rect.getBottomLeft()
       ]
       const areaEnd = bRect.getBottomRight()
       for (let i = 0; i < 4; i++) {
@@ -149,26 +150,29 @@ export default {
 
     /**
      * Fixes negative width/height.
-     * @param {Rect} rect
-     *   The viewport rect.
      */
-    normalize (rect) {
-      var fixed = rect.clone()
-      if (fixed.width < 0) {
-        fixed.x += fixed.width
-        fixed.width *= -1
+    normalize () {
+      if (this.rect) {
+        var fixed = this.rect.clone()
+        if (fixed.width < 0) {
+          console.log('true')
+          console.log(fixed)
+          fixed.x += fixed.width
+          fixed.width *= -1
+        }
+        if (fixed.height < 0) {
+          fixed.y += fixed.height
+          fixed.height *= -1
+        }
+        this.rect = fixed
       }
-      if (fixed.height < 0) {
-        fixed.y += fixed.height
-        fixed.height *= -1
-      }
-      return fixed
     },
 
     /**
      * Draw the current rectangle.
      */
     draw () {
+      this.normalize()
       if (this.rect) {
         const vp = this.viewer.viewport
         const wRect = vp.viewportToViewerElementRectangle(this.rect)
@@ -189,19 +193,14 @@ export default {
     },
 
     /**
-     * Calculate and draw the rectangle.
+     * Calculate the rectangle.
      */
     calculate () {
-      // Calculte remaining pixel coordinates
       const x3 = Math.min(this.x1, this.x2)
       const x4 = Math.max(this.x1, this.x2)
       const y3 = Math.min(this.y1, this.y2)
       const y4 = Math.max(this.y1, this.y2)
-
-      // Create a window rect
       const wRect = new OpenSeadragon.Rect(x3, y3, x4 - x3, y4 - y3)
-
-      // Create a viewport rect
       this.rect = this.viewer.viewport.viewerElementToViewportRectangle(wRect)
     },
 
@@ -235,7 +234,8 @@ export default {
      *   The mouse tracker event.
      */
     onSelectorBoxDrag (evt) {
-      const delta = this.viewer.viewport.deltaPointsFromPixels(evt.delta, true)
+      const vp = this.viewer.viewport
+      const delta = vp.deltaPointsFromPixelsNoRotate(evt.delta)
       const oldRect = this.rect.clone()
       this.rect.x += delta.x
       this.rect.y += delta.y
@@ -281,7 +281,7 @@ export default {
     onBorderDrag (position, evt) {
       const vp = this.viewer.viewport
       const wPoint = new OpenSeadragon.Point(evt.position.x, evt.position.y)
-      const delta = vp.deltaPointsFromPixels(wPoint)
+      const delta = vp.deltaPointsFromPixels(wPoint, true)
       const oldRect = this.rect.clone()
       switch (position) {
         case 'top':
