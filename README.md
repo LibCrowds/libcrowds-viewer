@@ -113,7 +113,7 @@ Note that the `tag` property is required when in `select` mode.
   "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
   "id": 123,
   "tag": "title",
-  "classify": "http://purl.org/dc/terms/title",
+  "classification": "http://purl.org/dc/terms/title",
   "objective": "Tag all of the titles",
   "guidance": "Draw a box around each title, including any subtitles"
 }
