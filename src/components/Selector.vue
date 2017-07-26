@@ -27,8 +27,8 @@
           id="cancel-selection"
           ref="cancelSelection"
           @click="cancel">
-          <icon label="Cancel">
-            <icon name="circle"></icon>
+          <icon label="Cancel" scale="1.2">
+            <icon name="circle" scale="1.2"></icon>
             <icon name="times" class="icon-white" scale="0.8"></icon>
           </icon>
         </button>
@@ -37,8 +37,8 @@
           id="confirm-selection"
           ref="confirmSelection"
           @click="confirm">
-          <icon label="Confirm">
-            <icon name="circle"></icon>
+          <icon label="Confirm" scale="1.2">
+            <icon name="circle" scale="1.2"></icon>
             <icon name="check" class="icon-white" scale="0.8"></icon>
           </icon>
         </button>
@@ -597,8 +597,7 @@ export default {
       align-items: center;
       font-size: 0.85rem;
       padding: 2px;
-      height: 16px;
-      width: 16px;
+      margin-left: 5px;
 
       &#cancel-selection {
         color: $red;
