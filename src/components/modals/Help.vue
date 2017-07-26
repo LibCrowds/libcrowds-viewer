@@ -1,16 +1,62 @@
 <template>
   <div id="lv-help-modal">
     <modal :id="id" title="Help">
+      <p>
+        The objective of the current task, along with any additional guidance
+        can be seen in the sidebar to the right of the viewer. Once the task
+        has been completed click the Submit button to submit your answer.
+      </p>
+      <p v-if="disableComplete">
+        Note that you can only submit one answer for each task. You are free to
+        browse back and forth between tasks but once you click submit your
+        answer will be saved and further submissions disabled.
+      </p>
       <h4>Viewer controls</h4>
-      <p>The following controls are provided to the left of the viewer:</p>
+      <p>The following controls are provided to the top-left of the viewer:</p>
       <ul>
-        <li><icon name="plus-circle"></icon>Zoom in</li>
-        <li><icon name="minus-circle"></icon>Zoom out</li>
-        <li><icon name="refresh"></icon>Reset zoom</li>
-        <li><icon name="expand"></icon>Fullscreen</li>
-        <li><icon name="question-circle"></icon>Help</li>
+        <li>
+          <icon name="plus-circle"></icon>Zoom in
+        </li>
+        <li>
+          <icon name="minus-circle"></icon>Zoom out
+        </li>
+        <li>
+          <icon name="refresh"></icon>Reset zoom
+        </li>
+        <li>
+          <icon name="expand"></icon>Fullscreen
+        </li>
+        <li>
+          <icon name="question-circle"></icon>View Help
+        </li>
+        <li v-if="showInfo">
+          <icon name="info-circle"></icon>View Metadata
+        </li>
+        <li v-if="showLike">
+          <icon name="thumbs-up"></icon>Like Task/Image
+        </li>
+        <li v-if="showShare">
+          <icon name="share-alt"></icon>Copy Image URL
+        </li>
       </ul>
-      <div v-if="mode === 'select'">
+      <p>
+        The following controls are provided to the bottom-left of the viewer:
+      </p>
+      <ul>
+        <li><icon name="chevron-up"></icon>Pan up</li>
+        <li><icon name="chevron-down"></icon>Pan down</li>
+        <li><icon name="chevron-left"></icon>Pan left</li>
+        <li><icon name="chevron-right"></icon>Pan right</li>
+      </ul>
+      <p>
+        To the left and right of the viewer are buttons to browse available
+        tasks:
+      </p>
+      <ul>
+        <li><icon name="chevron-left"></icon>Previous task</li>
+        <li><icon name="chevron-right"></icon>Next task</li>
+      </ul>
+      <div v-if="task.mode === 'select'">
         <h4>Select mode</h4>
         <p>
           When using the viewer in select mode an area of the image can
@@ -46,7 +92,13 @@ import 'vue-awesome/icons/question-circle'
 import 'vue-awesome/icons/info-circle'
 import 'vue-awesome/icons/check-circle'
 import 'vue-awesome/icons/times-circle'
+import 'vue-awesome/icons/thumbs-up'
+import 'vue-awesome/icons/chevron-up'
+import 'vue-awesome/icons/chevron-down'
+import 'vue-awesome/icons/chevron-left'
+import 'vue-awesome/icons/chevron-right'
 import Modal from '@/components/Modal'
+import Task from '@/model/Task'
 
 export default {
   data: function () {
@@ -60,8 +112,24 @@ export default {
       type: String,
       requried: true
     },
-    mode: {
-      type: String,
+    task: {
+      type: Task,
+      requried: true
+    },
+    showInfo: {
+      type: Boolean,
+      requried: true
+    },
+    showLike: {
+      type: Boolean,
+      requried: true
+    },
+    showShare: {
+      type: Boolean,
+      requried: true
+    },
+    disableComplete: {
+      type: Boolean,
       requried: true
     }
   },
@@ -81,7 +149,7 @@ export default {
   }
 
   li {
-    margin: 0;
+    margin-bottom: 5px;
   }
 
   svg {

@@ -36,7 +36,11 @@
         <help-modal
           v-if="currentTask && showHelp"
           :id="helpModalId"
-          :mode="currentTask.mode">
+          :showInfo="showInfo"
+          :showLike="showLike"
+          :showShare="showShare"
+          :disableComplete="disableComplete"
+          :task="currentTask">
         </help-modal>
 
         <button
