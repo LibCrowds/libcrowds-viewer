@@ -1,6 +1,16 @@
 <template>
   <div id="lv-help-modal">
     <modal :id="id" title="Help">
+      <p>
+        The objective of the current task, along with any additional guidance
+        can be seen in the sidebar to the right of the viewer. Once the task
+        has been completed click the Submit button to submit your answer.
+      </p>
+      <p v-if="disableComplete">
+        Note that you can only submit one answer for each task. You are free to
+        browse back and forth between tasks but once you click submit your
+        answer will be saved and further submissions disabled.
+      </p>
       <h4>Viewer controls</h4>
       <p>The following controls are provided to the top-left of the viewer:</p>
       <ul>
