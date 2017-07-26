@@ -2,13 +2,33 @@
   <div id="lv-help-modal">
     <modal :id="id" title="Help">
       <h4>Viewer controls</h4>
-      <p>The following controls are provided to the left of the viewer:</p>
+      <p>The following controls are provided to the top-left of the viewer:</p>
       <ul>
         <li><icon name="plus-circle"></icon>Zoom in</li>
         <li><icon name="minus-circle"></icon>Zoom out</li>
         <li><icon name="refresh"></icon>Reset zoom</li>
         <li><icon name="expand"></icon>Fullscreen</li>
-        <li><icon name="question-circle"></icon>Help</li>
+        <li><icon name="question-circle"></icon>View Help</li>
+        <li><icon name="info-circle"></icon>View Metadata</li>
+        <li><icon name="thumbs-up"></icon>Like Task/Image</li>
+        <li><icon name="share-alt"></icon>Copy Image URL</li>
+      </ul>
+      <p>
+        The following controls are provided to the bottom-left of the viewer:
+      </p>
+      <ul>
+        <li><icon name="chevron-up"></icon>Pan up</li>
+        <li><icon name="chevron-down"></icon>Pan down</li>
+        <li><icon name="chevron-left"></icon>Pan left</li>
+        <li><icon name="chevron-right"></icon>Pan right</li>
+      </ul>
+      <p>
+        To the left and right of the viewer are buttons to browse available
+        tasks:
+      </p>
+      <ul>
+        <li><icon name="chevron-left"></icon>Previous task</li>
+        <li><icon name="chevron-right"></icon>Next task</li>
       </ul>
       <div v-if="mode === 'select'">
         <h4>Select mode</h4>
@@ -46,6 +66,11 @@ import 'vue-awesome/icons/question-circle'
 import 'vue-awesome/icons/info-circle'
 import 'vue-awesome/icons/check-circle'
 import 'vue-awesome/icons/times-circle'
+import 'vue-awesome/icons/thumbs-up'
+import 'vue-awesome/icons/chevron-up'
+import 'vue-awesome/icons/chevron-down'
+import 'vue-awesome/icons/chevron-left'
+import 'vue-awesome/icons/chevron-right'
 import Modal from '@/components/Modal'
 
 export default {
@@ -81,7 +106,7 @@ export default {
   }
 
   li {
-    margin: 0;
+    margin-bottom: 5px;
   }
 
   svg {
