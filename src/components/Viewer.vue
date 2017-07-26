@@ -366,7 +366,9 @@ export default {
      */
     previousTask () {
       const index = this.tasks.indexOf(this.currentTask)
-      this.currentTask = this.tasks[index - 1]
+      if (index > 0) {
+        this.currentTask = this.tasks[index - 1]
+      }
     },
 
     /**
@@ -374,7 +376,9 @@ export default {
      */
     nextTask () {
       const index = this.tasks.indexOf(this.currentTask)
-      this.currentTask = this.tasks[index + 1]
+      if (index + 1 < this.tasks.length) {
+        this.currentTask = this.tasks[index + 1]
+      }
     },
 
     /**
