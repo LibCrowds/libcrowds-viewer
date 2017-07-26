@@ -259,7 +259,7 @@ export default {
      */
     emitTaskLiked (task, status) {
       task.liked = status
-      this.$emit('taskliked', status)
+      this.$emit('taskliked', task)
     },
 
     /**
