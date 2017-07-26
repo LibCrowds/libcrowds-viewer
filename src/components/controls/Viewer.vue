@@ -146,7 +146,7 @@ export default {
           id: 'lv-share-btn',
           tooltip: tooltip,
           icon: 'share-alt',
-          click: (evt) => {
+          click: () => {
             let clipboard = new Clipboard('#lv-share-btn', {
               text: (trigger) => {
                 trigger.setAttribute('aria-label', 'URL Copied!')
