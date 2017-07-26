@@ -362,7 +362,7 @@ export default {
     },
 
     /**
-     * Go to the next task.
+     * Go to the previous task.
      */
     previousTask () {
       const index = this.tasks.indexOf(this.currentTask)
