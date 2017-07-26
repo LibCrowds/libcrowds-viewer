@@ -36,6 +36,9 @@
         <help-modal
           v-if="currentTask && showHelp"
           :id="helpModalId"
+          :showInfo="showInfo"
+          :showLike="showLike"
+          :showShare="showShare"
           :task="currentTask">
         </help-modal>
 

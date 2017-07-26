@@ -4,14 +4,30 @@
       <h4>Viewer controls</h4>
       <p>The following controls are provided to the top-left of the viewer:</p>
       <ul>
-        <li><icon name="plus-circle"></icon>Zoom in</li>
-        <li><icon name="minus-circle"></icon>Zoom out</li>
-        <li><icon name="refresh"></icon>Reset zoom</li>
-        <li><icon name="expand"></icon>Fullscreen</li>
-        <li><icon name="question-circle"></icon>View Help</li>
-        <li><icon name="info-circle"></icon>View Metadata</li>
-        <li><icon name="thumbs-up"></icon>Like Task/Image</li>
-        <li><icon name="share-alt"></icon>Copy Image URL</li>
+        <li>
+          <icon name="plus-circle"></icon>Zoom in
+        </li>
+        <li>
+          <icon name="minus-circle"></icon>Zoom out
+        </li>
+        <li>
+          <icon name="refresh"></icon>Reset zoom
+        </li>
+        <li>
+          <icon name="expand"></icon>Fullscreen
+        </li>
+        <li>
+          <icon name="question-circle"></icon>View Help
+        </li>
+        <li v-if="showInfo">
+          <icon name="info-circle"></icon>View Metadata
+        </li>
+        <li v-if="showLike">
+          <icon name="thumbs-up"></icon>Like Task/Image
+        </li>
+        <li v-if="showShare">
+          <icon name="share-alt"></icon>Copy Image URL
+        </li>
       </ul>
       <p>
         The following controls are provided to the bottom-left of the viewer:
@@ -88,6 +104,18 @@ export default {
     },
     task: {
       type: Task,
+      requried: true
+    },
+    showInfo: {
+      type: Boolean,
+      requried: true
+    },
+    showLike: {
+      type: Boolean,
+      requried: true
+    },
+    showShare: {
+      type: Boolean,
       requried: true
     }
   },
