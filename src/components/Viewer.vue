@@ -201,6 +201,10 @@ export default {
     showShare: {
       type: Boolean,
       default: true
+    },
+    nextOnSubmit: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -463,6 +467,10 @@ export default {
         }
       }
       task.complete = true
+
+      if (this.nextOnSubmit) {
+        this.nextTask()
+      }
       this.$emit('submit', task)
     },
 
