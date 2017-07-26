@@ -38,7 +38,7 @@ export default {
           id: 'pan-up',
           tooltip: 'Move up',
           icon: 'chevron-up',
-          click: () => {
+          callback: () => {
             this.viewer.viewport.panBy(new OpenSeadragon.Point(0, -this.panBy))
           }
         },
@@ -46,7 +46,7 @@ export default {
           id: 'pan-down',
           tooltip: 'Move down',
           icon: 'chevron-down',
-          click: () => {
+          callback: () => {
             this.viewer.viewport.panBy(new OpenSeadragon.Point(0, this.panBy))
           }
         },
@@ -54,7 +54,7 @@ export default {
           id: 'pan-left',
           tooltip: 'Move left',
           icon: 'chevron-left',
-          click: () => {
+          callback: () => {
             this.viewer.viewport.panBy(new OpenSeadragon.Point(-this.panBy, 0))
           }
         },
@@ -62,7 +62,7 @@ export default {
           id: 'pan-right',
           tooltip: 'Move right',
           icon: 'chevron-right',
-          click: () => {
+          callback: () => {
             this.viewer.viewport.panBy(new OpenSeadragon.Point(this.panBy, 0))
           }
         }
