@@ -491,6 +491,7 @@ export default {
     background-color: rgba($blue, 0.2);
     position: absolute;
     z-index: 1;
+    display: none;
 
     .border {
       background: $blue;
