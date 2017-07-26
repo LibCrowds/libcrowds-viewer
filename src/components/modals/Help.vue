@@ -32,6 +32,9 @@
         <li v-if="showInfo">
           <icon name="info-circle"></icon>View Metadata
         </li>
+        <li v-if="showBrowse">
+          <icon name="list"></icon>Browse Tasks
+        </li>
         <li v-if="showLike">
           <icon name="thumbs-up"></icon>Like Task/Image
         </li>
@@ -97,6 +100,7 @@ import 'vue-awesome/icons/chevron-up'
 import 'vue-awesome/icons/chevron-down'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
+import 'vue-awesome/icons/list'
 import Modal from '@/components/Modal'
 import Task from '@/model/Task'
 
@@ -117,6 +121,10 @@ export default {
       requried: true
     },
     showInfo: {
+      type: Boolean,
+      requried: true
+    },
+    showBrowse: {
       type: Boolean,
       requried: true
     },

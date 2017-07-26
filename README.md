@@ -52,6 +52,7 @@ You can now use the component like this:
 | disable-complete      | Boolean | false   | Disable completed tasks to prevent multiple submission                                              |
 | show-help             | Boolean | true    | Include the help modal                                                                              |
 | show-info             | Boolean | true    | Include the metadata modal                                                                          |
+| show-browse           | Boolean | true    | Include the browse tasks modal                                                                      |
 | show-note             | Boolean | true    | Include the note input                                                                              |
 | show-form-errors      | Boolean | true    | Show form errors on submit                                                                          |
 | show-like             | Boolean | false   | Show the like button                                                                                |
