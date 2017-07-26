@@ -133,6 +133,7 @@ export default {
         buttons.push({
           tooltip: !this.task.liked ? 'Like' : 'Unlike',
           icon: 'thumbs-up',
+          iconClass: this.task.liked ? 'active' : null,
           click: () => {
             this.$emit('likeclicked', this.task, !this.task.liked)
           }

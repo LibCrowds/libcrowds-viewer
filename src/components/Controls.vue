@@ -8,7 +8,7 @@
         :class="`hint--${hintPosition} hint--no-animate btn btn-control`"
         :aria-label="b.tooltip"
         @click="handleClick(b.click)">
-        <icon :name="b.icon" :scale="scale"></icon>
+        <icon :name="b.icon" :scale="scale" :class="b.iconClass"></icon>
       </button>
 
   </div>
@@ -75,6 +75,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~hint.css';
+@import '~style/settings';
 @import '~style/partials/buttons';
 
 .lv-controls {
@@ -96,6 +97,12 @@ export default {
 
   &.top {
     top: 0;
+  }
+
+  button {
+    .active {
+      color: $blue;
+    }
   }
 }
 </style>
