@@ -30,7 +30,7 @@
         <li><icon name="chevron-left"></icon>Previous task</li>
         <li><icon name="chevron-right"></icon>Next task</li>
       </ul>
-      <div v-if="mode === 'select'">
+      <div v-if="task.mode === 'select'">
         <h4>Select mode</h4>
         <p>
           When using the viewer in select mode an area of the image can
@@ -72,6 +72,7 @@ import 'vue-awesome/icons/chevron-down'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
 import Modal from '@/components/Modal'
+import Task from '@/model/Task'
 
 export default {
   data: function () {
@@ -85,8 +86,8 @@ export default {
       type: String,
       requried: true
     },
-    mode: {
-      type: String,
+    task: {
+      type: Task,
       requried: true
     }
   },

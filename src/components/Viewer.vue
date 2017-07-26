@@ -36,7 +36,7 @@
         <help-modal
           v-if="currentTask && showHelp"
           :id="helpModalId"
-          :mode="currentTask.mode">
+          :task="currentTask">
         </help-modal>
 
         <button
