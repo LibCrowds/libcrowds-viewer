@@ -75,7 +75,7 @@ export default {
         {
           tooltip: 'Zoom in',
           icon: 'plus-circle',
-          click: () => {
+          callback: () => {
             const currentZoom = this.viewer.viewport.getZoom(true)
             const zoomTo = currentZoom + (currentZoom * this.zoomBy)
             this.viewer.viewport.zoomTo(zoomTo)
@@ -84,7 +84,7 @@ export default {
         {
           tooltip: 'Zoom out',
           icon: 'minus-circle',
-          click: () => {
+          callback: () => {
             const currentZoom = this.viewer.viewport.getZoom(true)
             const zoomTo = currentZoom - (currentZoom * this.zoomBy)
             this.viewer.viewport.zoomTo(zoomTo)
@@ -93,7 +93,7 @@ export default {
         {
           tooltip: 'Reset zoom',
           icon: 'refresh',
-          click: () => {
+          callback: () => {
             const homeZoom = this.viewer.viewport.getHomeZoom()
             this.viewer.viewport.zoomTo(homeZoom)
           }
@@ -101,7 +101,7 @@ export default {
         {
           tooltip: 'Fullscreen',
           icon: 'expand',
-          click: () => {
+          callback: () => {
             this.$emit('fullscreenclicked')
           }
         }
@@ -112,7 +112,7 @@ export default {
           id: this.helpButton,
           tooltip: 'Help',
           icon: 'question-circle',
-          click: () => {
+          callback: () => {
             this.$emit('helpclicked')
           }
         })
@@ -123,7 +123,7 @@ export default {
           id: this.infoButton,
           tooltip: 'Details',
           icon: 'info-circle',
-          click: () => {
+          callback: () => {
             this.$emit('infoclicked')
           }
         })
@@ -134,7 +134,7 @@ export default {
           tooltip: !this.task.liked ? 'Like' : 'Unlike',
           icon: 'thumbs-up',
           iconClass: this.task.liked ? 'active' : null,
-          click: () => {
+          callback: () => {
             this.$emit('likeclicked', this.task, !this.task.liked)
           }
         })
@@ -146,7 +146,7 @@ export default {
           id: 'lv-share-btn',
           tooltip: tooltip,
           icon: 'share-alt',
-          click: () => {
+          callback: () => {
             let clipboard = new Clipboard('#lv-share-btn', {
               text: (trigger) => {
                 trigger.setAttribute('aria-label', 'URL Copied!')

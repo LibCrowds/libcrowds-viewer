@@ -7,7 +7,7 @@
         :key="b.id"
         :class="`hint--${hintPosition} hint--no-animate btn btn-control`"
         :aria-label="b.tooltip"
-        @click="handleClick(b.click, $event)">
+        @click="handleClick(b.callback, $event)">
         <icon :name="b.icon" :scale="scale" :class="b.iconClass"></icon>
       </button>
 
@@ -60,9 +60,9 @@ export default {
   },
 
   methods: {
-    handleClick (func, evt) {
-      if (typeof func !== 'undefined') {
-        func(evt)
+    handleClick (callback, evt) {
+      if (typeof callback !== 'undefined') {
+        callback(evt)
       }
     }
   },
