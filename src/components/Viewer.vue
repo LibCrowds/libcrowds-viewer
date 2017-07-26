@@ -201,6 +201,10 @@ export default {
     showShare: {
       type: Boolean,
       default: true
+    },
+    nextOnSubmit: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -358,11 +362,13 @@ export default {
     },
 
     /**
-     * Go to the next task.
+     * Go to the previous task.
      */
     previousTask () {
       const index = this.tasks.indexOf(this.currentTask)
-      this.currentTask = this.tasks[index - 1]
+      if (index > 0) {
+        this.currentTask = this.tasks[index - 1]
+      }
     },
 
     /**
@@ -370,7 +376,9 @@ export default {
      */
     nextTask () {
       const index = this.tasks.indexOf(this.currentTask)
-      this.currentTask = this.tasks[index + 1]
+      if (index + 1 < this.tasks.length) {
+        this.currentTask = this.tasks[index + 1]
+      }
     },
 
     /**
@@ -463,6 +471,10 @@ export default {
         }
       }
       task.complete = true
+
+      if (this.nextOnSubmit) {
+        this.nextTask()
+      }
       this.$emit('submit', task)
     },
 
