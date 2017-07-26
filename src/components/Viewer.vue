@@ -39,6 +39,7 @@
           :showInfo="showInfo"
           :showLike="showLike"
           :showShare="showShare"
+          :disableComplete="disableComplete"
           :task="currentTask">
         </help-modal>
 

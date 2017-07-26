@@ -127,6 +127,10 @@ export default {
     showShare: {
       type: Boolean,
       requried: true
+    },
+    disableComplete: {
+      type: Boolean,
+      requried: true
     }
   },
 
