@@ -58,17 +58,23 @@ export default {
 
   ul {
     list-style: none;
-    -moz-column-count: 4;
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count: 2;
     -moz-column-gap: 5px;
-    -webkit-column-count: 4;
     -webkit-column-gap: 5px;
-    column-count: 4;
     column-gap: 5px;
+
+    @media (min-width: 992px) {
+      -moz-column-count: 4;
+      -webkit-column-count: 4;
+      column-count: 4;
+    }
   }
 
   li {
     width: 128px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 
     img {
       max-width: 100%;
