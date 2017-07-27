@@ -4,6 +4,7 @@ describe('Annotation', () => {
   let selectTask = null
   let opts = null
   let itemOne = null
+  let itemTwo = null
 
   beforeEach(() => {
     itemOne = {
