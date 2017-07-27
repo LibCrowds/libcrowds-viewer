@@ -73,7 +73,7 @@ describe('Annotation', () => {
 
   it('returns annotation from search', () => {
     task.annotations = [annoOne, annoTwo]
-    const found = task.searchAnnotation({
+    const found = task.searchAnnotations({
       id: annoOne.id
     })
     expect(found).toEqual([annoOne])
