@@ -435,7 +435,7 @@ export default {
           creator: this.creator,
           generator: this.generator
         })
-        task.storeAnnotation(annos[0])
+        task.storeAnnotation(anno)
         this.$emit('create', task, anno)
       }
     },
