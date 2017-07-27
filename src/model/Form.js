@@ -15,7 +15,6 @@ class Form {
       validateAfterChanged: true
     }
     this.errors = []
-    this.annotations = {}
 
     if (model === undefined) {
       throw new Error('model is required')
