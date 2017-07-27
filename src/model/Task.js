@@ -91,10 +91,10 @@ class Task {
    */
   storeAnnotation (annotation) {
     let anno = this.getAnnotation(annotation.id)
-    if (anno !== null) {
+    if (anno !== undefined) {
       anno = annotation
     } else {
-      this.annotations.push(anno)
+      this.annotations.push(annotation)
     }
   }
 
@@ -120,11 +120,7 @@ class Task {
    */
   searchAnnotations (terms) {
     let annotations = []
-    if (this.annotations.length) {
-      console.log('is function', typeof this.annotations[0].search === 'function')
-    }
     for (let anno of this.annotations) {
-      console.log('is function', typeof anno.search === 'function')
       if (anno.search(terms)) {
         annotations.push(anno)
       }
