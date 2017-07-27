@@ -24,6 +24,17 @@ describe('Annotation', () => {
     selectTask = new Task(opts)
   })
 
+  it('returns an annotation by id', () => {
+    selectTask.annotations = [itemOne]
+    const anno = selectTask.getAnnotation(itemOne.id)
+    expect(anno).toBe(itemOne)
+  })
+
+  it('returns null when no annotation with a given id', () => {
+    const anno = selectTask.getAnnotation(itemOne.id)
+    expect(anno).toBe(null)
+  })
+
   it('stores a new annotation', () => {
     selectTask.storeAnnotation(itemOne)
     expect(selectTask.annotations).toBe([itemOne])
@@ -40,5 +51,18 @@ describe('Annotation', () => {
     itemOne.key = '123'
     selectTask.storeAnnotation(itemOne)
     expect(selectTask.annotations).toBe([itemOne])
+  })
+
+  it('deletes an annotation', () => {
+    selectTask.annotations = [itemOne]
+    selectTask.deleteAnnotation(itemOne.id)
+    expect(selectTask.annotations).toBe([])
+  })
+
+  it('throws an error when no annotation to delete', () => {
+    const del = function {
+      selectTask.deleteAnnotation(itemOne.id)
+    }
+    expect(del).toThrowError()
   })
 })
