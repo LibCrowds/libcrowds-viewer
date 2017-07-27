@@ -1,5 +1,5 @@
-import Annotation from '@/utils/Annotation'
-import Task from '@/utils/Task'
+import Annotation from '@/model/Annotation'
+import Task from '@/model/Task'
 
 import imageInfo from './data/imageInfo'
 import selectTaskOpts from './data/selectTaskOpts'
