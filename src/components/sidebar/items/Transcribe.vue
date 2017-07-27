@@ -3,8 +3,8 @@
 
     <vue-form-generator
       id="lv-form"
-      :schema="task.form.schema"
-      :model="task.form.model"
+      :schema="form.schema"
+      :model="form.model"
       :options="formOptions"
       @validated="onValidated">
     </vue-form-generator>

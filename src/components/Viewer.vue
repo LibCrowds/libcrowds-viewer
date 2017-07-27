@@ -451,6 +451,7 @@ export default {
      */
     updateForm (task, form, errors) {
       for (let prop in form.model) {
+
         // Get the annotation(s) for this form field
         const annos = task.searchAnnotations({
           motivation: 'describing',
@@ -476,9 +477,11 @@ export default {
         } else {
           for (let anno of annos) {
             // Filter out the old description
-            anno.bodies = annos.bodies.filter((body) => {
-              return body.purpose !== 'describing'
+            anno.body = anno.body.filter((item) => {
+              return item.purpose !== 'describing'
             })
+
+            console.log('2', form.model[prop])
 
             // Add the new description and save
             anno.addDescription(form.model[prop])
