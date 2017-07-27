@@ -74,11 +74,90 @@ describe('Annotation', () => {
     expect(anno.key[2]).toBe(itemThree)
   })
 
-  it('update multi-items in existing array', () => {
+  it('updates multi-items in existing array', () => {
     anno.key = [itemOne, itemTwo]
     anno._setMultiItem(anno, 'key', updatedItemOne)
     expect(anno.key.length).toBe(2)
     expect(anno.key[0]).toBe(updatedItemOne)
     expect(anno.key[1]).toBe(itemTwo)
+  })
+
+  it('returns true when searching for matching value', () => {
+    anno.id = '123'
+    const result = anno.search({
+      id: '123'
+    })
+    expect(result).toBe(true)
+  })
+
+  it('returns false when searching for non-matching value', () => {
+    anno.id = '123'
+    const result = anno.search({
+      id: '456'
+    })
+    expect(result).toBe(false)
+  })
+
+  it('returns false when searching for non-existant value', () => {
+    const result = anno.search({
+      id: '456'
+    })
+    expect(result).toBe(false)
+  })
+
+
+  it('returns true when searching for matching array value', () => {
+    anno.body = [itemOne, itemTwo]
+    const result = anno.search({
+      body: itemOne
+    })
+    expect(result).toBe(true)
+  })
+
+  it('returns false when searching for non-matching array value', () => {
+    anno.body = [itemOne, itemTwo]
+    const result = anno.search({
+      body: itemThree
+    })
+    expect(result).toBe(false)
+  })
+
+  it('returns false when searching for non-existant array value', () => {
+    const result = anno.search({
+      body: itemOne
+    })
+    expect(result).toBe(false)
+  })
+
+  it('adds a comment', () => {
+    const value = 'hello'
+    anno.addComment(value)
+    expect(anno.body).toEqual({
+      type: 'TextualBody',
+      value: value,
+      purpose: 'commenting',
+      format: 'text/plain'
+    })
+  })
+
+  it('adds a classification', () => {
+    const value = 'hello'
+    anno.addClassification(value)
+    expect(anno.body).toEqual({
+      type: 'SpecificResource',
+      purpose: 'classifying',
+      value: value
+    })
+  })
+
+  it('adds a description', () => {
+    const value = 'hello'
+    anno.addDescription(value)
+    expect(anno.body).toEqual({
+      type: 'TextualBody',
+      purpose: 'describing',
+      value: value,
+      format: 'text/plain'
+    })
   })
 })

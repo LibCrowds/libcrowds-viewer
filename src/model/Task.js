@@ -71,27 +71,6 @@ class Task {
     }
   }
 
-  // /**
-  //  * Generate empty annotations for each
-  //  */
-  // _initTranscribeTask () {
-  //   for (let prop in this.form.model) {
-  //     this.currentTask.fetchImageInfo().then((info) => {
-  //       let anno = new DescriptionAnnotation({
-  //         imgInfo: info,
-  //         value: form.model[prop],
-  //         tag: prop,
-  //         creator: this.creator,
-  //         generator: this.generator,
-  //         classification: form.classification[prop]
-  //       })
-  //       form.annotations[prop] = anno
-  //       task.annotations.push(anno)
-  //       this.$emit('create', task, anno)
-  //     })
-  //   }
-  // }
-
   /**
    * Return an Annotation.
    * @param {*} id
@@ -103,6 +82,20 @@ class Task {
     })
     const idx = this.annotations.indexOf(filtered[0])
     return this.annotations[idx]
+  }
+
+  /**
+   * Add or update an Annotation.
+   * @param {Annotation} annotation
+   *   The Annotation.
+   */
+  storeAnnotation (annotation) {
+    let anno = this.getAnnotation(annotation.id)
+    if (anno !== null) {
+      anno = annotation
+    } else {
+      this.annotations.push(anno)
+    }
   }
 
   /**
@@ -118,6 +111,25 @@ class Task {
       throw Error('No Annotation exists with that ID')
     }
     this.annotations = filteredAnnos
+  }
+
+  /**
+   * Return Annotations.
+   * @param {Object} terms
+   *   Key-value pairs to check.
+   */
+  searchAnnotations (terms) {
+    let annotations = []
+    if (this.annotations.length) {
+      console.log('is function', typeof this.annotations[0].search === 'function')
+    }
+    for (let anno of this.annotations) {
+      console.log('is function', typeof anno.search === 'function')
+      if (anno.search(terms)) {
+        annotations.push(anno)
+      }
+    }
+    return annotations
   }
 }
 

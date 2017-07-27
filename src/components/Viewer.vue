@@ -125,7 +125,6 @@ import DescriptionAnnotation from '@/model/DescriptionAnnotation'
 import CommentAnnotation from '@/model/CommentAnnotation'
 import getImageUri from '@/utils/getImageUri'
 import extractRectFromImageUri from '@/utils/extractRectFromImageUri'
-import filterAnnotations from '@/utils/filterAnnotations'
 import toggleFullScreen from '@/utils/toggleFullScreen'
 import drawOverlay from '@/utils/drawOverlay'
 import deleteOverlay from '@/utils/deleteOverlay'
@@ -414,10 +413,10 @@ export default {
      *   The text.
      */
     updateNote (task, text) {
-      let annos = filterAnnotations({
-        annotations: task.annotations,
-        motivation: 'commenting'
+      const annos = task.searchAnnotations({
+        motivation: 'tagging'
       })
+
       if (annos.length && text.length === 0) {
         task.deleteAnnotation(annos[0].id)
         this.$emit('delete', task, annos[0])
@@ -427,6 +426,7 @@ export default {
           creator: this.creator,
           generator: this.generator
         })
+        task.storeAnnotation(annos[0])
         this.$emit('update', task, annos[0])
       } else {
         let anno = new CommentAnnotation({
@@ -435,7 +435,7 @@ export default {
           creator: this.creator,
           generator: this.generator
         })
-        task.annotations.push(anno)
+        task.storeAnnotation(annos[0])
         this.$emit('create', task, anno)
       }
     },
@@ -451,17 +451,19 @@ export default {
      */
     updateForm (task, form, errors) {
       for (let prop in form.model) {
-        if (Object.keys(form.annotations).indexOf(prop) > -1) {
-          const anno = form.annotations[prop]
-          const bodies = anno.searchBodies({ purpose: 'describing' })
-          bodies[0].value = form.model[prop]
-          anno.modify({
-            creator: this.creator,
-            generator: this.generator
-          })
-          this.$emit('update', task, anno)
-        } else {
-          let anno = new DescriptionAnnotation({
+        // Get the annotation(s) for this form field
+        const annos = task.searchAnnotations({
+          motivation: 'describing',
+          body: {
+            type: 'TextualBody',
+            purpose: 'tagging',
+            value: prop
+          }
+        })
+
+        // Create or update
+        if (!annos.length) {
+          const anno = new DescriptionAnnotation({
             imgInfo: task.imgInfo,
             value: form.model[prop],
             tag: prop,
@@ -469,13 +471,27 @@ export default {
             generator: this.generator,
             classification: form.classification[prop]
           })
-          form.annotations[prop] = anno
-          task.annotations.push(anno)
+          task.storeAnnotation(anno)
           this.$emit('create', task, anno)
+        } else {
+          for (let anno of annos) {
+            // Filter out the old description
+            anno.bodies = annos.bodies.filter((body) => {
+              return body.purpose !== 'describing'
+            })
+
+            // Add the new description and save
+            anno.addDescription(form.model[prop])
+            anno.modify({
+              creator: this.creator,
+              generator: this.generator
+            })
+            task.storeAnnotation(anno)
+            this.$emit('update', task, anno)
+          }
         }
       }
       form.errors = errors
-      task.form = form
     },
 
     /**
@@ -543,8 +559,7 @@ export default {
     configureMode (task) {
       if (task.mode === 'select' && !(task.complete && this.disableComplete)) {
         // Draw all tags as selection overlays
-        let annos = filterAnnotations({
-          annotations: task.annotations,
+        const annos = task.searchAnnotations({
           motivation: 'tagging'
         })
         for (let anno of annos) {

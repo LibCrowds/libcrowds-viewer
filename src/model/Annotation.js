@@ -169,34 +169,52 @@ class Annotation {
   }
 
   /**
-   * Return matching bodies filtered at root level by filters.
-   * @param {*} filters
-   *   Array of key-value pairs on which to search.
+   * Check if a section of the annotation contains an object.
+   * @param {Object} find
+   *   The object to find.
+   * @param {Object} root
+   *   The object to search.
    */
-  searchBodies (filters) {
-    if (Array.isArray(this.body)) {
-      const filtered = this.body.filter(function (item) {
-        for (let prop in filters) {
-          if (item[prop] !== filters[prop]) {
-            return false
-          }
-        }
-        return true
-      })
-      const bodies = []
-      for (let item of filtered) {
-        const idx = this.body.indexOf(item)
-        bodies.push(this.body[idx])
-      }
-      return bodies
-    } else if (this.body !== undefined) {
-      for (let prop in filters) {
-        if (this.body[prop] !== filters[prop]) {
-          return []
+  _hasMatch (find, root) {
+    if (root === undefined) {
+      return false
+    } else if (!Array.isArray(root)) {
+      return root === find
+    } else {
+      for (let item of root) {
+        if (JSON.stringify(item) === JSON.stringify(find)) {
+          return true
         }
       }
-      return this.body
+      return false
     }
+  }
+
+  /**
+   * Check if the annotation contains the given key-value pairs.
+   *
+   * If the key happens to relate to an array within the Annotation a search
+   * will be made within that array.
+   *
+   * Example:
+   * contains({
+   *  id: 123,
+   *  body: {
+   *    purpose: 'tagging',
+   *    value: 'something'
+   *  }
+   * })
+   *
+   * @param {Object} terms
+   *   Key-value pairs to check.
+   */
+  search (terms) {
+    for (let key in terms) {
+      if (!this._hasMatch(terms[key], this[key])) {
+        return false
+      }
+    }
+    return true
   }
 }
 

@@ -33,7 +33,6 @@ import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/pencil'
 import highlightOverlay from '@/utils/highlightOverlay'
-import filterAnnotations from '@/utils/filterAnnotations'
 
 export default {
   props: {
@@ -49,8 +48,7 @@ export default {
 
   computed: {
     tags: function () {
-      return filterAnnotations({
-        annotations: this.task.annotations,
+      return this.task.searchAnnotations({
         motivation: 'tagging'
       })
     }

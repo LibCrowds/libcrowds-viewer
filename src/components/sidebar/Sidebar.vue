@@ -70,7 +70,6 @@
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/tasks'
 import Task from '@/model/Task'
-import filterAnnotations from '@/utils/filterAnnotations'
 
 export default {
   data: function () {
@@ -104,11 +103,10 @@ export default {
 
   computed: {
     note: function () {
-      const annotations = filterAnnotations({
-        annotations: this.task.annotations,
-        motivation: 'commenting'
+      const annos = this.task.searchAnnotations({
+        motivation: 'tagging'
       })
-      return annotations.length ? annotations[0].body.value : ''
+      return annos.length ? annos[0].body.value : ''
     }
   },
 
