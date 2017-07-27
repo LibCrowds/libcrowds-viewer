@@ -37,20 +37,20 @@ describe('Annotation', () => {
 
   it('stores a new annotation', () => {
     selectTask.storeAnnotation(itemOne)
-    expect(selectTask.annotations).toBe([itemOne])
+    expect(selectTask.annotations).toEqual([itemOne])
   })
 
   it('stores multiple new annotations', () => {
     selectTask.storeAnnotation(itemOne)
     selectTask.storeAnnotation(itemTwo)
-    expect(selectTask.annotations).toBe([itemOne, itemTwo])
+    expect(selectTask.annotations).toEqual([itemOne, itemTwo])
   })
 
   it('updates an existing annotation', () => {
     selectTask.storeAnnotation(itemOne)
     itemOne.key = '123'
     selectTask.storeAnnotation(itemOne)
-    expect(selectTask.annotations).toBe([itemOne])
+    expect(selectTask.annotations).toEqual([itemOne])
   })
 
   it('deletes an annotation', () => {
