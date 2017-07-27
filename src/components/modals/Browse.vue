@@ -6,7 +6,7 @@
           <li
             v-for="task in tasks"
             :key="task.id"
-            @click="onThumbnailClicked(task)">
+            @click="onTaskClicked(task)">
             <img :src="task.thumbnailUri">
           </li>
         </ul>
@@ -36,10 +36,11 @@ export default {
 
   methods: {
     /**
-     * Emit the click event with the task.
+     * Hide the modal and emit the taskclick event with the task.
      */
-    onThumbnailClicked (task) {
-      this.$emit('click', task)
+    onTaskClicked (task) {
+      this.$root.$emit('hide::modal', this.id)
+      this.$emit('taskclick', task)
     }
   }
 }

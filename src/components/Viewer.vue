@@ -48,7 +48,8 @@
         <browse-modal
           v-if="showBrowse"
           :tasks="tasks"
-          :id="browseModalId">
+          :id="browseModalId"
+          @taskclick="setCurrentTask">
         </browse-modal>
 
         <button
