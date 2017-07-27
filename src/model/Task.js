@@ -9,6 +9,7 @@ class Task {
     mode,
     id,
     imgInfoUri,
+    imgInfo,
     manifestUri = '',
     objective = '',
     guidance = '',
@@ -33,6 +34,8 @@ class Task {
     this.liked = liked
     this.annotations = annotations
     this.complete = complete
+
+    this.imgInfo = imgInfo
 
     this.thumbnailUri = getImageUri({
       imgSource: this.imgInfoUri,
@@ -68,18 +71,26 @@ class Task {
     }
   }
 
-  /**
-   * Fetch the image info.
-   */
-  fetchImageInfo () {
-    return fetch(this.imgInfoUri, {
-      method: 'get'
-    }).then((response) => {
-      return response.json()
-    }).catch(function (err) {
-      throw Error(`Could not retrieve image info: ${err}`)
-    })
-  }
+  // /**
+  //  * Generate empty annotations for each
+  //  */
+  // _initTranscribeTask () {
+  //   for (let prop in this.form.model) {
+  //     this.currentTask.fetchImageInfo().then((info) => {
+  //       let anno = new DescriptionAnnotation({
+  //         imgInfo: info,
+  //         value: form.model[prop],
+  //         tag: prop,
+  //         creator: this.creator,
+  //         generator: this.generator,
+  //         classification: form.classification[prop]
+  //       })
+  //       form.annotations[prop] = anno
+  //       task.annotations.push(anno)
+  //       this.$emit('create', task, anno)
+  //     })
+  //   }
+  // }
 
   /**
    * Return an Annotation.

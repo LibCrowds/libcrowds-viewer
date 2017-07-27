@@ -307,19 +307,17 @@ export default {
         imgSource: task.imgInfoUri,
         region: imgRect
       })
-      task.fetchImageInfo().then((info) => {
-        let anno = new TagAnnotation({
-          imgInfo: info,
-          value: task.tag,
-          fragmentURI: imageUri,
-          creator: this.creator,
-          generator: this.generator,
-          classification: task.classification
-        })
-        task.annotations.push(anno)
-        this.drawSelectionOverlay(task, anno)
-        this.$emit('create', task, anno)
+      let anno = new TagAnnotation({
+        imgInfo: task.imgInfo,
+        value: task.tag,
+        fragmentURI: imageUri,
+        creator: this.creator,
+        generator: this.generator,
+        classification: task.classification
       })
+      task.annotations.push(anno)
+      this.drawSelectionOverlay(task, anno)
+      this.$emit('create', task, anno)
     },
 
     /**
@@ -431,16 +429,14 @@ export default {
         })
         this.$emit('update', task, annos[0])
       } else {
-        task.fetchImageInfo().then((info) => {
-          let anno = new CommentAnnotation({
-            imgInfo: info,
-            value: text,
-            creator: this.creator,
-            generator: this.generator
-          })
-          task.annotations.push(anno)
-          this.$emit('create', task, anno)
+        let anno = new CommentAnnotation({
+          imgInfo: task.imgInfo,
+          value: text,
+          creator: this.creator,
+          generator: this.generator
         })
+        task.annotations.push(anno)
+        this.$emit('create', task, anno)
       }
     },
 
@@ -465,19 +461,17 @@ export default {
           })
           this.$emit('update', task, anno)
         } else {
-          this.currentTask.fetchImageInfo().then((info) => {
-            let anno = new DescriptionAnnotation({
-              imgInfo: info,
-              value: form.model[prop],
-              tag: prop,
-              creator: this.creator,
-              generator: this.generator,
-              classification: form.classification[prop]
-            })
-            form.annotations[prop] = anno
-            task.annotations.push(anno)
-            this.$emit('create', task, anno)
+          let anno = new DescriptionAnnotation({
+            imgInfo: task.imgInfo,
+            value: form.model[prop],
+            tag: prop,
+            creator: this.creator,
+            generator: this.generator,
+            classification: form.classification[prop]
           })
+          form.annotations[prop] = anno
+          task.annotations.push(anno)
+          this.$emit('create', task, anno)
         }
       }
       form.errors = errors
@@ -563,12 +557,22 @@ export default {
      * Generate tasks from task options.
      */
     loadTasks () {
-      const previousTask = this.currentTask
-      this.tasks = this.taskOpts.map(function (opts) {
-        return new Task(opts)
-      })
-      if (!previousTask && this.tasks.length > 0) {
-        this.setCurrentTask(this.tasks[0])
+      const taskOptsCopy = JSON.parse(JSON.stringify(this.taskOpts))
+      let firstTask = true
+      this.tasks = []
+      for (let opts of taskOptsCopy) {
+        fetch(opts.imgInfoUri, {
+          method: 'get'
+        }).then((response) => {
+          opts.imgInfo = response.json()
+          this.tasks.push(new Task(opts))
+          if (firstTask) {
+            this.setCurrentTask(this.tasks[0])
+            firstTask = false
+          }
+        }).catch(function (err) {
+          throw Error(`Could not retrieve image info: ${err}`)
+        })
       }
     }
   },

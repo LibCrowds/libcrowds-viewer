@@ -181,10 +181,8 @@ export default {
   },
 
   created () {
-    this.task.fetchImageInfo().then((info) => {
-      const id = info['@id']
-      this.imgLink = `${id}/full/full/0/default.jpg`
-    })
+    const id = this.task.imgInfo['@id']
+    this.imgLink = `${id}/full/full/0/default.jpg`
   }
 }
 </script>
