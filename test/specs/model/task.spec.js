@@ -30,9 +30,9 @@ describe('Annotation', () => {
     expect(anno).toBe(itemOne)
   })
 
-  it('returns null when no annotation with a given id', () => {
+  it('returns undefined when no annotation with a given id', () => {
     const anno = selectTask.getAnnotation(itemOne.id)
-    expect(anno).toBe(null)
+    expect(anno).toBe(undefined)
   })
 
   it('stores a new annotation', () => {
