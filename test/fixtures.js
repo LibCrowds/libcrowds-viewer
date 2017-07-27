@@ -1,3 +1,5 @@
+import uuid from 'uuid/v4'
+
 import Annotation from '@/model/Annotation'
 import Task from '@/model/Task'
 
@@ -28,5 +30,12 @@ export default {
     } else if (mode === 'transcribe') {
       return new Task(transcribeTaskOpts)
     }
+  },
+
+  /**
+   * Returns a UUID.
+   */
+  randomString () {
+    return uuid()
   }
 }
