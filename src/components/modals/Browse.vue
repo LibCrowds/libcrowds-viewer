@@ -8,6 +8,7 @@
             :key="task.id"
             @click="onTaskClicked(task)">
             <img :src="task.thumbnailUri">
+            <p>{{ task.objective }}</p>
           </li>
         </ul>
       </div>
@@ -74,10 +75,19 @@ export default {
 
   li {
     width: 128px;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
+    border: 1px solid lighten($gray-dark, 20%);
+    padding: 5px;
 
     img {
       max-width: 100%;
+    }
+
+    p {
+      text-align: center;
+      font-family: sans-serif;
+      font-size: $font-size-small;
+      margin: 5px 5px 3px 5px;
     }
   }
 
