@@ -49,7 +49,8 @@ export default {
           this.form.model[field.model] = null
         }
       })
-      this.$emit('update', this.task, this.form, errors)
+      this.form.errors = errors
+      this.$emit('update', this.task, this.form)
     }
   }
 }
