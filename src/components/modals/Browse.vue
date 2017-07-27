@@ -1,17 +1,17 @@
 <template>
   <div id="lv-browse-modal">
     <modal :id="id" title="Browse Tasks">
-      <div class="container">
-        <ul>
-          <li
-            v-for="task in tasks"
-            :key="task.id"
-            @click="onTaskClicked(task)">
-            <img :src="task.thumbnailUri">
-            <p>{{ task.objective }}</p>
-          </li>
-        </ul>
-      </div>
+      <ul>
+        <li
+          v-for="(task, index) in tasks"
+          :key="task.id"
+          @click="onTaskClicked(task)">
+          <figure>
+            <img :src="task.thumbnailUri" :alt='`Task ${index} thumbnail`'>
+            <figcaption>{{ task.objective }}</figcaption>
+          </figure>
+        </li>
+      </ul>
     </modal>
   </div>
 </template>
@@ -52,11 +52,6 @@ export default {
 @import '~style/partials/buttons';
 
 #lv-browse-modal {
-  .container {
-    height: 300px;
-    position: relative;
-  }
-
   ul {
     list-style: none;
     -moz-column-count: 2;
@@ -74,25 +69,26 @@ export default {
   }
 
   li {
+    display: inline-block;
     width: 128px;
     margin-bottom: 30px;
     border: 1px solid lighten($gray-dark, 20%);
-    padding: 5px;
+    position: relative;
+
+    figure {
+      margin: 5px;
+    }
 
     img {
       max-width: 100%;
     }
 
-    p {
+    figcaption {
       text-align: center;
       font-family: sans-serif;
       font-size: $font-size-small;
       margin: 5px 5px 3px 5px;
     }
-  }
-
-  #lv-browse-viewer {
-    height: 100%;
   }
 }
 </style>
