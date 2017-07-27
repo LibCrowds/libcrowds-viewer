@@ -11,7 +11,10 @@ export default {
    * Return a new annotation.
    */
   buildAnnotation() {
-    return new Annotation('testing', imageInfo)
+    return new Annotation({
+      motivation: 'testing',
+      imgInfo: imageInfo
+    })
   },
 
   /**
