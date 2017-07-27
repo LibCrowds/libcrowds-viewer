@@ -84,36 +84,6 @@ class Task {
   updateForm (form) {
     this.form = form
   }
-
-  /**
-   * Create or update a form annotation.
-   * @param {String} key
-   *   The form model key.
-   * @param {String} value
-   *   The value.
-   */
-  storeFormFieldAnnotation (key, value) {
-    let anno = this._getFormFieldAnnotation(key)
-    if (anno === undefined) {
-      const anno = new DescriptionAnnotation({
-        imgInfo: this.imgInfo,
-        value: value,
-        tag: key,
-        creator: this.creator,
-        generator: this.generator,
-        classification: this.form.classification[key]
-      })
-      this.storeAnnotation(anno)
-    } else {
-      // Replace the description
-      anno.body = anno.body.filter((item) => {
-        return item.purpose !== 'describing'
-      })
-      anno.addDescription(value)
-      this.storeAnnotation(anno)
-    }
-    return anno
-  }
 }
 
 export default Task
