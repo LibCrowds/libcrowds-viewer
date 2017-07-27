@@ -35,7 +35,7 @@ export default {
   /**
    * Returns a UUID.
    */
-  randomString () {
+  uuid () {
     return uuid()
   }
 }
