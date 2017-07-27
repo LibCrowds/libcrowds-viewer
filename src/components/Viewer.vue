@@ -314,7 +314,7 @@ export default {
         generator: this.generator,
         classification: task.classification
       })
-      task.annotations.push(anno)
+      task.storeAnnotation(anno)
       this.drawSelectionOverlay(task, anno)
       this.$emit('create', task, anno)
     },
