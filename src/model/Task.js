@@ -1,5 +1,6 @@
 import Form from '@/model/Form'
 import getImageUri from '@/utils/getImageUri'
+import DescriptionAnnotation from '@/model/DescriptionAnnotation'
 
 /**
  * Represents a task to be updated with user input as annotations.
@@ -50,6 +51,10 @@ class Task {
       throw new Error(`${baseMsg} mode is required`)
     }
 
+    if (this.imgInfo === undefined) {
+      throw new Error(`${baseMsg} imgInfo is required`)
+    }
+
     if (validModes.indexOf(this.mode) < 0) {
       throw new Error(`${baseMsg} mode must be one of ${validModes}`)
     }
@@ -72,60 +77,42 @@ class Task {
   }
 
   /**
-   * Return an Annotation.
-   * @param {*} id
-   *   The Annotation ID.
+   * Update the form.
+   * @param {Object} form
+   *   The form.
    */
-  getAnnotation (id) {
-    const filtered = this.annotations.filter(function (anno) {
-      return anno.id === id
-    })
-    const idx = this.annotations.indexOf(filtered[0])
-    return this.annotations[idx]
+  updateForm (form) {
+    this.form = form
   }
 
   /**
-   * Add or update an Annotation.
-   * @param {Annotation} annotation
-   *   The Annotation.
+   * Create or update a form annotation.
+   * @param {String} key
+   *   The form model key.
+   * @param {String} value
+   *   The value.
    */
-  storeAnnotation (annotation) {
-    let anno = this.getAnnotation(annotation.id)
-    if (anno !== undefined) {
-      anno = annotation
+  storeFormFieldAnnotation (key, value) {
+    let anno = this._getFormFieldAnnotation(key)
+    if (anno === undefined) {
+      const anno = new DescriptionAnnotation({
+        imgInfo: this.imgInfo,
+        value: value,
+        tag: key,
+        creator: this.creator,
+        generator: this.generator,
+        classification: this.form.classification[key]
+      })
+      this.storeAnnotation(anno)
     } else {
-      this.annotations.push(annotation)
+      // Replace the description
+      anno.body = anno.body.filter((item) => {
+        return item.purpose !== 'describing'
+      })
+      anno.addDescription(value)
+      this.storeAnnotation(anno)
     }
-  }
-
-  /**
-   * Delete an Annotation by ID.
-   * @param {String} id
-   *   The ID of the Annotation to delete.
-   */
-  deleteAnnotation (id) {
-    const filteredAnnos = this.annotations.filter(function (anno) {
-      return anno.id !== id
-    })
-    if (filteredAnnos.length === this.annotations.length) {
-      throw Error('No Annotation exists with that ID')
-    }
-    this.annotations = filteredAnnos
-  }
-
-  /**
-   * Return Annotations.
-   * @param {Object} terms
-   *   Key-value pairs to check.
-   */
-  searchAnnotations (terms) {
-    let annotations = []
-    for (let anno of this.annotations) {
-      if (anno.search(terms)) {
-        annotations.push(anno)
-      }
-    }
-    return annotations
+    return anno
   }
 }
 
