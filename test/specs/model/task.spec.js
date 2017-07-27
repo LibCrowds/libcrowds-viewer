@@ -60,7 +60,7 @@ describe('Annotation', () => {
   })
 
   it('throws an error when no annotation to delete', () => {
-    const del = function {
+    const del = function () {
       selectTask.deleteAnnotation(itemOne.id)
     }
     expect(del).toThrowError()
