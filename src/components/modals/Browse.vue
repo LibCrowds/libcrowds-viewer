@@ -2,7 +2,14 @@
   <div id="lv-browse-modal">
     <modal :id="id" title="Browse Tasks">
       <div class="container">
-        <div id="lv-browse-viewer"></div>
+        <ul>
+          <li
+            v-for="task in tasks"
+            :key="task.id"
+            @click="onThumbnailClicked(task)">
+            <img :src="task.thumbnailUri">
+          </li>
+        </ul>
       </div>
     </modal>
   </div>
@@ -10,9 +17,6 @@
 
 <script>
 import Modal from '@/components/Modal'
-import 'vue-awesome/icons/chevron-left'
-import 'vue-awesome/icons/chevron-right'
-import OpenSeadragon from 'openseadragon'
 
 export default {
   components: {
@@ -31,65 +35,43 @@ export default {
   },
 
   methods: {
-    update () {
-      document.querySelector('#lv-browse-viewer').innerHTML = null
-      const viewer = OpenSeadragon({
-        id: 'lv-browse-viewer',
-        panVertical: false,
-        panHorizontal: false,
-        showNavigationControl: false,
-        previousButton: 'lv-browse-previous',
-        nextButton: 'lv-browse-next',
-        gestureSettingsMouse: {
-          scrollToZoom: false,
-          clickToZoom: false
-        },
-        gestureSettingsTouch: {
-          dblClickToZoom: false,
-          pinchToZoom: false,
-          flickEnabled: false
-        },
-        gestureSettingsPen: {
-          clickToZoom: false
-        },
-        gestureSettingsUnknown: {
-          scrollToZoom: false,
-          dblClickToZoom: false,
-          pinchToZoom: false,
-          flickEnabled: false
-        },
-        collectionMode: true,
-        collectionRows: 2,
-        tileSources: this.tasks.map((task) => {
-          return task.imgInfoUri
-        })
-      })
-
-      viewer.addHandler('canvas-click', () => {
-        let task = this.tasks[viewer.currentPage()]
-        this.$emit('taskselected', task)
-      })
+    /**
+     * Emit the click event with the task.
+     */
+    onThumbnailClicked (task) {
+      this.$emit('click', task)
     }
-  },
-
-  watch: {
-    tasks: function () {
-      this.update()
-    }
-  },
-
-  mounted () {
-    this.update()
   }
 }
 </script>
 
 <style lang="scss">
+@import '~style/settings';
 @import '~style/partials/buttons';
+
 #lv-browse-modal {
   .container {
     height: 300px;
     position: relative;
+  }
+
+  ul {
+    list-style: none;
+    -moz-column-count: 4;
+    -moz-column-gap: 5px;
+    -webkit-column-count: 4;
+    -webkit-column-gap: 5px;
+    column-count: 4;
+    column-gap: 5px;
+  }
+
+  li {
+    width: 128px;
+    margin-bottom: 5px;
+
+    img {
+      max-width: 100%;
+    }
   }
 
   #lv-browse-viewer {
