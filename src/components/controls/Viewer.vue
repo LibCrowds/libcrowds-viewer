@@ -43,6 +43,10 @@ export default {
       type: Boolean,
       required: true
     },
+    showBrowse: {
+      type: Boolean,
+      required: true
+    },
     showShare: {
       type: Boolean,
       required: true
@@ -125,6 +129,17 @@ export default {
           icon: 'info-circle',
           callback: () => {
             this.$emit('infoclicked')
+          }
+        })
+      }
+
+      if (this.showBrowse) {
+        buttons.push({
+          id: this.infoButton,
+          tooltip: 'Browse Tasks',
+          icon: 'list',
+          callback: () => {
+            this.$emit('browseclicked')
           }
         })
       }

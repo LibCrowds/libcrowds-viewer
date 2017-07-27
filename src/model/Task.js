@@ -1,4 +1,5 @@
 import Form from '@/model/Form'
+import getImageUri from '@/utils/getImageUri'
 
 /**
  * Represents a task to be updated with user input as annotations.
@@ -32,6 +33,11 @@ class Task {
     this.liked = liked
     this.annotations = annotations
     this.complete = complete
+
+    this.thumbnailUri = getImageUri({
+      imgSource: this.imgInfoUri,
+      size: '256,'
+    })
 
     // Validate
     const validModes = ['select', 'transcribe']

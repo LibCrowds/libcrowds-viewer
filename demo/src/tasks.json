@@ -52,23 +52,6 @@
     ]
   },
   {
-    "id": 4,
-    "tag": "actor",
-    "mode": "select",
-    "objective": "Tag all of the actors",
-    "guidance": "Draw a box around each actor, including any subtitles",
-    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589091.0x000003/info.json",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json"
-  },
-  {
-    "id": 8,
-    "tag": "face",
-    "mode": "select",
-    "objective": "Tag all of the faces",
-    "guidance": "Draw a box around each face",
-    "imgInfoUri": "https://images.britishart.yale.edu/iiif/c0b22208-1eab-4b5e-8bc2-a18390f003b4/info.json"
-  },
-  {
     "id": 1,
     "mode": "transcribe",
     "objective": "Transcribe the required info",
@@ -118,5 +101,22 @@
         "height": 100
       }
     ]
+  },
+  {
+    "id": 4,
+    "tag": "actor",
+    "mode": "select",
+    "objective": "Tag all of the actors",
+    "guidance": "Draw a box around each actor, including any subtitles",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589091.0x000003/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json"
+  },
+  {
+    "id": 8,
+    "tag": "face",
+    "mode": "select",
+    "objective": "Tag all of the faces",
+    "guidance": "Draw a box around each face",
+    "imgInfoUri": "https://images.britishart.yale.edu/iiif/c0b22208-1eab-4b5e-8bc2-a18390f003b4/info.json"
   }
 ]

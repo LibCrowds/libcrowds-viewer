@@ -11,12 +11,14 @@
           :zoomBy="zoomBy"
           :showHelp="showHelp"
           :showInfo="showInfo"
+          :showBrowse="showBrowse"
           :showLike="showLike"
           :showShare="showShare"
           :helpButton="viewerOpts.helpButton"
           :infoButton="viewerOpts.infoButton"
           @helpclicked="emitShowHelp"
           @infoclicked="emitShowInfo"
+          @browseclicked="emitShowBrowse"
           @likeclicked="emitTaskLiked"
           @fullscreenclicked="toggleFullScreen">
         </viewer-controls>
@@ -42,6 +44,13 @@
           :disableComplete="disableComplete"
           :task="currentTask">
         </help-modal>
+
+        <browse-modal
+          v-if="showBrowse"
+          :tasks="tasks"
+          :id="browseModalId"
+          @taskclick="setCurrentTask">
+        </browse-modal>
 
         <button
           :disabled="previousBtnDisabled"
@@ -103,6 +112,7 @@ import 'vue-awesome/icons/chevron-right'
 import OpenSeadragon from 'openseadragon'
 import MetadataModal from '@/components/modals/Metadata'
 import HelpModal from '@/components/modals/Help'
+import BrowseModal from '@/components/modals/Browse'
 import ViewerControls from '@/components/controls/Viewer'
 import PanControls from '@/components/controls/Pan'
 import Sidebar from '@/components/sidebar/Sidebar'
@@ -144,6 +154,7 @@ export default {
       },
       metadataModalId: 'lv-metadata-modal',
       helpModalId: 'lv-help-modal',
+      browseModalId: 'lv-browse-modal',
       tasks: [],
       currentTask: null
     }
@@ -167,6 +178,10 @@ export default {
       default: true
     },
     showInfo: {
+      type: Boolean,
+      default: true
+    },
+    showBrowse: {
       type: Boolean,
       default: true
     },
@@ -215,6 +230,7 @@ export default {
   components: {
     MetadataModal,
     HelpModal,
+    BrowseModal,
     ViewerControls,
     PanControls,
     Sidebar,
@@ -252,6 +268,13 @@ export default {
      */
     emitShowInfo () {
       this.$root.$emit('show::modal', this.metadataModalId)
+    },
+
+    /**
+     * Emit the show model event for the browse tasks modal.
+     */
+    emitShowBrowse () {
+      this.$root.$emit('show::modal', this.browseModalId)
     },
 
     /**
