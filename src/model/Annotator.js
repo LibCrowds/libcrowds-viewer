@@ -134,4 +134,4 @@ class Annotator {
   }
 }
 
-export default Task
+export default Annotator
