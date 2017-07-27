@@ -1,5 +1,3 @@
-import Form from '@/model/Form'
-import getImageUri from '@/utils/getImageUri'
 import DescriptionAnnotation from '@/model/DescriptionAnnotation'
 
 /**

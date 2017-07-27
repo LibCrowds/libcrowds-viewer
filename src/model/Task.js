@@ -1,6 +1,5 @@
 import Form from '@/model/Form'
 import getImageUri from '@/utils/getImageUri'
-import DescriptionAnnotation from '@/model/DescriptionAnnotation'
 
 /**
  * Represents a task to be updated with user input as annotations.
