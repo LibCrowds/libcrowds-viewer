@@ -38,7 +38,6 @@ export default {
         panVertical: false,
         panHorizontal: false,
         showNavigationControl: false,
-        sequenceMode: true,
         previousButton: 'lv-browse-previous',
         nextButton: 'lv-browse-next',
         gestureSettingsMouse: {
@@ -59,6 +58,8 @@ export default {
           pinchToZoom: false,
           flickEnabled: false
         },
+        collectionMode: true,
+        collectionRows: 2,
         tileSources: this.tasks.map((task) => {
           return task.imgInfoUri
         })
