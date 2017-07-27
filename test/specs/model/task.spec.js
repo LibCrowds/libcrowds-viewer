@@ -56,7 +56,7 @@ describe('Annotation', () => {
   it('deletes an annotation', () => {
     selectTask.annotations = [itemOne]
     selectTask.deleteAnnotation(itemOne.id)
-    expect(selectTask.annotations).toBe([])
+    expect(selectTask.annotations).toEqual([])
   })
 
   it('throws an error when no annotation to delete', () => {
