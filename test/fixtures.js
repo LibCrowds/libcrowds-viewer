@@ -2,6 +2,8 @@ import uuid from 'uuid/v4'
 
 import Annotator from '@/model/Annotator'
 import Annotation from '@/model/Annotation'
+import TranscribeAnnotation from '@/model/TranscribeAnnotation'
+import SelectAnnotation from '@/model/SelectAnnotation'
 import Task from '@/model/Task'
 
 import imageInfo from './data/imageInfo'
@@ -24,6 +26,28 @@ export default {
     return new Annotation({
       motivation: 'testing',
       imgInfo: imageInfo
+    })
+  },
+
+  /**
+   * Return a new TranscribeAnnotation.
+   */
+  buildTranscribeAnnotation () {
+    return new TranscribeAnnotation({
+      transcription: 'testing',
+      imgInfo: imageInfo,
+      tag: 'test'
+    })
+  },
+
+  /**
+   * Return a new TranscribeAnnotation.
+   */
+  buildSelectAnnotation () {
+    return new SelectAnnotation({
+      tag: 'test',
+      imgInfo: imageInfo,
+      fragmentUri: 'http://example.com/image'
     })
   },
 
