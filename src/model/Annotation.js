@@ -1,4 +1,5 @@
 import uuid from 'uuid/v4'
+import errors from '@/utils/errors'
 
 /**
  * Represents a Web Annotation.
@@ -21,8 +22,8 @@ import uuid from 'uuid/v4'
  */
 class Annotation {
   constructor ({
-    motivation,
-    imgInfo,
+    motivation = errors.throwIfMissing(),
+    imgInfo = errors.throwIfMissing(),
     creator = null,
     generator = null
   }) {
