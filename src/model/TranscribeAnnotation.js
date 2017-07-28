@@ -1,12 +1,12 @@
 import Annotation from '@/model/Annotation'
-import throwIfMissing from '@/utils/errors'
+import errors from '@/utils/errors'
 
 /**
  * Represents a Web Annotation used for transcriptions.
  * @param {Object} imgInfo
  *   The IIIF image info.
- * @param {String} value
- *   The description value.
+ * @param {String} transcription
+ *   The transcription.
  * @param {String} tag
  *   The tag value.
  * @param {String} fragmentURI
@@ -20,9 +20,9 @@ import throwIfMissing from '@/utils/errors'
  */
 class TranscribeAnnotation extends Annotation {
   constructor ({
-    imgInfo = throwIfMissing(),
-    value = throwIfMissing(),
-    tag = throwIfMissing(),
+    imgInfo = errors.throwIfMissing(),
+    description = errors.throwIfMissing(),
+    tag = errors.throwIfMissing(),
     fragmentURI = null,
     creator = null,
     generator = null,
@@ -34,7 +34,7 @@ class TranscribeAnnotation extends Annotation {
       creator: creator,
       generator: generator
     })
-    this.addDescription(value)
+    this.addDescription(description)
     this.addTag(tag, fragmentURI)
     if (classification) {
       this.addClassification(classification)

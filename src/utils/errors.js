@@ -1,6 +1,8 @@
-/**
- * Error used to identify missing required parameters.
- */
-export function throwIfMissing () {
-  throw new Error('Missing parameter')
+export default {
+  /**
+   * Error used to identify missing required parameters.
+   */
+  throwIfMissing () {
+    throw new Error('Missing parameter')
+  }
 }
