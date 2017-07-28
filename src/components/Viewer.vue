@@ -76,7 +76,7 @@
       v-if="currentTask"
       :task="currentTask"
       :showNote="showNote"
-      :note="note"
+      :commentAnnotation="commentAnnotation"
       :disableComplete="disableComplete"
       @noteupdated="updateNote"
       @submit="submitTask">
@@ -124,7 +124,6 @@ import Selector from '@/components/Selector'
 import Task from '@/model/Task'
 import Annotator from '@/model/Annotator'
 import SelectAnnotation from '@/model/SelectAnnotation'
-import CommentAnnotation from '@/model/CommentAnnotation'
 import getImageUri from '@/utils/getImageUri'
 import extractRectFromImageUri from '@/utils/extractRectFromImageUri'
 import toggleFullScreen from '@/utils/toggleFullScreen'
@@ -259,15 +258,10 @@ export default {
       return this.tasks.indexOf(this.currentTask) >= this.tasks.length - 1
     },
     tags: function () {
-      return this.annotator.searchAnnotations(this.currentTask, {
-        motivation: 'tagging'
-      })
+      return this.annotator.getSelectAnnotations(this.currentTask)
     },
-    note: function () {
-      const annos = this.annotator.searchAnnotations(this.currentTask, {
-        motivation: 'tagging'
-      })
-      return annos.length ? annos[0].body.value : ''
+    commentAnnotation: function () {
+      return this.annotator.getCommentAnnotation(this.currentTask)
     }
   },
 
@@ -430,30 +424,15 @@ export default {
      *   The text.
      */
     updateNote (task, text) {
-      const annos = this.annotator.searchAnnotations(task, {
-        motivation: 'tagging'
-      })
-
-      if (annos.length && text.length === 0) {
-        task.deleteAnnotation(annos[0].id)
-        this.$emit('delete', task, annos[0])
-      } else if (annos.length) {
-        annos[0].body.value = text
-        annos[0].modify({
-          creator: this.creator,
-          generator: this.generator
-        })
-        this.annotator.storeAnnotation(task, annos[0])
-        this.$emit('update', task, annos[0])
-      } else {
-        let anno = new CommentAnnotation({
-          imgInfo: task.imgInfo,
-          value: text,
-          creator: this.creator,
-          generator: this.generator
-        })
-        this.annotator.storeAnnotation(task, anno)
+      const now = new Date().toISOString()
+      const anno = this.annotator.storeCommentAnnotation(
+        task,
+        text
+      )
+      if (anno.created > now) {
         this.$emit('create', task, anno)
+      } else {
+        this.$emit('update', task, anno)
       }
     },
 
@@ -468,7 +447,7 @@ export default {
       task.updateForm(form)
       for (let key in form.model) {
         const now = new Date().toISOString()
-        const anno = this.annotator.storeFormFieldAnnotation(
+        const anno = this.annotator.storeTranscriptionAnnotation(
           task,
           key,
           form.model[key]
@@ -545,10 +524,8 @@ export default {
      */
     configureMode (task) {
       if (task.mode === 'select' && !(task.complete && this.disableComplete)) {
-        // Draw all tags as selection overlays
-        const annos = this.annotator.searchAnnotations(task, {
-          motivation: 'tagging'
-        })
+        // Draw all selection overlays
+        const annos = this.annotator.getSelectAnnotations(task)
         for (let anno of annos) {
           this.drawSelectionOverlay(task, anno)
         }
