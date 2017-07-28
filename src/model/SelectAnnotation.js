@@ -1,5 +1,5 @@
 import Annotation from '@/model/Annotation'
-import throwIfMissing from '@/utils/errors'
+import errors from '@/utils/errors'
 
 /**
  * Represents a Web Annotation used for tagging.
@@ -7,7 +7,7 @@ import throwIfMissing from '@/utils/errors'
  *   The IIIF image info.
  * @param {String} tag
  *   Plain text value for the tag.
- * @param {String} fragmentURI
+ * @param {String} fragmentUri
  *   The IIIF image region.
  * @param {Object} creator
  *   The Annotation creator.
@@ -20,7 +20,7 @@ class SelectAnnotation extends Annotation {
   constructor ({
     imgInfo = errors.throwIfMissing(),
     tag = errors.throwIfMissing(),
-    fragmentURI = errors.throwIfMissing(),
+    fragmentUri = errors.throwIfMissing(),
     creator = null,
     generator = null,
     classification = null
@@ -31,7 +31,7 @@ class SelectAnnotation extends Annotation {
       creator: creator,
       generator: generator
     })
-    this.addTag(tag, imgInfo, fragmentURI)
+    this.addTag(tag, imgInfo, fragmentUri)
     if (classification) {
       this.addClassification(classification)
     }
