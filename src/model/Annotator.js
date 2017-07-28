@@ -161,8 +161,7 @@ class Annotator {
       return anno.id === id
     })
     const idx = task.annotations.indexOf(filtered[0])
-    console.log(idx)
-    return task.annotations[idx]
+    return idx > -1 ? task.annotations[idx] : null
   }
 
   /**
@@ -174,7 +173,6 @@ class Annotator {
    */
   storeAnnotation (task, annotation) {
     let anno = this.getAnnotation(task, annotation.id)
-    console.log(anno)
     if (!anno) {
       anno = annotation
     } else {
