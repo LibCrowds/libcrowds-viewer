@@ -82,6 +82,7 @@
 
       <select-sidebar-item
         v-if="currentTask.mode === 'select'"
+        :task="currentTask"
         :tags="tags"
         @edit="editTag"
         @delete="deleteTag">
