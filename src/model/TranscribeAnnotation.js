@@ -21,7 +21,7 @@ import errors from '@/utils/errors'
 class TranscribeAnnotation extends Annotation {
   constructor ({
     imgInfo = errors.throwIfMissing(),
-    description = errors.throwIfMissing(),
+    transcription = errors.throwIfMissing(),
     tag = errors.throwIfMissing(),
     fragmentURI = null,
     creator = null,
@@ -34,7 +34,7 @@ class TranscribeAnnotation extends Annotation {
       creator: creator,
       generator: generator
     })
-    this.addDescription(description)
+    this.addDescription(transcription)
     this.addTag(tag, fragmentURI)
     if (classification) {
       this.addClassification(classification)
