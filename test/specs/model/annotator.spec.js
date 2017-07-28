@@ -143,9 +143,9 @@ describe('Annotator', () => {
       expect(anno).toBe(annoOne)
     })
 
-    it('returns undefined when no annotation with a given id', () => {
+    it('returns null when no annotation with a given id', () => {
       const anno = annotator.getAnnotation(selectTask, annoOne.id)
-      expect(anno).toBe(undefined)
+      expect(anno).toBe(null)
     })
   })
 

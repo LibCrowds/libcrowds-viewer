@@ -161,6 +161,7 @@ class Annotator {
       return anno.id === id
     })
     const idx = task.annotations.indexOf(filtered[0])
+    console.log(idx)
     return task.annotations[idx]
   }
 
