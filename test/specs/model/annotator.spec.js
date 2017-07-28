@@ -3,6 +3,9 @@ import fixtures from '../../fixtures'
 describe('Annotator', () => {
   let annoOne = null
   let annoTwo = null
+  let transcribeAnno = null
+  let selectAnno = null
+  let commentAnno = null
   let selectTask = null
   let transcribeTask = null
   let annotator = null
@@ -13,134 +16,185 @@ describe('Annotator', () => {
   beforeEach(() => {
     annoOne = fixtures.buildAnnotation()
     annoTwo = fixtures.buildAnnotation()
+    transcribeAnno = fixtures.buildTranscribeAnnotation()
+    selectAnno = fixtures.buildSelectAnnotation()
+    commentAnno = fixtures.buildCommentAnnotation()
     selectTask = fixtures.buildTask('select')
     transcribeTask = fixtures.buildTask('transcribe')
     annotator = fixtures.buildAnnotator()
     itemOne = fixtures.buildItem(1)
     itemTwo = fixtures.buildItem(2)
     itemThree = fixtures.buildItem(3)
+
+    spyOn(annotator, 'storeAnnotation')
   })
 
-  it('returns an annotation by id', () => {
-    selectTask.annotations = [annoOne]
-    const anno = annotator.getAnnotation(selectTask, annoOne.id)
-    expect(anno).toBe(annoOne)
+  describe('_search', () => {
+    it('returns true when searching for matching value', () => {
+      const value = fixtures.uuid()
+      annoOne.id = value
+      const result = annotator._search(annoOne, {
+        id: value
+      })
+      expect(result).toBe(true)
+    })
+
+    it('returns false when searching for non-matching value', () => {
+      const value = fixtures.uuid()
+      const anotherValue = fixtures.uuid()
+      annoOne.id = value
+      const result = annotator._search(annoOne, {
+        id: anotherValue
+      })
+      expect(result).toBe(false)
+    })
+
+    it('returns false when searching for non-existant value', () => {
+      const result = annotator._search(annoOne, {
+        id: fixtures.uuid()
+      })
+      expect(result).toBe(false)
+    })
+
+    it('returns true when searching for matching array value', () => {
+      annoOne.body = [itemOne, itemTwo]
+      const result = annotator._search(annoOne, {
+        body: itemOne
+      })
+      expect(result).toBe(true)
+    })
+
+    it('returns false when searching for non-matching array value', () => {
+      annoOne.body = [itemOne, itemTwo]
+      const result = annotator._search(annoOne, {
+        body: itemThree
+      })
+      expect(result).toBe(false)
+    })
+
+    it('returns false when searching for non-existant array value', () => {
+      const result = annotator._search(annoOne, {
+        body: itemOne
+      })
+      expect(result).toBe(false)
+    })
   })
 
-  it('returns undefined when no annotation with a given id', () => {
-    const anno = annotator.getAnnotation(selectTask, annoOne.id)
-    expect(anno).toBe(undefined)
+  describe('_getTranscribeAnnotations', () => {
+    it('returns transcribe annotations only', () => {
+      transcribeTask.annotations = [annoOne, transcribeAnno]
+      const result = annotator._getTranscribeAnnotations(transcribeTask)
+      expect(result).toEqual([transcribeAnno])
+    })
   })
 
-  it('stores a new annotation', () => {
-    annotator.storeAnnotation(selectTask, annoOne)
-    expect(selectTask.annotations).toEqual([annoOne])
+  describe('_getSelectAnnotations', () => {
+    it('returns select annotations only', () => {
+      selectTask.annotations = [selectAnno, annoOne]
+      const result = annotator._getSelectAnnotations(selectTask)
+      expect(result).toEqual([selectAnno])
+    })
   })
 
-  it('stores multiple new annotations', () => {
-    annotator.storeAnnotation(selectTask, annoOne)
-    annotator.storeAnnotation(selectTask, annoTwo)
-    expect(selectTask.annotations).toEqual([annoOne, annoTwo])
+  describe('_getCommentAnnotations', () => {
+    it('returns comment annotations only', () => {
+      selectTask.annotations = [commentAnno, annoOne]
+      const result = annotator._getCommentAnnotations(selectTask)
+      expect(result).toEqual([commentAnno])
+    })
   })
 
-  it('updates an existing annotation', () => {
-    annotator.storeAnnotation(selectTask, annoOne)
-    annoOne.key = '123'
-    annotator.storeAnnotation(selectTask, annoOne)
-    expect(selectTask.annotations).toEqual([annoOne])
+  describe('_getFormFieldAnnotation', () => {
+    it('gets form field annotation when one exists', () => {
+      const key = Object.keys(transcribeTask.form.model)[0]
+      transcribeTask.annotations = [transcribeAnno]
+      const anno = annotator._getFormFieldAnnotation(transcribeTask, key)
+      expect(anno).not.toEqual(transcribeAnno)
+    })
+
+    it('returns null when form field annotation does not exist', () => {
+      const key = fixtures.uuid()
+      const anno = annotator._getFormFieldAnnotation(transcribeTask, key)
+      expect(anno).toEqual(null)
+    })
   })
 
-  it('deletes an annotation', () => {
-    selectTask.annotations = [annoOne]
-    annotator.deleteAnnotation(selectTask, annoOne.id)
-    expect(selectTask.annotations).toEqual([])
+  describe('getAnnotation', () => {
+    it('returns an annotation by id', () => {
+      selectTask.annotations = [annoOne]
+      const anno = annotator.getAnnotation(selectTask, annoOne.id)
+      expect(anno).toBe(annoOne)
+    })
+
+    it('returns undefined when no annotation with a given id', () => {
+      const anno = annotator.getAnnotation(selectTask, annoOne.id)
+      expect(anno).toBe(undefined)
+    })
   })
 
-  it('throws an error when no annotation to delete', () => {
-    const del = function () {
+  describe('storeAnnotation', () => {
+    it('stores a new annotation', () => {
+      annotator.storeAnnotation(selectTask, annoOne)
+      expect(selectTask.annotations).toEqual([annoOne])
+    })
+
+    it('stores multiple new annotations', () => {
+      annotator.storeAnnotation(selectTask, annoOne)
+      annotator.storeAnnotation(selectTask, annoTwo)
+      expect(selectTask.annotations).toEqual([annoOne, annoTwo])
+    })
+
+    it('updates an existing annotation', () => {
+      annotator.storeAnnotation(selectTask, annoOne)
+      annoOne.key = '123'
+      annotator.storeAnnotation(selectTask, annoOne)
+      expect(selectTask.annotations).toEqual([annoOne])
+    })
+  })
+
+  describe('deleteAnnotation', () => {
+    it('deletes an annotation', () => {
+      selectTask.annotations = [annoOne]
       annotator.deleteAnnotation(selectTask, annoOne.id)
-    }
-    expect(del).toThrowError()
-  })
-
-  it('returns annotation from search', () => {
-    selectTask.annotations = [annoOne, annoTwo]
-    const found = annotator.searchAnnotations(selectTask, {
-      id: annoOne.id
+      expect(selectTask.annotations).toEqual([])
     })
-    expect(found).toEqual([annoOne])
-  })
 
-  it('returns true when searching for matching value', () => {
-    const value = fixtures.uuid()
-    annoOne.id = value
-    const result = annotator._search(annoOne, {
-      id: value
+    it('throws an error when no annotation to delete', () => {
+      const del = function () {
+        annotator.deleteAnnotation(selectTask, annoOne.id)
+      }
+      expect(del).toThrowError()
     })
-    expect(result).toBe(true)
   })
 
-  it('returns false when searching for non-matching value', () => {
-    const value = fixtures.uuid()
-    const anotherValue = fixtures.uuid()
-    annoOne.id = value
-    const result = annotator._search(annoOne, {
-      id: anotherValue
+  describe('filterAnnotations', () => {
+    it('returns annotation from search', () => {
+      const annotations = [annoOne, annoTwo]
+      const filtered = annotator.filterAnnotations(annotations, {
+        id: annoOne.id
+      })
+      expect(filtered).toEqual([annoOne])
     })
-    expect(result).toBe(false)
   })
 
-  it('returns false when searching for non-existant value', () => {
-    const result = annotator._search(annoOne, {
-      id: fixtures.uuid()
+  describe('storeTranscriptionAnnotation', () => {
+    it('stores a new TranscriptionAnnotation', () => {
+      const key = Object.keys(transcribeTask.form.model)[0]
+      const value = fixtures.uuid()
+      annotator.storeTranscriptionAnnotation(transcribeTask, key, value)
+      expect(transcribeTask.annotations.length).toEqual(1)
+      expect(annotator.storeAnnotation).toHaveBeenCalled()
     })
-    expect(result).toBe(false)
-  })
 
-  it('returns true when searching for matching array value', () => {
-    annoOne.body = [itemOne, itemTwo]
-    const result = annotator._search(annoOne, {
-      body: itemOne
+    it('updates an existing TranscriptionAnnotation', () => {
+      const key = Object.keys(transcribeTask.form.model)[0]
+      const value = fixtures.uuid()
+      transcribeTask.annotations = [transcribeAnno]
+      annotator.storeTranscriptionAnnotation(transcribeTask, key, value)
+      expect(transcribeTask.annotations.length).toEqual(1)
+      expect(annotator.storeAnnotation).toHaveBeenCalledWith(
+        transcribeTask, transcribeAnno
+      )
     })
-    expect(result).toBe(true)
   })
-
-  it('returns false when searching for non-matching array value', () => {
-    annoOne.body = [itemOne, itemTwo]
-    const result = annotator._search(annoOne, {
-      body: itemThree
-    })
-    expect(result).toBe(false)
-  })
-
-  it('returns false when searching for non-existant array value', () => {
-    const result = annotator._search(annoOne, {
-      body: itemOne
-    })
-    expect(result).toBe(false)
-  })
-
-  // it('gets form field annotation when one exists', () => {
-  //   transcribeTask.annotations = [descriptionAnnotation]
-  //   const anno = transcribeTask._getFormFieldAnnotation()
-  //   expect(anno).not.toEqual(descriptionAnnotation)
-  // })
-
-  it('returns null when no form field annotation exists', () => {
-    const anno = transcribeTask._getFormFieldAnnotation()
-    expect(anno).toEqual(null)
-  })
-
-  // it('creates a new form field annotation', () => {
-  //   expect(transcribeTask.annotations).toEqual([])
-  //   const key = Object.keys(transcribeTask.form.model)[0]
-  //   const value = fixtures.uuid()
-  //   const anno = transcribeTask.storeFormFieldAnnotation(key, value)
-  //   expect(transcribeTask.annotations).toEqual([anno])
-  //   expect(anno).toEqual(jasmine.any(Number))
-  // })
-
-  // it('updates a form field annotation', () => {
-
-  // })
 })
