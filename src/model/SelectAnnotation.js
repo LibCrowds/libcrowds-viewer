@@ -1,4 +1,5 @@
 import Annotation from '@/model/Annotation'
+import throwIfMissing from '@/utils/errors'
 
 /**
  * Represents a Web Annotation used for tagging.
@@ -15,11 +16,11 @@ import Annotation from '@/model/Annotation'
  * @param {String} classification
  *   A classification.
  */
-class TagAnnotation extends Annotation {
+class SelectAnnotation extends Annotation {
   constructor ({
-    imgInfo,
-    value,
-    fragmentURI = null,
+    imgInfo = throwIfMissing(),
+    value = throwIfMissing(),
+    fragmentURI = throwIfMissing(),
     creator = null,
     generator = null,
     classification = null
@@ -37,4 +38,4 @@ class TagAnnotation extends Annotation {
   }
 }
 
-export default TagAnnotation
+export default SelectAnnotation
