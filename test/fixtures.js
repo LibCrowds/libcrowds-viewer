@@ -57,9 +57,8 @@ export default {
    */
   buildCommentAnnotation () {
     return new CommentAnnotation({
-      tag: 'test',
-      imgInfo: imageInfo,
-      fragmentUri: 'http://example.com/image'
+      comment: 'test',
+      imgInfo: imageInfo
     })
   },
 
