@@ -25,7 +25,7 @@ class Annotator {
    *   The model key.
    */
   _getFormFieldAnnotation (task, key) {
-    const annos = task.searchAnnotations({
+    const annos = this.searchAnnotations(task, {
       motivation: 'describing',
       body: {
         type: 'TextualBody',
