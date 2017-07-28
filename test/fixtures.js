@@ -1,5 +1,6 @@
 import uuid from 'uuid/v4'
 
+import Annotator from '@/model/Annotator'
 import Annotation from '@/model/Annotation'
 import Task from '@/model/Task'
 
@@ -10,7 +11,14 @@ import transcribeTaskOpts from './data/transcribeTaskOpts'
 export default {
 
   /**
-   * Return a new annotation.
+   * Return a new Annotator.
+   */
+  buildAnnotator() {
+    return new Annotator()
+  },
+
+  /**
+   * Return a new Annotation.
    */
   buildAnnotation() {
     return new Annotation({
@@ -20,14 +28,16 @@ export default {
   },
 
   /**
-   * Return a new task.
+   * Return a new Task.
    * @param {String} mode
    *   The task mode.
    */
   buildTask(mode) {
     if (mode === 'select') {
+      selectTaskOpts.imgInfo = imageInfo
       return new Task(selectTaskOpts)
     } else if (mode === 'transcribe') {
+      transcribeTaskOpts.imgInfo = imageInfo
       return new Task(transcribeTaskOpts)
     }
   },
