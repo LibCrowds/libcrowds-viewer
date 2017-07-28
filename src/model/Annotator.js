@@ -4,13 +4,15 @@ import DescriptionAnnotation from '@/model/DescriptionAnnotation'
  * Represents an annotator responsible for managing all task annotations.
  */
 class Annotator {
-  constructor ({
-    creator = null,
-    generator = null
-  } = {
-    creator: null,
-    generator: null
-  }) {
+  constructor (
+    {
+      creator = null,
+      generator = null
+    } = {
+      creator: null,
+      generator: null
+    }
+  ) {
     this.creator = creator
     this.generator = generator
   }
