@@ -1,3 +1,6 @@
+import CommentAnnotation from '@/model/CommentAnnotation'
+import TranscribeAnnotation from '@/model/TranscribeAnnotation'
+import SelectAnnotation from '@/model/SelectAnnotation'
 import fixtures from '../../fixtures'
 
 describe('Annotator', () => {
@@ -26,7 +29,7 @@ describe('Annotator', () => {
     itemTwo = fixtures.buildItem(2)
     itemThree = fixtures.buildItem(3)
 
-    spyOn(annotator, 'storeAnnotation').and.callThrough()
+    // spyOn(annotator, 'storeAnnotation').and.callThrough()
   })
 
   describe('_search', () => {
@@ -119,6 +122,20 @@ describe('Annotator', () => {
     })
   })
 
+  describe('_getCommentAnnotation', () => {
+    it('gets CommentAnnotation when one exists', () => {
+      transcribeTask.annotations = [commentAnno]
+      const anno = annotator._getCommentAnnotation(transcribeTask)
+      expect(anno).not.toEqual(transcribeAnno)
+    })
+
+    it('returns null when no CommentAnnotation exists', () => {
+      const key = fixtures.uuid()
+      const anno = annotator._getCommentAnnotation(transcribeTask, key)
+      expect(anno).toEqual(null)
+    })
+  })
+
   describe('getAnnotation', () => {
     it('returns an annotation by id', () => {
       selectTask.annotations = [annoOne]
@@ -183,7 +200,8 @@ describe('Annotator', () => {
       const value = fixtures.uuid()
       annotator.storeTranscriptionAnnotation(transcribeTask, key, value)
       expect(transcribeTask.annotations.length).toEqual(1)
-      expect(annotator.storeAnnotation).toHaveBeenCalled()
+      expect(args[0]).toBe(transcribeTask)
+      expect(args[1] instanceof TranscribeAnnotation).toBeTruthy()
     })
 
     it('updates an existing TranscriptionAnnotation', () => {
@@ -194,6 +212,27 @@ describe('Annotator', () => {
       expect(transcribeTask.annotations.length).toEqual(1)
       expect(annotator.storeAnnotation).toHaveBeenCalledWith(
         transcribeTask, transcribeAnno
+      )
+    })
+  })
+
+  describe('storeCommentAnnotation', () => {
+    it('stores a new CommentAnnotation', () => {
+      const comment = fixtures.uuid()
+      annotator.storeCommentAnnotation(transcribeTask, comment)
+      const args = annotator.storeAnnotation.mostRecentCall.args
+      expect(transcribeTask.annotations.length).toEqual(1)
+      expect(args[0]).toBe(transcribeTask)
+      expect(args[1] instanceof CommentAnnotation).toBeTruthy()
+    })
+
+    it('updates an existing CommentAnnotation', () => {
+      transcribeTask.annotations = [commentAnno]
+      const comment = fixtures.uuid()
+      annotator.storeCommentAnnotation(transcribeTask, comment)
+      expect(transcribeTask.annotations.length).toEqual(1)
+      expect(annotator.storeAnnotation).toHaveBeenCalledWith(
+        transcribeTask, commentAnno
       )
     })
   })

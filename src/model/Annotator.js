@@ -117,6 +117,7 @@ class Annotator {
 
   /**
    * Return the annotation for a form field.
+   * @param {Task} task
    *   The task.
    * @param {String} key
    *   The model key.
@@ -133,6 +134,19 @@ class Annotator {
       throw Error('Multiple form field annotations identified')
     }
     return fieldAnnos.length > 0 ? fieldAnnos[0] : null
+  }
+
+  /**
+   * Return the CommentAnnotation for a task.
+   * @param {Task} task
+   *   The task.
+   */
+  _getCommentAnnotation (task) {
+    let commentAnnos = this._getCommentAnnotations(task)
+    if (annos.length > 1) {
+      throw Error('Multiple comment annotations identified')
+    }
+    return anno.length > 0 ? commentAnnos[0] : null
   }
 
   /**
@@ -231,6 +245,35 @@ class Annotator {
       this.storeAnnotation(task, anno)
     }
     return anno
+  }
+
+  /**
+   * Create or update a CommentAnnotation.
+   *
+   * There should only be one CommentAnnotation per task.
+   * @param {Task} task
+   *   The task.
+   * @param {String} comment
+   *   The comment text.
+   */
+  storeCommentAnnotation (task, comment) {
+    let anno = this._getCommentAnnotation(task)
+    if (!anno) {
+      anno = new CommentAnnotation({
+        imgInfo: task.imgInfo,
+        comment: comment,
+        creator: this.creator,
+        generator: this.generator
+      })
+      this.storeAnnotation(task, anno)
+    } else {
+      anno.body.value = text
+      anno.modify({
+        creator: this.creator,
+        generator: this.generator
+      })
+      this.annotator.storeAnnotation(task, anno)
+    }
   }
 }
 
