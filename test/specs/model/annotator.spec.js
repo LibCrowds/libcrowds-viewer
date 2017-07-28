@@ -29,7 +29,7 @@ describe('Annotator', () => {
     itemTwo = fixtures.buildItem(2)
     itemThree = fixtures.buildItem(3)
 
-    // spyOn(annotator, 'storeAnnotation').and.callThrough()
+    spyOn(annotator, 'storeAnnotation').and.callThrough()
   })
 
   describe('_search', () => {
