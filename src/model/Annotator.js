@@ -1,4 +1,6 @@
-import DescriptionAnnotation from '@/model/DescriptionAnnotation'
+import TranscribeAnnotation from '@/model/TranscribeAnnotation'
+import SelectAnnotation from '@/model/SelectAnnotation'
+import CommentAnnotation from '@/model/CommentAnnotation'
 
 /**
  * Represents an annotator responsible for managing all task annotations.
@@ -69,25 +71,68 @@ class Annotator {
   }
 
   /**
-   * Return the annotation for a form field.
+   * Return all instances of TranscribeAnnotation for the task.
    * @param {Task} task
+   *   The task.
+   */
+  _getTranscribeAnnotations (task) {
+    let matched = []
+    for (let anno of task.annotations) {
+      if (anno instanceof TranscribeAnnotation) {
+        matched.push(anno)
+      }
+    }
+    return matched
+  }
+
+  /**
+   * Return all instances of SelectAnnotation for the task.
+   * @param {Task} task
+   *   The task.
+   */
+  _getSelectAnnotations (task) {
+    let matched = []
+    for (let anno of task.annotations) {
+      if (anno instanceof SelectAnnotation) {
+        matched.push(anno)
+      }
+    }
+    return matched
+  }
+
+  /**
+   * Return all instances of CommentAnnotation for the task.
+   * @param {Task} task
+   *   The task.
+   */
+  _getCommentAnnotations (task) {
+    let matched = []
+    for (let anno of task.annotations) {
+      if (anno instanceof CommentAnnotation) {
+        matched.push(anno)
+      }
+    }
+    return matched
+  }
+
+  /**
+   * Return the annotation for a form field.
    *   The task.
    * @param {String} key
    *   The model key.
    */
   _getFormFieldAnnotation (task, key) {
-    const annos = this.searchAnnotations(task, {
-      motivation: 'describing',
+    const allAnnos = this._getTranscribeAnnotations(task)
+    const fieldAnnos = this.filterAnnotations(allAnnos, {
       body: {
-        type: 'TextualBody',
         purpose: 'tagging',
         value: key
       }
     })
-    if (annos.length > 1) {
+    if (fieldAnnos.length > 1) {
       throw Error('Multiple form field annotations identified')
     }
-    return annos.length > 0 ? annos[0] : null
+    return fieldAnnos.length > 0 ? fieldAnnos[0] : null
   }
 
   /**
@@ -114,7 +159,8 @@ class Annotator {
    */
   storeAnnotation (task, annotation) {
     let anno = this.getAnnotation(task, annotation.id)
-    if (anno !== undefined) {
+    console.log(anno)
+    if (!anno) {
       anno = annotation
     } else {
       task.annotations.push(annotation)
@@ -140,36 +186,36 @@ class Annotator {
 
   /**
    * Return Annotations.
-   * @param {Task} task
+   * @param {Array} annotations
    *   The task.
    * @param {Object} terms
    *   Key-value pairs to check.
    */
-  searchAnnotations (task, terms) {
-    let annotations = []
-    for (let anno of task.annotations) {
+  filterAnnotations (annotations, terms) {
+    let filtered = []
+    for (let anno of annotations) {
       if (this._search(anno, terms)) {
-        annotations.push(anno)
+        filtered.push(anno)
       }
     }
-    return annotations
+    return filtered
   }
 
   /**
-   * Create or update a form annotation.
+   * Create or update a transcription annotation.
    * @param {Task} task
    *   The task.
    * @param {String} key
    *   The form model key.
    * @param {String} value
-   *   The value.
+   *   The transcription value.
    */
-  storeFormFieldAnnotation (task, key, value) {
+  storeTranscriptionAnnotation (task, key, transcription) {
     let anno = this._getFormFieldAnnotation(task, key)
     if (!anno) {
-      anno = new DescriptionAnnotation({
+      anno = new TranscribeAnnotation({
         imgInfo: task.imgInfo,
-        value: value,
+        transcription: transcription,
         tag: key,
         creator: this.creator,
         generator: this.generator,
@@ -181,7 +227,7 @@ class Annotator {
       anno.body = anno.body.filter((item) => {
         return item.purpose !== 'describing'
       })
-      anno.addDescription(value)
+      anno.addDescription(transcription)
       this.storeAnnotation(task, anno)
     }
     return anno
