@@ -82,7 +82,7 @@
 
       <select-sidebar-item
         v-if="currentTask.mode === 'select'"
-        :task="currentTask"
+        :tags="tags"
         @edit="editTag"
         @delete="deleteTag">
       </select-sidebar-item>
@@ -255,6 +255,11 @@ export default {
         return true
       }
       return this.tasks.indexOf(this.currentTask) >= this.tasks.length - 1
+    },
+    tags: function () {
+      return this.annotator.searchAnnotations(this.currentTask, {
+        motivation: 'tagging'
+      })
     }
   },
 
@@ -417,7 +422,7 @@ export default {
      *   The text.
      */
     updateNote (task, text) {
-      const annos = task.searchAnnotations({
+      const annos = this.annotator.searchAnnotations(task, {
         motivation: 'tagging'
       })
 
@@ -533,7 +538,7 @@ export default {
     configureMode (task) {
       if (task.mode === 'select' && !(task.complete && this.disableComplete)) {
         // Draw all tags as selection overlays
-        const annos = task.searchAnnotations({
+        const annos = this.annotator.searchAnnotations(task, {
           motivation: 'tagging'
         })
         for (let anno of annos) {

@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import Task from '@/model/Task'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/pencil'
@@ -36,22 +35,14 @@ import highlightOverlay from '@/utils/highlightOverlay'
 
 export default {
   props: {
-    task: {
-      type: Task,
+    tags: {
+      type: Array,
       required: true
     }
   },
 
   components: {
     Icon
-  },
-
-  computed: {
-    tags: function () {
-      return this.task.searchAnnotations({
-        motivation: 'tagging'
-      })
-    }
   },
 
   methods: {
