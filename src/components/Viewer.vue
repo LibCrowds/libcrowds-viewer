@@ -76,6 +76,7 @@
       v-if="currentTask"
       :task="currentTask"
       :showNote="showNote"
+      :note="note"
       :disableComplete="disableComplete"
       @noteupdated="updateNote"
       @submit="submitTask">
@@ -261,6 +262,12 @@ export default {
       return this.annotator.searchAnnotations(this.currentTask, {
         motivation: 'tagging'
       })
+    },
+    note: function () {
+      const annos = this.task.searchAnnotations({
+        motivation: 'tagging'
+      })
+      return annos.length ? annos[0].body.value : ''
     }
   },
 

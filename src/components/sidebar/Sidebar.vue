@@ -87,6 +87,10 @@ export default {
       type: Task,
       required: true
     },
+    note: {
+      type: String,
+      required: true
+    },
     showNote: {
       type: Boolean,
       required: true
@@ -99,15 +103,6 @@ export default {
 
   components: {
     Icon
-  },
-
-  computed: {
-    note: function () {
-      const annos = this.task.searchAnnotations({
-        motivation: 'tagging'
-      })
-      return annos.length ? annos[0].body.value : ''
-    }
   },
 
   methods: {
