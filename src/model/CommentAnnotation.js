@@ -1,4 +1,5 @@
 import Annotation from '@/model/Annotation'
+import errors from '@/utils/errors'
 
 /**
  * Represents a Web Annotation used for comments.
@@ -13,8 +14,8 @@ import Annotation from '@/model/Annotation'
  */
 class CommentAnnotation extends Annotation {
   constructor ({
-    imgInfo,
-    value,
+    imgInfo = errors.throwIfMissing(),
+    value = errors.throwIfMissing(),
     creator = null,
     generator = null
   }) {
