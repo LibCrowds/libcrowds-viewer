@@ -1,7 +1,7 @@
 import Annotation from '@/model/Annotation'
 
 /**
- * Represents a Web Annotation used for descriptions.
+ * Represents a Web Annotation used for transcriptions.
  * @param {Object} imgInfo
  *   The IIIF image info.
  * @param {String} value
@@ -17,7 +17,7 @@ import Annotation from '@/model/Annotation'
  * @param {String} classification
  *   A classification.
  */
-class DescriptionAnnotation extends Annotation {
+class TranscribeAnnotation extends Annotation {
   constructor ({
     imgInfo,
     value,
@@ -43,4 +43,4 @@ class DescriptionAnnotation extends Annotation {
   }
 }
 
-export default DescriptionAnnotation
+export default TranscribeAnnotation
