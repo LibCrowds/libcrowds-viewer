@@ -264,7 +264,7 @@ export default {
       })
     },
     note: function () {
-      const annos = this.task.searchAnnotations({
+      const annos = this.annotator.searchAnnotations(this.currentTask, {
         motivation: 'tagging'
       })
       return annos.length ? annos[0].body.value : ''
