@@ -4,6 +4,7 @@ import Annotator from '@/model/Annotator'
 import Annotation from '@/model/Annotation'
 import TranscribeAnnotation from '@/model/TranscribeAnnotation'
 import SelectAnnotation from '@/model/SelectAnnotation'
+import CommentAnnotation from '@/model/CommentAnnotation'
 import Task from '@/model/Task'
 
 import imageInfo from './data/imageInfo'
@@ -45,6 +46,17 @@ export default {
    */
   buildSelectAnnotation () {
     return new SelectAnnotation({
+      tag: 'test',
+      imgInfo: imageInfo,
+      fragmentUri: 'http://example.com/image'
+    })
+  },
+
+  /**
+   * Return a new CommentAnnotation.
+   */
+  buildCommentAnnotation () {
+    return new CommentAnnotation({
       tag: 'test',
       imgInfo: imageInfo,
       fragmentUri: 'http://example.com/image'
