@@ -88,7 +88,6 @@ export default {
       required: true
     },
     commentAnnotation: {
-      type: [Object, null],
       required: true
     },
     showNote: {
