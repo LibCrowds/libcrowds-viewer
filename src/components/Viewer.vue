@@ -445,6 +445,30 @@ export default {
     },
 
     /**
+     * Update a form and associated annotations.
+     * @param {Task} task.
+     *   The task.
+     * @param {Object} form
+     *   The updated form.
+     */
+    updateForm (task, form) {
+      task.updateForm(form)
+      for (let key in form.model) {
+        const now = new Date().toISOString()
+        const anno = this.annotator.storeFormFieldAnnotation(
+          task,
+          key,
+          form.model[key]
+        )
+        if (anno.created > now) {
+          this.$emit('create', task, anno)
+        } else {
+          this.$emit('update', task, anno)
+        }
+      }
+    },
+
+    /**
      * Emit submit event with a task object.
      * @param {Task} task.
      *   The task.
