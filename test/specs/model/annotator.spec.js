@@ -94,14 +94,6 @@ describe('Annotator', () => {
     })
   })
 
-  describe('getCommentAnnotations', () => {
-    it('returns comment annotations only', () => {
-      selectTask.annotations = [commentAnno, annoOne]
-      const result = annotator.getCommentAnnotations(selectTask)
-      expect(result).toEqual([commentAnno])
-    })
-  })
-
   describe('_getFormFieldAnnotation', () => {
     it('gets form field annotation when one exists', () => {
       const key = Object.keys(transcribeTask.form.model)[0]
@@ -117,16 +109,16 @@ describe('Annotator', () => {
     })
   })
 
-  describe('_getCommentAnnotation', () => {
+  describe('getCommentAnnotation', () => {
     it('gets CommentAnnotation when one exists', () => {
       transcribeTask.annotations = [commentAnno]
-      const anno = annotator._getCommentAnnotation(transcribeTask)
-      expect(anno).not.toEqual(transcribeAnno)
+      const anno = annotator.getCommentAnnotation(transcribeTask)
+      expect(anno).toEqual(commentAnno)
     })
 
     it('returns null when no CommentAnnotation exists', () => {
       const key = fixtures.uuid()
-      const anno = annotator._getCommentAnnotation(transcribeTask, key)
+      const anno = annotator.getCommentAnnotation(transcribeTask, key)
       expect(anno).toEqual(null)
     })
   })
