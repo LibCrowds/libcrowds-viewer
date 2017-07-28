@@ -75,7 +75,7 @@ class Annotator {
    * @param {Task} task
    *   The task.
    */
-  _getTranscribeAnnotations (task) {
+  getTranscribeAnnotations (task) {
     let matched = []
     for (let anno of task.annotations) {
       if (anno instanceof TranscribeAnnotation) {
@@ -90,7 +90,7 @@ class Annotator {
    * @param {Task} task
    *   The task.
    */
-  _getSelectAnnotations (task) {
+  getSelectAnnotations (task) {
     let matched = []
     for (let anno of task.annotations) {
       if (anno instanceof SelectAnnotation) {
@@ -105,7 +105,7 @@ class Annotator {
    * @param {Task} task
    *   The task.
    */
-  _getCommentAnnotations (task) {
+  getCommentAnnotations (task) {
     let matched = []
     for (let anno of task.annotations) {
       if (anno instanceof CommentAnnotation) {
@@ -123,7 +123,7 @@ class Annotator {
    *   The model key.
    */
   _getFormFieldAnnotation (task, key) {
-    const allAnnos = this._getTranscribeAnnotations(task)
+    const allAnnos = this.getTranscribeAnnotations(task)
     const fieldAnnos = this.filterAnnotations(allAnnos, {
       body: {
         type: 'TextualBody',
@@ -143,7 +143,7 @@ class Annotator {
    *   The task.
    */
   _getCommentAnnotation (task) {
-    let commentAnnos = this._getCommentAnnotations(task)
+    let commentAnnos = this.getCommentAnnotations(task)
     if (commentAnnos.length > 1) {
       throw Error('Multiple comment annotations identified')
     }

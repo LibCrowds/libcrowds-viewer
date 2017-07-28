@@ -78,26 +78,26 @@ describe('Annotator', () => {
     })
   })
 
-  describe('_getTranscribeAnnotations', () => {
+  describe('getTranscribeAnnotations', () => {
     it('returns transcribe annotations only', () => {
       transcribeTask.annotations = [annoOne, transcribeAnno]
-      const result = annotator._getTranscribeAnnotations(transcribeTask)
+      const result = annotator.getTranscribeAnnotations(transcribeTask)
       expect(result).toEqual([transcribeAnno])
     })
   })
 
-  describe('_getSelectAnnotations', () => {
+  describe('getSelectAnnotations', () => {
     it('returns select annotations only', () => {
       selectTask.annotations = [selectAnno, annoOne]
-      const result = annotator._getSelectAnnotations(selectTask)
+      const result = annotator.getSelectAnnotations(selectTask)
       expect(result).toEqual([selectAnno])
     })
   })
 
-  describe('_getCommentAnnotations', () => {
+  describe('getCommentAnnotations', () => {
     it('returns comment annotations only', () => {
       selectTask.annotations = [commentAnno, annoOne]
-      const result = annotator._getCommentAnnotations(selectTask)
+      const result = annotator.getCommentAnnotations(selectTask)
       expect(result).toEqual([commentAnno])
     })
   })
