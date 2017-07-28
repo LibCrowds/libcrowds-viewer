@@ -1,4 +1,5 @@
 import Annotation from '@/model/Annotation'
+import throwIfMissing from '@/utils/errors'
 
 /**
  * Represents a Web Annotation used for transcriptions.
@@ -19,9 +20,9 @@ import Annotation from '@/model/Annotation'
  */
 class TranscribeAnnotation extends Annotation {
   constructor ({
-    imgInfo,
-    value,
-    tag = null,
+    imgInfo = throwIfMissing(),
+    value = throwIfMissing(),
+    tag = throwIfMissing(),
     fragmentURI = null,
     creator = null,
     generator = null,
@@ -34,9 +35,7 @@ class TranscribeAnnotation extends Annotation {
       generator: generator
     })
     this.addDescription(value)
-    if (tag) {
-      this.addTag(tag, fragmentURI)
-    }
+    this.addTag(tag, fragmentURI)
     if (classification) {
       this.addClassification(classification)
     }
