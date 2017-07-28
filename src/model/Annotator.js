@@ -105,14 +105,17 @@ class Annotator {
    * @param {Task} task
    *   The task.
    */
-  getCommentAnnotations (task) {
+  getCommentAnnotation (task) {
     let matched = []
     for (let anno of task.annotations) {
       if (anno instanceof CommentAnnotation) {
         matched.push(anno)
       }
     }
-    return matched
+    if (matched.length > 1) {
+      throw Error('Multiple comment annotations identified')
+    }
+    return matched.length > 0 ? matched[0] : null
   }
 
   /**
@@ -135,19 +138,6 @@ class Annotator {
       throw Error('Multiple form field annotations identified')
     }
     return fieldAnnos.length > 0 ? fieldAnnos[0] : null
-  }
-
-  /**
-   * Return the CommentAnnotation for a task.
-   * @param {Task} task
-   *   The task.
-   */
-  _getCommentAnnotation (task) {
-    let commentAnnos = this.getCommentAnnotations(task)
-    if (commentAnnos.length > 1) {
-      throw Error('Multiple comment annotations identified')
-    }
-    return commentAnnos.length > 0 ? commentAnnos[0] : null
   }
 
   /**
