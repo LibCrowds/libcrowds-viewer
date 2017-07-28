@@ -1,15 +1,16 @@
 import Form from '@/model/Form'
 import getImageUri from '@/utils/getImageUri'
+import errors from '@/utils/errors'
 
 /**
  * Represents a task to be updated with user input as annotations.
  */
 class Task {
   constructor ({
-    mode,
-    id,
-    imgInfoUri,
-    imgInfo,
+    mode = errors.throwIfMissing(),
+    imgInfoUri = errors.throwIfMissing(),
+    imgInfo = errors.throwIfMissing(),
+    id = null,
     manifestUri = '',
     objective = '',
     guidance = '',
@@ -44,34 +45,17 @@ class Task {
 
     // Validate
     const validModes = ['select', 'transcribe']
-    const baseMsg = 'Failed to initialise task - '
-
-    if (this.mode === undefined) {
-      throw new Error(`${baseMsg} mode is required`)
-    }
-
-    if (this.imgInfo === undefined) {
-      throw new Error(`${baseMsg} imgInfo is required`)
-    }
 
     if (validModes.indexOf(this.mode) < 0) {
-      throw new Error(`${baseMsg} mode must be one of ${validModes}`)
-    }
-
-    if (this.imgInfoUri === undefined) {
-      throw new Error(`${baseMsg} imgInfoUri is required`)
+      throw new Error(`Mode must be one of ${validModes}`)
     }
 
     if (this.mode === 'select' && !this.tag) {
-      throw new Error(`${baseMsg} tag is required when in select mode`)
+      throw new Error(`Tag is required when in select mode`)
     }
 
     if (mode === 'transcribe') {
-      try {
-        this.form = new Form(this.form)
-      } catch (err) {
-        throw new Error(`${baseMsg} ${err}`)
-      }
+      this.form = new Form(this.form)
     }
   }
 
