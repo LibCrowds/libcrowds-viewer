@@ -6,6 +6,9 @@ describe('Annotator', () => {
   let selectTask = null
   let transcribeTask = null
   let annotator = null
+  let itemOne = null
+  let itemTwo = null
+  let itemThree = null
 
   beforeEach(() => {
     annoOne = fixtures.buildAnnotation()
@@ -13,6 +16,9 @@ describe('Annotator', () => {
     selectTask = fixtures.buildTask('select')
     transcribeTask = fixtures.buildTask('transcribe')
     annotator = fixtures.buildAnnotator()
+    itemOne = fixtures.buildItem(1)
+    itemTwo = fixtures.buildItem(2)
+    itemThree = fixtures.buildItem(3)
   })
 
   it('returns an annotation by id', () => {
@@ -63,6 +69,55 @@ describe('Annotator', () => {
       id: annoOne.id
     })
     expect(found).toEqual([annoOne])
+  })
+
+  it('returns true when searching for matching value', () => {
+    const value = fixtures.uuid()
+    annoOne.id = value
+    const result = annotator._search(annoOne, {
+      id: value
+    })
+    expect(result).toBe(true)
+  })
+
+  it('returns false when searching for non-matching value', () => {
+    const value = fixtures.uuid()
+    const anotherValue = fixtures.uuid()
+    annoOne.id = value
+    const result = annotator._search(annoOne, {
+      id: anotherValue
+    })
+    expect(result).toBe(false)
+  })
+
+  it('returns false when searching for non-existant value', () => {
+    const result = annotator._search(annoOne, {
+      id: fixtures.uuid()
+    })
+    expect(result).toBe(false)
+  })
+
+  it('returns true when searching for matching array value', () => {
+    annoOne.body = [itemOne, itemTwo]
+    const result = annotator._search(annoOne, {
+      body: itemOne
+    })
+    expect(result).toBe(true)
+  })
+
+  it('returns false when searching for non-matching array value', () => {
+    annoOne.body = [itemOne, itemTwo]
+    const result = annotator._search(annoOne, {
+      body: itemThree
+    })
+    expect(result).toBe(false)
+  })
+
+  it('returns false when searching for non-existant array value', () => {
+    const result = annotator._search(annoOne, {
+      body: itemOne
+    })
+    expect(result).toBe(false)
   })
 
   // it('gets form field annotation when one exists', () => {

@@ -82,53 +82,6 @@ describe('Annotation', () => {
     expect(anno.key[1]).toBe(itemTwo)
   })
 
-  it('returns true when searching for matching value', () => {
-    anno.id = '123'
-    const result = anno.search({
-      id: '123'
-    })
-    expect(result).toBe(true)
-  })
-
-  it('returns false when searching for non-matching value', () => {
-    anno.id = '123'
-    const result = anno.search({
-      id: '456'
-    })
-    expect(result).toBe(false)
-  })
-
-  it('returns false when searching for non-existant value', () => {
-    const result = anno.search({
-      id: '456'
-    })
-    expect(result).toBe(false)
-  })
-
-
-  it('returns true when searching for matching array value', () => {
-    anno.body = [itemOne, itemTwo]
-    const result = anno.search({
-      body: itemOne
-    })
-    expect(result).toBe(true)
-  })
-
-  it('returns false when searching for non-matching array value', () => {
-    anno.body = [itemOne, itemTwo]
-    const result = anno.search({
-      body: itemThree
-    })
-    expect(result).toBe(false)
-  })
-
-  it('returns false when searching for non-existant array value', () => {
-    const result = anno.search({
-      body: itemOne
-    })
-    expect(result).toBe(false)
-  })
-
   it('adds a comment', () => {
     const value = 'hello'
     anno.addComment(value)

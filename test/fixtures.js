@@ -13,14 +13,14 @@ export default {
   /**
    * Return a new Annotator.
    */
-  buildAnnotator() {
+  buildAnnotator () {
     return new Annotator()
   },
 
   /**
    * Return a new Annotation.
    */
-  buildAnnotation() {
+  buildAnnotation () {
     return new Annotation({
       motivation: 'testing',
       imgInfo: imageInfo
@@ -32,13 +32,25 @@ export default {
    * @param {String} mode
    *   The task mode.
    */
-  buildTask(mode) {
+  buildTask (mode) {
     if (mode === 'select') {
       selectTaskOpts.imgInfo = imageInfo
       return new Task(selectTaskOpts)
     } else if (mode === 'transcribe') {
       transcribeTaskOpts.imgInfo = imageInfo
       return new Task(transcribeTaskOpts)
+    }
+  },
+
+  /**
+   * Return a generic test item.
+   * @param {Number} id
+   *   An ID.
+   */
+  buildItem (id) {
+    return {
+      id: `http://example.com/item${id}`,
+      name: uuid()
     }
   },
 

@@ -18,6 +18,57 @@ class Annotator {
   }
 
   /**
+   * Check if a section of an object contains another.
+   * @param {Object} find
+   *   The object to find.
+   * @param {Object} root
+   *   The object to search.
+   */
+  _hasMatch (find, root) {
+    if (root === undefined) {
+      return false
+    } else if (!Array.isArray(root)) {
+      return root === find
+    } else {
+      for (let item of root) {
+        if (JSON.stringify(item) === JSON.stringify(find)) {
+          return true
+        }
+      }
+      return false
+    }
+  }
+
+  /**
+   * Check if an annotation contains the given key-value pairs.
+   *
+   * If the key happens to relate to an array within the Annotation a search
+   * will be made within that array.
+   *
+   * Example:
+   * contains({
+   *  id: 123,
+   *  body: {
+   *    purpose: 'tagging',
+   *    value: 'something'
+   *  }
+   * })
+   *
+   * @param {Annotation} annotation
+   *   The annotation.
+   * @param {Object} terms
+   *   Key-value pairs to check.
+   */
+  _search (annotation, terms) {
+    for (let key in terms) {
+      if (!this._hasMatch(terms[key], annotation[key])) {
+        return false
+      }
+    }
+    return true
+  }
+
+  /**
    * Return the annotation for a form field.
    * @param {Task} task
    *   The task.
@@ -97,7 +148,7 @@ class Annotator {
   searchAnnotations (task, terms) {
     let annotations = []
     for (let anno of task.annotations) {
-      if (anno.search(terms)) {
+      if (this._search(anno, terms)) {
         annotations.push(anno)
       }
     }
