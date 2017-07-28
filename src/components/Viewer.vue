@@ -120,8 +120,8 @@ import SelectSidebarItem from '@/components/sidebar/items/Select'
 import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
 import Selector from '@/components/Selector'
 import Task from '@/model/Task'
+import Annotator from '@/model/Annotator'
 import TagAnnotation from '@/model/TagAnnotation'
-import DescriptionAnnotation from '@/model/DescriptionAnnotation'
 import CommentAnnotation from '@/model/CommentAnnotation'
 import getImageUri from '@/utils/getImageUri'
 import extractRectFromImageUri from '@/utils/extractRectFromImageUri'
@@ -134,6 +134,10 @@ export default {
     return {
       viewer: {},
       selectionRect: {},
+      annotator: new Annotator({
+        creator: this.creator,
+        generator: this.generator
+      }),
       viewerOpts: {
         id: 'lv-viewer-container',
         showNavigationControl: false,
@@ -314,7 +318,7 @@ export default {
         generator: this.generator,
         classification: task.classification
       })
-      task.storeAnnotation(anno)
+      this.annotator.storeAnnotation(task, anno)
       this.drawSelectionOverlay(task, anno)
       this.$emit('create', task, anno)
     },
@@ -426,7 +430,7 @@ export default {
           creator: this.creator,
           generator: this.generator
         })
-        task.storeAnnotation(annos[0])
+        this.annotator.storeAnnotation(task, annos[0])
         this.$emit('update', task, annos[0])
       } else {
         let anno = new CommentAnnotation({
@@ -435,66 +439,9 @@ export default {
           creator: this.creator,
           generator: this.generator
         })
-        task.storeAnnotation(anno)
+        this.annotator.storeAnnotation(task, anno)
         this.$emit('create', task, anno)
       }
-    },
-
-    /**
-     * Update the form for a task and associated annotations.
-     * @param {Task} task.
-     *   The task.
-     * @param {Object} form
-     *   The updated form.
-     * @param {Array} errors
-     *   Form errors.
-     */
-    updateForm (task, form, errors) {
-      for (let prop in form.model) {
-
-        // Get the annotation(s) for this form field
-        const annos = task.searchAnnotations({
-          motivation: 'describing',
-          body: {
-            type: 'TextualBody',
-            purpose: 'tagging',
-            value: prop
-          }
-        })
-
-        // Create or update
-        if (!annos.length) {
-          const anno = new DescriptionAnnotation({
-            imgInfo: task.imgInfo,
-            value: form.model[prop],
-            tag: prop,
-            creator: this.creator,
-            generator: this.generator,
-            classification: form.classification[prop]
-          })
-          task.storeAnnotation(anno)
-          this.$emit('create', task, anno)
-        } else {
-          for (let anno of annos) {
-            // Filter out the old description
-            anno.body = anno.body.filter((item) => {
-              return item.purpose !== 'describing'
-            })
-
-            console.log('2', form.model[prop])
-
-            // Add the new description and save
-            anno.addDescription(form.model[prop])
-            anno.modify({
-              creator: this.creator,
-              generator: this.generator
-            })
-            task.storeAnnotation(anno)
-            this.$emit('update', task, anno)
-          }
-        }
-      }
-      form.errors = errors
     },
 
     /**
