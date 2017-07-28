@@ -87,7 +87,7 @@ class Annotator {
     if (annos.length > 1) {
       throw Error('Multiple form field annotations identified')
     }
-    return annos[0]
+    return annos.length > 0 ? annos[0] : null
   }
 
   /**
@@ -166,8 +166,8 @@ class Annotator {
    */
   storeFormFieldAnnotation (task, key, value) {
     let anno = this._getFormFieldAnnotation(task, key)
-    if (anno === undefined) {
-      const anno = new DescriptionAnnotation({
+    if (!anno) {
+      anno = new DescriptionAnnotation({
         imgInfo: task.imgInfo,
         value: value,
         tag: key,

@@ -126,9 +126,10 @@ describe('Annotator', () => {
   //   expect(anno).not.toEqual(descriptionAnnotation)
   // })
 
-  // it('returns undefined when no form field annotation exists', () => {
-
-  // })
+  it('returns null when no form field annotation exists', () => {
+    const anno = transcribeTask._getFormFieldAnnotation()
+    expect(anno).toEqual(null)
+  })
 
   // it('creates a new form field annotation', () => {
   //   expect(transcribeTask.annotations).toEqual([])
