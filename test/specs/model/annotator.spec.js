@@ -195,7 +195,6 @@ describe('Annotator', () => {
       const value = fixtures.uuid()
       annotator.storeTranscriptionAnnotation(transcribeTask, key, value)
       expect(transcribeTask.annotations.length).toBe(1)
-      console.log(transcribeTask.annotations)
       expect(transcribeTask.annotations[0].motivation).toBe('describing')
     })
 
