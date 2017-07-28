@@ -87,8 +87,8 @@ export default {
       type: Task,
       required: true
     },
-    note: {
-      type: String,
+    commentAnnotation: {
+      type: Object,
       required: true
     },
     showNote: {
@@ -98,6 +98,15 @@ export default {
     disableComplete: {
       type: Boolean,
       required: true
+    }
+  },
+
+  computed: {
+    note: function () {
+      if (!this.commentAnnotation) {
+        return ''
+      }
+      return this.commentAnnotation.body.value
     }
   },
 
