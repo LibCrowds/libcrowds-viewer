@@ -247,7 +247,7 @@ class Annotator {
    *   The comment text.
    */
   storeCommentAnnotation (task, comment) {
-    let anno = this._getCommentAnnotation(task)
+    let anno = this.getCommentAnnotation(task)
     if (anno === null) {
       anno = new CommentAnnotation({
         imgInfo: task.imgInfo,
