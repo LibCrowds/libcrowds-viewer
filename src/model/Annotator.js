@@ -126,6 +126,7 @@ class Annotator {
     const allAnnos = this._getTranscribeAnnotations(task)
     const fieldAnnos = this.filterAnnotations(allAnnos, {
       body: {
+        type: 'TextualBody',
         purpose: 'tagging',
         value: key
       }
@@ -173,7 +174,7 @@ class Annotator {
    */
   storeAnnotation (task, annotation) {
     let anno = this.getAnnotation(task, annotation.id)
-    if (!anno) {
+    if (anno !== null) {
       anno = annotation
     } else {
       task.annotations.push(annotation)
@@ -225,7 +226,7 @@ class Annotator {
    */
   storeTranscriptionAnnotation (task, key, transcription) {
     let anno = this._getFormFieldAnnotation(task, key)
-    if (!anno) {
+    if (anno === null) {
       anno = new TranscribeAnnotation({
         imgInfo: task.imgInfo,
         transcription: transcription,
@@ -257,7 +258,7 @@ class Annotator {
    */
   storeCommentAnnotation (task, comment) {
     let anno = this._getCommentAnnotation(task)
-    if (!anno) {
+    if (anno === null) {
       anno = new CommentAnnotation({
         imgInfo: task.imgInfo,
         comment: comment,
@@ -266,12 +267,12 @@ class Annotator {
       })
       this.storeAnnotation(task, anno)
     } else {
-      anno.body.value = text
+      anno.body.value = comment
       anno.modify({
         creator: this.creator,
         generator: this.generator
       })
-      this.annotator.storeAnnotation(task, anno)
+      this.storeAnnotation(task, anno)
     }
   }
 }
