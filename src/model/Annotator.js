@@ -143,7 +143,7 @@ class Annotator {
    */
   _getCommentAnnotation (task) {
     let commentAnnos = this._getCommentAnnotations(task)
-    if (annos.length > 1) {
+    if (commentAnnos.length > 1) {
       throw Error('Multiple comment annotations identified')
     }
     return anno.length > 0 ? commentAnnos[0] : null
