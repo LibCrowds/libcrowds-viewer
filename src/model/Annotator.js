@@ -146,7 +146,7 @@ class Annotator {
     if (commentAnnos.length > 1) {
       throw Error('Multiple comment annotations identified')
     }
-    return anno.length > 0 ? commentAnnos[0] : null
+    return commentAnnos.length > 0 ? commentAnnos[0] : null
   }
 
   /**

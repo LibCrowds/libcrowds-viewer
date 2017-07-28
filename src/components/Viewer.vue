@@ -123,7 +123,7 @@ import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
 import Selector from '@/components/Selector'
 import Task from '@/model/Task'
 import Annotator from '@/model/Annotator'
-import TagAnnotation from '@/model/TagAnnotation'
+import SelectAnnotation from '@/model/SelectAnnotation'
 import CommentAnnotation from '@/model/CommentAnnotation'
 import getImageUri from '@/utils/getImageUri'
 import extractRectFromImageUri from '@/utils/extractRectFromImageUri'
@@ -323,7 +323,7 @@ export default {
         imgSource: task.imgInfoUri,
         region: imgRect
       })
-      let anno = new TagAnnotation({
+      let anno = new SelectAnnotation({
         imgInfo: task.imgInfo,
         value: task.tag,
         fragmentURI: imageUri,
