@@ -33,11 +33,11 @@ export default {
   /**
    * Return a new TranscribeAnnotation.
    */
-  buildTranscribeAnnotation () {
+  buildTranscribeAnnotation (tag = 'test') {
     return new TranscribeAnnotation({
       transcription: 'testing',
       imgInfo: imageInfo,
-      tag: 'test'
+      tag: tag
     })
   },
 
