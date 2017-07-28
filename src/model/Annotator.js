@@ -7,6 +7,9 @@ class Annotator {
   constructor ({
     creator = null,
     generator = null
+  } = {
+    creator: null,
+    generator: null
   }) {
     this.creator = creator
     this.generator = generator
