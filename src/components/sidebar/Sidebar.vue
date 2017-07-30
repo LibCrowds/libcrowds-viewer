@@ -139,9 +139,15 @@ export default {
   display: flex;
   flex-direction: column;
   transition: width 350ms;
+  overflow-y: auto;
+  border-top: 1px solid $gray;
+  flex-shrink: 2;
 
   @media screen and (min-width: 768px) {
     width: 320px;
+    overflow-y: initial;
+    border-top: none;
+    flex-shrink: initial;
   }
 
   &.collapsed {
@@ -236,7 +242,6 @@ export default {
     }
 
     textarea {
-      margin-top: 0.6rem;
       margin-bottom: 0.6rem;
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;
