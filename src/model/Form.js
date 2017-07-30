@@ -7,11 +7,13 @@ class Form {
   constructor ({
     model = errors.throwIfMissing(),
     schema = errors.throwIfMissing(),
-    classification = {}
+    classification = {},
+    highlights = {}
   }) {
     this.model = model
     this.schema = schema
     this.classification = classification
+    this.highlights = highlights
     this.formOptions = {
       validateAfterLoad: true,
       validateAfterChanged: true
