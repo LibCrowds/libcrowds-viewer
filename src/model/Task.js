@@ -39,7 +39,7 @@ class Task {
     this.imgInfo = imgInfo
 
     this.thumbnailUri = getImageUri({
-      imgSource: this.imgInfoUri,
+      imgInfo: this.imgInfo,
       size: '256,'
     })
 

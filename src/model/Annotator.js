@@ -276,7 +276,7 @@ class Annotator {
    */
   createSelectAnnotation (task, rect) {
     const imageUri = getImageUri({
-      imgSource: task.imgInfoUri,
+      imgInfo: task.imgInfo,
       region: rect
     })
     const anno = new SelectAnnotation({
