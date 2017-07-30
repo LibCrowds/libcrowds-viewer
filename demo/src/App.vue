@@ -120,7 +120,7 @@ export default {
     padding: 12px 26px;
     margin: 0.5rem;
     letter-spacing: 0.8px;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     border: none;
   }
 

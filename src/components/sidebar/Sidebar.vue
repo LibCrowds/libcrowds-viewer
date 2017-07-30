@@ -184,8 +184,8 @@ export default {
     position: fixed;
     right: 0;
     top: 1rem;
-    font-size: 0.85rem;
-    font-family: sans-serif;
+    font-size: $font-size-sm;
+    font-family: $font-family-headings;
     letter-spacing: 1px;
     text-transform: uppercase;
     transform: translateX(100%);
@@ -203,12 +203,13 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     padding: 1.5rem 1.5rem 0.75rem 1.5rem;
-    font-family: sans-serif;
+    font-family: $font-family-headings;
     letter-spacing: 1px;
 
     h4 {
       text-transform: uppercase;
-      margin: 0;
+      margin-bottom: 1rem;
+      font-size: $font-size-lg;
       flex-direction: row;
     }
   }
@@ -224,7 +225,7 @@ export default {
 
     h4 {
       margin: 0;
-      font-family: Arial;
+      font-family: $font-family-headings;
       font-weight: 200;
       letter-spacing: 0.5px;
     }

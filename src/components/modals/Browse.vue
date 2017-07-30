@@ -85,8 +85,8 @@ export default {
 
     figcaption {
       text-align: center;
-      font-family: sans-serif;
-      font-size: $font-size-small;
+      font-family: $font-family-headings;
+      font-size: $font-size-sm;
       margin: 5px 5px 3px 5px;
     }
   }

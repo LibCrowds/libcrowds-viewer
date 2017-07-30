@@ -7,7 +7,6 @@ textarea {
   display: block;
   width: 100%;
   padding: 10px;
-  font-size: 1rem;
   line-height: 1.25;
   color: $gray-dark;
   background-image: none;
@@ -15,7 +14,7 @@ textarea {
   border: 1px solid rgba(0, 0, 0, 0.15);
   transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s;
   touch-action: manipulation;
-  font-family: sans-serif;
+  font-family: $font-family-headings;
   box-sizing:border-box;
 
   &:focus {
@@ -28,7 +27,7 @@ textarea {
 label {
   text-transform: uppercase;
   font-family: Arial, sans-serif;
-  font-size: $font-size-small;
+  font-size: $font-size-sm;
   letter-spacing: 1px;
 }
 
