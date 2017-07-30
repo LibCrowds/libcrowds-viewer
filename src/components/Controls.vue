@@ -88,7 +88,7 @@ export default {
   background-color: rgba(0, 0, 0, 0.75);
   padding: 0 0.5rem;
 
-  @media screen and (min-width: 992px) {
+  @media screen and (min-width: 768px) {
     padding: 0;
   }
 

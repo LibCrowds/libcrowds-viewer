@@ -156,7 +156,7 @@ export default {
   z-index: 2;
   top: 0;
   right: 0;
-  width: 280px;
+  width: 100%;
   font-size: 14px;
   color: #FFFFFF;
   height: 100%;
@@ -165,8 +165,8 @@ export default {
   flex-direction: column;
   transition: width 350ms;
 
-  @media screen and (min-width: 992px) {
-    flex-direction: column;
+  @media screen and (min-width: 768px) {
+    width: 280px;
   }
 
   &.collapsed {
@@ -199,12 +199,17 @@ export default {
 
   .lv-sidebar-header {
     display: flex;
-    width: calc(280px - 3rem);
     flex-direction: row;
     justify-content: space-between;
-    padding: 1.5rem 1.5rem 0.75rem 1.5rem;
+    padding: 0.75rem 1.5rem 1.5rem 1.5rem;
     font-family: $font-family-headings;
     letter-spacing: 1px;
+    display: none;
+
+    @media screen and (min-width: 768px) {
+      display: block;
+      padding: 0.75rem 1.5rem 0.75rem 1.5rem;
+    }
 
     h4 {
       text-transform: uppercase;
@@ -215,13 +220,17 @@ export default {
   }
 
   .lv-sidebar-content {
-    flex: 1 1 auto;
+    flex: none;
     display: flex;
-    width: calc(280px - 3rem);
     flex-direction: column;
     position: relative;
-    padding: 0.75rem 1.5rem 1.5rem 1.5rem;
+    padding: 0.75rem 1.5rem 0.75rem 1.5rem;
     overflow-y: auto;
+
+    @media screen and (min-width: 768px) {
+      flex: 1 1 auto;
+      padding: 0.75rem 1.5rem 1.5rem 1.5rem;
+    }
 
     h4 {
       margin: 0;
@@ -229,12 +238,23 @@ export default {
       font-weight: 200;
       letter-spacing: 0.5px;
     }
+
+    p {
+      margin-bottom: 0;
+
+      @media screen and (min-width: 768px) {
+        margin-bottom: auto;
+      }
+    }
   }
 
   .lv-sidebar-footer {
-    padding: 1.5rem;
-    width: calc(280px - 3rem);
+    padding: 0.75rem 1.5rem 0.75rem 1.5rem;
     border-top: 1px solid lighten($gray-dark, 10%);
+
+    @media screen and (min-width: 768px) {
+      padding: 1.5rem;
+    }
 
     button:not(:last-child) {
       margin-bottom: 0.6rem;

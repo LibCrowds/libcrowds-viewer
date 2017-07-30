@@ -61,7 +61,7 @@ export default {
     -webkit-column-gap: 5px;
     column-gap: 5px;
 
-    @media (min-width: 992px) {
+    @media (min-width: 768px) {
       -moz-column-count: 4;
       -webkit-column-count: 4;
       column-count: 4;

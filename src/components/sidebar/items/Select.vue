@@ -68,8 +68,12 @@ export default {
 
 #lv-sidebar-select-item {
   flex: 1 1 auto;
-  display: flex;
+  display: none;
   flex-direction: column;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
 
   ul {
     margin: 0;
