@@ -334,19 +334,20 @@ export default {
     },
 
     /**
-     * Highlight a region of the current image.
+     * Draw any highlights for the task.
      */
-    highlightRegion () {
-      // if (this.region) {
-      //   const rect = new OpenSeadragon.Rect(
-      //     this.region.x,
-      //     this.region.y,
-      //     this.region.width,
-      //     this.region.height
-      //   )
-      //   // Use task.addOverlay when refactoring the highlight method
-      //   // drawOverlay(this.viewer, 'highlight', rect, 'highlight')
-      // }
+    drawHighlights (task) {
+      const vp = this.viewer.viewport
+      for (let highlight of task.highlights) {
+        const imgRect = new OpenSeadragon.Rect(
+          highlight.x,
+          highlight.y,
+          highlight.width,
+          highlight.height
+        )
+        const vpRect = vp.imageToViewportRectangle(imgRect)
+        drawOverlay(this.viewer, 'highlight', vpRect, 'highlight')
+      }
     },
 
     /**
@@ -492,6 +493,7 @@ export default {
           this.drawSelectionOverlay(task, anno)
         }
       }
+      this.drawHighlights(task)
     },
 
     /**
@@ -552,12 +554,8 @@ export default {
   },
 
   mounted () {
-    // Initialise after the DOM is loaded
     this.viewer = new OpenSeadragon.Viewer(this.viewerOpts)
-
     this.loadTasks()
-    this.highlightRegion()
-
     window.addEventListener('beforeunload', this.onBeforeUnload)
   },
 

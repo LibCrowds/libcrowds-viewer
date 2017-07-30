@@ -17,7 +17,7 @@ class Task {
     tag,
     classification,
     form = null,
-    regions = [],
+    highlights = [],
     liked = false,
     annotations = [],
     complete = false
@@ -31,7 +31,7 @@ class Task {
     this.tag = tag
     this.classification = classification
     this.form = form
-    this.regions = regions
+    this.highlights = highlights
     this.liked = liked
     this.annotations = annotations
     this.complete = complete
