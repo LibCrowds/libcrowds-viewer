@@ -66,7 +66,8 @@ export default {
       selecting: false,
       rect: null,
       minWidth: 10,
-      minHeight: 10
+      minHeight: 10,
+      mouseTrackers: []
     }
   },
 
@@ -401,69 +402,89 @@ export default {
 
   mounted () {
     /* eslint-disable no-new */
-    new OpenSeadragon.MouseTracker({
-      element: this.$refs.box,
-      clickTimeThreshold: this.viewer.clickTimeThreshold,
-      clickDistThreshold: this.viewer.clickDistThreshold,
-      dragHandler: OpenSeadragon.delegate(this, this.onSelectorBoxDrag)
-    })
+    this.mouseTrackers.push(
+      new OpenSeadragon.MouseTracker({
+        element: this.$refs.box,
+        clickTimeThreshold: this.viewer.clickTimeThreshold,
+        clickDistThreshold: this.viewer.clickDistThreshold,
+        dragHandler: OpenSeadragon.delegate(this, this.onSelectorBoxDrag)
+      })
+    )
 
     /* eslint-disable no-new */
-    new OpenSeadragon.MouseTracker({
-      element: this.viewer.canvas,
-      clickTimeThreshold: this.viewer.clickTimeThreshold,
-      clickDistThreshold: this.viewer.clickDistThreshold,
-      dragHandler: OpenSeadragon.delegate(this, this.onCanvasDrag),
-      dragEndHandler: OpenSeadragon.delegate(this, this.onCanvasDragEnd)
-    })
+    this.mouseTrackers.push(
+      new OpenSeadragon.MouseTracker({
+        element: this.viewer.canvas,
+        clickTimeThreshold: this.viewer.clickTimeThreshold,
+        clickDistThreshold: this.viewer.clickDistThreshold,
+        dragHandler: OpenSeadragon.delegate(this, this.onCanvasDrag),
+        dragEndHandler: OpenSeadragon.delegate(this, this.onCanvasDragEnd)
+      })
+    )
 
     /* eslint-disable no-new */
-    new OpenSeadragon.MouseTracker({
-      element: this.$refs['border-top'],
-      dragHandler: this.onBorderDrag.bind(this, 'top')
-    })
+    this.mouseTrackers.push(
+      new OpenSeadragon.MouseTracker({
+        element: this.$refs['border-top'],
+        dragHandler: this.onBorderDrag.bind(this, 'top')
+      })
+    )
 
     /* eslint-disable no-new */
-    new OpenSeadragon.MouseTracker({
-      element: this.$refs['border-right'],
-      dragHandler: this.onBorderDrag.bind(this, 'right')
-    })
+    this.mouseTrackers.push(
+      new OpenSeadragon.MouseTracker({
+        element: this.$refs['border-right'],
+        dragHandler: this.onBorderDrag.bind(this, 'right')
+      })
+    )
 
     /* eslint-disable no-new */
-    new OpenSeadragon.MouseTracker({
-      element: this.$refs['border-bottom'],
-      dragHandler: this.onBorderDrag.bind(this, 'bottom')
-    })
+    this.mouseTrackers.push(
+      new OpenSeadragon.MouseTracker({
+        element: this.$refs['border-bottom'],
+        dragHandler: this.onBorderDrag.bind(this, 'bottom')
+      })
+    )
 
     /* eslint-disable no-new */
-    new OpenSeadragon.MouseTracker({
-      element: this.$refs['border-left'],
-      dragHandler: this.onBorderDrag.bind(this, 'left')
-    })
+    this.mouseTrackers.push(
+      new OpenSeadragon.MouseTracker({
+        element: this.$refs['border-left'],
+        dragHandler: this.onBorderDrag.bind(this, 'left')
+      })
+    )
 
     /* eslint-disable no-new */
-    new OpenSeadragon.MouseTracker({
-      element: this.$refs['corner-top-right'],
-      dragHandler: this.onCornerDrag.bind(this, 'top-right')
-    })
+    this.mouseTrackers.push(
+      new OpenSeadragon.MouseTracker({
+        element: this.$refs['corner-top-right'],
+        dragHandler: this.onCornerDrag.bind(this, 'top-right')
+      })
+    )
 
     /* eslint-disable no-new */
-    new OpenSeadragon.MouseTracker({
-      element: this.$refs['corner-bottom-right'],
-      dragHandler: this.onCornerDrag.bind(this, 'bottom-right')
-    })
+    this.mouseTrackers.push(
+      new OpenSeadragon.MouseTracker({
+        element: this.$refs['corner-bottom-right'],
+        dragHandler: this.onCornerDrag.bind(this, 'bottom-right')
+      })
+    )
 
     /* eslint-disable no-new */
-    new OpenSeadragon.MouseTracker({
-      element: this.$refs['corner-bottom-left'],
-      dragHandler: this.onCornerDrag.bind(this, 'bottom-left')
-    })
+    this.mouseTrackers.push(
+      new OpenSeadragon.MouseTracker({
+        element: this.$refs['corner-bottom-left'],
+        dragHandler: this.onCornerDrag.bind(this, 'bottom-left')
+      })
+    )
 
     /* eslint-disable no-new */
-    new OpenSeadragon.MouseTracker({
-      element: this.$refs['corner-top-left'],
-      dragHandler: this.onCornerDrag.bind(this, 'top-left')
-    })
+    this.mouseTrackers.push(
+      new OpenSeadragon.MouseTracker({
+        element: this.$refs['corner-top-left'],
+        dragHandler: this.onCornerDrag.bind(this, 'top-left')
+      })
+    )
 
     window.addEventListener('keyup', this.onKeyUp)
 
@@ -474,6 +495,9 @@ export default {
   },
 
   beforeDestroy () {
+    for (let tracker of this.mouseTrackers) {
+      tracker.destroy()
+    }
     window.removeEventListener('keyup', this.onKeyUp)
     this.viewer.removeHandler('open', this.draw)
     this.viewer.removeHandler('animation', this.draw)
