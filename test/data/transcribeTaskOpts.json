@@ -16,6 +16,26 @@
       "title": "http://purl.org/dc/terms/title",
       "date": "http://purl.org/dc/terms/date"
     },
+    "highlights": {
+      "title": {
+        "x": 291,
+        "y": 1498,
+        "width": 1737,
+        "height": 244
+      },
+      "date": {
+        "x": 1114,
+        "y": 482,
+        "width": 761,
+        "height": 86
+      },
+      "genre": {
+        "x": 1196,
+        "y": 1457,
+        "width": 269,
+        "height": 62
+      }
+    },
     "schema": {
       "fields": [
         {
@@ -40,13 +60,5 @@
         }
       ]
     }
-  },
-  "highlight": [
-    {
-      "x": 100,
-      "y": 100,
-      "width": 100,
-      "height": 100
-    }
-  ]
+  }
 }
