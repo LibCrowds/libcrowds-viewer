@@ -323,12 +323,10 @@ export default {
       // Confirm before leaving if any overlays have been drawn or forms filled
       window.onbeforeunload = () => {
         const msg = 'Unsaved changes will be lost.'
+        const annos = this.annotator.getSelectAnnotations(this.currentTask)
         if (!this.confirmBeforeUnload) {
           return
-        }
-
-        // TODO: Check for selection overlays only
-        if (this.viewer.currentOverlays.length) {
+        } else if (annos.length) {
           return msg
         }
 
