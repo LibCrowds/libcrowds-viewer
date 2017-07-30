@@ -317,30 +317,6 @@ export default {
     },
 
     /**
-     * Setup event handlers.
-     */
-    setupHandlers () {
-      // Confirm before leaving if any overlays have been drawn or forms filled
-      window.onbeforeunload = () => {
-        const msg = 'Unsaved changes will be lost.'
-        if (!this.confirmBeforeUnload) {
-          return
-        }
-
-        // TODO: Check for selection overlays only
-        if (this.viewer.currentOverlays.length) {
-          return msg
-        }
-
-        [].forEach.call(document.querySelectorAll('input'), function (input) {
-          if (input.value.length) {
-            return msg
-          }
-        })
-      }
-    },
-
-    /**
      * Draw a selection overlays from an annotation.
      * @param {Task} task
      *   The Task.
@@ -539,6 +515,18 @@ export default {
           throw Error(`Could not retrieve image info: ${err}`)
         })
       }
+    },
+
+    /**
+     * Check for any unsaved annotations.
+     */
+    onBeforeUnload () {
+      const nAnnos = this.currentTask.annotations.length
+      if (!this.confirmBeforeUnload) {
+        return
+      } else if (!this.currentTask.complete && nAnnos > 0) {
+        return 'Unsaved changes will be lost.'
+      }
     }
   },
 
@@ -569,8 +557,13 @@ export default {
     this.viewer = new OpenSeadragon.Viewer(this.viewerOpts)
 
     this.loadTasks()
-    this.setupHandlers()
     this.highlightRegion()
+
+    window.addEventListener('beforeunload', this.onBeforeUnload)
+  },
+
+  beforeDestroy () {
+    window.removeEventListener('beforeunload', this.onBeforeUnload)
   }
 }
 </script>
