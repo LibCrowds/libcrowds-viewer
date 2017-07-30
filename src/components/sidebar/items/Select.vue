@@ -78,6 +78,11 @@ export default {
     list-style: none;
     padding: 0;
     border: 1px solid lighten($gray-dark, 20%);
+    transition: opacity 250ms;
+
+    &:empty {
+      opacity: 0;
+    }
 
     li {
       padding: 0.8rem;
