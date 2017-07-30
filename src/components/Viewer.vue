@@ -545,7 +545,9 @@ export default {
         fetch(opts.imgInfoUri, {
           method: 'get'
         }).then((response) => {
-          opts.imgInfo = response.json()
+          return response.json()
+        }).then((json) => {
+          opts.imgInfo = json
           this.tasks.push(new Task(opts))
           if (firstTask) {
             this.setCurrentTask(this.tasks[0])
