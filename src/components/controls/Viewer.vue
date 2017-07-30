@@ -171,7 +171,7 @@ export default {
                   clipboard.destroy()
                 })
                 return getImageUri({
-                  imgSource: this.task.imgInfoUri
+                  imgInfo: this.task.imgInfo
                 })
               }
             })
