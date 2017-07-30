@@ -1,4 +1,5 @@
 import uuid from 'uuid/v4'
+import errors from '@/utils/errors'
 
 /**
  * Represents a Web Annotation.
@@ -21,8 +22,8 @@ import uuid from 'uuid/v4'
  */
 class Annotation {
   constructor ({
-    motivation,
-    imgInfo,
+    motivation = errors.throwIfMissing(),
+    imgInfo = errors.throwIfMissing(),
     creator = null,
     generator = null
   }) {
@@ -166,37 +167,6 @@ class Annotation {
       purpose: 'commenting',
       format: 'text/plain'
     })
-  }
-
-  /**
-   * Return matching bodies filtered at root level by filters.
-   * @param {*} filters
-   *   Array of key-value pairs on which to search.
-   */
-  searchBodies (filters) {
-    if (Array.isArray(this.body)) {
-      const filtered = this.body.filter(function (item) {
-        for (let prop in filters) {
-          if (item[prop] !== filters[prop]) {
-            return false
-          }
-        }
-        return true
-      })
-      const bodies = []
-      for (let item of filtered) {
-        const idx = this.body.indexOf(item)
-        bodies.push(this.body[idx])
-      }
-      return bodies
-    } else if (this.body !== undefined) {
-      for (let prop in filters) {
-        if (this.body[prop] !== filters[prop]) {
-          return []
-        }
-      }
-      return this.body
-    }
   }
 }
 

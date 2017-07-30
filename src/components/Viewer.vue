@@ -76,6 +76,7 @@
       v-if="currentTask"
       :task="currentTask"
       :showNote="showNote"
+      :commentAnnotation="commentAnnotation"
       :disableComplete="disableComplete"
       @noteupdated="updateNote"
       @submit="submitTask">
@@ -83,6 +84,7 @@
       <select-sidebar-item
         v-if="currentTask.mode === 'select'"
         :task="currentTask"
+        :tags="tags"
         @edit="editTag"
         @delete="deleteTag">
       </select-sidebar-item>
@@ -120,12 +122,8 @@ import SelectSidebarItem from '@/components/sidebar/items/Select'
 import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
 import Selector from '@/components/Selector'
 import Task from '@/model/Task'
-import TagAnnotation from '@/model/TagAnnotation'
-import DescriptionAnnotation from '@/model/DescriptionAnnotation'
-import CommentAnnotation from '@/model/CommentAnnotation'
-import getImageUri from '@/utils/getImageUri'
+import Annotator from '@/model/Annotator'
 import extractRectFromImageUri from '@/utils/extractRectFromImageUri'
-import filterAnnotations from '@/utils/filterAnnotations'
 import toggleFullScreen from '@/utils/toggleFullScreen'
 import drawOverlay from '@/utils/drawOverlay'
 import deleteOverlay from '@/utils/deleteOverlay'
@@ -135,6 +133,10 @@ export default {
     return {
       viewer: {},
       selectionRect: {},
+      annotator: new Annotator({
+        creator: this.creator,
+        generator: this.generator
+      }),
       viewerOpts: {
         id: 'lv-viewer-container',
         showNavigationControl: false,
@@ -252,6 +254,12 @@ export default {
         return true
       }
       return this.tasks.indexOf(this.currentTask) >= this.tasks.length - 1
+    },
+    tags: function () {
+      return this.annotator.getSelectAnnotations(this.currentTask)
+    },
+    commentAnnotation: function () {
+      return this.annotator.getCommentAnnotation(this.currentTask)
     }
   },
 
@@ -303,23 +311,9 @@ export default {
     handleSelection (task, rect) {
       const vp = this.viewer.viewport
       const imgRect = vp.viewportToImageRectangle(rect)
-      const imageUri = getImageUri({
-        imgSource: task.imgInfoUri,
-        region: imgRect
-      })
-      task.fetchImageInfo().then((info) => {
-        let anno = new TagAnnotation({
-          imgInfo: info,
-          value: task.tag,
-          fragmentURI: imageUri,
-          creator: this.creator,
-          generator: this.generator,
-          classification: task.classification
-        })
-        task.annotations.push(anno)
-        this.drawSelectionOverlay(task, anno)
-        this.$emit('create', task, anno)
-      })
+      const anno = this.annotator.createSelectAnnotation(task, imgRect)
+      this.drawSelectionOverlay(task, anno)
+      this.$emit('create', task, anno)
     },
 
     /**
@@ -416,72 +410,40 @@ export default {
      *   The text.
      */
     updateNote (task, text) {
-      let annos = filterAnnotations({
-        annotations: task.annotations,
-        motivation: 'commenting'
-      })
-      if (annos.length && text.length === 0) {
-        task.deleteAnnotation(annos[0].id)
-        this.$emit('delete', task, annos[0])
-      } else if (annos.length) {
-        annos[0].body.value = text
-        annos[0].modify({
-          creator: this.creator,
-          generator: this.generator
-        })
-        this.$emit('update', task, annos[0])
+      const now = new Date().toISOString()
+      const anno = this.annotator.storeCommentAnnotation(
+        task,
+        text
+      )
+      if (anno.created > now) {
+        this.$emit('create', task, anno)
       } else {
-        task.fetchImageInfo().then((info) => {
-          let anno = new CommentAnnotation({
-            imgInfo: info,
-            value: text,
-            creator: this.creator,
-            generator: this.generator
-          })
-          task.annotations.push(anno)
-          this.$emit('create', task, anno)
-        })
+        this.$emit('update', task, anno)
       }
     },
 
     /**
-     * Update the form for a task and associated annotations.
+     * Update a form and associated annotations.
      * @param {Task} task.
      *   The task.
      * @param {Object} form
      *   The updated form.
-     * @param {Array} errors
-     *   Form errors.
      */
-    updateForm (task, form, errors) {
-      for (let prop in form.model) {
-        if (Object.keys(form.annotations).indexOf(prop) > -1) {
-          const anno = form.annotations[prop]
-          const bodies = anno.searchBodies({ purpose: 'describing' })
-          bodies[0].value = form.model[prop]
-          anno.modify({
-            creator: this.creator,
-            generator: this.generator
-          })
-          this.$emit('update', task, anno)
+    updateForm (task, form) {
+      task.updateForm(form)
+      for (let key in form.model) {
+        const now = new Date().toISOString()
+        const anno = this.annotator.storeTranscriptionAnnotation(
+          task,
+          key,
+          form.model[key]
+        )
+        if (anno.created > now) {
+          this.$emit('create', task, anno)
         } else {
-          this.currentTask.fetchImageInfo().then((info) => {
-            let anno = new DescriptionAnnotation({
-              imgInfo: info,
-              value: form.model[prop],
-              tag: prop,
-              creator: this.creator,
-              generator: this.generator,
-              classification: form.classification[prop]
-            })
-            form.annotations[prop] = anno
-            task.annotations.push(anno)
-            this.$emit('create', task, anno)
-          })
+          this.$emit('update', task, anno)
         }
       }
-      form.errors = errors
-      task.form = form
     },
 
     /**
@@ -514,8 +476,8 @@ export default {
      */
     editTag (task, id) {
       const vp = this.viewer.viewport
-      const tag = task.getAnnotation(id)
-      const imgRect = extractRectFromImageUri(tag.target.selector.value)
+      const anno = this.annotator.getAnnotation(task, id)
+      const imgRect = extractRectFromImageUri(anno.target.selector.value)
       const vpRect = vp.imageToViewportRectangle(imgRect)
       const rect = new OpenSeadragon.Rect(
         vpRect.x,
@@ -535,8 +497,8 @@ export default {
      *   The tag ID.
      */
     deleteTag (task, id) {
-      const anno = task.getAnnotation(id)
-      task.deleteAnnotation(id)
+      const anno = this.annotator.getAnnotation(task, id)
+      this.annotator.deleteAnnotation(task, id)
       deleteOverlay(this.viewer, id)
       this.$emit('delete', task, anno)
     },
@@ -548,11 +510,8 @@ export default {
      */
     configureMode (task) {
       if (task.mode === 'select' && !(task.complete && this.disableComplete)) {
-        // Draw all tags as selection overlays
-        let annos = filterAnnotations({
-          annotations: task.annotations,
-          motivation: 'tagging'
-        })
+        // Draw all selection overlays
+        const annos = this.annotator.getSelectAnnotations(task)
         for (let anno of annos) {
           this.drawSelectionOverlay(task, anno)
         }
@@ -563,12 +522,22 @@ export default {
      * Generate tasks from task options.
      */
     loadTasks () {
-      const previousTask = this.currentTask
-      this.tasks = this.taskOpts.map(function (opts) {
-        return new Task(opts)
-      })
-      if (!previousTask && this.tasks.length > 0) {
-        this.setCurrentTask(this.tasks[0])
+      const taskOptsCopy = JSON.parse(JSON.stringify(this.taskOpts))
+      let firstTask = true
+      this.tasks = []
+      for (let opts of taskOptsCopy) {
+        fetch(opts.imgInfoUri, {
+          method: 'get'
+        }).then((response) => {
+          opts.imgInfo = response.json()
+          this.tasks.push(new Task(opts))
+          if (firstTask) {
+            this.setCurrentTask(this.tasks[0])
+            firstTask = false
+          }
+        }).catch(function (err) {
+          throw Error(`Could not retrieve image info: ${err}`)
+        })
       }
     }
   },

@@ -110,7 +110,7 @@ Note that the `tag` property is required when in `select` mode.
 
 ```json
 {
-  "mode": "transcribe",
+  "mode": "select",
   "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
   "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
   "id": 123,

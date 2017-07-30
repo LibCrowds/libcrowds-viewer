@@ -1,11 +1,12 @@
 import Annotation from '@/model/Annotation'
+import errors from '@/utils/errors'
 
 /**
- * Represents a Web Annotation used for descriptions.
+ * Represents a Web Annotation used for transcriptions.
  * @param {Object} imgInfo
  *   The IIIF image info.
- * @param {String} value
- *   The description value.
+ * @param {String} transcription
+ *   The transcription.
  * @param {String} tag
  *   The tag value.
  * @param {String} fragmentURI
@@ -17,11 +18,11 @@ import Annotation from '@/model/Annotation'
  * @param {String} classification
  *   A classification.
  */
-class DescriptionAnnotation extends Annotation {
+class TranscribeAnnotation extends Annotation {
   constructor ({
-    imgInfo,
-    value,
-    tag = null,
+    imgInfo = errors.throwIfMissing(),
+    transcription = errors.throwIfMissing(),
+    tag = errors.throwIfMissing(),
     fragmentURI = null,
     creator = null,
     generator = null,
@@ -33,14 +34,12 @@ class DescriptionAnnotation extends Annotation {
       creator: creator,
       generator: generator
     })
-    this.addDescription(value)
-    if (tag) {
-      this.addTag(tag, fragmentURI)
-    }
+    this.addDescription(transcription)
+    this.addTag(tag, fragmentURI)
     if (classification) {
       this.addClassification(classification)
     }
   }
 }
 
-export default DescriptionAnnotation
+export default TranscribeAnnotation

@@ -1,12 +1,13 @@
 import Annotation from '@/model/Annotation'
+import errors from '@/utils/errors'
 
 /**
  * Represents a Web Annotation used for tagging.
  * @param {Object} imgInfo
  *   The IIIF image info.
- * @param {String} value
+ * @param {String} tag
  *   Plain text value for the tag.
- * @param {String} fragmentURI
+ * @param {String} fragmentUri
  *   The IIIF image region.
  * @param {Object} creator
  *   The Annotation creator.
@@ -15,11 +16,11 @@ import Annotation from '@/model/Annotation'
  * @param {String} classification
  *   A classification.
  */
-class TagAnnotation extends Annotation {
+class SelectAnnotation extends Annotation {
   constructor ({
-    imgInfo,
-    value,
-    fragmentURI = null,
+    imgInfo = errors.throwIfMissing(),
+    tag = errors.throwIfMissing(),
+    fragmentUri = errors.throwIfMissing(),
     creator = null,
     generator = null,
     classification = null
@@ -30,11 +31,11 @@ class TagAnnotation extends Annotation {
       creator: creator,
       generator: generator
     })
-    this.addTag(value, imgInfo, fragmentURI)
+    this.addTag(tag, imgInfo, fragmentUri)
     if (classification) {
       this.addClassification(classification)
     }
   }
 }
 
-export default TagAnnotation
+export default SelectAnnotation

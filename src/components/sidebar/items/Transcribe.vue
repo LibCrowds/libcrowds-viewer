@@ -3,8 +3,8 @@
 
     <vue-form-generator
       id="lv-form"
-      :schema="task.form.schema"
-      :model="task.form.model"
+      :schema="form.schema"
+      :model="form.model"
       :options="formOptions"
       @validated="onValidated">
     </vue-form-generator>
@@ -49,8 +49,8 @@ export default {
           this.form.model[field.model] = null
         }
       })
-
-      this.$emit('update', this.task, this.form, errors)
+      this.form.errors = errors
+      this.$emit('update', this.task, this.form)
     }
   }
 }

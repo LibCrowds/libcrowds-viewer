@@ -33,27 +33,21 @@ import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/pencil'
 import highlightOverlay from '@/utils/highlightOverlay'
-import filterAnnotations from '@/utils/filterAnnotations'
 
 export default {
   props: {
     task: {
       type: Task,
       required: true
+    },
+    tags: {
+      type: Array,
+      required: true
     }
   },
 
   components: {
     Icon
-  },
-
-  computed: {
-    tags: function () {
-      return filterAnnotations({
-        annotations: this.task.annotations,
-        motivation: 'tagging'
-      })
-    }
   },
 
   methods: {

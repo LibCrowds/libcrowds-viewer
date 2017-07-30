@@ -1,10 +1,11 @@
 import Annotation from '@/model/Annotation'
+import errors from '@/utils/errors'
 
 /**
  * Represents a Web Annotation used for comments.
  * @param {Object} imgInfo
  *   The IIIF image info.
- * @param {String} value
+ * @param {String} comment
  *   The comment value.
  * @param {Object} creator
  *   The Annotation creator.
@@ -13,8 +14,8 @@ import Annotation from '@/model/Annotation'
  */
 class CommentAnnotation extends Annotation {
   constructor ({
-    imgInfo,
-    value,
+    imgInfo = errors.throwIfMissing(),
+    comment = errors.throwIfMissing(),
     creator = null,
     generator = null
   }) {
@@ -24,7 +25,7 @@ class CommentAnnotation extends Annotation {
       creator: creator,
       generator: generator
     })
-    this.addComment(value)
+    this.addComment(comment)
   }
 }
 
