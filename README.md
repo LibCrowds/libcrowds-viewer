@@ -87,12 +87,23 @@ which are created from the task options passed to the viewer.
 | id             | String  | \<optional> | Task identifier                                                                                                |
 | objective      | String  | \<optional> | The main objective                                                                                             |
 | guidance       | String  | \<optional> | Additional guidance                                                                                            |
-| form           | Object  | \<optional> | Model and schema for `transcribe` mode (see [vue-form-generator](https://github.com/icebob/vue-form-generator))|
+| form           | Object  | \<optional> | See form properties below                                                                                      |
 | highlight      | Array   | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
 | tag            | String  | \<optional> | The tag to add when in `select` mode                                                                           |
 | liked          | Boolean | \<optional> | Task liked (see the viewer property `show-like`)                                                               |
 | classification | String  | \<optional> | A SpecificResource to classify the target as (e.g. [foaf:Person](http://xmlns.com/foaf/spec/#term_Person))     |
 | complete       | Boolean | \<optional> | Mark the task as complete                                                                                      |
+
+### Form properties
+
+In `transcribe` mode the form can be configured with the following properties.
+
+| Property        | Type    | Attributes  | Description                                                                                                           |
+|-----------------|---------|-------------|-----------------------------------------------------------------------------------------------------------------------|
+| model           | Object  |             | See [vue-form-generator](https://github.com/icebob/vue-form-generator))                                               |
+| schema          | Object  |             | See [vue-form-generator](https://github.com/icebob/vue-form-generator))                                               |                                                                               |
+| classifications | Object  | \<optional> | A SpecificResource IRI for each model key                                                                             |
+| highlights      | Object  | \<optional> | A region to highlight for each model key                                                                              |
 
 ## Modes
 
