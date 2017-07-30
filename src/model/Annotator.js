@@ -281,7 +281,7 @@ class Annotator {
     })
     const anno = new SelectAnnotation({
       imgInfo: task.imgInfo,
-      value: task.tag,
+      tag: task.tag,
       fragmentUri: imageUri,
       creator: this.creator,
       generator: this.generator,
