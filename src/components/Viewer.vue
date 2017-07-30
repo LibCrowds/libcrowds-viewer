@@ -317,21 +317,6 @@ export default {
     },
 
     /**
-     * Setup event handlers.
-     */
-    setupHandlers () {
-      // Confirm before leaving if any overlays have been drawn or forms filled
-      window.onbeforeunload = () => {
-        const nAnnos = this.currentTask.annotations.length
-        if (!this.confirmBeforeUnload) {
-          return
-        } else if (!this.currentTask.complete && nAnnos > 0) {
-          return 'Unsaved changes will be lost.'
-        }
-      }
-    },
-
-    /**
      * Draw a selection overlays from an annotation.
      * @param {Task} task
      *   The Task.
@@ -572,7 +557,6 @@ export default {
     this.viewer = new OpenSeadragon.Viewer(this.viewerOpts)
 
     this.loadTasks()
-    this.setupHandlers()
     this.highlightRegion()
 
     window.addEventListener('beforeunload', this.onBeforeUnload)
