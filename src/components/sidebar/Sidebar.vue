@@ -188,8 +188,8 @@ export default {
 
     h4 {
       text-transform: uppercase;
-      margin-bottom: 1rem;
-      font-size: $font-size-lg;
+      margin-bottom: 0;
+      font-size: 1rem;
       flex-direction: row;
     }
   }
@@ -238,6 +238,10 @@ export default {
     textarea {
       margin-top: 0.6rem;
       margin-bottom: 0.6rem;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      width: 100%;
     }
   }
 
