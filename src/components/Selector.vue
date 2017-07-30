@@ -619,7 +619,7 @@ export default {
       background: none;
       display: flex;
       align-items: center;
-      font-size: 0.85rem;
+      font-size: $font-size-sm;
       padding: 2px;
       margin-left: 5px;
 

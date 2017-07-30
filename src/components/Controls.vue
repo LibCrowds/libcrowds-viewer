@@ -81,15 +81,18 @@ export default {
 
 .lv-controls {
   display: flex;
-  margin: 1rem;
+  margin: 0;
   position: absolute;
   z-index: 2;
-  border-radius: 25px;
+  border-radius: 0;
   background-color: rgba(0, 0, 0, 0.75);
-  padding: 0 0.5rem;
+  padding: 0;
 
-  @media screen and (min-width: 992px) {
+  @media screen and (min-width: 768px) {
     padding: 0;
+    margin: 1rem;
+    border-radius: 25px;
+    padding: 0 0.5rem;
   }
 
   &.bottom {
@@ -98,6 +101,14 @@ export default {
 
   &.top {
     top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+
+    @media screen and (min-width: 768px) {
+      width: initial;
+      justify-content: initial;
+    }
   }
 
   button {

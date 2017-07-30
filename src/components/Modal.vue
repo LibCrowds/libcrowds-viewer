@@ -133,7 +133,7 @@ export default {
       border: 0;
       -webkit-appearance: none;
       float: right;
-      font-size: 1.5rem;
+      font-size: $font-size-lg;
       font-weight: 200;
       line-height: 1;
     }

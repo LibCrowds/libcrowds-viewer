@@ -609,17 +609,21 @@ export default {
 
 #lv-viewer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 100%;
   width: 100%;
   left: 0;
   margin: 0;
   top: 0;
+  overflow: hidden;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 }
 
 #lv-viewer-wrapper {
   display: flex;
-  flex-direction: row;
   position: relative;
   height: 100%;
   width: 100%;
