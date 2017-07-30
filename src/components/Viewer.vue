@@ -92,7 +92,9 @@
       <transcribe-sidebar-item
         v-if="currentTask.mode === 'transcribe'"
         :task="currentTask"
-        @update="updateForm">
+        @update="updateForm"
+        @inputfocus="onTranscribeInputFocus"
+        @inputblur="onTranscribeInputBlur">
       </transcribe-sidebar-item>
     </sidebar>
 
@@ -334,19 +336,32 @@ export default {
     },
 
     /**
-     * Draw any highlights for the task.
+     * Draw a highlight.
+     * @param {Object} rect
+     *   The image rectangle.
+     * @param {String} id
+     *   Ah ID for the highlight element.
+     */
+    drawHighlight (rect, id) {
+      const vp = this.viewer.viewport
+      const imgRect = new OpenSeadragon.Rect(
+        rect.x,
+        rect.y,
+        rect.width,
+        rect.height
+      )
+      const vpRect = vp.imageToViewportRectangle(imgRect)
+      drawOverlay(this.viewer, id, vpRect, 'highlight')
+    },
+
+    /**
+     * Draw all highlights for the task.
+     * @param {Task} task.
+     *   The task.
      */
     drawHighlights (task) {
-      const vp = this.viewer.viewport
-      for (let highlight of task.highlights) {
-        const imgRect = new OpenSeadragon.Rect(
-          highlight.x,
-          highlight.y,
-          highlight.width,
-          highlight.height
-        )
-        const vpRect = vp.imageToViewportRectangle(imgRect)
-        drawOverlay(this.viewer, 'highlight', vpRect, 'highlight')
+      for (let [index, rect] of task.highlights.entries()) {
+        this.drawHighlight(rect, `highlight-${index}`)
       }
     },
 
@@ -478,6 +493,29 @@ export default {
       this.annotator.deleteAnnotation(task, id)
       deleteOverlay(this.viewer, id)
       this.$emit('delete', task, anno)
+    },
+
+    /**
+     * Highlight any regions when transcribe form input focused.
+     * @param {Task} task
+     *   The task that the tag belongs to.
+     * @param {String} modelKey
+     *   The form model key.
+     */
+    onTranscribeInputFocus (task, modelKey) {
+      if (modelKey in task.form.highlights) {
+        const rect = task.form.highlights[modelKey]
+        this.drawHighlight(rect, `highlight-${modelKey}`)
+      }
+    },
+
+    /**
+     * Remove all form region highlights when transcribe form input blured.
+     */
+    onTranscribeInputBlur (task, modelKey) {
+      for (modelKey in task.form.highlights) {
+        deleteOverlay(this.viewer, `highlight-${modelKey}`)
+      }
     },
 
     /**
