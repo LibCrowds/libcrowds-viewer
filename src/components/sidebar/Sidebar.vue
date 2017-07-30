@@ -141,7 +141,7 @@ export default {
   transition: width 350ms;
 
   @media screen and (min-width: 768px) {
-    width: 280px;
+    width: 320px;
   }
 
   &.collapsed {
