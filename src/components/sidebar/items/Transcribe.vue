@@ -3,6 +3,7 @@
 
     <vue-form-generator
       id="lv-form"
+      ref="form"
       :schema="form.schema"
       :model="form.model"
       :options="formOptions"
@@ -40,9 +41,12 @@ export default {
   },
 
   methods: {
-    onValidated: function (isValid, errors) {
+    /**
+     * Emit the update event when the form validates (or otherwise).
+     */
+    onValidated (isValid, errors) {
       document.querySelector('.form-group').classList.remove('show-errors')
-      // Replace the empty string with null for date fields
+      // Replace the empty string with null for date fields in order
       // to avoid Invalid Date in fecha.format
       this.form.schema.fields.forEach((field) => {
         if (field.inputType === 'date' && this.form.model[field.model] === '') {
@@ -51,6 +55,37 @@ export default {
       })
       this.form.errors = errors
       this.$emit('update', this.task, this.form)
+    },
+
+    /**
+     * Emit the inputfocus event.
+     */
+    onInputFocus (evt) {
+      const modelId = evt.target.id
+      this.$emit('inputfocus', this.task, modelId)
+    },
+
+    /**
+     * Emit the inputblur event.
+     */
+    onInputBlur () {
+      this.$emit('inputblur', this.task)
+    }
+  },
+
+  mounted () {
+    const fieldElems = document.querySelectorAll('.form-control')
+    for (let el of fieldElems) {
+      el.addEventListener('focus', this.onInputFocus)
+      el.addEventListener('blur', this.onInputBlur)
+    }
+  },
+
+  beforeDestroy () {
+    const fieldElems = document.querySelectorAll('.form-control')
+    for (let el of fieldElems) {
+      el.removeEventListener('focus', this.onInputFocus)
+      el.removeEventListener('focus', this.onInputBlur)
     }
   }
 }

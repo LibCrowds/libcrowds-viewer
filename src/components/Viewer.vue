@@ -92,7 +92,9 @@
       <transcribe-sidebar-item
         v-if="currentTask.mode === 'transcribe'"
         :task="currentTask"
-        @update="updateForm">
+        @update="updateForm"
+        @inputfocus="onTranscribeInputFocus"
+        @inputblur="onTranscribeInputBlur">
       </transcribe-sidebar-item>
     </sidebar>
 
@@ -334,19 +336,33 @@ export default {
     },
 
     /**
-     * Highlight a region of the current image.
+     * Draw a highlight.
+     * @param {Object} rect
+     *   The image rectangle.
+     * @param {String} id
+     *   Ah ID for the highlight element.
      */
-    highlightRegion () {
-      // if (this.region) {
-      //   const rect = new OpenSeadragon.Rect(
-      //     this.region.x,
-      //     this.region.y,
-      //     this.region.width,
-      //     this.region.height
-      //   )
-      //   // Use task.addOverlay when refactoring the highlight method
-      //   // drawOverlay(this.viewer, 'highlight', rect, 'highlight')
-      // }
+    drawHighlight (rect, id) {
+      const vp = this.viewer.viewport
+      const imgRect = new OpenSeadragon.Rect(
+        rect.x,
+        rect.y,
+        rect.width,
+        rect.height
+      )
+      const vpRect = vp.imageToViewportRectangle(imgRect)
+      drawOverlay(this.viewer, id, vpRect, 'highlight')
+    },
+
+    /**
+     * Draw all highlights for the task.
+     * @param {Task} task.
+     *   The task.
+     */
+    drawHighlights (task) {
+      for (let [index, rect] of task.highlights.entries()) {
+        this.drawHighlight(rect, `highlight-${index}`)
+      }
     },
 
     /**
@@ -480,6 +496,29 @@ export default {
     },
 
     /**
+     * Highlight any regions when transcribe form input focused.
+     * @param {Task} task
+     *   The task that the tag belongs to.
+     * @param {String} modelKey
+     *   The form model key.
+     */
+    onTranscribeInputFocus (task, modelKey) {
+      if (modelKey in task.form.highlights) {
+        const rect = task.form.highlights[modelKey]
+        this.drawHighlight(rect, `highlight-${modelKey}`)
+      }
+    },
+
+    /**
+     * Remove all form region highlights when transcribe form input blured.
+     */
+    onTranscribeInputBlur (task, modelKey) {
+      for (modelKey in task.form.highlights) {
+        deleteOverlay(this.viewer, `highlight-${modelKey}`)
+      }
+    },
+
+    /**
      * Mode specific configuration for a task.
      * @param {Task} task
      *   The task.
@@ -492,6 +531,7 @@ export default {
           this.drawSelectionOverlay(task, anno)
         }
       }
+      this.drawHighlights(task)
     },
 
     /**
@@ -522,9 +562,8 @@ export default {
      */
     onBeforeUnload () {
       const nAnnos = this.currentTask.annotations.length
-      if (!this.confirmBeforeUnload) {
-        return
-      } else if (!this.currentTask.complete && nAnnos > 0) {
+      const complete = this.currentTask.complete
+      if (this.confirmBeforeUnload && !complete && nAnnos > 0) {
         return 'Unsaved changes will be lost.'
       }
     }
@@ -553,12 +592,8 @@ export default {
   },
 
   mounted () {
-    // Initialise after the DOM is loaded
     this.viewer = new OpenSeadragon.Viewer(this.viewerOpts)
-
     this.loadTasks()
-    this.highlightRegion()
-
     window.addEventListener('beforeunload', this.onBeforeUnload)
   },
 

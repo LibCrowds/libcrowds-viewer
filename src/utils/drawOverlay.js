@@ -32,6 +32,8 @@ export default function (viewer, id, rect, type = '') {
       el.style.border = '1px solid rgb(52, 152, 219)'
       el.style.backgroundColor = 'rgba(52, 152, 219, 0.2)'
     })
+  } else if (type === 'highlight') {
+    el.style.backgroundColor = 'rgba(244, 208, 63, 0.3)'
   }
   viewer.addOverlay({ element: el, location: rect })
   return el
