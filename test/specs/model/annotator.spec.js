@@ -219,4 +219,13 @@ describe('Annotator', () => {
       expect(transcribeTask.annotations).toEqual([commentAnno])
     })
   })
+
+  describe('createSelectAnnotation', () => {
+    it('stores a new SelectAnnotation', () => {
+      const tag = fixtures.uuid()
+      annotator.SelectAnnotation(selectTask, tag)
+      expect(selectTask.annotations.length).toBe(1)
+      expect(selectTask.annotations[0].motivation).toBe('tagging')
+    })
+  })
 })
