@@ -322,19 +322,12 @@ export default {
     setupHandlers () {
       // Confirm before leaving if any overlays have been drawn or forms filled
       window.onbeforeunload = () => {
-        const msg = 'Unsaved changes will be lost.'
-        const annos = this.annotator.getSelectAnnotations(this.currentTask)
+        const nAnnos = this.currentTask.annotations.length
         if (!this.confirmBeforeUnload) {
           return
-        } else if (annos.length) {
-          return msg
+        } else if (!this.currentTask.complete && nAnnos > 0) {
+          return 'Unsaved changes will be lost.'
         }
-
-        [].forEach.call(document.querySelectorAll('input'), function (input) {
-          if (input.value.length) {
-            return msg
-          }
-        })
       }
     },
 
