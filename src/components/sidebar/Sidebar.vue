@@ -1,25 +1,9 @@
 <template>
   <div id="lv-sidebar" ref="sidebar">
 
-    <button
-      ref="showsidebar"
-      id="show-sidebar"
-      class="btn-toggle delay"
-      @click="toggleSidebarCollapse">
-      <span>
-        &#x25C0;
-      </span>
-      Show {{ title }}
-    </button>
-
     <div
       class="lv-sidebar-header">
       <h4>{{ title }}</h4>
-      <button
-        class="btn-toggle"
-        @click="toggleSidebarCollapse">
-        &#x25B6;
-      </button>
     </div>
 
     <div
@@ -114,15 +98,6 @@ export default {
   },
 
   methods: {
-    /**
-     * Toggle the collapsing of the content.
-     */
-
-    toggleSidebarCollapse () {
-      this.$refs.sidebar.classList.toggle('collapsed')
-      this.$refs.showsidebar.blur()
-    },
-
     /**
      * Toggle the collapsing of the note input.
      */
@@ -264,14 +239,6 @@ export default {
       margin-top: 0.6rem;
       margin-bottom: 0.6rem;
     }
-  }
-
-  .btn-toggle {
-    cursor: default;
-    background: none;
-    border: none;
-    color: #FFFFFF;
-    transition: transform 500ms;
   }
 
   #task-complete {
