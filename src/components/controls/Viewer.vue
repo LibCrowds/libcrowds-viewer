@@ -14,6 +14,7 @@
 import Clipboard from 'clipboard'
 import Task from '@/model/Task'
 import Controls from '@/components/Controls'
+import getImageUri from '@/utils/getImageUri'
 
 export default {
   data: function () {
@@ -169,7 +170,9 @@ export default {
                   trigger.setAttribute('aria-label', tooltip)
                   clipboard.destroy()
                 })
-                return this.imgLink
+                return getImageUri({
+                  imgSource: this.task.imgInfoUri
+                })
               }
             })
           }
@@ -178,11 +181,6 @@ export default {
 
       return buttons
     }
-  },
-
-  created () {
-    const id = this.task.imgInfo['@id']
-    this.imgLink = `${id}/full/full/0/default.jpg`
   }
 }
 </script>
