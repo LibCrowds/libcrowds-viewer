@@ -476,8 +476,8 @@ export default {
      */
     editTag (task, id) {
       const vp = this.viewer.viewport
-      const tag = task.getAnnotation(id)
-      const imgRect = extractRectFromImageUri(tag.target.selector.value)
+      const anno = this.annotator.getAnnotation(task, id)
+      const imgRect = extractRectFromImageUri(anno.target.selector.value)
       const vpRect = vp.imageToViewportRectangle(imgRect)
       const rect = new OpenSeadragon.Rect(
         vpRect.x,
@@ -497,8 +497,8 @@ export default {
      *   The tag ID.
      */
     deleteTag (task, id) {
-      const anno = task.getAnnotation(id)
-      task.deleteAnnotation(id)
+      const anno = this.annotator.getAnnotation(task, id)
+      this.annotator.deleteAnnotation(task, id)
       deleteOverlay(this.viewer, id)
       this.$emit('delete', task, anno)
     },
