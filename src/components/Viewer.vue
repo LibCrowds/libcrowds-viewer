@@ -522,9 +522,8 @@ export default {
      */
     onBeforeUnload () {
       const nAnnos = this.currentTask.annotations.length
-      if (!this.confirmBeforeUnload) {
-        return
-      } else if (!this.currentTask.complete && nAnnos > 0) {
+      const complete = this.currentTask.complete
+      if (this.confirmBeforeUnload && !complete && nAnnos > 0) {
         return 'Unsaved changes will be lost.'
       }
     }
