@@ -615,6 +615,7 @@ export default {
   left: 0;
   margin: 0;
   top: 0;
+  overflow: hidden;
 
   @media screen and (min-width: 768px) {
     flex-direction: row;

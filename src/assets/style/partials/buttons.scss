@@ -28,11 +28,15 @@
     background: none;
     text-shadow: 0 0 5px #000000;
     font-size: $font-size-lg;
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem;
     border: none;
     outline: none !important;
     opacity: 0.8;
     margin: 0;
+
+    @media screen and (min-width: 768px) {
+      padding: 0.5rem 0.75rem
+    }
 
     &:hover,
     &:focus {
