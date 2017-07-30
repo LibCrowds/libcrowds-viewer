@@ -530,6 +530,18 @@ export default {
           throw Error(`Could not retrieve image info: ${err}`)
         })
       }
+    },
+
+    /**
+     * Check for any unsaved annotations.
+     */
+    onBeforeUnload () {
+      const nAnnos = this.currentTask.annotations.length
+      if (!this.confirmBeforeUnload) {
+        return
+      } else if (!this.currentTask.complete && nAnnos > 0) {
+        return 'Unsaved changes will be lost.'
+      }
     }
   },
 
@@ -562,6 +574,12 @@ export default {
     this.loadTasks()
     this.setupHandlers()
     this.highlightRegion()
+
+    window.addEventListener('beforeunload', this.onBeforeUnload)
+  },
+
+  beforeDestroy () {
+    window.removeEventListener('beforeunload', this.onBeforeUnload)
   }
 }
 </script>
