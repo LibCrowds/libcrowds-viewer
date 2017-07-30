@@ -123,8 +123,6 @@ import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
 import Selector from '@/components/Selector'
 import Task from '@/model/Task'
 import Annotator from '@/model/Annotator'
-import SelectAnnotation from '@/model/SelectAnnotation'
-import getImageUri from '@/utils/getImageUri'
 import extractRectFromImageUri from '@/utils/extractRectFromImageUri'
 import toggleFullScreen from '@/utils/toggleFullScreen'
 import drawOverlay from '@/utils/drawOverlay'
@@ -313,19 +311,7 @@ export default {
     handleSelection (task, rect) {
       const vp = this.viewer.viewport
       const imgRect = vp.viewportToImageRectangle(rect)
-      const imageUri = getImageUri({
-        imgSource: task.imgInfoUri,
-        region: imgRect
-      })
-      let anno = new SelectAnnotation({
-        imgInfo: task.imgInfo,
-        value: task.tag,
-        fragmentURI: imageUri,
-        creator: this.creator,
-        generator: this.generator,
-        classification: task.classification
-      })
-      this.annotator.storeAnnotation(task, anno)
+      const anno = this.annotator.createSelectAnnotation(task, imgRect)
       this.drawSelectionOverlay(task, anno)
       this.$emit('create', task, anno)
     },

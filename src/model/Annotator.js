@@ -1,6 +1,7 @@
 import TranscribeAnnotation from '@/model/TranscribeAnnotation'
 import SelectAnnotation from '@/model/SelectAnnotation'
 import CommentAnnotation from '@/model/CommentAnnotation'
+import getImageUri from '@/utils/getImageUri'
 
 /**
  * Represents an annotator responsible for managing all task annotations.
@@ -264,6 +265,30 @@ class Annotator {
       })
       this.storeAnnotation(task, anno)
     }
+  }
+
+  /**
+   * Create a SelectAnnotation.
+   * @param {Task} task
+   *   The task.
+   * @param {Object} rect
+   *   The image rectangle.
+   */
+  createSelectAnnotation (task, rect) {
+    const imageUri = getImageUri({
+      imgSource: task.imgInfoUri,
+      region: rect
+    })
+    const anno = new SelectAnnotation({
+      imgInfo: task.imgInfo,
+      value: task.tag,
+      fragmentUri: imageUri,
+      creator: this.creator,
+      generator: this.generator,
+      classification: task.classification
+    })
+    this.storeAnnotation(task, anno)
+    return anno
   }
 }
 
