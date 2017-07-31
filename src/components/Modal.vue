@@ -1,9 +1,9 @@
 <template>
   <transition name="modal">
     <div class="modal" v-show="show">
-        <div class="modal-mask">
+        <div class="modal-mask" @click="hide">
           <div class="modal-wrapper">
-            <div class="modal-container">
+            <div class="modal-container" @click.stop>
 
               <div class="modal-header">
                 <slot name="header">
