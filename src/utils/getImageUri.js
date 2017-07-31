@@ -19,5 +19,5 @@ export default function ({
     ? `${region.x},${region.y},${region.width},${region.height}`
     : region
 
-  return `${source}/${regStr}/${size}/${rotation}/${imgQuality}.${format}`
+  return `${source}/${regStr}/${size}/${rotation}/${quality}.${format}`
 }
