@@ -391,7 +391,7 @@ export default {
      *   The mouse tracker event.
      */
     onKeyUp (evt) {
-      var key = evt.keyCode ? evt.keyCode : evt.charCode
+      const key = evt.keyCode ? evt.keyCode : evt.charCode
       if (key === 13) {
         this.confirm()
       } else if (key === 27) {
@@ -486,8 +486,7 @@ export default {
       })
     )
 
-    window.addEventListener('keyup', this.onKeyUp)
-
+    document.addEventListener('keyup', this.onKeyUp)
     this.viewer.addHandler('open', this.draw)
     this.viewer.addHandler('animation', this.draw)
     this.viewer.addHandler('resize', this.draw)
@@ -498,7 +497,7 @@ export default {
     for (let tracker of this.mouseTrackers) {
       tracker.destroy()
     }
-    window.removeEventListener('keyup', this.onKeyUp)
+    document.removeEventListener('keyup', this.onKeyUp)
     this.viewer.removeHandler('open', this.draw)
     this.viewer.removeHandler('animation', this.draw)
     this.viewer.removeHandler('resize', this.draw)

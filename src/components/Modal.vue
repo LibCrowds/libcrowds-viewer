@@ -1,64 +1,72 @@
 <template>
-  <transition name="modal">
-  <div :id="id" class="modal" v-show="show">
-      <div class="modal-mask">
-        <div class="modal-wrapper">
-          <div class="modal-container">
+  <transition name="modal-fade">
+    <div class="modal" v-show="show">
+        <div class="modal-mask" @click="hide">
+          <div class="modal-wrapper">
+            <div class="modal-container" @click.stop>
 
-            <div class="modal-header">
-              <slot name="header">
-                <h3>{{ title }}</h3>
-                <span class="close" @click="show = false">&times;</span>
-              </slot>
+              <div class="modal-header">
+                <slot name="header">
+                  <h3>{{ title }}</h3>
+                  <span class="close" @click="hide">&times;</span>
+                </slot>
+              </div>
+
+              <div class="modal-body">
+                <slot>
+                </slot>
+              </div>
+
+              <div class="modal-footer">
+                <slot name="footer">
+                  <button class="btn" @click="hide">
+                    OK
+                  </button>
+                </slot>
+              </div>
+
             </div>
-
-            <div class="modal-body">
-              <slot>
-              </slot>
-            </div>
-
-            <div class="modal-footer">
-              <slot name="footer">
-                <button class="btn" @click="show = false">
-                  OK
-                </button>
-              </slot>
-            </div>
-
           </div>
         </div>
-      </div>
-  </div>
+    </div>
   </transition>
 </template>
 
 <script>
 export default {
-  data: function () {
-    return {
-      show: false
-    }
-  },
-
   props: {
     title: String,
-    id: {
-      type: String,
+    show: {
+      type: Boolean,
       requried: true
     }
   },
 
-  created () {
-    this.$root.$on('show::modal', (id, triggerEl) => {
-      if (id === this.id) {
-        this.show = true
+  methods: {
+    /**
+     * Emit the hide event.
+     */
+    hide () {
+      this.$emit('hide')
+    },
+
+    /**
+     * Hide on esc keyup.
+     */
+    onKeyUp (evt) {
+      const key = evt.keyCode ? evt.keyCode : evt.charCode
+      if (key === 27) {
+        this.hide()
       }
-    })
-    this.$root.$on('hide::modal', id => {
-      if (id === this.id) {
-        this.show = false
-      }
-    })
+    }
+  },
+
+  mounted () {
+    document.addEventListener('keyup', this.onKeyUp)
+  },
+
+  beforeDestroy () {
+    document.removeEventListener('keyup', this.onKeyUp)
   }
 }
 </script>
@@ -81,7 +89,7 @@ export default {
     height: 100%;
     background-color: rgba(0, 0, 0, .5);
     display: table;
-    transition: opacity .3s ease;
+    transition: opacity 350ms ease;
   }
 
   .modal-wrapper {
@@ -101,7 +109,7 @@ export default {
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
     border: 1px solid $gray-light;
-    transition: all .3s ease;
+    transition: all 350ms ease;
 
     @media screen and (min-width: 576px) {
       max-width: 500px;
@@ -155,17 +163,20 @@ export default {
   }
 }
 
-.modal-enter {
-  opacity: 0;
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: all 350ms ease;
 }
 
-.modal-leave-active {
-  opacity: 0;
-}
-
-.modal-enter .modal-container,
-.modal-leave-active .modal-container {
-  -webkit-transform: scale(1.1);
+.modal-fade-enter .modal-container,
+.modal-fade-leave-to .modal-container {
+  -webkit-transform: translateY(-10px) scale(0.9);
   transform: translateY(-10px) scale(0.9);
+  opacity: 0;
+}
+
+.modal-fade-enter .modal-mask,
+.modal-fade-leave-to .modal-mask {
+  opacity: 0;
 }
 </style>

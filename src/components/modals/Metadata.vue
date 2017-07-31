@@ -1,6 +1,6 @@
 <template>
   <div id="lv-metadata-modal">
-    <modal :id="id" title="Metadata">
+    <modal :show="show" title="Metadata" @hide="$emit('hide')">
 
       <span v-if="hasData">
         <ul v-for="item in metadata" :key="item.label">
@@ -38,8 +38,8 @@ export default {
   },
 
   props: {
-    id: {
-      type: String,
+    show: {
+      type: Boolean,
       requried: true
     },
     task: {
