@@ -1,5 +1,5 @@
 <template>
-  <transition name="modal">
+  <transition name="modal-fade">
     <div class="modal" v-show="show">
         <div class="modal-mask" @click="hide">
           <div class="modal-wrapper">
@@ -89,7 +89,7 @@ export default {
     height: 100%;
     background-color: rgba(0, 0, 0, .5);
     display: table;
-    transition: opacity .3s ease;
+    transition: opacity 350ms ease;
   }
 
   .modal-wrapper {
@@ -109,7 +109,7 @@ export default {
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
     border: 1px solid $gray-light;
-    transition: all .3s ease;
+    transition: all 350ms ease;
 
     @media screen and (min-width: 576px) {
       max-width: 500px;
@@ -163,17 +163,20 @@ export default {
   }
 }
 
-.modal-enter {
-  opacity: 0;
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: all 350ms ease;
 }
 
-.modal-leave-active {
-  opacity: 0;
-}
-
-.modal-enter .modal-container,
-.modal-leave-active .modal-container {
-  -webkit-transform: scale(1.1);
+.modal-fade-enter .modal-container,
+.modal-fade-leave-to .modal-container {
+  -webkit-transform: translateY(-10px) scale(0.9);
   transform: translateY(-10px) scale(0.9);
+  opacity: 0;
+}
+
+.modal-fade-enter .modal-mask,
+.modal-fade-leave-to .modal-mask {
+  opacity: 0;
 }
 </style>
