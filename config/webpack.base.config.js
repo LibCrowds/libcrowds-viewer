@@ -55,7 +55,8 @@ module.exports = {
         loader: 'babel-loader',
         include: [
           path.resolve(__dirname, '../src'),
-          path.resolve(__dirname, '../test')
+          path.resolve(__dirname, '../test'),
+          path.resolve(__dirname, '../demo/src')
         ],
       },
       {
