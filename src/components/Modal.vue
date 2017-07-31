@@ -48,7 +48,25 @@ export default {
      */
     hide () {
       this.$emit('hide')
+    },
+
+    /**
+     * Hide on esc keyup.
+     */
+    onKeyUp (evt) {
+      const key = evt.keyCode ? evt.keyCode : evt.charCode
+      if (key === 27) {
+        this.hide()
+      }
     }
+  },
+
+  mounted () {
+    document.addEventListener('keyup', this.onKeyUp)
+  },
+
+  beforeDestroy () {
+    document.removeEventListener('keyup', this.onKeyUp)
   }
 }
 </script>
