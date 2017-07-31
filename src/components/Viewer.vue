@@ -342,8 +342,8 @@ export default {
      *   The task.
      */
     drawHighlights (task) {
-      for (let [index, rect] of task.highlights.entries()) {
-        this.drawHighlight(rect, `highlight-${index}`)
+      for (let i = 0; i < task.highlights.length; i++) {
+        this.drawHighlight(task.highlights[i], `highlight-${i}`)
       }
     },
 
