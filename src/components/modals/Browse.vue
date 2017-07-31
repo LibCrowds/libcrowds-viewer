@@ -49,7 +49,6 @@ export default {
 
 <style lang="scss">
 @import '~style/settings';
-@import '~style/partials/buttons';
 
 #lv-browse-modal {
   ul {
