@@ -1,6 +1,6 @@
 <template>
   <div id="lv-browse-modal">
-    <modal :id="id" title="Browse Tasks">
+    <modal :show="show" title="Browse Tasks" @hide="$emit('hide')">
       <ul>
         <li
           v-for="(task, index) in tasks"
@@ -25,13 +25,13 @@ export default {
   },
 
   props: {
-    id: {
-      type: String,
-      requried: true
-    },
     tasks: {
       type: Array,
       required: true
+    },
+    show: {
+      type: Boolean,
+      requried: true
     }
   },
 
@@ -40,7 +40,7 @@ export default {
      * Hide the modal and emit the taskclick event with the task.
      */
     onTaskClicked (task) {
-      this.$root.$emit('hide::modal', this.id)
+      this.$emit('hide')
       this.$emit('taskclick', task)
     }
   }

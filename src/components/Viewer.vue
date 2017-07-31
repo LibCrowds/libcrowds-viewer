@@ -16,9 +16,9 @@
           :showShare="showShare"
           :helpButton="viewerOpts.helpButton"
           :infoButton="viewerOpts.infoButton"
-          @helpclicked="emitShowHelp"
-          @infoclicked="emitShowInfo"
-          @browseclicked="emitShowBrowse"
+          @helpclicked="showHelpModal = true"
+          @infoclicked="showInfoModal = true"
+          @browseclicked="showBrowseModal = true"
           @likeclicked="emitTaskLiked"
           @fullscreenclicked="toggleFullScreen">
         </viewer-controls>
@@ -31,24 +31,27 @@
         <metadata-modal
           v-if="currentTask"
           :task="currentTask"
-          :lang="lang"
-          :id="metadataModalId">
+          :show="showInfoModal"
+          @hide="showInfoModal = false"
+          :lang="lang">
         </metadata-modal>
 
         <help-modal
           v-if="currentTask && showHelp"
-          :id="helpModalId"
           :showInfo="showInfo"
           :showLike="showLike"
           :showShare="showShare"
+          :show="showHelpModal"
           :disableComplete="disableComplete"
+          @hide="showHelpModal = false"
           :task="currentTask">
         </help-modal>
 
         <browse-modal
           v-if="showBrowse"
           :tasks="tasks"
-          :id="browseModalId"
+          :show="showBrowseModal"
+          @hide="showBrowseModal = false"
           @taskclick="setCurrentTask">
         </browse-modal>
 
@@ -156,9 +159,9 @@ export default {
           dblClickToZoom: false
         }
       },
-      metadataModalId: 'lv-metadata-modal',
-      helpModalId: 'lv-help-modal',
-      browseModalId: 'lv-browse-modal',
+      showInfoModal: false,
+      showHelpModal: false,
+      showBrowseModal: false,
       tasks: [],
       currentTask: null
     }
@@ -266,27 +269,6 @@ export default {
   },
 
   methods: {
-    /**
-     * Emit the show model event for the help modal.
-     */
-    emitShowHelp () {
-      this.$root.$emit('show::modal', this.helpModalId)
-    },
-
-    /**
-     * Emit the show model event for the info modal.
-     */
-    emitShowInfo () {
-      this.$root.$emit('show::modal', this.metadataModalId)
-    },
-
-    /**
-     * Emit the show model event for the browse tasks modal.
-     */
-    emitShowBrowse () {
-      this.$root.$emit('show::modal', this.browseModalId)
-    },
-
     /**
      * Emit the taskliked event.
      */

@@ -1,64 +1,54 @@
 <template>
   <transition name="modal">
-  <div :id="id" class="modal" v-show="show">
-      <div class="modal-mask">
-        <div class="modal-wrapper">
-          <div class="modal-container">
+    <div class="modal" v-show="show">
+        <div class="modal-mask">
+          <div class="modal-wrapper">
+            <div class="modal-container">
 
-            <div class="modal-header">
-              <slot name="header">
-                <h3>{{ title }}</h3>
-                <span class="close" @click="show = false">&times;</span>
-              </slot>
+              <div class="modal-header">
+                <slot name="header">
+                  <h3>{{ title }}</h3>
+                  <span class="close" @click="hide">&times;</span>
+                </slot>
+              </div>
+
+              <div class="modal-body">
+                <slot>
+                </slot>
+              </div>
+
+              <div class="modal-footer">
+                <slot name="footer">
+                  <button class="btn" @click="hide">
+                    OK
+                  </button>
+                </slot>
+              </div>
+
             </div>
-
-            <div class="modal-body">
-              <slot>
-              </slot>
-            </div>
-
-            <div class="modal-footer">
-              <slot name="footer">
-                <button class="btn" @click="show = false">
-                  OK
-                </button>
-              </slot>
-            </div>
-
           </div>
         </div>
-      </div>
-  </div>
+    </div>
   </transition>
 </template>
 
 <script>
 export default {
-  data: function () {
-    return {
-      show: false
-    }
-  },
-
   props: {
     title: String,
-    id: {
-      type: String,
+    show: {
+      type: Boolean,
       requried: true
     }
   },
 
-  created () {
-    this.$root.$on('show::modal', (id, triggerEl) => {
-      if (id === this.id) {
-        this.show = true
-      }
-    })
-    this.$root.$on('hide::modal', id => {
-      if (id === this.id) {
-        this.show = false
-      }
-    })
+  methods: {
+    /**
+     * Emit the hide event.
+     */
+    hide () {
+      this.$emit('hide')
+    }
   }
 }
 </script>

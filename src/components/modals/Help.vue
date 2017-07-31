@@ -1,6 +1,6 @@
 <template>
   <div id="lv-help-modal">
-    <modal :id="id" title="Help">
+    <modal :show="show" title="Help" @hide="$emit('hide')">
       <p>
         The objective of the current task, along with any additional guidance
         can be seen in the sidebar to the right of the viewer. Once the task
@@ -112,8 +112,8 @@ export default {
   },
 
   props: {
-    id: {
-      type: String,
+    show: {
+      type: Boolean,
       requried: true
     },
     task: {
