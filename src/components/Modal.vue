@@ -168,15 +168,15 @@ export default {
   transition: all 350ms ease;
 }
 
-.lv-modal-fade-enter .modal-container,
-.lv-modal-fade-leave-to .modal-container {
+.lv-modal-fade-enter .lv-modal-container,
+.lv-modal-fade-leave-to .lv-modal-container {
   -webkit-transform: translateY(-10px) scale(0.9);
   transform: translateY(-10px) scale(0.9);
   opacity: 0;
 }
 
-.lv-modal-fade-enter .modal-mask,
-.lv-modal-fade-leave-to .modal-mask {
+.lv-modal-fade-enter .lv-modal-mask,
+.lv-modal-fade-leave-to .lv-modal-mask {
   opacity: 0;
 }
 </style>
