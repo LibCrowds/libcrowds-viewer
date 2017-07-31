@@ -572,18 +572,12 @@ export default {
   },
 
   watch: {
-    currentTask: {
-      handler: function (oldVal, newVal) {
-        // Update the task image if it has changed
-        if (!oldVal || !newVal || oldVal.imgInfoUri !== newVal.imgInfoUri) {
-          this.viewer.close()
-          this.viewer.open({
-            tileSource: this.currentTask.imgInfoUri,
-            success: () => this.configureMode(this.currentTask)
-          })
-        }
-      },
-      deep: true
+    currentTask: function () {
+      this.viewer.close()
+      this.viewer.open({
+        tileSource: this.currentTask.imgInfoUri,
+        success: () => this.configureMode(this.currentTask)
+      })
     },
     taskOpts: {
       handler: function () {
