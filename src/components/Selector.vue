@@ -391,7 +391,7 @@ export default {
      *   The mouse tracker event.
      */
     onKeyUp (evt) {
-      var key = evt.keyCode ? evt.keyCode : evt.charCode
+      const key = evt.keyCode ? evt.keyCode : evt.charCode
       if (key === 13) {
         this.confirm()
       } else if (key === 27) {
