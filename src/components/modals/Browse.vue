@@ -7,8 +7,19 @@
           :key="task.id"
           @click="onTaskClicked(task)">
           <figure>
-            <img :src="task.thumbnailUri" :alt='`Task ${index} thumbnail`'>
-            <figcaption>{{ task.objective }}</figcaption>
+            <img
+              :src="task.thumbnailUri"
+              :alt='`Task ${index} thumbnail`'
+              :class="{ 'task-complete': task.complete }">
+            <figcaption
+              v-if="!task.complete">
+              {{ task.objective }}
+            </figcaption>
+            <div
+              class="complete-icon"
+              v-if="task.complete">
+              <icon name="check-circle"></icon>
+            </div>
           </figure>
         </li>
       </ul>
@@ -17,11 +28,14 @@
 </template>
 
 <script>
+import Icon from 'vue-awesome/components/Icon'
+import 'vue-awesome/icons/check-circle'
 import Modal from '@/components/Modal'
 
 export default {
   components: {
-    Modal
+    Modal,
+    Icon
   },
 
   props: {
@@ -87,6 +101,22 @@ export default {
       font-family: $font-family-headings;
       font-size: $font-size-sm;
       margin: 5px 5px 3px 5px;
+    }
+
+    .task-complete {
+      opacity: 0.2;
+    }
+
+    .complete-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        height: 24px;
+        width: auto;
+        color: $green;
+      }
     }
   }
 }
