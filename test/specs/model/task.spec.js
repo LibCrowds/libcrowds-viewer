@@ -1,4 +1,4 @@
-import fixtures from '../../fixtures'
+import fixtures from '../../fixtures.js'
 
 describe('Task', () => {
   let transcribeTask = null

@@ -1,15 +1,15 @@
 import uuid from 'uuid/v4'
 
-import Annotator from '@/model/Annotator'
-import Annotation from '@/model/Annotation'
-import TranscribeAnnotation from '@/model/TranscribeAnnotation'
-import SelectAnnotation from '@/model/SelectAnnotation'
-import CommentAnnotation from '@/model/CommentAnnotation'
-import Task from '@/model/Task'
+import Annotator from '@/model/Annotator.js'
+import Annotation from '@/model/Annotation.js'
+import TranscribeAnnotation from '@/model/TranscribeAnnotation.js'
+import SelectAnnotation from '@/model/SelectAnnotation.js'
+import CommentAnnotation from '@/model/CommentAnnotation.js'
+import Task from '@/model/Task.js'
 
-import imageInfo from './data/imageInfo'
-import selectTaskOpts from './data/selectTaskOpts'
-import transcribeTaskOpts from './data/transcribeTaskOpts'
+import imageInfo from './data/imageInfo.json'
+import selectTaskOpts from './data/selectTaskOpts.json'
+import transcribeTaskOpts from './data/transcribeTaskOpts.json'
 
 export default {
 
