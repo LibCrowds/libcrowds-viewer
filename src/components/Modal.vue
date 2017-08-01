@@ -1,23 +1,23 @@
 <template>
-  <transition name="modal-fade">
-    <div class="modal" v-show="show">
-        <div class="modal-mask" @click="hide">
-          <div class="modal-wrapper">
-            <div class="modal-container" @click.stop>
+  <transition name="lv-modal-fade">
+    <div class="lv-modal" v-show="show">
+        <div class="lv-modal-mask" @click="hide">
+          <div class="lv-modal-wrapper">
+            <div class="lv-modal-container" @click.stop>
 
-              <div class="modal-header">
+              <div class="lv-modal-header">
                 <slot name="header">
                   <h3>{{ title }}</h3>
                   <span class="close" @click="hide">&times;</span>
                 </slot>
               </div>
 
-              <div class="modal-body">
+              <div class="lv-modal-body">
                 <slot>
                 </slot>
               </div>
 
-              <div class="modal-footer">
+              <div class="lv-modal-footer">
                 <slot name="footer">
                   <button class="btn" @click="hide">
                     OK
@@ -75,12 +75,12 @@ export default {
 @import '~style/settings';
 @import '~style/partials/buttons';
 
-.modal {
+.lv-modal {
   position: absolute;
   height: 100%;
   width: 100%;
 
-  .modal-mask {
+  .lv-modal-mask {
     position: fixed;
     z-index: 9998;
     top: 0;
@@ -92,12 +92,12 @@ export default {
     transition: opacity 350ms ease;
   }
 
-  .modal-wrapper {
+  .lv-modal-wrapper {
     display: table-cell;
     vertical-align: middle;
   }
 
-  .modal-container {
+  .lv-modal-container {
     display: flex;
     flex-direction: column;
     color: #fff;
@@ -121,7 +121,7 @@ export default {
     }
   }
 
-  .modal-header {
+  .lv-modal-header {
     margin-top: 0;
     padding: 20px 30px;
     border-bottom: 1px solid $gray-light;
@@ -147,12 +147,12 @@ export default {
     }
   }
 
-  .modal-body {
+  .lv-modal-body {
     padding: 20px 30px;
     overflow: auto;
   }
 
-  .modal-footer {
+  .lv-modal-footer {
     margin-top: 0;
     padding: 20px 30px;
     border-top: 1px solid $gray-light;
@@ -163,20 +163,20 @@ export default {
   }
 }
 
-.modal-fade-enter-active,
-.modal-fade-leave-active {
+.lv-modal-fade-enter-active,
+.lv-modal-fade-leave-active {
   transition: all 350ms ease;
 }
 
-.modal-fade-enter .modal-container,
-.modal-fade-leave-to .modal-container {
+.lv-modal-fade-enter .lv-modal-container,
+.lv-modal-fade-leave-to .lv-modal-container {
   -webkit-transform: translateY(-10px) scale(0.9);
   transform: translateY(-10px) scale(0.9);
   opacity: 0;
 }
 
-.modal-fade-enter .modal-mask,
-.modal-fade-leave-to .modal-mask {
+.lv-modal-fade-enter .lv-modal-mask,
+.lv-modal-fade-leave-to .lv-modal-mask {
   opacity: 0;
 }
 </style>
