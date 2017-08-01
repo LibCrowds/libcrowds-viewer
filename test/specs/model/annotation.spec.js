@@ -1,4 +1,4 @@
-import fixtures from '../../fixtures'
+import fixtures from '../../fixtures.js'
 
 describe('Annotation', () => {
   let anno = null
