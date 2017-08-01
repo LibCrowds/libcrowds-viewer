@@ -6,7 +6,7 @@
     "mode": "select",
     "objective": "Tag all of the titles",
     "guidance": "Draw a box around each title, including any subtitles",
-    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000004/info.json",
     "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json"
   },
   {
@@ -73,7 +73,6 @@
     }
   },
   {
-    "id": 4,
     "tag": "actor",
     "mode": "select",
     "objective": "Tag all of the actors",
@@ -82,11 +81,75 @@
     "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json"
   },
   {
-    "id": 8,
-    "tag": "face",
+    "tag": "actor",
     "mode": "select",
-    "objective": "Tag all of the faces",
-    "guidance": "Draw a box around each face",
-    "imgInfoUri": "https://images.britishart.yale.edu/iiif/c0b22208-1eab-4b5e-8bc2-a18390f003b4/info.json"
+    "objective": "Tag all of the actors",
+    "guidance": "Draw a box around each actor, including any subtitles",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589091.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json"
+  },
+  {
+    "tag": "actor",
+    "mode": "select",
+    "objective": "Tag all of the actors",
+    "guidance": "Draw a box around each actor, including any subtitles",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589091.0x000013/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json"
+  },
+  {
+    "tag": "actor",
+    "mode": "select",
+    "objective": "Tag all of the actors",
+    "guidance": "Draw a box around each actor, including any subtitles",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589091.0x000012/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json"
+  },
+  {
+    "tag": "actor",
+    "mode": "select",
+    "objective": "Tag all of the actors",
+    "guidance": "Draw a box around each actor, including any subtitles",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589091.0x000015/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json"
+  },
+  {
+    "tag": "actor",
+    "mode": "select",
+    "objective": "Tag all of the actors",
+    "guidance": "Draw a box around each actor, including any subtitles",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589091.0x000010/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json"
+  },
+  {
+    "tag": "actor",
+    "mode": "select",
+    "objective": "Tag all of the actors",
+    "guidance": "Draw a box around each actor, including any subtitles",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589091.0x000025/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json"
+  },
+  {
+    "tag": "actor",
+    "mode": "select",
+    "objective": "Tag all of the actors",
+    "guidance": "Draw a box around each actor, including any subtitles",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589091.0x000023/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json"
+  },
+  {
+    "tag": "actor",
+    "mode": "select",
+    "objective": "Tag all of the actors",
+    "guidance": "Draw a box around each actor, including any subtitles",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589091.0x000020/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json"
+  },
+  {
+    "tag": "actor",
+    "mode": "select",
+    "objective": "Tag all of the actors",
+    "guidance": "Draw a box around each actor, including any subtitles",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589091.0x000019/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json"
   }
 ]
