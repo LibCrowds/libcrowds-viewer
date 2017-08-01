@@ -19,7 +19,7 @@
 
     <div id="viewer-container" v-else>
       <libcrowds-viewer
-        :disable-on-Complete="true"
+        :disable-complete="true"
         :show-like="showLike"
         :task-opts="taskOpts"
         :creator="creator"
