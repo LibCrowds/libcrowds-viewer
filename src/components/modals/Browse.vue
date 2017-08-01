@@ -3,7 +3,7 @@
     <modal :show="show" title="Browse Tasks" @hide="$emit('hide')">
       <ul>
         <li
-          :class="{ 'task-complete': task.complete }"
+          :class="{ 'task-complete': task.complete && disableComplete }"
           v-for="(task, index) in tasks"
           :key="task.id"
           @click="onTaskClicked(task)">
@@ -12,12 +12,12 @@
               :src="task.thumbnailUri"
               :alt='`Task ${index} thumbnail`'>
             <figcaption
-              v-if="!task.complete">
+              v-if="!task.complete && disableComplete">
               {{ task.objective }}
             </figcaption>
             <div
               class="complete-icon"
-              v-if="task.complete">
+              v-if="task.complete && disableComplete">
               <icon name="check-circle"></icon>
             </div>
           </figure>
@@ -44,6 +44,10 @@ export default {
       required: true
     },
     show: {
+      type: Boolean,
+      requried: true
+    },
+    disableComplete: {
       type: Boolean,
       requried: true
     }

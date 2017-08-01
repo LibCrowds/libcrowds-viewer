@@ -51,6 +51,7 @@
           v-if="showBrowse"
           :tasks="tasks"
           :show="showBrowseModal"
+          :disableComplete="disableComplete"
           @hide="showBrowseModal = false"
           @taskclick="setCurrentTask">
         </browse-modal>
