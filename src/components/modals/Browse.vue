@@ -88,6 +88,11 @@ export default {
     border: 1px solid lighten($gray-dark, 20%);
     position: relative;
 
+    &:hover,
+    &:focus {
+      border-color: lighten($gray-dark, 35%);
+    }
+
     figure {
       margin: 5px;
     }
