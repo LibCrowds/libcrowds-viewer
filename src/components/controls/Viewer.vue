@@ -157,7 +157,7 @@ export default {
       }
 
       if (this.showShare) {
-        let tooltip = 'Share image'
+        let tooltip = 'Copy image URL'
         buttons.push({
           id: 'lv-share-btn',
           tooltip: tooltip,
