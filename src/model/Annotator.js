@@ -233,6 +233,10 @@ class Annotator {
         return item.purpose !== 'describing'
       })
       anno.addDescription(transcription)
+      anno.modify({
+        creator: this.creator,
+        generator: this.generator
+      })
       this.storeAnnotation(task, anno)
     }
     return anno
