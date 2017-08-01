@@ -150,8 +150,7 @@ describe('Annotator', () => {
 
     it('updates an existing annotation', () => {
       annotator.storeAnnotation(selectTask, annoOne)
-      annoOne.key = '123'
-      annotator.storeAnnotation(selectTask, annoOne)
+      annoOne.somekey = fixtures.uuid()
       expect(selectTask.annotations).toEqual([annoOne])
     })
   })
@@ -202,6 +201,19 @@ describe('Annotator', () => {
         transcribeTask.annotations[0].body.length - 1
       ].value).toEqual(value)
     })
+
+    it('updates modification details', () => {
+      const key = Object.keys(transcribeTask.form.model)[0]
+      const value = fixtures.uuid()
+      const newTranscribeAnno = fixtures.buildTranscribeAnnotation(key)
+      const before = fixtures.getISOYesterday()
+      newTranscribeAnno.modified = before
+      transcribeTask.annotations = [newTranscribeAnno]
+      annotator.storeTranscriptionAnnotation(transcribeTask, key, value)
+      expect(
+        Date.parse(newTranscribeAnno.modified) > Date.parse(before)
+      ).toBe(true)
+    })
   })
 
   describe('storeCommentAnnotation', () => {
@@ -217,6 +229,15 @@ describe('Annotator', () => {
       const comment = fixtures.uuid()
       annotator.storeCommentAnnotation(transcribeTask, comment)
       expect(transcribeTask.annotations).toEqual([commentAnno])
+    })
+
+    it('updates modification details', () => {
+      const comment = fixtures.uuid()
+      const before = fixtures.getISOYesterday()
+      commentAnno.modified = before
+      transcribeTask.annotations = [commentAnno]
+      annotator.storeCommentAnnotation(transcribeTask, comment)
+      expect(Date.parse(commentAnno.modified) > Date.parse(before)).toBe(true)
     })
   })
 

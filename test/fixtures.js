@@ -94,5 +94,14 @@ export default {
    */
   uuid () {
     return uuid()
+  },
+
+  /**
+   * Return an ISO string for yesterday's date.
+   */
+  getISOYesterday () {
+    const date = new Date()
+    date.setDate(date.getDate() - 1)
+    return date.toISOString()
   }
 }
