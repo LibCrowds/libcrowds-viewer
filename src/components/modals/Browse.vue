@@ -3,14 +3,14 @@
     <modal :show="show" title="Browse Tasks" @hide="$emit('hide')">
       <ul>
         <li
+          :class="{ 'task-complete': task.complete }"
           v-for="(task, index) in tasks"
           :key="task.id"
           @click="onTaskClicked(task)">
           <figure>
             <img
               :src="task.thumbnailUri"
-              :alt='`Task ${index} thumbnail`'
-              :class="{ 'task-complete': task.complete }">
+              :alt='`Task ${index} thumbnail`'>
             <figcaption
               v-if="!task.complete">
               {{ task.objective }}
@@ -88,9 +88,15 @@ export default {
     border: 1px solid lighten($gray-dark, 20%);
     position: relative;
 
-    &:hover,
-    &:focus {
+    &:not(.task-complete):hover,
+    &:not(.task-complete):focus {
       border-color: lighten($gray-dark, 35%);
+    }
+
+    &.task-complete {
+      img {
+        opacity: 0.2;
+      }
     }
 
     figure {
@@ -106,10 +112,6 @@ export default {
       font-family: $font-family-headings;
       font-size: $font-size-sm;
       margin: 5px 5px 3px 5px;
-    }
-
-    .task-complete {
-      opacity: 0.2;
     }
 
     .complete-icon {
