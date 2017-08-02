@@ -314,7 +314,9 @@ export default {
       const vpRect = vp.imageToViewportRectangle(imgRect)
       const overlay = drawOverlay(this.viewer, anno.id, vpRect, 'selection')
       overlay.addEventListener('click', (evt) => {
-        this.editTag(task, anno.id)
+        if (!task.complete || !this.disableComplete) {
+          this.editTag(task, anno.id)
+        }
       })
     },
 
@@ -507,7 +509,7 @@ export default {
      *   The task.
      */
     configureMode (task) {
-      if (task.mode === 'select' && !(task.complete && this.disableComplete)) {
+      if (task.mode === 'select') {
         // Draw all selection overlays
         const annos = this.annotator.getSelectAnnotations(task)
         for (let anno of annos) {
