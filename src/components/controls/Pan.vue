@@ -84,25 +84,44 @@ export default {
 
 <style lang="scss" scoped>
 #lv-pan-controls {
-  flex-direction: row;
-  display: flex;
-  margin: 0;
   position: absolute;
   z-index: 2;
-  border-radius: 0;
   background-color: rgba(0, 0, 0, 0.75);
-  padding: 0;
   margin: 1rem;
-  border-radius: 25px;
-  padding: 0.5rem 0;
+  border-radius: 50%;
   bottom: 0;
+  width: 4.5rem;
+  height: 4.5rem;
 
-  .btn-control:not(:nth-child(2)) {
-    padding: 0 0.5rem;
+  .btn-control {
+    display: flex;
+    position: absolute;
+    padding: 0.5rem;
   }
 
-  .btn-control:nth-child(2) {
-    padding: 0.5rem;
+  #pan-up {
+    justify-content: center;
+    width: 100%;
+  }
+
+  #pan-down {
+    justify-content: center;
+    width: 100%;
+    bottom: 0;
+  }
+
+  #pan-left {
+    justify-content: center;
+    height: 100%;
+    flex-direction: column;
+    left: 0;
+  }
+
+  #pan-right {
+    justify-content: center;
+    height: 100%;
+    flex-direction: column;
+    right: 0;
   }
 }
 </style>
