@@ -27,7 +27,7 @@
     <div class="viewer-container" v-else-if="showSelectViewer">
       <libcrowds-viewer
         :disable-complete="true"
-        :success-msg="successMsg"
+        :submit-message="submitMessage"
         :show-like="showLike"
         :task-opts="selectTaskOpts"
         :creator="creator"
@@ -44,7 +44,7 @@
     <div class="viewer-container" v-else-if="showTranscribeViewer">
       <libcrowds-viewer
         :disable-complete="true"
-        :success-msg="successMsg"
+        :submit-message="submitMessage"
         :show-like="showLike"
         :task-opts="transcribeTaskOpts"
         :creator="creator"
@@ -86,7 +86,7 @@ export default {
         homepage: 'http://example.org/client1/homepage1'
       },
       showLike: true,
-      successMsg: 'Answer saved!'
+      submitMessage: 'Answer saved!'
     }
   },
 

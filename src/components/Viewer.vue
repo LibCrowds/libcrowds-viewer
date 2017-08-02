@@ -242,7 +242,7 @@ export default {
     },
     submitMessage: {
       type: String,
-      default: 'Answer saved!'
+      default: null
     }
   },
 
@@ -461,7 +461,9 @@ export default {
         this.nextTask()
       }
       this.$emit('submit', task)
-      this.notyf.confirm(this.submitMessage)
+      if (this.submitMessage) {
+        this.notyf.confirm(this.submitMessage)
+      }
     },
 
     /**
