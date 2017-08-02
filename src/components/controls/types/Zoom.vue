@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import Controls from '@/components/Controls'
+import Controls from '@/components/controls/Controls'
 
 export default {
   props: {

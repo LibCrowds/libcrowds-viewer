@@ -13,7 +13,7 @@
 <script>
 import Clipboard from 'clipboard'
 import Task from '@/model/Task'
-import Controls from '@/components/Controls'
+import Controls from '@/components/controls/Controls'
 import getImageUri from '@/utils/getImageUri'
 
 export default {
