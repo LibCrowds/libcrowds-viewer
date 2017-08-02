@@ -17,10 +17,10 @@
 <script>
 import OpenSeadragon from 'openseadragon'
 import Icon from 'vue-awesome/components/Icon'
-import 'vue-awesome/icons/chevron-up'
-import 'vue-awesome/icons/chevron-down'
-import 'vue-awesome/icons/chevron-left'
-import 'vue-awesome/icons/chevron-right'
+import 'vue-awesome/icons/arrow-circle-up'
+import 'vue-awesome/icons/arrow-circle-down'
+import 'vue-awesome/icons/arrow-circle-left'
+import 'vue-awesome/icons/arrow-circle-right'
 import ControlButton from '@/components/controls/ControlButton'
 
 export default {
@@ -46,7 +46,7 @@ export default {
         {
           id: 'pan-up',
           tooltip: 'Move up',
-          icon: 'chevron-up',
+          icon: 'arrow-circle-up',
           callback: () => {
             this.viewer.viewport.panBy(new OpenSeadragon.Point(0, -this.panBy))
           }
@@ -54,7 +54,7 @@ export default {
         {
           id: 'pan-down',
           tooltip: 'Move down',
-          icon: 'chevron-down',
+          icon: 'arrow-circle-down',
           callback: () => {
             this.viewer.viewport.panBy(new OpenSeadragon.Point(0, this.panBy))
           }
@@ -62,7 +62,7 @@ export default {
         {
           id: 'pan-left',
           tooltip: 'Move left',
-          icon: 'chevron-left',
+          icon: 'arrow-circle-left',
           callback: () => {
             this.viewer.viewport.panBy(new OpenSeadragon.Point(-this.panBy, 0))
           }
@@ -70,7 +70,7 @@ export default {
         {
           id: 'pan-right',
           tooltip: 'Move right',
-          icon: 'chevron-right',
+          icon: 'arrow-circle-right',
           callback: () => {
             this.viewer.viewport.panBy(new OpenSeadragon.Point(this.panBy, 0))
           }
