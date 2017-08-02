@@ -1,5 +1,6 @@
 <template>
   <button
+    :id="id"
     :class="`hint--${hintPosition} hint--no-animate btn btn-control`"
     :aria-label="tooltip"
     @click="callback($event)">
@@ -21,7 +22,8 @@ export default {
     callback: {
       type: Function,
       required: true
-    }
+    },
+    id: String
   }
 }
 </script>

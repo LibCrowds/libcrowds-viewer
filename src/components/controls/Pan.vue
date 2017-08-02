@@ -4,6 +4,7 @@
     <control-button
       v-for="(b, index) in buttons"
       :key="`btn-zoom-${index}`"
+      :id="b.id"
       :tooltip="b.tooltip"
       :callback="b.callback"
       position="bottom"
