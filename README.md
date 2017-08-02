@@ -88,7 +88,7 @@ which are created from the task options passed to the viewer.
 | objective      | String  | \<optional> | The main objective                                                                                             |
 | guidance       | String  | \<optional> | Additional guidance                                                                                            |
 | form           | Object  | \<optional> | See form properties below                                                                                      |
-| highlight      | Array   | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
+| highlights     | Array   | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
 | tag            | String  | \<optional> | The tag to add when in `select` mode                                                                           |
 | liked          | Boolean | \<optional> | Task liked (see the viewer property `show-like`)                                                               |
 | classification | String  | \<optional> | A SpecificResource to classify the target as (e.g. [foaf:Person](http://xmlns.com/foaf/spec/#term_Person))     |
@@ -242,7 +242,7 @@ taken from `form.model` and `form.classification`, respectively.
       ]
     }
   },
-  "highlight": [
+  "highlights": [
     {
       "x": 100,
       "y": 100,

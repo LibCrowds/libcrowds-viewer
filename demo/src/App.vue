@@ -1,14 +1,20 @@
 <template>
   <div id="app">
 
-    <div id="home-container" v-if="!showViewer">
+    <!-- Demo home page -->
+    <div
+      id="home-container"
+      v-if="!showSelectViewer && !showTranscribeViewer">
       <h1>LibCrowds Viewer</h1>
       <p class="lead">
         IIIF-compatible image viewer Vue component.
       </p>
       <div>
-        <button @click="showViewer = true">
-          Try it
+        <button @click="showSelectViewer = true">
+          Select Mode
+        </button>
+        <button @click="showTranscribeViewer = true">
+          Transcribe Mode
         </button>
       </div>
       <a :href="githubUrl" id="doc-link">
@@ -17,11 +23,27 @@
       </a>
     </div>
 
-    <div id="viewer-container" v-else>
+    <!-- Viewer used for the select tasks -->
+    <div class="viewer-container" v-else-if="showSelectViewer">
+      <libcrowds-viewer
+        :show-like="showLike"
+        :task-opts="selectTaskOpts"
+        :creator="creator"
+        :generator="generator"
+        @taskchange="handleTaskChange"
+        @create="handleCreate"
+        @update="handleUpdate"
+        @delete="handleDelete"
+        @submit="handleSubmit">
+      </libcrowds-viewer>
+    </div>
+
+    <!-- Viewer used for the transcribe tasks -->
+    <div class="viewer-container" v-else-if="showTranscribeViewer">
       <libcrowds-viewer
         :disable-complete="true"
         :show-like="showLike"
-        :task-opts="taskOpts"
+        :task-opts="transcribeTaskOpts"
         :creator="creator"
         :generator="generator"
         @taskchange="handleTaskChange"
@@ -38,13 +60,16 @@
 <script>
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/github'
-import tasks from './tasks'
+import selectTasks from './selectTasks'
+import transcribeTasks from './transcribeTasks'
 
 export default {
   data: function () {
     return {
-      taskOpts: tasks,
-      showViewer: false,
+      selectTaskOpts: selectTasks,
+      transcribeTaskOpts: transcribeTasks,
+      showSelectViewer: false,
+      showTranscribeViewer: false,
       creator: {
         id: 'http://example.org/user1',
         type: 'Person',
@@ -143,7 +168,7 @@ export default {
   }
 }
 
-#viewer-container {
+.viewer-container {
   margin: 0;
   height: 100vh;
 }

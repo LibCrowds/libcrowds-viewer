@@ -1,7 +1,7 @@
 {
   "name": "libcrowds-viewer",
   "description": "IIIF-compatible image viewer component.",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "main": "dist/main.js",
   "author": "Alex Mendes <alexanderhmendes@gmail.com>",
   "license": "MIT",
@@ -88,7 +88,7 @@
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
       ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue-preprocessor"
     },
-    "collectCoverageFrom" : [
+    "collectCoverageFrom": [
       "src/**/*.{js,vue}",
       "!src/main.js",
       "!**/node_modules/**"
