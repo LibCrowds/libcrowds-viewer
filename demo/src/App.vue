@@ -27,6 +27,7 @@
     <div class="viewer-container" v-else-if="showSelectViewer">
       <libcrowds-viewer
         :disable-complete="true"
+        :success-msg="successMsg"
         :show-like="showLike"
         :task-opts="selectTaskOpts"
         :creator="creator"
@@ -43,6 +44,7 @@
     <div class="viewer-container" v-else-if="showTranscribeViewer">
       <libcrowds-viewer
         :disable-complete="true"
+        :success-msg="successMsg"
         :show-like="showLike"
         :task-opts="transcribeTaskOpts"
         :creator="creator"
@@ -83,7 +85,8 @@ export default {
         name: 'Code v2.1',
         homepage: 'http://example.org/client1/homepage1'
       },
-      showLike: true
+      showLike: true,
+      successMsg: 'Answer saved!'
     }
   },
 
@@ -111,9 +114,7 @@ export default {
       console.log('Annotation deleted', task, annotation)
     },
     handleSubmit (task) {
-      const jsonStr = JSON.stringify(task, null, 2)
-      console.log(jsonStr)
-      alert('User input logged to console')
+      console.log('Task submitted', task)
     }
   }
 }
@@ -177,5 +178,9 @@ export default {
 .viewer-container {
   margin: 0;
   height: 100vh;
+}
+
+.notyf {
+  right: 280px;
 }
 </style>

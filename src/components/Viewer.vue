@@ -118,6 +118,7 @@
 </template>
 
 <script>
+import Notyf from 'notyf'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
@@ -144,6 +145,7 @@ export default {
     return {
       viewer: {},
       selectionRect: {},
+      notyf: new Notyf(),
       annotator: new Annotator({
         creator: this.creator,
         generator: this.generator
@@ -237,6 +239,10 @@ export default {
     nextOnSubmit: {
       type: Boolean,
       default: true
+    },
+    submitMessage: {
+      type: String,
+      default: 'Answer saved!'
     }
   },
 
@@ -455,6 +461,7 @@ export default {
         this.nextTask()
       }
       this.$emit('submit', task)
+      this.notyf.confirm(this.submitMessage)
     },
 
     /**
@@ -598,6 +605,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~notyf/src/notyf.scss';
 @import '~style/settings';
 @import '~style/partials/buttons';
 
@@ -659,5 +667,9 @@ export default {
   .openseadragon-message {
     color: #FFF;
   }
+}
+
+.notyf {
+  right: 280px;
 }
 </style>
