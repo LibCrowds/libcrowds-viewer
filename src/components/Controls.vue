@@ -31,12 +31,6 @@ import 'vue-awesome/icons/share-alt'
 import 'vue-awesome/icons/list'
 
 export default {
-  data: function () {
-    return {
-      manifestData: {}
-    }
-  },
-
   props: {
     buttons: {
       type: Array,
