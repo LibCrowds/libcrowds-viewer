@@ -8,7 +8,6 @@
           v-if="currentTask"
           :task="currentTask"
           :viewer="viewer"
-          :zoomBy="zoomBy"
           :showHelp="showHelp"
           :showInfo="showInfo"
           :showBrowse="showBrowse"
@@ -27,6 +26,11 @@
           :viewer="viewer"
           :panBy="panBy">
         </pan-controls>
+
+        <zoom-controls
+          :viewer="viewer"
+          :zoomBy="zoomBy">
+        </zoom-controls>
 
         <metadata-modal
           v-if="currentTask"
@@ -123,6 +127,7 @@ import HelpModal from '@/components/modals/Help'
 import BrowseModal from '@/components/modals/Browse'
 import ViewerControls from '@/components/controls/Viewer'
 import PanControls from '@/components/controls/Pan'
+import ZoomControls from '@/components/controls/Zoom'
 import Sidebar from '@/components/sidebar/Sidebar'
 import SelectSidebarItem from '@/components/sidebar/items/Select'
 import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
@@ -241,6 +246,7 @@ export default {
     BrowseModal,
     ViewerControls,
     PanControls,
+    ZoomControls,
     Sidebar,
     Selector,
     SelectSidebarItem,

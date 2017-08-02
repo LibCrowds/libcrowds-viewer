@@ -32,10 +32,6 @@ export default {
       type: Object,
       required: true
     },
-    zoomBy: {
-      type: Number,
-      required: true
-    },
     showHelp: {
       type: Boolean,
       required: true
@@ -77,32 +73,6 @@ export default {
     // of passing the button IDs won't work.
     buttons: function () {
       let buttons = [
-        {
-          tooltip: 'Zoom in',
-          icon: 'plus-circle',
-          callback: () => {
-            const currentZoom = this.viewer.viewport.getZoom(true)
-            const zoomTo = currentZoom + (currentZoom * this.zoomBy)
-            this.viewer.viewport.zoomTo(zoomTo)
-          }
-        },
-        {
-          tooltip: 'Zoom out',
-          icon: 'minus-circle',
-          callback: () => {
-            const currentZoom = this.viewer.viewport.getZoom(true)
-            const zoomTo = currentZoom - (currentZoom * this.zoomBy)
-            this.viewer.viewport.zoomTo(zoomTo)
-          }
-        },
-        {
-          tooltip: 'Reset zoom',
-          icon: 'refresh',
-          callback: () => {
-            const homeZoom = this.viewer.viewport.getHomeZoom()
-            this.viewer.viewport.zoomTo(homeZoom)
-          }
-        },
         {
           tooltip: 'Fullscreen',
           icon: 'expand',
