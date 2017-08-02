@@ -32,6 +32,7 @@
     "es6-promise": "^4.1.1",
     "hint.css": "^2.5.0",
     "normalize.css": "^7.0.0",
+    "notyf": "^2.0.1",
     "openseadragon": "^2.2.1",
     "uuid": "^3.1.0",
     "vue": "^2.3.4",
