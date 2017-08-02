@@ -1,20 +1,31 @@
 <template>
-  <div class="lv-viewer-controls">
+  <div id="lv-viewer-controls">
 
-    <controls
-      position="top"
-      hint-position="bottom"
-      :buttons="buttons">
-    </controls>
+    <control-button
+      v-for="(b, index) in buttons"
+      :key="`btn-zoom-${index}`"
+      :tooltip="b.tooltip"
+      :callback="b.callback"
+      position="bottom"
+      hint-position="bottom">
+      <icon :name="b.icon"></icon>
+    </control-button>
 
   </div>
 </template>
 
 <script>
 import Clipboard from 'clipboard'
+import Icon from 'vue-awesome/components/Icon'
+import 'vue-awesome/icons/expand'
+import 'vue-awesome/icons/question-circle'
+import 'vue-awesome/icons/info-circle'
+import 'vue-awesome/icons/thumbs-up'
+import 'vue-awesome/icons/share-alt'
+import 'vue-awesome/icons/list'
 import Task from '@/model/Task'
-import Controls from '@/components/Controls'
 import getImageUri from '@/utils/getImageUri'
+import ControlButton from '@/components/controls/ControlButton'
 
 export default {
   data: function () {
@@ -26,14 +37,6 @@ export default {
   props: {
     task: {
       type: Task,
-      required: true
-    },
-    viewer: {
-      type: Object,
-      required: true
-    },
-    zoomBy: {
-      type: Number,
       required: true
     },
     showHelp: {
@@ -55,19 +58,12 @@ export default {
     showLike: {
       type: Boolean,
       required: true
-    },
-    helpButton: {
-      type: String,
-      required: true
-    },
-    infoButton: {
-      type: String,
-      required: true
     }
   },
 
   components: {
-    Controls
+    Icon,
+    ControlButton
   },
 
   computed: {
@@ -77,32 +73,6 @@ export default {
     // of passing the button IDs won't work.
     buttons: function () {
       let buttons = [
-        {
-          tooltip: 'Zoom in',
-          icon: 'plus-circle',
-          callback: () => {
-            const currentZoom = this.viewer.viewport.getZoom(true)
-            const zoomTo = currentZoom + (currentZoom * this.zoomBy)
-            this.viewer.viewport.zoomTo(zoomTo)
-          }
-        },
-        {
-          tooltip: 'Zoom out',
-          icon: 'minus-circle',
-          callback: () => {
-            const currentZoom = this.viewer.viewport.getZoom(true)
-            const zoomTo = currentZoom - (currentZoom * this.zoomBy)
-            this.viewer.viewport.zoomTo(zoomTo)
-          }
-        },
-        {
-          tooltip: 'Reset zoom',
-          icon: 'refresh',
-          callback: () => {
-            const homeZoom = this.viewer.viewport.getHomeZoom()
-            this.viewer.viewport.zoomTo(homeZoom)
-          }
-        },
         {
           tooltip: 'Fullscreen',
           icon: 'expand',
@@ -114,7 +84,6 @@ export default {
 
       if (this.showHelp) {
         buttons.push({
-          id: this.helpButton,
           tooltip: 'Help',
           icon: 'question-circle',
           callback: () => {
@@ -125,7 +94,6 @@ export default {
 
       if (this.showInfo) {
         buttons.push({
-          id: this.infoButton,
           tooltip: 'Details',
           icon: 'info-circle',
           callback: () => {
@@ -136,7 +104,6 @@ export default {
 
       if (this.showBrowse) {
         buttons.push({
-          id: this.infoButton,
           tooltip: 'Browse Tasks',
           icon: 'list',
           callback: () => {
@@ -184,3 +151,25 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '~style/settings';
+
+#lv-viewer-controls {
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  background-color: $hud;
+  margin: 0;
+  z-index: 2;
+  width: 100%;
+
+  @media screen and (min-width: 768px) {
+    justify-content: initial;
+    width: initial;
+    margin: 1rem;
+    border-radius: 25px;
+    padding: 0 0.5rem;
+  }
+}
+</style>

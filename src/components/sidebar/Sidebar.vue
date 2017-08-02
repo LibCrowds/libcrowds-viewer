@@ -56,7 +56,6 @@
 <script>
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/check-circle'
-import 'vue-awesome/icons/tasks'
 import Task from '@/model/Task'
 
 export default {
