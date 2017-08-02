@@ -4,7 +4,7 @@
     <div id="lv-viewer-wrapper">
 
       <div id="hud" ref="hud">
-        <viewer-controls
+        <toolbar-controls
           v-if="currentTask"
           :task="currentTask"
           :viewer="viewer"
@@ -20,7 +20,7 @@
           @browseclicked="showBrowseModal = true"
           @likeclicked="emitTaskLiked"
           @fullscreenclicked="toggleFullScreen">
-        </viewer-controls>
+        </toolbar-controls>
 
         <pan-controls
           :viewer="viewer"
@@ -126,7 +126,7 @@ import OpenSeadragon from 'openseadragon'
 import MetadataModal from '@/components/modals/Metadata'
 import HelpModal from '@/components/modals/Help'
 import BrowseModal from '@/components/modals/Browse'
-import ViewerControls from '@/components/controls/Viewer'
+import ToolbarControls from '@/components/controls/Toolbar'
 import PanControls from '@/components/controls/Pan'
 import ZoomControls from '@/components/controls/Zoom'
 import Sidebar from '@/components/sidebar/Sidebar'
@@ -250,7 +250,7 @@ export default {
     MetadataModal,
     HelpModal,
     BrowseModal,
-    ViewerControls,
+    ToolbarControls,
     PanControls,
     ZoomControls,
     Sidebar,
