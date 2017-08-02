@@ -3,7 +3,7 @@
     <modal :show="show" title="Browse Tasks" @hide="$emit('hide')">
       <ul>
         <li
-          :class="{ 'task-complete': task.complete && disableComplete }"
+          :class="listItemClass"
           v-for="(task, index) in tasks"
           :key="`task-${index}`"
           @click="onTaskClicked(task)">
@@ -50,6 +50,19 @@ export default {
     disableComplete: {
       type: Boolean,
       requried: true
+    }
+  },
+
+  computed: {
+    listItemClass: function () {
+      const complete = (
+        this.task !== undefined &&
+        this.task.complete &&
+        this.disableComplete
+      )
+      return {
+        'task-complete': complete
+      }
     }
   },
 
