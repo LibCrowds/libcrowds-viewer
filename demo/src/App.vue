@@ -26,6 +26,7 @@
     <!-- Viewer used for the select tasks -->
     <div class="viewer-container" v-else-if="showSelectViewer">
       <libcrowds-viewer
+        :disable-complete="true"
         :show-like="showLike"
         :task-opts="selectTaskOpts"
         :creator="creator"
@@ -41,6 +42,7 @@
     <!-- Viewer used for the transcribe tasks -->
     <div class="viewer-container" v-else-if="showTranscribeViewer">
       <libcrowds-viewer
+        :disable-complete="true"
         :show-like="showLike"
         :task-opts="transcribeTaskOpts"
         :creator="creator"

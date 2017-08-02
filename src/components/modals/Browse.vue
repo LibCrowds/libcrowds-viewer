@@ -3,12 +3,23 @@
     <modal :show="show" title="Browse Tasks" @hide="$emit('hide')">
       <ul>
         <li
+          :class="{ 'task-complete': task.complete && disableComplete }"
           v-for="(task, index) in tasks"
           :key="`task-${index}`"
           @click="onTaskClicked(task)">
           <figure v-if="task !== undefined">
-            <img :src="task.thumbnailUri" :alt='`Task ${index} thumbnail`'>
-            <figcaption>{{ task.objective }}</figcaption>
+            <img
+              :src="task.thumbnailUri"
+              :alt='`Task ${index} thumbnail`'>
+            <figcaption
+              v-if="!task.complete || !disableComplete">
+              {{ task.objective }}
+            </figcaption>
+            <div
+              class="complete-icon"
+              v-if="task.complete && disableComplete">
+              <icon name="check-circle"></icon>
+            </div>
           </figure>
         </li>
       </ul>
@@ -17,11 +28,14 @@
 </template>
 
 <script>
+import Icon from 'vue-awesome/components/Icon'
+import 'vue-awesome/icons/check-circle'
 import Modal from '@/components/Modal'
 
 export default {
   components: {
-    Modal
+    Modal,
+    Icon
   },
 
   props: {
@@ -30,6 +44,10 @@ export default {
       required: true
     },
     show: {
+      type: Boolean,
+      requried: true
+    },
+    disableComplete: {
       type: Boolean,
       requried: true
     }
@@ -74,6 +92,17 @@ export default {
     border: 1px solid lighten($gray-dark, 20%);
     position: relative;
 
+    &:not(.task-complete):hover,
+    &:not(.task-complete):focus {
+      border-color: lighten($gray-dark, 35%);
+    }
+
+    &.task-complete {
+      img {
+        opacity: 0.2;
+      }
+    }
+
     figure {
       margin: 5px;
     }
@@ -87,6 +116,18 @@ export default {
       font-family: $font-family-headings;
       font-size: $font-size-sm;
       margin: 5px 5px 3px 5px;
+    }
+
+    .complete-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        height: 24px;
+        width: auto;
+        color: $green;
+      }
     }
   }
 }

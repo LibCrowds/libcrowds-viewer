@@ -51,6 +51,7 @@
           v-if="showBrowse"
           :tasks="tasks"
           :show="showBrowseModal"
+          :disableComplete="disableComplete"
           @hide="showBrowseModal = false"
           @taskclick="setCurrentTask">
         </browse-modal>
@@ -102,7 +103,7 @@
     </sidebar>
 
     <selector
-      v-if="currentTask && currentTask.mode === 'select'"
+      v-if="selectorEnabled"
       :viewer="viewer"
       :task="currentTask"
       :selectionRect="selectionRect"
@@ -265,6 +266,13 @@ export default {
     },
     commentAnnotation: function () {
       return this.annotator.getCommentAnnotation(this.currentTask)
+    },
+    selectorEnabled: function () {
+      return (
+        this.currentTask &&
+        this.currentTask.mode === 'select' &&
+        (!this.currentTask.complete || !this.disableComplete)
+      )
     }
   },
 
@@ -313,7 +321,9 @@ export default {
       const vpRect = vp.imageToViewportRectangle(imgRect)
       const overlay = drawOverlay(this.viewer, anno.id, vpRect, 'selection')
       overlay.addEventListener('click', (evt) => {
-        this.editTag(task, anno.id)
+        if (!task.complete || !this.disableComplete) {
+          this.editTag(task, anno.id)
+        }
       })
     },
 
@@ -506,7 +516,7 @@ export default {
      *   The task.
      */
     configureMode (task) {
-      if (task.mode === 'select' && !(task.complete && this.disableComplete)) {
+      if (task.mode === 'select') {
         // Draw all selection overlays
         const annos = this.annotator.getSelectAnnotations(task)
         for (let anno of annos) {
