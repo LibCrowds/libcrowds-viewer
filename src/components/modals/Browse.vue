@@ -12,7 +12,7 @@
               :src="task.thumbnailUri"
               :alt='`Task ${index} thumbnail`'>
             <figcaption
-              v-if="!task.complete && disableComplete">
+              v-if="!task.complete || !disableComplete">
               {{ task.objective }}
             </figcaption>
             <div
