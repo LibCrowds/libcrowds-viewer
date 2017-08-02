@@ -8,7 +8,7 @@
       :callback="b.callback"
       position="bottom"
       hint-position="bottom">
-      <icon :name="b.icon"></icon>
+      <icon :name="b.icon" :class="b.iconClass"></icon>
     </control-button>
 
   </div>
