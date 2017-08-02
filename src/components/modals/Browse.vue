@@ -4,9 +4,9 @@
       <ul>
         <li
           v-for="(task, index) in tasks"
-          :key="task.id"
+          :key="`task-${index}`"
           @click="onTaskClicked(task)">
-          <figure>
+          <figure v-if="task !== undefined">
             <img :src="task.thumbnailUri" :alt='`Task ${index} thumbnail`'>
             <figcaption>{{ task.objective }}</figcaption>
           </figure>
