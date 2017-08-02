@@ -31,7 +31,6 @@ export default {
 <style lang="scss" scoped>
 @import '~hint.css';
 @import '~style/settings';
-@import '~style/partials/buttons';
 
 button {
   .active {
