@@ -103,7 +103,7 @@
     </sidebar>
 
     <selector
-      v-if="currentTask && currentTask.mode === 'select' && (!currentTask.complete || !disableComplete)"
+      v-if="selectorEnabled"
       :viewer="viewer"
       :task="currentTask"
       :selectionRect="selectionRect"
@@ -266,6 +266,13 @@ export default {
     },
     commentAnnotation: function () {
       return this.annotator.getCommentAnnotation(this.currentTask)
+    },
+    selectorEnabled: function () {
+      return (
+        this.currentTask &&
+        this.currentTask.mode === 'select' &&
+        (!this.currentTask.complete || !this.disableComplete)
+      )
     }
   },
 
