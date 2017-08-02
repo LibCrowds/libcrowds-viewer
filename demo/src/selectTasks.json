@@ -1,0 +1,43 @@
+[
+  {
+    "tag": "title",
+    "classification": "http://purl.org/dc/terms/title",
+    "mode": "select",
+    "objective": "Tag all of the titles",
+    "guidance": "Draw a box around each title, including any subtitles",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json"
+  },
+  {
+    "tag": "actor",
+    "mode": "select",
+    "objective": "Tag the actors",
+    "guidance": "Draw a box around each actor associated with the highlighted performance",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json",
+    "highlight": [
+      {
+        "x": 291,
+        "y": 1498,
+        "width": 1737,
+        "height": 244
+      }
+    ]
+  },
+  {
+    "tag": "date",
+    "mode": "select",
+    "objective": "Tag the date",
+    "guidance": "Draw a box around the date of the highlighted performance",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json",
+    "highlight": [
+      {
+        "x": 291,
+        "y": 1498,
+        "width": 1737,
+        "height": 244
+      }
+    ]
+  }
+]

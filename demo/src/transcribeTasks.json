@@ -1,0 +1,39 @@
+[
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the required info",
+    "guidance": "Transcribe the title exactly as you see on the page.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "title": null,
+        "date": null,
+        "genre": null
+      },
+      "classification": {
+        "title": "http://purl.org/dc/terms/title"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Title",
+            "model": "title",
+            "placeholder": "Enter the title",
+            "required": true
+          }
+        ]
+      }
+    },
+    "highlights": {
+      "title": {
+        "x": 291,
+        "y": 1498,
+        "width": 1737,
+        "height": 244
+      }
+    }
+  }
+]
