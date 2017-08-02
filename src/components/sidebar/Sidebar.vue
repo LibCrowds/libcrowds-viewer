@@ -42,9 +42,12 @@
         Submit
       </button>
 
-      <p id="task-complete" v-if="task.complete && disableComplete">
-        Task completed!
-      </p>
+      <span v-if="task.complete && disableComplete" id="task-complete">
+        <p>
+          Task complete!
+        </p>
+        <icon name="check-circle"></icon>
+      </span>
     </div>
 
   </div>
@@ -52,6 +55,7 @@
 
 <script>
 import Icon from 'vue-awesome/components/Icon'
+import 'vue-awesome/icons/check-circle'
 import 'vue-awesome/icons/tasks'
 import Task from '@/model/Task'
 
@@ -251,8 +255,18 @@ export default {
   }
 
   #task-complete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     font-size: 1.2rem;
     text-align: center;
+
+    svg {
+      height: 32px;
+      width: auto;
+      color: $green;
+    }
   }
 }
 </style>
