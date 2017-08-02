@@ -1,19 +1,27 @@
 <template>
-  <div class="lv-pan-controls">
+  <div id="lv-pan-controls">
 
-    <controls
+    <control-button
+      v-for="(b, index) in buttons"
+      :key="`btn-zoom-${index}`"
+      :tooltip="b.tooltip"
+      :callback="b.callback"
       position="bottom"
-      scale="1"
-      hint-position="top"
-      :buttons="buttons">
-    </controls>
+      hint-position="top">
+      <icon :name="b.icon"></icon>
+    </control-button>
 
   </div>
 </template>
 
 <script>
-import Controls from '@/components/controls/Controls'
 import OpenSeadragon from 'openseadragon'
+import Icon from 'vue-awesome/components/Icon'
+import 'vue-awesome/icons/chevron-up'
+import 'vue-awesome/icons/chevron-down'
+import 'vue-awesome/icons/chevron-left'
+import 'vue-awesome/icons/chevron-right'
+import ControlButton from '@/components/controls/ControlButton'
 
 export default {
   props: {
@@ -28,12 +36,13 @@ export default {
   },
 
   components: {
-    Controls
+    Icon,
+    ControlButton
   },
 
   computed: {
     buttons: function () {
-      let buttons = [
+      return [
         {
           id: 'pan-up',
           tooltip: 'Move up',
@@ -67,8 +76,32 @@ export default {
           }
         }
       ]
-      return buttons
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+#lv-pan-controls {
+  flex-direction: row;
+  display: flex;
+  margin: 0;
+  position: absolute;
+  z-index: 2;
+  border-radius: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 0;
+  margin: 1rem;
+  border-radius: 25px;
+  padding: 0.5rem 0;
+  bottom: 0;
+
+  .btn-control:not(:nth-child(2)) {
+    padding: 0 0.5rem;
+  }
+
+  .btn-control:nth-child(2) {
+    padding: 0.5rem;
+  }
+}
+</style>

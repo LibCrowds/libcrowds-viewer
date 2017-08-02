@@ -1,18 +1,25 @@
 <template>
-  <div class="lv-zoom-controls">
+  <div id="lv-zoom-controls">
 
-    <controls
+    <control-button
+      v-for="(b, index) in buttons"
+      :key="`btn-zoom-${index}`"
+      :tooltip="b.tooltip"
+      :callback="b.callback"
       position="bottom"
-      scale="1"
-      hint-position="top"
-      :buttons="buttons">
-    </controls>
+      hint-position="top">
+      <icon :name="b.icon"></icon>
+    </control-button>
 
   </div>
 </template>
 
 <script>
-import Controls from '@/components/controls/Controls'
+import Icon from 'vue-awesome/components/Icon'
+import 'vue-awesome/icons/plus-circle'
+import 'vue-awesome/icons/minus-circle'
+import 'vue-awesome/icons/refresh'
+import ControlButton from '@/components/controls/ControlButton'
 
 export default {
   props: {
@@ -27,7 +34,8 @@ export default {
   },
 
   components: {
-    Controls
+    Icon,
+    ControlButton
   },
 
   computed: {
@@ -64,3 +72,29 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+#lv-zoom-controls {
+  flex-direction: column;
+  display: flex;
+  margin: 0;
+  position: absolute;
+  z-index: 2;
+  border-radius: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 0;
+  margin: 1rem;
+  border-radius: 25px;
+  padding: 0.5rem 0;
+  bottom: 0;
+  left: 12rem;
+
+  .btn-control:not(:nth-child(2)) {
+    padding: 0 0.5rem;
+  }
+
+  .btn-control:nth-child(2) {
+    padding: 0.5rem;
+  }
+}
+</style>
