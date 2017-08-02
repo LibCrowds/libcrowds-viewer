@@ -83,44 +83,46 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~style/settings';
+
 #lv-pan-controls {
   position: absolute;
   z-index: 2;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: $hud;
   margin: 1rem;
   border-radius: 50%;
   bottom: 0;
-  width: 75px;
-  height: 75px;
+  width: 80px;
+  height: 80px;
 
   .btn-control {
     display: flex;
+    justify-content: center;
     position: absolute;
     padding: 0.5rem;
   }
 
   #pan-up {
-    justify-content: center;
+    flex-direction: row;
     width: 100%;
+    top: 0;
   }
 
   #pan-down {
-    justify-content: center;
+    flex-direction: row;
     width: 100%;
     bottom: 0;
   }
 
   #pan-left {
-    justify-content: center;
-    height: 100%;
     flex-direction: column;
+    height: 100%;
     left: 0;
   }
 
   #pan-right {
-    justify-content: center;
-    height: 100%;
     flex-direction: column;
+    height: 100%;
     right: 0;
   }
 }

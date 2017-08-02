@@ -7,7 +7,7 @@
       :tooltip="b.tooltip"
       :callback="b.callback"
       position="bottom"
-      hint-position="top">
+      hint-position="bottom">
       <icon :name="b.icon"></icon>
     </control-button>
 
@@ -153,26 +153,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~style/settings';
+
 #lv-viewer-controls {
-  flex-direction: row;
   display: flex;
-  margin: 0;
+  justify-content: space-around;
   position: absolute;
+  background-color: $hud;
+  margin: 0;
   z-index: 2;
-  border-radius: 0;
-  background-color: rgba(0, 0, 0, 0.75);
-  padding: 0;
-  margin: 1rem;
-  border-radius: 25px;
-  padding: 0.5rem 0;
-  top: 0;
+  width: 100%;
 
-  .btn-control:not(:nth-child(2)) {
+  @media screen and (min-width: 768px) {
+    justify-content: initial;
+    width: initial;
+    margin: 1rem;
+    border-radius: 25px;
     padding: 0 0.5rem;
-  }
-
-  .btn-control:nth-child(2) {
-    padding: 0.5rem;
   }
 }
 </style>

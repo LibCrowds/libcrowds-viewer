@@ -74,24 +74,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~style/settings';
+
 #lv-zoom-controls {
-  flex-direction: column;
   display: flex;
+  flex-direction: column;
   position: absolute;
+  justify-content: space-around;
   z-index: 2;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: $hud;
   margin: 1rem;
   border-radius: 25px;
-  padding: 0.5rem 0;
   bottom: 0;
-  left: 100px;
+  height: 80px;
+  right: 0;
+
+  @media screen and (min-width: 768px) {
+    right: initial;
+    left: 100px;
+  }
 
   .btn-control:not(:nth-child(2)) {
-    padding: 0 0.5rem;
+    padding: 0.5rem;
   }
 
   .btn-control:nth-child(2) {
-    padding: 0.5rem;
+    padding: 0 0.5rem;
   }
 }
 </style>
