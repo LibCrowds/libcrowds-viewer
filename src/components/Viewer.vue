@@ -103,7 +103,7 @@
     </sidebar>
 
     <selector
-      v-if="currentTask && currentTask.mode === 'select'"
+      v-if="currentTask && currentTask.mode === 'select' && (!currentTask.complete || !disableComplete)"
       :viewer="viewer"
       :task="currentTask"
       :selectionRect="selectionRect"
