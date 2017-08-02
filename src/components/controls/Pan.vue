@@ -90,13 +90,13 @@ export default {
   margin: 1rem;
   border-radius: 50%;
   bottom: 0;
-  width: 70px;
-  height: 70px;
+  width: 75px;
+  height: 75px;
 
   .btn-control {
     display: flex;
     position: absolute;
-    padding: 0.35rem;
+    padding: 0.5rem;
   }
 
   #pan-up {
