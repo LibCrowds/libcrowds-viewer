@@ -5,9 +5,9 @@
         <li
           :class="{ 'task-complete': task.complete && disableComplete }"
           v-for="(task, index) in tasks"
-          :key="task.id"
+          :key="`task-${index}`"
           @click="onTaskClicked(task)">
-          <figure>
+          <figure v-if="task !== undefined">
             <img
               :src="task.thumbnailUri"
               :alt='`Task ${index} thumbnail`'>

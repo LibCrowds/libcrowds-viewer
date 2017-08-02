@@ -521,20 +521,20 @@ export default {
      * Generate tasks from task options.
      */
     loadTasks () {
-      const taskOptsCopy = JSON.parse(JSON.stringify(this.taskOpts))
-      let firstTask = true
-      this.tasks = []
-      for (let opts of taskOptsCopy) {
-        fetch(opts.imgInfoUri, {
+      // Create an empty tasks array to later maintain order
+      this.tasks = Array.apply(null, Array(this.taskOpts.length)).map(() => {})
+      for (let i = 0; i < this.taskOpts.length; i++) {
+        fetch(this.taskOpts[i].imgInfoUri, {
           method: 'get'
         }).then((response) => {
           return response.json()
         }).then((json) => {
+          const opts = JSON.parse(JSON.stringify(this.taskOpts[i]))
           opts.imgInfo = json
-          this.tasks.push(new Task(opts))
-          if (firstTask) {
+          this.tasks[i] = new Task(opts)
+          // Set the first task as current
+          if (i === 1) {
             this.setCurrentTask(this.tasks[0])
-            firstTask = false
           }
         }).catch(function (err) {
           throw Error(`Could not retrieve image info: ${err}`)
