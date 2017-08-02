@@ -77,17 +77,14 @@ export default {
 #lv-zoom-controls {
   flex-direction: column;
   display: flex;
-  margin: 0;
   position: absolute;
   z-index: 2;
-  border-radius: 0;
   background-color: rgba(0, 0, 0, 0.75);
-  padding: 0;
   margin: 1rem;
   border-radius: 25px;
   padding: 0.5rem 0;
   bottom: 0;
-  left: 12rem;
+  left: 100px;
 
   .btn-control:not(:nth-child(2)) {
     padding: 0 0.5rem;
