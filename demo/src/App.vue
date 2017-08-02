@@ -27,8 +27,8 @@
     <div class="viewer-container" v-else-if="showSelectViewer">
       <libcrowds-viewer
         :disable-complete="true"
-        :submit-message="submitMessage"
         :show-like="showLike"
+        :message-bus="messageBus"
         :task-opts="selectTaskOpts"
         :creator="creator"
         :generator="generator"
@@ -44,8 +44,8 @@
     <div class="viewer-container" v-else-if="showTranscribeViewer">
       <libcrowds-viewer
         :disable-complete="true"
-        :submit-message="submitMessage"
         :show-like="showLike"
+        :message-bus="messageBus"
         :task-opts="transcribeTaskOpts"
         :creator="creator"
         :generator="generator"
@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/github'
 import selectTasks from './selectTasks'
@@ -86,7 +87,7 @@ export default {
         homepage: 'http://example.org/client1/homepage1'
       },
       showLike: true,
-      submitMessage: 'Answer saved!'
+      messageBus: new Vue()
     }
   },
 
@@ -115,6 +116,7 @@ export default {
     },
     handleSubmit (task) {
       console.log('Task submitted', task)
+      this.messageBus.$emit('success', 'Answer saved!')
     }
   }
 }

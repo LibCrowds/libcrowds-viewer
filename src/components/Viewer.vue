@@ -240,8 +240,8 @@ export default {
       type: Boolean,
       default: true
     },
-    submitMessage: {
-      type: String,
+    messageBus: {
+      type: Object,
       default: null
     }
   },
@@ -461,9 +461,6 @@ export default {
         this.nextTask()
       }
       this.$emit('submit', task)
-      if (this.submitMessage) {
-        this.notyf.confirm(this.submitMessage)
-      }
     },
 
     /**
@@ -523,6 +520,12 @@ export default {
       for (modelKey in task.form.highlights) {
         deleteOverlay(this.viewer, `highlight-${modelKey}`)
       }
+    },
+
+    setupMessageBus () {
+      this.messageBus.$on('success', text => {
+        this.notyf.confirm(text)
+      })
     },
 
     /**
@@ -597,6 +600,7 @@ export default {
   mounted () {
     this.viewer = new OpenSeadragon.Viewer(this.viewerOpts)
     this.loadTasks()
+    this.setupMessageBus()
     window.addEventListener('beforeunload', this.onBeforeUnload)
   },
 
