@@ -9,7 +9,7 @@
       <p class="lead">
         IIIF-compatible image viewer Vue component.
       </p>
-      <div>
+      <div id="mode-buttons">
         <button @click="showSelectViewer = true">
           Select Mode
         </button>
@@ -154,7 +154,7 @@ export default {
   #doc-link {
     display: flex;
     align-items: center;
-    margin-top: 2em;
+    margin-top: 1em;
     text-decoration: none;
 
     svg {
@@ -167,6 +167,11 @@ export default {
       font-family: Arial, Helvetica, sans-serif;
     }
   }
+}
+
+#mode-buttons {
+  display:flex;
+  flex-direction: column;
 }
 
 .viewer-container {
