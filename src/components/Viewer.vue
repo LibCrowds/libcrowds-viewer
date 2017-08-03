@@ -676,6 +676,15 @@ export default {
 }
 
 .notyf {
-  right: 280px;
+  @media screen and (min-width: 768px) {
+    right: 280px;
+  }
+
+  @media screen and (max-width: 767px) {
+    bottom: initial;
+    top: 0;
+    right: 0;
+    width: 100%;
+  }
 }
 </style>
