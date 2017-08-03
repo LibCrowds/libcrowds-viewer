@@ -28,6 +28,7 @@
       <libcrowds-viewer
         :disable-complete="true"
         :show-like="showLike"
+        :message-bus="messageBus"
         :task-opts="selectTaskOpts"
         :creator="creator"
         :generator="generator"
@@ -44,6 +45,7 @@
       <libcrowds-viewer
         :disable-complete="true"
         :show-like="showLike"
+        :message-bus="messageBus"
         :task-opts="transcribeTaskOpts"
         :creator="creator"
         :generator="generator"
@@ -59,6 +61,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/github'
 import selectTasks from './selectTasks'
@@ -83,7 +86,8 @@ export default {
         name: 'Code v2.1',
         homepage: 'http://example.org/client1/homepage1'
       },
-      showLike: true
+      showLike: true,
+      messageBus: new Vue()
     }
   },
 
@@ -111,9 +115,8 @@ export default {
       console.log('Annotation deleted', task, annotation)
     },
     handleSubmit (task) {
-      const jsonStr = JSON.stringify(task, null, 2)
-      console.log(jsonStr)
-      alert('User input logged to console')
+      console.log('Task submitted', task)
+      this.messageBus.$emit('success', 'Answer saved!')
     }
   }
 }
@@ -177,5 +180,9 @@ export default {
 .viewer-container {
   margin: 0;
   height: 100vh;
+}
+
+.notyf {
+  right: 280px;
 }
 </style>

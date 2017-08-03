@@ -4,7 +4,7 @@
     <div id="lv-viewer-wrapper">
 
       <div id="hud" ref="hud">
-        <viewer-controls
+        <toolbar-controls
           v-if="currentTask"
           :task="currentTask"
           :viewer="viewer"
@@ -20,7 +20,7 @@
           @browseclicked="showBrowseModal = true"
           @likeclicked="emitTaskLiked"
           @fullscreenclicked="toggleFullScreen">
-        </viewer-controls>
+        </toolbar-controls>
 
         <pan-controls
           :viewer="viewer"
@@ -118,6 +118,7 @@
 </template>
 
 <script>
+import Notyf from 'notyf'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
@@ -125,7 +126,7 @@ import OpenSeadragon from 'openseadragon'
 import MetadataModal from '@/components/modals/Metadata'
 import HelpModal from '@/components/modals/Help'
 import BrowseModal from '@/components/modals/Browse'
-import ViewerControls from '@/components/controls/Viewer'
+import ToolbarControls from '@/components/controls/Toolbar'
 import PanControls from '@/components/controls/Pan'
 import ZoomControls from '@/components/controls/Zoom'
 import Sidebar from '@/components/sidebar/Sidebar'
@@ -144,6 +145,7 @@ export default {
     return {
       viewer: {},
       selectionRect: {},
+      notyf: new Notyf(),
       annotator: new Annotator({
         creator: this.creator,
         generator: this.generator
@@ -237,6 +239,10 @@ export default {
     nextOnSubmit: {
       type: Boolean,
       default: true
+    },
+    messageBus: {
+      type: Object,
+      default: null
     }
   },
 
@@ -244,7 +250,7 @@ export default {
     MetadataModal,
     HelpModal,
     BrowseModal,
-    ViewerControls,
+    ToolbarControls,
     PanControls,
     ZoomControls,
     Sidebar,
@@ -516,6 +522,12 @@ export default {
       }
     },
 
+    setupMessageBus () {
+      this.messageBus.$on('success', text => {
+        this.notyf.confirm(text)
+      })
+    },
+
     /**
      * Mode specific configuration for a task.
      * @param {Task} task
@@ -588,6 +600,7 @@ export default {
   mounted () {
     this.viewer = new OpenSeadragon.Viewer(this.viewerOpts)
     this.loadTasks()
+    this.setupMessageBus()
     window.addEventListener('beforeunload', this.onBeforeUnload)
   },
 
@@ -598,6 +611,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~notyf/src/notyf.scss';
 @import '~style/settings';
 @import '~style/partials/buttons';
 
@@ -658,6 +672,19 @@ export default {
 
   .openseadragon-message {
     color: #FFF;
+  }
+}
+
+.notyf {
+  @media screen and (min-width: 768px) {
+    right: 280px;
+  }
+
+  @media screen and (max-width: 767px) {
+    bottom: initial;
+    top: 0;
+    right: 0;
+    width: 100%;
   }
 }
 </style>

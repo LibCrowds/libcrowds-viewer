@@ -42,26 +42,31 @@ You can now use the component like this:
 
 ### Properties
 
+The following viewer has the following properties.
+
 | Property              | Type    | Default | Description                                                                                         |
 |-----------------------|---------|---------|-----------------------------------------------------------------------------------------------------|
-| task-opts             | String  | null    | An array of task options                                                                            |
-| pan-by                | Number  | 0.1     | Multiplier by which to pan                                                                          |
-| zoom-by               | Number  | 0.2     | Multiplier by which to zoom                                                                         |
-| lang                  | String  | 'en'    | Language for manifest metadata (where available)                                                    |
-| confirm-before-unload | Boolean | false   | Confirm before leaving the page                                                                     |
-| disable-complete      | Boolean | false   | Disable completed tasks to prevent multiple submission                                              |
-| show-help             | Boolean | true    | Include the help modal                                                                              |
-| show-info             | Boolean | true    | Include the metadata modal                                                                          |
-| show-browse           | Boolean | true    | Include the browse tasks modal                                                                      |
-| show-note             | Boolean | true    | Include the note input                                                                              |
-| show-form-errors      | Boolean | true    | Show form errors on submit                                                                          |
-| show-like             | Boolean | false   | Show the like button                                                                                |
-| show-share            | Boolean | true    | Show the share button                                                                               |
-| creator               | Object  | null    | The Annotation creator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/))   |
-| generator             | Object  | null    | The Annotation generator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)) |
-| next-on-submit        | Object  | true    | Move to the next task on after submission                                                           |
+| task-opts             | String  | null  | An array of task options                                                                              |
+| pan-by                | Number  | 0.1   | Multiplier by which to pan                                                                            |
+| zoom-by               | Number  | 0.2   | Multiplier by which to zoom                                                                           |
+| lang                  | String  | 'en'  | Language for manifest metadata (where available)                                                      |
+| confirm-before-unload | Boolean | false | Confirm before leaving the page                                                                       |
+| disable-complete      | Boolean | false | Disable completed tasks to prevent multiple submission                                                |
+| show-help             | Boolean | true  | Include the help modal                                                                                |
+| show-info             | Boolean | true  | Include the metadata modal                                                                            |
+| show-browse           | Boolean | true  | Include the browse tasks modal                                                                        |
+| show-note             | Boolean | true  | Include the note input                                                                                |
+| show-form-errors      | Boolean | true  | Show form errors on submit                                                                            |
+| show-like             | Boolean | false | Show the like button                                                                                  |
+| show-share            | Boolean | true  | Show the share button                                                                                 |
+| creator               | Object  | null  | The Annotation creator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/))     |
+| generator             | Object  | null  | The Annotation generator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/))   |
+| next-on-submit        | Object  | true  | Move to the next task on after submission                                                             |
+| messageBus            | Object  | null  | Message bus used for notifications (see below)                                                        |
 
 ### Events
+
+The following events are emitted from the viewer.
 
 | Event         | Arguments        | Description          |
 |---------------|------------------|----------------------|
@@ -71,6 +76,55 @@ You can now use the component like this:
 | delete        | task, annotation | Annotation deleted   |
 | taskchange    | task             | Task changed         |
 | taskliked     | task             | Task liked/unliked   |
+
+### Notifications
+
+By creating an instance of Vue and passing it to the viewer via the `messageBus`
+property it is possible to emit `success` and `error` events that will be
+displayed as notifications within the viewer, see example.
+
+```vue
+<template>
+  <libcrowds-viewer
+    :task-opts="taskOpts"
+    :message-bus="messageBus">
+  </libcrowds-viewer>
+</template>
+
+<script>
+import Vue from 'vue';
+
+export default {
+  data: function () {
+    return {
+      messageBus: new Vue(),
+      taskOpts: [
+        {
+          mode: 'select',
+          imgInfoUri: 'http://www.example.org/image-service/abcd1234/info.json'
+        }
+      ]
+    }
+  },
+
+  mounted () {
+    // Display a success message
+    this.messageBus.$emit('success', 'Yay');
+
+    // Display an error message
+    this.messageBus.$emit('error', 'Boo');
+  }
+}
+</script>
+```
+
+To display a notification push an object to the `notifications` array with the
+following required properties.
+
+| Property | Type   | Description          |
+|----------|--------|----------------------|
+| type     | String | `success` or `error` |
+| text     | String | Message text         |
 
 ## Tasks
 
