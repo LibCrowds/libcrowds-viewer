@@ -150,6 +150,7 @@ export default {
   .lv-modal-body {
     padding: 20px 30px;
     overflow: auto;
+    flex: 1 1 auto;
   }
 
   .lv-modal-footer {

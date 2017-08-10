@@ -165,8 +165,7 @@ export default {
   width: 100%;
 
   @media screen and (min-width: 768px) {
-    justify-content: initial;
-    width: initial;
+    width: auto;
     margin: 1rem;
     border-radius: 25px;
     padding: 0 0.5rem;
