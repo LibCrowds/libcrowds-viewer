@@ -13,13 +13,15 @@
           :showBrowse="showBrowse"
           :showLike="showLike"
           :showShare="showShare"
+          :discussLink="discussLink"
           :helpButton="viewerOpts.helpButton"
           :infoButton="viewerOpts.infoButton"
           @helpclicked="showHelpModal = true"
           @infoclicked="showInfoModal = true"
           @browseclicked="showBrowseModal = true"
           @likeclicked="emitTaskLiked"
-          @fullscreenclicked="toggleFullScreen">
+          @fullscreenclicked="toggleFullScreen"
+          @discussclicked="onDiscussClicked">
         </toolbar-controls>
 
         <pan-controls
@@ -242,6 +244,10 @@ export default {
     },
     messageBus: {
       type: Object,
+      default: null
+    },
+    discussLink: {
+      type: String,
       default: null
     }
   },
@@ -516,11 +522,24 @@ export default {
 
     /**
      * Remove all form region highlights when transcribe form input blured.
+     * @param {Task} task
+     *   The task that the tag belongs to.
+     * @param {String} modelKey
+     *   The form model key.
      */
     onTranscribeInputBlur (task, modelKey) {
       for (modelKey in task.form.highlights) {
         deleteOverlay(this.viewer, `highlight-${modelKey}`)
       }
+    },
+
+    /**
+     * Go to the discussion URL.
+     * @param {String} url
+     *   The URL.
+     */
+    onDiscussClicked (url) {
+      window.location.href = url
     },
 
     setupMessageBus () {
