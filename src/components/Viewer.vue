@@ -375,6 +375,7 @@ export default {
      *   The task.
      */
     setCurrentTask (task) {
+      this.$emit('taskchange', this.currentTask, task)
       this.currentTask = task
     },
 
@@ -384,7 +385,7 @@ export default {
     previousTask () {
       const index = this.tasks.indexOf(this.currentTask)
       if (index > 0) {
-        this.currentTask = this.tasks[index - 1]
+        this.setCurrentTask(this.tasks[index - 1])
       }
     },
 
@@ -394,7 +395,7 @@ export default {
     nextTask () {
       const index = this.tasks.indexOf(this.currentTask)
       if (index + 1 < this.tasks.length) {
-        this.currentTask = this.tasks[index + 1]
+        this.setCurrentTask(this.tasks[index + 1])
       }
     },
 
