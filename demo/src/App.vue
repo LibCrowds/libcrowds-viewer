@@ -32,6 +32,7 @@
         :task-opts="selectTaskOpts"
         :creator="creator"
         :generator="generator"
+        :navigation="navigation"
         @taskchange="handleTaskChange"
         @create="handleCreate"
         @update="handleUpdate"
@@ -49,6 +50,7 @@
         :task-opts="transcribeTaskOpts"
         :creator="creator"
         :generator="generator"
+        :navigation="navigation"
         @taskchange="handleTaskChange"
         @create="handleCreate"
         @update="handleUpdate"
@@ -87,7 +89,10 @@ export default {
         homepage: 'http://example.org/client1/homepage1'
       },
       showLike: true,
-      messageBus: new Vue()
+      messageBus: new Vue(),
+      navigation: [
+        { label: 'Home', url: window.location.href }
+      ]
     }
   },
 
@@ -133,6 +138,8 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding-left: 1rem;
+  padding-right: 1rem;
 
   h1 {
     margin: 0;
@@ -140,6 +147,7 @@ export default {
   }
 
   p.lead {
+    text-align: center;
     font-weight: bold;
     color: #5F5F5F;
   }

@@ -22,7 +22,8 @@ import 'vue-awesome/icons/question-circle'
 import 'vue-awesome/icons/info-circle'
 import 'vue-awesome/icons/thumbs-up'
 import 'vue-awesome/icons/share-alt'
-import 'vue-awesome/icons/list'
+import 'vue-awesome/icons/eye'
+import 'vue-awesome/icons/bars'
 import 'vue-awesome/icons/comments'
 import Task from '@/model/Task'
 import getImageUri from '@/utils/getImageUri'
@@ -62,6 +63,10 @@ export default {
     },
     discussLink: {
       type: String,
+      required: true
+    },
+    showNavigation: {
+      type: Boolean,
       required: true
     }
   },
@@ -110,7 +115,7 @@ export default {
       if (this.showBrowse) {
         buttons.push({
           tooltip: 'Browse Tasks',
-          icon: 'list',
+          icon: 'eye',
           callback: () => {
             this.$emit('browseclicked')
           }
@@ -129,7 +134,7 @@ export default {
       }
 
       if (this.showShare) {
-        let tooltip = 'Copy image URL'
+        let tooltip = 'Copy Image URL'
         buttons.push({
           id: 'lv-share-btn',
           tooltip: tooltip,
@@ -153,10 +158,20 @@ export default {
 
       if (this.discussLink) {
         buttons.push({
-          tooltip: 'Discuss on forum',
+          tooltip: 'Discuss on Forum',
           icon: 'comments',
           callback: () => {
             this.$emit('discussclicked', this.discussLink)
+          }
+        })
+      }
+
+      if (this.showNavigation) {
+        buttons.unshift({
+          tooltip: 'Navigation',
+          icon: 'bars',
+          callback: () => {
+            this.$emit('navigationclicked')
           }
         })
       }

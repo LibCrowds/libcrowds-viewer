@@ -1,5 +1,5 @@
 <template>
-  <div id="lv-sidebar" ref="sidebar">
+  <div id="lv-task-sidebar" ref="sidebar">
 
     <div
       class="lv-sidebar-header">
@@ -130,7 +130,7 @@ export default {
 @import '~style/partials/buttons';
 @import '~style/partials/transitions';
 
-#lv-sidebar {
+#lv-task-sidebar {
   z-index: 2;
   top: 0;
   right: 0;

@@ -13,6 +13,7 @@
           :showBrowse="showBrowse"
           :showLike="showLike"
           :showShare="showShare"
+          :showNavigation="navigation.length > 0"
           :discussLink="discussLink"
           :helpButton="viewerOpts.helpButton"
           :infoButton="viewerOpts.infoButton"
@@ -21,7 +22,8 @@
           @browseclicked="showBrowseModal = true"
           @likeclicked="emitTaskLiked"
           @fullscreenclicked="toggleFullScreen"
-          @discussclicked="onDiscussClicked">
+          @discussclicked="onDiscussClicked"
+          @navigationclicked="showNavigationSidebar = !showNavigationSidebar">
         </toolbar-controls>
 
         <pan-controls
@@ -82,7 +84,7 @@
 
     </div>
 
-    <sidebar
+    <task-sidebar
       v-if="currentTask"
       :task="currentTask"
       :showNote="showNote"
@@ -106,7 +108,7 @@
         @inputfocus="onTranscribeInputFocus"
         @inputblur="onTranscribeInputBlur">
       </transcribe-sidebar-item>
-    </sidebar>
+    </task-sidebar>
 
     <selector
       v-if="selectorEnabled"
@@ -115,6 +117,13 @@
       :selectionRect="selectionRect"
       @selection="handleSelection">
     </selector>
+
+    <navigation-sidebar
+      v-if="navigation.length"
+      :show="showNavigationSidebar"
+      :navigation="navigation"
+      @hide="showNavigationSidebar = false">
+    </navigation-sidebar>
 
   </div>
 </template>
@@ -131,9 +140,10 @@ import BrowseModal from '@/components/modals/Browse'
 import ToolbarControls from '@/components/controls/Toolbar'
 import PanControls from '@/components/controls/Pan'
 import ZoomControls from '@/components/controls/Zoom'
-import Sidebar from '@/components/sidebar/Sidebar'
-import SelectSidebarItem from '@/components/sidebar/items/Select'
-import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
+import TaskSidebar from '@/components/sidebars/Task'
+import NavigationSidebar from '@/components/sidebars/Navigation'
+import SelectSidebarItem from '@/components/sidebars/items/Select'
+import TranscribeSidebarItem from '@/components/sidebars/items/Transcribe'
 import Selector from '@/components/Selector'
 import Task from '@/model/Task'
 import Annotator from '@/model/Annotator'
@@ -172,6 +182,7 @@ export default {
       showInfoModal: false,
       showHelpModal: false,
       showBrowseModal: false,
+      showNavigationSidebar: false,
       tasks: [],
       currentTask: null
     }
@@ -248,6 +259,10 @@ export default {
     },
     discussLink: {
       type: String,
+      default: ''
+    },
+    navigation: {
+      type: Array,
       default: null
     }
   },
@@ -259,7 +274,8 @@ export default {
     ToolbarControls,
     PanControls,
     ZoomControls,
-    Sidebar,
+    TaskSidebar,
+    NavigationSidebar,
     Selector,
     SelectSidebarItem,
     TranscribeSidebarItem,
