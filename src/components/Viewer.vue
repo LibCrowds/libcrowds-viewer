@@ -13,6 +13,7 @@
           :showBrowse="showBrowse"
           :showLike="showLike"
           :showShare="showShare"
+          :showNavigation="navigation.length > 0"
           :discussLink="discussLink"
           :helpButton="viewerOpts.helpButton"
           :infoButton="viewerOpts.infoButton"
@@ -21,7 +22,8 @@
           @browseclicked="showBrowseModal = true"
           @likeclicked="emitTaskLiked"
           @fullscreenclicked="toggleFullScreen"
-          @discussclicked="onDiscussClicked">
+          @discussclicked="onDiscussClicked"
+          @navigationclicked="showNavigationSidebar = !showNavigationSidebar">
         </toolbar-controls>
 
         <pan-controls
@@ -116,6 +118,13 @@
       @selection="handleSelection">
     </selector>
 
+    <navigation-sidebar
+      v-if="navigation.length"
+      :show="showNavigationSidebar"
+      :navigation="navigation"
+      @hide="showNavigationSidebar = false">
+    </navigation-sidebar>
+
   </div>
 </template>
 
@@ -132,6 +141,7 @@ import ToolbarControls from '@/components/controls/Toolbar'
 import PanControls from '@/components/controls/Pan'
 import ZoomControls from '@/components/controls/Zoom'
 import Sidebar from '@/components/sidebar/Sidebar'
+import NavigationSidebar from '@/components/sidebar/Navigation'
 import SelectSidebarItem from '@/components/sidebar/items/Select'
 import TranscribeSidebarItem from '@/components/sidebar/items/Transcribe'
 import Selector from '@/components/Selector'
@@ -172,6 +182,7 @@ export default {
       showInfoModal: false,
       showHelpModal: false,
       showBrowseModal: false,
+      showNavigationSidebar: false,
       tasks: [],
       currentTask: null
     }
@@ -249,6 +260,10 @@ export default {
     discussLink: {
       type: String,
       default: ''
+    },
+    navigation: {
+      type: Array,
+      default: null
     }
   },
 
@@ -260,6 +275,7 @@ export default {
     PanControls,
     ZoomControls,
     Sidebar,
+    NavigationSidebar,
     Selector,
     SelectSidebarItem,
     TranscribeSidebarItem,

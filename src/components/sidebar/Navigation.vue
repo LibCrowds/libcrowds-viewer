@@ -1,0 +1,117 @@
+<template>
+  <transition name="lv-navigation-slide" id="lv-navigation">
+    <div id="lv-navigation-sidebar" v-show="show">
+      <div
+        class="lv-sidebar-close"
+        @click="hide">
+        <icon
+          class="close"
+          name="times"
+          scale="1.5">
+        </icon>
+      </div>
+      <ul>
+        <li
+          v-for="(item, index) in navigation"
+          :key="index">
+          <a :href="item.url">{{ item.label }}</a>
+        </li>
+      </ul>
+    </div>
+  </transition>
+</template>
+
+<script>
+import Icon from 'vue-awesome/components/Icon'
+import 'vue-awesome/icons/times'
+
+export default {
+  data: function () {
+    return {
+      noteCollapsed: true
+    }
+  },
+
+  props: {
+    navigation: {
+      type: Array,
+      required: true
+    },
+    show: {
+      type: Boolean,
+      requried: false
+    }
+  },
+
+  components: {
+    Icon
+  },
+
+  methods: {
+    /**
+     * Emit the hide event.
+     */
+    hide () {
+      this.$emit('hide')
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import '~style/settings';
+@import '~style/partials/buttons';
+@import '~style/partials/transitions';
+
+#lv-navigation-sidebar {
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-size: 14px;
+  height: 100%;
+  background-color: rgba(#F7F7F7, 0.98);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: all 350ms;
+  overflow-y: auto;
+  flex-shrink: 2;
+
+  @media screen and (min-width: 768px) {
+    width: 320px;
+    flex-shrink: 0;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    height: calc(100% - 16px);
+  }
+
+  ul {
+    padding: 1rem;
+    list-style: none;
+    font-family: $font-family-headings;
+    font-weight: 600;
+
+    li {
+      margin-left: 0;
+      position: relative;
+
+      a {
+        text-decoration: none;
+        color: $gray-dark;
+      }
+    }
+  }
+
+  .lv-sidebar-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    color: lighten($gray-dark, 20%);
+  }
+
+}
+</style>
