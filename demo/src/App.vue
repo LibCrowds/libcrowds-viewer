@@ -138,6 +138,8 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding-left: 1rem;
+  padding-right: 1rem;
 
   h1 {
     margin: 0;
@@ -145,6 +147,7 @@ export default {
   }
 
   p.lead {
+    text-align: center;
     font-weight: bold;
     color: #5F5F5F;
   }
