@@ -156,7 +156,7 @@ export default {
           tooltip: 'Discuss on forum',
           icon: 'comments',
           callback: () => {
-            this.$emit('discussclicked')
+            this.$emit('discussclicked', this.discussLink)
           }
         })
       }
