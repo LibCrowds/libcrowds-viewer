@@ -59,7 +59,7 @@ The following viewer has the following properties.
 | show-form-errors      | Boolean | true    | Show form errors on submit                                                                            |
 | show-like             | Boolean | false   | Show the like button                                                                                  |
 | show-share            | Boolean | true    | Show the share button                                                                                 |
-| discuss-link          | String  | null    | Show the discuss button using this URL                                                                |
+| discuss-link          | String  | ''      | Show the discuss button using this URL                                                                |
 | creator               | Object  | null    | The Annotation creator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/))     |
 | generator             | Object  | null    | The Annotation generator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/))   |
 | next-on-submit        | Object  | true    | Move to the next task on after submission                                                             |

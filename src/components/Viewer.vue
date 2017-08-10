@@ -248,7 +248,7 @@ export default {
     },
     discussLink: {
       type: String,
-      default: null
+      default: ''
     }
   },
 
