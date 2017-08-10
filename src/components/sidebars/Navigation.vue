@@ -114,6 +114,12 @@ export default {
       a {
         text-decoration: none;
         color: $gray-dark;
+        transition: color 200ms ease;
+
+        &:hover,
+        &:focus {
+          color: $red;
+        }
       }
     }
   }
