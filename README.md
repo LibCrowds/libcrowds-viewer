@@ -40,7 +40,7 @@ You can now use the component like this:
 </libcrowds-viewer>
 ```
 
-### Properties
+## Properties
 
 The following viewer has the following properties.
 
@@ -64,8 +64,9 @@ The following viewer has the following properties.
 | generator             | Object  | null    | The Annotation generator (see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/))   |
 | next-on-submit        | Object  | true    | Move to the next task on after submission                                                             |
 | messageBus            | Object  | null    | Message bus used for notifications (see below)                                                        |
+| navigation            | Array   | null    | Additional navigation links (see below)                                                               |
 
-### Events
+## Events
 
 The following events are emitted from the viewer.
 
@@ -78,7 +79,40 @@ The following events are emitted from the viewer.
 | taskchange | oldTask, newTask | Task changed         |
 | taskliked  | task             | Task liked/unliked   |
 
-### Notifications
+## Tasks
+
+The core data structure for LibCrowds Viewer is the Task object, an array of
+which are created from the task options passed to the viewer.
+
+### Task properties
+
+| Property       | Type    | Attributes  | Description                                                                                                    |
+|----------------|---------|-------------|----------------------------------------------------------------------------------------------------------------|
+| mode           | String  |             | `'select'` or `'transcribe'`                                                                                   |
+| imgInfoUri     | String  |             | Image info URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/#image-information-request-uri-syntax/)) |
+| manifestUri    | String  | \<optional> | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/#resource-structure))        |
+| id             | String  | \<optional> | Task identifier                                                                                                |
+| objective      | String  | \<optional> | The main objective                                                                                             |
+| guidance       | String  | \<optional> | Additional guidance                                                                                            |
+| form           | Object  | \<optional> | See form properties below                                                                                      |
+| highlights     | Array   | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
+| tag            | String  | \<optional> | The tag to add when in `select` mode                                                                           |
+| liked          | Boolean | \<optional> | Task liked (see the viewer property `show-like`)                                                               |
+| classification | String  | \<optional> | A SpecificResource to classify the target as (e.g. [foaf:Person](http://xmlns.com/foaf/spec/#term_Person))     |
+| complete       | Boolean | \<optional> | Mark the task as complete                                                                                      |
+
+### Form properties
+
+In `transcribe` mode the form can be configured with the following properties.
+
+| Property        | Type    | Attributes  | Description                                                            |
+|-----------------|---------|-------------|------------------------------------------------------------------------|
+| model           | Object  |             | See [vue-form-generator](https://github.com/icebob/vue-form-generator) |
+| schema          | Object  |             | See [vue-form-generator](https://github.com/icebob/vue-form-generator) |
+| classifications | Object  | \<optional> | A SpecificResource IRI for each model key                              |
+| highlights      | Object  | \<optional> | A region to highlight for each model key                               |
+
+## Notifications
 
 By creating an instance of Vue and passing it to the viewer via the `messageBus`
 property it is possible to emit `success` and `error` events that will be
@@ -127,38 +161,19 @@ following required properties.
 | type     | String | `success` or `error` |
 | text     | String | Message text         |
 
-## Tasks
+## Navigation
 
-The core data structure for LibCrowds Viewer is the Task object, an array of
-which are created from the task options passed to the viewer.
+Additional navigation links (for example, for the rest of your website) can be
+passed to the viewer via the `navigation` property. These links will be appended
+to a collapsible sidebar toggled via a 'hamburger' button. This way the viewer
+interface can remain uncluttered and the button will be available when
+fullscreen mode is enabled.
 
-### Task properties
+| Property | Type   | Description          |
+|----------|--------|----------------------|
+| label    | String | A label for the link |
+| url      | String | The link url         |
 
-| Property       | Type    | Attributes  | Description                                                                                                    |
-|----------------|---------|-------------|----------------------------------------------------------------------------------------------------------------|
-| mode           | String  |             | `'select'` or `'transcribe'`                                                                                   |
-| imgInfoUri     | String  |             | Image info URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/#image-information-request-uri-syntax/)) |
-| manifestUri    | String  | \<optional> | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/#resource-structure))        |
-| id             | String  | \<optional> | Task identifier                                                                                                |
-| objective      | String  | \<optional> | The main objective                                                                                             |
-| guidance       | String  | \<optional> | Additional guidance                                                                                            |
-| form           | Object  | \<optional> | See form properties below                                                                                      |
-| highlights     | Array   | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
-| tag            | String  | \<optional> | The tag to add when in `select` mode                                                                           |
-| liked          | Boolean | \<optional> | Task liked (see the viewer property `show-like`)                                                               |
-| classification | String  | \<optional> | A SpecificResource to classify the target as (e.g. [foaf:Person](http://xmlns.com/foaf/spec/#term_Person))     |
-| complete       | Boolean | \<optional> | Mark the task as complete                                                                                      |
-
-### Form properties
-
-In `transcribe` mode the form can be configured with the following properties.
-
-| Property        | Type    | Attributes  | Description                                                            |
-|-----------------|---------|-------------|------------------------------------------------------------------------|
-| model           | Object  |             | See [vue-form-generator](https://github.com/icebob/vue-form-generator) |
-| schema          | Object  |             | See [vue-form-generator](https://github.com/icebob/vue-form-generator) |
-| classifications | Object  | \<optional> | A SpecificResource IRI for each model key                              |
-| highlights      | Object  | \<optional> | A region to highlight for each model key                               |
 
 ## Modes
 
