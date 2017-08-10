@@ -23,6 +23,7 @@ import 'vue-awesome/icons/info-circle'
 import 'vue-awesome/icons/thumbs-up'
 import 'vue-awesome/icons/share-alt'
 import 'vue-awesome/icons/list'
+import 'vue-awesome/icons/comments'
 import Task from '@/model/Task'
 import getImageUri from '@/utils/getImageUri'
 import ControlButton from '@/components/controls/ControlButton'
@@ -57,6 +58,10 @@ export default {
     },
     showLike: {
       type: Boolean,
+      required: true
+    },
+    discussLink: {
+      type: String,
       required: true
     }
   },
@@ -142,6 +147,16 @@ export default {
                 })
               }
             })
+          }
+        })
+      }
+
+      if (this.discussLink) {
+        buttons.push({
+          tooltip: 'Discuss on forum',
+          icon: 'comments',
+          callback: () => {
+            this.$emit('discussclicked', this.discussLink)
           }
         })
       }
