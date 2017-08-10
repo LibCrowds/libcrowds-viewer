@@ -22,7 +22,7 @@ import 'vue-awesome/icons/question-circle'
 import 'vue-awesome/icons/info-circle'
 import 'vue-awesome/icons/thumbs-up'
 import 'vue-awesome/icons/share-alt'
-import 'vue-awesome/icons/list'
+import 'vue-awesome/icons/eye'
 import 'vue-awesome/icons/comments'
 import Task from '@/model/Task'
 import getImageUri from '@/utils/getImageUri'
@@ -110,7 +110,7 @@ export default {
       if (this.showBrowse) {
         buttons.push({
           tooltip: 'Browse Tasks',
-          icon: 'list',
+          icon: 'eye',
           callback: () => {
             this.$emit('browseclicked')
           }
