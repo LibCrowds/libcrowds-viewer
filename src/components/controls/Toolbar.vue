@@ -1,5 +1,5 @@
 <template>
-  <div id="lv-viewer-controls">
+  <div id="lv-toolbar">
 
     <control-button
       v-for="(b, index) in buttons"
@@ -155,7 +155,7 @@ export default {
 <style lang="scss" scoped>
 @import '~style/settings';
 
-#lv-viewer-controls {
+#lv-toolbar {
   display: flex;
   justify-content: space-around;
   position: absolute;
@@ -165,8 +165,7 @@ export default {
   width: 100%;
 
   @media screen and (min-width: 768px) {
-    justify-content: initial;
-    width: initial;
+    width: auto;
     margin: 1rem;
     border-radius: 25px;
     padding: 0 0.5rem;

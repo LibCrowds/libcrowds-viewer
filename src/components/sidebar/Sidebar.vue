@@ -148,9 +148,8 @@ export default {
 
   @media screen and (min-width: 768px) {
     width: 320px;
-    overflow-y: initial;
     border-top: none;
-    flex-shrink: initial;
+    flex-shrink: 0;
   }
 
   &.collapsed {

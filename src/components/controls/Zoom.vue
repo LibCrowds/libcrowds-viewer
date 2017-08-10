@@ -90,7 +90,7 @@ export default {
   right: 0;
 
   @media screen and (min-width: 768px) {
-    right: initial;
+    right: auto;
     left: 100px;
   }
 

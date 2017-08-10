@@ -687,7 +687,7 @@ export default {
   }
 
   @media screen and (max-width: 767px) {
-    bottom: initial;
+    bottom: auto;
     top: 0;
     right: 0;
     width: 100%;
