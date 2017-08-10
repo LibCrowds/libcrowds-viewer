@@ -46,7 +46,7 @@ The following viewer has the following properties.
 
 | Property              | Type    | Default | Description                                                                                           |
 |-----------------------|---------|---------|-------------------------------------------------------------------------------------------------------|
-| task-opts             | String  | null    | An array of task options                                                                              |
+| task-opts             | Array   | null    | An array of task options                                                                              |
 | pan-by                | Number  | 0.1     | Multiplier by which to pan                                                                            |
 | zoom-by               | Number  | 0.2     | Multiplier by which to zoom                                                                           |
 | lang                  | String  | 'en'    | Language for manifest metadata (where available)                                                      |
