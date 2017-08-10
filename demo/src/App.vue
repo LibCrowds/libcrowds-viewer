@@ -32,6 +32,7 @@
         :task-opts="selectTaskOpts"
         :creator="creator"
         :generator="generator"
+        :navigation="navigation"
         @taskchange="handleTaskChange"
         @create="handleCreate"
         @update="handleUpdate"
@@ -49,6 +50,7 @@
         :task-opts="transcribeTaskOpts"
         :creator="creator"
         :generator="generator"
+        :navigation="navigation"
         @taskchange="handleTaskChange"
         @create="handleCreate"
         @update="handleUpdate"
@@ -87,7 +89,10 @@ export default {
         homepage: 'http://example.org/client1/homepage1'
       },
       showLike: true,
-      messageBus: new Vue()
+      messageBus: new Vue(),
+      navigation: [
+        { label: 'Home', url: window.location.href }
+      ]
     }
   },
 
