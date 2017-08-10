@@ -154,7 +154,7 @@ export default {
       if (this.discussLink) {
         buttons.push({
           tooltip: 'Discuss on forum',
-          icon: 'comment',
+          icon: 'comments',
           callback: () => {
             this.$emit('discussclicked')
           }
