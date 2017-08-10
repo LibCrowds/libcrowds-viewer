@@ -572,12 +572,17 @@ export default {
 
     /**
      * Check for any unsaved annotations.
+     * @param {Object} evt
+     *   The event.
      */
-    onBeforeUnload () {
-      const nAnnos = this.currentTask.annotations.length
-      const complete = this.currentTask.complete
-      if (this.confirmBeforeUnload && !complete && nAnnos > 0) {
-        return 'Unsaved changes will be lost.'
+    onBeforeUnload (evt) {
+      const msg = 'Unsaved changes will be lost.'
+      let unsavedTasks = this.tasks.filter((task) => {
+        return task.annotations.length > 0 && !task.complete
+      })
+      if (this.confirmBeforeUnload && unsavedTasks.length > 0) {
+        evt.returnValue = msg
+        return msg
       }
     }
   },
