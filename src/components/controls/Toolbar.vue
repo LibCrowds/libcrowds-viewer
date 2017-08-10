@@ -60,10 +60,6 @@ export default {
       type: Boolean,
       required: true
     },
-    showLike: {
-      type: String,
-      required: true
-    },
     discussLink: {
       type: String,
       required: true
