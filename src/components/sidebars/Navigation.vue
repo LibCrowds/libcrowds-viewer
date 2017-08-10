@@ -1,24 +1,22 @@
 <template>
-  <transition name="lv-navigation-slide" id="lv-navigation">
-    <div id="lv-navigation-sidebar" v-show="show">
-      <div
-        class="lv-sidebar-close"
-        @click="hide">
-        <icon
-          class="close"
-          name="times"
-          scale="1.5">
-        </icon>
-      </div>
-      <ul>
-        <li
-          v-for="(item, index) in navigation"
-          :key="index">
-          <a :href="item.url">{{ item.label }}</a>
-        </li>
-      </ul>
+  <nav id="lv-navigation-sidebar" :class="navClass">
+    <div
+      class="lv-sidebar-close"
+      @click="hide">
+      <icon
+        class="close"
+        name="times"
+        scale="1.5">
+      </icon>
     </div>
-  </transition>
+    <ul>
+      <li
+        v-for="(item, index) in navigation"
+        :key="index">
+        <a :href="item.url">{{ item.label }}</a>
+      </li>
+    </ul>
+  </nav>
 </template>
 
 <script>
@@ -45,6 +43,14 @@ export default {
 
   components: {
     Icon
+  },
+
+  computed: {
+    navClass: function () {
+      return {
+        show: this.show
+      }
+    }
   },
 
   methods: {
@@ -79,6 +85,13 @@ export default {
   transition: all 350ms;
   overflow-y: auto;
   flex-shrink: 2;
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+
+  &.show {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
 
   @media screen and (min-width: 768px) {
     width: 320px;
@@ -112,6 +125,5 @@ export default {
     padding: 1rem;
     color: lighten($gray-dark, 20%);
   }
-
 }
 </style>
