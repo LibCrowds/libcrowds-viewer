@@ -152,12 +152,12 @@ which are created from the task options passed to the viewer.
 
 In `transcribe` mode the form can be configured with the following properties.
 
-| Property        | Type    | Attributes  | Description                                                                                                           |
-|-----------------|---------|-------------|-----------------------------------------------------------------------------------------------------------------------|
-| model           | Object  |             | See [vue-form-generator](https://github.com/icebob/vue-form-generator)                                                |
-| schema          | Object  |             | See [vue-form-generator](https://github.com/icebob/vue-form-generator)                                                |                                                                               |
-| classifications | Object  | \<optional> | A SpecificResource IRI for each model key                                                                             |
-| highlights      | Object  | \<optional> | A region to highlight for each model key                                                                              |
+| Property        | Type    | Attributes  | Description                                                            |
+|-----------------|---------|-------------|------------------------------------------------------------------------|
+| model           | Object  |             | See [vue-form-generator](https://github.com/icebob/vue-form-generator) |
+| schema          | Object  |             | See [vue-form-generator](https://github.com/icebob/vue-form-generator) |
+| classifications | Object  | \<optional> | A SpecificResource IRI for each model key                              |
+| highlights      | Object  | \<optional> | A region to highlight for each model key                               |
 
 ## Modes
 
