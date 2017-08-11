@@ -370,9 +370,11 @@ export default {
      * @param {Object} rect
      *   The image rectangle.
      * @param {String} id
-     *   Ah ID for the highlight element.
+     *   A ID for the highlight element.
+     * @param {Function} onClick
+     *   A callback to trigger on click (or tap).
      */
-    drawHighlight (rect, id) {
+    drawHighlight (rect, id, onClick) {
       const vp = this.viewer.viewport
       const imgRect = new OpenSeadragon.Rect(
         rect.x,
@@ -381,7 +383,7 @@ export default {
         rect.height
       )
       const vpRect = vp.imageToViewportRectangle(imgRect)
-      drawOverlay(this.viewer, id, vpRect, 'highlight')
+      drawOverlay(this.viewer, id, vpRect, 'highlight', onClick)
     },
 
     /**
@@ -392,6 +394,19 @@ export default {
     drawHighlights (task) {
       for (let i = 0; i < task.highlights.length; i++) {
         this.drawHighlight(task.highlights[i], `highlight-${i}`)
+      }
+    },
+
+    /**
+     * Draw all highlights for a task, where clicking moves to that task.
+     * @param {Task} task.
+     *   The task.
+     */
+    drawRelatedTaskHighlights (task) {
+      for (let i = 0; i < task.highlights.length; i++) {
+        this.drawHighlight(task.highlights[i], `highlight-${i}`, () => {
+          this.setCurrentTask(task)
+        })
       }
     },
 
@@ -416,7 +431,7 @@ export default {
     showAllRelatedTasks (task) {
       const relatedTasks = this.getRelatedTasks(task)
       for (let relatedTask of relatedTasks) {
-        this.drawHighlights(relatedTask)
+        this.drawRelatedTaskHighlights(relatedTask)
       }
     },
 

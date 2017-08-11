@@ -8,8 +8,10 @@
  *   Overlay coordinates.
  * @param {String} cls
  *   Additional overlay class.
+ * @param {Function} onClick
+ *   A callback to trigger on click (or tap).
  */
-export default function (viewer, id, rect, type = '') {
+export default function (viewer, id, rect, type = '', onClick = null) {
   if (!viewer.addOverlay) {
     return
   }
@@ -34,6 +36,9 @@ export default function (viewer, id, rect, type = '') {
     })
   } else if (type === 'highlight') {
     el.style.backgroundColor = 'rgba(244, 208, 63, 0.3)'
+  }
+  if (onClick) {
+    el.addEventListener('click', onClick)
   }
   viewer.addOverlay({ element: el, location: rect })
   return el
