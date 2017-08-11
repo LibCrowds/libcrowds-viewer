@@ -251,7 +251,7 @@ export default {
     },
     showRelatedTasks: {
       type: Boolean,
-      default: true
+      default: false
     },
     nextOnSubmit: {
       type: Boolean,
