@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/LibCrowds/libcrowds-viewer",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest test/specs  --coverage",
+    "test": "cross-env NODE_ENV=test jest --coverage",
     "lint": "eslint --ext .js,.vue src demo",
     "clean": "rimraf dist",
     "build": "npm run clean && cross-env NODE_ENV=production webpack --config=config/webpack.prod.config.js --progress --hide-modules",
@@ -93,6 +93,7 @@
       "src/**/*.{js,vue}",
       "!src/main.js",
       "!**/node_modules/**"
-    ]
+    ],
+    "testRegex": "/test/specs/.*(test|spec)\\.jsx?$"
   }
 }
