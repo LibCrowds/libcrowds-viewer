@@ -91,11 +91,20 @@ export default {
         fieldElems[i].addEventListener('blur', this.onInputBlur)
         fieldElems[i].addEventListener('keyup', this.onKeyup)
       }
+    },
+
+    /**
+     * Load the form.
+     */
+    load () {
+      this.form = JSON.parse(JSON.stringify(this.task.form))
+      this.addEventListeners()
+      document.querySelector('.form-control').focus()
     }
   },
 
   mounted () {
-    this.addEventListeners()
+    this.load()
   },
 
   beforeDestroy () {
@@ -109,8 +118,7 @@ export default {
 
   watch: {
     task: function () {
-      this.form = JSON.parse(JSON.stringify(this.task.form))
-      this.addEventListeners()
+      this.load()
     }
   }
 }
