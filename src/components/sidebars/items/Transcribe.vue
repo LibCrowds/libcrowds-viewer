@@ -4,6 +4,7 @@
     <vue-form-generator
       id="lv-form"
       ref="form"
+      v-if="form"
       :schema="form.schema"
       :model="form.model"
       :options="formOptions"
@@ -24,7 +25,6 @@ export default {
         validateAfterLoad: true,
         validateAfterChanged: true
       },
-      // To avoid modifying parent state
       form: JSON.parse(JSON.stringify(this.task.form))
     }
   },
@@ -70,22 +70,55 @@ export default {
      */
     onInputBlur () {
       this.$emit('inputblur', this.task)
+    },
+
+    /**
+     * Emit the submit event on enter.
+     */
+    onKeyup (evt) {
+      if (evt.keyCode === 13) {
+        this.$emit('submit', this.task)
+      }
+    },
+
+    /**
+     * Add event listeners.
+     */
+    addEventListeners () {
+      const fieldElems = document.querySelectorAll('.form-control')
+      for (let i = 0; i < fieldElems.length; i++) {
+        fieldElems[i].addEventListener('focus', this.onInputFocus)
+        fieldElems[i].addEventListener('blur', this.onInputBlur)
+        fieldElems[i].addEventListener('keyup', this.onKeyup)
+      }
+    },
+
+    /**
+     * Load the form.
+     */
+    load () {
+      this.form = JSON.parse(JSON.stringify(this.task.form))
+      this.addEventListeners()
+      document.querySelector('.form-control').focus()
     }
   },
 
   mounted () {
-    const fieldElems = document.querySelectorAll('.form-control')
-    for (let el of fieldElems) {
-      el.addEventListener('focus', this.onInputFocus)
-      el.addEventListener('blur', this.onInputBlur)
-    }
+    this.load()
   },
 
   beforeDestroy () {
     const fieldElems = document.querySelectorAll('.form-control')
-    for (let el of fieldElems) {
-      el.removeEventListener('focus', this.onInputFocus)
-      el.removeEventListener('focus', this.onInputBlur)
+    for (let i = 0; i < fieldElems.length; i++) {
+      fieldElems[i].removeEventListener('focus', this.onInputFocus)
+      fieldElems[i].removeEventListener('blur', this.onInputBlur)
+      fieldElems[i].removeEventListener('keyup', this.onKeyup)
+    }
+  },
+
+  watch: {
+    task: function () {
+      this.load()
     }
   }
 }

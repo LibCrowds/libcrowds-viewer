@@ -105,6 +105,7 @@
         v-if="currentTask.mode === 'transcribe'"
         :task="currentTask"
         @update="updateForm"
+        @submit="submitTask"
         @inputfocus="onTranscribeInputFocus"
         @inputblur="onTranscribeInputBlur">
       </transcribe-sidebar-item>
@@ -390,7 +391,7 @@ export default {
 
     /**
      * Draw all highlights for the task.
-     * @param {Task} task.
+     * @param {Task} task
      *   The task.
      */
     drawHighlights (task) {
@@ -401,14 +402,21 @@ export default {
 
     /**
      * Draw all highlights for a task, where clicking moves to that task.
-     * @param {Task} task.
+     * @param {Task} task
      *   The task.
      */
     drawRelatedTaskHighlights (task) {
       for (let i = 0; i < task.highlights.length; i++) {
+        // Check the highlight wasn't already drawn (e.g. on initial load)
+        let taskIndex = this.tasks.indexOf(task)
+        let highlightId = `related-t${taskIndex}-h${i}`
+        if (document.querySelector(`[data-id="${highlightId}"]`)) {
+          continue
+        }
+
         this.drawHighlight(
           task.highlights[i],
-          `related-${i}`,
+          highlightId,
           'related',
           () => { this.setCurrentTask(task) }
         )
@@ -673,7 +681,7 @@ export default {
         taskPromise.then(task => {
           // Slot loaded tasks into their place in the array
           this.tasks[index] = task
-          if (index === 1) {
+          if (index === 0) {
             // Set the first task as current once its loaded
             this.setCurrentTask(task)
           }
@@ -822,13 +830,14 @@ export default {
 
 .notyf {
   @media screen and (min-width: 768px) {
-    right: 280px;
+    right: 350px;
   }
 
-  @media screen and (max-width: 767px) {
+  // Remove if a small screen fix is added to notyf
+  @media screen and (max-width: 766px) {
     bottom: auto;
     top: 0;
-    right: 0;
+    left: calc(50vw - 200px);
     width: 100%;
   }
 }

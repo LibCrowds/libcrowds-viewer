@@ -1,15 +1,13 @@
 [
   {
     "mode": "transcribe",
-    "objective": "Transcribe the required info",
+    "objective": "Transcribe the title",
     "guidance": "Transcribe the title exactly as you see on the page.",
     "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
     "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
-        "title": null,
-        "date": null,
-        "genre": null
+        "title": null
       },
       "classification": {
         "title": "http://purl.org/dc/terms/title"
@@ -38,15 +36,13 @@
   },
   {
     "mode": "transcribe",
-    "objective": "Transcribe the required info",
+    "objective": "Transcribe the title",
     "guidance": "Transcribe the title exactly as you see on the page.",
     "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
     "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
-        "title": null,
-        "date": null,
-        "genre": null
+        "title": null
       },
       "classification": {
         "title": "http://purl.org/dc/terms/title"
@@ -75,15 +71,13 @@
   },
   {
     "mode": "transcribe",
-    "objective": "Transcribe the required info",
+    "objective": "Transcribe the title",
     "guidance": "Transcribe the title exactly as you see on the page.",
     "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000006/info.json",
     "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
-        "title": null,
-        "date": null,
-        "genre": null
+        "title": null
       },
       "classification": {
         "title": "http://purl.org/dc/terms/title"
@@ -112,15 +106,13 @@
   },
   {
     "mode": "transcribe",
-    "objective": "Transcribe the required info",
+    "objective": "Transcribe the title",
     "guidance": "Transcribe the title exactly as you see on the page.",
     "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000006/info.json",
     "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
-        "title": null,
-        "date": null,
-        "genre": null
+        "title": null
       },
       "classification": {
         "title": "http://purl.org/dc/terms/title"
@@ -144,6 +136,1202 @@
         "y": 2440,
         "width": 1851,
         "height": 362
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 1215,
+        "y": 1587,
+        "width": 415,
+        "height": 70
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 1186,
+        "y": 1694,
+        "width": 450,
+        "height": 68
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 862,
+        "y": 1746,
+        "width": 282,
+        "height": 68
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 1569,
+        "y": 1760,
+        "width": 433,
+        "height": 68
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 1090,
+        "y": 1805,
+        "width": 510,
+        "height": 70
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 697,
+        "y": 1851,
+        "width": 361,
+        "height": 72
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 1333,
+        "y": 1865,
+        "width": 492,
+        "height": 66
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 1240,
+        "y": 1920,
+        "width": 407,
+        "height": 68
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 1207,
+        "y": 1976,
+        "width": 510,
+        "height": 68
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 1002,
+        "y": 2023,
+        "width": 617,
+        "height": 75
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 1256,
+        "y": 2194,
+        "width": 442,
+        "height": 60
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 1119,
+        "y": 2245,
+        "width": 462,
+        "height": 64
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 983,
+        "y": 2301,
+        "width": 668,
+        "height": 60
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 1059,
+        "y": 2672,
+        "width": 411,
+        "height": 54
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 789,
+        "y": 2717,
+        "width": 280,
+        "height": 66
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 1402,
+        "y": 2733,
+        "width": 446,
+        "height": 70
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 1057,
+        "y": 2789,
+        "width": 417,
+        "height": 58
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 692,
+        "y": 2822,
+        "width": 419,
+        "height": 74
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 1445,
+        "y": 2842,
+        "width": 466,
+        "height": 58
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 1156,
+        "y": 2896,
+        "width": 314,
+        "height": 60
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 996,
+        "y": 2945,
+        "width": 579,
+        "height": 70
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 718,
+        "y": 2995,
+        "width": 532,
+        "height": 72
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 1572,
+        "y": 3009,
+        "width": 375,
+        "height": 70
       }
     ]
   }
