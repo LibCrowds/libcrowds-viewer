@@ -23,6 +23,18 @@
     }
   }
 
+  &:disabled,
+  &:disabled:hover,
+  &:disabled:focus,
+  &[disabled],
+  &[disabled]:hover,
+  &[disabled]:focus {
+    cursor: not-allowed;
+    border: 1px solid $gray;
+    background-color: $gray-light;
+    color: $gray;
+  }
+
   &.btn-control {
     display: flex !important;
     background: none;

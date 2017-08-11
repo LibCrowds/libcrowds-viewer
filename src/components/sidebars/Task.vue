@@ -16,7 +16,7 @@
 
     <div class="lv-sidebar-footer">
       <button
-        v-if="!(disableComplete && task.complete) && showNote"
+        :disabled="disableComplete && task.complete"
         class="btn btn-block"
         @click="toggleeNoteCollapse">
         Add a note
@@ -36,7 +36,7 @@
       </transition>
 
       <button
-        v-if="!(disableComplete && task.complete)"
+        :disabled="disableComplete && task.complete"
         class="btn btn-block btn-green"
         @click="submit">
         Submit
