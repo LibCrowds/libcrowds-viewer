@@ -15,7 +15,9 @@
       <icon name="check-circle"></icon>
     </span>
 
-    <div class="lv-sidebar-footer">
+    <div
+      class="lv-sidebar-footer hint--top hint--no-animate"
+      :aria-label="footerTooltip">
       <button
         :disabled="disableComplete && task.complete"
         class="btn btn-block"
@@ -87,6 +89,11 @@ export default {
         return ''
       }
       return this.commentAnnotation.body.value
+    },
+    footerTooltip: function () {
+      if (this.disableComplete && this.task.complete) {
+        return 'Only one submission allowed per task'
+      }
     }
   },
 
@@ -120,6 +127,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~hint.css';
 @import '~style/settings';
 @import '~style/partials/buttons';
 @import '~style/partials/transitions';
