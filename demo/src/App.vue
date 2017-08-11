@@ -44,6 +44,7 @@
     <!-- Viewer used for the transcribe tasks -->
     <div class="viewer-container" v-else-if="showTranscribeViewer">
       <libcrowds-viewer
+        :show-related-tasks="true"
         :disable-complete="true"
         :show-like="showLike"
         :message-bus="messageBus"
