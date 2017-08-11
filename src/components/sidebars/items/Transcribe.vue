@@ -86,10 +86,10 @@ export default {
      */
     addEventListeners () {
       const fieldElems = document.querySelectorAll('.form-control')
-      for (let el of fieldElems) {
-        el.addEventListener('focus', this.onInputFocus)
-        el.addEventListener('blur', this.onInputBlur)
-        el.addEventListener('keyup', this.onKeyup)
+      for (let i = 0; i < fieldElems.length; i++) {
+        fieldElems[i].addEventListener('focus', this.onInputFocus)
+        fieldElems[i].addEventListener('blur', this.onInputBlur)
+        fieldElems[i].addEventListener('keyup', this.onKeyup)
       }
     }
   },
@@ -100,10 +100,10 @@ export default {
 
   beforeDestroy () {
     const fieldElems = document.querySelectorAll('.form-control')
-    for (let el of fieldElems) {
-      el.removeEventListener('focus', this.onInputFocus)
-      el.removeEventListener('blur', this.onInputBlur)
-      el.removeEventListener('keyup', this.onKeyup)
+    for (let i = 0; i < fieldElems.length; i++) {
+      fieldElems[i].removeEventListener('focus', this.onInputFocus)
+      fieldElems[i].removeEventListener('blur', this.onInputBlur)
+      fieldElems[i].removeEventListener('keyup', this.onKeyup)
     }
   },
 
