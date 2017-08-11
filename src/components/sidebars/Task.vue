@@ -1,13 +1,11 @@
 <template>
   <div id="lv-task-sidebar" ref="sidebar">
 
-    <div
-      class="lv-sidebar-header">
+    <div class="lv-sidebar-header">
       <h4>{{ title }}</h4>
     </div>
 
-    <div
-      class="lv-sidebar-content">
+    <div class="lv-sidebar-content">
       <h4>{{ task.objective }}</h4>
       <p>{{ task.guidance }}</p>
       <slot></slot>
