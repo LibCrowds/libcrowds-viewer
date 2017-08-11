@@ -828,13 +828,14 @@ export default {
 
 .notyf {
   @media screen and (min-width: 768px) {
-    right: 280px;
+    right: 350px;
   }
 
-  @media screen and (max-width: 767px) {
+  // Remove if a small screen fix is added to notyf
+  @media screen and (max-width: 766px) {
     bottom: auto;
     top: 0;
-    right: 0;
+    left: calc(50vw - 200px);
     width: 100%;
   }
 }
