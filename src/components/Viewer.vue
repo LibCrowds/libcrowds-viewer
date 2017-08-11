@@ -619,6 +619,9 @@ export default {
       this.messageBus.$on('success', text => {
         this.notyf.confirm(text)
       })
+      this.messageBus.$on('alert', text => {
+        this.notyf.alert(text)
+      })
     },
 
     /**
