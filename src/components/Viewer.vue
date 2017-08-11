@@ -391,7 +391,7 @@ export default {
 
     /**
      * Draw all highlights for the task.
-     * @param {Task} task.
+     * @param {Task} task
      *   The task.
      */
     drawHighlights (task) {
@@ -402,19 +402,21 @@ export default {
 
     /**
      * Draw all highlights for a task, where clicking moves to that task.
-     * @param {Task} task.
+     * @param {Task} task
      *   The task.
      */
     drawRelatedTaskHighlights (task) {
       for (let i = 0; i < task.highlights.length; i++) {
         // Check the highlight wasn't already drawn (e.g. on initial load)
-        if (document.querySelector(`[data-id="related-${i}"]`)) {
+        let taskIndex = this.tasks.indexOf(task)
+        let highlightId = `related-t${taskIndex}-h${i}`
+        if (document.querySelector(`[data-id="${highlightId}"]`)) {
           continue
         }
 
         this.drawHighlight(
           task.highlights[i],
-          `related-${i}`,
+          highlightId,
           'related',
           () => { this.setCurrentTask(task) }
         )
