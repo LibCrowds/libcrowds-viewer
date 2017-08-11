@@ -249,6 +249,10 @@ export default {
       type: Boolean,
       default: true
     },
+    showRelatedTasks: {
+      type: Boolean,
+      default: false
+    },
     nextOnSubmit: {
       type: Boolean,
       default: true
@@ -366,9 +370,13 @@ export default {
      * @param {Object} rect
      *   The image rectangle.
      * @param {String} id
-     *   Ah ID for the highlight element.
+     *   A ID for the highlight element.
+     * @param {String} overlayCls
+     *   Additional overlay class.
+     * @param {Function} onClick
+     *   A callback to trigger on click (or tap).
      */
-    drawHighlight (rect, id) {
+    drawHighlight (rect, id, overlayCls = 'highlight', onClick = null) {
       const vp = this.viewer.viewport
       const imgRect = new OpenSeadragon.Rect(
         rect.x,
@@ -377,7 +385,7 @@ export default {
         rect.height
       )
       const vpRect = vp.imageToViewportRectangle(imgRect)
-      drawOverlay(this.viewer, id, vpRect, 'highlight')
+      drawOverlay(this.viewer, id, vpRect, overlayCls, onClick)
     },
 
     /**
@@ -392,6 +400,22 @@ export default {
     },
 
     /**
+     * Draw all highlights for a task, where clicking moves to that task.
+     * @param {Task} task.
+     *   The task.
+     */
+    drawRelatedTaskHighlights (task) {
+      for (let i = 0; i < task.highlights.length; i++) {
+        this.drawHighlight(
+          task.highlights[i],
+          `related-${i}`,
+          'related',
+          () => { this.setCurrentTask(task) }
+        )
+      }
+    },
+
+    /**
      * Set the current task.
      * @param {Task} task.
      *   The task.
@@ -399,6 +423,36 @@ export default {
     setCurrentTask (task) {
       this.$emit('taskchange', this.currentTask, task)
       this.currentTask = task
+      if (this.showRelatedTasks) {
+        this.showAllRelatedTasks(task)
+      }
+    },
+
+    /**
+     * Show all related tasks.
+     * @param {Task} task.
+     *   The task.
+     */
+    showAllRelatedTasks (task) {
+      const relatedTasks = this.getRelatedTasks(task)
+      for (let relatedTask of relatedTasks) {
+        this.drawRelatedTaskHighlights(relatedTask)
+      }
+    },
+
+    /**
+     * Get all related tasks.
+     * @param {Task} task.
+     *   The task.
+     */
+    getRelatedTasks (task) {
+      return this.tasks.filter((anotherTask) => {
+        return (
+          anotherTask !== task &&
+          anotherTask !== undefined &&
+          anotherTask.imgInfoUri === task.imgInfoUri
+        )
+      })
     },
 
     /**
@@ -558,6 +612,9 @@ export default {
       window.location.href = url
     },
 
+    /**
+     * Setup the message bus.
+     */
     setupMessageBus () {
       this.messageBus.$on('success', text => {
         this.notyf.confirm(text)
@@ -565,11 +622,11 @@ export default {
     },
 
     /**
-     * Mode specific configuration for a task.
+     * Mode specific configuration for select tasks.
      * @param {Task} task
      *   The task.
      */
-    configureMode (task) {
+    configureSelectMode (task) {
       if (task.mode === 'select') {
         // Draw all selection overlays
         const annos = this.annotator.getSelectAnnotations(task)
@@ -577,31 +634,70 @@ export default {
           this.drawSelectionOverlay(task, anno)
         }
       }
-      this.drawHighlights(task)
+    },
+
+    /**
+     * Promise to create a task.
+     * @param {String} taskOpts
+     *   The options for a task.
+     */
+    fetchTask (taskOpts) {
+      return new Promise((resolve, reject) => {
+        fetch(taskOpts.imgInfoUri, {
+          method: 'get'
+        }).then((response) => {
+          return response.json()
+        }).then((json) => {
+          taskOpts.imgInfo = json
+          resolve(new Task(taskOpts))
+        }).catch(function (err) {
+          reject(new Error(`Could not retrieve image info: ${err}`))
+        })
+      })
     },
 
     /**
      * Generate tasks from task options.
      */
-    loadTasks () {
+    generateTasks () {
       // Create an empty tasks array to later maintain order
       this.tasks = Array.apply(null, Array(this.taskOpts.length)).map(() => {})
-      for (let i = 0; i < this.taskOpts.length; i++) {
-        fetch(this.taskOpts[i].imgInfoUri, {
-          method: 'get'
-        }).then((response) => {
-          return response.json()
-        }).then((json) => {
-          const opts = JSON.parse(JSON.stringify(this.taskOpts[i]))
-          opts.imgInfo = json
-          this.tasks[i] = new Task(opts)
-          // Set the first task as current
-          if (i === 1) {
-            this.setCurrentTask(this.tasks[0])
+      const taskPromises = this.taskOpts.map((opts, index) => {
+        // Don't modify the original prop
+        const optsCopy = JSON.parse(JSON.stringify(opts))
+
+        const taskPromise = this.fetchTask(optsCopy)
+        taskPromise.then(task => {
+          // Slot loaded tasks into their place in the array
+          this.tasks[index] = task
+          if (index === 1) {
+            // Set the first task as current once its loaded
+            this.setCurrentTask(task)
           }
-        }).catch(function (err) {
-          throw Error(`Could not retrieve image info: ${err}`)
         })
+        return taskPromise
+      })
+
+      // Do things after all tasks are loaded
+      Promise.all(taskPromises).then(tasks => {
+        if (this.showRelatedTasks) {
+          this.showAllRelatedTasks(this.tasks[0])
+        }
+      })
+    },
+
+    /**
+     * Load a task and configure the view accordingly.
+     * @param {Task} task
+     *   The task.
+     */
+    loadTask (task) {
+      if (task.mode === 'select') {
+        this.configureSelectMode(task)
+      }
+      this.drawHighlights(task)
+      if (this.showRelatedTasks) {
+        this.showAllRelatedTasks(task)
       }
     },
 
@@ -626,18 +722,18 @@ export default {
     currentTask: function (newTask, oldTask) {
       if (oldTask && oldTask.imgInfoUri === newTask.imgInfoUri) {
         this.viewer.clearOverlays()
-        this.configureMode(newTask)
+        this.loadTask(newTask)
       } else {
         this.viewer.close()
         this.viewer.open({
           tileSource: newTask.imgInfoUri,
-          success: () => this.configureMode(newTask)
+          success: () => this.loadTask(newTask)
         })
       }
     },
     taskOpts: {
       handler: function () {
-        this.loadTasks()
+        this.generateTasks()
       },
       deep: true
     }
@@ -645,7 +741,7 @@ export default {
 
   mounted () {
     this.viewer = new OpenSeadragon.Viewer(this.viewerOpts)
-    this.loadTasks()
+    this.generateTasks()
     this.setupMessageBus()
     window.addEventListener('beforeunload', this.onBeforeUnload)
   },

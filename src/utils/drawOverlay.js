@@ -8,8 +8,10 @@
  *   Overlay coordinates.
  * @param {String} cls
  *   Additional overlay class.
+ * @param {Function} onClick
+ *   A callback to trigger on click (or tap).
  */
-export default function (viewer, id, rect, type = '') {
+export default function (viewer, id, rect, type = '', onClick = null) {
   if (!viewer.addOverlay) {
     return
   }
@@ -33,7 +35,14 @@ export default function (viewer, id, rect, type = '') {
       el.style.backgroundColor = 'rgba(52, 152, 219, 0.2)'
     })
   } else if (type === 'highlight') {
-    el.style.backgroundColor = 'rgba(244, 208, 63, 0.3)'
+    el.style.border = '1px solid rgba(77, 175, 124, 0.8)'
+    el.style.backgroundColor = 'rgba(77, 175, 124, 0.2)'
+  } else if (type === 'related') {
+    el.style.border = '1px solid rgba(244, 208, 63, 0.4)'
+    el.style.backgroundColor = 'rgba(244, 208, 63, 0.2)'
+  }
+  if (onClick) {
+    el.addEventListener('click', onClick)
   }
   viewer.addOverlay({ element: el, location: rect })
   return el
