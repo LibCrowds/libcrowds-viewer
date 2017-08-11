@@ -79,16 +79,23 @@ export default {
       if (evt.keyCode === 13) {
         this.$emit('submit', this.task)
       }
+    },
+
+    /**
+     * Add event listeners.
+     */
+    addEventListeners () {
+      const fieldElems = document.querySelectorAll('.form-control')
+      for (let el of fieldElems) {
+        el.addEventListener('focus', this.onInputFocus)
+        el.addEventListener('blur', this.onInputBlur)
+        el.addEventListener('keyup', this.onKeyup)
+      }
     }
   },
 
   mounted () {
-    const fieldElems = document.querySelectorAll('.form-control')
-    for (let el of fieldElems) {
-      el.addEventListener('focus', this.onInputFocus)
-      el.addEventListener('blur', this.onInputBlur)
-      el.addEventListener('keyup', this.onKeyup)
-    }
+    this.addEventListeners()
   },
 
   beforeDestroy () {
@@ -103,6 +110,7 @@ export default {
   watch: {
     task: function () {
       this.form = JSON.parse(JSON.stringify(this.task.form))
+      this.addEventListeners()
     }
   }
 }
