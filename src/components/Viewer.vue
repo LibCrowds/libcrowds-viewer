@@ -670,7 +670,7 @@ export default {
         taskPromise.then(task => {
           // Slot loaded tasks into their place in the array
           this.tasks[index] = task
-          if (index === 1) {
+          if (index === 0) {
             // Set the first task as current once its loaded
             this.setCurrentTask(task)
           }
