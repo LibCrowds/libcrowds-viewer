@@ -97,6 +97,7 @@
         v-if="currentTask.mode === 'select'"
         :task="currentTask"
         :tags="tags"
+        :disableComplete="disableComplete"
         @edit="editTag"
         @delete="deleteTag">
       </select-sidebar-item>
@@ -104,6 +105,7 @@
       <transcribe-sidebar-item
         v-if="currentTask.mode === 'transcribe'"
         :task="currentTask"
+        :disableComplete="disableComplete"
         @update="updateForm"
         @submit="submitTask"
         @inputfocus="onTranscribeInputFocus"
