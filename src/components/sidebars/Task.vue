@@ -7,12 +7,15 @@
     </div>
 
     <div
-      class="lv-sidebar-content"
-      v-if="!(disableComplete && task.complete)">
+      class="lv-sidebar-content">
       <h4>{{ task.objective }}</h4>
       <p>{{ task.guidance }}</p>
       <slot></slot>
     </div>
+
+    <span v-if="task.complete && disableComplete" id="task-complete">
+      <icon name="check-circle"></icon>
+    </span>
 
     <div class="lv-sidebar-footer">
       <button
@@ -41,13 +44,6 @@
         @click="submit">
         Submit
       </button>
-
-      <span v-if="task.complete && disableComplete" id="task-complete">
-        <p>
-          Task complete!
-        </p>
-        <icon name="check-circle"></icon>
-      </span>
     </div>
 
   </div>
@@ -259,6 +255,7 @@ export default {
     flex-direction: column;
     font-size: 1.2rem;
     text-align: center;
+    margin-bottom: 1rem;
 
     svg {
       height: 32px;
