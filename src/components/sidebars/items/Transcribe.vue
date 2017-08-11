@@ -97,7 +97,7 @@ export default {
     const fieldElems = document.querySelectorAll('.form-control')
     for (let el of fieldElems) {
       el.removeEventListener('focus', this.onInputFocus)
-      el.removeEventListener('focus', this.onInputBlur)
+      el.removeEventListener('blur', this.onInputBlur)
       el.removeEventListener('keyup', this.onKeyup)
     }
   },
