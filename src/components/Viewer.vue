@@ -371,10 +371,12 @@ export default {
      *   The image rectangle.
      * @param {String} id
      *   A ID for the highlight element.
+     * @param {String} overlayCls
+     *   Additional overlay class.
      * @param {Function} onClick
      *   A callback to trigger on click (or tap).
      */
-    drawHighlight (rect, id, onClick) {
+    drawHighlight (rect, id, overlayCls = 'highlight', onClick = null) {
       const vp = this.viewer.viewport
       const imgRect = new OpenSeadragon.Rect(
         rect.x,
@@ -383,7 +385,7 @@ export default {
         rect.height
       )
       const vpRect = vp.imageToViewportRectangle(imgRect)
-      drawOverlay(this.viewer, id, vpRect, 'highlight', onClick)
+      drawOverlay(this.viewer, id, vpRect, overlayCls, onClick)
     },
 
     /**
@@ -404,9 +406,12 @@ export default {
      */
     drawRelatedTaskHighlights (task) {
       for (let i = 0; i < task.highlights.length; i++) {
-        this.drawHighlight(task.highlights[i], `highlight-${i}`, () => {
-          this.setCurrentTask(task)
-        })
+        this.drawHighlight(
+          task.highlights[i],
+          `related-${i}`,
+          'related',
+          () => { this.setCurrentTask(task) }
+        )
       }
     },
 
