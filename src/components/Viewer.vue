@@ -581,28 +581,50 @@ export default {
     },
 
     /**
+     * Promise to create a task.
+     * @param {String} taskOpts
+     *   The options for a task.
+     */
+    fetchTask (taskOpts) {
+      return new Promise((resolve, reject) => {
+        fetch(taskOpts.imgInfoUri, {
+          method: 'get'
+        }).then((response) => {
+          return response.json()
+        }).then((json) => {
+          taskOpts.imgInfo = json
+          resolve(new Task(taskOpts))
+        }).catch(function (err) {
+          reject(new Error(`Could not retrieve image info: ${err}`))
+        })
+      })
+    },
+
+    /**
      * Generate tasks from task options.
      */
     loadTasks () {
       // Create an empty tasks array to later maintain order
       this.tasks = Array.apply(null, Array(this.taskOpts.length)).map(() => {})
-      for (let i = 0; i < this.taskOpts.length; i++) {
-        fetch(this.taskOpts[i].imgInfoUri, {
-          method: 'get'
-        }).then((response) => {
-          return response.json()
-        }).then((json) => {
-          const opts = JSON.parse(JSON.stringify(this.taskOpts[i]))
-          opts.imgInfo = json
-          this.tasks[i] = new Task(opts)
-          // Set the first task as current
-          if (i === 1) {
-            this.setCurrentTask(this.tasks[0])
+      const taskPromises = this.taskOpts.map((opts, index) => {
+        // Don't modify the original prop
+        const optsCopy = JSON.parse(JSON.stringify(opts))
+
+        const taskPromise = this.fetchTask(optsCopy)
+        taskPromise.then(task => {
+          // Slot loaded tasks into their place in the array
+          this.tasks[index] = task
+          if (index === 1) {
+            // Set the first task as current once its loaded
+            this.setCurrentTask(task)
           }
-        }).catch(function (err) {
-          throw Error(`Could not retrieve image info: ${err}`)
         })
-      }
+        return taskPromise
+      })
+      Promise.all(taskPromises).then(tasks => {
+        // Do things that can only be done after all tasks are loaded
+
+      })
     },
 
     /**
