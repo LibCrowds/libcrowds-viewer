@@ -1,17 +1,15 @@
 <template>
   <div id="lv-sidebar-transcribe-item">
 
-    <form ref="form">
-      <vue-form-generator
-        id="lv-form"
-        ref="form"
-        v-if="form"
-        :schema="form.schema"
-        :model="form.model"
-        :options="formOptions"
-        @validated="onValidated">
-      </vue-form-generator>
-    </form>
+    <vue-form-generator
+      id="lv-form"
+      ref="form"
+      v-if="form"
+      :schema="form.schema"
+      :model="form.model"
+      :options="formOptions"
+      @validated="onValidated">
+    </vue-form-generator>
 
   </div>
 </template>
