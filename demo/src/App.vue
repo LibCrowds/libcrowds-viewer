@@ -17,6 +17,9 @@
           Transcribe Mode
         </button>
       </div>
+      <p id="instructions">
+        <small>(watch the console for events)</small>
+      </p>
       <a :href="githubUrl" id="doc-link">
         <icon name="github" scale="1.2"></icon>
         <span class="text">Documentation on GitHub</span>
@@ -108,8 +111,8 @@ export default {
   },
 
   methods: {
-    handleTaskChange (task) {
-      console.log('Task changed', task)
+    handleTaskChange (oldTask, newTask) {
+      console.log('TASKchange', oldTask, newTask)
     },
     handleCreate (task, annotation) {
       console.log('Annotation created', task, annotation)
@@ -150,6 +153,10 @@ export default {
   p.lead {
     text-align: center;
     font-weight: bold;
+    color: #5F5F5F;
+  }
+
+  #instructions {
     color: #5F5F5F;
   }
 

@@ -1,15 +1,13 @@
 [
   {
     "mode": "transcribe",
-    "objective": "Transcribe the required info",
+    "objective": "Transcribe the title",
     "guidance": "Transcribe the title exactly as you see on the page.",
     "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
     "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
-        "title": null,
-        "date": null,
-        "genre": null
+        "title": null
       },
       "classification": {
         "title": "http://purl.org/dc/terms/title"
@@ -38,15 +36,13 @@
   },
   {
     "mode": "transcribe",
-    "objective": "Transcribe the required info",
+    "objective": "Transcribe the title",
     "guidance": "Transcribe the title exactly as you see on the page.",
     "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
     "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
-        "title": null,
-        "date": null,
-        "genre": null
+        "title": null
       },
       "classification": {
         "title": "http://purl.org/dc/terms/title"
@@ -75,15 +71,13 @@
   },
   {
     "mode": "transcribe",
-    "objective": "Transcribe the required info",
+    "objective": "Transcribe the title",
     "guidance": "Transcribe the title exactly as you see on the page.",
     "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000006/info.json",
     "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
-        "title": null,
-        "date": null,
-        "genre": null
+        "title": null
       },
       "classification": {
         "title": "http://purl.org/dc/terms/title"
@@ -112,15 +106,13 @@
   },
   {
     "mode": "transcribe",
-    "objective": "Transcribe the required info",
+    "objective": "Transcribe the title",
     "guidance": "Transcribe the title exactly as you see on the page.",
     "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000006/info.json",
     "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
-        "title": null,
-        "date": null,
-        "genre": null
+        "title": null
       },
       "classification": {
         "title": "http://purl.org/dc/terms/title"
@@ -144,6 +136,58 @@
         "y": 2440,
         "width": 1851,
         "height": 362
+      }
+    ]
+  },
+  {
+    "mode": "transcribe",
+    "objective": "Transcribe the person's details",
+    "guidance": "Transcribe all details about the person, where available.",
+    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000006/info.json",
+    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "prefix": null,
+        "givenName": null,
+        "familyName": null
+      },
+      "classification": {
+        "prefix": "http://schema.org/honorificPrefix",
+        "givenName": "http://schema.org/givenName",
+        "familyName": "http://schema.org/familyName"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Prefix",
+            "model": "prefix",
+            "placeholder": "Mr, Mrs, Dr etc."
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "First name",
+            "model": "givenName",
+            "placeholder": "Leave blank if not present"
+          },
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Surname",
+            "model": "familyName",
+            "placeholder": "Leave blank if not present"
+          }
+        ]
+      }
+    },
+    "highlights": [
+      {
+        "x": 1039,
+        "y": 1417,
+        "width": 536,
+        "height": 69
       }
     ]
   }
