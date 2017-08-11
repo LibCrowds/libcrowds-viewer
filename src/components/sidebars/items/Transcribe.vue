@@ -1,15 +1,17 @@
 <template>
   <div id="lv-sidebar-transcribe-item">
 
-    <vue-form-generator
-      id="lv-form"
-      ref="form"
-      v-if="form"
-      :schema="form.schema"
-      :model="form.model"
-      :options="formOptions"
-      @validated="onValidated">
-    </vue-form-generator>
+    <form ref="form">
+      <vue-form-generator
+        id="lv-form"
+        ref="form"
+        v-if="form"
+        :schema="form.schema"
+        :model="form.model"
+        :options="formOptions"
+        @validated="onValidated">
+      </vue-form-generator>
+    </form>
 
   </div>
 </template>
@@ -70,6 +72,15 @@ export default {
      */
     onInputBlur () {
       this.$emit('inputblur', this.task)
+    },
+
+    /**
+     * Emit the submit event on enter.
+     */
+    onKeyup (evt) {
+      if (evt.keyCode === 13) {
+        this.$emit('submit', this.task)
+      }
     }
   },
 
@@ -78,6 +89,7 @@ export default {
     for (let el of fieldElems) {
       el.addEventListener('focus', this.onInputFocus)
       el.addEventListener('blur', this.onInputBlur)
+      el.addEventListener('keyup', this.onKeyup)
     }
   },
 
@@ -86,6 +98,7 @@ export default {
     for (let el of fieldElems) {
       el.removeEventListener('focus', this.onInputFocus)
       el.removeEventListener('focus', this.onInputBlur)
+      el.removeEventListener('keyup', this.onKeyup)
     }
   },
 

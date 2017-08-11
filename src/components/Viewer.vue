@@ -105,6 +105,7 @@
         v-if="currentTask.mode === 'transcribe'"
         :task="currentTask"
         @update="updateForm"
+        @submit="submitTask"
         @inputfocus="onTranscribeInputFocus"
         @inputblur="onTranscribeInputBlur">
       </transcribe-sidebar-item>
