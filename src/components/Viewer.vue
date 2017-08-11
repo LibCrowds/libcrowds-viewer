@@ -623,12 +623,17 @@ export default {
   },
 
   watch: {
-    currentTask: function () {
-      this.viewer.close()
-      this.viewer.open({
-        tileSource: this.currentTask.imgInfoUri,
-        success: () => this.configureMode(this.currentTask)
-      })
+    currentTask: function (newTask, oldTask) {
+      if (oldTask && oldTask.imgInfoUri === newTask.imgInfoUri) {
+        this.viewer.clearOverlays()
+        this.configureMode(newTask)
+      } else {
+        this.viewer.close()
+        this.viewer.open({
+          tileSource: newTask.imgInfoUri,
+          success: () => this.configureMode(newTask)
+        })
+      }
     },
     taskOpts: {
       handler: function () {
