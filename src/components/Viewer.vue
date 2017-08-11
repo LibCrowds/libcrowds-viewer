@@ -407,6 +407,11 @@ export default {
      */
     drawRelatedTaskHighlights (task) {
       for (let i = 0; i < task.highlights.length; i++) {
+        // Check the highlight wasn't already drawn (e.g. on initial load)
+        if (document.querySelector(`[data-id="related-${i}"]`)) {
+          continue
+        }
+
         this.drawHighlight(
           task.highlights[i],
           `related-${i}`,
