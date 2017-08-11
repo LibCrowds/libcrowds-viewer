@@ -416,7 +416,6 @@ export default {
     showAllRelatedTasks (task) {
       const relatedTasks = this.getRelatedTasks(task)
       for (let relatedTask of relatedTasks) {
-        console.log
         this.drawHighlights(relatedTask)
       }
     },
@@ -429,6 +428,7 @@ export default {
     getRelatedTasks (task) {
       return this.tasks.filter((anotherTask) => {
         return (
+          anotherTask !== task &&
           anotherTask !== undefined &&
           anotherTask.imgInfoUri === task.imgInfoUri
         )
@@ -592,6 +592,9 @@ export default {
       window.location.href = url
     },
 
+    /**
+     * Setup the message bus.
+     */
     setupMessageBus () {
       this.messageBus.$on('success', text => {
         this.notyf.confirm(text)
@@ -599,11 +602,11 @@ export default {
     },
 
     /**
-     * Mode specific configuration for a task.
+     * Mode specific configuration for select tasks.
      * @param {Task} task
      *   The task.
      */
-    configureMode (task) {
+    configureSelectMode (task) {
       if (task.mode === 'select') {
         // Draw all selection overlays
         const annos = this.annotator.getSelectAnnotations(task)
@@ -611,7 +614,6 @@ export default {
           this.drawSelectionOverlay(task, anno)
         }
       }
-      this.drawHighlights(task)
     },
 
     /**
@@ -637,7 +639,7 @@ export default {
     /**
      * Generate tasks from task options.
      */
-    loadTasks () {
+    generateTasks () {
       // Create an empty tasks array to later maintain order
       this.tasks = Array.apply(null, Array(this.taskOpts.length)).map(() => {})
       const taskPromises = this.taskOpts.map((opts, index) => {
@@ -665,6 +667,21 @@ export default {
     },
 
     /**
+     * Load a task and configure the view accordingly.
+     * @param {Task} task
+     *   The task.
+     */
+    loadTask (task) {
+      if (task.mode === 'select') {
+        this.configureSelectMode(task)
+      }
+      this.drawHighlights(task)
+      if (this.showRelatedTasks) {
+        this.showAllRelatedTasks(task)
+      }
+    },
+
+    /**
      * Check for any unsaved annotations.
      * @param {Object} evt
      *   The event.
@@ -685,18 +702,18 @@ export default {
     currentTask: function (newTask, oldTask) {
       if (oldTask && oldTask.imgInfoUri === newTask.imgInfoUri) {
         this.viewer.clearOverlays()
-        this.configureMode(newTask)
+        this.loadTask(newTask)
       } else {
         this.viewer.close()
         this.viewer.open({
           tileSource: newTask.imgInfoUri,
-          success: () => this.configureMode(newTask)
+          success: () => this.loadTask(newTask)
         })
       }
     },
     taskOpts: {
       handler: function () {
-        this.loadTasks()
+        this.generateTasks()
       },
       deep: true
     }
@@ -704,7 +721,7 @@ export default {
 
   mounted () {
     this.viewer = new OpenSeadragon.Viewer(this.viewerOpts)
-    this.loadTasks()
+    this.generateTasks()
     this.setupMessageBus()
     window.addEventListener('beforeunload', this.onBeforeUnload)
   },
