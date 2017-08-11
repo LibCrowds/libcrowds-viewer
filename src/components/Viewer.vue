@@ -249,6 +249,10 @@ export default {
       type: Boolean,
       default: true
     },
+    showRelatedTasks: {
+      type: Boolean,
+      default: true
+    },
     nextOnSubmit: {
       type: Boolean,
       default: true
@@ -399,6 +403,36 @@ export default {
     setCurrentTask (task) {
       this.$emit('taskchange', this.currentTask, task)
       this.currentTask = task
+      if (this.showRelatedTasks) {
+        this.showAllRelatedTasks(task)
+      }
+    },
+
+    /**
+     * Show all related tasks.
+     * @param {Task} task.
+     *   The task.
+     */
+    showAllRelatedTasks (task) {
+      const relatedTasks = this.getRelatedTasks(task)
+      for (let relatedTask of relatedTasks) {
+        console.log
+        this.drawHighlights(relatedTask)
+      }
+    },
+
+    /**
+     * Get all related tasks.
+     * @param {Task} task.
+     *   The task.
+     */
+    getRelatedTasks (task) {
+      return this.tasks.filter((anotherTask) => {
+        return (
+          anotherTask !== undefined &&
+          anotherTask.imgInfoUri === task.imgInfoUri
+        )
+      })
     },
 
     /**
@@ -621,9 +655,12 @@ export default {
         })
         return taskPromise
       })
-      Promise.all(taskPromises).then(tasks => {
-        // Do things that can only be done after all tasks are loaded
 
+      // Do things after all tasks are loaded
+      Promise.all(taskPromises).then(tasks => {
+        if (this.showRelatedTasks) {
+          this.showAllRelatedTasks(this.tasks[0])
+        }
       })
     },
 
