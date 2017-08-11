@@ -4,6 +4,7 @@
     <vue-form-generator
       id="lv-form"
       ref="form"
+      v-if="form"
       :schema="form.schema"
       :model="form.model"
       :options="formOptions"
@@ -24,7 +25,6 @@ export default {
         validateAfterLoad: true,
         validateAfterChanged: true
       },
-      // To avoid modifying parent state
       form: JSON.parse(JSON.stringify(this.task.form))
     }
   },
@@ -86,6 +86,12 @@ export default {
     for (let el of fieldElems) {
       el.removeEventListener('focus', this.onInputFocus)
       el.removeEventListener('focus', this.onInputBlur)
+    }
+  },
+
+  watch: {
+    task: function () {
+      this.form = JSON.parse(JSON.stringify(this.task.form))
     }
   }
 }
