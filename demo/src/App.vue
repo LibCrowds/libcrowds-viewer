@@ -112,7 +112,7 @@ export default {
 
   methods: {
     handleTaskChange (oldTask, newTask) {
-      console.log('TASKchange', oldTask, newTask)
+      console.log('Task changed', oldTask, newTask)
     },
     handleCreate (task, annotation) {
       console.log('Annotation created', task, annotation)
