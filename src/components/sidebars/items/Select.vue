@@ -9,7 +9,9 @@
         <div class="thumbnail-container">
           <img :src="tag.target.selector.value">
         </div>
-        <div class="buttons">
+        <div
+          v-if="!(disableComplete && task.complete)"
+          class="buttons">
           <button
             @click="editTag(tag)"
             class="btn btn-control">
@@ -42,6 +44,10 @@ export default {
     },
     tags: {
       type: Array,
+      required: true
+    },
+    disableComplete: {
+      type: Boolean,
       required: true
     }
   },
