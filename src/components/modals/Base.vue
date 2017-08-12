@@ -104,7 +104,7 @@ export default {
     background-color: $gray-dark;
     margin-top: 2em;
     max-height: calc(100vh - 4em);
-    width: auto;
+    width: 90vw;
     margin: 0px auto;
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
