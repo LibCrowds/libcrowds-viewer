@@ -1,6 +1,6 @@
 <template>
   <div id="lv-browse-modal">
-    <modal :show="show" title="Browse Tasks" @hide="$emit('hide')">
+    <modal-base :show="show" title="Browse Tasks" @hide="$emit('hide')">
       <ul>
         <li
           :class="listItemClass"
@@ -23,7 +23,7 @@
           </figure>
         </li>
       </ul>
-    </modal>
+    </modal-base>
   </div>
 </template>
 

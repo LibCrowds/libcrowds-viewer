@@ -1,6 +1,6 @@
 <template>
   <div id="lv-metadata-modal">
-    <modal :show="show" title="Metadata" @hide="$emit('hide')">
+    <modal-base :show="show" title="Metadata" @hide="$emit('hide')">
 
       <span v-if="hasData">
         <ul v-for="item in metadata" :key="item.label">
@@ -19,7 +19,7 @@
       <p class="center">No metadata loaded</p>
     </span>
 
-    </modal>
+    </modal-base>
   </div>
 </template>
 
