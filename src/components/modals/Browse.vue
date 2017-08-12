@@ -1,6 +1,6 @@
 <template>
   <div id="lv-browse-modal">
-    <modal :show="show" title="Browse Tasks" @hide="$emit('hide')">
+    <modal-base :show="show" title="Browse Tasks" @hide="$emit('hide')">
       <ul>
         <li
           :class="listItemClass"
@@ -23,18 +23,18 @@
           </figure>
         </li>
       </ul>
-    </modal>
+    </modal-base>
   </div>
 </template>
 
 <script>
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/check-circle'
-import Modal from '@/components/Modal'
+import ModalBase from '@/components/modals/Base'
 
 export default {
   components: {
-    Modal,
+    ModalBase,
     Icon
   },
 
@@ -83,25 +83,15 @@ export default {
 
 #lv-browse-modal {
   ul {
+    text-align: center;
+    padding-left: 0;
     list-style: none;
-    -moz-column-count: 2;
-    -webkit-column-count: 2;
-    column-count: 2;
-    -moz-column-gap: 5px;
-    -webkit-column-gap: 5px;
-    column-gap: 5px;
-
-    @media (min-width: 992px) {
-      -moz-column-count: 4;
-      -webkit-column-count: 4;
-      column-count: 4;
-    }
   }
 
   li {
     display: inline-block;
     width: 128px;
-    margin-bottom: 30px;
+    margin: 0 10px 30px;
     border: 1px solid lighten($gray-dark, 20%);
     position: relative;
 
