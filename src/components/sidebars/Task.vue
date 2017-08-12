@@ -11,10 +11,6 @@
       <slot></slot>
     </div>
 
-    <span v-if="task.complete && disableComplete" id="task-complete">
-      <icon name="check-circle"></icon>
-    </span>
-
     <div
       class="lv-sidebar-footer hint--top hint--no-animate"
       :aria-label="footerTooltip">
@@ -251,22 +247,6 @@ export default {
       -moz-box-sizing: border-box;
       box-sizing: border-box;
       width: 100%;
-    }
-  }
-
-  #task-complete {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    font-size: 1.2rem;
-    text-align: center;
-    margin-bottom: 1rem;
-
-    svg {
-      height: 32px;
-      width: auto;
-      color: $green;
     }
   }
 }
