@@ -2,13 +2,17 @@
   <div id="lv-toolbar">
 
     <control-button
-      v-for="(b, index) in buttons"
-      :key="`btn-zoom-${index}`"
-      :tooltip="b.tooltip"
-      :callback="b.callback"
+      v-for="button in buttons"
+      :key="button.id"
+      :id="button.id"
+      :tooltip="button.tooltip"
+      :callback="button.callback"
       position="bottom"
       hint-position="bottom">
-      <icon :name="b.icon" :class="b.iconClass"></icon>
+      <icon
+        :name="button.icon"
+        :class="button.iconClass">
+      </icon>
     </control-button>
 
   </div>
@@ -142,6 +146,7 @@ export default {
           callback: () => {
             let clipboard = new Clipboard('#lv-share-btn', {
               text: (trigger) => {
+                console.log(trigger)
                 trigger.setAttribute('aria-label', 'URL Copied!')
                 trigger.addEventListener('mouseleave', () => {
                   trigger.setAttribute('aria-label', tooltip)
