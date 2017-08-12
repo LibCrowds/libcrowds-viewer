@@ -30,11 +30,11 @@
 <script>
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/check-circle'
-import Modal from '@/components/Modal'
+import ModalBase from '@/components/modals/Base'
 
 export default {
   components: {
-    Modal,
+    ModalBase,
     Icon
   },
 

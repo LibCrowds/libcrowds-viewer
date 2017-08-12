@@ -101,7 +101,7 @@ import 'vue-awesome/icons/chevron-down'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
 import 'vue-awesome/icons/list'
-import Modal from '@/components/Modal'
+import ModalBase from '@/components/modals/Base'
 import Task from '@/model/Task'
 
 export default {
@@ -144,7 +144,7 @@ export default {
 
   components: {
     Icon,
-    Modal
+    ModalBase
   }
 }
 </script>

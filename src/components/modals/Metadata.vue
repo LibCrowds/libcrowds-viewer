@@ -25,7 +25,7 @@
 
 <script>
 import Task from '@/model/Task'
-import Modal from '@/components/Modal'
+import ModalBase from '@/components/modals/Base'
 
 export default {
   data: function () {
@@ -53,7 +53,7 @@ export default {
   },
 
   components: {
-    Modal
+    ModalBase
   },
 
   computed: {
