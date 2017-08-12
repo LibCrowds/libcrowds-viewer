@@ -85,6 +85,7 @@ export default {
   transition: all 350ms;
   overflow-y: auto;
   flex-shrink: 2;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   -webkit-transform: translateX(-100%);
   transform: translateX(-100%);
 
