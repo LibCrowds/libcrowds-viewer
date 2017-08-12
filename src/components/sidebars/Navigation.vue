@@ -24,12 +24,6 @@ import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/times'
 
 export default {
-  data: function () {
-    return {
-      noteCollapsed: true
-    }
-  },
-
   props: {
     navigation: {
       type: Array,
