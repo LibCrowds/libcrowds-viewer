@@ -58,10 +58,6 @@ export default {
   },
 
   props: {
-    title: {
-      type: String,
-      default: 'Task'
-    },
     task: {
       type: Task,
       required: true
@@ -90,6 +86,11 @@ export default {
       if (this.disableComplete && this.task.complete) {
         return 'Only one submission allowed per task'
       }
+    },
+    title: function () {
+      return this.disableComplete && this.task.complete
+        ? 'Task complete'
+        : 'Task'
     }
   },
 
