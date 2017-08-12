@@ -160,6 +160,10 @@ export default {
   .form-group {
     margin-bottom: 1rem;
   }
+
+  :disabled {
+    background: $gray-light;
+  }
 }
 
 #lv-form {
