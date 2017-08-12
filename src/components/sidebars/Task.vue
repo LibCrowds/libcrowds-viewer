@@ -1,22 +1,21 @@
 <template>
   <div id="lv-task-sidebar" ref="sidebar">
 
-    <div
-      class="lv-sidebar-header">
+    <div class="lv-sidebar-header">
       <h4>{{ title }}</h4>
     </div>
 
-    <div
-      class="lv-sidebar-content"
-      v-if="!(disableComplete && task.complete)">
+    <div class="lv-sidebar-content">
       <h4>{{ task.objective }}</h4>
       <p>{{ task.guidance }}</p>
       <slot></slot>
     </div>
 
-    <div class="lv-sidebar-footer">
+    <div
+      class="lv-sidebar-footer hint--top hint--no-animate"
+      :aria-label="footerTooltip">
       <button
-        v-if="!(disableComplete && task.complete) && showNote"
+        :disabled="disableComplete && task.complete"
         class="btn btn-block"
         @click="toggleeNoteCollapse">
         Add a note
@@ -36,18 +35,11 @@
       </transition>
 
       <button
-        v-if="!(disableComplete && task.complete)"
+        :disabled="disableComplete && task.complete"
         class="btn btn-block btn-green"
         @click="submit">
         Submit
       </button>
-
-      <span v-if="task.complete && disableComplete" id="task-complete">
-        <p>
-          Task complete!
-        </p>
-        <icon name="check-circle"></icon>
-      </span>
     </div>
 
   </div>
@@ -66,10 +58,6 @@ export default {
   },
 
   props: {
-    title: {
-      type: String,
-      default: 'Task'
-    },
     task: {
       type: Task,
       required: true
@@ -93,6 +81,16 @@ export default {
         return ''
       }
       return this.commentAnnotation.body.value
+    },
+    footerTooltip: function () {
+      if (this.disableComplete && this.task.complete) {
+        return 'Only one submission allowed per task'
+      }
+    },
+    title: function () {
+      return this.disableComplete && this.task.complete
+        ? 'Task complete'
+        : 'Task'
     }
   },
 
@@ -126,6 +124,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~hint.css';
 @import '~style/settings';
 @import '~style/partials/buttons';
 @import '~style/partials/transitions';
@@ -249,21 +248,6 @@ export default {
       -moz-box-sizing: border-box;
       box-sizing: border-box;
       width: 100%;
-    }
-  }
-
-  #task-complete {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    font-size: 1.2rem;
-    text-align: center;
-
-    svg {
-      height: 32px;
-      width: auto;
-      color: $green;
     }
   }
 }

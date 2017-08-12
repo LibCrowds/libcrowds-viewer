@@ -25,7 +25,7 @@ export default {
         validateAfterLoad: true,
         validateAfterChanged: true
       },
-      form: JSON.parse(JSON.stringify(this.task.form))
+      form: this.copyForm()
     }
   },
 
@@ -36,6 +36,10 @@ export default {
   props: {
     task: {
       type: Task,
+      required: true
+    },
+    disableComplete: {
+      type: Boolean,
       required: true
     }
   },
@@ -94,10 +98,24 @@ export default {
     },
 
     /**
+     * Make a copy of the form and disable any fields if necessary.
+     */
+    copyForm () {
+      let form = JSON.parse(JSON.stringify(this.task.form))
+      if (this.disableComplete && this.task.complete) {
+        form.schema.fields = form.schema.fields.map((field) => {
+          field.disabled = true
+          return field
+        })
+      }
+      return form
+    },
+
+    /**
      * Load the form.
      */
     load () {
-      this.form = JSON.parse(JSON.stringify(this.task.form))
+      this.form = this.copyForm()
       this.addEventListeners()
       document.querySelector('.form-control').focus()
     }
@@ -141,6 +159,10 @@ export default {
 
   .form-group {
     margin-bottom: 1rem;
+  }
+
+  :disabled {
+    background: $gray-light;
   }
 }
 
