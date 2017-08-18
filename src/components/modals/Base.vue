@@ -103,7 +103,6 @@ export default {
     color: #fff;
     background-color: $gray-dark;
     margin-top: 2em;
-    max-height: calc(100vh - 4em);
     width: 90vw;
     margin: 0px auto;
     overflow: hidden;
@@ -148,8 +147,10 @@ export default {
   }
 
   .lv-modal-body {
+    position: relative;
+    max-height: 70vh;
     padding: 20px 30px;
-    overflow: auto;
+    overflow-y: auto;
     flex: 1 1 auto;
   }
 
