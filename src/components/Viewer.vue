@@ -270,7 +270,7 @@ export default {
     },
     navigation: {
       type: Array,
-      default: null
+      default: []
     }
   },
 
