@@ -2,35 +2,27 @@
   <div id="lv-help-modal">
     <modal-base :show="show" title="Help" @hide="$emit('hide')">
       <p>
-        The objective of the current task, along with any additional guidance
-        can be seen in the sidebar to the right of the viewer. Once the task
-        has been completed click the Submit button to submit your answer.
+        Guidance specific to the current task is listed in the sidebar to the right of the viewer. 
+        You can use the Notes field to share something interesting you've spotted on a page or
+        to let us know that a page needs attention for some reason. 
+        When you've completed all tasks for a page, click the Submit button to save your contribution.
       </p>
       <p v-if="disableComplete">
-        Note that you can only submit one answer for each task. You are free to
-        browse back and forth between tasks but once you click submit your
-        answer will be saved and further submissions disabled.
+        Note that you can only submit one response for each page. When you click submit
+        your answer will be saved and further submissions disabled. You are free to
+        browse back and forth between submitted and unsubmitted pages.
       </p>
       <h4>Viewer controls</h4>
-      <p>The following controls are provided to the top-left of the viewer:</p>
+      <p>In the top-left corner of the viewer:</p>
       <ul>
-        <li>
-          <icon name="plus-circle"></icon>Zoom in
-        </li>
-        <li>
-          <icon name="minus-circle"></icon>Zoom out
-        </li>
-        <li>
-          <icon name="refresh"></icon>Reset zoom
-        </li>
         <li>
           <icon name="expand"></icon>Fullscreen
         </li>
         <li>
-          <icon name="question-circle"></icon>View Help
+          <icon name="question-circle"></icon>View this Help page
         </li>
         <li v-if="showInfo">
-          <icon name="info-circle"></icon>View Metadata
+          <icon name="info-circle"></icon>View Metadata about the item
         </li>
         <li v-if="showBrowse">
           <icon name="list"></icon>Browse Tasks
@@ -39,25 +31,27 @@
           <icon name="thumbs-up"></icon>Like Task/Image
         </li>
         <li v-if="showShare">
-          <icon name="share-alt"></icon>Copy Image URL
+          <icon name="share-alt"></icon>Copy Image URL for bookmarking or sharing
         </li>
       </ul>
       <p>
-        The following controls are provided to the bottom-left of the viewer:
+        In the bottom-left corner of the viewer, controls to:
       </p>
       <ul>
         <li><icon name="chevron-up"></icon>Pan up</li>
         <li><icon name="chevron-down"></icon>Pan down</li>
         <li><icon name="chevron-left"></icon>Pan left</li>
         <li><icon name="chevron-right"></icon>Pan right</li>
+        <li><icon name="plus-circle"></icon>Zoom in</li>
+        <li><icon name="minus-circle"></icon>Zoom out</li>
+        <li><icon name="refresh"></icon>Reset zoom</li>
       </ul>
       <p>
-        To the left and right of the viewer are buttons to browse available
-        tasks:
+        Use arrows left and right of the viewer to move between pages:
       </p>
       <ul>
-        <li><icon name="chevron-left"></icon>Previous task</li>
-        <li><icon name="chevron-right"></icon>Next task</li>
+        <li><icon name="chevron-left"></icon>Previous page</li>
+        <li><icon name="chevron-right"></icon>Next page</li>
       </ul>
       <div v-if="task.mode === 'select'">
         <h4>Select mode</h4>
