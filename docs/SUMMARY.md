@@ -1,7 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
-* [Configuration](/docs/configuration.md)
+* [Configuration](/configuration.md)
 * [Notifications](/docs/notifications.md)
 
 
