@@ -2,7 +2,7 @@
   <div id="lv-task-sidebar" ref="sidebar">
 
     <div class="lv-sidebar-header">
-      <h4>{{ title }}</h4>
+      <h3>{{ title }}</h3>
     </div>
 
     <div class="lv-sidebar-content">
@@ -14,32 +14,57 @@
     <div
       class="lv-sidebar-footer hint--top hint--no-animate"
       :aria-label="footerTooltip">
-      <button
-        :disabled="disableComplete && task.complete"
-        class="btn btn-block"
-        @click="toggleeNoteCollapse">
-        Add a note
-      </button>
 
-      <transition name="fade-height"
-        v-show="showNote"
-        v-if="!noteCollapsed">
-        <textarea
-          v-if="!(disableComplete && task.complete)"
-          ref="note"
-          rows="3"
-          placeholder="Leave a note..."
-          v-model="note"
-          @input="updateNote">
-        </textarea>
+      <transition>
+        <span v-if="!showConfirmButtons">
+          <button
+            :disabled="disableComplete && task.complete"
+            class="btn btn-block"
+            @click="toggleeNoteCollapse">
+            Add a note
+          </button>
+
+          <transition name="fade-height"
+            v-show="showNote"
+            v-if="!noteCollapsed">
+            <textarea
+              v-if="!(disableComplete && task.complete)"
+              ref="note"
+              rows="3"
+              placeholder="Leave a note..."
+              v-model="note"
+              @input="updateNote">
+            </textarea>
+          </transition>
+
+          <button
+            :disabled="disableComplete && task.complete"
+            class="btn btn-block btn-green"
+            @click="submit(false)">
+            Submit
+          </button>
+        </span>
+
+        <span v-else-if="showConfirmButtons">
+          <p class="lead">Are you sure you want to submit this task?</p>
+          <p v-if="disableComplete">There is no going back!</p>
+          <div id="confirm-buttons">
+            <button
+              :disabled="disableComplete && task.complete"
+              class="btn btn-red"
+              @click="showConfirmButtons = false">
+              Cancel
+            </button>
+            <button
+              :disabled="disableComplete && task.complete"
+              class="btn btn-green"
+              @click="submit(true)">
+              Confirm
+            </button>
+          </div>
+        </span>
       </transition>
 
-      <button
-        :disabled="disableComplete && task.complete"
-        class="btn btn-block btn-green"
-        @click="submit">
-        Submit
-      </button>
     </div>
 
   </div>
@@ -53,7 +78,8 @@ import Task from '@/model/Task'
 export default {
   data: function () {
     return {
-      noteCollapsed: true
+      noteCollapsed: true,
+      showConfirmButtons: false
     }
   },
 
@@ -70,6 +96,10 @@ export default {
       required: true
     },
     disableComplete: {
+      type: Boolean,
+      required: true
+    },
+    confirmOnSubmit: {
       type: Boolean,
       required: true
     }
@@ -115,9 +145,18 @@ export default {
 
     /**
      * Emit the submit event with the task.
+     * @param {Boolean} confirmed
+     *   True if the submission has been confirmed.
      */
-    submit () {
-      this.$emit('submit', this.task)
+    submit (confirmed) {
+      if (this.confirmOnSubmit && confirmed !== true) {
+        this.showConfirmButtons = true
+        this.$emit('disableviewer')
+      } else {
+        this.$emit('submit', this.task)
+        this.$emit('enableviewer')
+        this.showConfirmButtons = false
+      }
     }
   }
 }
@@ -193,7 +232,7 @@ export default {
       padding: 0.75rem 1.5rem 0.75rem 1.5rem;
     }
 
-    h4 {
+    h3 {
       text-transform: uppercase;
       margin-bottom: 0;
       font-size: 1rem;
@@ -215,7 +254,6 @@ export default {
     }
 
     h4 {
-      margin: 0;
       font-family: $font-family-headings;
       font-weight: 200;
       letter-spacing: 0.5px;
@@ -248,6 +286,28 @@ export default {
       -moz-box-sizing: border-box;
       box-sizing: border-box;
       width: 100%;
+    }
+
+    .lead {
+      font-size: 1.2rem;
+    }
+  }
+
+  #confirm-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    button {
+      width: 50%;
+
+      &:first-child {
+        margin: 0 0.3rem 0 0;
+      }
+
+      &:last-child {
+        margin: 0 0 0 0.3rem;
+      }
     }
   }
 }

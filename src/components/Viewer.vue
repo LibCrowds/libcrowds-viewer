@@ -90,6 +90,7 @@
       :showNote="showNote"
       :commentAnnotation="commentAnnotation"
       :disableComplete="disableComplete"
+      :confirmOnSubmit="confirmOnSubmit"
       @noteupdated="updateNote"
       @submit="submitTask">
 
