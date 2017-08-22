@@ -4,7 +4,7 @@ LibCrowds Viewer currently provides the following modes, each configurable via t
 
 ## Select Mode
 
-In select mode users can use their mouse (or finger) to tag areas of the image, potentially preparing them for subsequent transcription.
+In select mode users can use their mouse \(or finger\) to tag areas of the image, potentially preparing them for subsequent transcription.
 
 Note that the `tag` property is required when in `select` mode.
 
@@ -78,14 +78,9 @@ Note that the `tag` property is required when in `select` mode.
 
 ## Transcribe Mode
 
-In transcribe mode a form schema is passed to the viewer along with optional
-coordinates to highlight regions of the image (such as those returned from a
-previous selection task) allowing for transcription of specific details found
-in the image.
+In transcribe mode a form schema is passed to the viewer along with optional coordinates to highlight regions of the image \(such as those returned from a previous selection task\) allowing for transcription of specific details found in the image.
 
-Note that the `form` task property is required when in `transcribe` mode. The
-`tag` and `classification` task properties are ignored and are instead
-taken from `form.model` and `form.classification`, respectively.
+Note that the `form` task property is required when in `transcribe` mode. The `tag` and `classification` task properties are ignored and are instead taken from `form.model` and `form.classification`, respectively.
 
 #### Example task
 
@@ -197,3 +192,6 @@ taken from `form.model` and `form.classification`, respectively.
   "modified": "2017-07-16T13:53:18.795Z"
 }
 ```
+
+
+
