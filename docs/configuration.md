@@ -4,6 +4,8 @@ The viewer provides a range of flexible configuration options.
 
 ## Viewer Properties
 
+All of the following properties, apart from `task-opts` are optional.
+
 | Property              | Type    | Default | Description                                                                                           |
 |-----------------------|---------|---------|-------------------------------------------------------------------------------------------------------|
 | task-opts             | Array   |         | An array of task options                                                                              |
@@ -24,42 +26,42 @@ The viewer provides a range of flexible configuration options.
 | creator               | Object  | null    | The Annotation creator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\)   |
 | generator             | Object  | null    | The Annotation generator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\) |
 | next-on-submit        | Object  | true    | Move to the next task on after submission                                                             |
-| messageBus            | Object  | null    | Message bus used for notifications \(see below\)                                                      |
-| navigation            | Array   | null    | Additional navigation links \(see below\)                                                             |
-| confirm-on-submit     | Boolean | false   | Show a confirmation dialogue on submission                                                            |
+| messageBus            | Object  | null    | Message bus used for notifications \(see [Notifications](notifcations.md)\)                           |
+| navigation            | Array   | null    | Additional navigation links \(see [Navigation Properties](configuration.md#navigation_properties)\)   |
+| confirm-on-submit     | Boolean | false   | Show a confirmation box on submission                                                                 |
 
 
 ## Task properties
 
 The core data structure for LibCrowds Viewer is the Task object, an array of which are created from the `task-opts` passed to the viewer, which each have the following properties.
 
-| Property       | Type    | Attributes  | Description                                                                                                    |
-|----------------|---------|-------------|----------------------------------------------------------------------------------------------------------------|
-| mode           | String  |             | `'select'` or `'transcribe'`                                                                                   |
-| imgInfoUri     | String  |             | Image info URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/#image-information-request-uri-syntax/)) |
-| manifestUri    | String  | \<optional> | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/#resource-structure))        |
-| id             | String  | \<optional> | Task identifier                                                                                                |
-| objective      | String  | \<optional> | The main objective                                                                                             |
-| guidance       | String  | \<optional> | Additional guidance                                                                                            |
-| form           | Object  | \<optional> | See form properties below                                                                                      |
-| highlights     | Array   | \<optional> | Coordinates identifying regions of the image to highlight                                                      |
-| tag            | String  | \<optional> | The tag to add when in `select` mode                                                                           |
-| liked          | Boolean | \<optional> | Task liked (see the viewer property `show-like`)                                                               |
-| classification | String  | \<optional> | A SpecificResource to classify the target as (e.g. [foaf:Person](http://xmlns.com/foaf/spec/#term_Person))     |
-| complete       | Boolean | \<optional> | Mark the task as complete                                                                                      |
+| Property       | Type    | Attributes | Description                                                                                                    |
+|----------------|---------|------------|----------------------------------------------------------------------------------------------------------------|
+| mode           | String  |            | `'select'` or `'transcribe'`                                                                                   |
+| imgInfoUri     | String  |            | Image info URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/#image-information-request-uri-syntax/)) |
+| manifestUri    | String  |  optional  | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/#resource-structure))        |
+| id             | String  |  optional  | Task identifier                                                                                                |
+| objective      | String  |  optional  | The main objective                                                                                             |
+| guidance       | String  |  optional  | Additional guidance                                                                                            |
+| form           | Object  |  optional  | See form properties below                                                                                      |
+| highlights     | Array   |  optional  | Coordinates identifying regions of the image to highlight                                                      |
+| tag            | String  |  optional  | The tag to add when in `select` mode                                                                           |
+| liked          | Boolean |  optional  | Task liked (see the viewer property `show-like`)                                                               |
+| classification | String  |  optional  | A SpecificResource to classify the target as (e.g. [foaf:Person](http://xmlns.com/foaf/spec/#term_Person))     |
+| complete       | Boolean |  optional  | Mark the task as complete                                                                                      |
 
 ## Form properties
 
 In `transcribe` mode the form can be configured with the following properties.
 
-| Property        | Type    | Attributes  | Description                                                            |
-|-----------------|---------|-------------|------------------------------------------------------------------------|
-| model           | Object  |             | See [vue-form-generator](https://github.com/icebob/vue-form-generator) |
-| schema          | Object  |             | See [vue-form-generator](https://github.com/icebob/vue-form-generator) |
-| classifications | Object  | \<optional> | A SpecificResource IRI for each model key                              |
-| highlights      | Object  | \<optional> | A region to highlight for each model key                               |
+| Property        | Type    | Attributes | Description                                                            |
+|-----------------|---------|------------|------------------------------------------------------------------------|
+| model           | Object  |            | See [vue-form-generator](https://github.com/icebob/vue-form-generator) |
+| schema          | Object  |            | See [vue-form-generator](https://github.com/icebob/vue-form-generator) |
+| classifications | Object  |  optional  | A SpecificResource IRI for each model key                              |
+| highlights      | Object  |  optional  | A region to highlight for each model key                               |
 
-## Navigation
+## Navigation Properties
 
 Additional navigation links (for example, for the rest of your website) can be
 passed to the viewer via the `navigation` property. These links will be appended

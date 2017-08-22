@@ -1,7 +1,17 @@
 # Summary
 
 * [Introduction](README.md)
+  * [Installation](README.md#installation)
+  * [Usage](README.md#usage)
+  * [Development](README.md#development)
+  * [Testing](README.md#testing)
 * [Configuration](configuration.md)
+  * [Viewer Properties](configuration.md#viewer_properties)
+  * [Task Properties](configuration.md#task_properties)
+  * [Form Properties](configuration.md#form_properties)
+  * [Navigation Properties](configuration.md#navigation_properties)
 * [Notifications](notifications.md)
 * [Events](events.md)
-* [Modes](modes.md)
+* [Annotation Modes](/modes/README.md)
+  * [Select Mode](/modes/select.md)
+  * [Transcribe Mode](/modes/transcribe.md)
