@@ -82,6 +82,10 @@
 
       <div :id="viewerOpts.id"></div>
 
+      <transition name="fade">
+        <div id="viewer-disabled-overlay" v-if="viewerDisabled"></div>
+      </transition>
+
     </div>
 
     <task-sidebar
@@ -90,8 +94,11 @@
       :showNote="showNote"
       :commentAnnotation="commentAnnotation"
       :disableComplete="disableComplete"
+      :confirmOnSubmit="confirmOnSubmit"
       @noteupdated="updateNote"
-      @submit="submitTask">
+      @submit="submitTask"
+      @disableviewer="viewerDisabled = true"
+      @enableviewer="viewerDisabled = false">
 
       <select-sidebar-item
         v-if="currentTask.mode === 'select'"
@@ -186,6 +193,7 @@ export default {
       showHelpModal: false,
       showBrowseModal: false,
       showNavigationSidebar: false,
+      viewerDisabled: false,
       tasks: [],
       currentTask: null
     }
@@ -271,6 +279,10 @@ export default {
     navigation: {
       type: Array,
       default: []
+    },
+    confirmOnSubmit: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -797,6 +809,14 @@ export default {
   flex: 1 1 auto;
 }
 
+#viewer-disabled-overlay {
+  z-index: 100;
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+  position: absolute;
+  height: 100%;
+}
+
 #lv-browse-next,
 #lv-browse-previous {
   margin: 1rem;
@@ -842,5 +862,13 @@ export default {
     left: calc(50vw - 200px);
     width: 100%;
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 400ms ease;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>
