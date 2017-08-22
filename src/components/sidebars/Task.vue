@@ -52,7 +52,7 @@
             <button
               :disabled="disableComplete && task.complete"
               class="btn btn-red"
-              @click="showConfirmButtons = false">
+              @click="hideConfirm()">
               Cancel
             </button>
             <button
@@ -150,13 +150,27 @@ export default {
      */
     submit (confirmed) {
       if (this.confirmOnSubmit && confirmed !== true) {
-        this.showConfirmButtons = true
-        this.$emit('disableviewer')
+        this.showConfirm()
       } else {
+        this.hideConfirm()
         this.$emit('submit', this.task)
-        this.$emit('enableviewer')
-        this.showConfirmButtons = false
       }
+    },
+
+    /**
+     * Show confirm buttons and emit disableviewer.
+     */
+    showConfirm () {
+      this.$emit('disableviewer')
+      this.showConfirmButtons = true
+    },
+
+    /**
+     * Hide confirm buttons and emit enableviewer.
+     */
+    hideConfirm () {
+      this.$emit('enableviewer')
+      this.showConfirmButtons = false
     }
   }
 }

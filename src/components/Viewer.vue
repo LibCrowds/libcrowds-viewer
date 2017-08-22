@@ -82,6 +82,8 @@
 
       <div :id="viewerOpts.id"></div>
 
+      <div id="viewer-disabled-overlay" v-if="viewerDisabled"></div>
+
     </div>
 
     <task-sidebar
@@ -92,7 +94,9 @@
       :disableComplete="disableComplete"
       :confirmOnSubmit="confirmOnSubmit"
       @noteupdated="updateNote"
-      @submit="submitTask">
+      @submit="submitTask"
+      @disableviewer="viewerDisabled = true"
+      @enableviewer="viewerDisabled = false">
 
       <select-sidebar-item
         v-if="currentTask.mode === 'select'"
@@ -187,6 +191,7 @@ export default {
       showHelpModal: false,
       showBrowseModal: false,
       showNavigationSidebar: false,
+      viewerDisabled: false,
       tasks: [],
       currentTask: null
     }
@@ -800,6 +805,14 @@ export default {
 
 #lv-viewer-container {
   flex: 1 1 auto;
+}
+
+#viewer-disabled-overlay {
+  z-index: 100;
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+  position: absolute;
+  height: 100%;
 }
 
 #lv-browse-next,
