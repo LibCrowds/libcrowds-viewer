@@ -25,14 +25,32 @@ Use it in your templates \(minimum configuration options shown\).
 
 ```js
 <libcrowds-viewer
-  :task-opts="[{ 
-    mode: 'select', 
-    imgInfoUri: 'http://www.example.org/image-service/abcd1234/info.json' 
+  :task-opts="[{
+    mode: 'select',
+    imgInfoUri: 'http://www.example.org/image-service/abcd1234/info.json'
   }]">
 </libcrowds-viewer>
 ```
 
-## 
+## Development
+
+``` bash
+# install dependencies
+npm install
+
+# serve demo at localhost:8080
+npm run demo:dev
+
+# deploy to gh-pages (rights permitting)
+npm run demo:deploy
+```
+
+## Testing
+
+```
+# test
+npm run test
+```
 
 
 

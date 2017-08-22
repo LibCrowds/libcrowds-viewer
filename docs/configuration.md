@@ -58,3 +58,14 @@ In `transcribe` mode the form can be configured with the following properties.
 | schema          | Object  |             | See [vue-form-generator](https://github.com/icebob/vue-form-generator) |
 | classifications | Object  | \<optional> | A SpecificResource IRI for each model key                              |
 | highlights      | Object  | \<optional> | A region to highlight for each model key                               |
+
+## Navigation
+
+Additional navigation links (for example, for the rest of your website) can be
+passed to the viewer via the `navigation` property. These links will be appended
+to a collapsible sidebar toggled via a 'hamburger' button.
+
+| Property | Type   | Description          |
+|----------|--------|----------------------|
+| label    | String | A label for the link |
+| url      | String | The link url         |
