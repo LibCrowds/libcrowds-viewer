@@ -82,7 +82,9 @@
 
       <div :id="viewerOpts.id"></div>
 
-      <div id="viewer-disabled-overlay" v-if="viewerDisabled"></div>
+      <transition name="fade">
+        <div id="viewer-disabled-overlay" v-if="viewerDisabled"></div>
+      </transition>
 
     </div>
 
@@ -860,5 +862,13 @@ export default {
     left: calc(50vw - 200px);
     width: 100%;
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 400ms ease;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>
