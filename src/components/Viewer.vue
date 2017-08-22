@@ -271,6 +271,10 @@ export default {
     navigation: {
       type: Array,
       default: []
+    },
+    confirmOnSubmit: {
+      type: Boolean,
+      default: false
     }
   },
 
