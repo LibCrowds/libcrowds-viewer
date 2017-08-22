@@ -1,8 +1,10 @@
 # Summary
 
-* [Introduction](README.md)
-* [Configuration](/configuration.md)
+* [Introduction](/docs/README.md)
+* [Configuration](/docs/configuration.md)
 * [Notifications](/docs/notifications.md)
+* [Events](/docs/events.md)
+* [Modes](/docs/modes.md)
 
 
 
