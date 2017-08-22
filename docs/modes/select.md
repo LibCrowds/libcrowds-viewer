@@ -31,7 +31,7 @@ One of the following annotations will be emitted, depending on the `annoType` se
   ],
   "id": "d008efa2-42e5-494e-b463-c7b9b6744b67",
   "type": "Annotation",
-  "motivation": "painting",
+  "motivation": "tagging",
   "created": "2017-07-16T00:44:28.454Z",
   "generated": "2017-07-16T00:44:28.454Z",
   "creator": {
