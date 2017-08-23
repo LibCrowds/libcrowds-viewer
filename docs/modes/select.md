@@ -17,11 +17,7 @@ Note that the `tag` property is required when in `select` mode.
 }
 ```
 
-### Example annotations
-
-One of the following annotations will be emitted, depending on the `annoType` set in the task options.
-
-#### IIIF Presentation API v3
+### Example annotation
 
 ```jsonld
 {

@@ -42,11 +42,8 @@ Note that the `form` task property is required when in `transcribe` mode. The `t
 }
 ```
 
-### Example annotations
+### Example annotation
 
-One of the following annotations will be emitted, depending on the `annoType` set in the task options.
-
-#### IIIF Presentation API v3
 
 ```jsonld
 {
