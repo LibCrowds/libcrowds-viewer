@@ -750,6 +750,7 @@ export default {
         this.loadTask(newTask)
       } else {
         this.viewer.close()
+        console.log(tileSource)
         this.viewer.open({
           tileSource: newTask.imgInfoUri,
           success: () => this.loadTask(newTask)
