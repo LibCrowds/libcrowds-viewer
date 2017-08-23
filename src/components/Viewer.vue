@@ -706,13 +706,11 @@ export default {
 
   watch: {
     currentTask: function (newTask, oldTask) {
-      console.log(newTask, oldTask)
       if (oldTask && oldTask.equals(newTask)) {
         this.viewer.clearOverlays()
         this.loadTask(newTask)
       } else {
         this.viewer.close()
-        console.log('tilesource', newTask.tileSource)
         this.viewer.open({
           tileSource: newTask.tileSource,
           success: () => this.loadTask(newTask)
