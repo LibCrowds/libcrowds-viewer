@@ -157,7 +157,7 @@ import TranscribeSidebarItem from '@/components/sidebars/items/Transcribe'
 import Selector from '@/components/Selector'
 import Task from '@/model/Task'
 import Annotator from '@/model/Annotator'
-import extractRectFromImageUri from '@/utils/extractRectFromImageUri'
+import getRectFromFragment from '@/utils/getRectFromFragment'
 import toggleFullScreen from '@/utils/toggleFullScreen'
 import drawOverlay from '@/utils/drawOverlay'
 import deleteOverlay from '@/utils/deleteOverlay'
@@ -370,7 +370,7 @@ export default {
      */
     drawSelectionOverlay (task, anno) {
       const vp = this.viewer.viewport
-      const imgRect = extractRectFromImageUri(anno.target.selector.value)
+      const imgRect = getRectFromFragment(anno.target.selector.value)
       const vpRect = vp.imageToViewportRectangle(imgRect)
       const overlay = drawOverlay(this.viewer, anno.id, vpRect, 'selection')
       overlay.addEventListener('click', (evt) => {
@@ -573,7 +573,7 @@ export default {
     editTag (task, id) {
       const vp = this.viewer.viewport
       const anno = this.annotator.getAnnotation(task, id)
-      const imgRect = extractRectFromImageUri(anno.target.selector.value)
+      const imgRect = getRectFromFragment(anno.target.selector.value)
       const vpRect = vp.imageToViewportRectangle(imgRect)
       const rect = new OpenSeadragon.Rect(
         vpRect.x,

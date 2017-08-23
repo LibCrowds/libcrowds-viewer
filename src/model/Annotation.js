@@ -97,7 +97,7 @@ class Annotation {
    * @param {String} value
    *   A plain text value.
    * @param {String} fragment
- *   The media fragment selector value (see https://www.w3.org/TR/media-frags/).
+   *   The media fragment selector value (see https://www.w3.org/TR/media-frags/).
    */
   addTag (value, fragment = null) {
     if (fragment) {

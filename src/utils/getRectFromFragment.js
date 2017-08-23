@@ -2,13 +2,11 @@ import OpenSeadragon from 'openseadragon'
 
 /**
  * Return a rectangle object from an IIIF image URI.
- * @param {String} imageUri
- *   The image URI.
+ * @param {String} fragment
+ *   The media fragment selector value (see https://www.w3.org/TR/media-frags/).
  */
-export default function (imageUri) {
-  const uriParts = imageUri.split('/')
-  const regionStr = uriParts[uriParts.length - 4]
-  const regionParts = regionStr.split(',')
+export default function (fragment) {
+  const regionParts = fragment.split('=')[1].split(',')
   return new OpenSeadragon.Rect(
     Number(regionParts[0]),
     Number(regionParts[1]),
