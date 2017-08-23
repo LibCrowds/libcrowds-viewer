@@ -146,12 +146,14 @@ export default {
           callback: () => {
             let clipboard = new Clipboard('#lv-share-btn', {
               text: (trigger) => {
-                console.log(trigger)
                 trigger.setAttribute('aria-label', 'URL Copied!')
                 trigger.addEventListener('mouseleave', () => {
                   trigger.setAttribute('aria-label', tooltip)
                   clipboard.destroy()
                 })
+                if (this.task.shareUrl) {
+                  return this.task.shareUrl
+                }
                 return getImageUri({
                   imgInfo: this.task.imgInfo
                 })

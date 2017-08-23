@@ -49,6 +49,7 @@ Tasks are created from the `task-opts` passed to the viewer, which each have the
 | liked          | Boolean |  optional  | Task liked (see the viewer property `show-like`)                                                               |
 | classification | String  |  optional  | A SpecificResource to classify the target as (e.g. [foaf:Person](http://xmlns.com/foaf/spec/#term_Person))     |
 | complete       | Boolean |  optional  | Mark the task as complete                                                                                      |
+| shareUrl       | String  |  optional  | URL for the 'share' button (if not given the `tileSource` url will be used)                                    |
 
 ## Forms
 

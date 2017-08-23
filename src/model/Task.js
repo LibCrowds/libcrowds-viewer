@@ -20,7 +20,8 @@ class Task {
     highlights = [],
     liked = false,
     annotations = [],
-    complete = false
+    complete = false,
+    shareUrl = null
   }) {
     this.mode = mode
     this.id = id
@@ -35,6 +36,7 @@ class Task {
     this.liked = liked
     this.annotations = annotations
     this.complete = complete
+    this.shareUrl = shareUrl
 
     this.imgInfo = imgInfo
 
