@@ -20,8 +20,8 @@ import errors from '@/utils/errors'
  */
 class TranscribeAnnotation extends Annotation {
   constructor ({
-    transcription = errors.throwIfMissing(),
-    tag = errors.throwIfMissing(),
+    transcription = errors.throwIfMissing('transcription'),
+    tag = errors.throwIfMissing('tag'),
     fragment = null,
     creator = null,
     generator = null,

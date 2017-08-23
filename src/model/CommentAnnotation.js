@@ -14,8 +14,8 @@ import errors from '@/utils/errors'
  */
 class CommentAnnotation extends Annotation {
   constructor ({
-    imgInfo = errors.throwIfMissing(),
-    comment = errors.throwIfMissing(),
+    imgInfo = errors.throwIfMissing('imgInfo'),
+    comment = errors.throwIfMissing('comment'),
     creator = null,
     generator = null
   }) {

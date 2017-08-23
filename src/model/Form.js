@@ -5,8 +5,8 @@ import errors from '@/utils/errors'
  */
 class Form {
   constructor ({
-    model = errors.throwIfMissing(),
-    schema = errors.throwIfMissing(),
+    model = errors.throwIfMissing('model'),
+    schema = errors.throwIfMissing('schema'),
     classification = {},
     highlights = {}
   }) {

@@ -18,9 +18,9 @@ import errors from '@/utils/errors'
  */
 class SelectAnnotation extends Annotation {
   constructor ({
-    imgInfo = errors.throwIfMissing(),
-    tag = errors.throwIfMissing(),
-    fragment = errors.throwIfMissing(),
+    imgInfo = errors.throwIfMissing('imgInfo'),
+    tag = errors.throwIfMissing('tag'),
+    fragment = errors.throwIfMissing('fragment'),
     creator = null,
     generator = null,
     classification = null

@@ -6,8 +6,8 @@ import errors from '@/utils/errors'
  */
 class Task {
   constructor ({
-    mode = errors.throwIfMissing(),
-    tileSource = errors.throwIfMissing(),
+    mode = errors.throwIfMissing('mode'),
+    tileSource = errors.throwIfMissing('tileSource'),
     id = null,
     manifestUri = '',
     objective = '',

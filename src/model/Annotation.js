@@ -22,8 +22,8 @@ import errors from '@/utils/errors'
  */
 class Annotation {
   constructor ({
-    motivation = errors.throwIfMissing(),
-    imgInfo = errors.throwIfMissing(),
+    motivation = errors.throwIfMissing('motivation'),
+    imgInfo = errors.throwIfMissing('imgInfo'),
     creator = null,
     generator = null
   }) {
