@@ -6,9 +6,12 @@
         :key="tag.id"
         @mouseover="highlightOverlay(tag.id, true)"
         @mouseleave="highlightOverlay(tag.id, false)">
-        <div class="thumbnail-container">
-          <img :src="tag.target.selector.value">
+
+        <div
+          class="thumbnail-viewer">
+          {{ getThumbnailViewer(tag) }}
         </div>
+
         <div
           v-if="!(disableComplete && task.complete)"
           class="buttons">
@@ -30,11 +33,13 @@
 </template>
 
 <script>
+import OpenSeadragon from 'openseadragon'
 import Task from '@/model/Task'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/pencil'
 import highlightOverlay from '@/utils/highlightOverlay'
+import getRectFromFragment from '@/utils/getRectFromFragment'
 
 export default {
   props: {
@@ -49,6 +54,10 @@ export default {
     disableComplete: {
       type: Boolean,
       required: true
+    },
+    imageUrl: {
+      type: String,
+      required: true
     }
   },
 
@@ -57,13 +66,46 @@ export default {
   },
 
   methods: {
-    highlightOverlay,
+    /**
+     * Edit a selection.
+     * @param {Object} tag
+     *   The annotation.
+     */
     editTag (tag) {
       this.$emit('edit', this.task, tag.id)
     },
+
+    /**
+     * Delete a selection.
+     * @param {Object} tag
+     *   The annotation.
+     */
     deleteTag (tag) {
       this.$emit('delete', this.task, tag.id)
-    }
+    },
+
+    /**
+     * Return an OpenSeadragon Viewer containing the clipped image.
+     * @param {Object} tag
+     *   The annotation.
+     */
+    getThumbnailViewer (tag) {
+      const rect = getRectFromFragment(tag.target.selector.value)
+      console.log(rect)
+      let viewerDiv = document.createElement('div')
+      viewerDiv.id = `viewer-${tag.id}`
+      /* eslint-disable no-new */
+      new OpenSeadragon.Viewer({
+        element: viewerDiv
+      })
+      console.log(viewerDiv)
+      return viewerDiv
+    },
+
+    /**
+     * Highlight an overlay.
+     */
+    highlightOverlay
   }
 }
 </script>
@@ -120,18 +162,13 @@ export default {
     }
   }
 
-  .thumbnail-container {
+  .thumbnail-viewer {
     align-items: center;
     justify-content: center;
     display: flex;
     flex: 1 1 auto;
     height: 50px;
-
-    img {
-      flex: none;  /* IE fix */
-      max-width: 100%;
-      max-height: 100%;
-    }
+    overflow: hidden;
   }
 }
 </style>

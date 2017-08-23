@@ -1,7 +1,7 @@
 import OpenSeadragon from 'openseadragon'
 
 /**
- * Return a rectangle object from an IIIF image URI.
+ * Return a rectangle object from a media fragment.
  * @param {String} fragment
  *   The media fragment selector value (see https://www.w3.org/TR/media-frags/).
  */
