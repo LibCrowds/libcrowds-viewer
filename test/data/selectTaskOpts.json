@@ -1,6 +1,7 @@
 {
   "mode": "select",
   "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+  "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x00007e",
   "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
   "tag": "title",
   "classification": "http://purl.org/dc/terms/title",

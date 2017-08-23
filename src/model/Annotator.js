@@ -218,6 +218,7 @@ class Annotator {
     let anno = this._getFormFieldAnnotation(task, key)
     if (anno === null) {
       anno = new TranscribeAnnotation({
+        target: task.target,
         transcription: transcription,
         tag: key,
         creator: this.creator,
@@ -253,6 +254,7 @@ class Annotator {
     let anno = this.getCommentAnnotation(task)
     if (anno === null) {
       anno = new CommentAnnotation({
+        target: task.target,
         comment: comment,
         creator: this.creator,
         generator: this.generator
@@ -278,6 +280,7 @@ class Annotator {
   createSelectAnnotation (task, rect) {
     const fragment = `xywh=${rect.x},${rect.y},${rect.width},${rect.height}`
     const anno = new SelectAnnotation({
+      target: task.target,
       tag: task.tag,
       fragment: fragment,
       creator: this.creator,

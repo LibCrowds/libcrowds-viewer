@@ -39,10 +39,10 @@ Tasks are created from the `task-opts` passed to the viewer, which each have the
 |----------------|-------------------|------------|----------------------------------------------------------------------------------------------------------------|
 | mode           | String            |            | `'select'` or `'transcribe'`                                                                                   |
 | tileSource     | String or Object  |            | The tile source specifier (see [Tile Sources](configuration.md#tile-sources))                                  |
+| target         | String            |            | The target of the annotation (e.g. the canvas URI for IIIF annotations)                                        |
 | thumbnailUrl   | String            |  optional  | URL for a thumbnail image to use in the browse modal                                                           |
 | manifestUri    | String            |  optional  | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation))                                |
 | metadata       | Object            |  optional  | Metadata for the info modal (takes preference over `manifestUri`)                                              |
-| target         | String            |  optional  | Alternative source to use for the annotation target (if not given `url` will be used by default)               |
 | id             | String            |  optional  | Task identifier                                                                                                |
 | objective      | String            |  optional  | The main objective                                                                                             |
 | guidance       | String            |  optional  | Additional guidance                                                                                            |

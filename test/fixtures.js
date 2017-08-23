@@ -7,7 +7,6 @@ import SelectAnnotation from '@/model/SelectAnnotation.js'
 import CommentAnnotation from '@/model/CommentAnnotation.js'
 import Task from '@/model/Task.js'
 
-import imageInfo from './data/imageInfo.json'
 import selectTaskOpts from './data/selectTaskOpts.json'
 import transcribeTaskOpts from './data/transcribeTaskOpts.json'
 
@@ -26,7 +25,7 @@ export default {
   buildAnnotation () {
     return new Annotation({
       motivation: 'testing',
-      imgInfo: imageInfo
+      target: 'http://www.example.org/image-service/abcd1234'
     })
   },
 
@@ -36,7 +35,7 @@ export default {
   buildTranscribeAnnotation (tag = 'test') {
     return new TranscribeAnnotation({
       transcription: 'testing',
-      imgInfo: imageInfo,
+      target: 'http://www.example.org/image-service/abcd1234',
       tag: tag
     })
   },
@@ -47,7 +46,7 @@ export default {
   buildSelectAnnotation () {
     return new SelectAnnotation({
       tag: 'test',
-      imgInfo: imageInfo,
+      target: 'http://www.example.org/image-service/abcd1234',
       fragment: 'xywh=100,100,100,100'
     })
   },
@@ -58,7 +57,7 @@ export default {
   buildCommentAnnotation () {
     return new CommentAnnotation({
       comment: 'test',
-      imgInfo: imageInfo
+      target: 'http://www.example.org/image-service/abcd1234'
     })
   },
 
@@ -69,10 +68,8 @@ export default {
    */
   buildTask (mode) {
     if (mode === 'select') {
-      selectTaskOpts.imgInfo = imageInfo
       return new Task(selectTaskOpts)
     } else if (mode === 'transcribe') {
-      transcribeTaskOpts.imgInfo = imageInfo
       return new Task(transcribeTaskOpts)
     }
   },

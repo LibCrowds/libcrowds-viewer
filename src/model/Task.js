@@ -8,6 +8,7 @@ class Task {
   constructor ({
     mode = errors.throwIfMissing('mode'),
     tileSource = errors.throwIfMissing('tileSource'),
+    target = errors.throwIfMissing('target'),
     id = null,
     manifestUri = '',
     objective = '',
@@ -23,8 +24,9 @@ class Task {
     thumbnailUrl = null
   }) {
     this.mode = mode
-    this.id = id
+    this.target = target
     this.tileSource = tileSource
+    this.id = id
     this.manifestUri = manifestUri
     this.objective = objective
     this.guidance = guidance

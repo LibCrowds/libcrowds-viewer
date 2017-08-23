@@ -3,8 +3,8 @@ import errors from '@/utils/errors'
 
 /**
  * Represents a Web Annotation used for comments.
- * @param {Object} imgInfo
- *   The IIIF image info.
+ * @param {String} target
+ *   The URL of the resource being annotated
  * @param {String} comment
  *   The comment value.
  * @param {Object} creator
@@ -14,14 +14,14 @@ import errors from '@/utils/errors'
  */
 class CommentAnnotation extends Annotation {
   constructor ({
-    imgInfo = errors.throwIfMissing('imgInfo'),
+    target = errors.throwIfMissing('target'),
     comment = errors.throwIfMissing('comment'),
     creator = null,
     generator = null
   }) {
     super({
       motivation: 'commenting',
-      imgInfo: imgInfo,
+      target: target,
       creator: creator,
       generator: generator
     })

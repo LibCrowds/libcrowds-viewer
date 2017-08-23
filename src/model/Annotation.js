@@ -13,8 +13,8 @@ import errors from '@/utils/errors'
  * @param {String} motivation
  *   A motivation from the following section of the spec.
  *   https://www.w3.org/TR/annotation-model/#motivation-and-purpose
- * @param {Object} imgInfo
- *   The IIIF image info.
+ * @param {String} target
+ *   The URL of the resource being annotated
  * @param {Object} creator
  *   The Annotation creator.
  * @param {Object} generator
@@ -23,25 +23,16 @@ import errors from '@/utils/errors'
 class Annotation {
   constructor ({
     motivation = errors.throwIfMissing('motivation'),
-    imgInfo = errors.throwIfMissing('imgInfo'),
+    target = errors.throwIfMissing('target'),
     creator = null,
     generator = null
   }) {
-    this['@context'] = [
-      'http://www.w3.org/ns/anno.jsonld',
-      imgInfo['context'] || imgInfo['@context']
-    ]
+    this['@context'] = 'http://www.w3.org/ns/anno.jsonld'
     this['id'] = uuid()
     this.type = 'Annotation'
     this.motivation = motivation
     this.created = new Date().toISOString()
-    this.target = {
-      id: imgInfo['id'] || imgInfo['@id'],
-      width: imgInfo.width,
-      height: imgInfo.height,
-      type: 'Image',
-      format: 'image/jpeg'
-    }
+    this.target = target
     if (creator) {
       this._setMultiItem(this, 'creator', creator)
     }
@@ -105,13 +96,17 @@ class Annotation {
    * Add a tag to the Body and set the fragement selector, if provided.
    * @param {String} value
    *   A plain text value.
-   * @param {Object} imgInfo
-   *   The IIIF image info.
    * @param {String} fragment
-   *   A fragment selector value.
+ *   The media fragment selector value (see https://www.w3.org/TR/media-frags/).
    */
-  addTag (value, imgInfo, fragment = null) {
+  addTag (value, fragment = null) {
     if (fragment) {
+      console.log(typeof this.target)
+      if (typeof this.target === 'string') {
+        this.target = {
+          source: this.target
+        }
+      }
       this.target.selector = {
         type: 'FragmentSelector',
         conformsTo: 'http://www.w3.org/TR/media-frags/',
