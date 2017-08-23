@@ -7,8 +7,8 @@ import errors from '@/utils/errors'
  *   The IIIF image info.
  * @param {String} tag
  *   Plain text value for the tag.
- * @param {String} fragmentUri
- *   The IIIF image region.
+ * @param {String} fragment
+ *   The fragment selector value.
  * @param {Object} creator
  *   The Annotation creator.
  * @param {Object} generator
@@ -20,7 +20,7 @@ class SelectAnnotation extends Annotation {
   constructor ({
     imgInfo = errors.throwIfMissing(),
     tag = errors.throwIfMissing(),
-    fragmentUri = errors.throwIfMissing(),
+    fragment = errors.throwIfMissing(),
     creator = null,
     generator = null,
     classification = null
@@ -31,7 +31,7 @@ class SelectAnnotation extends Annotation {
       creator: creator,
       generator: generator
     })
-    this.addTag(tag, imgInfo, fragmentUri)
+    this.addTag(tag, imgInfo, fragment)
     if (classification) {
       this.addClassification(classification)
     }

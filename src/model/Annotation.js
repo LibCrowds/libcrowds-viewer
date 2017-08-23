@@ -107,15 +107,15 @@ class Annotation {
    *   A plain text value.
    * @param {Object} imgInfo
    *   The IIIF image info.
-   * @param {*} fragmentURI
-   *   The IIIF image region.
+   * @param {String} fragment
+   *   A fragment selector value.
    */
-  addTag (value, imgInfo, fragmentURI = null) {
-    if (fragmentURI) {
+  addTag (value, imgInfo, fragment = null) {
+    if (fragment) {
       this.target.selector = {
         type: 'FragmentSelector',
-        value: fragmentURI,
-        conformsTo: imgInfo.protocol
+        conformsTo: 'http://www.w3.org/TR/media-frags/',
+        value: fragment
       }
     }
 
@@ -130,8 +130,6 @@ class Annotation {
    * Add a description to the Body.
    * @param {String} value
    *   A plain text value.
-   * @param {*} fragmentURI
-   *   The IIIF image region.
    */
   addDescription (value) {
     this._setMultiItem(this, 'body', {

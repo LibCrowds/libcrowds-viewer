@@ -9,7 +9,8 @@
           @click="onTaskClicked(task)">
           <figure v-if="task !== undefined">
             <img
-              :src="task.thumbnailUri"
+              v-if="task.thumbnailUrl"
+              :src="task.thumbnailUrl"
               :alt='`Task ${index} thumbnail`'>
             <figcaption
               v-if="!task.complete || !disableComplete">

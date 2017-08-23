@@ -1,6 +1,6 @@
 # Configuration
 
-The viewer provides a range of flexible configuration options.
+LibCrowds Viewer provides a range of configuration options that are passed as properties, most of which are optional but allow for more flexible implementations where required.
 
 ## Viewer
 
@@ -35,21 +35,30 @@ All of the following properties, apart from `task-opts` are optional.
 
 Tasks are created from the `task-opts` passed to the viewer, which each have the following properties.
 
-| Property       | Type    | Attributes | Description                                                                                                    |
-|----------------|---------|------------|----------------------------------------------------------------------------------------------------------------|
-| mode           | String  |            | `'select'` or `'transcribe'`                                                                                   |
-| imgInfoUri     | String  |            | Image info URI (see the [IIIF Image API](http://iiif.io/api/image/2.1/#image-information-request-uri-syntax/)) |
-| manifestUri    | String  |  optional  | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation/2.1/#resource-structure))        |
-| id             | String  |  optional  | Task identifier                                                                                                |
-| objective      | String  |  optional  | The main objective                                                                                             |
-| guidance       | String  |  optional  | Additional guidance                                                                                            |
-| form           | Object  |  optional  | Form properties (see [Forms](configuration.md#forms))                                                          |
-| highlights     | Array   |  optional  | Coordinates identifying regions of the image to highlight                                                      |
-| tag            | String  |  optional  | The tag to add when in `select` mode                                                                           |
-| liked          | Boolean |  optional  | Task liked (see the viewer property `show-like`)                                                               |
-| classification | String  |  optional  | A SpecificResource to classify the target as (e.g. [foaf:Person](http://xmlns.com/foaf/spec/#term_Person))     |
-| complete       | Boolean |  optional  | Mark the task as complete                                                                                      |
-| shareUrl       | String  |  optional  | URL for the 'share' button (if not given the `tileSource` url will be used)                                    |
+| Property       | Type              | Attributes | Description                                                                                                    |
+|----------------|-------------------|------------|----------------------------------------------------------------------------------------------------------------|
+| mode           | String            |            | `'select'` or `'transcribe'`                                                                                   |
+| tileSource     | String or Object  |            | The tile source specifier (see [Tile Sources](configuration.md#tile-sources))                                  |
+| thumbnailUrl   | String            |  optional  | URL for a thumbnail image to use in the browse modal                                                           |
+| manifestUri    | String            |  optional  | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation))                                |
+| metadata       | Object            |  optional  | Metadata for the info modal (takes preference over `manifestUri`)                                              |
+| target         | String            |  optional  | Alternative source to use for the annotation target (if not given `url` will be used by default)               |
+| id             | String            |  optional  | Task identifier                                                                                                |
+| objective      | String            |  optional  | The main objective                                                                                             |
+| guidance       | String            |  optional  | Additional guidance                                                                                            |
+| form           | Object            |  optional  | Form properties (see [Forms](configuration.md#forms))                                                          |
+| highlights     | Array             |  optional  | Coordinates identifying regions of the image to highlight                                                      |
+| tag            | String            |  optional  | The tag to add when in `select` mode                                                                           |
+| liked          | Boolean           |  optional  | Task liked (see the viewer property `show-like`)                                                               |
+| classification | String            |  optional  | A SpecificResource to classify the target as (e.g. [foaf:Person](http://xmlns.com/foaf/spec/#term_Person))     |
+| complete       | Boolean           |  optional  | Mark the task as complete                                                                                      |
+| shareUrl       | String            |  optional  | URL for the 'share' button (if not given the `tileSource` url will be used)                                    |
+
+## Tile Source
+
+A String implies a URL used to determine the tileSource implementation based on the file extension of the URL. For example, "http://www.example.org/image-service/abcd1234/info.json" would be loaded as a IIIF tile source.
+
+An Object implies an inline configuration which has a single property sufficient for being able to determine tileSource implementation. See the [OpenSeadragon docs](https://openseadragon.github.io/#examples-and-features) for examples of how to implement custom tile sources.
 
 ## Forms
 

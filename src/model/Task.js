@@ -1,5 +1,4 @@
 import Form from '@/model/Form'
-import getImageUri from '@/utils/getImageUri'
 import errors from '@/utils/errors'
 
 /**
@@ -8,8 +7,7 @@ import errors from '@/utils/errors'
 class Task {
   constructor ({
     mode = errors.throwIfMissing(),
-    imgInfoUri = errors.throwIfMissing(),
-    imgInfo = errors.throwIfMissing(),
+    tileSource = errors.throwIfMissing(),
     id = null,
     manifestUri = '',
     objective = '',
@@ -21,11 +19,12 @@ class Task {
     liked = false,
     annotations = [],
     complete = false,
-    shareUrl = null
+    shareUrl = null,
+    thumbnailUrl = null
   }) {
     this.mode = mode
     this.id = id
-    this.imgInfoUri = imgInfoUri
+    this.tileSource = tileSource
     this.manifestUri = manifestUri
     this.objective = objective
     this.guidance = guidance
@@ -37,13 +36,7 @@ class Task {
     this.annotations = annotations
     this.complete = complete
     this.shareUrl = shareUrl
-
-    this.imgInfo = imgInfo
-
-    this.thumbnailUri = getImageUri({
-      imgInfo: this.imgInfo,
-      size: '256,'
-    })
+    this.thumbnailUrl = thumbnailUrl
 
     // Validate
     const validModes = ['select', 'transcribe']
@@ -68,6 +61,14 @@ class Task {
    */
   updateForm (form) {
     this.form = form
+  }
+
+  /**
+   * Return true if tihs task is the same as another, false otherwise.
+   * @param {Task} task
+   */
+  equals (task) {
+    return JSON.stringify(this) === JSON.stringify(task)
   }
 }
 

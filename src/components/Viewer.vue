@@ -468,11 +468,12 @@ export default {
      *   The task.
      */
     getRelatedTasks (task) {
-      return this.tasks.filter((anotherTask) => {
+      return this.tasks.filter((otherTask) => {
+        const otherSourceStr = JSON.stringify(otherTask.tileSource)
         return (
-          anotherTask !== task &&
-          anotherTask !== undefined &&
-          anotherTask.imgInfoUri === task.imgInfoUri
+          otherTask !== task &&
+          otherTask !== undefined &&
+          otherSourceStr === JSON.stringify(task.tileSource)
         )
       })
     },
@@ -662,53 +663,13 @@ export default {
     },
 
     /**
-     * Promise to create a task.
-     * @param {String} taskOpts
-     *   The options for a task.
+     * Load tasks from task options.
      */
-    fetchTask (taskOpts) {
-      return new Promise((resolve, reject) => {
-        fetch(taskOpts.imgInfoUri, {
-          method: 'get'
-        }).then((response) => {
-          return response.json()
-        }).then((json) => {
-          taskOpts.imgInfo = json
-          resolve(new Task(taskOpts))
-        }).catch(function (err) {
-          reject(new Error(`Could not retrieve image info: ${err}`))
-        })
+    loadTasks () {
+      this.tasks = this.taskOpts.map(opts => {
+        return new Task(opts)
       })
-    },
-
-    /**
-     * Generate tasks from task options.
-     */
-    generateTasks () {
-      // Create an empty tasks array to later maintain order
-      this.tasks = Array.apply(null, Array(this.taskOpts.length)).map(() => {})
-      const taskPromises = this.taskOpts.map((opts, index) => {
-        // Don't modify the original prop
-        const optsCopy = JSON.parse(JSON.stringify(opts))
-
-        const taskPromise = this.fetchTask(optsCopy)
-        taskPromise.then(task => {
-          // Slot loaded tasks into their place in the array
-          this.tasks[index] = task
-          if (index === 0) {
-            // Set the first task as current once its loaded
-            this.setCurrentTask(task)
-          }
-        })
-        return taskPromise
-      })
-
-      // Do things after all tasks are loaded
-      Promise.all(taskPromises).then(tasks => {
-        if (this.showRelatedTasks) {
-          this.showAllRelatedTasks(this.tasks[0])
-        }
-      })
+      this.setCurrentTask(this.tasks[0])
     },
 
     /**
@@ -745,21 +706,22 @@ export default {
 
   watch: {
     currentTask: function (newTask, oldTask) {
-      if (oldTask && oldTask.imgInfoUri === newTask.imgInfoUri) {
+      console.log(newTask, oldTask)
+      if (oldTask && oldTask.equals(newTask)) {
         this.viewer.clearOverlays()
         this.loadTask(newTask)
       } else {
         this.viewer.close()
-        console.log(tileSource)
+        console.log('tilesource', newTask.tileSource)
         this.viewer.open({
-          tileSource: newTask.imgInfoUri,
+          tileSource: newTask.tileSource,
           success: () => this.loadTask(newTask)
         })
       }
     },
     taskOpts: {
       handler: function () {
-        this.generateTasks()
+        this.loadTasks()
       },
       deep: true
     }
@@ -767,7 +729,7 @@ export default {
 
   mounted () {
     this.viewer = new OpenSeadragon.Viewer(this.viewerOpts)
-    this.generateTasks()
+    this.loadTasks()
     this.setupMessageBus()
     window.addEventListener('beforeunload', this.onBeforeUnload)
   },

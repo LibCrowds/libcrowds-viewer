@@ -9,7 +9,7 @@ Note that the `tag` property is required when in `select` mode.
 ```json
 {
   "mode": "select",
-  "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+  "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
   "tag": "title",
   "objective": "Tag all of the titles",
   "guidance": "Draw a box around each title, including any subtitles"

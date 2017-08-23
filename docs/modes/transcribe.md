@@ -10,7 +10,7 @@ Note that the `form` task property is required when in `transcribe` mode. The `t
 ```json
 {
   "mode": "transcribe",
-  "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+  "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
   "objective": "Transcribe the title",
   "guidance": "Transcribe the title exactly as shown on the page.",
   "form": {

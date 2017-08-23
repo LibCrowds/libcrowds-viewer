@@ -30,7 +30,6 @@ import 'vue-awesome/icons/eye'
 import 'vue-awesome/icons/bars'
 import 'vue-awesome/icons/comments'
 import Task from '@/model/Task'
-import getImageUri from '@/utils/getImageUri'
 import ControlButton from '@/components/controls/ControlButton'
 
 export default {
@@ -151,12 +150,7 @@ export default {
                   trigger.setAttribute('aria-label', tooltip)
                   clipboard.destroy()
                 })
-                if (this.task.shareUrl) {
-                  return this.task.shareUrl
-                }
-                return getImageUri({
-                  imgInfo: this.task.imgInfo
-                })
+                return this.task.shareUrl
               }
             })
           }

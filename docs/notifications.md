@@ -22,7 +22,7 @@ export default {
       taskOpts: [
         {
           mode: 'select',
-          imgInfoUri: 'http://www.example.org/image-service/abcd1234/info.json'
+          tileSource: 'http://www.example.org/image-service/abcd1234/info.json'
         }
       ]
     }

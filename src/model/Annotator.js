@@ -1,7 +1,6 @@
 import TranscribeAnnotation from '@/model/TranscribeAnnotation'
 import SelectAnnotation from '@/model/SelectAnnotation'
 import CommentAnnotation from '@/model/CommentAnnotation'
-import getImageUri from '@/utils/getImageUri'
 
 /**
  * Represents an annotator responsible for managing all task annotations.
@@ -219,7 +218,6 @@ class Annotator {
     let anno = this._getFormFieldAnnotation(task, key)
     if (anno === null) {
       anno = new TranscribeAnnotation({
-        imgInfo: task.imgInfo,
         transcription: transcription,
         tag: key,
         creator: this.creator,
@@ -255,7 +253,6 @@ class Annotator {
     let anno = this.getCommentAnnotation(task)
     if (anno === null) {
       anno = new CommentAnnotation({
-        imgInfo: task.imgInfo,
         comment: comment,
         creator: this.creator,
         generator: this.generator
@@ -279,14 +276,10 @@ class Annotator {
    *   The image rectangle.
    */
   createSelectAnnotation (task, rect) {
-    const imageUri = getImageUri({
-      imgInfo: task.imgInfo,
-      region: rect
-    })
+    const fragment = `xywh=${rect.x},${rect.y},${rect.width},${rect.height}`
     const anno = new SelectAnnotation({
-      imgInfo: task.imgInfo,
       tag: task.tag,
-      fragmentUri: imageUri,
+      fragment: fragment,
       creator: this.creator,
       generator: this.generator,
       classification: task.classification

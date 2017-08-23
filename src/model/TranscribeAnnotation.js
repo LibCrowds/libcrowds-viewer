@@ -9,8 +9,8 @@ import errors from '@/utils/errors'
  *   The transcription.
  * @param {String} tag
  *   The tag value.
- * @param {String} fragmentURI
- *   An IIIF image region.
+ * @param {String} fragment
+ *   A fragment selector value.
  * @param {Object} creator
  *   The Annotation creator.
  * @param {Object} generator
@@ -20,22 +20,20 @@ import errors from '@/utils/errors'
  */
 class TranscribeAnnotation extends Annotation {
   constructor ({
-    imgInfo = errors.throwIfMissing(),
     transcription = errors.throwIfMissing(),
     tag = errors.throwIfMissing(),
-    fragmentURI = null,
+    fragment = null,
     creator = null,
     generator = null,
     classification = null
   }) {
     super({
       motivation: 'describing',
-      imgInfo: imgInfo,
       creator: creator,
       generator: generator
     })
     this.addDescription(transcription)
-    this.addTag(tag, fragmentURI)
+    this.addTag(tag, fragment)
     if (classification) {
       this.addClassification(classification)
     }

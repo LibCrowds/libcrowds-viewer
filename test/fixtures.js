@@ -48,7 +48,7 @@ export default {
     return new SelectAnnotation({
       tag: 'test',
       imgInfo: imageInfo,
-      fragmentUri: 'http://example.com/image'
+      fragment: 'xywh=100,100,100,100'
     })
   },
 
