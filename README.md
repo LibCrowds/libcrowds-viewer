@@ -8,4 +8,4 @@
 
 [**DEMO**](https://libcrowds.github.io/libcrowds-viewer/)
 
-See the [LibCrowds Viewer documentation](https://libcrowds.gitbooks.io/libcrowds-viewer-documentation/content/) for full details of installation, configuration and usage.
+See the [LibCrowds Viewer documentation](https://libcrowds.gitbooks.io/libcrowds-viewer-docs/content/) for full details of installation, configuration and usage.

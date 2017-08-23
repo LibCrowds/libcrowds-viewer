@@ -8,7 +8,7 @@ All of the following properties, apart from `task-opts` are optional.
 
 | Property              | Type    | Default | Description                                                                                           |
 |-----------------------|---------|---------|-------------------------------------------------------------------------------------------------------|
-| task-opts             | Array   |         | An array of task options \(see [Tasks](configuration.md#tasks)\)                                                                              |
+| task-opts             | Array   |         | An array of task options \(see [Tasks](configuration.md#tasks)\)                                      |
 | pan-by                | Number  | 0.1     | Multiplier by which to pan                                                                            |
 | zoom-by               | Number  | 0.2     | Multiplier by which to zoom                                                                           |
 | lang                  | String  | 'en'    | Language for manifest metadata \(where available\)                                                    |
@@ -26,8 +26,8 @@ All of the following properties, apart from `task-opts` are optional.
 | creator               | Object  | null    | The Annotation creator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\)   |
 | generator             | Object  | null    | The Annotation generator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\) |
 | next-on-submit        | Object  | true    | Move to the next task on after submission                                                             |
-| messageBus            | Object  | null    | Message bus used for notifications \(see [Notifications](notifications.md)\)                           |
-| navigation            | Array   | null    | Additional navigation links \(see [Navigation](configuration.md#navigation)\)   |
+| messageBus            | Object  | null    | Message bus used for notifications \(see [Notifications](notifications.md)\)                          |
+| navigation            | Array   | null    | Additional navigation links \(see [Navigation](configuration.md#navigation)\)                         |
 | confirm-on-submit     | Boolean | false   | Show a confirmation box on submission                                                                 |
 
 
@@ -43,7 +43,7 @@ Tasks are created from the `task-opts` passed to the viewer, which each have the
 | id             | String  |  optional  | Task identifier                                                                                                |
 | objective      | String  |  optional  | The main objective                                                                                             |
 | guidance       | String  |  optional  | Additional guidance                                                                                            |
-| form           | Object  |  optional  | Form properties (see [Forms](configuration.md#forms))                                                                                   |
+| form           | Object  |  optional  | Form properties (see [Forms](configuration.md#forms))                                                          |
 | highlights     | Array   |  optional  | Coordinates identifying regions of the image to highlight                                                      |
 | tag            | String  |  optional  | The tag to add when in `select` mode                                                                           |
 | liked          | Boolean |  optional  | Task liked (see the viewer property `show-like`)                                                               |
