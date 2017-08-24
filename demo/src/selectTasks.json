@@ -27,23 +27,6 @@
     ]
   },
   {
-    "tag": "date",
-    "mode": "select",
-    "objective": "Tag the date",
-    "guidance": "Draw a box around the date of the highlighted performance",
-    "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
-    "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x00007e",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json",
-    "highlights": [
-      {
-        "x": 291,
-        "y": 1498,
-        "width": 1737,
-        "height": 244
-      }
-    ]
-  },
-  {
     "tag": "shelfmark",
     "mode": "select",
     "objective": "Tag the shelfmark",
