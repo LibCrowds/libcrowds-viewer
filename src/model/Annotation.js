@@ -33,14 +33,14 @@ class Annotation {
     this.motivation = motivation
     this.created = new Date().toISOString()
     this.target = target
-    if (creator) {
-      this._setMultiItem(this, 'creator', creator)
-    }
-    if (generator) {
-      this._setMultiItem(this, 'generator', generator)
-    }
     this.created = new Date().toISOString()
     this.generated = new Date().toISOString()
+    if (creator) {
+      this.creator = creator
+    }
+    if (generator) {
+      this.generator = generator
+    }
   }
 
   /**
