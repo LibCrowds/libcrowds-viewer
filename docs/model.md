@@ -2,7 +2,7 @@
 
 The annotations emitted from LibCrowds Viewer are based on the [Web Annotations data model](https://www.w3.org/TR/annotation-model/).
 
-See [Annotation Modes](/modes/README.md) for examples.
+See [Annotation Modes](/annotations/README.md) for examples.
 
 
 | Property       | Type             | Description                                                                                                                       |

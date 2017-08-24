@@ -1,4 +1,6 @@
-# Select Mode
+# Select Annotations
+
+Generate Select Annotations by setting the task options `type` to  `select`, see [Configuration](../configuration.md) for details.
 
 In select mode users can use their mouse \(or finger\) to tag areas of the image, potentially preparing them for subsequent transcription.
 
