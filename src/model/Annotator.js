@@ -261,6 +261,7 @@ class Annotator {
       anno.body.value = comment
       this.storeAnnotation(task, anno)
     }
+    return anno
   }
 
   /**
