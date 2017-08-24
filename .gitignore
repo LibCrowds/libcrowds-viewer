@@ -6,3 +6,4 @@ demo/dist/
 npm-debug.log
 yarn-error.log
 coverage/
+_book/
