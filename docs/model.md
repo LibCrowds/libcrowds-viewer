@@ -18,3 +18,69 @@ See [Annotation Modes](/modes/README.md) for examples.
 | modified       | String           | The time at which the resource was modified, after creation                                                                       |
 | target         | String           | The URL of the resource being annotated                                                                                           |
 | body           | Object           | The relationship between an Annotation and its Body                                                                               |
+
+## Bodies
+
+Annotation bodies will differ depending on task configuration, see [Configuration](configuration.md) and [Modes](modes.md) for details.
+
+### Tags
+
+Tags are used to associate some label, generally as plain text, with the target.
+
+| Property       | Type             | Description                                                                                                                       |
+|----------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| type           | String           | The type of the resource (always 'TextualBody')                                                                                   |
+| purpose        | String           | The reason for the inclusion (always 'tagging')                                                                                   |
+| value          | String           | The tag text                                                                                                                      |
+
+#### Example
+
+```json-ld
+{
+  "type": "TextualBody",
+  "purpose": "tagging",
+  "value": "title"
+}
+```
+
+### Semantic Tags
+
+Semantic Tags are used to link the annotation to a URI that identifies a specific resource.
+
+| Property       | Type             | Description                                                                                                                       |
+|----------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| type           | String           | The type of the resource (always 'SpecificResource')                                                                              |
+| purpose        | String           | The reason for the inclusion (always 'classifying')                                                                               |
+| source         | String           | A URI identifying the specific resource                                                                                         |
+
+#### Example
+
+```json-ld
+{
+  "type": "SpecificResource",
+  "purpose": "classifying",
+  "source": "http://purl.org/dc/terms/title"
+}
+```
+
+### Descriptions
+
+Descriptions are used to describe the target in plain text.
+
+| Property       | Type             | Description                                                                                                                       |
+|----------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| type           | String           | The type of the resource (always 'TextualBody')                                                                                   |
+| purpose        | String           | The reason for the inclusion (always 'describing')                                                                                |
+| format         | String           | The format of the description (always 'text/plain')                                                                               |
+| value          | String           | The description text                                                                                                              |
+
+#### Example
+
+```json-ld
+{
+  "type": "TextualBody",
+  "purpose": "describing",
+  "format": "text/plain",
+  "value": "The Merchant of Venice"
+}
+```
