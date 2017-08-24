@@ -40,11 +40,11 @@ Note that the `tag` property is required when in `select` mode.
     "homepage": "http://example.org/client1/homepage1"
   },
   "target": {
-    "source": "http://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000163"
+    "source": "http://example.org/iiif/book1/canvas/p1"
     "selector": {
       "conformsTo": "http://www.w3.org/TR/media-frags/",
       "type": "FragmentSelector",
-      "value": "?xywh=291,1498,1737,244"
+      "value": "?xywh=100,100,100,100"
     }
   }
   "body": [

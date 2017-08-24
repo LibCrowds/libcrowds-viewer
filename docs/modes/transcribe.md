@@ -49,7 +49,7 @@ Note that the `form` task property is required when in `transcribe` mode. The `t
   "@context": "http://www.w3.org/ns/anno.jsonld",
   "id": "45e07a8b-82c2-4fb3-a746-068aad1fab11",
   "type": "Annotation",
-  "motivation": "tagging",
+  "motivation": "describing",
   "created": "2017-07-16T13:53:18.795Z",
   "generated": "2017-07-16T13:53:18.795Z",
   "creator": {
@@ -65,7 +65,7 @@ Note that the `form` task property is required when in `transcribe` mode. The `t
     "homepage": "http://example.org/client1/homepage1"
   },
   "target": {
-    "source": "http://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000163"
+    "source": "http://example.org/iiif/book1/canvas/p1"
     "selector": {
       "conformsTo": "http://www.w3.org/TR/media-frags/",
       "type": "FragmentSelector",

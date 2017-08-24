@@ -16,10 +16,38 @@ See [Annotation Modes](/modes/README.md) for examples.
 | generated      | String           | The time at which the Annotation serialization was generated                                                                      |
 | generator      | String or Object | The agent responsible for generating the serialization of the Annotation (typically software)                                     |
 | modified       | String           | The time at which the resource was modified, after creation                                                                       |
-| target         | String           | The URL of the resource being annotated                                                                                           |
+| target         | String or Object | The target of the resource being annotated                                                                                        |
 | body           | Object           | The relationship between an Annotation and its Body                                                                               |
 
-## Bodies
+## target
+
+The target is specified through the task configuration, see [Configuration](configuration.md) for details.
+
+The String passed during task configuration will be used directly, unless a specific fragment of the image is also selected, in which case the target will be specified
+with the following properties.
+
+| Property            | Type             | Description                                                                                                                       |
+|---------------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| source              | String           | The initial target                                                                                                                |
+| selector            | Object           | The relationship between the resource and a selector                                                                              |
+| selector.type       | String           | The class of the selector (always 'FragmentSelector')                                                                             |
+| selector.conformsTo | String           | The fragment selector syntax IRI (always 'http://www.w3.org/TR/media-frags/')                                                     |
+| selector.value      | String           | The contents of the fragment component                                                                                            |
+
+#### Example
+
+```json-ld
+"target": {
+  "source": "http://example.org/iiif/book1/canvas/p1",
+  "selector": {
+    "type": "FragmentSelector",
+    "conformsTo": "http://www.w3.org/TR/media-frags/",
+    "value": "xywh=100,100,100,100"
+  }
+}
+```
+
+## body
 
 Annotation bodies will differ depending on task configuration, see [Configuration](configuration.md) and [Modes](modes.md) for details.
 
