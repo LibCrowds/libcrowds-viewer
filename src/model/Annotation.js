@@ -140,7 +140,7 @@ class Annotation {
    * @param {String} source
    *   A specific representation source.
    */
-  specificRes (source) {
+  addClassification (source) {
     this._setMultiItem(this, 'body', {
       type: 'SpecificResource',
       purpose: 'classifying',
