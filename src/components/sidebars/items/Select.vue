@@ -1,34 +1,35 @@
 <template>
   <div id="lv-sidebar-select-item">
-    <ul>
-      <li
-        v-for="tag in tags.reverse()"
-        :key="tag.id"
-        @mouseover="highlightOverlay(tag.id, true)"
-        @mouseleave="highlightOverlay(tag.id, false)">
+    <transition appear name="fade-sidebar">
+      <ul>
+        <li
+          v-for="tag in tags.reverse()"
+          :key="tag.id"
+          @mouseover="highlightOverlay(tag.id, true)"
+          @mouseleave="highlightOverlay(tag.id, false)">
 
-        <div
-          class="thumbnail-wrapper">
-          <canvas :ref="`canvas-${tag.id}`"></canvas>
-        </div>
+          <div
+            class="thumbnail-wrapper">
+            <canvas :ref="`canvas-${tag.id}`"></canvas>
+          </div>
 
-        <div
-          v-if="!(disableComplete && task.complete)"
-          class="buttons">
-          <button
-            @click="editTag(tag)"
-            class="btn btn-control">
-            <icon name="pencil"></icon>
-          </button>
-          <button
-            @click="deleteTag(tag)"
-            class="btn btn-control">
-            <icon name="times-circle"></icon>
-          </button>
-        </div>
-      </li>
-    </ul>
-
+          <div
+            v-if="!(disableComplete && task.complete)"
+            class="buttons">
+            <button
+              @click="editTag(tag)"
+              class="btn btn-control">
+              <icon name="pencil"></icon>
+            </button>
+            <button
+              @click="deleteTag(tag)"
+              class="btn btn-control">
+              <icon name="times-circle"></icon>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </transition>
   </div>
 </template>
 
@@ -186,5 +187,13 @@ export default {
     height: 50px;
     overflow: hidden;
   }
+}
+
+.fade-sidebar-enter-active,
+.fade-sidebar-leave-active {
+  transition: all 500ms ease;
+}
+.fade-sidebar-enter, .fade-sidebar-leave-to {
+  opacity: 0;
 }
 </style>
