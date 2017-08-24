@@ -52,11 +52,11 @@
         <li><icon name="refresh"></icon>Reset zoom</li>
       </ul>
       <p>
-        Use arrows left and right of the viewer to move between pages:
+        Use arrows left and right of the viewer to move between tasks:
       </p>
       <ul>
-        <li><icon name="chevron-left"></icon>Previous page</li>
-        <li><icon name="chevron-right"></icon>Next page</li>
+        <li><icon name="chevron-left"></icon>Previous task</li>
+        <li><icon name="chevron-right"></icon>Next task</li>
       </ul>
       <div v-if="task.mode === 'select'">
         <h4>Select mode</h4>
