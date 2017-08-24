@@ -1,6 +1,6 @@
 # Comment Annotations
 
-Generate Select Annotations by setting the viewer property `show-note` to  `true`, see [Configuration](../configuration.md) for details.
+Generate Comment Annotations by setting the viewer property `show-note` to  `true`, see [Configuration](../configuration.md) for details.
 
 Comment Annotations are intended for comments about the image, as opposed to specific content on the image.
 

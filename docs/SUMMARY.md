@@ -11,7 +11,7 @@
   * [Tile Sources](configuration.md#tile-sources.md)
   * [Forms](configuration.md#forms.md)
   * [Navigation](configuration.md#navigation.md)
-* [Notifications](notifications.md)
+* [Message Bus](message_bus.md)
 * [Events](events.md)
 * [Annotation Modes](/annotations/README.md)
   * [Select Mode](/annotations/select.md)

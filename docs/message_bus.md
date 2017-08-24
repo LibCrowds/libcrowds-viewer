@@ -1,8 +1,8 @@
-# Notifications
+# Message Bus
 
 By creating an instance of Vue and passing it to the viewer via the `messageBus` property it is possible to emit `success` and `error` events that will be displayed as notifications within the viewer.
 
-### Example
+### Full example
 
 ```vue
 <template>
