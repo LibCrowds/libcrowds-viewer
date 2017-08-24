@@ -49,6 +49,7 @@
           :showInfo="showInfo"
           :showLike="showLike"
           :showShare="showShare"
+          :showNote="showNote"
           :show="showHelpModal"
           :disableComplete="disableComplete"
           @hide="showHelpModal = false"

@@ -2,10 +2,14 @@
   <div id="lv-help-modal">
     <modal-base :show="show" title="Help" @hide="$emit('hide')">
       <p>
-        Guidance specific to the current task is listed in the sidebar to the right of the viewer. 
-        You can use the Notes field to share something interesting you've spotted on a page or
-        to let us know that a page needs attention for some reason. 
-        When you've completed all tasks for a page, click the Submit button to save your contribution.
+        Guidance specific to the current task is listed in the sidebar to the
+        right of the viewer.
+        <span v-if="showNote">
+          You can use the notes field to draw our attention to anything we might
+          need to know while processing the data.
+        </span>
+        When you've completed all tasks for a page, click the Submit button to
+        save your contribution.
       </p>
       <p v-if="disableComplete">
         Note that you can only submit one response for each page. When you click submit
@@ -127,6 +131,10 @@ export default {
       requried: true
     },
     showShare: {
+      type: Boolean,
+      requried: true
+    },
+    showNote: {
       type: Boolean,
       requried: true
     },
