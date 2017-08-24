@@ -39,6 +39,7 @@ import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/pencil'
 import highlightOverlay from '@/utils/highlightOverlay'
 import drawFragmentToCanvas from '@/utils/drawFragmentToCanvas'
+import getRectFromFragment from '@/utils/getRectFromFragment'
 
 export default {
   props: {
@@ -88,18 +89,23 @@ export default {
      */
     drawSelections () {
       for (let tag of this.tags) {
-        let canvas = this.$refs[`canvas-${tag.id}`][0]
-        if (canvas.hasAttribute('drawn')) {
+        let destCanvas = this.$refs[`canvas-${tag.id}`][0]
+        if (destCanvas.hasAttribute('drawn')) {
           continue
         }
-        canvas.width = canvas.parentNode.clientWidth
-        canvas.height = canvas.parentNode.clientHeight
+        destCanvas.width = destCanvas.parentNode.clientWidth
+        destCanvas.height = destCanvas.parentNode.clientHeight
+        const vp = this.viewer.viewport
+        const imgRect = getRectFromFragment(tag.target.selector.value)
+        const vpRect = vp.imageToViewportRectangle(imgRect)
+        const webRect = vp.viewportToViewerElementRectangle(vpRect)
+        const srcCanvas = this.viewer.drawer.canvas
         drawFragmentToCanvas(
-          this.viewer,
-          tag.target.selector.value,
-          canvas
+          srcCanvas,
+          webRect,
+          destCanvas
         )
-        canvas.setAttribute('drawn', true)
+        destCanvas.setAttribute('drawn', true)
       }
     },
 

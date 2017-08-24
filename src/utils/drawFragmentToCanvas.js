@@ -1,20 +1,13 @@
-import getRectFromFragment from '@/utils/getRectFromFragment'
 /**
  * Draw a cropped section of the current viewer canvas on the given canvas.
- * @param {Object} viewer
- *   The OpenSeadragon viewer.
- * @param {String} fragment
- *   The media fragment selector value (see https://www.w3.org/TR/media-frags/).
+ * @param {Object} srcCanvas
+ * The canvas to copy from.
+ * @param {String} webRect
+ *   The web rectangle (normal pixel coordinates of the page).
  * @param {HTMLCanvasElement} destCanvas
  *   The canvas to draw on.
  */
-export default function (viewer, fragment, destCanvas) {
-  // Get image data fragment from current canvas
-  const vp = viewer.viewport
-  const imgRect = getRectFromFragment(fragment)
-  const vpRect = vp.imageToViewportRectangle(imgRect)
-  const webRect = vp.viewportToViewerElementRectangle(vpRect)
-  const srcCanvas = viewer.drawer.canvas
+export default function (srcCanvas, webRect, destCanvas) {
   const srcContext = srcCanvas.getContext('2d')
   const imgData = srcContext.getImageData(
     webRect.x,
