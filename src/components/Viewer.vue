@@ -13,6 +13,7 @@
           :showBrowse="showBrowse"
           :showLike="showLike"
           :showShare="showShare"
+          :showDownload="showDownload"
           :showNavigation="navigation.length > 0"
           :discussLink="discussLink"
           :helpButton="viewerOpts.helpButton"
@@ -260,6 +261,10 @@ export default {
       default: false
     },
     showShare: {
+      type: Boolean,
+      default: true
+    },
+    showDownload: {
       type: Boolean,
       default: true
     },

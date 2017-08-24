@@ -21,6 +21,7 @@ All of the following properties, apart from `task-opts` are optional.
 | show-form-errors      | Boolean | true    | Show form errors on submit                                                                            |
 | show-like             | Boolean | false   | Show the like button                                                                                  |
 | show-share            | Boolean | true    | Show the share button                                                                                 |
+| show-download         | Boolean | true    | Show the download button                                                                              |
 | show-related-tasks    | Boolean | false   | Show all tasks related to the same image                                                              |
 | discuss-link          | String  | ''      | Show the discuss button using this URL                                                                |
 | creator               | Object  | null    | The Annotation creator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\)   |

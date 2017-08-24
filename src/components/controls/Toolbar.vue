@@ -29,6 +29,7 @@ import 'vue-awesome/icons/share-alt'
 import 'vue-awesome/icons/eye'
 import 'vue-awesome/icons/bars'
 import 'vue-awesome/icons/comments'
+import 'vue-awesome/icons/download'
 import Task from '@/model/Task'
 import ControlButton from '@/components/controls/ControlButton'
 
@@ -42,6 +43,10 @@ export default {
   props: {
     task: {
       type: Task,
+      required: true
+    },
+    viewer: {
+      type: Object,
       required: true
     },
     showHelp: {
@@ -61,6 +66,10 @@ export default {
       required: true
     },
     showLike: {
+      type: Boolean,
+      required: true
+    },
+    showDownload: {
       type: Boolean,
       required: true
     },
@@ -173,6 +182,22 @@ export default {
           icon: 'bars',
           callback: () => {
             this.$emit('navigationclicked')
+          }
+        })
+      }
+
+      if (this.showDownload) {
+        buttons.push({
+          tooltip: 'Download',
+          id: 'lv-download-btn',
+          icon: 'download',
+          callback: () => {
+            const canvas = this.viewer.drawer.canvas
+            const data = canvas.toDataURL()
+            const link = document.createElement('a')
+            link.download = 'task.png'
+            link.href = data
+            link.click()
           }
         })
       }
