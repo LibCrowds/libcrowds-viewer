@@ -110,6 +110,11 @@ export default {
   },
 
   updated () {
+    // Draw the selections after the DOM is updated (for new selections).
+    this.drawSelections()
+  },
+
+  mounted () {
     this.drawSelections()
   }
 }

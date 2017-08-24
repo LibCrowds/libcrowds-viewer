@@ -101,7 +101,7 @@
       @enableviewer="viewerDisabled = false">
 
       <select-sidebar-item
-        v-if="currentTask.mode === 'select'"
+        v-if="taskLoaded && currentTask.mode === 'select'"
         :task="currentTask"
         :tags="tags"
         :disableComplete="disableComplete"
@@ -197,7 +197,8 @@ export default {
       showNavigationSidebar: false,
       viewerDisabled: false,
       tasks: [],
-      currentTask: null
+      currentTask: null,
+      taskLoaded: false
     }
   },
 
@@ -665,13 +666,12 @@ export default {
     },
 
     /**
-     * Load tasks from task options.
+     * Generate tasks from task options.
      */
-    loadTasks () {
+    generateTasks () {
       this.tasks = this.taskOpts.map(opts => {
         return new Task(opts)
       })
-      this.setCurrentTask(this.tasks[0])
     },
 
     /**
@@ -708,22 +708,40 @@ export default {
 
   watch: {
     currentTask: function (newTask, oldTask) {
-      if (oldTask && oldTask.equals(newTask)) {
+      this.taskLoaded = false
+      if (
+        oldTask &&
+        JSON.stringify(oldTask.tileSource) ===
+        JSON.stringify(newTask.tileSource)
+      ) {
         this.viewer.clearOverlays()
         this.loadTask(newTask)
+        this.taskLoaded = true
       } else {
         this.viewer.close()
         this.viewer.open({
           tileSource: newTask.tileSource,
-          success: () => {
+          success: (evt) => {
             this.loadTask(newTask)
+            // Set the task loaded flag after the tile has been fully loaded.
+            // This helps with things such as the selection preview canvases
+            // being drawn using the correct image (rather than the one that has
+            // just been removed).
+            evt.item.addHandler('fully-loaded-change', () => {
+              this.taskLoaded = true
+            })
           }
         })
       }
     },
     taskOpts: {
       handler: function () {
-        this.loadTasks()
+        this.generateTasks()
+        if (this.tasks.length) {
+          this.setCurrentTask(this.tasks[0])
+        } else {
+          console.warn('No tasks loaded')
+        }
       },
       deep: true
     }
@@ -731,7 +749,12 @@ export default {
 
   mounted () {
     this.viewer = new OpenSeadragon.Viewer(this.viewerOpts)
-    this.loadTasks()
+    this.generateTasks()
+    if (this.tasks.length) {
+      this.setCurrentTask(this.tasks[0])
+    } else {
+      console.warn('No tasks loaded')
+    }
     this.setupMessageBus()
     window.addEventListener('beforeunload', this.onBeforeUnload)
   },
