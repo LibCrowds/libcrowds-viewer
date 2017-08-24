@@ -93,7 +93,6 @@ class Annotation {
    */
   addTag (value, fragment = null) {
     if (fragment) {
-      console.log(typeof this.target)
       if (typeof this.target === 'string') {
         this.target = {
           source: this.target
