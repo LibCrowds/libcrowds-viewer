@@ -13,6 +13,7 @@
           :showBrowse="showBrowse"
           :showLike="showLike"
           :showShare="showShare"
+          :showDownload="showDownload"
           :showNavigation="navigation.length > 0"
           :discussLink="discussLink"
           :helpButton="viewerOpts.helpButton"
@@ -101,10 +102,11 @@
       @enableviewer="viewerDisabled = false">
 
       <select-sidebar-item
-        v-if="currentTask.mode === 'select'"
+        v-if="taskLoaded && currentTask.mode === 'select'"
         :task="currentTask"
         :tags="tags"
         :disableComplete="disableComplete"
+        :viewer="viewer"
         @edit="editTag"
         @delete="deleteTag">
       </select-sidebar-item>
@@ -157,7 +159,7 @@ import TranscribeSidebarItem from '@/components/sidebars/items/Transcribe'
 import Selector from '@/components/Selector'
 import Task from '@/model/Task'
 import Annotator from '@/model/Annotator'
-import extractRectFromImageUri from '@/utils/extractRectFromImageUri'
+import getRectFromFragment from '@/utils/getRectFromFragment'
 import toggleFullScreen from '@/utils/toggleFullScreen'
 import drawOverlay from '@/utils/drawOverlay'
 import deleteOverlay from '@/utils/deleteOverlay'
@@ -174,6 +176,7 @@ export default {
       }),
       viewerOpts: {
         id: 'lv-viewer-container',
+        crossOriginPolicy: 'Anonymous',
         showNavigationControl: false,
         helpButton: 'show-help',
         infoButton: 'show-info',
@@ -195,7 +198,8 @@ export default {
       showNavigationSidebar: false,
       viewerDisabled: false,
       tasks: [],
-      currentTask: null
+      currentTask: null,
+      taskLoaded: false
     }
   },
 
@@ -257,6 +261,10 @@ export default {
       default: false
     },
     showShare: {
+      type: Boolean,
+      default: true
+    },
+    showDownload: {
       type: Boolean,
       default: true
     },
@@ -370,7 +378,7 @@ export default {
      */
     drawSelectionOverlay (task, anno) {
       const vp = this.viewer.viewport
-      const imgRect = extractRectFromImageUri(anno.target.selector.value)
+      const imgRect = getRectFromFragment(anno.target.selector.value)
       const vpRect = vp.imageToViewportRectangle(imgRect)
       const overlay = drawOverlay(this.viewer, anno.id, vpRect, 'selection')
       overlay.addEventListener('click', (evt) => {
@@ -468,11 +476,12 @@ export default {
      *   The task.
      */
     getRelatedTasks (task) {
-      return this.tasks.filter((anotherTask) => {
+      return this.tasks.filter((otherTask) => {
+        const otherSourceStr = JSON.stringify(otherTask.tileSource)
         return (
-          anotherTask !== task &&
-          anotherTask !== undefined &&
-          anotherTask.imgInfoUri === task.imgInfoUri
+          otherTask !== task &&
+          otherTask !== undefined &&
+          otherSourceStr === JSON.stringify(task.tileSource)
         )
       })
     },
@@ -572,7 +581,7 @@ export default {
     editTag (task, id) {
       const vp = this.viewer.viewport
       const anno = this.annotator.getAnnotation(task, id)
-      const imgRect = extractRectFromImageUri(anno.target.selector.value)
+      const imgRect = getRectFromFragment(anno.target.selector.value)
       const vpRect = vp.imageToViewportRectangle(imgRect)
       const rect = new OpenSeadragon.Rect(
         vpRect.x,
@@ -662,52 +671,11 @@ export default {
     },
 
     /**
-     * Promise to create a task.
-     * @param {String} taskOpts
-     *   The options for a task.
-     */
-    fetchTask (taskOpts) {
-      return new Promise((resolve, reject) => {
-        fetch(taskOpts.imgInfoUri, {
-          method: 'get'
-        }).then((response) => {
-          return response.json()
-        }).then((json) => {
-          taskOpts.imgInfo = json
-          resolve(new Task(taskOpts))
-        }).catch(function (err) {
-          reject(new Error(`Could not retrieve image info: ${err}`))
-        })
-      })
-    },
-
-    /**
      * Generate tasks from task options.
      */
     generateTasks () {
-      // Create an empty tasks array to later maintain order
-      this.tasks = Array.apply(null, Array(this.taskOpts.length)).map(() => {})
-      const taskPromises = this.taskOpts.map((opts, index) => {
-        // Don't modify the original prop
-        const optsCopy = JSON.parse(JSON.stringify(opts))
-
-        const taskPromise = this.fetchTask(optsCopy)
-        taskPromise.then(task => {
-          // Slot loaded tasks into their place in the array
-          this.tasks[index] = task
-          if (index === 0) {
-            // Set the first task as current once its loaded
-            this.setCurrentTask(task)
-          }
-        })
-        return taskPromise
-      })
-
-      // Do things after all tasks are loaded
-      Promise.all(taskPromises).then(tasks => {
-        if (this.showRelatedTasks) {
-          this.showAllRelatedTasks(this.tasks[0])
-        }
+      this.tasks = this.taskOpts.map(opts => {
+        return new Task(opts)
       })
     },
 
@@ -745,20 +713,40 @@ export default {
 
   watch: {
     currentTask: function (newTask, oldTask) {
-      if (oldTask && oldTask.imgInfoUri === newTask.imgInfoUri) {
+      this.taskLoaded = false
+      if (
+        oldTask &&
+        JSON.stringify(oldTask.tileSource) ===
+        JSON.stringify(newTask.tileSource)
+      ) {
         this.viewer.clearOverlays()
         this.loadTask(newTask)
+        this.taskLoaded = true
       } else {
         this.viewer.close()
         this.viewer.open({
-          tileSource: newTask.imgInfoUri,
-          success: () => this.loadTask(newTask)
+          tileSource: newTask.tileSource,
+          success: (evt) => {
+            this.loadTask(newTask)
+            // Set the task loaded flag after the tile has been fully loaded.
+            // This helps with things such as the selection preview canvases
+            // being drawn using the correct image (rather than the one that has
+            // just been removed).
+            evt.item.addHandler('fully-loaded-change', () => {
+              this.taskLoaded = true
+            })
+          }
         })
       }
     },
     taskOpts: {
       handler: function () {
         this.generateTasks()
+        if (this.tasks.length) {
+          this.setCurrentTask(this.tasks[0])
+        } else {
+          console.warn('No tasks loaded')
+        }
       },
       deep: true
     }
@@ -767,6 +755,11 @@ export default {
   mounted () {
     this.viewer = new OpenSeadragon.Viewer(this.viewerOpts)
     this.generateTasks()
+    if (this.tasks.length) {
+      this.setCurrentTask(this.tasks[0])
+    } else {
+      console.warn('No tasks loaded')
+    }
     this.setupMessageBus()
     window.addEventListener('beforeunload', this.onBeforeUnload)
   },

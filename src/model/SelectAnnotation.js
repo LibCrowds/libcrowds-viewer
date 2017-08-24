@@ -3,12 +3,12 @@ import errors from '@/utils/errors'
 
 /**
  * Represents a Web Annotation used for tagging.
- * @param {Object} imgInfo
- *   The IIIF image info.
+ * @param {String} target
+ *   The URL of the resource being annotated
  * @param {String} tag
  *   Plain text value for the tag.
- * @param {String} fragmentUri
- *   The IIIF image region.
+ * @param {String} fragment
+ *   The media fragment selector value (see https://www.w3.org/TR/media-frags/).
  * @param {Object} creator
  *   The Annotation creator.
  * @param {Object} generator
@@ -18,20 +18,20 @@ import errors from '@/utils/errors'
  */
 class SelectAnnotation extends Annotation {
   constructor ({
-    imgInfo = errors.throwIfMissing(),
-    tag = errors.throwIfMissing(),
-    fragmentUri = errors.throwIfMissing(),
+    target = errors.throwIfMissing('target'),
+    tag = errors.throwIfMissing('tag'),
+    fragment = errors.throwIfMissing('fragment'),
     creator = null,
     generator = null,
     classification = null
   }) {
     super({
       motivation: 'tagging',
-      imgInfo: imgInfo,
+      target: target,
       creator: creator,
       generator: generator
     })
-    this.addTag(tag, imgInfo, fragmentUri)
+    this.addTag(tag, fragment)
     if (classification) {
       this.addClassification(classification)
     }

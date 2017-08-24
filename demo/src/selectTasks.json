@@ -5,7 +5,8 @@
     "mode": "select",
     "objective": "Tag all of the titles",
     "guidance": "Draw a box around each title, including any subtitles",
-    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
+    "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
     "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json"
   },
   {
@@ -13,7 +14,8 @@
     "mode": "select",
     "objective": "Tag the actors",
     "guidance": "Draw a box around each actor associated with the highlighted performance",
-    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+    "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+    "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x00007e",
     "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json",
     "highlights": [
       {
@@ -25,60 +27,15 @@
     ]
   },
   {
-    "tag": "date",
+    "tag": "shelfmark",
     "mode": "select",
-    "objective": "Tag the date",
-    "guidance": "Draw a box around the date of the highlighted performance",
-    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json",
-    "highlights": [
-      {
-        "x": 291,
-        "y": 1498,
-        "width": 1737,
-        "height": 244
-      }
-    ]
-  },
-  {
-    "tag": "title",
-    "classification": "http://purl.org/dc/terms/title",
-    "mode": "select",
-    "objective": "Tag all of the titles",
-    "guidance": "Draw a box around each title, including any subtitles",
-    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000006/info.json",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json"
-  },
-  {
-    "tag": "actor",
-    "mode": "select",
-    "objective": "Tag the actors",
-    "guidance": "Draw a box around each actor associated with the highlighted performance",
-    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000006/info.json",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json",
-    "highlights": [
-      {
-        "x": 271,
-        "y": 1190,
-        "width": 1753,
-        "height": 265
-      }
-    ]
-  },
-  {
-    "tag": "date",
-    "mode": "select",
-    "objective": "Tag the date",
-    "guidance": "Draw a box around the date of the highlighted performance",
-    "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000006/info.json",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json",
-    "highlights": [
-      {
-        "x": 271,
-        "y": 1190,
-        "width": 1753,
-        "height": 265
-      }
-    ]
+    "objective": "Tag the shelfmark",
+    "guidance": "Draw a box around the shelfmark",
+    "tileSource": {
+      "type": "image",
+      "url": "https://farm6.staticflickr.com/5452/31011537275_e92f4e3be9_b.jpg",
+      "crossOriginPolicy": "Anonymous"
+    },
+    "target": "https://www.flickr.com/photos/132066275@N04/31011537275/"
   }
 ]

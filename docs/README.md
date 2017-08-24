@@ -29,7 +29,7 @@ Use it in your templates \(minimum configuration options shown\).
 <libcrowds-viewer
   :task-opts="[{
     mode: 'select',
-    imgInfoUri: 'http://www.example.org/image-service/abcd1234/info.json',
+    tileSource: 'http://www.example.org/image-service/abcd1234/info.json',
     manifestUri: 'http://example.org/iiif/book1/manifest'
   }]">
 </libcrowds-viewer>

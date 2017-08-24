@@ -9,26 +9,19 @@ Note that the `tag` property is required when in `select` mode.
 ```json
 {
   "mode": "select",
-  "imgInfoUri": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
-  "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+  "tileSource": "http://www.example.org/image-service/abcd1234/info.json",
+  "target": "http://example.org/iiif/book1/canvas/p1",
   "tag": "title",
   "objective": "Tag all of the titles",
   "guidance": "Draw a box around each title, including any subtitles"
 }
 ```
 
-### Example annotations
-
-One of the following annotations will be emitted, depending on the `annoType` set in the task options.
-
-#### IIIF Presentation API v3
+### Example annotation
 
 ```jsonld
 {
-  "@context": [
-    "http://www.w3.org/ns/anno.jsonld",
-    "http://iiif.io/api/presentation/3/context.json"
-  ],
+  "@context": "http://www.w3.org/ns/anno.jsonld",
   "id": "d008efa2-42e5-494e-b463-c7b9b6744b67",
   "type": "Annotation",
   "motivation": "tagging",
@@ -46,18 +39,7 @@ One of the following annotations will be emitted, depending on the `annoType` se
     "name": "Code v2.1",
     "homepage": "http://example.org/client1/homepage1"
   },
-  "target": {
-    "id": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005",
-    "width": 2433,
-    "height": 3838,
-    "type": "Image",
-    "format" : "image/jpeg",
-    "selector": {
-      "type": "FragmentSelector",
-      "value": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/291,1498,1737,244/full/0/default.jpg",
-      "conformsTo": "http://iiif.io/api/image"
-    }
-  },
+  "target": "http://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000163?xywh=291,1498,1737,244",
   "body": [
     {
       "type": "TextualBody",
@@ -69,7 +51,7 @@ One of the following annotations will be emitted, depending on the `annoType` se
       "purpose": "classifying",
       "value": "http://purl.org/dc/terms/title"
     }
-  ]
-  "modified": "2017-07-16T00:44:28.454Z"
+  ],
+  "modified": "2017-07-16T13:53:18.795Z"
 }
 ```

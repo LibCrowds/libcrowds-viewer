@@ -3,14 +3,14 @@ import errors from '@/utils/errors'
 
 /**
  * Represents a Web Annotation used for transcriptions.
- * @param {Object} imgInfo
- *   The IIIF image info.
+ * @param {String} target
+ *   The URL of the resource being annotated
  * @param {String} transcription
  *   The transcription.
  * @param {String} tag
  *   The tag value.
- * @param {String} fragmentURI
- *   An IIIF image region.
+ * @param {String} fragment
+ *   The media fragment selector value (see https://www.w3.org/TR/media-frags/).
  * @param {Object} creator
  *   The Annotation creator.
  * @param {Object} generator
@@ -20,22 +20,22 @@ import errors from '@/utils/errors'
  */
 class TranscribeAnnotation extends Annotation {
   constructor ({
-    imgInfo = errors.throwIfMissing(),
-    transcription = errors.throwIfMissing(),
-    tag = errors.throwIfMissing(),
-    fragmentURI = null,
+    target = errors.throwIfMissing('target'),
+    transcription = errors.throwIfMissing('transcription'),
+    tag = errors.throwIfMissing('tag'),
+    fragment = null,
     creator = null,
     generator = null,
     classification = null
   }) {
     super({
       motivation: 'describing',
-      imgInfo: imgInfo,
+      target: target,
       creator: creator,
       generator: generator
     })
     this.addDescription(transcription)
-    this.addTag(tag, fragmentURI)
+    this.addTag(tag, fragment)
     if (classification) {
       this.addClassification(classification)
     }

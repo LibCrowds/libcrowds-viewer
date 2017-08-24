@@ -1,31 +1,35 @@
 <template>
   <div id="lv-sidebar-select-item">
-    <ul>
-      <li
-        v-for="tag in tags"
-        :key="tag.id"
-        @mouseover="highlightOverlay(tag.id, true)"
-        @mouseleave="highlightOverlay(tag.id, false)">
-        <div class="thumbnail-container">
-          <img :src="tag.target.selector.value">
-        </div>
-        <div
-          v-if="!(disableComplete && task.complete)"
-          class="buttons">
-          <button
-            @click="editTag(tag)"
-            class="btn btn-control">
-            <icon name="pencil"></icon>
-          </button>
-          <button
-            @click="deleteTag(tag)"
-            class="btn btn-control">
-            <icon name="times-circle"></icon>
-          </button>
-        </div>
-      </li>
-    </ul>
+    <transition appear name="fade-sidebar">
+      <ul>
+        <li
+          v-for="tag in tags.reverse()"
+          :key="tag.id"
+          @mouseover="highlightOverlay(tag.id, true)"
+          @mouseleave="highlightOverlay(tag.id, false)">
 
+          <div
+            class="thumbnail-wrapper">
+            <canvas :ref="`canvas-${tag.id}`"></canvas>
+          </div>
+
+          <div
+            v-if="!(disableComplete && task.complete)"
+            class="buttons">
+            <button
+              @click="editTag(tag)"
+              class="btn btn-control">
+              <icon name="pencil"></icon>
+            </button>
+            <button
+              @click="deleteTag(tag)"
+              class="btn btn-control">
+              <icon name="times-circle"></icon>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </transition>
   </div>
 </template>
 
@@ -35,6 +39,8 @@ import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/pencil'
 import highlightOverlay from '@/utils/highlightOverlay'
+import drawFragmentToCanvas from '@/utils/drawFragmentToCanvas'
+import getRectFromFragment from '@/utils/getRectFromFragment'
 
 export default {
   props: {
@@ -49,6 +55,10 @@ export default {
     disableComplete: {
       type: Boolean,
       required: true
+    },
+    viewer: {
+      type: Object,
+      required: true
     }
   },
 
@@ -57,13 +67,62 @@ export default {
   },
 
   methods: {
-    highlightOverlay,
+    /**
+     * Edit a selection.
+     * @param {Object} tag
+     *   The annotation.
+     */
     editTag (tag) {
       this.$emit('edit', this.task, tag.id)
     },
+
+    /**
+     * Delete a selection.
+     * @param {Object} tag
+     *   The annotation.
+     */
     deleteTag (tag) {
       this.$emit('delete', this.task, tag.id)
-    }
+    },
+
+    /**
+     * Draw the selection canvases.
+     */
+    drawSelections () {
+      for (let tag of this.tags) {
+        let destCanvas = this.$refs[`canvas-${tag.id}`][0]
+        if (destCanvas.hasAttribute('drawn')) {
+          continue
+        }
+        destCanvas.width = destCanvas.parentNode.clientWidth
+        destCanvas.height = destCanvas.parentNode.clientHeight
+        const vp = this.viewer.viewport
+        const imgRect = getRectFromFragment(tag.target.selector.value)
+        const vpRect = vp.imageToViewportRectangle(imgRect)
+        const webRect = vp.viewportToViewerElementRectangle(vpRect)
+        const srcCanvas = this.viewer.drawer.canvas
+        drawFragmentToCanvas(
+          srcCanvas,
+          webRect,
+          destCanvas
+        )
+        destCanvas.setAttribute('drawn', true)
+      }
+    },
+
+    /**
+     * Highlight an overlay.
+     */
+    highlightOverlay
+  },
+
+  updated () {
+    // Draw the selections after the DOM is updated (for new selections).
+    this.drawSelections()
+  },
+
+  mounted () {
+    this.drawSelections()
   }
 }
 </script>
@@ -120,18 +179,21 @@ export default {
     }
   }
 
-  .thumbnail-container {
+  .thumbnail-wrapper {
     align-items: center;
     justify-content: center;
     display: flex;
     flex: 1 1 auto;
     height: 50px;
-
-    img {
-      flex: none;  /* IE fix */
-      max-width: 100%;
-      max-height: 100%;
-    }
+    overflow: hidden;
   }
+}
+
+.fade-sidebar-enter-active,
+.fade-sidebar-leave-active {
+  transition: all 500ms ease;
+}
+.fade-sidebar-enter, .fade-sidebar-leave-to {
+  opacity: 0;
 }
 </style>

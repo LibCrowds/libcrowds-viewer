@@ -29,8 +29,8 @@ import 'vue-awesome/icons/share-alt'
 import 'vue-awesome/icons/eye'
 import 'vue-awesome/icons/bars'
 import 'vue-awesome/icons/comments'
+import 'vue-awesome/icons/download'
 import Task from '@/model/Task'
-import getImageUri from '@/utils/getImageUri'
 import ControlButton from '@/components/controls/ControlButton'
 
 export default {
@@ -43,6 +43,10 @@ export default {
   props: {
     task: {
       type: Task,
+      required: true
+    },
+    viewer: {
+      type: Object,
       required: true
     },
     showHelp: {
@@ -62,6 +66,10 @@ export default {
       required: true
     },
     showLike: {
+      type: Boolean,
+      required: true
+    },
+    showDownload: {
       type: Boolean,
       required: true
     },
@@ -146,15 +154,12 @@ export default {
           callback: () => {
             let clipboard = new Clipboard('#lv-share-btn', {
               text: (trigger) => {
-                console.log(trigger)
                 trigger.setAttribute('aria-label', 'URL Copied!')
                 trigger.addEventListener('mouseleave', () => {
                   trigger.setAttribute('aria-label', tooltip)
                   clipboard.destroy()
                 })
-                return getImageUri({
-                  imgInfo: this.task.imgInfo
-                })
+                return this.task.shareUrl
               }
             })
           }
@@ -177,6 +182,22 @@ export default {
           icon: 'bars',
           callback: () => {
             this.$emit('navigationclicked')
+          }
+        })
+      }
+
+      if (this.showDownload) {
+        buttons.push({
+          tooltip: 'Download',
+          id: 'lv-download-btn',
+          icon: 'download',
+          callback: () => {
+            const canvas = this.viewer.drawer.canvas
+            const data = canvas.toDataURL()
+            const link = document.createElement('a')
+            link.download = 'task.png'
+            link.href = data
+            link.click()
           }
         })
       }
