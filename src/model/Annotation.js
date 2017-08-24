@@ -44,19 +44,12 @@ class Annotation {
   }
 
   /**
-   * Update the modified time and add creator and generator.
-   * @param {Object} creator
-   *   The Annotation creator.
-   * @param {Object} generator
-   *   The Annotation generator.
+   * Update the modified time, if the annotation is modified after creation.
    */
-  modify ({creator = null, generator = null}) {
-    this.modified = new Date().toISOString()
-    if (creator) {
-      this._setMultiItem(this, 'creator', creator)
-    }
-    if (generator) {
-      this._setMultiItem(this, 'generator', generator)
+  setModified () {
+    const now = new Date().toISOString()
+    if (now !== this.created) {
+      this.modified = new Date().toISOString()
     }
   }
 
@@ -89,7 +82,6 @@ class Annotation {
       // Create new array if both items are unique
       root[key] = [root[key], value]
     }
-    this.modified = new Date().toISOString()
   }
 
   /**

@@ -166,6 +166,7 @@ class Annotator {
     let anno = this.getAnnotation(task, annotation.id)
     if (anno !== null) {
       anno = annotation
+      anno.setModified()
     } else {
       task.annotations.push(annotation)
     }
@@ -232,10 +233,6 @@ class Annotator {
         return item.purpose !== 'describing'
       })
       anno.addDescription(transcription)
-      anno.modify({
-        creator: this.creator,
-        generator: this.generator
-      })
       this.storeAnnotation(task, anno)
     }
     return anno
@@ -262,10 +259,6 @@ class Annotator {
       this.storeAnnotation(task, anno)
     } else {
       anno.body.value = comment
-      anno.modify({
-        creator: this.creator,
-        generator: this.generator
-      })
       this.storeAnnotation(task, anno)
     }
   }
