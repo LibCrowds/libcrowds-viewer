@@ -524,6 +524,7 @@ export default {
       } else {
         this.$emit('update', task, anno)
       }
+      return anno
     },
 
     /**
