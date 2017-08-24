@@ -78,12 +78,12 @@ describe('Annotation', () => {
 
   describe('addClassification', () => {
     it('adds a classification', () => {
-      const value = 'hello'
-      anno.addClassification(value)
+      const source = 'http://example.org/hello'
+      anno.addClassification(source)
       expect(anno.body).toEqual({
         type: 'SpecificResource',
         purpose: 'classifying',
-        value: value
+        source: source
       })
     })
 

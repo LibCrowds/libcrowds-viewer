@@ -39,7 +39,14 @@ Note that the `tag` property is required when in `select` mode.
     "name": "Code v2.1",
     "homepage": "http://example.org/client1/homepage1"
   },
-  "target": "http://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000163?xywh=291,1498,1737,244",
+  "target": {
+    "source": "http://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000163"
+    "selector": {
+      "conformsTo": "http://www.w3.org/TR/media-frags/",
+      "type": "FragmentSelector",
+      "value": "?xywh=291,1498,1737,244"
+    }
+  }
   "body": [
     {
       "type": "TextualBody",
@@ -49,7 +56,7 @@ Note that the `tag` property is required when in `select` mode.
     {
       "type": "SpecificResource",
       "purpose": "classifying",
-      "value": "http://purl.org/dc/terms/title"
+      "source": "http://purl.org/dc/terms/title"
     }
   ],
   "modified": "2017-07-16T13:53:18.795Z"

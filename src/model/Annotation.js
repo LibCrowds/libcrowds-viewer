@@ -137,14 +137,14 @@ class Annotation {
 
   /**
    * Add a classification to the Body
-   * @param {String} value
-   *   The value of the resource.
+   * @param {String} source
+   *   A specific representation source.
    */
-  addClassification (value) {
+  specificRes (source) {
     this._setMultiItem(this, 'body', {
       type: 'SpecificResource',
       purpose: 'classifying',
-      value: value
+      source: source
     })
   }
 
