@@ -46,10 +46,10 @@
         The following controls are provided to the bottom-left of the viewer:
       </p>
       <ul>
-        <li><icon name="chevron-up"></icon>Pan up</li>
-        <li><icon name="chevron-down"></icon>Pan down</li>
-        <li><icon name="chevron-left"></icon>Pan left</li>
-        <li><icon name="chevron-right"></icon>Pan right</li>
+        <li><icon name="arrow-circle-up"></icon>Pan up</li>
+        <li><icon name="arrow-circle-down"></icon>Pan down</li>
+        <li><icon name="arrow-circle-left"></icon>Pan left</li>
+        <li><icon name="arrow-circle-right"></icon>Pan right</li>
       </ul>
       <p>
         To the left and right of the viewer are buttons to browse available
@@ -96,8 +96,10 @@ import 'vue-awesome/icons/info-circle'
 import 'vue-awesome/icons/check-circle'
 import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/thumbs-up'
-import 'vue-awesome/icons/chevron-up'
-import 'vue-awesome/icons/chevron-down'
+import 'vue-awesome/icons/arrow-circle-up'
+import 'vue-awesome/icons/arrow-circle-down'
+import 'vue-awesome/icons/arrow-circle-left'
+import 'vue-awesome/icons/arrow-circle-right'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
 import 'vue-awesome/icons/list'
