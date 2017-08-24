@@ -2,14 +2,14 @@
   <div id="lv-sidebar-select-item">
     <ul>
       <li
-        v-for="tag in tags"
+        v-for="tag in tags.reverse()"
         :key="tag.id"
         @mouseover="highlightOverlay(tag.id, true)"
         @mouseleave="highlightOverlay(tag.id, false)">
 
         <div
-          class="thumbnail-viewer">
-          {{ getThumbnailViewer(tag) }}
+          class="thumbnail-wrapper">
+          <canvas :ref="`canvas-${tag.id}`"></canvas>
         </div>
 
         <div
@@ -33,13 +33,12 @@
 </template>
 
 <script>
-import OpenSeadragon from 'openseadragon'
 import Task from '@/model/Task'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/pencil'
 import highlightOverlay from '@/utils/highlightOverlay'
-import getRectFromFragment from '@/utils/getRectFromFragment'
+import drawFragmentToCanvas from '@/utils/drawFragmentToCanvas'
 
 export default {
   props: {
@@ -55,8 +54,8 @@ export default {
       type: Boolean,
       required: true
     },
-    imageUrl: {
-      type: String,
+    viewer: {
+      type: Object,
       required: true
     }
   },
@@ -85,27 +84,33 @@ export default {
     },
 
     /**
-     * Return an OpenSeadragon Viewer containing the clipped image.
-     * @param {Object} tag
-     *   The annotation.
+     * Draw the selection canvases.
      */
-    getThumbnailViewer (tag) {
-      const rect = getRectFromFragment(tag.target.selector.value)
-      console.log(rect)
-      let viewerDiv = document.createElement('div')
-      viewerDiv.id = `viewer-${tag.id}`
-      /* eslint-disable no-new */
-      new OpenSeadragon.Viewer({
-        element: viewerDiv
-      })
-      console.log(viewerDiv)
-      return viewerDiv
+    drawSelections () {
+      for (let tag of this.tags) {
+        let canvas = this.$refs[`canvas-${tag.id}`][0]
+        if (canvas.hasAttribute('drawn')) {
+          continue
+        }
+        canvas.width = canvas.parentNode.clientWidth
+        canvas.height = canvas.parentNode.clientHeight
+        drawFragmentToCanvas(
+          this.viewer,
+          tag.target.selector.value,
+          canvas
+        )
+        canvas.setAttribute('drawn', true)
+      }
     },
 
     /**
      * Highlight an overlay.
      */
     highlightOverlay
+  },
+
+  updated () {
+    this.drawSelections()
   }
 }
 </script>
@@ -162,7 +167,7 @@ export default {
     }
   }
 
-  .thumbnail-viewer {
+  .thumbnail-wrapper {
     align-items: center;
     justify-content: center;
     display: flex;

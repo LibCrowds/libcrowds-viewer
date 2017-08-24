@@ -101,11 +101,11 @@
       @enableviewer="viewerDisabled = false">
 
       <select-sidebar-item
-        v-if="currentTask.mode === 'select' && currentImageUrl"
+        v-if="currentTask.mode === 'select'"
         :task="currentTask"
         :tags="tags"
         :disableComplete="disableComplete"
-        :imageUrl="currentImageUrl"
+        :viewer="viewer"
         @edit="editTag"
         @delete="deleteTag">
       </select-sidebar-item>
@@ -159,7 +159,6 @@ import Selector from '@/components/Selector'
 import Task from '@/model/Task'
 import Annotator from '@/model/Annotator'
 import getRectFromFragment from '@/utils/getRectFromFragment'
-import getCurrentImageUrl from '@/utils/getCurrentImageUrl'
 import toggleFullScreen from '@/utils/toggleFullScreen'
 import drawOverlay from '@/utils/drawOverlay'
 import deleteOverlay from '@/utils/deleteOverlay'
@@ -198,8 +197,7 @@ export default {
       showNavigationSidebar: false,
       viewerDisabled: false,
       tasks: [],
-      currentTask: null,
-      currentImageUrl: null
+      currentTask: null
     }
   },
 
@@ -713,14 +711,12 @@ export default {
       if (oldTask && oldTask.equals(newTask)) {
         this.viewer.clearOverlays()
         this.loadTask(newTask)
-        this.currentImageUrl = getCurrentImageUrl(this.viewer)
       } else {
         this.viewer.close()
         this.viewer.open({
           tileSource: newTask.tileSource,
           success: () => {
             this.loadTask(newTask)
-            this.currentImageUrl = getCurrentImageUrl(this.viewer)
           }
         })
       }
