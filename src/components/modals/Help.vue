@@ -8,13 +8,14 @@
           You can use the notes field to draw our attention to anything we might
           need to know while processing the data.
         </span>
-        When you've completed all tasks for a page, click the Submit button to
-        save your contribution.
+        When you've completed a task click the Submit button to save your
+        contribution.
       </p>
       <p v-if="disableComplete">
-        Note that you can only submit one response for each page. When you click submit
-        your answer will be saved and further submissions disabled. You are free to
-        browse back and forth between submitted and unsubmitted pages.
+        Note that you can only submit one response for each task. When you click
+        submit your answer will be saved and further submissions disabled. You
+        are free to browse back and forth between submitted and unsubmitted
+        tasks.
       </p>
       <h4>Viewer controls</h4>
       <p>In the top-left corner of the viewer:</p>
