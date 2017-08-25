@@ -249,14 +249,4 @@ describe('Annotator', () => {
       expect(selectTask.annotations[0].motivation).toBe('tagging')
     })
   })
-
-  describe('setModified', () => {
-    it('updates the modified time', () => {
-      const initialTime = annoOne.modified
-      annoOne.setModified()
-      console.log(Date.parse(annoOne.modified))
-      expect(initialTime).toBe(undefined)
-      expect(Date.parse(annoOne.modified)).not.toBeNaN()
-    })
-  })
 })
