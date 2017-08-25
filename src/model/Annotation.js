@@ -33,30 +33,23 @@ class Annotation {
     this.motivation = motivation
     this.created = new Date().toISOString()
     this.target = target
-    if (creator) {
-      this._setMultiItem(this, 'creator', creator)
-    }
-    if (generator) {
-      this._setMultiItem(this, 'generator', generator)
-    }
     this.created = new Date().toISOString()
     this.generated = new Date().toISOString()
+    if (creator) {
+      this.creator = creator
+    }
+    if (generator) {
+      this.generator = generator
+    }
   }
 
   /**
-   * Update the modified time and add creator and generator.
-   * @param {Object} creator
-   *   The Annotation creator.
-   * @param {Object} generator
-   *   The Annotation generator.
+   * Update the modified time, if the annotation is modified after creation.
    */
-  modify ({creator = null, generator = null}) {
-    this.modified = new Date().toISOString()
-    if (creator) {
-      this._setMultiItem(this, 'creator', creator)
-    }
-    if (generator) {
-      this._setMultiItem(this, 'generator', generator)
+  setModified () {
+    const now = new Date().toISOString()
+    if (now !== this.created) {
+      this.modified = new Date().toISOString()
     }
   }
 
@@ -89,7 +82,6 @@ class Annotation {
       // Create new array if both items are unique
       root[key] = [root[key], value]
     }
-    this.modified = new Date().toISOString()
   }
 
   /**
@@ -101,7 +93,6 @@ class Annotation {
    */
   addTag (value, fragment = null) {
     if (fragment) {
-      console.log(typeof this.target)
       if (typeof this.target === 'string') {
         this.target = {
           source: this.target
@@ -137,14 +128,14 @@ class Annotation {
 
   /**
    * Add a classification to the Body
-   * @param {String} value
-   *   The value of the resource.
+   * @param {String} source
+   *   A specific representation source.
    */
-  addClassification (value) {
+  addClassification (source) {
     this._setMultiItem(this, 'body', {
       type: 'SpecificResource',
       purpose: 'classifying',
-      value: value
+      source: source
     })
   }
 

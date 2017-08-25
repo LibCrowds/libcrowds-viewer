@@ -202,12 +202,12 @@ describe('Annotator', () => {
       ].value).toEqual(value)
     })
 
-    it('updates modification details', () => {
+    it('updates the modified time', () => {
       const key = Object.keys(transcribeTask.form.model)[0]
       const value = fixtures.uuid()
       const newTranscribeAnno = fixtures.buildTranscribeAnnotation(key)
       const before = fixtures.getISOYesterday()
-      newTranscribeAnno.modified = before
+      newTranscribeAnno.created = before
       transcribeTask.annotations = [newTranscribeAnno]
       annotator.storeTranscriptionAnnotation(transcribeTask, key, value)
       expect(
@@ -231,10 +231,10 @@ describe('Annotator', () => {
       expect(transcribeTask.annotations).toEqual([commentAnno])
     })
 
-    it('updates modification details', () => {
+    it('updates the modified time', () => {
       const comment = fixtures.uuid()
       const before = fixtures.getISOYesterday()
-      commentAnno.modified = before
+      commentAnno.created = before
       transcribeTask.annotations = [commentAnno]
       annotator.storeCommentAnnotation(transcribeTask, comment)
       expect(Date.parse(commentAnno.modified) > Date.parse(before)).toBe(true)

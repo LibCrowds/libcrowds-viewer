@@ -1,6 +1,8 @@
-# Select Mode
+# Select Annotations
 
-In select mode users can use their mouse \(or finger\) to tag areas of the image, potentially preparing them for subsequent transcription.
+In select mode users can tag areas of the image (semantically or otherwise), potentially preparing them for subsequent transcription.
+
+Generate Select Annotations by setting the task options `type` to  `select`, see [Configuration](../configuration.md) for details.
 
 Note that the `tag` property is required when in `select` mode.
 
@@ -39,7 +41,14 @@ Note that the `tag` property is required when in `select` mode.
     "name": "Code v2.1",
     "homepage": "http://example.org/client1/homepage1"
   },
-  "target": "http://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000163?xywh=291,1498,1737,244",
+  "target": {
+    "source": "http://example.org/iiif/book1/canvas/p1"
+    "selector": {
+      "conformsTo": "http://www.w3.org/TR/media-frags/",
+      "type": "FragmentSelector",
+      "value": "?xywh=100,100,100,100"
+    }
+  }
   "body": [
     {
       "type": "TextualBody",
@@ -49,7 +58,7 @@ Note that the `tag` property is required when in `select` mode.
     {
       "type": "SpecificResource",
       "purpose": "classifying",
-      "value": "http://purl.org/dc/terms/title"
+      "source": "http://purl.org/dc/terms/title"
     }
   ],
   "modified": "2017-07-16T13:53:18.795Z"

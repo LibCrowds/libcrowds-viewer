@@ -4,7 +4,7 @@ LibCrowds Viewer provides a range of configuration options that are passed as pr
 
 ## Viewer
 
-All of the following properties, apart from `task-opts` are optional.
+All of the following properties, apart from `task-opts`, are optional.
 
 | Property              | Type    | Default | Description                                                                                           |
 |-----------------------|---------|---------|-------------------------------------------------------------------------------------------------------|
@@ -27,7 +27,7 @@ All of the following properties, apart from `task-opts` are optional.
 | creator               | Object  | null    | The Annotation creator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\)   |
 | generator             | Object  | null    | The Annotation generator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\) |
 | next-on-submit        | Object  | true    | Move to the next task on after submission                                                             |
-| messageBus            | Object  | null    | Message bus used for notifications \(see [Notifications](notifications.md)\)                          |
+| messageBus            | Object  | null    | Message bus used for notifications \(see [Message Bus](message_bus.md)\)                          |
 | navigation            | Array   | null    | Additional navigation links \(see [Navigation](configuration.md#navigation)\)                         |
 | confirm-on-submit     | Boolean | false   | Show a confirmation box on submission                                                                 |
 
@@ -38,32 +38,26 @@ Tasks are created from the `task-opts` passed to the viewer, which each have the
 
 | Property       | Type              | Attributes | Description                                                                                                    |
 |----------------|-------------------|------------|----------------------------------------------------------------------------------------------------------------|
-| mode           | String            |            | `'select'` or `'transcribe'`                                                                                   |
-| tileSource     | String or Object  |            | The tile source specifier (see [Tile Sources](configuration.md#tile-sources))                                  |
-| target         | String            |            | The target of the annotation (e.g. the canvas URI for IIIF annotations)                                        |
+| mode           | String            |            | The task more (see [Annotation Modes](annotations/README.md))                                                  |
+| tileSource     | String or Object  |            | The tile source specifier (see [Tile Sources](tile_sources.md))                                                |
+| target         | String            |            | The target of the annotation (see [Data Model](data_model.md))                                                 |
+| objective      | String            |  optional  | The main objective                                                                                             |
+| guidance       | String            |  optional  | Additional guidance                                                                                            |
 | thumbnailUrl   | String            |  optional  | URL for a thumbnail image to use in the browse modal                                                           |
 | manifestUri    | String            |  optional  | Manifest URI (see the [IIIF Presentation API](http://iiif.io/api/presentation))                                |
 | metadata       | Object            |  optional  | Metadata for the info modal (takes preference over `manifestUri`)                                              |
 | id             | String            |  optional  | Task identifier                                                                                                |
-| objective      | String            |  optional  | The main objective                                                                                             |
-| guidance       | String            |  optional  | Additional guidance                                                                                            |
 | form           | Object            |  optional  | Form properties (see [Forms](configuration.md#forms))                                                          |
 | highlights     | Array             |  optional  | Coordinates identifying regions of the image to highlight                                                      |
-| tag            | String            |  optional  | The tag to add when in `select` mode                                                                           |
+| tag            | String            |  optional  | A tag                                                                                                          |
 | liked          | Boolean           |  optional  | Task liked (see the viewer property `show-like`)                                                               |
-| classification | String            |  optional  | A SpecificResource to classify the target as (e.g. [foaf:Person](http://xmlns.com/foaf/spec/#term_Person))     |
+| classification | String            |  optional  | A Semantic Tag (e.g. [http://purl.org/dc/terms/title](http://purl.org/dc/terms/title))       |
 | complete       | Boolean           |  optional  | Mark the task as complete                                                                                      |
-| shareUrl       | String            |  optional  | URL for the 'share' button (if not given the `tileSource` url will be used)                                    |
-
-## Tile Source
-
-A String implies a URL used to determine the tileSource implementation based on the file extension of the URL. For example, "http://www.example.org/image-service/abcd1234/info.json" would be loaded as a IIIF tile source.
-
-An Object implies an inline configuration which has a single property sufficient for being able to determine tileSource implementation. See the [OpenSeadragon docs](https://openseadragon.github.io/#examples-and-features) for examples of how to implement custom tile sources.
+| shareUrl       | String            |  optional  | URL for the 'share' button                                                                                     |
 
 ## Forms
 
-In `transcribe` mode the form can be configured via the following properties.
+In `transcribe` mode the form can be configured with the following properties.
 
 | Property        | Type    | Attributes | Description                                                            |
 |-----------------|---------|------------|------------------------------------------------------------------------|
@@ -74,9 +68,7 @@ In `transcribe` mode the form can be configured via the following properties.
 
 ## Navigation
 
-Additional navigation links (for example, for the rest of your website) can be
-passed to the viewer via the `navigation` property. These links will be appended
-to a collapsible sidebar toggled via a 'hamburger' button.
+Additional navigation links (for example, for the rest of your website) can be passed to the viewer via the `navigation` property. These links will be appended to a collapsible sidebar toggled via a 'hamburger' button and (as with all other buttons) still visible in full screen mode.
 
 | Property | Type   | Description          |
 |----------|--------|----------------------|

@@ -128,6 +128,7 @@ export default {
     handleSubmit (task) {
       console.log('Task submitted', task)
       this.messageBus.$emit('success', 'Answer saved!')
+      console.log(JSON.stringify(task.annotations, null, 2))
     }
   }
 }
