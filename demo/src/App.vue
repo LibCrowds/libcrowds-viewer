@@ -88,7 +88,6 @@ export default {
         name: 'Code v2.1',
         homepage: 'http://example.org/client1/homepage1'
       },
-      showLike: true,
       messageBus: new Vue(),
       navigation: [
         { label: 'Home', url: window.location.href }
