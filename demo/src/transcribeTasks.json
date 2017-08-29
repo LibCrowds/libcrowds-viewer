@@ -24,16 +24,16 @@
             "required": true
           }
         ]
-      },
-      "fragments": {
-        "title": {
-          "x": 296,
-          "y": 620,
-          "width": 1711,
-          "height": 194
-        }
       }
-    }
+    },
+    "highlights": [
+      {
+        "x": 296,
+        "y": 620,
+        "width": 1711,
+        "height": 194
+      }
+    ]
   },
   {
     "mode": "transcribe",
@@ -60,16 +60,16 @@
             "required": true
           }
         ]
-      },
-      "fragments": {
-        "title": {
-          "x": 303,
-          "y": 1500,
-          "width": 1708,
-          "height": 323
-        }
       }
-    }
+    },
+    "highlights": [
+      {
+        "x": 303,
+        "y": 1500,
+        "width": 1708,
+        "height": 323
+      }
+    ]
   },
   {
     "mode": "transcribe",
@@ -96,16 +96,16 @@
             "required": true
           }
         ]
-      },
-      "fragments": {
-        "title": {
-          "x": 271,
-          "y": 1190,
-          "width": 1753,
-          "height": 265
-        }
       }
-    }
+    },
+    "highlights": [
+      {
+        "x": 271,
+        "y": 1190,
+        "width": 1753,
+        "height": 265
+      }
+    ]
   },
   {
     "mode": "transcribe",
@@ -132,16 +132,16 @@
             "required": true
           }
         ]
-      },
-      "fragments": {
-        "title": {
-          "x": 258,
-          "y": 2440,
-          "width": 1851,
-          "height": 362
-        }
       }
-    }
+    },
+    "highlights": [
+      {
+        "x": 258,
+        "y": 2440,
+        "width": 1851,
+        "height": 362
+      }
+    ]
   },
   {
     "mode": "transcribe",
@@ -185,14 +185,6 @@
             "placeholder": "Leave blank if not present"
           }
         ]
-      },
-      "fragments": {
-        "title": {
-          "x": 303,
-          "y": 1500,
-          "width": 1708,
-          "height": 323
-        }
       }
     },
     "highlights": [
