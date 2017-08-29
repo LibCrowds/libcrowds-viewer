@@ -8,12 +8,7 @@
           v-if="currentTask"
           :task="currentTask"
           :viewer="viewer"
-          :showHelp="showHelp"
-          :showInfo="showInfo"
-          :showBrowse="showBrowse"
-          :showLike="showLike"
-          :showShare="showShare"
-          :showDownload="showDownload"
+          :buttons="mergedToolbarButtons"
           :showNavigation="navigation.length > 0"
           :discussLink="discussLink"
           :helpButton="viewerOpts.helpButton"
@@ -46,10 +41,8 @@
         </metadata-modal>
 
         <help-modal
-          v-if="currentTask && showHelp"
-          :showInfo="showInfo"
-          :showLike="showLike"
-          :showShare="showShare"
+          v-if="currentTask && mergedToolbarButtons.help"
+          :buttons="mergedToolbarButtons"
           :show="showHelpModal"
           :disableComplete="disableComplete"
           @hide="showHelpModal = false"
@@ -57,7 +50,7 @@
         </help-modal>
 
         <browse-modal
-          v-if="showBrowse"
+          v-if="mergedToolbarButtons.browse"
           :tasks="tasks"
           :show="showBrowseModal"
           :disableComplete="disableComplete"
@@ -192,6 +185,15 @@ export default {
           dblClickToZoom: false
         }
       },
+      defaultToolbarButtons: {
+        fullscreen: true,
+        help: true,
+        info: true,
+        browse: true,
+        like: true,
+        share: true,
+        download: true
+      },
       showInfoModal: false,
       showHelpModal: false,
       showBrowseModal: false,
@@ -215,18 +217,6 @@ export default {
     disableComplete: {
       type: Boolean,
       default: false
-    },
-    showHelp: {
-      type: Boolean,
-      default: true
-    },
-    showInfo: {
-      type: Boolean,
-      default: true
-    },
-    showBrowse: {
-      type: Boolean,
-      default: true
     },
     showNote: {
       type: Boolean,
@@ -256,18 +246,6 @@ export default {
       type: Object,
       default: null
     },
-    showLike: {
-      type: Boolean,
-      default: false
-    },
-    showShare: {
-      type: Boolean,
-      default: true
-    },
-    showDownload: {
-      type: Boolean,
-      default: true
-    },
     showRelatedTasks: {
       type: Boolean,
       default: false
@@ -291,6 +269,10 @@ export default {
     confirmOnSubmit: {
       type: Boolean,
       default: false
+    },
+    buttons: {
+      type: Object,
+      default: () => ({}) // Defaults set in defaultToolbarButtons
     }
   },
 
@@ -334,6 +316,15 @@ export default {
         this.currentTask.mode === 'select' &&
         (!this.currentTask.complete || !this.disableComplete)
       )
+    },
+    mergedToolbarButtons: function () {
+      let mergedButtons = JSON.parse(JSON.stringify(this.defaultToolbarButtons))
+      for (let key in mergedButtons) {
+        if (this.buttons.hasOwnProperty(key)) {
+          mergedButtons[key] = this.buttons[key]
+        }
+      }
+      return mergedButtons
     }
   },
 

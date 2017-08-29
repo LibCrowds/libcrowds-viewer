@@ -2,7 +2,7 @@
   <div id="lv-toolbar">
 
     <control-button
-      v-for="button in buttons"
+      v-for="button in toolbarButtons"
       :key="button.id"
       :id="button.id"
       :tooltip="button.tooltip"
@@ -49,28 +49,8 @@ export default {
       type: Object,
       required: true
     },
-    showHelp: {
-      type: Boolean,
-      required: true
-    },
-    showInfo: {
-      type: Boolean,
-      required: true
-    },
-    showBrowse: {
-      type: Boolean,
-      required: true
-    },
-    showShare: {
-      type: Boolean,
-      required: true
-    },
-    showLike: {
-      type: Boolean,
-      required: true
-    },
-    showDownload: {
-      type: Boolean,
+    buttons: {
+      type: Object,
       required: true
     },
     discussLink: {
@@ -93,19 +73,21 @@ export default {
     // as other controls rely on the current task being passed in and therefore
     // this component could be rendered after the viewer and the default method
     // of passing the button IDs won't work.
-    buttons: function () {
-      let buttons = [
-        {
+    toolbarButtons: function () {
+      let tbButtons = []
+
+      if (this.buttons.fullscreen) {
+        tbButtons.push({
           tooltip: 'Fullscreen',
           icon: 'expand',
           callback: () => {
             this.$emit('fullscreenclicked')
           }
-        }
-      ]
+        })
+      }
 
-      if (this.showHelp) {
-        buttons.push({
+      if (this.buttons.help) {
+        tbButtons.push({
           tooltip: 'Help',
           icon: 'question-circle',
           callback: () => {
@@ -114,8 +96,8 @@ export default {
         })
       }
 
-      if (this.showInfo) {
-        buttons.push({
+      if (this.buttons.info) {
+        tbButtons.push({
           tooltip: 'Details',
           icon: 'info-circle',
           callback: () => {
@@ -124,8 +106,8 @@ export default {
         })
       }
 
-      if (this.showBrowse) {
-        buttons.push({
+      if (this.buttons.browse) {
+        tbButtons.push({
           tooltip: 'Browse Tasks',
           icon: 'eye',
           callback: () => {
@@ -134,8 +116,8 @@ export default {
         })
       }
 
-      if (this.showLike) {
-        buttons.push({
+      if (this.buttons.like) {
+        tbButtons.push({
           tooltip: !this.task.liked ? 'Like' : 'Unlike',
           icon: 'thumbs-up',
           iconClass: this.task.liked ? 'active' : null,
@@ -145,9 +127,9 @@ export default {
         })
       }
 
-      if (this.showShare) {
+      if (this.buttons.share) {
         let tooltip = 'Copy Image URL'
-        buttons.push({
+        tbButtons.push({
           id: 'lv-share-btn',
           tooltip: tooltip,
           icon: 'share-alt',
@@ -166,28 +148,8 @@ export default {
         })
       }
 
-      if (this.discussLink) {
-        buttons.push({
-          tooltip: 'Discuss on Forum',
-          icon: 'comments',
-          callback: () => {
-            this.$emit('discussclicked', this.discussLink)
-          }
-        })
-      }
-
-      if (this.showNavigation) {
-        buttons.unshift({
-          tooltip: 'Navigation',
-          icon: 'bars',
-          callback: () => {
-            this.$emit('navigationclicked')
-          }
-        })
-      }
-
-      if (this.showDownload) {
-        buttons.push({
+      if (this.buttons.download) {
+        tbButtons.push({
           tooltip: 'Download',
           id: 'lv-download-btn',
           icon: 'download',
@@ -202,7 +164,27 @@ export default {
         })
       }
 
-      return buttons
+      if (this.discussLink) {
+        tbButtons.push({
+          tooltip: 'Discuss on Forum',
+          icon: 'comments',
+          callback: () => {
+            this.$emit('discussclicked', this.discussLink)
+          }
+        })
+      }
+
+      if (this.showNavigation) {
+        tbButtons.unshift({
+          tooltip: 'Navigation',
+          icon: 'bars',
+          callback: () => {
+            this.$emit('navigationclicked')
+          }
+        })
+      }
+
+      return tbButtons
     }
   }
 }

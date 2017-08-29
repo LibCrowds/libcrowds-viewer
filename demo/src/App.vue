@@ -31,7 +31,6 @@
       <libcrowds-viewer
         confirm-on-submit
         :disable-complete="true"
-        :show-like="showLike"
         :message-bus="messageBus"
         :task-opts="selectTaskOpts"
         :creator="creator"
@@ -51,7 +50,6 @@
         confirm-on-submit
         :show-related-tasks="true"
         :disable-complete="true"
-        :show-like="showLike"
         :message-bus="messageBus"
         :task-opts="transcribeTaskOpts"
         :creator="creator"
