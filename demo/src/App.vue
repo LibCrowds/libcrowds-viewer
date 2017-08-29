@@ -46,6 +46,7 @@
     <div class="viewer-container" v-else-if="showTranscribeViewer">
       <libcrowds-viewer
         :show-related-tasks="true"
+        :buttons="{browse: false}"
         :message-bus="messageBus"
         :task-opts="transcribeTaskOpts"
         :creator="creator"
