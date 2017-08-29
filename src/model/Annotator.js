@@ -125,7 +125,7 @@ class Annotator {
    * @param {String} key
    *   The model key.
    */
-  _getFormFieldAnnotation (task, key) {
+  getFormFieldAnnotation (task, key) {
     const allAnnos = this.getTranscribeAnnotations(task)
     const fieldAnnos = this.filterAnnotations(allAnnos, {
       body: {
@@ -218,7 +218,7 @@ class Annotator {
    *   A image rectangle to be converted to a fragment selector.
    */
   storeTranscriptionAnnotation (task, key, transcription, rect = null) {
-    let anno = this._getFormFieldAnnotation(task, key)
+    let anno = this.getFormFieldAnnotation(task, key)
     const fragment = rect
       ? `xywh=${rect.x},${rect.y},${rect.width},${rect.height}`
       : null

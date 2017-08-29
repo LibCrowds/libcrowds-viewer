@@ -108,17 +108,17 @@ describe('Annotator', () => {
     })
   })
 
-  describe('_getFormFieldAnnotation', () => {
+  describe('getFormFieldAnnotation', () => {
     it('gets form field annotation when one exists', () => {
       const key = Object.keys(transcribeTask.form.model)[0]
       transcribeTask.annotations = [transcribeAnno]
-      const anno = annotator._getFormFieldAnnotation(transcribeTask, key)
+      const anno = annotator.getFormFieldAnnotation(transcribeTask, key)
       expect(anno).not.toEqual(transcribeAnno)
     })
 
     it('returns null when form field annotation does not exist', () => {
       const key = fixtures.uuid()
-      const anno = annotator._getFormFieldAnnotation(transcribeTask, key)
+      const anno = annotator.getFormFieldAnnotation(transcribeTask, key)
       expect(anno).toEqual(null)
     })
   })
