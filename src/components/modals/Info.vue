@@ -105,6 +105,10 @@ export default {
       this.attribution = null
       this.license = null
 
+      if (!this.task.info) {
+        return
+      }
+
       if (typeof this.task.info === 'string') {
         this.fetchTaskInfo(this.task.info).then(data => {
           this.updateInfo(data)
