@@ -1,8 +1,8 @@
 <template>
-  <div id="lv-metadata-modal">
-    <modal-base :show="show" title="Metadata" @hide="$emit('hide')">
+  <div id="lv-info-modal">
+    <modal-base :show="show" title="Information" @hide="$emit('hide')">
 
-      <span v-if="hasData">
+      <span v-if="hasInfo">
         <ul v-for="item in metadata" :key="item.label">
           <li>
             <strong>{{ item.label }}:</strong>
@@ -16,7 +16,7 @@
     </span>
 
     <span v-else>
-      <p class="center">No metadata loaded</p>
+      <p class="center">No task info available</p>
     </span>
 
     </modal-base>
@@ -45,10 +45,6 @@ export default {
     task: {
       type: Task,
       required: true
-    },
-    lang: {
-      type: String,
-      default: 'en'
     }
   },
 
@@ -57,7 +53,7 @@ export default {
   },
 
   computed: {
-    hasData: function () {
+    hasInfo: function () {
       return (this.metadata.length > 0 ||
               this.logo !== null ||
               this.attribution !== null ||
@@ -68,66 +64,76 @@ export default {
   methods: {
 
     /**
-     * Fetch the manifest and load data.
+     * Fetch and return the task info.
+     * @param {Object} uri
+     *   URI to the JSON task item info.
      */
-    fetchManifest () {
+    fetchTaskInfo (uri) {
+      return new Promise((resolve, reject) => {
+        fetch(uri, {
+          method: 'get'
+        }).then((response) => {
+          return response.json()
+        }).then((data) => {
+          resolve(data)
+        }).catch(function (err) {
+          reject(new Error(`Could not retrieve the item info: ${err}`))
+        })
+      })
+    },
+
+    /**
+     * Update the info for a task.
+     * @param {Object} info
+     *   The info.
+     */
+    updateInfo (info) {
+      this.metadata = info.metadata
+      this.logo = info.logo
+      this.attribution = info.attribution
+      this.license = info.license
+    },
+
+    /**
+     * Load the info for a task.
+     * @param {Object} info
+     *   The info.
+     */
+    loadInfo () {
       this.metadata = []
       this.logo = null
       this.attribution = null
       this.license = null
 
-      if (!this.task.manifestUri.length) {
+      if (!this.task.info) {
         return
       }
 
-      fetch(this.task.manifestUri, {
-        method: 'get'
-      }).then((response) => {
-        return response.json()
-      }).then((data) => {
-        this.metadata = data.metadata.map((item) => {
-          if (typeof item.value === 'object') {
-            item.value = this.getValueInLang(item.value)
-          }
-          return item
+      if (typeof this.task.info === 'string') {
+        this.fetchTaskInfo(this.task.info).then(data => {
+          this.updateInfo(data)
         })
-        this.logo = data.logo
-        this.attribution = data.attribution
-        this.license = data.license
-      }).catch(function (err) {
-        throw Error(`Could not retrieve the manifest: ${err}`)
-      })
-    },
-
-    /**
-     * Return a metadata value in the chosen language, if available.
-     */
-    getValueInLang (values) {
-      const filtered = values.filter((value) => {
-        return value['@language'] === this.lang
-      })
-      return filtered.length ? filtered[0]['@value'] : ''
+      } else if (typeof this.task.info === 'object') {
+        this.updateInfo(this.task.info)
+      }
     }
   },
 
   watch: {
-
-    /**
-     * Update the manifest when the task changes.
-     */
     task: function () {
-      this.fetchManifest()
+      // Update the info when the task changes.
+      this.loadInfo()
     }
   },
 
   created () {
-    this.fetchManifest()
+    this.loadInfo()
   }
 }
 </script>
 
 <style lang="scss" scoped>
-#lv-metadata-modal {
+#lv-info-modal {
   ul {
     padding-left: 0;
     list-style: none;

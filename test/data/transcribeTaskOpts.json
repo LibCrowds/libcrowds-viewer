@@ -2,7 +2,7 @@
   "mode": "transcribe",
   "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
   "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x00007e",
-  "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+  "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
   "id": 123,
   "objective": "Transcribe the required info",
   "guidance": "Write everything exactly as you see on the page.",

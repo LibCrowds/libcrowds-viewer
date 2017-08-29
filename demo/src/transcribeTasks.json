@@ -5,7 +5,7 @@
     "guidance": "Transcribe the title exactly as you see on the page.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x00007e",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "title": null
@@ -41,7 +41,7 @@
     "guidance": "Transcribe the title exactly as you see on the page.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x00007e",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "title": null
@@ -77,7 +77,7 @@
     "guidance": "Transcribe the title exactly as you see on the page.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000006/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x00007f",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "title": null
@@ -113,7 +113,7 @@
     "guidance": "Transcribe the title exactly as you see on the page.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000006/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x00007f",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "title": null
@@ -149,7 +149,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -202,7 +202,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -255,7 +255,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -308,7 +308,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -361,7 +361,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -414,7 +414,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -467,7 +467,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -520,7 +520,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -573,7 +573,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -626,7 +626,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -679,7 +679,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -732,7 +732,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -785,7 +785,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -838,7 +838,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -891,7 +891,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -944,7 +944,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -997,7 +997,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -1050,7 +1050,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -1103,7 +1103,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -1156,7 +1156,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -1209,7 +1209,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -1262,7 +1262,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,
@@ -1315,7 +1315,7 @@
     "guidance": "Transcribe all details about the person, where available.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "manifestUri": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
         "prefix": null,

@@ -33,13 +33,12 @@
             :zoomBy="zoomBy">
           </zoom-controls>
 
-          <metadata-modal
+          <info-modal
             v-if="currentTask"
             :task="currentTask"
             :show="showInfoModal"
-            @hide="showInfoModal = false"
-            :lang="lang">
-          </metadata-modal>
+            @hide="showInfoModal = false">
+          </info-modal>
 
           <help-modal
             v-if="currentTask && mergedToolbarButtons.help"
@@ -134,7 +133,7 @@ import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
 import OpenSeadragon from 'openseadragon'
-import MetadataModal from '@/components/modals/Metadata'
+import InfoModal from '@/components/modals/Info'
 import HelpModal from '@/components/modals/Help'
 import BrowseModal from '@/components/modals/Browse'
 import ToolbarControls from '@/components/controls/Toolbar'
@@ -228,10 +227,6 @@ export default {
       type: Number,
       default: 0.2
     },
-    lang: {
-      type: String,
-      default: 'en'
-    },
     creator: {
       type: Object,
       default: null
@@ -267,7 +262,7 @@ export default {
   },
 
   components: {
-    MetadataModal,
+    InfoModal,
     HelpModal,
     BrowseModal,
     ToolbarControls,
