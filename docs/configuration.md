@@ -70,7 +70,7 @@ In `transcribe` mode the form can be configured with the following properties.
 | model           | Object  |            | See [vue-form-generator](https://github.com/icebob/vue-form-generator) |
 | schema          | Object  |            | See [vue-form-generator](https://github.com/icebob/vue-form-generator) |
 | classifications | Object  |  optional  | A SpecificResource IRI for each model key                              |
-| highlights      | Object  |  optional  | A region to highlight for each model key                               |
+| fragments       | Object  |  optional  | A fragment to highlight for each model key                             |
 
 ## Info
 

@@ -585,28 +585,28 @@ export default {
     },
 
     /**
-     * Highlight any regions when transcribe form input focused.
+     * Highlight any fragments when transcribe form input focused.
      * @param {Task} task
      *   The task that the tag belongs to.
      * @param {String} modelKey
      *   The form model key.
      */
     onTranscribeInputFocus (task, modelKey) {
-      if (modelKey in task.form.highlights) {
-        const rect = task.form.highlights[modelKey]
+      if (modelKey in task.form.fragments) {
+        const rect = task.form.fragments[modelKey]
         this.drawHighlight(rect, `highlight-${modelKey}`)
       }
     },
 
     /**
-     * Remove all form region highlights when transcribe form input blured.
+     * Remove all form fragment highlights when transcribe form input blured.
      * @param {Task} task
      *   The task that the tag belongs to.
      * @param {String} modelKey
      *   The form model key.
      */
     onTranscribeInputBlur (task, modelKey) {
-      for (modelKey in task.form.highlights) {
+      for (modelKey in task.form.fragments) {
         deleteOverlay(this.viewer, `highlight-${modelKey}`)
       }
     },
