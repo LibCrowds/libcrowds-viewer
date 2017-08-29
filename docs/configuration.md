@@ -35,7 +35,7 @@ By default the viewer displays all of the buttons listed below, to hide a partic
 | help                  | Boolean | true    | Show the help modal button                                                                            |
 | info                  | Boolean | true    | Show the metadata modal button                                                                        |
 | browse                | Boolean | true    | Show the browse tasks modal button                                                                    |
-| like                  | Boolean | false   | Show the like button                                                                                  |
+| like                  | Boolean | true    | Show the like button                                                                                  |
 | share                 | Boolean | true    | Show the share button                                                                                 |
 | download              | Boolean | true    | Show the download button                                                                              |
 
