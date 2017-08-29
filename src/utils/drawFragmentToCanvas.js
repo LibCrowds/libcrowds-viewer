@@ -25,24 +25,18 @@ export default function (srcCanvas, webRect, destCanvas) {
 
   // Scale
   let destCtx = destCanvas.getContext('2d')
-  let scaleFactor = 1
-  if (
-    newCanvas.width > newCanvas.height &&
-    newCanvas.width > destCanvas.width
-  ) {
-    scaleFactor = destCanvas.width / newCanvas.width
-  } else if (
-    newCanvas.height > newCanvas.width &&
-    newCanvas.height > destCanvas.height
-  ) {
-    scaleFactor = destCanvas.height / newCanvas.height
-  }
-  destCtx.scale(scaleFactor, scaleFactor)
+  const scaleFactors = [
+    1,
+    destCanvas.height / newCanvas.height,
+    destCanvas.width / newCanvas.width
+  ]
+  const sf = Math.min.apply(null, scaleFactors)
+  destCtx.scale(sf, sf)
 
   // Draw
   destCtx.drawImage(
     newCanvas,
-    destCanvas.width / scaleFactor / 2 - imgData.width / 2,
-    destCanvas.height / scaleFactor / 2 - imgData.height / 2
+    destCanvas.width / sf / 2 - imgData.width / 2,
+    destCanvas.height / sf / 2 - imgData.height / 2
   )
 }

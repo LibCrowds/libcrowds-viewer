@@ -80,6 +80,14 @@
           <div id="viewer-disabled-overlay" v-if="viewerDisabled"></div>
         </transition>
 
+        <selector
+          v-if="selectorEnabled"
+          :viewer="viewer"
+          :task="currentTask"
+          :selectionRect="selectionRect"
+          @selection="handleSelection">
+        </selector>
+
       </div>
 
       <task-sidebar
@@ -115,14 +123,6 @@
         </transcribe-sidebar-item>
       </task-sidebar>
     </main>
-
-    <selector
-      v-if="selectorEnabled"
-      :viewer="viewer"
-      :task="currentTask"
-      :selectionRect="selectionRect"
-      @selection="handleSelection">
-    </selector>
 
   </div>
 </template>
