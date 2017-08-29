@@ -212,16 +212,22 @@ class Annotator {
    *   The task.
    * @param {String} key
    *   The form model key.
-   * @param {String} value
+   * @param {String} transcription
    *   The transcription value.
+   * @param {String} rect
+   *   A image rectangle to be converted to a fragment selector.
    */
-  storeTranscriptionAnnotation (task, key, transcription) {
+  storeTranscriptionAnnotation (task, key, transcription, rect = null) {
     let anno = this._getFormFieldAnnotation(task, key)
+    const fragment = rect
+      ? `xywh=${rect.x},${rect.y},${rect.width},${rect.height}`
+      : null
     if (anno === null) {
       anno = new TranscribeAnnotation({
         target: task.target,
         transcription: transcription,
         tag: key,
+        fragment: fragment,
         creator: this.creator,
         generator: this.generator,
         classification: task.form.classification[key]

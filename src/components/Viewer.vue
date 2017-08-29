@@ -404,7 +404,15 @@ export default {
      *   The task.
      */
     drawRelatedTaskHighlights (task) {
-      for (let i = 0; i < task.highlights.length; i++) {
+      // Merge general and specific fragment highlights
+      let allHighlights = JSON.parse(JSON.stringify(task.highlights))
+      if (task.form && 'fragments' in task.form) {
+        for (let key in task.form.fragments) {
+          allHighlights.push(task.form.fragments[key])
+        }
+      }
+
+      for (let i = 0; i < allHighlights.length; i++) {
         // Check the highlight wasn't already drawn (e.g. on initial load)
         let taskIndex = this.tasks.indexOf(task)
         let highlightId = `related-t${taskIndex}-h${i}`
@@ -413,7 +421,7 @@ export default {
         }
 
         this.drawHighlight(
-          task.highlights[i],
+          allHighlights[i],
           highlightId,
           'related',
           () => { this.setCurrentTask(task) }
@@ -517,7 +525,8 @@ export default {
         const anno = this.annotator.storeTranscriptionAnnotation(
           task,
           key,
-          form.model[key]
+          form.model[key],
+          form.fragments[key]
         )
         if (anno.created > now) {
           this.$emit('create', task, anno)
