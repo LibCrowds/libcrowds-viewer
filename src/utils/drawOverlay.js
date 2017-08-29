@@ -39,7 +39,7 @@ export default function (viewer, id, rect, type = '', onClick = null) {
     el.style.backgroundColor = 'rgba(77, 175, 124, 0.2)'
   } else if (type === 'related') {
     el.style.border = '1px solid rgba(244, 208, 63, 0.4)'
-    el.style.backgroundColor = 'rgba(244, 208, 63, 0.2)'
+    el.style.backgroundColor = 'rgba(244, 208, 63, 0.05)'
   }
   if (onClick) {
     el.addEventListener('click', onClick)

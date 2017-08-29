@@ -404,7 +404,15 @@ export default {
      *   The task.
      */
     drawRelatedTaskHighlights (task) {
-      for (let i = 0; i < task.highlights.length; i++) {
+      // Merge general and specific fragment highlights
+      let allHighlights = JSON.parse(JSON.stringify(task.highlights))
+      if (task.form && 'fragments' in task.form) {
+        for (let key in task.form.fragments) {
+          allHighlights.push(task.form.fragments[key])
+        }
+      }
+
+      for (let i = 0; i < allHighlights.length; i++) {
         // Check the highlight wasn't already drawn (e.g. on initial load)
         let taskIndex = this.tasks.indexOf(task)
         let highlightId = `related-t${taskIndex}-h${i}`
@@ -413,7 +421,7 @@ export default {
         }
 
         this.drawHighlight(
-          task.highlights[i],
+          allHighlights[i],
           highlightId,
           'related',
           () => { this.setCurrentTask(task) }
@@ -517,7 +525,8 @@ export default {
         const anno = this.annotator.storeTranscriptionAnnotation(
           task,
           key,
-          form.model[key]
+          form.model[key],
+          form.fragments[key]
         )
         if (anno.created > now) {
           this.$emit('create', task, anno)
@@ -585,28 +594,28 @@ export default {
     },
 
     /**
-     * Highlight any regions when transcribe form input focused.
+     * Highlight any fragments when transcribe form input focused.
      * @param {Task} task
      *   The task that the tag belongs to.
      * @param {String} modelKey
      *   The form model key.
      */
     onTranscribeInputFocus (task, modelKey) {
-      if (modelKey in task.form.highlights) {
-        const rect = task.form.highlights[modelKey]
+      if (modelKey in task.form.fragments) {
+        const rect = task.form.fragments[modelKey]
         this.drawHighlight(rect, `highlight-${modelKey}`)
       }
     },
 
     /**
-     * Remove all form region highlights when transcribe form input blured.
+     * Remove all form fragment highlights when transcribe form input blured.
      * @param {Task} task
      *   The task that the tag belongs to.
      * @param {String} modelKey
      *   The form model key.
      */
     onTranscribeInputBlur (task, modelKey) {
-      for (modelKey in task.form.highlights) {
+      for (modelKey in task.form.fragments) {
         deleteOverlay(this.viewer, `highlight-${modelKey}`)
       }
     },

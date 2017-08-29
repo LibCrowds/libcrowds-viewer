@@ -8,12 +8,12 @@ class Form {
     model = errors.throwIfMissing('model'),
     schema = errors.throwIfMissing('schema'),
     classification = {},
-    highlights = {}
+    fragments = {}
   }) {
     this.model = model
     this.schema = schema
     this.classification = classification
-    this.highlights = highlights
+    this.fragments = fragments
     this.formOptions = {
       validateAfterLoad: true,
       validateAfterChanged: true
