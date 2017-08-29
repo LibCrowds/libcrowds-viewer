@@ -45,10 +45,6 @@ export default {
     task: {
       type: Task,
       required: true
-    },
-    lang: {
-      type: String,
-      default: 'en'
     }
   },
 
@@ -92,12 +88,7 @@ export default {
      *   The info.
      */
     updateInfo (info) {
-      this.metadata = info.metadata.map((item) => {
-        if (typeof item.value === 'object') {
-          item.value = this.getValueInLang(item.value)
-        }
-        return item
-      })
+      this.metadata = info.metadata
       this.logo = info.logo
       this.attribution = info.attribution
       this.license = info.license
@@ -121,16 +112,6 @@ export default {
       } else if (typeof this.task.info === 'object') {
         this.updateInfo(this.task.info)
       }
-    },
-
-    /**
-     * Return a metadata value in the chosen language, if available.
-     */
-    getValueInLang (values) {
-      const filtered = values.filter((value) => {
-        return value['@language'] === this.lang
-      })
-      return filtered.length ? filtered[0]['@value'] : ''
     }
   },
 

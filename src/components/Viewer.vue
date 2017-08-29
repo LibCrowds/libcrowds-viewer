@@ -37,8 +37,7 @@
             v-if="currentTask"
             :task="currentTask"
             :show="showInfoModal"
-            @hide="showInfoModal = false"
-            :lang="lang">
+            @hide="showInfoModal = false">
           </info-modal>
 
           <help-modal
@@ -227,10 +226,6 @@ export default {
     zoomBy: {
       type: Number,
       default: 0.2
-    },
-    lang: {
-      type: String,
-      default: 'en'
     },
     creator: {
       type: Object,

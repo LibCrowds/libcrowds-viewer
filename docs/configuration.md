@@ -11,7 +11,6 @@ All of the following properties, apart from `task-opts`, are optional.
 | task-opts             | Array   |           | An array of task options \(see [Tasks](configuration.md#tasks)\)                                      |
 | pan-by                | Number  | 0.1       | Multiplier by which to pan                                                                            |
 | zoom-by               | Number  | 0.2       | Multiplier by which to zoom                                                                           |
-| lang                  | String  | 'en'      | Language for manifest metadata \(where available\)                                                    |
 | confirm-before-unload | Boolean | true      | Confirm before leaving the page                                                                       |
 | disable-complete      | Boolean | true      | Disable completed tasks to prevent multiple submission                                                |
 | show-note             | Boolean | true      | Include the note input                                                                                |
