@@ -7,7 +7,8 @@
     "guidance": "Draw a box around each title, including any subtitles",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
-    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json"
+    "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "thumbnailUrl": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000003/full/max/0/default.jpg"
   },
   {
     "tag": "actor",
@@ -17,6 +18,7 @@
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x00007e",
     "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589092.0x000002/manifest.json",
+    "thumbnailUrl": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589091.0x000003/full/max/0/default.jpg",
     "highlights": [
       {
         "x": 291,
@@ -36,6 +38,7 @@
       "url": "https://farm6.staticflickr.com/5452/31011537275_e92f4e3be9_b.jpg",
       "crossOriginPolicy": "Anonymous"
     },
+    "thumbnailUrl": "https://farm6.staticflickr.com/5452/31011537275_e92f4e3be9_m.jpg",
     "info": {
       "metadata": [
         { "label": "Title", "value": "Example of an image loaded from Flickr" }
