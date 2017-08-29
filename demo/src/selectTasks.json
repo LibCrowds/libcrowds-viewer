@@ -36,6 +36,11 @@
       "url": "https://farm6.staticflickr.com/5452/31011537275_e92f4e3be9_b.jpg",
       "crossOriginPolicy": "Anonymous"
     },
+    "info": {
+      "metadata": [
+        { "label": "Title", "value": "Example of an image loaded from Flickr" }
+      ]
+    },
     "target": "https://www.flickr.com/photos/132066275@N04/31011537275/"
   }
 ]
