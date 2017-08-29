@@ -10,7 +10,6 @@
           :viewer="viewer"
           :buttons="mergedToolbarButtons"
           :showNavigation="navigation.length > 0"
-          :discussLink="discussLink"
           :helpButton="viewerOpts.helpButton"
           :infoButton="viewerOpts.infoButton"
           @helpclicked="showHelpModal = true"
@@ -18,7 +17,6 @@
           @browseclicked="showBrowseModal = true"
           @likeclicked="emitTaskLiked"
           @fullscreenclicked="toggleFullScreen"
-          @discussclicked="onDiscussClicked"
           @navigationclicked="showNavigationSidebar = !showNavigationSidebar">
         </toolbar-controls>
 
@@ -257,10 +255,6 @@ export default {
     messageBus: {
       type: Object,
       default: null
-    },
-    discussLink: {
-      type: String,
-      default: ''
     },
     navigation: {
       type: Array,
@@ -624,15 +618,6 @@ export default {
       for (modelKey in task.form.highlights) {
         deleteOverlay(this.viewer, `highlight-${modelKey}`)
       }
-    },
-
-    /**
-     * Go to the discussion URL.
-     * @param {String} url
-     *   The URL.
-     */
-    onDiscussClicked (url) {
-      window.location.href = url
     },
 
     /**

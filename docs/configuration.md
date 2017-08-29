@@ -17,7 +17,6 @@ All of the following properties, apart from `task-opts`, are optional.
 | show-note             | Boolean | true      | Include the note input                                                                                |
 | show-form-errors      | Boolean | true      | Show form errors on submit                                                                            |
 | show-related-tasks    | Boolean | false     | Show all tasks related to the same image                                                              |
-| discuss-link          | String  | ''        | Show the discuss button using this URL                                                                |
 | creator               | Object  | null      | The Annotation creator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\)   |
 | generator             | Object  | null      | The Annotation generator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\) |
 | next-on-submit        | Object  | true      | Move to the next task on after submission                                                             |

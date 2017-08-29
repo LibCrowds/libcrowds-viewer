@@ -53,10 +53,6 @@ export default {
       type: Object,
       required: true
     },
-    discussLink: {
-      type: String,
-      required: true
-    },
     showNavigation: {
       type: Boolean,
       required: true
@@ -160,16 +156,6 @@ export default {
             link.download = 'task.png'
             link.href = data
             link.click()
-          }
-        })
-      }
-
-      if (this.discussLink) {
-        tbButtons.push({
-          tooltip: 'Discuss on Forum',
-          icon: 'comments',
-          callback: () => {
-            this.$emit('discussclicked', this.discussLink)
           }
         })
       }
