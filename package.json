@@ -1,6 +1,6 @@
 {
   "name": "libcrowds-viewer",
-  "description": "IIIF-compatible image viewer component.",
+  "description": "A Vue component for crowdsourcing Web Annotations.",
   "version": "3.0.0",
   "main": "dist/main.js",
   "author": "Alex Mendes <alexanderhmendes@gmail.com>",

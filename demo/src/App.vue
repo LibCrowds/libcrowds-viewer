@@ -7,7 +7,7 @@
       v-if="!showSelectViewer && !showTranscribeViewer">
       <h1>LibCrowds Viewer</h1>
       <p class="lead">
-        IIIF-compatible image viewer Vue component.
+        A Vue component for crowdsourcing Web Annotations.
       </p>
       <div id="mode-buttons">
         <button @click="showSelectViewer = true">

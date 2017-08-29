@@ -30,7 +30,7 @@
           <icon name="question-circle"></icon>View Help
         </li>
         <li v-if="buttons.info">
-          <icon name="info-circle"></icon>View Metadata
+          <icon name="info-circle"></icon>View Info
         </li>
         <li v-if="buttons.browse">
           <icon name="list"></icon>Browse Tasks
