@@ -4,7 +4,7 @@
       <ul>
         <li
           :class="listItemClass"
-          v-for="(task, index) in tasks"
+          v-for="(task, index) in paginatedTasks"
           :key="`task-${index}`"
           @click="onTaskClicked(task)">
           <figure v-if="task !== undefined">
@@ -24,6 +24,24 @@
           </figure>
         </li>
       </ul>
+      <div class="pagination">
+        <button
+          :disabled="page <= 1"
+          @click="page = page - 1">
+          &laquo;
+        </button>
+        <button
+          v-for="n in totalPages"
+          :key="`page-${n}`"
+          :class="{active: n === page}"
+          @click="page = n">{{ n }}
+        </button>
+        <button
+          :disabled="page >= totalPages"
+          @click="page = page + 1">
+          &raquo;
+        </button>
+      </div>
     </modal-base>
   </div>
 </template>
@@ -34,6 +52,13 @@ import 'vue-awesome/icons/check-circle'
 import ModalBase from '@/components/modals/Base'
 
 export default {
+  data: function () {
+    return {
+      page: 1,
+      perPage: 15
+    }
+  },
+
   components: {
     ModalBase,
     Icon
@@ -64,6 +89,18 @@ export default {
       return {
         'task-complete': complete
       }
+    },
+    paginatedTasks: function () {
+      const tasks = this.tasks.slice(
+        this.page - 1 * this.perPage,
+        this.page * this.perPage
+      )
+      console.log(tasks)
+      return tasks
+    },
+    totalPages: function () {
+      console.log('TOTAL PAGES', this.tasks.length / this.perPage)
+      return this.tasks.length / this.perPage
     }
   },
 
@@ -132,6 +169,24 @@ export default {
         width: auto;
         color: $green;
       }
+    }
+  }
+
+  .pagination {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .pagination button {
+    color: #fff;
+    background: none;
+    border: none;
+    padding: 8px 16px;
+
+    &.active {
+      background-color: $blue;
     }
   }
 }
