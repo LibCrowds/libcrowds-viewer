@@ -55,7 +55,7 @@ export default {
   data: function () {
     return {
       page: 1,
-      perPage: 15
+      perPage: 2
     }
   },
 
@@ -91,16 +91,15 @@ export default {
       }
     },
     paginatedTasks: function () {
-      const tasks = this.tasks.slice(
-        this.page - 1 * this.perPage,
-        this.page * this.perPage
-      )
-      console.log(tasks)
+      const start = (this.page - 1) * this.perPage
+      const end = start + this.perPage >= this.tasks.length
+        ? this.tasks.length
+        : start + this.perPage
+      const tasks = this.tasks.slice(start, end)
       return tasks
     },
     totalPages: function () {
-      console.log('TOTAL PAGES', this.tasks.length / this.perPage)
-      return this.tasks.length / this.perPage
+      return Math.ceil(this.tasks.length / this.perPage)
     }
   },
 
