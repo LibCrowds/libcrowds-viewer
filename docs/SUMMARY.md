@@ -10,6 +10,7 @@
   * [Tasks](configuration.md#tasks)
   * [Tile Sources](configuration.md#tile-sources)
   * [Forms](configuration.md#forms)
+  * [Info](configuration.md#info)
   * [Navigation](configuration.md#navigation)
 * [Data Model](data_model.md)
 * [Tile Sources](tile_sources.md)
