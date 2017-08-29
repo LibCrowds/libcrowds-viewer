@@ -1,117 +1,121 @@
 <template>
   <div id="lv-viewer" ref="container">
 
-    <div id="lv-viewer-wrapper">
+    <navbar
+      v-if="navigation.length > 0"
+      :navigation="navigation">
+    </navbar>
 
-      <div id="hud" ref="hud">
-        <toolbar-controls
-          v-if="currentTask"
-          :task="currentTask"
-          :viewer="viewer"
-          :buttons="mergedToolbarButtons"
-          :showNavigation="navigation.length > 0"
-          :helpButton="viewerOpts.helpButton"
-          :infoButton="viewerOpts.infoButton"
-          @helpclicked="showHelpModal = true"
-          @infoclicked="showInfoModal = true"
-          @browseclicked="showBrowseModal = true"
-          @likeclicked="emitTaskLiked"
-          @fullscreenclicked="toggleFullScreen"
-          @navigationclicked="showNavigationSidebar = !showNavigationSidebar">
-        </toolbar-controls>
+    <main>
+      <div id="lv-viewer-wrapper">
+        <div id="hud" ref="hud">
+          <toolbar-controls
+            v-if="currentTask"
+            :task="currentTask"
+            :viewer="viewer"
+            :buttons="mergedToolbarButtons"
+            :helpButton="viewerOpts.helpButton"
+            :infoButton="viewerOpts.infoButton"
+            @helpclicked="showHelpModal = true"
+            @infoclicked="showInfoModal = true"
+            @browseclicked="showBrowseModal = true"
+            @likeclicked="emitTaskLiked"
+            @fullscreenclicked="toggleFullScreen">
+          </toolbar-controls>
 
-        <pan-controls
-          :viewer="viewer"
-          :panBy="panBy">
-        </pan-controls>
+          <pan-controls
+            :viewer="viewer"
+            :panBy="panBy">
+          </pan-controls>
 
-        <zoom-controls
-          :viewer="viewer"
-          :zoomBy="zoomBy">
-        </zoom-controls>
+          <zoom-controls
+            :viewer="viewer"
+            :zoomBy="zoomBy">
+          </zoom-controls>
 
-        <metadata-modal
-          v-if="currentTask"
-          :task="currentTask"
-          :show="showInfoModal"
-          @hide="showInfoModal = false"
-          :lang="lang">
-        </metadata-modal>
+          <metadata-modal
+            v-if="currentTask"
+            :task="currentTask"
+            :show="showInfoModal"
+            @hide="showInfoModal = false"
+            :lang="lang">
+          </metadata-modal>
 
-        <help-modal
-          v-if="currentTask && mergedToolbarButtons.help"
-          :buttons="mergedToolbarButtons"
-          :show="showHelpModal"
-          :disableComplete="disableComplete"
-          @hide="showHelpModal = false"
-          :task="currentTask">
-        </help-modal>
+          <help-modal
+            v-if="currentTask && mergedToolbarButtons.help"
+            :buttons="mergedToolbarButtons"
+            :show="showHelpModal"
+            :disableComplete="disableComplete"
+            @hide="showHelpModal = false"
+            :task="currentTask">
+          </help-modal>
 
-        <browse-modal
-          v-if="mergedToolbarButtons.browse"
-          :tasks="tasks"
-          :show="showBrowseModal"
-          :disableComplete="disableComplete"
-          @hide="showBrowseModal = false"
-          @taskclick="setCurrentTask">
-        </browse-modal>
+          <browse-modal
+            v-if="mergedToolbarButtons.browse"
+            :tasks="tasks"
+            :show="showBrowseModal"
+            :disableComplete="disableComplete"
+            @hide="showBrowseModal = false"
+            @taskclick="setCurrentTask">
+          </browse-modal>
 
-        <button
-          :disabled="previousBtnDisabled"
-          class="btn btn-hud"
-          id="lv-browse-previous"
-          @click="previousTask">
-          <icon name="chevron-left" scale="1.5"></icon>
-        </button>
-        <button
-          :disabled="nextBtnDisabled"
-          class="btn btn-hud"
-          id="lv-browse-next"
-          @click="nextTask">
-          <icon name="chevron-right" scale="1.5"></icon>
-        </button>
+          <button
+            :disabled="previousBtnDisabled"
+            class="btn btn-hud"
+            id="lv-browse-previous"
+            @click="previousTask">
+            <icon name="chevron-left" scale="1.5"></icon>
+          </button>
+          <button
+            :disabled="nextBtnDisabled"
+            class="btn btn-hud"
+            id="lv-browse-next"
+            @click="nextTask">
+            <icon name="chevron-right" scale="1.5"></icon>
+          </button>
+        </div>
+
+        <div :id="viewerOpts.id"></div>
+
+        <transition name="fade">
+          <div id="viewer-disabled-overlay" v-if="viewerDisabled"></div>
+        </transition>
+
       </div>
 
-      <div :id="viewerOpts.id"></div>
-
-      <transition name="fade">
-        <div id="viewer-disabled-overlay" v-if="viewerDisabled"></div>
-      </transition>
-
-    </div>
-
-    <task-sidebar
-      v-if="currentTask"
-      :task="currentTask"
-      :showNote="showNote"
-      :commentAnnotation="commentAnnotation"
-      :disableComplete="disableComplete"
-      :confirmOnSubmit="confirmOnSubmit"
-      @noteupdated="updateNote"
-      @submit="submitTask"
-      @disableviewer="viewerDisabled = true"
-      @enableviewer="viewerDisabled = false">
-
-      <select-sidebar-item
-        v-if="taskLoaded && currentTask.mode === 'select'"
+      <task-sidebar
+        v-if="currentTask"
         :task="currentTask"
-        :tags="tags"
+        :showNote="showNote"
+        :commentAnnotation="commentAnnotation"
         :disableComplete="disableComplete"
-        :viewer="viewer"
-        @edit="editTag"
-        @delete="deleteTag">
-      </select-sidebar-item>
-
-      <transcribe-sidebar-item
-        v-if="currentTask.mode === 'transcribe'"
-        :task="currentTask"
-        :disableComplete="disableComplete"
-        @update="updateForm"
+        :confirmOnSubmit="confirmOnSubmit"
+        @noteupdated="updateNote"
         @submit="submitTask"
-        @inputfocus="onTranscribeInputFocus"
-        @inputblur="onTranscribeInputBlur">
-      </transcribe-sidebar-item>
-    </task-sidebar>
+        @disableviewer="viewerDisabled = true"
+        @enableviewer="viewerDisabled = false">
+
+        <select-sidebar-item
+          v-if="taskLoaded && currentTask.mode === 'select'"
+          :task="currentTask"
+          :tags="tags"
+          :disableComplete="disableComplete"
+          :viewer="viewer"
+          @edit="editTag"
+          @delete="deleteTag">
+        </select-sidebar-item>
+
+        <transcribe-sidebar-item
+          v-if="currentTask.mode === 'transcribe'"
+          :task="currentTask"
+          :disableComplete="disableComplete"
+          @update="updateForm"
+          @submit="submitTask"
+          @inputfocus="onTranscribeInputFocus"
+          @inputblur="onTranscribeInputBlur">
+        </transcribe-sidebar-item>
+      </task-sidebar>
+    </main>
 
     <selector
       v-if="selectorEnabled"
@@ -120,13 +124,6 @@
       :selectionRect="selectionRect"
       @selection="handleSelection">
     </selector>
-
-    <navigation-sidebar
-      v-if="navigation.length"
-      :show="showNavigationSidebar"
-      :navigation="navigation"
-      @hide="showNavigationSidebar = false">
-    </navigation-sidebar>
 
   </div>
 </template>
@@ -144,7 +141,7 @@ import ToolbarControls from '@/components/controls/Toolbar'
 import PanControls from '@/components/controls/Pan'
 import ZoomControls from '@/components/controls/Zoom'
 import TaskSidebar from '@/components/sidebars/Task'
-import NavigationSidebar from '@/components/sidebars/Navigation'
+import Navbar from '@/components/navigation/Navbar'
 import SelectSidebarItem from '@/components/sidebars/items/Select'
 import TranscribeSidebarItem from '@/components/sidebars/items/Transcribe'
 import Selector from '@/components/Selector'
@@ -195,7 +192,6 @@ export default {
       showInfoModal: false,
       showHelpModal: false,
       showBrowseModal: false,
-      showNavigationSidebar: false,
       viewerDisabled: false,
       tasks: [],
       currentTask: null,
@@ -278,7 +274,7 @@ export default {
     PanControls,
     ZoomControls,
     TaskSidebar,
-    NavigationSidebar,
+    Navbar,
     Selector,
     SelectSidebarItem,
     TranscribeSidebarItem,
@@ -762,8 +758,17 @@ export default {
   top: 0;
   overflow: hidden;
 
-  @media screen and (min-width: 768px) {
-    flex-direction: row;
+  main {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-color: #000;
+
+    @media screen and (min-width: 768px) {
+      flex-direction: row;
+    }
   }
 }
 
