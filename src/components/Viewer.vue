@@ -521,17 +521,23 @@ export default {
     updateForm (task, form) {
       task.updateForm(form)
       for (let key in form.model) {
-        const now = new Date().toISOString()
-        const anno = this.annotator.storeTranscriptionAnnotation(
-          task,
-          key,
-          form.model[key],
-          form.fragments[key]
-        )
-        if (anno.created > now) {
-          this.$emit('create', task, anno)
-        } else {
-          this.$emit('update', task, anno)
+        let anno = this.annotator.getTranscribeAnnotation(task, key)
+        if (form.model[key]) {
+          const now = new Date().toISOString()
+          const anno = this.annotator.storeTranscriptionAnnotation(
+            task,
+            key,
+            form.model[key],
+            form.fragments[key]
+          )
+          if (anno.created > now) {
+            this.$emit('create', task, anno)
+          } else {
+            this.$emit('update', task, anno)
+          }
+        } else if (anno) {
+          this.annotator.deleteAnnotation(task, anno.id)
+          this.$emit('delete', task, anno)
         }
       }
     },
