@@ -90,6 +90,7 @@ export default {
       },
       messageBus: new Vue(),
       navigation: [
+        { label: 'LibCrowds Viewer', url: window.location.href, brand: true },
         { label: 'Home', url: window.location.href }
       ]
     }

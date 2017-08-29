@@ -76,9 +76,10 @@ In `transcribe` mode the form can be configured with the following properties.
 
 ## Navigation
 
-Additional navigation links (for example, for the rest of your website) can be passed to the viewer via the `navigation` property. These links will be appended to a collapsible sidebar toggled via a 'hamburger' button and (as with all other buttons) still visible in full screen mode.
+Additional navigation links (for example, for the rest of your website) can be passed to the viewer via the `navigation` property. These links will be appended to a responsive navbar that will still visible in full screen mode.
 
-| Property | Type   | Description          |
-|----------|--------|----------------------|
-| label    | String | A label for the link |
-| url      | String | The link url         |
+| Property | Type    | Description          |
+|----------|---------|----------------------|
+| label    | String  | A label for the link |
+| url      | String  | The link url         |
+| brand    | Boolean | Add brand styling    |

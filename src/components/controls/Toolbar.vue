@@ -27,7 +27,6 @@ import 'vue-awesome/icons/info-circle'
 import 'vue-awesome/icons/thumbs-up'
 import 'vue-awesome/icons/share-alt'
 import 'vue-awesome/icons/eye'
-import 'vue-awesome/icons/bars'
 import 'vue-awesome/icons/comments'
 import 'vue-awesome/icons/download'
 import Task from '@/model/Task'
@@ -51,10 +50,6 @@ export default {
     },
     buttons: {
       type: Object,
-      required: true
-    },
-    showNavigation: {
-      type: Boolean,
       required: true
     }
   },
@@ -156,16 +151,6 @@ export default {
             link.download = 'task.png'
             link.href = data
             link.click()
-          }
-        })
-      }
-
-      if (this.showNavigation) {
-        tbButtons.unshift({
-          tooltip: 'Navigation',
-          icon: 'bars',
-          callback: () => {
-            this.$emit('navigationclicked')
           }
         })
       }
