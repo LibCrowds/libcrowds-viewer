@@ -210,7 +210,7 @@ export default {
     },
     confirmBeforeUnload: {
       type: Boolean,
-      default: false
+      default: true
     },
     disableComplete: {
       type: Boolean,
