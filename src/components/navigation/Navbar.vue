@@ -14,7 +14,8 @@
         <a
           v-for="(item, index) in navigation"
           :key="index"
-          :href="item.url">
+          :href="item.url"
+          :data-brand="item.brand">
           {{ item.label }}
         </a>
       </div>
@@ -127,6 +128,23 @@ export default {
       color: $gray-dark;
       transition: color 200ms ease;
       padding: 0.5rem;
+
+      &[data-brand] {
+        display: none;
+        margin-right: 1rem;
+        font-weight: 600;
+        letter-spacing: 0.8px;
+        font-size: 1rem;
+
+        @media screen and (min-width: 768px) {
+          display: block;
+        }
+
+        &:hover,
+        &:focus {
+          color: #fff;
+        }
+      }
 
       &:hover,
       &:focus {
