@@ -29,7 +29,6 @@
     <!-- Viewer used for the select tasks -->
     <div class="viewer-container" v-else-if="showSelectViewer">
       <libcrowds-viewer
-        confirm-on-submit
         :disable-complete="true"
         :message-bus="messageBus"
         :task-opts="selectTaskOpts"
@@ -47,7 +46,6 @@
     <!-- Viewer used for the transcribe tasks -->
     <div class="viewer-container" v-else-if="showTranscribeViewer">
       <libcrowds-viewer
-        confirm-on-submit
         :show-related-tasks="true"
         :disable-complete="true"
         :message-bus="messageBus"

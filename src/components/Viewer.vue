@@ -262,7 +262,7 @@ export default {
     },
     confirmOnSubmit: {
       type: Boolean,
-      default: false
+      default: true
     },
     buttons: {
       type: Object,

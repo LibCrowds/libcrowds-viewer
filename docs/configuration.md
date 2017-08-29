@@ -22,7 +22,7 @@ All of the following properties, apart from `task-opts`, are optional.
 | next-on-submit        | Object  | true      | Move to the next task on after submission                                                             |
 | messageBus            | Object  | null      | Message bus used for notifications \(see [Message Bus](message_bus.md)\)                              |
 | navigation            | Array   | null      | Additional navigation links \(see [Navigation](configuration.md#navigation)\)                         |
-| confirm-on-submit     | Boolean | false     | Show a confirmation box on submission                                                                 |
+| confirm-on-submit     | Boolean | true      | Show a confirmation box on submission                                                                 |
 | buttons               | Object  | See below | The toolbar buttons to display (see [Buttons](configuration.md#buttons)                               |
 
 ## Buttons
