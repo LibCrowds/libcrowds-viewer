@@ -521,7 +521,7 @@ export default {
     updateForm (task, form) {
       task.updateForm(form)
       for (let key in form.model) {
-        let anno = this.annotator.getFormFieldAnnotation(task, key)
+        let anno = this.annotator.getTranscribeAnnotation(task, key)
         if (form.model[key]) {
           const now = new Date().toISOString()
           const anno = this.annotator.storeTranscriptionAnnotation(
