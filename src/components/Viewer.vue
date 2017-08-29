@@ -214,7 +214,7 @@ export default {
     },
     disableComplete: {
       type: Boolean,
-      default: false
+      default: true
     },
     showNote: {
       type: Boolean,

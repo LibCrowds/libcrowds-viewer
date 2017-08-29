@@ -13,7 +13,7 @@ All of the following properties, apart from `task-opts`, are optional.
 | zoom-by               | Number  | 0.2       | Multiplier by which to zoom                                                                           |
 | lang                  | String  | 'en'      | Language for manifest metadata \(where available\)                                                    |
 | confirm-before-unload | Boolean | false     | Confirm before leaving the page                                                                       |
-| disable-complete      | Boolean | false     | Disable completed tasks to prevent multiple submission                                                |
+| disable-complete      | Boolean | true      | Disable completed tasks to prevent multiple submission                                                |
 | show-note             | Boolean | true      | Include the note input                                                                                |
 | show-form-errors      | Boolean | true      | Show form errors on submit                                                                            |
 | show-related-tasks    | Boolean | false     | Show all tasks related to the same image                                                              |

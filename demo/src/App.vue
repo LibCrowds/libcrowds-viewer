@@ -29,7 +29,6 @@
     <!-- Viewer used for the select tasks -->
     <div class="viewer-container" v-else-if="showSelectViewer">
       <libcrowds-viewer
-        :disable-complete="true"
         :message-bus="messageBus"
         :task-opts="selectTaskOpts"
         :creator="creator"
@@ -47,7 +46,6 @@
     <div class="viewer-container" v-else-if="showTranscribeViewer">
       <libcrowds-viewer
         :show-related-tasks="true"
-        :disable-complete="true"
         :message-bus="messageBus"
         :task-opts="transcribeTaskOpts"
         :creator="creator"
