@@ -29,9 +29,6 @@
     <!-- Viewer used for the select tasks -->
     <div class="viewer-container" v-else-if="showSelectViewer">
       <libcrowds-viewer
-        confirm-on-submit
-        :disable-complete="true"
-        :show-like="showLike"
         :message-bus="messageBus"
         :task-opts="selectTaskOpts"
         :creator="creator"
@@ -48,10 +45,7 @@
     <!-- Viewer used for the transcribe tasks -->
     <div class="viewer-container" v-else-if="showTranscribeViewer">
       <libcrowds-viewer
-        confirm-on-submit
         :show-related-tasks="true"
-        :disable-complete="true"
-        :show-like="showLike"
         :message-bus="messageBus"
         :task-opts="transcribeTaskOpts"
         :creator="creator"
@@ -94,7 +88,6 @@ export default {
         name: 'Code v2.1',
         homepage: 'http://example.org/client1/homepage1'
       },
-      showLike: true,
       messageBus: new Vue(),
       navigation: [
         { label: 'Home', url: window.location.href }

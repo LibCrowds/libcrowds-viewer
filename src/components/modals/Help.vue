@@ -29,16 +29,16 @@
         <li>
           <icon name="question-circle"></icon>View Help
         </li>
-        <li v-if="showInfo">
+        <li v-if="buttons.info">
           <icon name="info-circle"></icon>View Metadata
         </li>
-        <li v-if="showBrowse">
+        <li v-if="buttons.browse">
           <icon name="list"></icon>Browse Tasks
         </li>
-        <li v-if="showLike">
+        <li v-if="buttons.like">
           <icon name="thumbs-up"></icon>Like Task/Image
         </li>
-        <li v-if="showShare">
+        <li v-if="buttons.share">
           <icon name="share-alt"></icon>Copy Image URL
         </li>
       </ul>
@@ -122,21 +122,9 @@ export default {
       type: Task,
       requried: true
     },
-    showInfo: {
-      type: Boolean,
-      requried: true
-    },
-    showBrowse: {
-      type: Boolean,
-      requried: true
-    },
-    showLike: {
-      type: Boolean,
-      requried: true
-    },
-    showShare: {
-      type: Boolean,
-      requried: true
+    buttons: {
+      type: Object,
+      required: true
     },
     disableComplete: {
       type: Boolean,
