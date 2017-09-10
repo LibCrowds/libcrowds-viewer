@@ -48,7 +48,7 @@ Note that the `tag` property is required when in `select` mode.
       "type": "FragmentSelector",
       "value": "?xywh=100,100,100,100"
     }
-  }
+  },
   "body": [
     {
       "type": "TextualBody",
