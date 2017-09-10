@@ -42,7 +42,7 @@ Note that the `tag` property is required when in `select` mode.
     "homepage": "http://example.org/client1/homepage1"
   },
   "target": {
-    "source": "http://example.org/iiif/book1/canvas/p1"
+    "source": "http://example.org/iiif/book1/canvas/p1",
     "selector": {
       "conformsTo": "http://www.w3.org/TR/media-frags/",
       "type": "FragmentSelector",
