@@ -13,7 +13,7 @@
             v-if="currentTask"
             :task="currentTask"
             :viewer="viewer"
-            :buttons="mergedToolbarButtons"
+            :buttons="mergedButtons"
             :helpButton="viewerOpts.helpButton"
             :infoButton="viewerOpts.infoButton"
             @helpclicked="showHelpModal = true"
@@ -41,8 +41,8 @@
           </info-modal>
 
           <help-modal
-            v-if="currentTask && mergedToolbarButtons.help"
-            :buttons="mergedToolbarButtons"
+            v-if="currentTask && mergedButtons.help"
+            :buttons="mergedButtons"
             :show="showHelpModal"
             :disableComplete="disableComplete"
             @hide="showHelpModal = false"
@@ -50,7 +50,7 @@
           </help-modal>
 
           <browse-modal
-            v-if="mergedToolbarButtons.browse"
+            v-if="mergedButtons.browse"
             :tasks="tasks"
             :show="showBrowseModal"
             :disableComplete="disableComplete"
@@ -180,7 +180,7 @@ export default {
           dblClickToZoom: false
         }
       },
-      defaultToolbarButtons: {
+      defaultButtons: {
         fullscreen: true,
         help: true,
         info: true,
@@ -314,14 +314,14 @@ export default {
         (!this.currentTask.complete || !this.disableComplete)
       )
     },
-    mergedToolbarButtons: function () {
-      let mergedButtons = JSON.parse(JSON.stringify(this.defaultToolbarButtons))
-      for (let key in mergedButtons) {
+    mergedButtons: function () {
+      let merged = JSON.parse(JSON.stringify(this.defaultButtons))
+      for (let key in merged) {
         if (this.buttons.hasOwnProperty(key)) {
-          mergedButtons[key] = this.buttons[key]
+          merged[key] = this.buttons[key]
         }
       }
-      return mergedButtons
+      return merged
     }
   },
 
