@@ -212,8 +212,8 @@ export default {
       margin: 1rem;
     }
 
-    button: {
-      background: #26A65B;
+    button {
+      background: #26A65B !important;
     }
   }
 
