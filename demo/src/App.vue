@@ -4,7 +4,10 @@
     <!-- Demo home page -->
     <div
       id="home-container"
-      v-if="!showSelectViewer && !showTranscribeViewer">
+      v-if="(
+        !showSelectViewer &&
+        !showTranscribeViewer &&
+        !customTaskOpts.length)">
       <h1>LibCrowds Viewer</h1>
       <p class="lead">
         A Vue component for crowdsourcing Web Annotations.
@@ -16,7 +19,21 @@
         <button @click="showTranscribeViewer = true">
           Transcribe Mode
         </button>
+        <button @click="showCustomiseTextArea = !showCustomiseTextArea">
+          Customise
+        </button>
       </div>
+      <transition name="fade-text-area">
+        <div id="customise" v-show="showCustomiseTextArea">
+          <textarea
+            ref="custom"
+            rows="10">
+          </textarea>
+          <button @click="loadCustomTaskOpts">
+            Try it out
+          </button>
+        </div>
+      </transition>
       <p id="instructions">
         <small>(watch the console for events)</small>
       </p>
@@ -31,8 +48,6 @@
       <libcrowds-viewer
         :message-bus="messageBus"
         :task-opts="selectTaskOpts"
-        :creator="creator"
-        :generator="generator"
         :navigation="navigation"
         @taskchange="handleTaskChange"
         @create="handleCreate"
@@ -49,8 +64,22 @@
         :buttons="{browse: false}"
         :message-bus="messageBus"
         :task-opts="transcribeTaskOpts"
-        :creator="creator"
-        :generator="generator"
+        :navigation="navigation"
+        @taskchange="handleTaskChange"
+        @create="handleCreate"
+        @update="handleUpdate"
+        @delete="handleDelete"
+        @submit="handleSubmit">
+      </libcrowds-viewer>
+    </div>
+
+    <!-- Viewer used for the custom tasks -->
+    <div class="viewer-container" v-else-if="customTaskOpts.length">
+      <libcrowds-viewer
+        :show-related-tasks="true"
+        :buttons="{browse: false}"
+        :message-bus="messageBus"
+        :task-opts="customTaskOpts"
         :navigation="navigation"
         @taskchange="handleTaskChange"
         @create="handleCreate"
@@ -77,18 +106,8 @@ export default {
       transcribeTaskOpts: transcribeTasks,
       showSelectViewer: false,
       showTranscribeViewer: false,
-      creator: {
-        id: 'http://example.org/user1',
-        type: 'Person',
-        name: 'My Pseudonym',
-        nickname: 'pseudo'
-      },
-      generator: {
-        id: 'http://example.org/client1',
-        type: 'Software',
-        name: 'Code v2.1',
-        homepage: 'http://example.org/client1/homepage1'
-      },
+      showCustomiseTextArea: false,
+      customTaskOpts: [],
       messageBus: new Vue(),
       navigation: [
         { label: 'LibCrowds Viewer', url: window.location.href, brand: true },
@@ -100,6 +119,13 @@ export default {
   computed: {
     githubUrl: function () {
       return process.env.GITHUB_URL
+    },
+    customTaskOpts: function () {
+      try {
+        return JSON.parse(this.$refs.custom.value)
+      } catch (err) {
+        alert(err)
+      }
     }
   },
 
@@ -108,6 +134,14 @@ export default {
   },
 
   methods: {
+    loadCustomTaskOpts () {
+      try {
+        this.customTaskOpts = JSON.parse(this.$refs.custom.value)
+      } catch (err) {
+        this.customTaskOpts = []
+        alert(err)
+      }
+    },
     handleTaskChange (oldTask, newTask) {
       console.log('Task changed', oldTask, newTask)
     },
@@ -168,6 +202,21 @@ export default {
     border: none;
   }
 
+  #customise {
+    width: 75%;
+    display: block;
+    text-align: center;
+
+    textarea {
+      width: 100%;
+      margin: 1rem;
+    }
+
+    button: {
+      background: #26A65B;
+    }
+  }
+
   #doc-link {
     display: flex;
     align-items: center;
@@ -183,6 +232,18 @@ export default {
       color: #5F5F5F;
       font-family: Arial, Helvetica, sans-serif;
     }
+  }
+
+  .fade-text-area-enter-active,
+  .fade-text-area-leave-active {
+    transition: all 0.2s;
+    max-height: 500px;
+  }
+  .fade-text-area-enter,
+  .fade-text-area-leave-to
+  {
+    opacity: 0;
+    max-height: 0px;
   }
 }
 
