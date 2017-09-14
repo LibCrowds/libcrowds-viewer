@@ -97,7 +97,7 @@
         :commentAnnotation="commentAnnotation"
         :disableComplete="disableComplete"
         :confirmOnSubmit="confirmOnSubmit"
-        :noteButton="noteButton"
+        :buttons="mergedButtons"
         @noteupdated="updateNote"
         @submit="submitTask"
         @disableviewer="viewerDisabled = true"
@@ -187,7 +187,8 @@ export default {
         browse: true,
         like: true,
         share: true,
-        download: true
+        download: true,
+        note: true
       },
       showInfoModal: false,
       showHelpModal: false,
@@ -263,13 +264,6 @@ export default {
     buttonText: {
       type: String,
       default: 'Add a note'
-    },
-    noteButton: {
-      type: Object,
-      default: () => ({
-        text: 'Add a note',
-        placeholder: 'Leave a note...',
-      })
     }
   },
 

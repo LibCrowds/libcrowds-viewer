@@ -22,31 +22,22 @@ All of the following properties, apart from `task-opts`, are optional.
 | messageBus            | Object  | null      | Message bus used for notifications \(see [Message Bus](message_bus.md)\)                              |
 | navigation            | Array   | []]       | Additional navigation links \(see [Navigation](configuration.md#navigation)\)                         |
 | confirm-on-submit     | Boolean | true      | Show a confirmation box on submission                                                                 |
-| buttons               | Object  | See below | The toolbar buttons to display (see [Buttons](configuration.md#buttons)                               |
-| note-button           | Object  | See below | The note button configuration (see [Note Button](configuration.md#note-button)                        |
+| buttons               | Object  | See below | Button configuration details (see [Buttons](configuration.md#buttons)                                 |
 
 ## Buttons
 
-By default the viewer displays all of the buttons listed below, to hide a particular button set its value to `false` via the `buttons` object.
+By default the viewer displays all of the `buttons` listed below. To hide a particular button set its value to `false`. If the button
 
-| Property              | Type    | Default | Description                                                                                           |
-|-----------------------|---------|---------|-------------------------------------------------------------------------------------------------------|
-| fullscreen            | Boolean | true    | Show the fullscreen button                                                                            |
-| help                  | Boolean | true    | Show the help modal button                                                                            |
-| info                  | Boolean | true    | Show the info modal button                                                                            |
-| browse                | Boolean | true    | Show the browse tasks modal button                                                                    |
-| like                  | Boolean | true    | Show the like button                                                                                  |
-| share                 | Boolean | true    | Show the share button                                                                                 |
-| download              | Boolean | true    | Show the download button                                                                              |
-
-## Note Button
-
-The `note-button` can be configured with the following properties.
-
-| Property              | Type   | Default           | Description                                                                                           |
-|-----------------------|--------|-------------------|-------------------------------------------------------------------------------------------------------|
-| text                  | String | 'Add a note'      | The text for the note button                                                                          |
-| placeholder           | String | 'Leave a note...' | The placeholder text for the note text area                                                           |
+| Property              | Type              | Default | Description                                                                                           |
+|-----------------------|-------------------|---------|-------------------------------------------------------------------------------------------------------|
+| fullscreen            | Boolean or Object | true    | Show the fullscreen button                                                                            |
+| help                  | Boolean or Object | true    | Show the help modal button                                                                            |
+| info                  | Boolean or Object | true    | Show the info modal button                                                                            |
+| browse                | Boolean or Object | true    | Show the browse tasks modal button                                                                    |
+| like                  | Boolean or Object | true    | Show the like button                                                                                  |
+| share                 | Boolean or Object | true    | Show the share button                                                                                 |
+| download              | Boolean or Object | true    | Show the download button                                                                              |
+| note                  | Boolean or Object | true    | Show the note button                                                                                  |
 
 ## Tasks
 

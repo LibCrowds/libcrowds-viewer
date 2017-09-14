@@ -8,7 +8,6 @@
 * [Configuration](configuration.md)
   * [Viewer](configuration.md#viewer)
   * [Buttons](configuration.md#buttons)
-  * [Note Button](configuration.md#note-button)
   * [Tasks](configuration.md#tasks)
   * [Forms](configuration.md#forms)
   * [Info](configuration.md#info)
