@@ -21,7 +21,7 @@
             :disabled="disableComplete && task.complete"
             class="btn btn-block"
             @click="toggleeNoteCollapse">
-            Add a note
+            {{ noteButton.text }}
           </button>
 
           <transition name="fade-height"
@@ -31,7 +31,7 @@
               v-if="!(disableComplete && task.complete)"
               ref="note"
               rows="3"
-              placeholder="Leave a note..."
+              :placeholder="noteButton.placeholder"
               v-model="note"
               @input="updateNote">
             </textarea>
@@ -93,6 +93,10 @@ export default {
     },
     showNote: {
       type: Boolean,
+      required: true
+    },
+    noteButton: {
+      type: Object,
       required: true
     },
     disableComplete: {
@@ -295,6 +299,7 @@ export default {
     }
 
     textarea {
+      padding: 0.5rem;
       margin-bottom: 0.6rem;
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;

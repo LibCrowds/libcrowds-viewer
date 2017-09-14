@@ -97,6 +97,7 @@
         :commentAnnotation="commentAnnotation"
         :disableComplete="disableComplete"
         :confirmOnSubmit="confirmOnSubmit"
+        :noteButton="noteButton"
         @noteupdated="updateNote"
         @submit="submitTask"
         @disableviewer="viewerDisabled = true"
@@ -258,6 +259,17 @@ export default {
     buttons: {
       type: Object,
       default: () => ({}) // Defaults set in defaultToolbarButtons
+    },
+    buttonText: {
+      type: String,
+      default: 'Add a note'
+    },
+    noteButton: {
+      type: Object,
+      default: () => ({
+        text: 'Add a note',
+        placeholder: 'Leave a note...',
+      })
     }
   },
 
