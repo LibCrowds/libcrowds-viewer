@@ -108,6 +108,7 @@
           :task="currentTask"
           :tags="tags"
           :disableComplete="disableComplete"
+          :selectionsEditable="selectionsEditable"
           :viewer="viewer"
           @edit="editTag"
           @delete="deleteTag">
@@ -262,9 +263,9 @@ export default {
       type: Object,
       default: () => ({}) // Defaults set in defaultToolbarButtons
     },
-    buttonText: {
-      type: String,
-      default: 'Add a note'
+    selectionsEditable: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -365,7 +366,9 @@ export default {
       const vpRect = vp.imageToViewportRectangle(imgRect)
       const overlay = drawOverlay(this.viewer, anno.id, vpRect, 'selection')
       overlay.addEventListener('click', (evt) => {
-        if (!task.complete || !this.disableComplete) {
+        if (
+          (!task.complete || !this.disableComplete) &&
+          this.selectionsEditable) {
           this.editTag(task, anno.id)
         }
       })
