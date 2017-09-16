@@ -23,7 +23,9 @@ All of the following properties, apart from `task-opts`, are optional.
 | navigation            | Array   | []]       | Additional navigation links \(see [Navigation](configuration.md#navigation)\)                         |
 | confirm-on-submit     | Boolean | true      | Show a confirmation box on submission                                                                 |
 | buttons               | Object  | See below | Button configuration details (see [Buttons](configuration.md#buttons)                                 |
-| selections- editable  | Boolean | true      | Allow the editing of selections                                                                       |
+| selections-editable   | Boolean | true      | Allow the editing of selections                                                                       |
+| browsable             | Boolean | true      | Allow browsing back and forth between tasks                                                           |
+
 ## Buttons
 
 To hide one of the `buttons` listed below, set its property to `false`. To change the text associated with the button enter a String (or an Array in the case of the `like` button).
