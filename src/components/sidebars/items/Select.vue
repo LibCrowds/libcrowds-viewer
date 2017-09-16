@@ -18,13 +18,15 @@
             class="buttons">
             <button
               v-if="selectionsEditable"
+              aria-label="Edit"
               @click="editTag(tag)"
-              class="btn btn-control">
+              class="btn btn-control hint--left hint--no-animate">
               <icon name="pencil"></icon>
             </button>
             <button
               @click="deleteTag(tag)"
-              class="btn btn-control">
+              aria-label="Delete"
+              class="btn btn-control hint--left hint--no-animate">
               <icon name="times-circle"></icon>
             </button>
           </div>
@@ -135,6 +137,7 @@ export default {
 <style lang="scss" scoped>
 @import '~style/settings';
 @import '~style/partials/buttons';
+@import '~hint.css';
 
 #lv-sidebar-select-item {
   flex: 1 1 auto;
