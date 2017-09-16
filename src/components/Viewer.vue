@@ -261,10 +261,6 @@ export default {
     buttons: {
       type: Object,
       default: () => ({}) // Defaults set in defaultToolbarButtons
-    },
-    buttonText: {
-      type: String,
-      default: 'Add a note'
     }
   },
 
