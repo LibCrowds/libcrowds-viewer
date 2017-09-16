@@ -181,14 +181,15 @@ export default {
         }
       },
       defaultButtons: {
-        fullscreen: true,
-        help: true,
-        info: true,
-        browse: true,
-        like: true,
-        share: true,
-        download: true,
-        note: true
+        fullscreen: 'Fullscreen',
+        help: 'Help',
+        info: 'Details',
+        browse: 'Browse',
+        like: ['Like', 'Unlike'],
+        share: 'Share',
+        download: 'Download',
+        note: 'Add a note',
+        submit: 'Save'
       },
       showInfoModal: false,
       showHelpModal: false,

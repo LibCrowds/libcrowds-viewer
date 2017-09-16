@@ -69,7 +69,7 @@ export default {
 
       if (this.buttons.fullscreen) {
         tbButtons.push({
-          tooltip: 'Fullscreen',
+          tooltip: this.buttons.fullscreen,
           icon: 'expand',
           callback: () => {
             this.$emit('fullscreenclicked')
@@ -79,7 +79,7 @@ export default {
 
       if (this.buttons.help) {
         tbButtons.push({
-          tooltip: 'Help',
+          tooltip: this.buttons.help,
           icon: 'question-circle',
           callback: () => {
             this.$emit('helpclicked')
@@ -89,7 +89,7 @@ export default {
 
       if (this.buttons.info) {
         tbButtons.push({
-          tooltip: 'Details',
+          tooltip: this.buttons.info,
           icon: 'info-circle',
           callback: () => {
             this.$emit('infoclicked')
@@ -99,7 +99,7 @@ export default {
 
       if (this.buttons.browse) {
         tbButtons.push({
-          tooltip: 'Browse Tasks',
+          tooltip: this.buttons.browse,
           icon: 'eye',
           callback: () => {
             this.$emit('browseclicked')
@@ -109,7 +109,9 @@ export default {
 
       if (this.buttons.like) {
         tbButtons.push({
-          tooltip: !this.task.liked ? 'Like' : 'Unlike',
+          tooltip: !this.task.liked
+            ? this.buttons.like[0]
+            : this.buttons.like[1],
           icon: 'thumbs-up',
           iconClass: this.task.liked ? 'active' : null,
           callback: () => {
@@ -119,7 +121,7 @@ export default {
       }
 
       if (this.buttons.share) {
-        let tooltip = 'Copy Image URL'
+        let tooltip = this.buttons.share
         tbButtons.push({
           id: 'lv-share-btn',
           tooltip: tooltip,
@@ -141,7 +143,7 @@ export default {
 
       if (this.buttons.download) {
         tbButtons.push({
-          tooltip: 'Download',
+          tooltip: this.buttons.download,
           id: 'lv-download-btn',
           icon: 'download',
           callback: () => {

@@ -26,18 +26,19 @@ All of the following properties, apart from `task-opts`, are optional.
 
 ## Buttons
 
-By default the viewer displays all of the `buttons` listed below. To hide a particular button set its value to `false`. If the button
+To hide one of the `buttons` listed below, set its property to `False`. To change the text associated with the button enter a String (or an Array in the case of the `like` button).
 
-| Property              | Type              | Default | Description                                                                                           |
-|-----------------------|-------------------|---------|-------------------------------------------------------------------------------------------------------|
-| fullscreen            | Boolean or Object | true    | Show the fullscreen button                                                                            |
-| help                  | Boolean or Object | true    | Show the help modal button                                                                            |
-| info                  | Boolean or Object | true    | Show the info modal button                                                                            |
-| browse                | Boolean or Object | true    | Show the browse tasks modal button                                                                    |
-| like                  | Boolean or Object | true    | Show the like button                                                                                  |
-| share                 | Boolean or Object | true    | Show the share button                                                                                 |
-| download              | Boolean or Object | true    | Show the download button                                                                              |
-| note                  | Boolean or Object | true    | Show the note button                                                                                  |
+| Property              | Type              | Default            | Description                     |
+|-----------------------|-------------------|--------------------|---------------------------------|
+| fullscreen            | Boolean or String | 'Fullscreen'       | The fullscreen button           |
+| help                  | Boolean or String | 'Help'             | The help button                 |
+| info                  | Boolean or String | 'Details'          | The info button                 |
+| browse                | Boolean or String | 'Browse Tasks'     | The browse tasks button         |
+| like                  | Boolean or Array  | ['Like', 'Unlike'] | The like button                 |
+| share                 | Boolean or String | 'Share'            | The share button                |
+| download              | Boolean or String | 'Download'         | The download button             |
+| note                  | Boolean or String | 'Add a note'       | The note button                 |
+| submit                | Boolean or String | 'Submit'           | The note button                 |
 
 ## Tasks
 
