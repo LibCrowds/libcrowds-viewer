@@ -184,7 +184,7 @@ export default {
         fullscreen: 'Fullscreen',
         help: 'Help',
         info: 'Details',
-        browse: 'Browse',
+        browse: 'Browse Tasks',
         like: ['Like', 'Unlike'],
         share: 'Share',
         download: 'Download',
