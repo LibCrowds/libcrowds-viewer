@@ -50,7 +50,7 @@
           </help-modal>
 
           <browse-modal
-            v-if="mergedButtons.browse"
+            v-if="mergedButtons.browse && browsable"
             :tasks="tasks"
             :show="showBrowseModal"
             :disableComplete="disableComplete"
@@ -59,6 +59,7 @@
           </browse-modal>
 
           <button
+            v-if="browsable"
             :disabled="previousBtnDisabled"
             class="btn btn-hud"
             id="lv-browse-previous"
@@ -66,6 +67,7 @@
             <icon name="chevron-left" scale="1.5"></icon>
           </button>
           <button
+            v-if="browsable"
             :disabled="nextBtnDisabled"
             class="btn btn-hud"
             id="lv-browse-next"
@@ -266,6 +268,10 @@ export default {
     selectionsEditable: {
       type: Boolean,
       default: true
+    },
+    browsable: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -316,6 +322,9 @@ export default {
         if (this.buttons.hasOwnProperty(key)) {
           merged[key] = this.buttons[key]
         }
+      }
+      if (!this.browsable) {
+        merged.browse = false
       }
       return merged
     }
