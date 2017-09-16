@@ -17,6 +17,7 @@
             v-if="!(disableComplete && task.complete)"
             class="buttons">
             <button
+              v-if="selectionsEditable"
               @click="editTag(tag)"
               class="btn btn-control">
               <icon name="pencil"></icon>
@@ -50,6 +51,10 @@ export default {
     },
     tags: {
       type: Array,
+      required: true
+    },
+    selectionsEditable: {
+      type: Boolean,
       required: true
     },
     disableComplete: {
