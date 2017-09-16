@@ -55,7 +55,7 @@ export default {
   data: function () {
     return {
       page: 1,
-      perPage: 2
+      perPage: 15
     }
   },
 
