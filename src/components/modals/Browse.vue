@@ -172,10 +172,8 @@ export default {
   }
 
   .pagination {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: center;
+    display: block;
+    text-align: center;
   }
 
   .pagination button {
