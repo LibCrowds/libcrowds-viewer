@@ -20,8 +20,8 @@
           <button
             :disabled="disableComplete && task.complete"
             class="btn btn-block"
-            @click="toggleeNoteCollapse">
-            Add a note
+            @click="toggleeNoteCollapse"
+            v-html="buttons.note">
           </button>
 
           <transition name="fade-height"
@@ -31,7 +31,6 @@
               v-if="!(disableComplete && task.complete)"
               ref="note"
               rows="3"
-              placeholder="Leave a note..."
               v-model="note"
               @input="updateNote">
             </textarea>
@@ -40,8 +39,8 @@
           <button
             :disabled="disableComplete && task.complete"
             class="btn btn-block btn-green"
-            @click="submit(false)">
-            Submit
+            @click="submit(false)"
+            v-html="buttons.submit">
           </button>
         </span>
 
@@ -93,6 +92,10 @@ export default {
     },
     showNote: {
       type: Boolean,
+      required: true
+    },
+    buttons: {
+      type: Object,
       required: true
     },
     disableComplete: {
@@ -295,6 +298,7 @@ export default {
     }
 
     textarea {
+      padding: 0.5rem;
       margin-bottom: 0.6rem;
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;

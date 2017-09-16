@@ -13,7 +13,7 @@
             v-if="currentTask"
             :task="currentTask"
             :viewer="viewer"
-            :buttons="mergedToolbarButtons"
+            :buttons="mergedButtons"
             :helpButton="viewerOpts.helpButton"
             :infoButton="viewerOpts.infoButton"
             @helpclicked="showHelpModal = true"
@@ -41,8 +41,8 @@
           </info-modal>
 
           <help-modal
-            v-if="currentTask && mergedToolbarButtons.help"
-            :buttons="mergedToolbarButtons"
+            v-if="currentTask && mergedButtons.help"
+            :buttons="mergedButtons"
             :show="showHelpModal"
             :disableComplete="disableComplete"
             @hide="showHelpModal = false"
@@ -50,7 +50,7 @@
           </help-modal>
 
           <browse-modal
-            v-if="mergedToolbarButtons.browse"
+            v-if="mergedButtons.browse"
             :tasks="tasks"
             :show="showBrowseModal"
             :disableComplete="disableComplete"
@@ -97,6 +97,7 @@
         :commentAnnotation="commentAnnotation"
         :disableComplete="disableComplete"
         :confirmOnSubmit="confirmOnSubmit"
+        :buttons="mergedButtons"
         @noteupdated="updateNote"
         @submit="submitTask"
         @disableviewer="viewerDisabled = true"
@@ -179,14 +180,16 @@ export default {
           dblClickToZoom: false
         }
       },
-      defaultToolbarButtons: {
-        fullscreen: true,
-        help: true,
-        info: true,
-        browse: true,
-        like: true,
-        share: true,
-        download: true
+      defaultButtons: {
+        fullscreen: 'Fullscreen',
+        help: 'Help',
+        info: 'Details',
+        browse: 'Browse Tasks',
+        like: ['Like', 'Unlike'],
+        share: 'Share',
+        download: 'Download',
+        note: 'Add a note',
+        submit: 'Save'
       },
       showInfoModal: false,
       showHelpModal: false,
@@ -258,6 +261,10 @@ export default {
     buttons: {
       type: Object,
       default: () => ({}) // Defaults set in defaultToolbarButtons
+    },
+    buttonText: {
+      type: String,
+      default: 'Add a note'
     }
   },
 
@@ -302,14 +309,14 @@ export default {
         (!this.currentTask.complete || !this.disableComplete)
       )
     },
-    mergedToolbarButtons: function () {
-      let mergedButtons = JSON.parse(JSON.stringify(this.defaultToolbarButtons))
-      for (let key in mergedButtons) {
+    mergedButtons: function () {
+      let merged = JSON.parse(JSON.stringify(this.defaultButtons))
+      for (let key in merged) {
         if (this.buttons.hasOwnProperty(key)) {
-          mergedButtons[key] = this.buttons[key]
+          merged[key] = this.buttons[key]
         }
       }
-      return mergedButtons
+      return merged
     }
   },
 

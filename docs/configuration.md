@@ -22,22 +22,23 @@ All of the following properties, apart from `task-opts`, are optional.
 | messageBus            | Object  | null      | Message bus used for notifications \(see [Message Bus](message_bus.md)\)                              |
 | navigation            | Array   | []]       | Additional navigation links \(see [Navigation](configuration.md#navigation)\)                         |
 | confirm-on-submit     | Boolean | true      | Show a confirmation box on submission                                                                 |
-| buttons               | Object  | See below | The toolbar buttons to display (see [Buttons](configuration.md#buttons)                               |
+| buttons               | Object  | See below | Button configuration details (see [Buttons](configuration.md#buttons)                                 |
 
 ## Buttons
 
-By default the viewer displays all of the buttons listed below, to hide a particular button set its value to `false` via the `buttons` object.
+To hide one of the `buttons` listed below, set its property to `False`. To change the text associated with the button enter a String (or an Array in the case of the `like` button).
 
-| Property              | Type    | Default | Description                                                                                           |
-|-----------------------|---------|---------|-------------------------------------------------------------------------------------------------------|
-| fullscreen            | Boolean | true    | Show the fullscreen button                                                                            |
-| help                  | Boolean | true    | Show the help modal button                                                                            |
-| info                  | Boolean | true    | Show the info modal button                                                                            |
-| browse                | Boolean | true    | Show the browse tasks modal button                                                                    |
-| like                  | Boolean | true    | Show the like button                                                                                  |
-| share                 | Boolean | true    | Show the share button                                                                                 |
-| download              | Boolean | true    | Show the download button                                                                              |
-
+| Property              | Type              | Default            | Description                     |
+|-----------------------|-------------------|--------------------|---------------------------------|
+| fullscreen            | Boolean or String | 'Fullscreen'       | The fullscreen button           |
+| help                  | Boolean or String | 'Help'             | The help button                 |
+| info                  | Boolean or String | 'Details'          | The info button                 |
+| browse                | Boolean or String | 'Browse Tasks'     | The browse tasks button         |
+| like                  | Boolean or Array  | ['Like', 'Unlike'] | The like button                 |
+| share                 | Boolean or String | 'Share'            | The share button                |
+| download              | Boolean or String | 'Download'         | The download button             |
+| note                  | Boolean or String | 'Add a note'       | The note button                 |
+| submit                | Boolean or String | 'Submit'           | The note button                 |
 
 ## Tasks
 
