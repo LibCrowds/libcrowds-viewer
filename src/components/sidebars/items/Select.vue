@@ -3,7 +3,7 @@
     <transition appear name="fade-sidebar">
       <ul>
         <li
-          v-for="tag in tags.reverse()"
+          v-for="tag in sortedTags"
           :key="tag.id"
           @mouseover="highlightOverlay(tag.id, true)"
           @mouseleave="highlightOverlay(tag.id, false)">
@@ -121,6 +121,19 @@ export default {
      * Highlight an overlay.
      */
     highlightOverlay
+  },
+
+  computed: {
+    sortedTags () {
+      // Sort tags by position on the original canvas
+      let sortedTags = JSON.parse(JSON.stringify(this.tags))
+      sortedTags.sort((a, b) => {
+        let rectA = getRectFromFragment(a.target.selector.value)
+        let rectB = getRectFromFragment(b.target.selector.value)
+        return rectA.y - rectB.y
+      })
+      return sortedTags
+    }
   },
 
   updated () {
