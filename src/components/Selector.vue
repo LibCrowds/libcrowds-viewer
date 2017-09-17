@@ -564,9 +564,9 @@ export default {
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 4px;
-        height: 4px;
-        margin: -3px 0 0 -3px;
+        width: 6px;
+        height: 6px;
+        margin: -4px 0 0 -4px;
         background: #FFF;
         border: 1px solid $blue;
       }
@@ -574,32 +574,32 @@ export default {
 
     .corner {
       position: absolute;
-      width: 4px;
-      height: 4px;
+      width: 6px;
+      height: 6px;
       background: #FFF;
       border: 1px solid $blue;
 
       &.corner-top-right {
-        top: -2px;
-        right: -2px;
+        top: -3px;
+        right: -3px;
         cursor: nesw-resize;
       }
 
       &.corner-bottom-right {
-        bottom: -2px;
-        right: -2px;
+        bottom: -3px;
+        right: -3px;
         cursor: nwse-resize;
       }
 
       &.corner-bottom-left {
-        bottom: -2px;
-        left: -2px;
+        bottom: -3px;
+        left: -3px;
         cursor: nesw-resize;
       }
 
       &.corner-top-left {
-        top: -2px;
-        left: -2px;
+        top: -3px;
+        left: -3px;
         cursor: nwse-resize;
       }
     }
