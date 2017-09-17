@@ -271,12 +271,14 @@ export default {
     }
 
     h4 {
+      margin-top: 0;
       font-family: $font-family-headings;
       font-weight: 200;
       letter-spacing: 0.5px;
     }
 
     p {
+      margin-top: 0;
       margin-bottom: 0;
 
       @media screen and (min-width: 768px) {

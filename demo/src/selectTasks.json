@@ -8,7 +8,8 @@
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000007/info.json",
     "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000080",
     "info": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
-    "thumbnailUrl": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000003/full/max/0/default.jpg"
+    "thumbnailUrl": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000003/full/max/0/default.jpg",
+    "help": "This is an example of some additional help data loaded into the modal."
   },
   {
     "tag": "actor",
