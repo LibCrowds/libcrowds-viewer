@@ -695,6 +695,16 @@ export default {
       if (this.showRelatedTasks) {
         this.showAllRelatedTasks(task)
       }
+      if (task.bounds) {
+        const imgRect = new OpenSeadragon.Rect(
+          task.bounds.x,
+          task.bounds.y,
+          task.bounds.width,
+          task.bounds.height
+        )
+        const vpRect = this.viewer.viewport.imageToViewportRectangle(imgRect)
+        this.viewer.viewport.fitBounds(vpRect)
+      }
     },
 
     /**

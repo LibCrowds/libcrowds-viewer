@@ -33,7 +33,13 @@
         "width": 1711,
         "height": 194
       }
-    ]
+    ],
+    "bounds": {
+      "x": 96,
+      "y": 620,
+      "width": 2111,
+      "height": 194
+    }
   },
   {
     "mode": "transcribe",
@@ -69,7 +75,13 @@
         "width": 1708,
         "height": 323
       }
-    ]
+    ],
+    "bounds": {
+      "x": 103,
+      "y": 1500,
+      "width": 2108,
+      "height": 323
+    }
   },
   {
     "mode": "transcribe",
@@ -105,7 +117,13 @@
         "width": 1753,
         "height": 265
       }
-    ]
+    ],
+    "bounds": {
+      "x": 71,
+      "y": 1190,
+      "width": 2153,
+      "height": 265
+    }
   },
   {
     "mode": "transcribe",
@@ -141,7 +159,13 @@
         "width": 1851,
         "height": 362
       }
-    ]
+    ],
+    "bounds": {
+      "x": 58,
+      "y": 2440,
+      "width": 2251,
+      "height": 362
+    }
   },
   {
     "mode": "transcribe",
@@ -194,7 +218,13 @@
         "width": 415,
         "height": 70
       }
-    ]
+    ],
+    "bounds": {
+      "x": 815,
+      "y": 1587,
+      "width": 1215,
+      "height": 70
+    }
   },
   {
     "mode": "transcribe",
@@ -247,7 +277,13 @@
         "width": 450,
         "height": 68
       }
-    ]
+    ],
+    "bounds": {
+      "x": 786,
+      "y": 1694,
+      "width": 1250,
+      "height": 68
+    }
   },
   {
     "mode": "transcribe",
@@ -300,7 +336,13 @@
         "width": 282,
         "height": 68
       }
-    ]
+    ],
+    "bounds": {
+      "x": 462,
+      "y": 1746,
+      "width": 1082,
+      "height": 68
+    }
   },
   {
     "mode": "transcribe",
@@ -353,7 +395,13 @@
         "width": 433,
         "height": 68
       }
-    ]
+    ],
+    "bounds": {
+      "x": 1169,
+      "y": 1760,
+      "width": 1233,
+      "height": 68
+    }
   },
   {
     "mode": "transcribe",
@@ -406,7 +454,13 @@
         "width": 510,
         "height": 70
       }
-    ]
+    ],
+    "bounds": {
+      "x": 690,
+      "y": 1805,
+      "width": 1310,
+      "height": 70
+    }
   },
   {
     "mode": "transcribe",
@@ -459,7 +513,13 @@
         "width": 361,
         "height": 72
       }
-    ]
+    ],
+    "bounds": {
+      "x": 297,
+      "y": 1851,
+      "width": 1161,
+      "height": 72
+    }
   },
   {
     "mode": "transcribe",
@@ -512,7 +572,13 @@
         "width": 492,
         "height": 66
       }
-    ]
+    ],
+    "bounds": {
+      "x": 933,
+      "y": 1865,
+      "width": 1292,
+      "height": 66
+    }
   },
   {
     "mode": "transcribe",
@@ -565,7 +631,13 @@
         "width": 407,
         "height": 68
       }
-    ]
+    ],
+    "bounds": {
+      "x": 840,
+      "y": 1920,
+      "width": 1207,
+      "height": 68
+    }
   },
   {
     "mode": "transcribe",
@@ -618,7 +690,13 @@
         "width": 510,
         "height": 68
       }
-    ]
+    ],
+    "bounds": {
+      "x": 807,
+      "y": 1976,
+      "width": 1310,
+      "height": 68
+    }
   },
   {
     "mode": "transcribe",
@@ -671,7 +749,13 @@
         "width": 617,
         "height": 75
       }
-    ]
+    ],
+    "bounds": {
+      "x": 602,
+      "y": 2023,
+      "width": 1417,
+      "height": 75
+    }
   },
   {
     "mode": "transcribe",
@@ -724,7 +808,13 @@
         "width": 442,
         "height": 60
       }
-    ]
+    ],
+    "bounds": {
+      "x": 856,
+      "y": 2194,
+      "width": 1242,
+      "height": 60
+    }
   },
   {
     "mode": "transcribe",
@@ -777,7 +867,13 @@
         "width": 462,
         "height": 64
       }
-    ]
+    ],
+    "bounds": {
+      "x": 719,
+      "y": 2245,
+      "width": 1262,
+      "height": 64
+    }
   },
   {
     "mode": "transcribe",
@@ -830,7 +926,13 @@
         "width": 668,
         "height": 60
       }
-    ]
+    ],
+    "bounds": {
+      "x": 583,
+      "y": 2301,
+      "width": 1468,
+      "height": 60
+    }
   },
   {
     "mode": "transcribe",
@@ -883,7 +985,13 @@
         "width": 411,
         "height": 54
       }
-    ]
+    ],
+    "bounds": {
+      "x": 659,
+      "y": 2672,
+      "width": 1211,
+      "height": 54
+    }
   },
   {
     "mode": "transcribe",
@@ -936,7 +1044,13 @@
         "width": 280,
         "height": 66
       }
-    ]
+    ],
+    "bounds": {
+      "x": 389,
+      "y": 2717,
+      "width": 1080,
+      "height": 66
+    }
   },
   {
     "mode": "transcribe",
@@ -989,7 +1103,13 @@
         "width": 446,
         "height": 70
       }
-    ]
+    ],
+    "bounds": {
+      "x": 1002,
+      "y": 2733,
+      "width": 1246,
+      "height": 70
+    }
   },
   {
     "mode": "transcribe",
@@ -1042,7 +1162,13 @@
         "width": 417,
         "height": 58
       }
-    ]
+    ],
+    "bounds": {
+      "x": 657,
+      "y": 2789,
+      "width": 1217,
+      "height": 58
+    }
   },
   {
     "mode": "transcribe",
@@ -1095,7 +1221,13 @@
         "width": 419,
         "height": 74
       }
-    ]
+    ],
+    "bounds": {
+      "x": 292,
+      "y": 2822,
+      "width": 1219,
+      "height": 74
+    }
   },
   {
     "mode": "transcribe",
@@ -1148,7 +1280,13 @@
         "width": 466,
         "height": 58
       }
-    ]
+    ],
+    "bounds": {
+      "x": 1045,
+      "y": 2842,
+      "width": 1266,
+      "height": 58
+    }
   },
   {
     "mode": "transcribe",
@@ -1201,7 +1339,13 @@
         "width": 314,
         "height": 60
       }
-    ]
+    ],
+    "bounds": {
+      "x": 756,
+      "y": 2896,
+      "width": 1114,
+      "height": 60
+    }
   },
   {
     "mode": "transcribe",
@@ -1254,7 +1398,13 @@
         "width": 579,
         "height": 70
       }
-    ]
+    ],
+    "bounds": {
+      "x": 596,
+      "y": 2945,
+      "width": 1379,
+      "height": 70
+    }
   },
   {
     "mode": "transcribe",
@@ -1307,7 +1457,13 @@
         "width": 532,
         "height": 72
       }
-    ]
+    ],
+    "bounds": {
+      "x": 318,
+      "y": 2995,
+      "width": 1332,
+      "height": 72
+    }
   },
   {
     "mode": "transcribe",
@@ -1360,6 +1516,12 @@
         "width": 375,
         "height": 70
       }
-    ]
+    ],
+    "bounds": {
+      "x": 1172,
+      "y": 3009,
+      "width": 1175,
+      "height": 70
+    }
   }
 ]
