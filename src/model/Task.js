@@ -21,7 +21,8 @@ class Task {
     annotations = [],
     complete = false,
     shareUrl = null,
-    thumbnailUrl = null
+    thumbnailUrl = null,
+    help = null
   }) {
     this.mode = mode
     this.target = target
@@ -39,6 +40,7 @@ class Task {
     this.complete = complete
     this.shareUrl = shareUrl
     this.thumbnailUrl = thumbnailUrl
+    this.help = help
 
     // Validate
     const validModes = ['select', 'transcribe']

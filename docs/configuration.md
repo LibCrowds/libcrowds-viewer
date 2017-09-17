@@ -63,6 +63,7 @@ Tasks are created from the `task-opts` passed to the viewer, which each have the
 | classification | String            |  optional  | A Semantic Tag (e.g. [http://purl.org/dc/terms/title](http://purl.org/dc/terms/title))                         |
 | complete       | Boolean           |  optional  | Mark the task as complete                                                                                      |
 | shareUrl       | String            |  optional  | URL for the 'share' button                                                                                     |
+| help           | String            |  optional  | Additional help loaded as Markdown into the top of the help modal                                              |
 
 ## Forms
 
