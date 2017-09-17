@@ -48,7 +48,7 @@
         To the left and right of the viewer are buttons to browse available
         tasks:
       </p>
-      <ul>
+      <ul v-if="browsable">
         <li><icon name="chevron-left"></icon>Previous task</li>
         <li><icon name="chevron-right"></icon>Next task</li>
       </ul>
@@ -121,6 +121,10 @@ export default {
       required: true
     },
     disableComplete: {
+      type: Boolean,
+      requried: true
+    },
+    browsable: {
       type: Boolean,
       requried: true
     }
