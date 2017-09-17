@@ -64,6 +64,7 @@ Tasks are created from the `task-opts` passed to the viewer, which each have the
 | complete       | Boolean           |  optional  | Mark the task as complete                                                                                      |
 | shareUrl       | String            |  optional  | URL for the 'share' button                                                                                     |
 | help           | String            |  optional  | Additional help loaded as Markdown into the top of the help modal                                              |
+| bounds         | Object            |  optional  | Parameters to fit screen to when task loaded (`x`, `y`, `width` and `height`)                                  |
 
 ## Forms
 
