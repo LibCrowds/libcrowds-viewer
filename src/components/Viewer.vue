@@ -44,6 +44,7 @@
             v-if="currentTask && mergedButtons.help"
             :buttons="mergedButtons"
             :show="showHelpModal"
+            :browsable="browsable"
             :disableComplete="disableComplete"
             @hide="showHelpModal = false"
             :task="currentTask">
