@@ -695,16 +695,6 @@ export default {
       if (this.showRelatedTasks) {
         this.showAllRelatedTasks(task)
       }
-      if (task.bounds) {
-        const imgRect = new OpenSeadragon.Rect(
-          task.bounds.x,
-          task.bounds.y,
-          task.bounds.width,
-          task.bounds.height
-        )
-        const vpRect = this.viewer.viewport.imageToViewportRectangle(imgRect)
-        this.viewer.viewport.fitBounds(vpRect)
-      }
     },
 
     /**
@@ -721,6 +711,24 @@ export default {
         evt.returnValue = msg
         return msg
       }
+    },
+
+    /**
+     * Fit to bounds for the task.
+     * @param {Task} task
+     *   The task.
+     */
+    fitToBounds (task) {
+      if (task.bounds) {
+        const imgRect = new OpenSeadragon.Rect(
+          task.bounds.x,
+          task.bounds.y,
+          task.bounds.width,
+          task.bounds.height
+        )
+        const vpRect = this.viewer.viewport.imageToViewportRectangle(imgRect)
+        this.viewer.viewport.fitBounds(vpRect)
+      }
     }
   },
 
@@ -734,6 +742,7 @@ export default {
       ) {
         this.viewer.clearOverlays()
         this.loadTask(newTask)
+        this.fitToBounds(newTask)
         this.taskLoaded = true
       } else {
         this.viewer.close()
@@ -749,6 +758,9 @@ export default {
               this.taskLoaded = true
             })
           }
+        })
+        this.viewer.addHandler('open', () => {
+          this.fitToBounds(newTask)
         })
       }
     },
