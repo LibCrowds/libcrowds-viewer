@@ -22,7 +22,8 @@ class Task {
     complete = false,
     shareUrl = null,
     thumbnailUrl = null,
-    help = null
+    help = null,
+    bounds = null
   }) {
     this.mode = mode
     this.target = target
@@ -41,6 +42,7 @@ class Task {
     this.shareUrl = shareUrl
     this.thumbnailUrl = thumbnailUrl
     this.help = help
+    this.bounds = bounds
 
     // Validate
     const validModes = ['select', 'transcribe']
