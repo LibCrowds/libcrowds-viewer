@@ -34,6 +34,17 @@
     }
   }
 
+  &.btn-blue {
+    background-color: $blue;
+    border-color: $blue;
+
+    &:hover,
+    &:focus {
+      background-color: darken($blue, 10%);
+      border-color: darken($blue, 10%);
+    }
+  }
+
   &:disabled,
   &:disabled:hover,
   &:disabled:focus,
