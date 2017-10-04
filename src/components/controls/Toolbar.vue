@@ -11,6 +11,7 @@
       hint-position="bottom">
       <icon
         :name="button.icon"
+        scale="1.35"
         :class="button.iconClass">
       </icon>
     </control-button>

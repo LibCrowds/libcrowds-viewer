@@ -8,7 +8,7 @@
       :callback="b.callback"
       position="bottom"
       hint-position="top">
-      <icon :name="b.icon"></icon>
+      <icon :name="b.icon" scale="1.35"></icon>
     </control-button>
 
   </div>
@@ -86,12 +86,12 @@ export default {
   margin: 1rem;
   border-radius: 25px;
   bottom: 0;
-  height: 80px;
+  height: 100px;
   right: 0;
 
   @media screen and (min-width: 768px) {
     right: auto;
-    left: 100px;
+    left: 120px;
   }
 
   .btn-control:not(:nth-child(2)) {

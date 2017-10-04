@@ -9,7 +9,7 @@
       :callback="b.callback"
       position="bottom"
       hint-position="top">
-      <icon :name="b.icon"></icon>
+      <icon :name="b.icon" scale="1.35"></icon>
     </control-button>
 
   </div>
@@ -92,8 +92,8 @@ export default {
   margin: 1rem;
   border-radius: 50%;
   bottom: 0;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
 
   .btn-control {
     display: flex;
