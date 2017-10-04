@@ -3,10 +3,8 @@
     <modal-base :show="show" title="Share" @hide="$emit('hide')">
       <span v-if="task.shareText" v-html="marked(task.shareText)"></span>
       <div class="flex-row">
-        <input id="share-url" :value="task.shareUrl" readonly>
-        <button
-          class="btn btn-blue hint--left"
-          @click="onCopyClick">
+        <input :value="task.shareUrl" readonly>
+        <button ref="copybtn" aria-label="URL copied!" class="btn btn-blue">
           Copy to clipboard
         </button>
       </div>
@@ -34,32 +32,27 @@ export default {
   },
 
   methods: {
-    /**
-     * Show a tooltip when the copy button is clicked.
-     */
-    onCopyClick (evt) {
-      let clipboard = new Clipboard(evt.target, {
-        text: (trigger) => {
-          trigger.setAttribute('aria-label', 'URL Copied!')
-          console.log(trigger)
-          trigger.addEventListener('mouseleave', () => {
-            trigger.setAttribute('aria-label', '')
-            clipboard.destroy()
-          })
-          return this.task.shareUrl
-        }
-      })
-    },
-
-    /**
-     * Markdown processor.
-     */
     marked
   },
 
   components: {
     Icon,
     ModalBase
+  },
+
+  mounted () {
+    let btn = this.$refs.copybtn
+
+    /* eslint-disable no-new */
+    new Clipboard(btn, {
+      text: (trigger) => {
+        btn.classList.add('hint--top')
+        trigger.addEventListener('mouseleave', () => {
+          btn.classList.remove('hint--top')
+        })
+        return this.task.shareUrl
+      }
+    })
   }
 }
 </script>
@@ -71,7 +64,7 @@ export default {
 
 #lv-share-modal {
   .flex-row {
-    margin: 10px 0;
+    margin: 25px 0;
     display: flex;
     flex-direction: row;
 
