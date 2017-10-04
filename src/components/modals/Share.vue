@@ -5,7 +5,6 @@
         <input id="share-url" :value="task.shareUrl" readonly>
         <button
           class="btn btn-blue hint--left"
-          data-clipboard-target="#share-url"
           @click="onCopyClick">
           Copy to clipboard
         </button>
@@ -22,12 +21,6 @@ import ModalBase from '@/components/modals/Base'
 import Task from '@/model/Task'
 
 export default {
-  data: function () {
-    return {
-      manifestData: {}
-    }
-  },
-
   props: {
     show: {
       type: Boolean,
@@ -44,9 +37,16 @@ export default {
      * Show a tooltip when the copy button is clicked.
      */
     onCopyClick (evt) {
-      evt.target.setAttribute('aria-label', 'URL Copied!')
-      evt.target.addEventListener('mouseleave', () => {
-        evt.target.setAttribute('aria-label', '')
+      let clipboard = new Clipboard(evt.target, {
+        text: (trigger) => {
+          trigger.setAttribute('aria-label', 'URL Copied!')
+          console.log(trigger)
+          trigger.addEventListener('mouseleave', () => {
+            trigger.setAttribute('aria-label', '')
+            clipboard.destroy()
+          })
+          return this.task.shareUrl
+        }
       })
     },
 
