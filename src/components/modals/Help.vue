@@ -69,7 +69,10 @@
           controls are provided:
         </p>
         <ul>
-          <li><icon name="pencil"></icon>Edit selection</li>
+          <li>
+            <icon name="pencil" v-if="selectionsEditable"></icon>
+            Edit selection
+          </li>
           <li><icon name="times-circle"></icon>Delete selection</li>
         </ul>
       </div>
@@ -127,7 +130,11 @@ export default {
     browsable: {
       type: Boolean,
       requried: true
-    }
+    },
+    selectionsEditable: {
+      type: Boolean,
+      default: true
+    },
   },
 
   methods: {
