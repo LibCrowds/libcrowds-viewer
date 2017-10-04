@@ -4,7 +4,7 @@
       <div class="flex-row">
         <input id="share-url" :value="task.shareUrl" readonly>
         <button
-          class="btn hint--left hint--no-animate"
+          class="btn btn-blue hint--left"
           data-clipboard-target="#share-url"
           @click="onCopyClick">
           Copy to clipboard
