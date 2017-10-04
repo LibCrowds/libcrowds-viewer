@@ -119,13 +119,6 @@ export default {
   computed: {
     githubUrl: function () {
       return process.env.GITHUB_URL
-    },
-    customTaskOpts: function () {
-      try {
-        return JSON.parse(this.$refs.custom.value)
-      } catch (err) {
-        alert(err)
-      }
     }
   },
 
