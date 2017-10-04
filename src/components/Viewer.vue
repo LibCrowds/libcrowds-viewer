@@ -46,6 +46,7 @@
             :buttons="mergedButtons"
             :show="showHelpModal"
             :browsable="browsable"
+            :selections-editable="selectionsEditable"
             :disableComplete="disableComplete"
             @hide="showHelpModal = false"
             :task="currentTask">
