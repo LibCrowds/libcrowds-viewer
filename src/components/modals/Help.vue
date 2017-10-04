@@ -69,8 +69,8 @@
           controls are provided:
         </p>
         <ul>
-          <li>
-            <icon name="pencil" v-if="selectionsEditable"></icon>
+          <li v-if="selectionsEditable">
+            <icon name="pencil"></icon>
             Edit selection
           </li>
           <li><icon name="times-circle"></icon>Delete selection</li>
