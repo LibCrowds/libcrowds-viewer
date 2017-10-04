@@ -21,6 +21,7 @@ class Task {
     annotations = [],
     complete = false,
     shareUrl = null,
+    shareText = null,
     thumbnailUrl = null,
     help = null,
     bounds = null
@@ -40,6 +41,7 @@ class Task {
     this.annotations = annotations
     this.complete = complete
     this.shareUrl = shareUrl
+    this.shareText = shareText
     this.thumbnailUrl = thumbnailUrl
     this.help = help
     this.bounds = bounds

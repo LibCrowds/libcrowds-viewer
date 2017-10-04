@@ -62,7 +62,8 @@ Tasks are created from the `task-opts` passed to the viewer, which each have the
 | liked          | Boolean           |  optional  | Highlight the task liked button                                                                                |
 | classification | String            |  optional  | A Semantic Tag (e.g. [http://purl.org/dc/terms/title](http://purl.org/dc/terms/title))                         |
 | complete       | Boolean           |  optional  | Mark the task as complete                                                                                      |
-| shareUrl       | String            |  optional  | URL for the 'share' button                                                                                     |
+| shareUrl       | String            |  optional  | URL for the 'share' modal input                                                                                |
+| shareText      | String            |  optional  | Text for the share modal                                                                                       |
 | help           | String            |  optional  | Additional help loaded as Markdown into the top of the help modal                                              |
 | bounds         | Object            |  optional  | Parameters to fit screen to when task loaded (`x`, `y`, `width` and `height`)                                  |
 
