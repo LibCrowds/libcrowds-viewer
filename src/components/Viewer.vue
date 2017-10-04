@@ -19,6 +19,7 @@
             @helpclicked="showHelpModal = true"
             @infoclicked="showInfoModal = true"
             @browseclicked="showBrowseModal = true"
+            @shareclicked="showShareModal = true"
             @likeclicked="emitTaskLiked"
             @fullscreenclicked="toggleFullScreen">
           </toolbar-controls>
@@ -49,6 +50,13 @@
             @hide="showHelpModal = false"
             :task="currentTask">
           </help-modal>
+
+          <share-modal
+            v-if="currentTask && mergedButtons.share && currentTask.shareUrl"
+            :task="currentTask"
+            :show="showShareModal"
+            @hide="showShareModal = false">
+          </share-modal>
 
           <browse-modal
             v-if="mergedButtons.browse && browsable"
@@ -140,6 +148,7 @@ import 'vue-awesome/icons/chevron-right'
 import OpenSeadragon from 'openseadragon'
 import InfoModal from '@/components/modals/Info'
 import HelpModal from '@/components/modals/Help'
+import ShareModal from '@/components/modals/Share'
 import BrowseModal from '@/components/modals/Browse'
 import ToolbarControls from '@/components/controls/Toolbar'
 import PanControls from '@/components/controls/Pan'
@@ -197,6 +206,7 @@ export default {
       },
       showInfoModal: false,
       showHelpModal: false,
+      showShareModal: false,
       showBrowseModal: false,
       viewerDisabled: false,
       tasks: [],
@@ -279,6 +289,7 @@ export default {
   components: {
     InfoModal,
     HelpModal,
+    ShareModal,
     BrowseModal,
     ToolbarControls,
     PanControls,

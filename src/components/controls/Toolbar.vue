@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import Clipboard from 'clipboard'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/expand'
 import 'vue-awesome/icons/question-circle'
@@ -127,16 +126,7 @@ export default {
           tooltip: tooltip,
           icon: 'share-alt',
           callback: () => {
-            let clipboard = new Clipboard('#lv-share-btn', {
-              text: (trigger) => {
-                trigger.setAttribute('aria-label', 'URL Copied!')
-                trigger.addEventListener('mouseleave', () => {
-                  trigger.setAttribute('aria-label', tooltip)
-                  clipboard.destroy()
-                })
-                return this.task.shareUrl
-              }
-            })
+            this.$emit('shareclicked')
           }
         })
       }
