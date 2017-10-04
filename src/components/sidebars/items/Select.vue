@@ -156,6 +156,7 @@ export default {
   flex: 1 1 auto;
   display: none;
   flex-direction: column;
+  min-height: 200px;
 
   @media screen and (min-width: 768px) {
     display: flex;
