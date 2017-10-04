@@ -134,7 +134,7 @@ export default {
     selectionsEditable: {
       type: Boolean,
       requried: true
-    },
+    }
   },
 
   methods: {
