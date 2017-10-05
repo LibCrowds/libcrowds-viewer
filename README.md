@@ -5,7 +5,7 @@
 [![dependencies Status](https://david-dm.org/LibCrowds/libcrowds-viewer/status.svg)](https://david-dm.org/LibCrowds/libcrowds-viewer)
 [![DOI](https://zenodo.org/badge/95394175.svg)](https://zenodo.org/badge/latestdoi/95394175)
 
-> A Vue.js component for crowdsourcing IIIF image annotations.
+> A Vue.js component for crowdsourcing Web Annotations using a IIIF viewer.
 
 [**DEMO**](https://libcrowds.github.io/libcrowds-viewer/)
 
