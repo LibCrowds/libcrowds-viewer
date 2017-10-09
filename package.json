@@ -19,7 +19,7 @@
     "clean": "rimraf dist",
     "build": "npm run clean && cross-env NODE_ENV=production webpack --config=config/webpack.prod.config.js --progress --hide-modules",
     "prepublish": "(not-in-publish && echo 'Skipping prepublish') || npm run require-npm4-to-publish",
-    "require-npm4-to-publish": "semver -r '>=4.0.0' $(npm --version) || (echo 'NPM 4+ required to publish' && exit 1)",
+    "require-npm4-to-publish": "echo semver -r '>=4.0.0' $(npm --version) || (echo 'NPM 4+ required to publish' && exit 1)",
     "prepublishOnly": "npm test && npm run build",
     "demo:dev": "cross-env NODE_ENV=development webpack-dev-server --config=config/webpack.demo.config.js --hot",
     "demo:build": "cross-env NODE_ENV=production webpack --config=config/webpack.demo.config.js --progress --hide-modules",
