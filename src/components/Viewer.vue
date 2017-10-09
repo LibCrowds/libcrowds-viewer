@@ -261,10 +261,6 @@ export default {
       type: Boolean,
       default: true
     },
-    messageBus: {
-      type: Object,
-      default: null
-    },
     navigation: {
       type: Array,
       default: []
@@ -663,18 +659,6 @@ export default {
     },
 
     /**
-     * Setup the message bus.
-     */
-    setupMessageBus () {
-      this.messageBus.$on('success', text => {
-        this.notyf.confirm(text)
-      })
-      this.messageBus.$on('alert', text => {
-        this.notyf.alert(text)
-      })
-    },
-
-    /**
      * Mode specific configuration for select tasks.
      * @param {Task} task
      *   The task.
@@ -801,7 +785,6 @@ export default {
     } else {
       console.warn('No tasks loaded')
     }
-    this.setupMessageBus()
     window.addEventListener('beforeunload', this.onBeforeUnload)
   },
 

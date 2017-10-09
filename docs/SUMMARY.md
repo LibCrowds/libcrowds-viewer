@@ -14,7 +14,6 @@
   * [Navigation](configuration.md#navigation)
 * [Data Model](data_model.md)
 * [Tile Sources](tile_sources.md)
-* [Message Bus](message_bus.md)
 * [Events](events.md)
 * [Annotations](/annotations/README.md)
   * [Select Annotations](/annotations/select.md)

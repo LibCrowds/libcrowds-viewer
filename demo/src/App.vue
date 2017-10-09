@@ -46,7 +46,6 @@
     <!-- Viewer used for the select tasks -->
     <div class="viewer-container" v-else-if="showSelectViewer">
       <libcrowds-viewer
-        :message-bus="messageBus"
         :task-opts="selectTaskOpts"
         :navigation="navigation"
         @taskchange="handleTaskChange"
@@ -62,7 +61,6 @@
       <libcrowds-viewer
         :show-related-tasks="true"
         :buttons="{browse: false}"
-        :message-bus="messageBus"
         :task-opts="transcribeTaskOpts"
         :navigation="navigation"
         @taskchange="handleTaskChange"
@@ -78,7 +76,6 @@
       <libcrowds-viewer
         :show-related-tasks="true"
         :buttons="{browse: false}"
-        :message-bus="messageBus"
         :task-opts="customTaskOpts"
         :navigation="navigation"
         @taskchange="handleTaskChange"
@@ -93,7 +90,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/github'
 import selectTasks from './selectTasks'
@@ -108,7 +104,6 @@ export default {
       showTranscribeViewer: false,
       showCustomiseTextArea: false,
       customTaskOpts: [],
-      messageBus: new Vue(),
       navigation: [
         { label: 'LibCrowds Viewer', url: window.location.href, brand: true },
         { label: 'Home', url: window.location.href }
@@ -149,7 +144,6 @@ export default {
     },
     handleSubmit (task) {
       console.log('Task submitted', task)
-      this.messageBus.$emit('success', 'Answer saved!')
       console.log(JSON.stringify(task.annotations, null, 2))
     }
   }

@@ -19,7 +19,6 @@ All of the following properties, apart from `task-opts`, are optional.
 | creator               | Object  | null      | The Annotation creator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\)   |
 | generator             | Object  | null      | The Annotation generator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\) |
 | next-on-submit        | Object  | true      | Move to the next task on after submission                                                             |
-| messageBus            | Object  | null      | Message bus used for notifications \(see [Message Bus](message_bus.md)\)                              |
 | navigation            | Array   | []]       | Additional navigation links \(see [Navigation](configuration.md#navigation)\)                         |
 | confirm-on-submit     | Boolean | true      | Show a confirmation box on submission                                                                 |
 | buttons               | Object  | See below | Button configuration details (see [Buttons](configuration.md#buttons)                                 |
