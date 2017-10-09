@@ -25,6 +25,7 @@ All of the following properties, apart from `task-opts`, are optional.
 | buttons               | Object  | See below | Button configuration details (see [Buttons](configuration.md#buttons)                                 |
 | selections-editable   | Boolean | true      | Allow the editing of selections                                                                       |
 | browsable             | Boolean | true      | Allow browsing back and forth between tasks                                                           |
+| show-help-on-mount    | Boolean | false     | Show the help modal when the component is mounted                                                     |
 
 ## Buttons
 

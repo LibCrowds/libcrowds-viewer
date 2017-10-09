@@ -206,7 +206,7 @@ export default {
         submit: 'Save'
       },
       showInfoModal: false,
-      showHelpModal: false,
+      showHelpModal: this.showHelpOnMount,
       showShareModal: false,
       showBrowseModal: false,
       viewerDisabled: false,
@@ -284,6 +284,10 @@ export default {
     browsable: {
       type: Boolean,
       default: true
+    },
+    showHelpOnMount: {
+      type: Boolean,
+      default: false
     }
   },
 
