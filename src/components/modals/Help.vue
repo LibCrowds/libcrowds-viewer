@@ -5,46 +5,43 @@
       <span v-if="task.help" v-html="marked(task.help)"></span>
 
       <h4>Viewer controls</h4>
-      <p>The following controls are provided to the top-left of the viewer:</p>
+      <p>You can use keyboard arrow keys to move the image around the screen.</p>  
+      <p>On the top-left of the viewer:</p>
       <ul>
-        <li>
-          <icon name="plus-circle"></icon>Zoom in
-        </li>
-        <li>
-          <icon name="minus-circle"></icon>Zoom out
-        </li>
-        <li>
-          <icon name="refresh"></icon>Reset zoom
-        </li>
         <li>
           <icon name="expand"></icon>Fullscreen
         </li>
         <li>
-          <icon name="question-circle"></icon>View Help
+          <icon name="question-circle"></icon>View this help page
         </li>
         <li v-if="buttons.info">
-          <icon name="info-circle"></icon>View Info
+          <icon name="info-circle"></icon>View information about the volume
         </li>
         <li v-if="buttons.browse">
           <icon name="list"></icon>Browse Tasks
         </li>
         <li v-if="buttons.like">
-          <icon name="thumbs-up"></icon>Like Task/Image
+          <icon name="thumbs-up"></icon>Like this playbill
         </li>
         <li v-if="buttons.share">
-          <icon name="share-alt"></icon>Copy Image URL
+          <icon name="share-alt"></icon>Copy and share playbill URL
+        </li>
+        <li v-if="buttons.download">
+          <icon name="download"></icon>Download this image
         </li>
       </ul>
-      <p>
-        The following controls are provided to the bottom-left of the viewer:
-      </p>
+      <p>On the bottom-left of the viewer:</p>
       <ul>
         <li><icon name="arrow-circle-up"></icon>Pan up</li>
         <li><icon name="arrow-circle-down"></icon>Pan down</li>
         <li><icon name="arrow-circle-left"></icon>Pan left</li>
         <li><icon name="arrow-circle-right"></icon>Pan right</li>
+        <li><icon name="plus-circle"></icon>Zoom in</li>
+        <li><icon name="minus-circle"></icon>Zoom out</li>
+        <li><icon name="refresh"></icon>Reset zoom</li>
+
       </ul>
-      <p>
+      <p v-if="browsable">
         To the left and right of the viewer are buttons to browse available
         tasks:
       </p>
@@ -100,6 +97,7 @@ import 'vue-awesome/icons/arrow-circle-right'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
 import 'vue-awesome/icons/list'
+import 'vue-awesome/icons/download'
 import ModalBase from '@/components/modals/Base'
 import Task from '@/model/Task'
 
