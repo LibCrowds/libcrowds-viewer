@@ -5,7 +5,7 @@
       <span v-if="task.help" v-html="marked(task.help)"></span>
 
       <h4>Viewer controls</h4>
-      <p>You can use keyboard arrow keys to move the image around the screen.</p>  
+      <p>Use the pan buttons on the lower left or your keyboard's arrow keys to move the image around the screen.</p>  
       <p>On the top-left of the viewer:</p>
       <ul>
         <li>
