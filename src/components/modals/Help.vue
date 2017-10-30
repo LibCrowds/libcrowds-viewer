@@ -15,16 +15,16 @@
           <icon name="question-circle"></icon>View this help page
         </li>
         <li v-if="buttons.info">
-          <icon name="info-circle"></icon>View information about the volume
+          <icon name="info-circle"></icon>View information about the item
         </li>
         <li v-if="buttons.browse">
           <icon name="list"></icon>Browse Tasks
         </li>
         <li v-if="buttons.like">
-          <icon name="thumbs-up"></icon>Like this playbill
+          <icon name="thumbs-up"></icon>Like this image
         </li>
         <li v-if="buttons.share">
-          <icon name="share-alt"></icon>Copy and share playbill URL
+          <icon name="share-alt"></icon>Copy and share the image URL
         </li>
         <li v-if="buttons.download">
           <icon name="download"></icon>Download this image
