@@ -23,7 +23,7 @@
 
       <div class="selection-buttons">
         <button
-          class="btn-selection"
+          class="lv-btn lv-btn-selection"
           id="cancel-selection"
           ref="cancelSelection"
           @click="cancel">
@@ -33,7 +33,7 @@
           </icon>
         </button>
         <button
-          class="btn-selection"
+          class="lv-btn lv-btn-selection"
           id="confirm-selection"
           ref="confirmSelection"
           @click="confirm">
@@ -613,7 +613,7 @@ export default {
     display: flex;
     flex-direction: row;
 
-    .btn-selection {
+    .lv-btn-selection {
       border: none;
       background: none;
       display: flex;

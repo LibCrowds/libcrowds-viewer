@@ -19,7 +19,7 @@
         <span v-if="!showConfirmButtons">
           <button
             :disabled="disableComplete && task.complete"
-            class="btn btn-block"
+            class="lv-btn lv-btn-block"
             @click="toggleeNoteCollapse"
             v-html="buttons.note">
           </button>
@@ -38,7 +38,7 @@
 
           <button
             :disabled="disableComplete && task.complete"
-            class="btn btn-block btn-green"
+            class="lv-btn lv-btn-block lv-btn-green"
             @click="submit(false)"
             v-html="buttons.submit">
           </button>
@@ -50,13 +50,13 @@
           <div id="confirm-buttons">
             <button
               :disabled="disableComplete && task.complete"
-              class="btn btn-red"
+              class="lv-btn lv-btn-red"
               @click="hideConfirm()">
               Cancel
             </button>
             <button
               :disabled="disableComplete && task.complete"
-              class="btn btn-green"
+              class="lv-btn lv-btn-green"
               @click="submit(true)">
               Confirm
             </button>

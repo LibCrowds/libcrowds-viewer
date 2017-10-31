@@ -71,7 +71,7 @@
           <button
             v-if="browsable"
             :disabled="previousBtnDisabled"
-            class="btn btn-hud"
+            class="lv-btn lv-btn-hud"
             id="lv-browse-previous"
             @click="previousTask">
             <icon name="chevron-left" scale="1.5"></icon>
@@ -79,7 +79,7 @@
           <button
             v-if="browsable"
             :disabled="nextBtnDisabled"
-            class="btn btn-hud"
+            class="lv-btn lv-btn-hud"
             id="lv-browse-next"
             @click="nextTask">
             <icon name="chevron-right" scale="1.5"></icon>

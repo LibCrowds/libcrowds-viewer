@@ -20,13 +20,13 @@
               v-if="selectionsEditable"
               aria-label="Edit"
               @click="editTag(tag)"
-              class="btn btn-control hint--left hint--no-animate">
+              class="lv-btn lv-btn-control hint--left hint--no-animate">
               <icon name="pencil"></icon>
             </button>
             <button
               @click="deleteTag(tag)"
               aria-label="Delete"
-              class="btn btn-control hint--left hint--no-animate">
+              class="lv-btn lv-btn-control hint--left hint--no-animate">
               <icon name="times-circle"></icon>
             </button>
           </div>
@@ -190,7 +190,7 @@ export default {
     flex: 0 0 33.3333%;
   }
 
-  .btn {
+  .lv-btn {
     display: flex;
     margin-right: auto;
     margin-left: auto;

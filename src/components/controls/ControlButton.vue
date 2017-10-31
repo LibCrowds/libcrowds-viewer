@@ -1,7 +1,7 @@
 <template>
   <button
     :id="id"
-    :class="`hint--${hintPosition} hint--no-animate btn btn-control`"
+    :class="`hint--${hintPosition} hint--no-animate lv-btn lv-btn-control`"
     :aria-label="tooltip"
     @click="callback($event)">
     <slot></slot>

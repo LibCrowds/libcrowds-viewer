@@ -3,7 +3,7 @@
 
     <control-button
       v-for="(b, index) in buttons"
-      :key="`btn-zoom-${index}`"
+      :key="`lv-btn-zoom-${index}`"
       :id="b.id"
       :tooltip="b.tooltip"
       :callback="b.callback"
@@ -95,7 +95,7 @@ export default {
   width: 100px;
   height: 100px;
 
-  .btn-control {
+  .lv-btn-control {
     display: flex;
     justify-content: center;
     position: absolute;

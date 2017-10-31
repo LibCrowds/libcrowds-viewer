@@ -4,7 +4,10 @@
       <span v-if="task.shareText" v-html="marked(task.shareText)"></span>
       <div class="flex-row">
         <input :value="task.shareUrl" readonly>
-        <button ref="copybtn" aria-label="URL copied!" class="btn btn-blue">
+        <button
+          ref="copybtn"
+          aria-label="URL copied!"
+          class="lv-btn lv-btn-blue">
           Copy to clipboard
         </button>
       </div>
@@ -73,7 +76,7 @@ export default {
       margin: 0 12px 0 0;
     }
 
-    .btn {
+    .lv-btn {
       flex: 0 0 auto;
     }
   }

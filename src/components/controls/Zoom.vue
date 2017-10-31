@@ -3,7 +3,7 @@
 
     <control-button
       v-for="(b, index) in buttons"
-      :key="`btn-zoom-${index}`"
+      :key="`lv-zoom-${index}`"
       :tooltip="b.tooltip"
       :callback="b.callback"
       position="bottom"
@@ -94,11 +94,11 @@ export default {
     left: 120px;
   }
 
-  .btn-control:not(:nth-child(2)) {
+  .lv-btn-control:not(:nth-child(2)) {
     padding: 0.5rem;
   }
 
-  .btn-control:nth-child(2) {
+  .lv-btn-control:nth-child(2) {
     padding: 0 0.5rem;
   }
 }
