@@ -6,7 +6,7 @@
       :navigation="navigation">
     </navbar>
 
-    <main>
+    <main class="lv-container">
       <div id="lv-viewer-wrapper">
         <div id="hud" ref="hud">
           <toolbar-controls
