@@ -96,6 +96,10 @@ export default {
         }
       },
       deep: true
+    },
+
+    task () {
+      this.undraw()
     }
   },
 
