@@ -166,6 +166,12 @@ export default {
       this.$emit('enableviewer')
       this.showConfirmButtons = false
     }
+  },
+
+  watch: {
+    task () {
+      this.noteCollapsed = true
+    }
   }
 }
 </script>
