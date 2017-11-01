@@ -62,7 +62,7 @@ Use it in your templates \(minimal configuration options shown\).
 npm install
 
 # serve demo at localhost:8080
-npm run demo:dev
+npm run dev
 
 # deploy to gh-pages (rights permitting)
 npm run demo:deploy
