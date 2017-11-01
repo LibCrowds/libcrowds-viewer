@@ -1,4 +1,4 @@
-# libcrowds-viewer
+# LibCrowds Viewer
 
 [![npm version](https://badge.fury.io/js/libcrowds-viewer.svg)](https://badge.fury.io/js/libcrowds-viewer)
 [![Build Status](https://travis-ci.org/LibCrowds/libcrowds-viewer.svg?branch=master)](https://travis-ci.org/LibCrowds/libcrowds-viewer)
@@ -7,9 +7,9 @@
 
 > A Vue.js component for crowdsourcing Web Annotations using a IIIF viewer.
 
-[**DEMO**](https://libcrowds.github.io/libcrowds-viewer/)
+[**Try the demo**](https://libcrowds.github.io/libcrowds-viewer/)
 
-**[LibCrowds Viewer documentation](https://libcrowds.gitbooks.io/libcrowds-viewer-docs/content/) for full details of installation, configuration and usage.
+[**Read the documentation**](https://libcrowds.gitbooks.io/libcrowds-viewer-docs/content/)
 
 ## Installation
 
