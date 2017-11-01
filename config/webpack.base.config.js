@@ -43,14 +43,6 @@ module.exports = {
         }
       },
       {
-        test: /\.s?css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
-      },
-      {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [
@@ -58,13 +50,6 @@ module.exports = {
           path.resolve(__dirname, '../test'),
           path.resolve(__dirname, '../demo/src')
         ]
-      },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
       }
     ]
   },

@@ -4,8 +4,6 @@ import 'es6-object-assign/auto'
 
 import Viewer from './components/Viewer.vue'
 
-import 'normalize.css'
-
 export default {
   install (Vue) {
     if (this.installed) {
