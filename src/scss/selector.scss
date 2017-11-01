@@ -1,11 +1,11 @@
 .lv-selector {
-  background-color: $lv-select-bg;
+  background-color: $lv-selection-bg;
   position: absolute;
   z-index: 1;
   display: none;
 
   .border {
-    background: $lv-select-border;
+    background: $lv-selection-border;
     position: absolute;
     height: 1px;
     width: 1px;

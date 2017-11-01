@@ -405,7 +405,7 @@ export default {
      * @param {Function} onClick
      *   A callback to trigger on click (or tap).
      */
-    drawHighlight (rect, id, overlayCls = 'highlight', onClick = null) {
+    drawHighlight (rect, id, overlayCls = 'selection', onClick = null) {
       const vp = this.viewer.viewport
       const imgRect = new OpenSeadragon.Rect(
         rect.x,
