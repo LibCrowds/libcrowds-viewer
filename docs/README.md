@@ -28,9 +28,11 @@ Use it in your templates \(minimal configuration options shown\).
 
 ``` vue
 <template>
-  <libcrowds-viewer
-    :task-opts="taskOpts">
-  </libcrowds-viewer>
+  <div class="container">
+    <libcrowds-viewer
+      :task-opts="taskOpts">
+    </libcrowds-viewer>
+  </div>
 </template>
 
 <script>
@@ -52,6 +54,12 @@ Use it in your templates \(minimal configuration options shown\).
 
 <style lang="scss">
   @import "~libcrowds-viewer/dist/scss/libcrowds-viewer.scss";
+
+  // An explicit height must be set on the viewer container.
+  .viewer-container {
+    margin: 0;
+    height: 100vh;
+  }
 </style>
 ```
 

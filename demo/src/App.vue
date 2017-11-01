@@ -3,7 +3,7 @@
 
     <!-- Demo home page -->
     <div
-      id="home-container"
+      id="homepage"
       v-if="(
         !showSelectViewer &&
         !showTranscribeViewer &&
@@ -153,8 +153,14 @@ export default {
 <style lang="scss">
 @import 'libcrowds-viewer/dist/scss/libcrowds-viewer.scss';
 
-#home-container {
-  font-family: Arial, Helvetica, sans-serif;
+.viewer-container {
+  margin: 0;
+  height: 100vh;
+}
+
+/* The styles below apply to the demo homepage only */
+#homepage {
+  font-family: $lv-font-family-base;
   margin: 0;
   background-color: #F8F8F8;
   color: #1F1E38;
@@ -234,15 +240,10 @@ export default {
     opacity: 0;
     max-height: 0px;
   }
-}
 
-#mode-buttons {
-  display:flex;
-  flex-direction: column;
-}
-
-.viewer-container {
-  margin: 0;
-  height: 100vh;
+  #mode-buttons {
+    display:flex;
+    flex-direction: column;
+  }
 }
 </style>

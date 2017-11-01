@@ -1,67 +1,67 @@
 <template>
-  <div id="lv-task-sidebar" ref="sidebar">
+  <transition-group
+    appear
+    name="fade-sidebar"
+    class="lv-sidebar"
+    ref="sidebar">
 
-    <header>
+    <header key="header" class="lv-sidebar-header">
       <h3>{{ title }}</h3>
+      <h4 key="objective">{{ task.objective }}</h4>
+      <p key="guidance">{{ task.guidance }}</p>
     </header>
 
-    <main>
-      <h4>{{ task.objective }}</h4>
-      <p>{{ task.guidance }}</p>
+    <main key="content" class="lv-sidebar-content">
       <slot></slot>
     </main>
 
-    <footer>
-      <transition>
-        <span v-if="!showConfirmButtons">
-          <button
-            :disabled="disableComplete && task.complete"
-            class="lv-btn lv-btn-block"
-            @click="toggleeNoteCollapse"
-            v-html="buttons.note">
-          </button>
+    <footer key="footer" class="lv-sidebar-footer">
+      <span v-if="!showConfirmButtons">
+        <button
+          :disabled="disableComplete && task.complete"
+          class="lv-btn lv-btn-block"
+          @click="toggleeNoteCollapse"
+          v-html="buttons.note">
+        </button>
 
-          <transition name="fade-height"
-            v-show="showNote"
-            v-if="!noteCollapsed">
-            <textarea
-              v-if="!(disableComplete && task.complete)"
-              ref="note"
-              rows="3"
-              v-model="note"
-              @input="updateNote">
-            </textarea>
-          </transition>
+        <transition name="fade-height"
+          v-show="showNote"
+          v-if="!noteCollapsed">
+          <textarea
+            v-if="!(disableComplete && task.complete)"
+            ref="note"
+            rows="3"
+            v-model="note"
+            @input="updateNote">
+          </textarea>
+        </transition>
 
-          <button
-            :disabled="disableComplete && task.complete"
-            class="lv-btn lv-btn-block lv-btn-green"
-            @click="submit(false)"
-            v-html="buttons.submit">
-          </button>
-        </span>
+        <button
+          :disabled="disableComplete && task.complete"
+          class="lv-btn lv-btn-block lv-btn-green"
+          @click="submit(false)"
+          v-html="buttons.submit">
+        </button>
+      </span>
 
-        <span v-else-if="showConfirmButtons">
-          <p class="lead">Are you sure you want to submit this task?</p>
-          <p v-if="disableComplete">There is no going back!</p>
-          <div id="confirm-buttons">
-            <button
-              :disabled="disableComplete && task.complete"
-              class="lv-btn lv-btn-red"
-              @click="hideConfirm()">
-              Cancel
-            </button>
-            <button
-              :disabled="disableComplete && task.complete"
-              class="lv-btn lv-btn-green"
-              @click="submit(true)">
-              Confirm
-            </button>
-          </div>
-        </span>
-      </transition>
+      <span v-else-if="showConfirmButtons">
+        <p class="lead">Are you sure you want to submit this task?</p>
+        <p v-if="disableComplete">There is no going back!</p>
+        <button
+          :disabled="disableComplete && task.complete"
+          class="lv-btn lv-btn-red"
+          @click="hideConfirm()">
+          Cancel
+        </button>
+        <button
+          :disabled="disableComplete && task.complete"
+          class="lv-btn lv-btn-green"
+          @click="submit(true)">
+          Confirm
+        </button>
+      </span>
     </footer>
-  </div>
+  </transition-group>
 </template>
 
 <script>

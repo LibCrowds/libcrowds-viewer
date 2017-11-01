@@ -1,39 +1,30 @@
 <template>
-  <div id="lv-sidebar-select-item">
-    <transition appear name="fade-sidebar">
-      <ul>
-        <li
-          v-for="tag in sortedTags"
-          :key="tag.id"
-          @mouseover="highlightOverlay(tag.id, true)"
-          @mouseleave="highlightOverlay(tag.id, false)">
+  <ul>
+    <li
+      v-for="tag in sortedTags"
+      :key="tag.id"
+      @mouseover="highlightOverlay(tag.id, true)"
+      @mouseleave="highlightOverlay(tag.id, false)">
 
-          <div
-            class="thumbnail-wrapper">
-            <canvas :ref="`canvas-${tag.id}`"></canvas>
-          </div>
+      <canvas :ref="`canvas-${tag.id}`" style="height: 50px;"></canvas>
 
-          <div
-            v-if="!(disableComplete && task.complete)"
-            class="buttons">
-            <button
-              v-if="selectionsEditable"
-              aria-label="Edit"
-              @click="editTag(tag)"
-              class="lv-btn lv-btn-control hint--left hint--no-animate">
-              <icon name="pencil"></icon>
-            </button>
-            <button
-              @click="deleteTag(tag)"
-              aria-label="Delete"
-              class="lv-btn lv-btn-control hint--left hint--no-animate">
-              <icon name="times-circle"></icon>
-            </button>
-          </div>
-        </li>
-      </ul>
-    </transition>
-  </div>
+      <div v-if="!(disableComplete && task.complete)">
+        <button
+          v-if="selectionsEditable"
+          aria-label="Edit"
+          @click="editTag(tag)"
+          class="lv-btn lv-btn-control hint--left hint--no-animate">
+          <icon name="pencil"></icon>
+        </button>
+        <button
+          @click="deleteTag(tag)"
+          aria-label="Delete"
+          class="lv-btn lv-btn-control hint--left hint--no-animate">
+          <icon name="times-circle"></icon>
+        </button>
+      </div>
+    </li>
+  </ul>
 </template>
 
 <script>

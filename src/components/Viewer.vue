@@ -102,7 +102,7 @@
 
       </div>
 
-      <task-sidebar
+      <base-sidebar
         v-if="currentTask"
         :task="currentTask"
         :showNote="showNote"
@@ -135,7 +135,7 @@
           @inputfocus="onTranscribeInputFocus"
           @inputblur="onTranscribeInputBlur">
         </transcribe-sidebar-item>
-      </task-sidebar>
+      </base-sidebar>
     </main>
 
   </div>
@@ -153,7 +153,7 @@ import BrowseModal from '@/components/modals/Browse'
 import ToolbarControls from '@/components/controls/Toolbar'
 import PanControls from '@/components/controls/Pan'
 import ZoomControls from '@/components/controls/Zoom'
-import TaskSidebar from '@/components/sidebars/Task'
+import BaseSidebar from '@/components/sidebars/Base'
 import Navbar from '@/components/navigation/Navbar'
 import SelectSidebarItem from '@/components/sidebars/items/Select'
 import TranscribeSidebarItem from '@/components/sidebars/items/Transcribe'
@@ -293,7 +293,7 @@ export default {
     ToolbarControls,
     PanControls,
     ZoomControls,
-    TaskSidebar,
+    BaseSidebar,
     Navbar,
     Selector,
     SelectSidebarItem,
