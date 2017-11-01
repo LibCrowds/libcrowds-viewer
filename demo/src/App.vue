@@ -48,6 +48,7 @@
       <libcrowds-viewer
         :task-opts="selectTaskOpts"
         :navigation="navigation"
+        :before-submit="beforeSubmit"
         @taskchange="handleTaskChange"
         @create="handleCreate"
         @update="handleUpdate"
@@ -63,6 +64,7 @@
         :buttons="{browse: false}"
         :task-opts="transcribeTaskOpts"
         :navigation="navigation"
+        :before-submit="beforeSubmit"
         @taskchange="handleTaskChange"
         @create="handleCreate"
         @update="handleUpdate"
@@ -78,6 +80,7 @@
         :buttons="{browse: false}"
         :task-opts="customTaskOpts"
         :navigation="navigation"
+        :before-submit="beforeSubmit"
         @taskchange="handleTaskChange"
         @create="handleCreate"
         @update="handleUpdate"
@@ -107,7 +110,19 @@ export default {
       navigation: [
         { label: 'LibCrowds Viewer', url: window.location.href, brand: true },
         { label: 'Home', url: window.location.href }
-      ]
+      ],
+      beforeSubmit: (taskData) => new Promise((resolve, reject) => {
+        if (!taskData.annotations.length) {
+          const confirm = window.confirm(
+            'EXAMPLE ALERT\n\n' +
+            'No annotations have been saved, do you want to continue?'
+          )
+          if (!confirm) {
+            reject(new Error())
+          }
+        }
+        resolve()
+      })
     }
   },
 

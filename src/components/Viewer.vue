@@ -265,7 +265,7 @@ export default {
     },
     confirmOnSubmit: {
       type: Boolean,
-      default: true
+      default: false
     },
     buttons: {
       type: Object,
@@ -282,6 +282,10 @@ export default {
     showHelpOnMount: {
       type: Boolean,
       default: false
+    },
+    beforeSubmit: {
+      type: Function,
+      default: () => new Promise((resolve, reject) => resolve())
     }
   },
 
@@ -590,12 +594,15 @@ export default {
           formGroups.classList.add('show-errors')
         }
       }
-      task.complete = true
 
-      if (this.nextOnSubmit) {
-        this.nextTask()
-      }
-      this.$emit('submit', task)
+      /* eslint-disable handle-callback-err */
+      this.beforeSubmit(task).then(() => {
+        task.complete = true
+        if (this.nextOnSubmit) {
+          this.nextTask()
+        }
+        this.$emit('submit', task)
+      }).catch(err => {})
     },
 
     /**

@@ -6,25 +6,26 @@ LibCrowds Viewer provides a range of configuration options that are passed as pr
 
 All of the following properties, apart from `task-opts`, are optional.
 
-| Property              | Type    | Default   | Description                                                                                           |
-|-----------------------|---------|-----------|-------------------------------------------------------------------------------------------------------|
-| task-opts             | Array   |           | An array of task options \(see [Tasks](configuration.md#tasks)\)                                      |
-| pan-by                | Number  | 0.1       | Multiplier by which to pan                                                                            |
-| zoom-by               | Number  | 0.2       | Multiplier by which to zoom                                                                           |
-| confirm-before-unload | Boolean | true      | Confirm before leaving the page                                                                       |
-| disable-complete      | Boolean | true      | Disable completed tasks to prevent multiple submission                                                |
-| show-note             | Boolean | true      | Include the note input                                                                                |
-| show-form-errors      | Boolean | true      | Show form errors on submit                                                                            |
-| show-related-tasks    | Boolean | false     | Show all tasks related to the same image                                                              |
-| creator               | Object  | null      | The Annotation creator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\)   |
-| generator             | Object  | null      | The Annotation generator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\) |
-| next-on-submit        | Object  | true      | Move to the next task on after submission                                                             |
-| navigation            | Array   | [ ]       | Additional navigation links \(see [Navigation](configuration.md#navigation)\)                         |
-| confirm-on-submit     | Boolean | true      | Show a confirmation box on submission                                                                 |
-| buttons               | Object  | See below | Button configuration details (see [Buttons](configuration.md#buttons)\)                               |
-| selections-editable   | Boolean | true      | Allow the editing of selections                                                                       |
-| browsable             | Boolean | true      | Allow browsing back and forth between tasks                                                           |
-| show-help-on-mount    | Boolean | false     | Show the help modal when the component is mounted                                                     |
+| Property              | Type     | Default       | Description                                                                                           |
+|-----------------------|----------|---------------|-------------------------------------------------------------------------------------------------------|
+| task-opts             | Array    |               | An array of task options \(see [Tasks](configuration.md#tasks)\)                                      |
+| pan-by                | Number   | 0.1           | Multiplier by which to pan                                                                            |
+| zoom-by               | Number   | 0.2           | Multiplier by which to zoom                                                                           |
+| confirm-before-unload | Boolean  | true          | Confirm before leaving the page                                                                       |
+| disable-complete      | Boolean  | true          | Disable completed tasks to prevent multiple submission                                                |
+| show-note             | Boolean  | true          | Include the note input                                                                                |
+| show-form-errors      | Boolean  | true          | Show form errors on submit                                                                            |
+| show-related-tasks    | Boolean  | false         | Show all tasks related to the same image                                                              |
+| creator               | Object   | null          | The Annotation creator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\)   |
+| generator             | Object   | null          | The Annotation generator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\) |
+| next-on-submit        | Object   | true          | Move to the next task on after submission                                                             |
+| navigation            | Array    | [ ]           | Additional navigation links \(see [Navigation](configuration.md#navigation)\)                         |
+| confirm-on-submit     | Boolean  | false         | Show a confirmation box on submission                                                                 |
+| buttons               | Object   | See below     | Button configuration details (see [Buttons](configuration.md#buttons)\)                               |
+| selections-editable   | Boolean  | true          | Allow the editing of selections                                                                       |
+| browsable             | Boolean  | true          | Allow browsing back and forth between tasks                                                           |
+| show-help-on-mount    | Boolean  | false         | Show the help modal when the component is mounted                                                     |
+| before-submit         | Promise  | Empty promise | A function that recieves the task data as an argument and should return a promise that resolves if the submission should go ahead and rejects otherwise |
 
 ## Buttons
 
