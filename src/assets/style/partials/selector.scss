@@ -1,0 +1,127 @@
+#lv-selector {
+  .lv-selector-box {
+    background-color: rgba($lv-blue, 0.2);
+    position: absolute;
+    z-index: 1;
+    display: none;
+
+    .border {
+      background: $lv-blue;
+      position: absolute;
+      height: 1px;
+      width: 1px;
+      margin: 0px;
+      padding: 0px;
+
+      &.border-top {
+        width: 100%;
+        top: 0;
+
+        .handle {
+          cursor: ns-resize;
+        }
+      }
+
+      &.border-right {
+        height: 100%;
+        right: 0;
+
+        .handle {
+          cursor: ew-resize;
+        }
+      }
+
+      &.border-bottom {
+        width: 100%;
+        bottom: 0;
+
+        .handle {
+          cursor: ns-resize;
+        }
+      }
+
+      &.border-left {
+        height: 100%;
+        left: 0;
+
+        .handle {
+          cursor: ew-resize;
+        }
+      }
+
+      .handle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 6px;
+        height: 6px;
+        margin: -4px 0 0 -4px;
+        background: #FFF;
+        border: 1px solid $lv-blue;
+      }
+    }
+
+    .corner {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #FFF;
+      border: 1px solid $lv-blue;
+
+      &.corner-top-right {
+        top: -3px;
+        right: -3px;
+        cursor: nesw-resize;
+      }
+
+      &.corner-bottom-right {
+        bottom: -3px;
+        right: -3px;
+        cursor: nwse-resize;
+      }
+
+      &.corner-bottom-left {
+        bottom: -3px;
+        left: -3px;
+        cursor: nesw-resize;
+      }
+
+      &.corner-top-left {
+        top: -3px;
+        left: -3px;
+        cursor: nwse-resize;
+      }
+    }
+  }
+
+  .selection-buttons {
+    bottom: 0;
+    right: 0;
+    transform: translateY(105%);
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+
+    .lv-btn-selection {
+      border: none;
+      background: none;
+      display: flex;
+      align-items: center;
+      font-size: $lv-font-size-sm;
+      padding: 2px;
+      margin-left: 5px;
+
+      &#cancel-selection {
+        color: $lv-red;
+      }
+
+      &#confirm-selection {
+        color: $lv-green;
+      }
+
+      .icon-white {
+        color: #FFF;
+      }
+    }
+  }
+}

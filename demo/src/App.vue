@@ -151,6 +151,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import 'libcrowds-viewer/dist/scss/libcrowds-viewer.scss';
+
 #home-container {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
@@ -242,9 +244,5 @@ export default {
 .viewer-container {
   margin: 0;
   height: 100vh;
-}
-
-.notyf {
-  right: 280px;
 }
 </style>

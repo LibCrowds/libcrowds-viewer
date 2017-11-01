@@ -1,13 +1,13 @@
-$gray:                 #666666;
-$gray-dark:              darken($gray, 35%);
-$gray-light:             lighten($gray, 40%);
-$blue:                 #3498DB;
-$green:                #4DAF7C;
-$yellow:               #F4D03F;
-$red:                  #D91E18;
-$hud:                  rgba(0, 0, 0, 0.75);
+/* Colours */
+$lv-gray:                 #666666 !default;
+$lv-gray-dark:              darken($lv-gray, 35%);
+$lv-gray-light:             lighten($lv-gray, 40%);
+$lv-blue:                 #3498DB !default;
+$lv-green:                #4DAF7C !default;
+$lv-red:                  #D91E18 !default;
+$lv-main-bg:              #000000 !default;
+$lv-hud-bg:               rgba(0, 0, 0, 0.75) !default;
 
-$font-size-sm:           0.85rem;
-$font-size-lg:           1.25rem;
-
-$font-family-headings:   Arial, Helvetica, sans-serif;
+/* Fonts */
+$lv-font-size-sm:           0.85rem !default;
+$lv-font-size-lg:           1.25rem !default;

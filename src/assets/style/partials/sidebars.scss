@@ -1,0 +1,227 @@
+#lv-task-sidebar {
+  z-index: 2;
+  top: 0;
+  right: 0;
+  width: 100%;
+  font-size: 14px;
+  color: #FFFFFF;
+  height: 100%;
+  background-color: $lv-gray-dark;
+  display: flex;
+  flex-direction: column;
+  transition: width 350ms;
+  overflow-y: auto;
+  border-top: 1px solid $lv-gray;
+  flex-shrink: 2;
+
+  @media screen and (min-width: 768px) {
+    width: 320px;
+    border-top: none;
+    flex-shrink: 0;
+  }
+
+  &.collapsed {
+    width: 0px;
+
+    #show-sidebar {
+      background-color: $lv-gray-dark;
+      transform: translateX(0);
+      padding: 0.5rem;
+    }
+  }
+
+  #show-sidebar {
+    cursor: default;
+    position: fixed;
+    right: 0;
+    top: 1rem;
+    font-size: $lv-font-size-sm;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transform: translateX(100%);
+    transition: transform 200ms;
+
+    &.delay {
+      -webkit-transition-delay: 450ms;
+      transition-delay: 450ms;
+    }
+  }
+
+  header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.75rem 1.5rem 1.5rem 1.5rem;
+    letter-spacing: 1px;
+    display: none;
+
+    @media screen and (min-width: 768px) {
+      display: block;
+      padding: 0.75rem 1.5rem 0.75rem 1.5rem;
+    }
+
+    h3 {
+      text-transform: uppercase;
+      margin-bottom: 0;
+      font-size: 1rem;
+      flex-direction: row;
+    }
+  }
+
+  main {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 0.75rem 1.5rem 0.75rem 1.5rem;
+    overflow-y: auto;
+
+    @media screen and (min-width: 768px) {
+      flex: 1 1 auto;
+      padding: 0.75rem 1.5rem 1.5rem 1.5rem;
+    }
+
+    h4 {
+      margin-top: 0;
+      font-weight: 200;
+      letter-spacing: 0.5px;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 0;
+
+      @media screen and (min-width: 768px) {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+  footer {
+    padding: 0.75rem 1.5rem 0.75rem 1.5rem;
+    border-top: 1px solid lighten($lv-gray-dark, 10%);
+
+    @media screen and (min-width: 768px) {
+      padding: 1.5rem;
+    }
+
+    button:not(:last-child) {
+      margin-bottom: 0.6rem;
+    }
+
+    textarea {
+      padding: 0.5rem;
+      margin-bottom: 0.6rem;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .lead {
+      font-size: 1.2rem;
+    }
+  }
+
+  #confirm-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    button {
+      width: 50%;
+
+      &:first-child {
+        margin: 0 0.3rem 0 0;
+      }
+
+      &:last-child {
+        margin: 0 0 0 0.3rem;
+      }
+    }
+  }
+}
+
+
+#lv-sidebar-select-item {
+  flex: 1 1 auto;
+  display: none;
+  flex-direction: column;
+  min-height: 200px;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
+
+  ul {
+    margin: 0;
+    overflow-y: auto;
+    flex: 1 1 auto;
+    list-style: none;
+    padding: 0;
+    border: 1px solid lighten($lv-gray-dark, 20%);
+    transition: opacity 250ms;
+
+    &:empty {
+      opacity: 0;
+    }
+
+    li {
+      padding: 0.8rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid darken($lv-gray, 25%);
+    }
+  }
+
+  .buttons {
+    display: flex;
+    flex: 0 0 33.3333%;
+  }
+
+  .lv-btn {
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+
+    &:last-child {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .thumbnail-wrapper {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex: 1 1 auto;
+    height: 50px;
+    overflow: hidden;
+  }
+}
+
+#lv-sidebar-transcribe-item {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+
+  fieldset {
+    border: none;
+    padding: 0;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  :disabled {
+    background: $lv-gray-light;
+  }
+}
+
+#lv-form {
+  flex: 1 1 auto;
+}

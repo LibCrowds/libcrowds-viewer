@@ -1,63 +1,62 @@
-@import '../settings.scss';
+.lv-form {
+  input,
+  select,
+  textarea {
+    margin: 10px 0;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    line-height: 1.25;
+    color: $lv-gray-dark;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    touch-action: manipulation;
+    box-sizing:border-box;
 
-input,
-select,
-textarea {
-  margin: 10px 0;
-  display: block;
-  width: 100%;
-  padding: 10px;
-  line-height: 1.25;
-  color: $gray-dark;
-  background-image: none;
-  background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s;
-  touch-action: manipulation;
-  font-family: $font-family-headings;
-  box-sizing:border-box;
-
-  &:focus {
-    border-color: $blue;
-    outline: none;
-    box-shadow: 0 0 5px rgba($blue, 0.5);
+    &:focus {
+      border-color: $lv-blue;
+      outline: none;
+      box-shadow: 0 0 5px rgba($lv-blue, 0.5);
+    }
   }
-}
 
-label {
-  text-transform: uppercase;
-  font-family: Arial, sans-serif;
-  font-size: $font-size-sm;
-  letter-spacing: 1px;
-}
+  label {
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+    font-size: $lv-font-size-sm;
+    letter-spacing: 1px;
+  }
 
-textarea {
-  overflow: auto;
-}
+  textarea {
+    overflow: auto;
+  }
 
-.form-group {
-  &.show-errors {
-    &.error {
-      input,
-      select,
-      textarea {
-        border: 1px solid rgba($red, 0.75);
+  .form-group {
+    &.show-errors {
+      &.error {
+        input,
+        select,
+        textarea {
+          border: 1px solid rgba($lv-red, 0.75);
+        }
+      }
+
+      .errors {
+        display: block;
+        margin-top: 5px;
+        color: $lv-red;
+        font-weight: bold;
       }
     }
 
     .errors {
-      display: block;
-      margin-top: 5px;
-      color: $red;
-      font-weight: bold;
+      display: none;
     }
-  }
 
-  .errors {
-    display: none;
-  }
-
-  .field-wrap {
-    margin-top: 2px;
+    .field-wrap {
+      margin-top: 2px;
+    }
   }
 }

@@ -1,0 +1,91 @@
+#lv-toolbar {
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  background-color: $lv-hud-bg;
+  margin: 0;
+  z-index: 2;
+  width: 100%;
+
+  @media screen and (min-width: 768px) {
+    width: auto;
+    margin: 1rem;
+    border-radius: 25px;
+    padding: 0 0.5rem;
+  }
+
+  button {
+    .active {
+      color: $lv-blue;
+    }
+  }
+}
+
+#lv-pan-controls {
+  position: absolute;
+  z-index: 2;
+  background-color: $lv-hud-bg;
+  margin: 1rem;
+  border-radius: 50%;
+  bottom: 0;
+  width: 100px;
+  height: 100px;
+
+  button {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    padding: 0.5rem;
+  }
+
+  #pan-up {
+    flex-direction: row;
+    width: 100%;
+    top: 0;
+  }
+
+  #pan-down {
+    flex-direction: row;
+    width: 100%;
+    bottom: 0;
+  }
+
+  #pan-left {
+    flex-direction: column;
+    height: 100%;
+    left: 0;
+  }
+
+  #pan-right {
+    flex-direction: column;
+    height: 100%;
+    right: 0;
+  }
+}
+
+#lv-zoom-controls {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  justify-content: space-around;
+  z-index: 2;
+  background-color: $lv-hud-bg;
+  margin: 1rem;
+  border-radius: 25px;
+  bottom: 0;
+  height: 100px;
+  right: 0;
+
+  @media screen and (min-width: 768px) {
+    right: auto;
+    left: 120px;
+  }
+
+  button:not(:nth-child(2)) {
+    padding: 0.5rem;
+  }
+
+  button:nth-child(2) {
+    padding: 0 0.5rem;
+  }
+}

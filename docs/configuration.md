@@ -98,3 +98,9 @@ Additional navigation links (for example, for the rest of your website) can be p
 | label    | String  | A label for the link |
 | url      | String  | The link url         |
 | brand    | Boolean | Add brand styling    |
+
+## Styles
+
+To customise the appearance of the viewer, the following Sass variables can be overridden before importing the libcrowds-viewer.scss file.
+
+{% codesnippet "./assets/style/settings.scss language="scss" %}{% endcodesnippet %}

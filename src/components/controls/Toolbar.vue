@@ -153,24 +153,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '~style/settings';
-
-#lv-toolbar {
-  display: flex;
-  justify-content: space-around;
-  position: absolute;
-  background-color: $hud;
-  margin: 0;
-  z-index: 2;
-  width: 100%;
-
-  @media screen and (min-width: 768px) {
-    width: auto;
-    margin: 1rem;
-    border-radius: 25px;
-    padding: 0 0.5rem;
-  }
-}
-</style>

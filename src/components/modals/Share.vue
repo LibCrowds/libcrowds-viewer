@@ -59,26 +59,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '~hint.css';
-@import '~style/partials/forms';
-@import '~style/partials/buttons';
-
-#lv-share-modal {
-  .flex-row {
-    margin: 25px 0;
-    display: flex;
-    flex-direction: row;
-
-    input {
-      font-size: 0.75rem;
-      margin: 0 12px 0 0;
-    }
-
-    .lv-btn {
-      flex: 0 0 auto;
-    }
-  }
-}
-</style>

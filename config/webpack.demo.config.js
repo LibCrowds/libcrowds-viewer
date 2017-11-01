@@ -1,8 +1,8 @@
-var path = require('path')
-var webpack = require('webpack')
-var merge = require('webpack-merge')
-var baseConfig = require('./webpack.base.config')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const baseConfig = require('./webpack.base.config')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = merge(baseConfig, {
   entry: path.resolve(__dirname, '../demo/src/main.js'),
@@ -16,8 +16,8 @@ module.exports = merge(baseConfig, {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       'libcrowds-viewer': path.resolve(__dirname, '../src/main.js'),
-      '@': path.resolve(__dirname, '../src'),
-      style: path.resolve(__dirname, '../src/assets/style/')
+      './libcrowds-viewer/dist/scss/libcrowds-viewer.scss': path.resolve(__dirname, '../src/assets/style/main.scss'),
+      '@': path.resolve(__dirname, '../src')
     }
   },
   plugins: [

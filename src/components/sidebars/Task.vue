@@ -1,20 +1,17 @@
 <template>
   <div id="lv-task-sidebar" ref="sidebar">
 
-    <div class="lv-sidebar-header">
+    <header>
       <h3>{{ title }}</h3>
-    </div>
+    </header>
 
-    <div class="lv-sidebar-content">
+    <main>
       <h4>{{ task.objective }}</h4>
       <p>{{ task.guidance }}</p>
       <slot></slot>
-    </div>
+    </main>
 
-    <div
-      class="lv-sidebar-footer hint--top hint--no-animate"
-      :aria-label="footerTooltip">
-
+    <footer>
       <transition>
         <span v-if="!showConfirmButtons">
           <button
@@ -63,9 +60,7 @@
           </div>
         </span>
       </transition>
-
-    </div>
-
+    </footer>
   </div>
 </template>
 
@@ -75,7 +70,7 @@ import 'vue-awesome/icons/check-circle'
 import Task from '@/model/Task'
 
 export default {
-  data: function () {
+  data () {
     return {
       noteCollapsed: true,
       showConfirmButtons: false
@@ -109,18 +104,14 @@ export default {
   },
 
   computed: {
-    note: function () {
+    note () {
       if (!this.commentAnnotation) {
         return ''
       }
       return this.commentAnnotation.body.value
     },
-    footerTooltip: function () {
-      if (this.disableComplete && this.task.complete) {
-        return 'Only one submission allowed per task'
-      }
-    },
-    title: function () {
+
+    title () {
       return this.disableComplete && this.task.complete
         ? 'Task complete'
         : 'Task'
@@ -178,157 +169,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '~hint.css';
-@import '~style/settings';
-@import '~style/partials/buttons';
-@import '~style/partials/transitions';
-
-#lv-task-sidebar {
-  z-index: 2;
-  top: 0;
-  right: 0;
-  width: 100%;
-  font-size: 14px;
-  color: #FFFFFF;
-  height: 100%;
-  background-color: $gray-dark;
-  display: flex;
-  flex-direction: column;
-  transition: width 350ms;
-  overflow-y: auto;
-  border-top: 1px solid $gray;
-  flex-shrink: 2;
-
-  @media screen and (min-width: 768px) {
-    width: 320px;
-    border-top: none;
-    flex-shrink: 0;
-  }
-
-  &.collapsed {
-    width: 0px;
-
-    #show-sidebar {
-      background-color: $gray-dark;
-      transform: translateX(0);
-      padding: 0.5rem;
-    }
-  }
-
-  #show-sidebar {
-    cursor: default;
-    position: fixed;
-    right: 0;
-    top: 1rem;
-    font-size: $font-size-sm;
-    font-family: $font-family-headings;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transform: translateX(100%);
-    transition: transform 200ms;
-
-    &.delay {
-      -webkit-transition-delay: 450ms;
-      transition-delay: 450ms;
-    }
-  }
-
-  .lv-sidebar-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0.75rem 1.5rem 1.5rem 1.5rem;
-    font-family: $font-family-headings;
-    letter-spacing: 1px;
-    display: none;
-
-    @media screen and (min-width: 768px) {
-      display: block;
-      padding: 0.75rem 1.5rem 0.75rem 1.5rem;
-    }
-
-    h3 {
-      text-transform: uppercase;
-      margin-bottom: 0;
-      font-size: 1rem;
-      flex-direction: row;
-    }
-  }
-
-  .lv-sidebar-content {
-    flex: none;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    padding: 0.75rem 1.5rem 0.75rem 1.5rem;
-    overflow-y: auto;
-
-    @media screen and (min-width: 768px) {
-      flex: 1 1 auto;
-      padding: 0.75rem 1.5rem 1.5rem 1.5rem;
-    }
-
-    h4 {
-      margin-top: 0;
-      font-family: $font-family-headings;
-      font-weight: 200;
-      letter-spacing: 0.5px;
-    }
-
-    p {
-      margin-top: 0;
-      margin-bottom: 0;
-
-      @media screen and (min-width: 768px) {
-        margin-bottom: 1rem;
-      }
-    }
-  }
-
-  .lv-sidebar-footer {
-    padding: 0.75rem 1.5rem 0.75rem 1.5rem;
-    border-top: 1px solid lighten($gray-dark, 10%);
-
-    @media screen and (min-width: 768px) {
-      padding: 1.5rem;
-    }
-
-    button:not(:last-child) {
-      margin-bottom: 0.6rem;
-    }
-
-    textarea {
-      padding: 0.5rem;
-      margin-bottom: 0.6rem;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      width: 100%;
-    }
-
-    .lead {
-      font-size: 1.2rem;
-    }
-  }
-
-  #confirm-buttons {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    button {
-      width: 50%;
-
-      &:first-child {
-        margin: 0 0.3rem 0 0;
-      }
-
-      &:last-child {
-        margin: 0 0 0 0.3rem;
-      }
-    }
-  }
-}
-</style>

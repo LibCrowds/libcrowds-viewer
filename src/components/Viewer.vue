@@ -89,7 +89,7 @@
         <div :id="viewerOpts.id"></div>
 
         <transition name="fade">
-          <div id="viewer-disabled-overlay" v-if="viewerDisabled"></div>
+          <div id="lv-viewer-disabled-overlay" v-if="viewerDisabled"></div>
         </transition>
 
         <selector
@@ -142,7 +142,6 @@
 </template>
 
 <script>
-import Notyf from 'notyf'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
@@ -171,7 +170,6 @@ export default {
     return {
       viewer: {},
       selectionRect: {},
-      notyf: new Notyf(),
       annotator: new Annotator({
         creator: this.creator,
         generator: this.generator
@@ -793,108 +791,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-@import '~notyf/src/notyf.scss';
-@import '~style/settings';
-@import '~style/partials/buttons';
-
-#lv-viewer {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  margin: 0;
-  top: 0;
-  overflow: hidden;
-
-  main {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    height: 100%;
-    width: 100%;
-    background-color: #000;
-
-    @media screen and (min-width: 768px) {
-      flex-direction: row;
-    }
-  }
-}
-
-#lv-viewer-wrapper {
-  display: flex;
-  position: relative;
-  height: 100%;
-  width: 100%;
-  background-color: #000;
-}
-
-#lv-viewer-container {
-  flex: 1 1 auto;
-}
-
-#viewer-disabled-overlay {
-  z-index: 100;
-  width: 100%;
-  background: rgba(0,0,0,0.5);
-  position: absolute;
-  height: 100%;
-}
-
-#lv-browse-next,
-#lv-browse-previous {
-  margin: 1rem;
-  height: 3rem;
-  width: 3rem;
-  position: absolute !important;
-  top: calc(50% - 2rem);
-}
-
-#lv-browse-previous {
-  left: 0;
-
-  svg {
-    margin-right: 2px;
-  }
-}
-
-#lv-browse-next {
-  right: 0;
-
-  svg {
-    margin-left: 2px;
-  }
-}
-
-.openseadragon-container {
-  height: 100%;
-
-  .openseadragon-message {
-    color: #FFF;
-  }
-}
-
-.notyf {
-  @media screen and (min-width: 768px) {
-    right: 350px;
-  }
-
-  // Remove if a small screen fix is added to notyf
-  @media screen and (max-width: 766px) {
-    bottom: auto;
-    top: 0;
-    left: calc(50vw - 200px);
-    width: 100%;
-  }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 400ms ease;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
-</style>

@@ -1,5 +1,4 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path')
 
 module.exports = {
   entry: [
@@ -57,7 +56,7 @@ module.exports = {
           path.resolve(__dirname, '../src'),
           path.resolve(__dirname, '../test'),
           path.resolve(__dirname, '../demo/src')
-        ],
+        ]
       },
       {
         test: /\.(png|jpg|gif|svg)$/,

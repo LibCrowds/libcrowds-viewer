@@ -131,21 +131,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-#lv-info-modal {
-  ul {
-    padding-left: 0;
-    list-style: none;
-  }
-
-  .center {
-    text-align: center;
-    margin: 2rem;
-  }
-
-  li {
-    margin: 0;
-  }
-}
-</style>

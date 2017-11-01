@@ -27,14 +27,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '~hint.css';
-@import '~style/settings';
-
-button {
-  .active {
-    color: $blue;
-  }
-}
-</style>

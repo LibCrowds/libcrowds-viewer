@@ -72,34 +72,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '~style/settings';
-
-#lv-zoom-controls {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  justify-content: space-around;
-  z-index: 2;
-  background-color: $hud;
-  margin: 1rem;
-  border-radius: 25px;
-  bottom: 0;
-  height: 100px;
-  right: 0;
-
-  @media screen and (min-width: 768px) {
-    right: auto;
-    left: 120px;
-  }
-
-  .lv-btn-control:not(:nth-child(2)) {
-    padding: 0.5rem;
-  }
-
-  .lv-btn-control:nth-child(2) {
-    padding: 0 0.5rem;
-  }
-}
-</style>
