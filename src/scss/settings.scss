@@ -2,11 +2,22 @@
 $lv-gray:                 #666666 !default;
 $lv-gray-dark:              darken($lv-gray, 35%);
 $lv-gray-light:             lighten($lv-gray, 40%);
+$lv-white:                #FFFFFF !default;
 $lv-blue:                 #3498DB !default;
 $lv-green:                #4DAF7C !default;
 $lv-red:                  #D91E18 !default;
 $lv-main-bg:              #000000 !default;
 $lv-hud-bg:               rgba(0, 0, 0, 0.75) !default;
+$lv-select-bg:            rgba($lv-blue, 0.2);
+$lv-select-border:          $lv-blue;
+$lv-select-confirmed:       $lv-green;
+
+$btn-colors: (
+  "white": $lv-white,
+  "blue":  $lv-blue,
+  "green": $lv-green,
+  "red":   $lv-red
+);
 
 /* Fonts */
 $lv-font-size-sm:           0.85rem !default;

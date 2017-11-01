@@ -1,6 +1,5 @@
 <template>
   <div id="lv-zoom-controls">
-
     <control-button
       v-for="(b, index) in buttons"
       :key="`lv-zoom-${index}`"
@@ -10,7 +9,6 @@
       hint-position="top">
       <icon :name="b.icon" scale="1.35"></icon>
     </control-button>
-
   </div>
 </template>
 
@@ -39,7 +37,7 @@ export default {
   },
 
   computed: {
-    buttons: function () {
+    buttons () {
       return [
         {
           tooltip: 'Zoom in',

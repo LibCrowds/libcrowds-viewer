@@ -1,6 +1,5 @@
 <template>
   <div id="lv-toolbar">
-
     <control-button
       v-for="button in toolbarButtons"
       :key="button.id"
@@ -9,13 +8,8 @@
       :callback="button.callback"
       position="bottom"
       hint-position="bottom">
-      <icon
-        :name="button.icon"
-        scale="1.35"
-        :class="button.iconClass">
-      </icon>
+      <icon :name="button.icon" :class="button.iconClass" scale="1.35"></icon>
     </control-button>
-
   </div>
 </template>
 
@@ -33,7 +27,7 @@ import Task from '@/model/Task'
 import ControlButton from '@/components/controls/ControlButton'
 
 export default {
-  data: function () {
+  data () {
     return {
       imgLink: null
     }
@@ -64,7 +58,7 @@ export default {
     // as other controls rely on the current task being passed in and therefore
     // this component could be rendered after the viewer and the default method
     // of passing the button IDs won't work.
-    toolbarButtons: function () {
+    toolbarButtons () {
       let tbButtons = []
 
       if (this.buttons.fullscreen) {

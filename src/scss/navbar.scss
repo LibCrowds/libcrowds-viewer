@@ -83,7 +83,7 @@
 
         &:hover,
         &:focus {
-          color: #fff;
+          color: $lv-white;
         }
       }
 
@@ -96,7 +96,7 @@
         font-size: $lv-font-size-sm;
         float: left;
         display: block;
-        color: #fff;
+        color: $lv-white;
         text-align: center;
         padding: 1.2rem 1rem;
         text-decoration: none;
@@ -109,7 +109,7 @@
     margin-left: auto;
     background: none;
     border: none;
-    color: #fff;
+    color: $lv-white;
     display: flex;
     padding: 1.2rem 1rem;
 

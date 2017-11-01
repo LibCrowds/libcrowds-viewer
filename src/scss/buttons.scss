@@ -1,47 +1,27 @@
-@import '../settings.scss';
-
 .lv-btn {
   cursor: default;
-  font-size: 14px;
-  background-color: transparent;
-  border: 1px solid #fff;
-  color: #fff;
   padding: 8px 26px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   touch-action: manipulation;
 
-  &.lv-btn-green {
-    background-color: $lv-green;
-    border-color: $lv-green;
+  @each $color, $value in $btn-colors {
+    &.lv-btn-#{$color} {
+      color: $lv-white;
+      background-color: $value;
+      border-color: $value;
 
-    &:hover,
-    &:focus {
-      background-color: darken($lv-green, 10%);
-      border-color: darken($lv-green, 10%);
+      &:hover,
+      &:focus {
+        background-color: darken($value, 10%);
+        border-color: darken($value, 10%);
+      }
     }
-  }
-
-  &.lv-btn-red {
-    background-color: $lv-red;
-    border-color: $lv-red;
-
-    &:hover,
-    &:focus {
-      background-color: darken($lv-red, 10%);
-      border-color: darken($lv-red, 10%);
-    }
-  }
-
-  &.lv-btn-blue {
-    background-color: $lv-blue;
-    border-color: $lv-blue;
-
-    &:hover,
-    &:focus {
-      background-color: darken($lv-blue, 10%);
-      border-color: darken($lv-blue, 10%);
+    &.lv-btn-#{$color}-inverse {
+      color: $value;
+      background-color: transparent;
+      border: 1px solid $value;
     }
   }
 
@@ -58,6 +38,7 @@
   }
 
   &.lv-btn-control {
+    color: $lv-white;
     display: flex !important;
     background: none;
     text-shadow: 0 0 5px #000000;
@@ -69,7 +50,7 @@
     margin: 0;
 
     @media screen and (min-width: 768px) {
-      padding: 0.5rem 1rem
+      padding: $lv-sidebar-padding-y $lv-sidebar-padding-x;
     }
 
     &:hover,
@@ -84,6 +65,7 @@
   }
 
   &.lv-btn-hud {
+    color: $lv-white;
     display: flex !important;
     justify-content: center;
     height: 32px;

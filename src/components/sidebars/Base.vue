@@ -19,7 +19,7 @@
       <span v-if="!showConfirmButtons">
         <button
           :disabled="disableComplete && task.complete"
-          class="lv-btn lv-btn-block"
+          class="lv-btn lv-btn-block lv-btn-white-inverse"
           @click="toggleeNoteCollapse"
           v-html="buttons.note">
         </button>
