@@ -66,14 +66,7 @@ npm run demo:dev
 
 # deploy to gh-pages (rights permitting)
 npm run demo:deploy
-```
 
-## Testing
-
-```bash
 # test
 npm run test
 ```
-
-
-
