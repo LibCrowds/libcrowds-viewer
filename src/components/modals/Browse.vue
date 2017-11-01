@@ -52,7 +52,7 @@ import 'vue-awesome/icons/check-circle'
 import ModalBase from '@/components/modals/Base'
 
 export default {
-  data: function () {
+  data () {
     return {
       page: 1,
       perPage: 15
@@ -80,7 +80,7 @@ export default {
   },
 
   computed: {
-    listItemClass: function () {
+    listItemClass () {
       const complete = (
         this.task !== undefined &&
         this.task.complete &&
@@ -90,7 +90,8 @@ export default {
         'task-complete': complete
       }
     },
-    paginatedTasks: function () {
+
+    paginatedTasks () {
       const start = (this.page - 1) * this.perPage
       const end = start + this.perPage >= this.tasks.length
         ? this.tasks.length
@@ -98,7 +99,8 @@ export default {
       const tasks = this.tasks.slice(start, end)
       return tasks
     },
-    totalPages: function () {
+
+    totalPages () {
       return Math.ceil(this.tasks.length / this.perPage)
     }
   },

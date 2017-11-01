@@ -28,7 +28,7 @@ import Task from '@/model/Task'
 import ModalBase from '@/components/modals/Base'
 
 export default {
-  data: function () {
+  data () {
     return {
       metadata: [],
       logo: null,
@@ -53,7 +53,7 @@ export default {
   },
 
   computed: {
-    hasInfo: function () {
+    hasInfo () {
       return (this.metadata.length > 0 ||
               this.logo !== null ||
               this.attribution !== null ||
@@ -62,7 +62,6 @@ export default {
   },
 
   methods: {
-
     /**
      * Fetch and return the task info.
      * @param {Object} uri
@@ -120,7 +119,7 @@ export default {
   },
 
   watch: {
-    task: function () {
+    task () {
       // Update the info when the task changes.
       this.loadInfo()
     }

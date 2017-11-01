@@ -50,7 +50,7 @@ import 'vue-awesome/icons/check'
 import Task from '@/model/Task'
 
 export default {
-  data: function () {
+  data () {
     return {
       x1: 0,
       y1: 0,

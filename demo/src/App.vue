@@ -96,7 +96,7 @@ import selectTasks from './selectTasks'
 import transcribeTasks from './transcribeTasks'
 
 export default {
-  data: function () {
+  data () {
     return {
       selectTaskOpts: selectTasks,
       transcribeTaskOpts: transcribeTasks,
@@ -112,7 +112,7 @@ export default {
   },
 
   computed: {
-    githubUrl: function () {
+    githubUrl () {
       return process.env.GITHUB_URL
     }
   },

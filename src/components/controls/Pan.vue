@@ -42,7 +42,7 @@ export default {
   },
 
   computed: {
-    buttons: function () {
+    buttons () {
       return [
         {
           id: 'pan-up',

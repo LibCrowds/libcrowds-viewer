@@ -15,7 +15,7 @@ import Task from '@/model/Task'
 import VueFormGenerator from 'vue-form-generator'
 
 export default {
-  data: function () {
+  data () {
     return {
       formOptions: {
         validateAfterLoad: true,
@@ -131,7 +131,7 @@ export default {
   },
 
   watch: {
-    task: function () {
+    task () {
       this.load()
     }
   }

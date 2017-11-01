@@ -102,7 +102,7 @@ import ModalBase from '@/components/modals/Base'
 import Task from '@/model/Task'
 
 export default {
-  data: function () {
+  data () {
     return {
       manifestData: {}
     }

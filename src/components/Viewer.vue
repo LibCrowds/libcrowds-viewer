@@ -166,7 +166,7 @@ import drawOverlay from '@/utils/drawOverlay'
 import deleteOverlay from '@/utils/deleteOverlay'
 
 export default {
-  data: function () {
+  data () {
     return {
       viewer: {},
       selectionRect: {},
@@ -302,32 +302,37 @@ export default {
   },
 
   computed: {
-    previousBtnDisabled: function () {
+    previousBtnDisabled () {
       if (!this.currentTask) {
         return true
       }
       return !(this.tasks.indexOf(this.currentTask) > 0)
     },
-    nextBtnDisabled: function () {
+
+    nextBtnDisabled () {
       if (!this.currentTask) {
         return true
       }
       return this.tasks.indexOf(this.currentTask) >= this.tasks.length - 1
     },
-    tags: function () {
+
+    tags () {
       return this.annotator.getSelectAnnotations(this.currentTask)
     },
-    commentAnnotation: function () {
+
+    commentAnnotation () {
       return this.annotator.getCommentAnnotation(this.currentTask)
     },
-    selectorEnabled: function () {
+
+    selectorEnabled () {
       return (
         this.currentTask &&
         this.currentTask.mode === 'select' &&
         (!this.currentTask.complete || !this.disableComplete)
       )
     },
-    mergedButtons: function () {
+
+    mergedButtons () {
       let merged = JSON.parse(JSON.stringify(this.defaultButtons))
       for (let key in merged) {
         if (this.buttons.hasOwnProperty(key)) {
@@ -763,7 +768,7 @@ export default {
       }
     },
     taskOpts: {
-      handler: function () {
+      handler () {
         this.generateTasks()
         if (this.tasks.length) {
           this.setCurrentTask(this.tasks[0])
