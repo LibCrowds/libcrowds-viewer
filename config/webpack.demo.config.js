@@ -16,7 +16,7 @@ module.exports = merge(baseConfig, {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       'libcrowds-viewer': path.resolve(__dirname, '../src/main.js'),
-      './libcrowds-viewer/dist/scss/libcrowds-viewer.scss': path.resolve(__dirname, '../scss/main.scss'),
+      './libcrowds-viewer/dist/scss/libcrowds-viewer.scss': path.resolve(__dirname, '../src/scss/main.scss'),
       '@': path.resolve(__dirname, '../src')
     }
   },
