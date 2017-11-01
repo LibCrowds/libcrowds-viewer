@@ -3,7 +3,7 @@
 
     <!-- Demo home page -->
     <div
-      id="home-container"
+      id="homepage"
       v-if="(
         !showSelectViewer &&
         !showTranscribeViewer &&
@@ -48,6 +48,7 @@
       <libcrowds-viewer
         :task-opts="selectTaskOpts"
         :navigation="navigation"
+        :before-submit="beforeSubmit"
         @taskchange="handleTaskChange"
         @create="handleCreate"
         @update="handleUpdate"
@@ -63,6 +64,7 @@
         :buttons="{browse: false}"
         :task-opts="transcribeTaskOpts"
         :navigation="navigation"
+        :before-submit="beforeSubmit"
         @taskchange="handleTaskChange"
         @create="handleCreate"
         @update="handleUpdate"
@@ -78,6 +80,7 @@
         :buttons="{browse: false}"
         :task-opts="customTaskOpts"
         :navigation="navigation"
+        :before-submit="beforeSubmit"
         @taskchange="handleTaskChange"
         @create="handleCreate"
         @update="handleUpdate"
@@ -96,7 +99,7 @@ import selectTasks from './selectTasks'
 import transcribeTasks from './transcribeTasks'
 
 export default {
-  data: function () {
+  data () {
     return {
       selectTaskOpts: selectTasks,
       transcribeTaskOpts: transcribeTasks,
@@ -107,12 +110,24 @@ export default {
       navigation: [
         { label: 'LibCrowds Viewer', url: window.location.href, brand: true },
         { label: 'Home', url: window.location.href }
-      ]
+      ],
+      beforeSubmit: (taskData) => new Promise((resolve, reject) => {
+        if (!taskData.annotations.length) {
+          const confirm = window.confirm(
+            'EXAMPLE ALERT\n\n' +
+            'No annotations have been saved, do you want to continue?'
+          )
+          if (!confirm) {
+            reject(new Error())
+          }
+        }
+        resolve()
+      })
     }
   },
 
   computed: {
-    githubUrl: function () {
+    githubUrl () {
       return process.env.GITHUB_URL
     }
   },
@@ -151,8 +166,16 @@ export default {
 </script>
 
 <style lang="scss">
-#home-container {
-  font-family: Arial, Helvetica, sans-serif;
+@import 'libcrowds-viewer/dist/scss/libcrowds-viewer.scss';
+
+.viewer-container {
+  margin: 0;
+  height: 100vh;
+}
+
+/* The styles below apply to the demo homepage only */
+#homepage {
+  font-family: $lv-font-family-base;
   margin: 0;
   background-color: #F8F8F8;
   color: #1F1E38;
@@ -232,19 +255,10 @@ export default {
     opacity: 0;
     max-height: 0px;
   }
-}
 
-#mode-buttons {
-  display:flex;
-  flex-direction: column;
-}
-
-.viewer-container {
-  margin: 0;
-  height: 100vh;
-}
-
-.notyf {
-  right: 280px;
+  #mode-buttons {
+    display:flex;
+    flex-direction: column;
+  }
 }
 </style>

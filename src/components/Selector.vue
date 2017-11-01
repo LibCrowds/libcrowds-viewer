@@ -1,49 +1,42 @@
 <template>
-  <div id="lv-selector">
+  <div class="lv-selector" ref="box">
+    <span class="border border-top" ref="border-top">
+      <span class="handle"></span>
+    </span>
+    <span class="border border-right" ref="border-right">
+      <span class="handle"></span>
+    </span>
+    <span class="border border-bottom" ref="border-bottom">
+      <span class="handle"></span>
+    </span>
+    <span class="border border-left" ref="border-left">
+      <span class="handle"></span>
+    </span>
 
-    <div class="lv-selector-box" ref="box">
+    <span class="corner corner-top-right" ref="corner-top-right"></span>
+    <span class="corner corner-bottom-right" ref="corner-bottom-right"></span>
+    <span class="corner corner-bottom-left" ref="corner-bottom-left"></span>
+    <span class="corner corner-top-left" ref="corner-top-left"></span>
 
-      <span class="border border-top" ref="border-top">
-        <span class="handle"></span>
-      </span>
-      <span class="border border-right" ref="border-right">
-        <span class="handle"></span>
-      </span>
-      <span class="border border-bottom" ref="border-bottom">
-        <span class="handle"></span>
-      </span>
-      <span class="border border-left" ref="border-left">
-        <span class="handle"></span>
-      </span>
-
-      <span class="corner corner-top-right" ref="corner-top-right"></span>
-      <span class="corner corner-bottom-right" ref="corner-bottom-right"></span>
-      <span class="corner corner-bottom-left" ref="corner-bottom-left"></span>
-      <span class="corner corner-top-left" ref="corner-top-left"></span>
-
-      <div class="selection-buttons">
-        <button
-          class="btn-selection"
-          id="cancel-selection"
-          ref="cancelSelection"
-          @click="cancel">
-          <icon label="Cancel" scale="1.2">
-            <icon name="circle" scale="1.2"></icon>
-            <icon name="times" class="icon-white" scale="0.8"></icon>
-          </icon>
-        </button>
-        <button
-          class="btn-selection"
-          id="confirm-selection"
-          ref="confirmSelection"
-          @click="confirm">
-          <icon label="Confirm" scale="1.2">
-            <icon name="circle" scale="1.2"></icon>
-            <icon name="check" class="icon-white" scale="0.8"></icon>
-          </icon>
-        </button>
-      </div>
-
+    <div class="selection-buttons">
+      <button
+        class="lv-btn lv-btn-red-inverse"
+        ref="cancelSelection"
+        @click="cancel">
+        <icon label="Cancel" scale="1.2">
+          <icon name="circle" scale="1.2"></icon>
+          <icon name="times" class="icon-white" scale="0.8"></icon>
+        </icon>
+      </button>
+      <button
+        class="lv-btn lv-btn-green-inverse"
+        ref="confirmSelection"
+        @click="confirm">
+        <icon label="Confirm" scale="1.2">
+          <icon name="circle" scale="1.2"></icon>
+          <icon name="check" class="icon-white" scale="0.8"></icon>
+        </icon>
+      </button>
     </div>
   </div>
 </template>
@@ -57,7 +50,7 @@ import 'vue-awesome/icons/check'
 import Task from '@/model/Task'
 
 export default {
-  data: function () {
+  data () {
     return {
       x1: 0,
       y1: 0,
@@ -103,6 +96,10 @@ export default {
         }
       },
       deep: true
+    },
+
+    task () {
+      this.undraw()
     }
   },
 
@@ -505,135 +502,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '~style/settings';
-
-#lv-selector {
-  .lv-selector-box {
-    background-color: rgba($blue, 0.2);
-    position: absolute;
-    z-index: 1;
-    display: none;
-
-    .border {
-      background: $blue;
-      position: absolute;
-      height: 1px;
-      width: 1px;
-      margin: 0px;
-      padding: 0px;
-
-      &.border-top {
-        width: 100%;
-        top: 0;
-
-        .handle {
-          cursor: ns-resize;
-        }
-      }
-
-      &.border-right {
-        height: 100%;
-        right: 0;
-
-        .handle {
-          cursor: ew-resize;
-        }
-      }
-
-      &.border-bottom {
-        width: 100%;
-        bottom: 0;
-
-        .handle {
-          cursor: ns-resize;
-        }
-      }
-
-      &.border-left {
-        height: 100%;
-        left: 0;
-
-        .handle {
-          cursor: ew-resize;
-        }
-      }
-
-      .handle {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 6px;
-        height: 6px;
-        margin: -4px 0 0 -4px;
-        background: #FFF;
-        border: 1px solid $blue;
-      }
-    }
-
-    .corner {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      background: #FFF;
-      border: 1px solid $blue;
-
-      &.corner-top-right {
-        top: -3px;
-        right: -3px;
-        cursor: nesw-resize;
-      }
-
-      &.corner-bottom-right {
-        bottom: -3px;
-        right: -3px;
-        cursor: nwse-resize;
-      }
-
-      &.corner-bottom-left {
-        bottom: -3px;
-        left: -3px;
-        cursor: nesw-resize;
-      }
-
-      &.corner-top-left {
-        top: -3px;
-        left: -3px;
-        cursor: nwse-resize;
-      }
-    }
-  }
-
-  .selection-buttons {
-    bottom: 0;
-    right: 0;
-    transform: translateY(105%);
-    position: absolute;
-    display: flex;
-    flex-direction: row;
-
-    .btn-selection {
-      border: none;
-      background: none;
-      display: flex;
-      align-items: center;
-      font-size: $font-size-sm;
-      padding: 2px;
-      margin-left: 5px;
-
-      &#cancel-selection {
-        color: $red;
-      }
-
-      &#confirm-selection {
-        color: $green;
-      }
-
-      .icon-white {
-        color: #FFF;
-      }
-    }
-  }
-}
-</style>

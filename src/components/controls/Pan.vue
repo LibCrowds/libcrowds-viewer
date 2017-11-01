@@ -3,7 +3,7 @@
 
     <control-button
       v-for="(b, index) in buttons"
-      :key="`btn-zoom-${index}`"
+      :key="`lv-btn-zoom-${index}`"
       :id="b.id"
       :tooltip="b.tooltip"
       :callback="b.callback"
@@ -42,7 +42,7 @@ export default {
   },
 
   computed: {
-    buttons: function () {
+    buttons () {
       return [
         {
           id: 'pan-up',
@@ -81,49 +81,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '~style/settings';
-
-#lv-pan-controls {
-  position: absolute;
-  z-index: 2;
-  background-color: $hud;
-  margin: 1rem;
-  border-radius: 50%;
-  bottom: 0;
-  width: 100px;
-  height: 100px;
-
-  .btn-control {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    padding: 0.5rem;
-  }
-
-  #pan-up {
-    flex-direction: row;
-    width: 100%;
-    top: 0;
-  }
-
-  #pan-down {
-    flex-direction: row;
-    width: 100%;
-    bottom: 0;
-  }
-
-  #pan-left {
-    flex-direction: column;
-    height: 100%;
-    left: 0;
-  }
-
-  #pan-right {
-    flex-direction: column;
-    height: 100%;
-    right: 0;
-  }
-}
-</style>

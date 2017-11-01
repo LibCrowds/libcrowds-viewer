@@ -16,23 +16,51 @@ npm install libcrowds-viewer --save
 
 Install the component.
 
-```js
+``` js
+// main.js
 import Vue from 'vue';
 import LibcrowdsViewer from 'libcrowds-viewer';
 
 Vue.use(LibcrowdsViewer);
 ```
 
-Use it in your templates \(minimum configuration options shown\).
+Use it in your templates \(minimal configuration options shown\).
 
-```vue
-<libcrowds-viewer
-  :task-opts="[{
-    mode: 'select',
-    tileSource: 'http://www.example.org/image-service/abcd1234/info.json',
-    info: 'http://example.org/iiif/book1/manifest'
-  }]">
-</libcrowds-viewer>
+``` vue
+<template>
+  <div class="container">
+    <libcrowds-viewer
+      :task-opts="taskOpts">
+    </libcrowds-viewer>
+  </div>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        taskOpts: [
+          {
+            mode: 'select',
+            objective: 'Draw rectangles around stuff'
+            tileSource: 'http://www.example.org/image-service/abcd123/info.json',
+            target: 'http://example.org/iiif/book1/canvas/p1'
+          }
+        ]
+      }
+    }
+  }
+</script>
+
+<style lang="scss">
+  @import "~libcrowds-viewer/dist/scss/libcrowds-viewer.scss";
+
+  // An explicit height must be set on the viewer container.
+  .viewer-container {
+    margin: 0;
+    height: 100vh;
+  }
+</style>
 ```
 
 ## Development
@@ -42,18 +70,11 @@ Use it in your templates \(minimum configuration options shown\).
 npm install
 
 # serve demo at localhost:8080
-npm run demo:dev
+npm run dev
 
 # deploy to gh-pages (rights permitting)
 npm run demo:deploy
-```
 
-## Testing
-
-```bash
 # test
 npm run test
 ```
-
-
-

@@ -1,10 +1,10 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path')
 
 module.exports = {
   entry: [
     'whatwg-fetch',
-    './src/main.js'
+    './src/main.js',
+    './src/scss/main.scss'
   ],
   output: {
     path: path.resolve(__dirname, '../dist'),
@@ -43,28 +43,13 @@ module.exports = {
         }
       },
       {
-        test: /\.s?css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
-      },
-      {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [
           path.resolve(__dirname, '../src'),
           path.resolve(__dirname, '../test'),
           path.resolve(__dirname, '../demo/src')
-        ],
-      },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
+        ]
       }
     ]
   },
@@ -72,8 +57,7 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': path.resolve(__dirname, '../src'),
-      style: path.resolve(__dirname, '../src/assets/style/')
+      '@': path.resolve(__dirname, '../src')
     }
   },
   performance: {

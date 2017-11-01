@@ -5,7 +5,7 @@
       <span v-if="task.help" v-html="marked(task.help)"></span>
 
       <h4>Viewer controls</h4>
-      <p>Use the pan buttons on the lower left or your keyboard's arrow keys to move the image around the screen.</p>  
+      <p>Use the pan buttons on the lower left or your keyboard's arrow keys to move the image around the screen.</p>
       <p>On the top-left of the viewer:</p>
       <ul>
         <li>
@@ -102,7 +102,7 @@ import ModalBase from '@/components/modals/Base'
 import Task from '@/model/Task'
 
 export default {
-  data: function () {
+  data () {
     return {
       manifestData: {}
     }
@@ -145,20 +145,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-#lv-help-modal {
-  ul {
-    padding-left: 0;
-    list-style: none;
-  }
-
-  li {
-    margin-bottom: 5px;
-  }
-
-  svg {
-    margin-right: 8px;
-  }
-}
-</style>

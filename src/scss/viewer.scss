@@ -1,0 +1,79 @@
+#lv-viewer {
+  font-family: $lv-font-family-base;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+
+  .lv-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 100%;
+    width: 100%;
+
+    @media screen and (min-width: 768px) {
+      flex-direction: row;
+    }
+  }
+}
+
+#lv-viewer-wrapper {
+  display: flex;
+  position: relative;
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+  background-color: $lv-main-bg;
+}
+
+#lv-viewer-container {
+  flex: 1 1 auto;
+}
+
+#lv-viewer-disabled-overlay {
+  z-index: 100;
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+  position: absolute;
+  height: 100%;
+}
+
+#lv-browse-next,
+#lv-browse-previous {
+  margin: 1rem;
+  height: 3rem;
+  width: 3rem;
+  position: absolute !important;
+  top: calc(50% - 2rem);
+}
+
+#lv-browse-previous {
+  left: 0;
+
+  svg {
+    margin-right: 2px;
+  }
+}
+
+#lv-browse-next {
+  right: 0;
+
+  svg {
+    margin-left: 2px;
+  }
+}
+
+.openseadragon-container {
+  height: 100%;
+
+  .openseadragon-message {
+    color: #FFF;
+  }
+}

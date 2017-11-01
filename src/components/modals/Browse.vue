@@ -52,7 +52,7 @@ import 'vue-awesome/icons/check-circle'
 import ModalBase from '@/components/modals/Base'
 
 export default {
-  data: function () {
+  data () {
     return {
       page: 1,
       perPage: 15
@@ -80,7 +80,7 @@ export default {
   },
 
   computed: {
-    listItemClass: function () {
+    listItemClass () {
       const complete = (
         this.task !== undefined &&
         this.task.complete &&
@@ -90,7 +90,8 @@ export default {
         'task-complete': complete
       }
     },
-    paginatedTasks: function () {
+
+    paginatedTasks () {
       const start = (this.page - 1) * this.perPage
       const end = start + this.perPage >= this.tasks.length
         ? this.tasks.length
@@ -98,7 +99,8 @@ export default {
       const tasks = this.tasks.slice(start, end)
       return tasks
     },
-    totalPages: function () {
+
+    totalPages () {
       return Math.ceil(this.tasks.length / this.perPage)
     }
   },
@@ -114,77 +116,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-@import '~style/settings';
-
-#lv-browse-modal {
-  ul {
-    text-align: center;
-    padding-left: 0;
-    list-style: none;
-  }
-
-  li {
-    display: inline-block;
-    width: 128px;
-    margin: 0 10px 30px;
-    border: 1px solid lighten($gray-dark, 20%);
-    position: relative;
-
-    &:not(.task-complete):hover,
-    &:not(.task-complete):focus {
-      border-color: lighten($gray-dark, 35%);
-    }
-
-    &.task-complete {
-      img {
-        opacity: 0.2;
-      }
-    }
-
-    figure {
-      margin: 5px;
-    }
-
-    img {
-      max-width: 100%;
-    }
-
-    figcaption {
-      text-align: center;
-      font-family: $font-family-headings;
-      font-size: $font-size-sm;
-      margin: 5px 5px 3px 5px;
-    }
-
-    .complete-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      svg {
-        height: 24px;
-        width: auto;
-        color: $green;
-      }
-    }
-  }
-
-  .pagination {
-    display: block;
-    text-align: center;
-  }
-
-  .pagination button {
-    color: #fff;
-    background: none;
-    border: none;
-    padding: 8px 16px;
-
-    &.active {
-      background-color: $blue;
-    }
-  }
-}
-</style>

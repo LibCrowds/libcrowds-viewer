@@ -1,16 +1,14 @@
 <template>
   <div id="lv-zoom-controls">
-
     <control-button
       v-for="(b, index) in buttons"
-      :key="`btn-zoom-${index}`"
+      :key="`lv-zoom-${index}`"
       :tooltip="b.tooltip"
       :callback="b.callback"
       position="bottom"
       hint-position="top">
       <icon :name="b.icon" scale="1.35"></icon>
     </control-button>
-
   </div>
 </template>
 
@@ -39,7 +37,7 @@ export default {
   },
 
   computed: {
-    buttons: function () {
+    buttons () {
       return [
         {
           tooltip: 'Zoom in',
@@ -72,34 +70,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '~style/settings';
-
-#lv-zoom-controls {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  justify-content: space-around;
-  z-index: 2;
-  background-color: $hud;
-  margin: 1rem;
-  border-radius: 25px;
-  bottom: 0;
-  height: 100px;
-  right: 0;
-
-  @media screen and (min-width: 768px) {
-    right: auto;
-    left: 120px;
-  }
-
-  .btn-control:not(:nth-child(2)) {
-    padding: 0.5rem;
-  }
-
-  .btn-control:nth-child(2) {
-    padding: 0 0.5rem;
-  }
-}
-</style>

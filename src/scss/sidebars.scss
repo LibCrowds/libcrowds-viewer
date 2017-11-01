@@ -1,0 +1,114 @@
+.lv-sidebar {
+  width: 100%;
+  font-size: $lv-font-size-sm;
+  color: #FFFFFF;
+  height: 100%;
+  background-color: $lv-gray-dark;
+  display: flex;
+  flex-direction: column;
+  transition: width 350ms;
+  overflow-y: auto;
+  border-top: 1px solid $lv-gray;
+  flex-shrink: 2;
+
+  @media screen and (min-width: 768px) {
+    width: 320px;
+    border-top: none;
+    flex-shrink: 0;
+  }
+
+  .lv-sidebar-header {
+    padding: $lv-sidebar-padding-y $lv-sidebar-padding-x;
+    display: none;
+
+    @media screen and (min-width: 768px) {
+      display: block;
+    }
+
+    h3 {
+      text-transform: uppercase;
+    }
+  }
+
+  .lv-sidebar-content {
+    padding: $lv-sidebar-padding-y $lv-sidebar-padding-x;
+    flex: 1 1 auto;
+    display: none;
+    flex-direction: column;
+    overflow-y: auto;
+    position: relative;
+    min-height: 200px;
+
+    @media screen and (min-width: 768px) {
+      display: block;
+    }
+
+    ul {
+      margin-bottom: 0;
+      overflow-y: auto;
+      flex: 1 1 auto;
+      list-style: none;
+      padding: 0;
+      border: 1px solid lighten($lv-gray-dark, 20%);
+      transition: opacity 250ms;
+
+      &:empty {
+        opacity: 0;
+      }
+
+      li {
+        padding: 0.8rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid darken($lv-gray, 25%);
+
+        &>* {
+          display: inline-block;
+        }
+      }
+    }
+
+    .buttons {
+      display: flex;
+      flex: 0 0 33.3333%;
+    }
+
+    .lv-btn {
+      display: flex;
+      margin-right: auto;
+      margin-left: auto;
+
+      &:last-child {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+
+  .lv-sidebar-footer {
+    padding: $lv-sidebar-padding-y $lv-sidebar-padding-x;
+    border-top: 1px solid lighten($lv-gray-dark, 10%);
+    margin-top: 1rem;
+    padding-top: 1rem;
+
+    button {
+      display: block;
+      width: 100%;
+
+      &:not(:last-child) {
+        margin-bottom: 0.6rem;
+      }
+    }
+
+    textarea {
+      padding: 0.5rem;
+      margin-bottom: 0.6rem;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      width: 100%;
+    }
+  }
+}

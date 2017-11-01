@@ -6,7 +6,7 @@
       :navigation="navigation">
     </navbar>
 
-    <main>
+    <main class="lv-container">
       <div id="lv-viewer-wrapper">
         <div id="hud" ref="hud">
           <toolbar-controls
@@ -71,7 +71,7 @@
           <button
             v-if="browsable"
             :disabled="previousBtnDisabled"
-            class="btn btn-hud"
+            class="lv-btn lv-btn-hud"
             id="lv-browse-previous"
             @click="previousTask">
             <icon name="chevron-left" scale="1.5"></icon>
@@ -79,7 +79,7 @@
           <button
             v-if="browsable"
             :disabled="nextBtnDisabled"
-            class="btn btn-hud"
+            class="lv-btn lv-btn-hud"
             id="lv-browse-next"
             @click="nextTask">
             <icon name="chevron-right" scale="1.5"></icon>
@@ -89,7 +89,7 @@
         <div :id="viewerOpts.id"></div>
 
         <transition name="fade">
-          <div id="viewer-disabled-overlay" v-if="viewerDisabled"></div>
+          <div id="lv-viewer-disabled-overlay" v-if="viewerDisabled"></div>
         </transition>
 
         <selector
@@ -102,7 +102,7 @@
 
       </div>
 
-      <task-sidebar
+      <base-sidebar
         v-if="currentTask"
         :task="currentTask"
         :showNote="showNote"
@@ -135,14 +135,13 @@
           @inputfocus="onTranscribeInputFocus"
           @inputblur="onTranscribeInputBlur">
         </transcribe-sidebar-item>
-      </task-sidebar>
+      </base-sidebar>
     </main>
 
   </div>
 </template>
 
 <script>
-import Notyf from 'notyf'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
@@ -154,7 +153,7 @@ import BrowseModal from '@/components/modals/Browse'
 import ToolbarControls from '@/components/controls/Toolbar'
 import PanControls from '@/components/controls/Pan'
 import ZoomControls from '@/components/controls/Zoom'
-import TaskSidebar from '@/components/sidebars/Task'
+import BaseSidebar from '@/components/sidebars/Base'
 import Navbar from '@/components/navigation/Navbar'
 import SelectSidebarItem from '@/components/sidebars/items/Select'
 import TranscribeSidebarItem from '@/components/sidebars/items/Transcribe'
@@ -167,11 +166,10 @@ import drawOverlay from '@/utils/drawOverlay'
 import deleteOverlay from '@/utils/deleteOverlay'
 
 export default {
-  data: function () {
+  data () {
     return {
       viewer: {},
       selectionRect: {},
-      notyf: new Notyf(),
       annotator: new Annotator({
         creator: this.creator,
         generator: this.generator
@@ -263,11 +261,11 @@ export default {
     },
     navigation: {
       type: Array,
-      default: []
+      default: () => []
     },
     confirmOnSubmit: {
       type: Boolean,
-      default: true
+      default: false
     },
     buttons: {
       type: Object,
@@ -284,6 +282,10 @@ export default {
     showHelpOnMount: {
       type: Boolean,
       default: false
+    },
+    beforeSubmit: {
+      type: Function,
+      default: () => new Promise((resolve, reject) => resolve())
     }
   },
 
@@ -295,7 +297,7 @@ export default {
     ToolbarControls,
     PanControls,
     ZoomControls,
-    TaskSidebar,
+    BaseSidebar,
     Navbar,
     Selector,
     SelectSidebarItem,
@@ -304,32 +306,37 @@ export default {
   },
 
   computed: {
-    previousBtnDisabled: function () {
+    previousBtnDisabled () {
       if (!this.currentTask) {
         return true
       }
       return !(this.tasks.indexOf(this.currentTask) > 0)
     },
-    nextBtnDisabled: function () {
+
+    nextBtnDisabled () {
       if (!this.currentTask) {
         return true
       }
       return this.tasks.indexOf(this.currentTask) >= this.tasks.length - 1
     },
-    tags: function () {
+
+    tags () {
       return this.annotator.getSelectAnnotations(this.currentTask)
     },
-    commentAnnotation: function () {
+
+    commentAnnotation () {
       return this.annotator.getCommentAnnotation(this.currentTask)
     },
-    selectorEnabled: function () {
+
+    selectorEnabled () {
       return (
         this.currentTask &&
         this.currentTask.mode === 'select' &&
         (!this.currentTask.complete || !this.disableComplete)
       )
     },
-    mergedButtons: function () {
+
+    mergedButtons () {
       let merged = JSON.parse(JSON.stringify(this.defaultButtons))
       for (let key in merged) {
         if (this.buttons.hasOwnProperty(key)) {
@@ -407,7 +414,7 @@ export default {
      * @param {Function} onClick
      *   A callback to trigger on click (or tap).
      */
-    drawHighlight (rect, id, overlayCls = 'highlight', onClick = null) {
+    drawHighlight (rect, id, overlayCls = 'selection', onClick = null) {
       const vp = this.viewer.viewport
       const imgRect = new OpenSeadragon.Rect(
         rect.x,
@@ -587,12 +594,15 @@ export default {
           formGroups.classList.add('show-errors')
         }
       }
-      task.complete = true
 
-      if (this.nextOnSubmit) {
-        this.nextTask()
-      }
-      this.$emit('submit', task)
+      /* eslint-disable handle-callback-err */
+      this.beforeSubmit(task).then(() => {
+        task.complete = true
+        if (this.nextOnSubmit) {
+          this.nextTask()
+        }
+        this.$emit('submit', task)
+      }).catch(err => {})
     },
 
     /**
@@ -765,7 +775,7 @@ export default {
       }
     },
     taskOpts: {
-      handler: function () {
+      handler () {
         this.generateTasks()
         if (this.tasks.length) {
           this.setCurrentTask(this.tasks[0])
@@ -793,108 +803,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-@import '~notyf/src/notyf.scss';
-@import '~style/settings';
-@import '~style/partials/buttons';
-
-#lv-viewer {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  margin: 0;
-  top: 0;
-  overflow: hidden;
-
-  main {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    height: 100%;
-    width: 100%;
-    background-color: #000;
-
-    @media screen and (min-width: 768px) {
-      flex-direction: row;
-    }
-  }
-}
-
-#lv-viewer-wrapper {
-  display: flex;
-  position: relative;
-  height: 100%;
-  width: 100%;
-  background-color: #000;
-}
-
-#lv-viewer-container {
-  flex: 1 1 auto;
-}
-
-#viewer-disabled-overlay {
-  z-index: 100;
-  width: 100%;
-  background: rgba(0,0,0,0.5);
-  position: absolute;
-  height: 100%;
-}
-
-#lv-browse-next,
-#lv-browse-previous {
-  margin: 1rem;
-  height: 3rem;
-  width: 3rem;
-  position: absolute !important;
-  top: calc(50% - 2rem);
-}
-
-#lv-browse-previous {
-  left: 0;
-
-  svg {
-    margin-right: 2px;
-  }
-}
-
-#lv-browse-next {
-  right: 0;
-
-  svg {
-    margin-left: 2px;
-  }
-}
-
-.openseadragon-container {
-  height: 100%;
-
-  .openseadragon-message {
-    color: #FFF;
-  }
-}
-
-.notyf {
-  @media screen and (min-width: 768px) {
-    right: 350px;
-  }
-
-  // Remove if a small screen fix is added to notyf
-  @media screen and (max-width: 766px) {
-    bottom: auto;
-    top: 0;
-    left: calc(50vw - 200px);
-    width: 100%;
-  }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 400ms ease;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
-</style>

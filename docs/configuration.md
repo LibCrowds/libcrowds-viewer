@@ -1,34 +1,35 @@
 # Configuration
 
-LibCrowds Viewer provides a range of configuration options that are passed as properties, most of which are optional but allow for more flexible implementations where required.
+LibCrowds Viewer provides a range of configuration options that are passed as properties. Most of these are optional but allow for more flexible implementations where required.
 
 ## Viewer
 
 All of the following properties, apart from `task-opts`, are optional.
 
-| Property              | Type    | Default   | Description                                                                                           |
-|-----------------------|---------|-----------|-------------------------------------------------------------------------------------------------------|
-| task-opts             | Array   |           | An array of task options \(see [Tasks](configuration.md#tasks)\)                                      |
-| pan-by                | Number  | 0.1       | Multiplier by which to pan                                                                            |
-| zoom-by               | Number  | 0.2       | Multiplier by which to zoom                                                                           |
-| confirm-before-unload | Boolean | true      | Confirm before leaving the page                                                                       |
-| disable-complete      | Boolean | true      | Disable completed tasks to prevent multiple submission                                                |
-| show-note             | Boolean | true      | Include the note input                                                                                |
-| show-form-errors      | Boolean | true      | Show form errors on submit                                                                            |
-| show-related-tasks    | Boolean | false     | Show all tasks related to the same image                                                              |
-| creator               | Object  | null      | The Annotation creator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\)   |
-| generator             | Object  | null      | The Annotation generator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\) |
-| next-on-submit        | Object  | true      | Move to the next task on after submission                                                             |
-| navigation            | Array   | []]       | Additional navigation links \(see [Navigation](configuration.md#navigation)\)                         |
-| confirm-on-submit     | Boolean | true      | Show a confirmation box on submission                                                                 |
-| buttons               | Object  | See below | Button configuration details (see [Buttons](configuration.md#buttons)                                 |
-| selections-editable   | Boolean | true      | Allow the editing of selections                                                                       |
-| browsable             | Boolean | true      | Allow browsing back and forth between tasks                                                           |
-| show-help-on-mount    | Boolean | false     | Show the help modal when the component is mounted                                                     |
+| Property              | Type     | Default       | Description                                                                                           |
+|-----------------------|----------|---------------|-------------------------------------------------------------------------------------------------------|
+| task-opts             | Array    |               | An array of task options \(see [Tasks](configuration.md#tasks)\)                                      |
+| pan-by                | Number   | 0.1           | Multiplier by which to pan                                                                            |
+| zoom-by               | Number   | 0.2           | Multiplier by which to zoom                                                                           |
+| confirm-before-unload | Boolean  | true          | Confirm before leaving the page                                                                       |
+| disable-complete      | Boolean  | true          | Disable completed tasks to prevent multiple submission                                                |
+| show-note             | Boolean  | true          | Include the note input                                                                                |
+| show-form-errors      | Boolean  | true          | Show form errors on submit                                                                            |
+| show-related-tasks    | Boolean  | false         | Show all tasks related to the same image                                                              |
+| creator               | Object   | null          | The Annotation creator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\)   |
+| generator             | Object   | null          | The Annotation generator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\) |
+| next-on-submit        | Object   | true          | Move to the next task on after submission                                                             |
+| navigation            | Array    | [ ]           | Additional navigation links \(see [Navigation](configuration.md#navigation)\)                         |
+| confirm-on-submit     | Boolean  | false         | Show a confirmation box on submission                                                                 |
+| buttons               | Object   | See below     | Button configuration details (see [Buttons](configuration.md#buttons)\)                               |
+| selections-editable   | Boolean  | true          | Allow the editing of selections                                                                       |
+| browsable             | Boolean  | true          | Allow browsing back and forth between tasks                                                           |
+| show-help-on-mount    | Boolean  | false         | Show the help modal when the component is mounted                                                     |
+| before-submit         | Promise  | Empty promise | A function that recieves the task data as an argument and should return a promise that resolves if the submission should go ahead and rejects otherwise |
 
 ## Buttons
 
-To hide one of the `buttons` listed below, set its property to `false`. To change the text associated with the button enter a String (or an Array in the case of the `like` button).
+To hide a particular button set its property to `false`, or to change its tooltip enter a String (or an Array in the case of the `like` button).
 
 | Property              | Type              | Default            | Description                     |
 |-----------------------|-------------------|--------------------|---------------------------------|
@@ -44,7 +45,7 @@ To hide one of the `buttons` listed below, set its property to `false`. To chang
 
 ## Tasks
 
-Tasks are created from the `task-opts` passed to the viewer, which each have the following properties.
+Tasks are created from an array of objects with the following properties. These objects are passed to the viewer via `task-opts`.
 
 | Property       | Type              | Attributes | Description                                                                                                    |
 |----------------|-------------------|------------|----------------------------------------------------------------------------------------------------------------|
@@ -67,6 +68,8 @@ Tasks are created from the `task-opts` passed to the viewer, which each have the
 | help           | String            |  optional  | Additional help loaded as Markdown into the top of the help modal                                              |
 | bounds         | Object            |  optional  | Parameters to fit screen to when task loaded (`x`, `y`, `width` and `height`)                                  |
 
+See the [Annotations](annotations/README.md) section for some examples.
+
 ## Forms
 
 In `transcribe` mode the form can be configured with the following properties.
@@ -80,7 +83,7 @@ In `transcribe` mode the form can be configured with the following properties.
 
 ## Info
 
-The content of the info modal is taken from the `info` task property, where an Object can be passed with the following properties and a String implies a URL that will return a JSON Object with the same properties (e.g. an IIIF manifest URI).
+The content of the info modal is taken from the `info` task property. An Object can be passed with the following properties and a String implies a URL that will return a JSON Object with the same properties (e.g. an IIIF manifest URI).
 
 | Property    | Type    | Description                                                    |
 |-------------|---------|----------------------------------------------------------------|
@@ -98,3 +101,9 @@ Additional navigation links (for example, for the rest of your website) can be p
 | label    | String  | A label for the link |
 | url      | String  | The link url         |
 | brand    | Boolean | Add brand styling    |
+
+## Styles
+
+To customise the appearance of the viewer, the following Sass variables can be overridden before importing the libcrowds-viewer.scss file.
+
+{% codesnippet "./src/scss/settings.scss language="scss" %}{% endcodesnippet %}

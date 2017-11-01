@@ -1,0 +1,45 @@
+/* General */
+.fade-height-enter-active,
+.fade-height-leave-active {
+  transition: all 0.2s;
+  max-height: 500px;
+}
+.fade-height-enter,
+.fade-height-leave-to
+{
+  opacity: 0;
+  max-height: 0px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 400ms ease;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+/* Sidebars */
+.fade-sidebar-enter-active,
+.fade-sidebar-leave-active {
+  transition: all 500ms ease;
+}
+.fade-sidebar-enter, .fade-sidebar-leave-to {
+  opacity: 0;
+}
+
+/* Modals */
+.lv-modal-fade-enter-active,
+.lv-modal-fade-leave-active {
+  transition: all 350ms ease;
+}
+.lv-modal-fade-enter .lv-modal-container,
+.lv-modal-fade-leave-to .lv-modal-container {
+  -webkit-transform: translateY(-10px) scale(0.9);
+  transform: translateY(-10px) scale(0.9);
+  opacity: 0;
+}
+.lv-modal-fade-enter .lv-modal-mask,
+.lv-modal-fade-leave-to .lv-modal-mask {
+  opacity: 0;
+}

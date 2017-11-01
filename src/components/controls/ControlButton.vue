@@ -1,7 +1,7 @@
 <template>
   <button
     :id="id"
-    :class="`hint--${hintPosition} hint--no-animate btn btn-control`"
+    :class="`hint--${hintPosition} hint--no-animate lv-btn lv-btn-control`"
     :aria-label="tooltip"
     @click="callback($event)">
     <slot></slot>
@@ -27,14 +27,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '~hint.css';
-@import '~style/settings';
-
-button {
-  .active {
-    color: $blue;
-  }
-}
-</style>

@@ -1,47 +1,27 @@
-@import '../settings.scss';
-
-.btn {
+.lv-btn {
   cursor: default;
-  font-size: 14px;
-  background-color: transparent;
-  border: 1px solid #fff;
-  color: #fff;
   padding: 8px 26px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   touch-action: manipulation;
 
-  &.btn-green {
-    background-color: $green;
-    border-color: $green;
+  @each $color, $value in $btn-colors {
+    &.lv-btn-#{$color} {
+      color: $lv-white;
+      background-color: $value;
+      border-color: $value;
 
-    &:hover,
-    &:focus {
-      background-color: darken($green, 10%);
-      border-color: darken($green, 10%);
+      &:hover,
+      &:focus {
+        background-color: darken($value, 10%);
+        border-color: darken($value, 10%);
+      }
     }
-  }
-
-  &.btn-red {
-    background-color: $red;
-    border-color: $red;
-
-    &:hover,
-    &:focus {
-      background-color: darken($red, 10%);
-      border-color: darken($red, 10%);
-    }
-  }
-
-  &.btn-blue {
-    background-color: $blue;
-    border-color: $blue;
-
-    &:hover,
-    &:focus {
-      background-color: darken($blue, 10%);
-      border-color: darken($blue, 10%);
+    &.lv-btn-#{$color}-inverse {
+      color: $value;
+      background-color: transparent;
+      border: 1px solid $value;
     }
   }
 
@@ -52,16 +32,17 @@
   &[disabled]:hover,
   &[disabled]:focus {
     cursor: not-allowed;
-    border: 1px solid $gray;
-    background-color: $gray-light;
-    color: $gray;
+    border: 1px solid $lv-gray;
+    background-color: $lv-gray-light;
+    color: $lv-gray;
   }
 
-  &.btn-control {
+  &.lv-btn-control {
+    color: $lv-white;
     display: flex !important;
     background: none;
     text-shadow: 0 0 5px #000000;
-    font-size: $font-size-lg;
+    font-size: $lv-font-size-lg;
     padding: 0.5rem;
     border: none;
     outline: none !important;
@@ -69,7 +50,7 @@
     margin: 0;
 
     @media screen and (min-width: 768px) {
-      padding: 0.5rem 1rem
+      padding: $lv-sidebar-padding-y $lv-sidebar-padding-x;
     }
 
     &:hover,
@@ -78,12 +59,13 @@
     }
   }
 
-  &.btn-block {
+  &.lv-btn-block {
     width: 100%;
     display: block;
   }
 
-  &.btn-hud {
+  &.lv-btn-hud {
+    color: $lv-white;
     display: flex !important;
     justify-content: center;
     height: 32px;

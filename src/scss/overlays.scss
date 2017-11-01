@@ -1,0 +1,14 @@
+.overlay {
+  z-index: 1;
+  box-sizing: border-box;
+
+  &.selection {
+    background-color: $lv-selection-confirmed-bg;
+    border: 1px solid $lv-selection-confirmed-border;
+  }
+
+  &.related {
+    background-color: $lv-selection-related-bg;
+    border: 1px solid $lv-selection-related-border;
+  }
+}

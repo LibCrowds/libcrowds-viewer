@@ -1,9 +1,8 @@
 require('babel-polyfill')
-var webpack = require('webpack')
-var merge = require('webpack-merge')
-var baseConfig = require('./webpack.base.config')
+const merge = require('webpack-merge')
+const baseConfig = require('./webpack.base.config')
 
-var webpackConfig = merge(baseConfig, {
+const webpackConfig = merge(baseConfig, {
   devtool: '#inline-source-map',
   resolveLoader: {
     alias: {
