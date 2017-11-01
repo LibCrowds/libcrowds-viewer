@@ -6,15 +6,17 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = merge(baseWebpackConfig, {
   devtool: '#source-map',
-  rules: [
-    {
-      test: /\.s?css$/,
-      loader: ExtractTextPlugin.extract({
-        fallback: "style-loader",
-        use: 'css-loader!sass-loader'
-      })
-    }
-  ],
+  module: {
+    rules: [
+      {
+        test: /\.s?css$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: 'css-loader!sass-loader'
+        })
+      }
+    ]
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
