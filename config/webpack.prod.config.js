@@ -11,7 +11,7 @@ module.exports = merge(baseWebpackConfig, {
       {
         test: /\.s?css$/,
         loader: ExtractTextPlugin.extract({
-          fallback: "style-loader",
+          fallback: 'style-loader',
           use: 'css-loader!sass-loader'
         })
       }

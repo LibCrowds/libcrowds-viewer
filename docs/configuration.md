@@ -103,4 +103,4 @@ Additional navigation links (for example, for the rest of your website) can be p
 
 To customise the appearance of the viewer, the following Sass variables can be overridden before importing the libcrowds-viewer.scss file.
 
-{% codesnippet "./assets/style/settings.scss language="scss" %}{% endcodesnippet %}
+{% codesnippet "./src/scss/settings.scss language="scss" %}{% endcodesnippet %}

@@ -3,7 +3,8 @@ const path = require('path')
 module.exports = {
   entry: [
     'whatwg-fetch',
-    './src/main.js'
+    './src/main.js',
+    './src/scss/main.scss'
   ],
   output: {
     path: path.resolve(__dirname, '../dist'),
@@ -71,8 +72,7 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': path.resolve(__dirname, '../src'),
-      style: path.resolve(__dirname, '../src/assets/style/')
+      '@': path.resolve(__dirname, '../src')
     }
   },
   performance: {
