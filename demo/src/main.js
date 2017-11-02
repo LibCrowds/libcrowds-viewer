@@ -7,6 +7,8 @@ import LibcrowdsViewer from 'libcrowds-viewer'
 /* eslint-enable */
 import App from './App'
 
+Vue.use(LibcrowdsViewer)
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
