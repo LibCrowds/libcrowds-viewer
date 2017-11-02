@@ -3,13 +3,12 @@ const path = require('path')
 module.exports = {
   entry: [
     'whatwg-fetch',
-    './src/main.js',
-    './src/scss/main.scss'
+    './src/main.js'
   ],
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/dist/',
-    filename: 'main.js',
+    filename: '[name].js',
     library: 'libcrowds-viewer',
     libraryTarget: 'umd'
   },
