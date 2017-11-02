@@ -21,9 +21,10 @@
   }
 
   .lv-modal-container {
+    max-height: 80vh;
     display: flex;
     flex-direction: column;
-    color: #fff;
+    color: $lv-white;
     background-color: $lv-gray-dark;
     margin-top: 2em;
     width: 90vw;
@@ -106,6 +107,23 @@
   }
 }
 
+#lv-help-modal {
+  ul {
+    padding-left: 0;
+    list-style: none;
+
+    li {
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+
+      svg {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
 #lv-browse-modal {
   ul {
     text-align: center;
@@ -182,6 +200,7 @@
     flex-direction: row;
 
     input {
+      flex: 1 1 auto;
       font-size: 0.75rem;
       margin: 0 12px 0 0;
     }

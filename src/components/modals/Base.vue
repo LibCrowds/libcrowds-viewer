@@ -19,7 +19,7 @@
 
               <footer class="lv-modal-footer">
                 <slot name="footer">
-                  <button class="lv-btn" @click="hide">
+                  <button class="lv-btn lv-btn-white-inverse" @click="hide">
                     OK
                   </button>
                 </slot>
