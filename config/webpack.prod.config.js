@@ -7,17 +7,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = merge(baseWebpackConfig, {
   devtool: '#source-map',
-  module: {
-    rules: [
-      {
-        test: /\.s?css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader!sass-loader'
-        })
-      }
-    ]
-  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
@@ -32,12 +21,6 @@ module.exports = merge(baseWebpackConfig, {
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
-    }),
-    new ExtractTextPlugin('style.css'),
-    new OptimizeCSSPlugin({
-      cssProcessorOptions: {
-        safe: true
-      }
     }),
     new CopyWebpackPlugin([
       {

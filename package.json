@@ -1,7 +1,7 @@
 {
   "name": "libcrowds-viewer",
   "description": "A Vue component for crowdsourcing Web Annotations.",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "main": "dist/main.js",
   "author": "Alex Mendes <alexanderhmendes@gmail.com>",
   "license": "MIT",
@@ -35,7 +35,6 @@
     "normalize.css": "^7.0.0",
     "openseadragon": "~2.3.1",
     "uuid": "^3.1.0",
-    "vue": "^2.3.4",
     "vue-awesome": "^2.3.1",
     "vue-form-generator": "^2.0.0"
   },
@@ -76,6 +75,7 @@
     "sass-loader": "^5.0.1",
     "semver": "^5.4.1",
     "style-loader": "^0.18.2",
+    "vue": "^2.3.4",
     "vue-loader": "^12.2.1",
     "vue-template-compiler": "^2.3.4",
     "webpack": "^2.6.1",
