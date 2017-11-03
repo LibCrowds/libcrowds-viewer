@@ -8,38 +8,40 @@
         !showSelectViewer &&
         !showTranscribeViewer &&
         !customTaskOpts.length)">
-      <h1>LibCrowds Viewer</h1>
-      <p class="lead">
-        A Vue component for crowdsourcing Web Annotations.
-      </p>
-      <div id="mode-buttons">
-        <button @click="showSelectViewer = true">
-          Select Mode
-        </button>
-        <button @click="showTranscribeViewer = true">
-          Transcribe Mode
-        </button>
-        <button @click="showCustomiseTextArea = !showCustomiseTextArea">
-          Customise
-        </button>
-      </div>
-      <transition name="fade-text-area">
-        <div id="customise" v-show="showCustomiseTextArea">
-          <textarea
-            ref="custom"
-            rows="10">
-          </textarea>
-          <button @click="loadCustomTaskOpts">
-            Try it out
+      <div class="container">
+        <h1>LibCrowds Viewer</h1>
+        <p class="lead">
+          A Vue component for crowdsourcing Web Annotations.
+        </p>
+        <div id="mode-buttons">
+          <button @click="showSelectViewer = true">
+            Select Mode
+          </button>
+          <button @click="showTranscribeViewer = true">
+            Transcribe Mode
+          </button>
+          <button @click="showCustomiseTextArea = !showCustomiseTextArea">
+            Customise
           </button>
         </div>
-      </transition>
-      <p id="instructions">
-        <small>(watch the console for events)</small>
-      </p>
-      <div id="links">
-        <a :href="githubUrl">View on GitHub</a>
-        <a :href="docsUrl">Read the docs</a>
+        <transition name="fade-text-area">
+          <div id="customise" v-show="showCustomiseTextArea">
+            <textarea
+              ref="custom"
+              rows="10">
+            </textarea>
+            <button @click="loadCustomTaskOpts">
+              Try it out
+            </button>
+          </div>
+        </transition>
+        <p id="instructions">
+          <small>(watch the console for events)</small>
+        </p>
+        <div id="links">
+          <a :href="githubUrl">View on GitHub</a>
+          <a :href="docsUrl">Read the docs</a>
+        </div>
       </div>
     </div>
 
@@ -172,15 +174,21 @@ export default {
 /* The styles below apply to the demo homepage only */
 #homepage {
   overflow: auto;
-  display: block;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   font-family: $lv-font-family-base;
   margin: 0;
   background-color: #F8F8F8;
   color: #1F1E38;
   height: 100vh;
-  padding-left: 1rem;
-  padding-right: 1rem;
+
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+  }
 
   h1 {
     text-align: center;
