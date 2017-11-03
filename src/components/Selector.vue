@@ -1,31 +1,43 @@
 <template>
   <div class="lv-selector" ref="box">
-    <span class="border border-top" ref="border-top">
-      <span class="handle"></span>
+    <span class="lv-border lv-border-top" ref="border-top">
+      <span class="lv-handle"></span>
     </span>
-    <span class="border border-right" ref="border-right">
-      <span class="handle"></span>
+    <span class="lv-border lv-border-right" ref="border-right">
+      <span class="lv-handle"></span>
     </span>
-    <span class="border border-bottom" ref="border-bottom">
-      <span class="handle"></span>
+    <span class="lv-border lv-border-bottom" ref="border-bottom">
+      <span class="lv-handle"></span>
     </span>
-    <span class="border border-left" ref="border-left">
-      <span class="handle"></span>
+    <span class="lv-border lv-border-left" ref="border-left">
+      <span class="lv-handle"></span>
     </span>
 
-    <span class="corner corner-top-right" ref="corner-top-right"></span>
-    <span class="corner corner-bottom-right" ref="corner-bottom-right"></span>
-    <span class="corner corner-bottom-left" ref="corner-bottom-left"></span>
-    <span class="corner corner-top-left" ref="corner-top-left"></span>
+    <span
+      class="lv-corner lv-corner-top-right"
+      ref="corner-top-right">
+    </span>
+    <span
+      class="lv-corner lv-corner-bottom-right"
+      ref="corner-btm-right">
+    </span>
+    <span
+      class="lv-corner lv-corner-bottom-left"
+      ref="corner-bottom-left">
+    </span>
+    <span
+      class="lv-corner lv-corner-top-left"
+      ref="corner-top-left">
+    </span>
 
-    <div class="selection-buttons">
+    <div class="lv-selection-buttons">
       <button
         class="lv-btn lv-btn-red-inverse"
         ref="cancelSelection"
         @click="cancel">
         <icon label="Cancel" scale="1.2">
           <icon name="circle" scale="1.2"></icon>
-          <icon name="times" class="icon-white" scale="0.8"></icon>
+          <icon name="times" class="lv-icon-white" scale="0.8"></icon>
         </icon>
       </button>
       <button
@@ -34,7 +46,7 @@
         @click="confirm">
         <icon label="Confirm" scale="1.2">
           <icon name="circle" scale="1.2"></icon>
-          <icon name="check" class="icon-white" scale="0.8"></icon>
+          <icon name="check" class="lv-icon-white" scale="0.8"></icon>
         </icon>
       </button>
     </div>
