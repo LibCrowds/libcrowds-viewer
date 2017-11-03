@@ -1,6 +1,5 @@
 <template>
-  <div id="lv-pan-controls">
-
+  <div class="lv-toolbar" id="lv-pan-controls">
     <control-button
       v-for="(b, index) in buttons"
       :key="`lv-btn-zoom-${index}`"
@@ -11,7 +10,6 @@
       hint-position="top">
       <icon :name="b.icon" scale="1.35"></icon>
     </control-button>
-
   </div>
 </template>
 
@@ -45,7 +43,7 @@ export default {
     buttons () {
       return [
         {
-          id: 'pan-up',
+          id: 'pan-top',
           tooltip: 'Move up',
           icon: 'arrow-circle-up',
           callback: () => {
@@ -53,7 +51,7 @@ export default {
           }
         },
         {
-          id: 'pan-down',
+          id: 'pan-bottom',
           tooltip: 'Move down',
           icon: 'arrow-circle-down',
           callback: () => {

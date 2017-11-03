@@ -1,14 +1,15 @@
-#lv-toolbar {
-  display: none;
+.lv-toolbar {
+  display: flex;
   justify-content: space-around;
   position: absolute;
   background-color: $lv-hud-bg;
   margin: 0;
   z-index: 2;
   width: 100%;
+  height: $lv-toolbar-xs-height;
 
   @media screen and (min-width: 576px) {
-    display: flex;
+    height: auto;
   }
 
   @media screen and (min-width: 768px) {
@@ -19,97 +20,93 @@
   }
 
   .lv-btn {
+    padding: 0;
+
+    /* Scale icon size */
+    .fa-icon {
+      width: auto;
+      height: 1rem;
+
+      @media screen and (min-width: 576px) {
+        padding: 0.75rem 1.25rem;
+        height: 1.35rem;
+      }
+    }
+
     .active {
       color: $lv-blue;
     }
-  }
-}
-
-#lv-pan-controls {
-  display: flex;
-  position: absolute;
-  justify-content: space-around;
-  z-index: 2;
-  background-color: $lv-hud-bg;
-  bottom: 0;
-  width: 100%;
-
-  .lv-btn {
-    display: inline-block;
 
     svg {
       display: flex;
     }
   }
+}
+
+#lv-pan-controls {
+  bottom: $lv-toolbar-xs-height;
 
   @media screen and (min-width: 576px) {
-    width: 100px;
-    height: 100px;
+    width: 6.5rem;
+    height: 6.5rem;
     border-radius: 50%;
     margin: 1rem;
+    bottom: 0;
 
     .lv-btn {
       display: flex;
       justify-content: center;
       position: absolute;
       padding: 0.5rem;
+
+      svg {
+        position: absolute;
+      }
     }
 
-    #pan-up {
-      flex-direction: row;
-      width: 100%;
-      top: 0;
-    }
+    $lv-pan-positions: top bottom left right;
+    @for $i from 1 through length($lv-pan-positions) {
+      #pan-#{nth($lv-pan-positions, $i)} {
+        #{nth($lv-pan-positions, $i)}: 0;
 
-    #pan-down {
-      flex-direction: row;
-      width: 100%;
-      bottom: 0;
-    }
+        svg {
+          #{nth($lv-pan-positions, $i)}: 0;
+        }
 
-    #pan-left {
-      flex-direction: column;
-      height: 100%;
-      left: 0;
-    }
-
-    #pan-right {
-      flex-direction: column;
-      height: 100%;
-      right: 0;
+        @if index((top, bottom), nth($lv-pan-positions, $i)) {
+          flex-direction: row;
+          width: 100%;
+        } @else {
+          flex-direction: column;
+          height: 100%;
+        }
+      }
     }
   }
 }
 
 #lv-zoom-controls {
-  display: flex;
-  flex-direction: row;
-  position: absolute;
-  justify-content: space-around;
-  z-index: 2;
-  background-color: $lv-hud-bg;
-  width: 100%;
+  bottom: 0;
 
   @media screen and (min-width: 576px) {
     flex-direction: column;
     margin: 1rem;
     border-radius: 25px;
     width: auto;
-    height: 100px;
-    bottom: 0;
+    height: 6.5rem;
     right: 0;
   }
 
   @media screen and (min-width: 768px) {
     right: auto;
-    left: 120px;
+    left: 10rem;
   }
 
-  button:not(:nth-child(2)) {
+  .lv-btn:not(:nth-child(2)) svg {
     padding: 0.5rem;
   }
 
-  button:nth-child(2) {
+  .lv-btn:nth-child(2) svg {
     padding: 0 0.5rem;
   }
 }
