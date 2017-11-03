@@ -26,12 +26,12 @@
 
         <transition
           name="fade-height"
-          class="lv-note"
           v-show="showNote"
           v-if="!noteCollapsed">
           <textarea
             v-if="!(disableComplete && task.complete)"
             ref="note"
+            class="lv-note"
             rows="3"
             v-model="note"
             @input="updateNote">
