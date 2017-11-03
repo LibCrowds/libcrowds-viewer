@@ -1,11 +1,15 @@
 #lv-toolbar {
-  display: flex;
+  display: none;
   justify-content: space-around;
   position: absolute;
   background-color: $lv-hud-bg;
   margin: 0;
   z-index: 2;
   width: 100%;
+
+  @media screen and (min-width: 576px) {
+    display: flex;
+  }
 
   @media screen and (min-width: 768px) {
     width: auto;
@@ -14,7 +18,7 @@
     padding: 0 0.5rem;
   }
 
-  button {
+  .lv-btn {
     .active {
       color: $lv-blue;
     }
@@ -22,59 +26,79 @@
 }
 
 #lv-pan-controls {
+  display: flex;
   position: absolute;
+  justify-content: space-around;
   z-index: 2;
   background-color: $lv-hud-bg;
-  margin: 1rem;
-  border-radius: 50%;
   bottom: 0;
-  width: 100px;
-  height: 100px;
+  width: 100%;
 
-  button {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    padding: 0.5rem;
+  .lv-btn {
+    display: inline-block;
+
+    svg {
+      display: flex;
+    }
   }
 
-  #pan-up {
-    flex-direction: row;
-    width: 100%;
-    top: 0;
-  }
+  @media screen and (min-width: 576px) {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 1rem;
 
-  #pan-down {
-    flex-direction: row;
-    width: 100%;
-    bottom: 0;
-  }
+    .lv-btn {
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      padding: 0.5rem;
+    }
 
-  #pan-left {
-    flex-direction: column;
-    height: 100%;
-    left: 0;
-  }
+    #pan-up {
+      flex-direction: row;
+      width: 100%;
+      top: 0;
+    }
 
-  #pan-right {
-    flex-direction: column;
-    height: 100%;
-    right: 0;
+    #pan-down {
+      flex-direction: row;
+      width: 100%;
+      bottom: 0;
+    }
+
+    #pan-left {
+      flex-direction: column;
+      height: 100%;
+      left: 0;
+    }
+
+    #pan-right {
+      flex-direction: column;
+      height: 100%;
+      right: 0;
+    }
   }
 }
 
 #lv-zoom-controls {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   position: absolute;
   justify-content: space-around;
   z-index: 2;
   background-color: $lv-hud-bg;
-  margin: 1rem;
-  border-radius: 25px;
-  bottom: 0;
-  height: 100px;
-  right: 0;
+  width: 100%;
+
+  @media screen and (min-width: 576px) {
+    flex-direction: column;
+    margin: 1rem;
+    border-radius: 25px;
+    width: auto;
+    height: 100px;
+    bottom: 0;
+    right: 0;
+  }
 
   @media screen and (min-width: 768px) {
     right: auto;

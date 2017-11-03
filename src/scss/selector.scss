@@ -98,13 +98,28 @@
   right: 0;
   transform: translateY(105%);
   position: absolute;
-  display: flex;
-  flex-direction: row;
+  text-align: center;
+
+  @media screen and (min-width: 576px) {
+    width: auto;
+  }
 
   .lv-btn {
     padding: 2px;
     margin-left: 5px;
     border: none;
+
+    /* Scale icon size dynamically */
+    .fa-icon {
+      width: auto;
+      height: 42px;
+
+      @media screen and (min-width: 576px) {
+        height: 28px;
+        display: flex;
+        flex-direction: row;
+      }
+    }
 
     .lv-icon-white {
       color: $lv-white;
