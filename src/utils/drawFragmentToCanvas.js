@@ -8,6 +8,10 @@
  *   The canvas to draw on.
  */
 export default function (srcCanvas, webRect, destCanvas) {
+  if (typeof document === 'undefined') {
+    return
+  }
+
   const srcContext = srcCanvas.getContext('2d')
   const imgData = srcContext.getImageData(
     webRect.x,

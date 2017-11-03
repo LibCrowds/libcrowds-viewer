@@ -455,7 +455,11 @@ export default {
         // Check the highlight wasn't already drawn (e.g. on initial load)
         let taskIndex = this.tasks.indexOf(task)
         let highlightId = `related-t${taskIndex}-h${i}`
-        if (document.querySelector(`[data-id="${highlightId}"]`)) {
+        let selector = `[data-id="${highlightId}"]`
+        if (
+          typeof document !== 'undefined' &&
+          document.querySelector(selector)
+        ) {
           continue
         }
 
@@ -503,7 +507,7 @@ export default {
         const otherSourceStr = JSON.stringify(otherTask.tileSource)
         return (
           otherTask !== task &&
-          otherTask !== undefined &&
+          typeof otherTask !== 'undefined' &&
           otherSourceStr === JSON.stringify(task.tileSource)
         )
       })
@@ -588,7 +592,11 @@ export default {
      */
     submitTask (task) {
       // Show form errors if enabled and in transcribe mode
-      if (this.showFormErrors && this.currentTask.mode === 'transcribe') {
+      if (
+        this.showFormErrors &&
+        this.currentTask.mode === 'transcribe' &&
+        typeof document !== 'undefined'
+      ) {
         const formGroups = document.querySelector('.form-group')
         if (formGroups.length) {
           formGroups.classList.add('show-errors')
@@ -795,11 +803,16 @@ export default {
     } else {
       console.warn('No tasks loaded')
     }
-    window.addEventListener('beforeunload', this.onBeforeUnload)
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('beforeunload', this.onBeforeUnload)
+    }
   },
 
   beforeDestroy () {
-    window.removeEventListener('beforeunload', this.onBeforeUnload)
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('beforeunload', this.onBeforeUnload)
+    }
   }
 }
 </script>

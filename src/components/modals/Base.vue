@@ -62,11 +62,15 @@ export default {
   },
 
   mounted () {
-    document.addEventListener('keyup', this.onKeyUp)
+    if (typeof document !== 'undefined') {
+      document.addEventListener('keyup', this.onKeyUp)
+    }
   },
 
   beforeDestroy () {
-    document.removeEventListener('keyup', this.onKeyUp)
+    if (typeof document !== 'undefined') {
+      document.removeEventListener('keyup', this.onKeyUp)
+    }
   }
 }
 </script>

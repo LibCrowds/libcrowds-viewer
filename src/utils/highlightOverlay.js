@@ -6,6 +6,10 @@
  *   True to highlight, false otherwise.
  */
 export default function (id, highlight) {
+  if (typeof document === 'undefined') {
+    return
+  }
+
   const query = `.overlay[data-id="${id}"]`
   const el = document.querySelector(query)
   if (highlight) {

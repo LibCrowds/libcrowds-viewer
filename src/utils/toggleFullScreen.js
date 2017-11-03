@@ -19,6 +19,9 @@ function enterFullscreen (el) {
  * @param {Object} el
  */
 function exitFullscreen (el) {
+  if (typeof document === 'undefined') {
+    return
+  }
   if (document.exitFullscreen) {
     document.exitFullscreen()
   } else if (document.mozCancelFullScreen) {
@@ -34,6 +37,10 @@ function exitFullscreen (el) {
  *   The element to put in fullscreen mode.
  */
 export default function (el) {
+  if (typeof document === 'undefined') {
+    return
+  }
+
   const isFullScreen = (
     document.fullscreenElement ||
     document.mozFullScreenElement ||
