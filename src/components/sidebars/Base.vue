@@ -11,7 +11,7 @@
       <p key="guidance">{{ task.guidance }}</p>
     </header>
 
-    <main key="content" class="lv-sidebar-content">
+    <main key="content" :class="contentClass">
       <slot></slot>
     </main>
 
@@ -102,6 +102,10 @@ export default {
     confirmOnSubmit: {
       type: Boolean,
       required: true
+    },
+    displayXs: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -117,6 +121,13 @@ export default {
       return this.disableComplete && this.task.complete
         ? 'Task complete'
         : 'Task'
+    },
+
+    contentClass () {
+      return {
+        'lv-sidebar-content': true,
+        'display-xs': this.displayXs
+      }
     }
   },
 

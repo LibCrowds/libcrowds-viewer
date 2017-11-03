@@ -110,6 +110,7 @@
         :disableComplete="disableComplete"
         :confirmOnSubmit="confirmOnSubmit"
         :buttons="mergedButtons"
+        :display-xs="currentTask.mode === 'transcribe'"
         @noteupdated="updateNote"
         @submit="submitTask"
         @disableviewer="viewerDisabled = true"

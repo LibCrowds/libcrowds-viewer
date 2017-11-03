@@ -110,13 +110,13 @@
   @media screen and (min-width: 768px) {
     right: auto;
     left: 10rem;
-  }
 
-  .lv-btn:not(:nth-child(2)) svg {
-    padding: 0.5rem;
-  }
+    .lv-btn:not(:nth-child(2)) svg {
+      padding: 0.5rem;
+    }
 
-  .lv-btn:nth-child(2) svg {
-    padding: 0 0.5rem;
+    .lv-btn:nth-child(2) svg {
+      padding: 0 0.5rem;
+    }
   }
 }
