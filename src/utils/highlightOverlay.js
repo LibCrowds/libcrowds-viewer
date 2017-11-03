@@ -1,22 +1,22 @@
 /**
- * Toggle the focus class on an overlay.
+ * Toggle a class on an overlay.
  * @param {String} id
  *   The overlay ID.
- * @param {Boolean} highlight
- *   True to highlight, false otherwise.
+ * @param {Boolean} add
+ *   True to add the class, false otherwise.
+ * @param {String} cls
+ *   The class to add.
  */
-export default function (id, highlight) {
+export default function (id, add, cls) {
   if (typeof document === 'undefined') {
     return
   }
 
   const query = `.overlay[data-id="${id}"]`
   const el = document.querySelector(query)
-  if (highlight) {
-    el.style.borderColor = '#4DAF7C'
-    el.style.backgroundColor = 'rgba(77, 175, 124, 0.2)'
+  if (add) {
+    el.classList.add(cls)
   } else {
-    el.style.borderColor = 'rgb(52, 152, 219)'
-    el.style.backgroundColor = 'rgba(52, 152, 219, 0.2)'
+    el.classList.remove(cls)
   }
 }
