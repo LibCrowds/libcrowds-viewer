@@ -45,7 +45,10 @@ export default {
      * Emit the update event when the form validates (or otherwise).
      */
     onValidated (isValid, errors) {
-      document.querySelector('.form-group').classList.remove('show-errors')
+      if (typeof document !== 'undefined') {
+        document.querySelector('.form-group').classList.remove('show-errors')
+      }
+
       // Replace the empty string with null for date fields in order
       // to avoid Invalid Date in fecha.format
       this.form.schema.fields.forEach((field) => {
@@ -85,11 +88,13 @@ export default {
      * Add event listeners.
      */
     addEventListeners () {
-      const fieldElems = document.querySelectorAll('.form-control')
-      for (let i = 0; i < fieldElems.length; i++) {
-        fieldElems[i].addEventListener('focus', this.onInputFocus)
-        fieldElems[i].addEventListener('blur', this.onInputBlur)
-        fieldElems[i].addEventListener('keyup', this.onKeyup)
+      if (typeof document !== 'undefined') {
+        const fieldElems = document.querySelectorAll('.form-control')
+        for (let i = 0; i < fieldElems.length; i++) {
+          fieldElems[i].addEventListener('focus', this.onInputFocus)
+          fieldElems[i].addEventListener('blur', this.onInputBlur)
+          fieldElems[i].addEventListener('keyup', this.onKeyup)
+        }
       }
     },
 
@@ -113,7 +118,9 @@ export default {
     load () {
       this.form = this.copyForm()
       this.addEventListeners()
-      document.querySelector('.form-control').focus()
+      if (typeof document !== 'undefined') {
+        document.querySelector('.form-control').focus()
+      }
     }
   },
 
@@ -122,11 +129,13 @@ export default {
   },
 
   beforeDestroy () {
-    const fieldElems = document.querySelectorAll('.form-control')
-    for (let i = 0; i < fieldElems.length; i++) {
-      fieldElems[i].removeEventListener('focus', this.onInputFocus)
-      fieldElems[i].removeEventListener('blur', this.onInputBlur)
-      fieldElems[i].removeEventListener('keyup', this.onKeyup)
+    if (typeof document !== 'undefined') {
+      const fieldElems = document.querySelectorAll('.form-control')
+      for (let i = 0; i < fieldElems.length; i++) {
+        fieldElems[i].removeEventListener('focus', this.onInputFocus)
+        fieldElems[i].removeEventListener('blur', this.onInputBlur)
+        fieldElems[i].removeEventListener('keyup', this.onKeyup)
+      }
     }
   },
 

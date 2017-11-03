@@ -483,7 +483,10 @@ export default {
       })
     )
 
-    document.addEventListener('keyup', this.onKeyUp)
+    if (typeof document !== 'undefined') {
+      document.addEventListener('keyup', this.onKeyUp)
+    }
+
     this.viewer.addHandler('open', this.draw)
     this.viewer.addHandler('animation', this.draw)
     this.viewer.addHandler('resize', this.draw)
@@ -494,7 +497,11 @@ export default {
     for (let tracker of this.mouseTrackers) {
       tracker.destroy()
     }
-    document.removeEventListener('keyup', this.onKeyUp)
+
+    if (typeof document !== 'undefined') {
+      document.removeEventListener('keyup', this.onKeyUp)
+    }
+
     this.viewer.removeHandler('open', this.draw)
     this.viewer.removeHandler('animation', this.draw)
     this.viewer.removeHandler('resize', this.draw)

@@ -2,7 +2,7 @@
   z-index: 1;
   box-sizing: border-box;
 
-  &.selection {
+  &.selection, {
     background-color: $lv-selection-confirmed-bg;
     border: 1px solid $lv-selection-confirmed-border;
   }
@@ -10,5 +10,16 @@
   &.related {
     background-color: $lv-selection-related-bg;
     border: 1px solid $lv-selection-related-border;
+  }
+
+  &.danger {
+    background-color: $lv-selection-danger-bg !important;
+    border: 1px solid $lv-selection-danger-border !important;
+    transition: background-color 500ms, border 800ms;
+  }
+
+  &.active {
+    background-color: $lv-selection-active-bg;
+    border: 1px solid $lv-selection-active-border;
   }
 }

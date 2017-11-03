@@ -131,18 +131,25 @@ export default {
           tooltip: this.buttons.download,
           id: 'lv-download-btn',
           icon: 'download',
-          callback: () => {
-            const canvas = this.viewer.drawer.canvas
-            const data = canvas.toDataURL()
-            const link = document.createElement('a')
-            link.download = 'task.png'
-            link.href = data
-            link.click()
-          }
+          callback: this.download
         })
       }
 
       return tbButtons
+    }
+  },
+
+  methods: {
+    /**
+     * Download the current canvas.
+     */
+    download () {
+      const canvas = this.viewer.drawer.canvas
+      const data = canvas.toDataURL()
+      const link = document.createElement('a')
+      link.download = 'task.png'
+      link.href = data
+      link.click()
     }
   }
 }

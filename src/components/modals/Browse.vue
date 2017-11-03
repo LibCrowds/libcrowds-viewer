@@ -7,7 +7,7 @@
           v-for="(task, index) in paginatedTasks"
           :key="`task-${index}`"
           @click="onTaskClicked(task)">
-          <figure v-if="task !== undefined">
+          <figure v-if="typeof task !== 'undefined'">
             <img
               v-if="task.thumbnailUrl"
               :src="task.thumbnailUrl"
@@ -82,7 +82,7 @@ export default {
   computed: {
     listItemClass () {
       const complete = (
-        this.task !== undefined &&
+        typeof this.task !== 'undefined' &&
         this.task.complete &&
         this.disableComplete
       )

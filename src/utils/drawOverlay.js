@@ -12,7 +12,7 @@
  *   A callback to trigger on click (or tap).
  */
 export default function (viewer, id, rect, type = '', onClick = null) {
-  if (!viewer.addOverlay) {
+  if (!viewer.addOverlay || typeof document === 'undefined') {
     return
   }
   const el = document.createElement('div')

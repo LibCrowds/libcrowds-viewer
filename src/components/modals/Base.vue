@@ -19,7 +19,7 @@
 
               <footer class="lv-modal-footer">
                 <slot name="footer">
-                  <button class="lv-btn" @click="hide">
+                  <button class="lv-btn lv-btn-white-inverse" @click="hide">
                     OK
                   </button>
                 </slot>
@@ -62,11 +62,15 @@ export default {
   },
 
   mounted () {
-    document.addEventListener('keyup', this.onKeyUp)
+    if (typeof document !== 'undefined') {
+      document.addEventListener('keyup', this.onKeyUp)
+    }
   },
 
   beforeDestroy () {
-    document.removeEventListener('keyup', this.onKeyUp)
+    if (typeof document !== 'undefined') {
+      document.removeEventListener('keyup', this.onKeyUp)
+    }
   }
 }
 </script>

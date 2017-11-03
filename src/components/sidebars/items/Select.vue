@@ -3,8 +3,8 @@
     <li
       v-for="tag in sortedTags"
       :key="tag.id"
-      @mouseover="highlightOverlay(tag.id, true)"
-      @mouseleave="highlightOverlay(tag.id, false)">
+      @mouseover="highlightOverlay(tag.id, true, 'active')"
+      @mouseleave="highlightOverlay(tag.id, false, 'active')">
 
       <canvas :ref="`canvas-${tag.id}`" style="height: 50px;"></canvas>
 
@@ -18,6 +18,8 @@
         </button>
         <button
           @click="deleteTag(tag)"
+          @mouseover="highlightOverlay(tag.id, true, 'danger')"
+          @mouseleave="highlightOverlay(tag.id, false, 'danger')"
           aria-label="Delete"
           class="lv-btn lv-btn-control hint--left hint--no-animate">
           <icon name="times-circle"></icon>

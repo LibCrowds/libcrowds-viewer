@@ -6,7 +6,7 @@ $lv-white:                      #FFFFFF !default;
 $lv-blue:                       #3498DB !default;
 $lv-yellow:                     #F5D76E !default;
 $lv-green:                      #4DAF7C !default;
-$lv-red:                        #D91E18 !default;
+$lv-red:                        #E33732 !default;
 $lv-main-bg:                    #000000 !default;
 $lv-hud-bg:                     rgba(0, 0, 0, 0.75) !default;
 
@@ -16,6 +16,10 @@ $lv-selection-confirmed-bg:     rgba($lv-green, 0.2);
 $lv-selection-confirmed-border: $lv-green;
 $lv-selection-related-bg:       rgba($lv-yellow, 0.2);
 $lv-selection-related-border:   $lv-yellow;
+$lv-selection-danger-bg:        rgba($lv-red, 0.2);
+$lv-selection-danger-border:    $lv-red;
+$lv-selection-active-bg:        rgba($lv-green, 0.45);
+$lv-selection-active-border:    $lv-green;
 
 
 $btn-colors: (

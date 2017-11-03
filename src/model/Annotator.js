@@ -27,7 +27,7 @@ class Annotator {
    *   The object to search.
    */
   _hasMatch (find, root) {
-    if (root === undefined) {
+    if (typeof root === 'undefined') {
       return false
     } else if (!Array.isArray(root)) {
       return root === find
