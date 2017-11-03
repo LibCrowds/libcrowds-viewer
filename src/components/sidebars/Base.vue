@@ -20,7 +20,7 @@
         <button
           :disabled="disableComplete && task.complete"
           class="lv-btn lv-btn-block lv-btn-white-inverse lv-btn-note"
-          @click="toggleeNoteCollapse"
+          @click="toggleNoteCollapse"
           v-html="buttons.note">
         </button>
 
@@ -128,7 +128,7 @@ export default {
     /**
      * Toggle the collapsing of the note input.
      */
-    toggleeNoteCollapse () {
+    toggleNoteCollapse () {
       this.noteCollapsed = !this.noteCollapsed
     },
 
