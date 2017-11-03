@@ -19,7 +19,7 @@
     </span>
     <span
       class="lv-corner lv-corner-bottom-right"
-      ref="corner-btm-right">
+      ref="corner-bottom-right">
     </span>
     <span
       class="lv-corner lv-corner-bottom-left"
@@ -410,6 +410,11 @@ export default {
   },
 
   mounted () {
+    // If client, add mouse trackers for manipulating the selection box
+    if (typeof document === 'undefined') {
+      return
+    }
+
     /* eslint-disable no-new */
     this.mouseTrackers.push(
       new OpenSeadragon.MouseTracker({
