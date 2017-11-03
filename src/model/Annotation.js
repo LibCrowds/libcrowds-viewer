@@ -63,7 +63,7 @@ class Annotation {
    *   The value to be set for key.
    */
   _setMultiItem (root, key, value) {
-    if (root[key] === undefined) {
+    if (typeof root[key] === 'undefined') {
       // Set the item if none exists
       root[key] = value
     } else if (root[key].id && value.id && root[key].id === value.id) {
