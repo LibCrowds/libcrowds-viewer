@@ -19,12 +19,14 @@
       <span v-if="!showConfirmButtons">
         <button
           :disabled="disableComplete && task.complete"
-          class="lv-btn lv-btn-block lv-btn-white-inverse"
+          class="lv-btn lv-btn-block lv-btn-white-inverse lv-btn-note"
           @click="toggleeNoteCollapse"
           v-html="buttons.note">
         </button>
 
-        <transition name="fade-height"
+        <transition
+          name="fade-height"
+          class="lv-note"
           v-show="showNote"
           v-if="!noteCollapsed">
           <textarea
