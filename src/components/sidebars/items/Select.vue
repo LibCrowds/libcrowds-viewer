@@ -91,7 +91,10 @@ export default {
     drawSelections () {
       for (let tag of this.tags) {
         let destCanvas = this.$refs[`canvas-${tag.id}`][0]
-        if (destCanvas.hasAttribute('drawn')) {
+        if (
+          typeof destCanvas !== 'undefined' &&
+          destCanvas.hasAttribute('drawn')
+        ) {
           continue
         }
         destCanvas.width = destCanvas.parentNode.clientWidth
