@@ -3,17 +3,18 @@
   select,
   textarea {
     margin: 10px 0;
-    display: block;
     width: 100%;
     padding: 10px;
-    line-height: 1.25;
     color: $lv-gray-dark;
     background-image: none;
+    line-height: 1.25;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, 0.15);
+    -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     touch-action: manipulation;
     box-sizing:border-box;
+    overflow: visible;
 
     &:focus {
       border-color: $lv-blue;
@@ -33,6 +34,8 @@
   }
 
   .form-group {
+    margin-bottom: 0.25rem;
+
     &.show-errors {
       &.error {
         input,
@@ -53,10 +56,6 @@
     .errors {
       display: none;
     }
-
-    .field-wrap {
-      margin-top: 2px;
-    }
   }
 
   fieldset {
@@ -64,8 +63,10 @@
     padding: 0;
   }
 
-  .form-group {
-    margin-bottom: 1rem;
+  @media screen and (min-width: 768px) {
+    .form-group {
+      margin-bottom: 1rem;
+    }
   }
 
   :disabled {

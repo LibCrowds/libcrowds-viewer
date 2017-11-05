@@ -15,7 +15,7 @@
 
 The component can by installed via npm.
 
-```bash
+``` bash
 npm install libcrowds-viewer --save
 ```
 
@@ -62,7 +62,7 @@ Use it in your templates \(minimal configuration options shown\):
 <style lang="scss">
   @import "~libcrowds-viewer/dist/scss/libcrowds-viewer.scss";
 
-  // An explicit height must be set on the viewer container.
+  // A height must be set on the viewer container.
   .viewer-container {
     margin: 0;
     height: 100vh;
@@ -72,7 +72,7 @@ Use it in your templates \(minimal configuration options shown\):
 
 ## Development
 
-```bash
+``` bash
 # install dependencies
 npm install
 

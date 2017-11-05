@@ -70,7 +70,10 @@
             <icon name="pencil"></icon>
             Edit selection
           </li>
-          <li><icon name="times-circle"></icon>Delete selection</li>
+          <li>
+            <icon name="times-circle"></icon>
+            Delete selection
+          </li>
         </ul>
       </div>
     </modal-base>

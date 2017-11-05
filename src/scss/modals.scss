@@ -57,24 +57,6 @@
       margin: 0;
     }
 
-    ul {
-      padding-left: 0;
-      list-style: none;
-    }
-
-    li {
-      margin-bottom: 2px;
-    }
-
-    svg {
-      margin-right: 8px;
-    }
-
-    .center {
-      text-align: center;
-      margin: 2rem;
-    }
-
     .close {
       padding: 0;
       cursor: pointer;
@@ -94,6 +76,19 @@
     padding: 20px 30px;
     overflow-y: auto;
     flex: 1 1 auto;
+
+    ul {
+      padding-left: 0;
+      list-style: none;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    svg {
+      margin-right: 8px;
+    }
   }
 
   .lv-modal-footer {
@@ -109,9 +104,6 @@
 
 #lv-help-modal {
   ul {
-    padding-left: 0;
-    list-style: none;
-
     li {
       margin-bottom: 0.5rem;
       display: flex;
@@ -127,8 +119,6 @@
 #lv-browse-modal {
   ul {
     text-align: center;
-    padding-left: 0;
-    list-style: none;
   }
 
   li {
@@ -194,19 +184,32 @@
 }
 
 #lv-share-modal {
-  .flex-row {
+  #lv-share-controls {
     margin: 25px 0;
-    display: flex;
-    flex-direction: row;
 
     input {
-      flex: 1 1 auto;
-      font-size: 0.75rem;
-      margin: 0 12px 0 0;
+      font-size: $lv-font-size-sm;
+      margin: 0 1rem 0 0;
+      padding: 0.5rem;
+      margin-bottom: 0.6rem;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      width: 100%;
     }
 
     .lv-btn {
-      flex: 0 0 auto;
+      width: 100%;
     }
+  }
+}
+
+#lv-info-modal {
+  #lv-attribution-details {
+    text-align: center;
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }

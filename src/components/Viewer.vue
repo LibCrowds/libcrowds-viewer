@@ -110,6 +110,7 @@
         :disableComplete="disableComplete"
         :confirmOnSubmit="confirmOnSubmit"
         :buttons="mergedButtons"
+        :display-xs="currentTask.mode === 'transcribe'"
         @noteupdated="updateNote"
         @submit="submitTask"
         @disableviewer="viewerDisabled = true"
@@ -395,9 +396,7 @@ export default {
       const vpRect = vp.imageToViewportRectangle(imgRect)
       const overlay = drawOverlay(this.viewer, anno.id, vpRect, 'selection')
       overlay.addEventListener('click', (evt) => {
-        if (
-          (!task.complete || !this.disableComplete) &&
-          this.selectionsEditable) {
+        if (!task.complete && !this.disableComplete) {
           this.editTag(task, anno.id)
         }
       })

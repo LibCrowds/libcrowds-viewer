@@ -1,5 +1,5 @@
 <template>
-  <div id="lv-zoom-controls">
+  <div class="lv-toolbar" id="lv-zoom-controls">
     <control-button
       v-for="(b, index) in buttons"
       :key="`lv-zoom-${index}`"

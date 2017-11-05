@@ -2,7 +2,7 @@
   <div id="lv-share-modal">
     <modal-base :show="show" title="Share" @hide="$emit('hide')">
       <span v-if="task.shareText" v-html="marked(task.shareText)"></span>
-      <div class="flex-row">
+      <div id="lv-share-controls">
         <input :value="task.shareUrl" readonly>
         <button
           ref="copybtn"

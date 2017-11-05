@@ -11,7 +11,7 @@
       <p key="guidance">{{ task.guidance }}</p>
     </header>
 
-    <main key="content" class="lv-sidebar-content">
+    <main key="content" :class="contentClass">
       <slot></slot>
     </main>
 
@@ -19,17 +19,19 @@
       <span v-if="!showConfirmButtons">
         <button
           :disabled="disableComplete && task.complete"
-          class="lv-btn lv-btn-block lv-btn-white-inverse"
-          @click="toggleeNoteCollapse"
+          class="lv-btn lv-btn-block lv-btn-white-inverse lv-btn-note"
+          @click="toggleNoteCollapse"
           v-html="buttons.note">
         </button>
 
-        <transition name="fade-height"
+        <transition
+          name="fade-height"
           v-show="showNote"
           v-if="!noteCollapsed">
           <textarea
             v-if="!(disableComplete && task.complete)"
             ref="note"
+            class="lv-note"
             rows="3"
             v-model="note"
             @input="updateNote">
@@ -100,6 +102,10 @@ export default {
     confirmOnSubmit: {
       type: Boolean,
       required: true
+    },
+    displayXs: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -115,6 +121,13 @@ export default {
       return this.disableComplete && this.task.complete
         ? 'Task complete'
         : 'Task'
+    },
+
+    contentClass () {
+      return {
+        'lv-sidebar-content': true,
+        'display-xs': this.displayXs
+      }
     }
   },
 
@@ -126,7 +139,7 @@ export default {
     /**
      * Toggle the collapsing of the note input.
      */
-    toggleeNoteCollapse () {
+    toggleNoteCollapse () {
       this.noteCollapsed = !this.noteCollapsed
     },
 

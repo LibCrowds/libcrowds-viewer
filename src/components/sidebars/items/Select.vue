@@ -89,9 +89,14 @@ export default {
      * Draw the selection canvases.
      */
     drawSelections () {
+      console.log(this.tags)
       for (let tag of this.tags) {
         let destCanvas = this.$refs[`canvas-${tag.id}`][0]
-        if (destCanvas.hasAttribute('drawn')) {
+        if (
+          typeof destCanvas !== 'undefined' &&
+          destCanvas.hasAttribute('drawn') &&
+          destCanvas.width > 0
+        ) {
           continue
         }
         destCanvas.width = destCanvas.parentNode.clientWidth
@@ -135,7 +140,15 @@ export default {
   },
 
   mounted () {
-    this.drawSelections()
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', this.drawSelections)
+    }
+  },
+
+  beforeDestroy () {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', this.drawSelections)
+    }
   }
 }
 </script>

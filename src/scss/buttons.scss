@@ -39,7 +39,7 @@
 
   &.lv-btn-control {
     color: $lv-white;
-    display: flex !important;
+    display: flex;
     background: none;
     text-shadow: 0 0 5px #000000;
     font-size: $lv-font-size-lg;
@@ -66,10 +66,8 @@
 
   &.lv-btn-hud {
     color: $lv-white;
-    display: flex !important;
+    display: flex;
     justify-content: center;
-    height: 32px;
-    width: 32px;
     border: none;
     padding: 5px;
     z-index: 2;

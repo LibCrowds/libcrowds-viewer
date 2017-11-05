@@ -1,5 +1,5 @@
 <template>
-  <div id="lv-toolbar">
+  <div class="lv-toolbar" id="lv-main-controls">
     <control-button
       v-for="button in toolbarButtons"
       :key="button.id"

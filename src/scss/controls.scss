@@ -1,4 +1,4 @@
-#lv-toolbar {
+.lv-toolbar {
   display: flex;
   justify-content: space-around;
   position: absolute;
@@ -6,6 +6,11 @@
   margin: 0;
   z-index: 2;
   width: 100%;
+  height: $lv-toolbar-xs-height;
+
+  @media screen and (min-width: 576px) {
+    height: auto;
+  }
 
   @media screen and (min-width: 768px) {
     width: auto;
@@ -14,78 +19,103 @@
     padding: 0 0.5rem;
   }
 
-  button {
+  .lv-btn {
+    padding: 0;
+
+    /* Scale icon size */
+    .fa-icon {
+      width: auto;
+      height: 1.25rem;
+
+      @media screen and (min-width: 576px) {
+        margin: 0.75rem 1.25rem;
+        height: 1.35rem;
+      }
+    }
+
     .active {
       color: $lv-blue;
+    }
+
+    svg {
+      display: flex;
+    }
+
+    /* Hide tooltips on small screens */
+    &:before,
+    &:after {
+      display: none;
+
+      @media screen and (min-width: 576px) {
+        display: initial;
+      }
     }
   }
 }
 
 #lv-pan-controls {
-  position: absolute;
-  z-index: 2;
-  background-color: $lv-hud-bg;
-  margin: 1rem;
-  border-radius: 50%;
-  bottom: 0;
-  width: 100px;
-  height: 100px;
+  bottom: $lv-toolbar-xs-height;
 
-  button {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    padding: 0.5rem;
-  }
-
-  #pan-up {
-    flex-direction: row;
-    width: 100%;
-    top: 0;
-  }
-
-  #pan-down {
-    flex-direction: row;
-    width: 100%;
+  @media screen and (min-width: 576px) {
+    width: 6.5rem;
+    height: 6.5rem;
+    border-radius: 50%;
+    margin: 1rem;
     bottom: 0;
-  }
+    padding: 0;
 
-  #pan-left {
-    flex-direction: column;
-    height: 100%;
-    left: 0;
-  }
+    .lv-btn {
+      position: absolute;
+      justify-content: center;
 
-  #pan-right {
-    flex-direction: column;
-    height: 100%;
-    right: 0;
+      .fa-icon {
+        margin: 0.75rem ;
+      }
+    }
+
+    $lv-pan-positions: top bottom left right;
+    @for $i from 1 through length($lv-pan-positions) {
+      #pan-#{nth($lv-pan-positions, $i)} {
+        #{nth($lv-pan-positions, $i)}: 0;
+
+        svg {
+          #{nth($lv-pan-positions, $i)}: 0;
+        }
+
+        @if index((top, bottom), nth($lv-pan-positions, $i)) {
+          flex-direction: row;
+          width: 100%;
+        } @else {
+          flex-direction: column;
+          height: 100%;
+        }
+      }
+    }
   }
 }
 
 #lv-zoom-controls {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  justify-content: space-around;
-  z-index: 2;
-  background-color: $lv-hud-bg;
-  margin: 1rem;
-  border-radius: 25px;
   bottom: 0;
-  height: 100px;
-  right: 0;
+
+  @media screen and (min-width: 576px) {
+    flex-direction: column;
+    margin: 1rem;
+    border-radius: 25px;
+    width: auto;
+    height: 6.5rem;
+    right: 0;
+  }
 
   @media screen and (min-width: 768px) {
     right: auto;
-    left: 120px;
-  }
+    left: 8rem;
 
-  button:not(:nth-child(2)) {
-    padding: 0.5rem;
-  }
+    .lv-btn:not(:nth-child(2)) svg {
+      margin: 0.5rem;
+    }
 
-  button:nth-child(2) {
-    padding: 0 0.5rem;
+    .lv-btn:nth-child(2) svg {
+      margin: 0 0.5rem;
+    }
   }
 }

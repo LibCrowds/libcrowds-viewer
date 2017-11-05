@@ -3,12 +3,12 @@
     <modal-base :show="show" title="Information" @hide="$emit('hide')">
 
       <span v-if="hasInfo">
-        <ul v-for="item in metadata" :key="item.label">
-          <li>
+        <ul>
+          <li v-for="item in metadata" :key="item.label">
             <strong>{{ item.label }}:</strong>
             <span v-html="item.value"></span></li>
         </ul>
-        <div class="center">
+        <div id="lv-attribution-details">
           <img v-if="logo" :src="logo">
           <p v-if="attribution" v-html="attribution"></p>
           <a :href="license" v-if="license" v-html="license"></a>
