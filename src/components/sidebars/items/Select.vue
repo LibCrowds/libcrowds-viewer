@@ -89,13 +89,12 @@ export default {
      * Draw the selection canvases.
      */
     drawSelections () {
-      console.log(this.tags)
       for (let tag of this.tags) {
         let destCanvas = this.$refs[`canvas-${tag.id}`][0]
         if (
-          typeof destCanvas !== 'undefined' &&
-          destCanvas.hasAttribute('drawn') &&
-          destCanvas.width > 0
+          typeof destCanvas === 'undefined' ||
+          (destCanvas.hasAttribute('drawn') &&
+          destCanvas.width > 0)
         ) {
           continue
         }
