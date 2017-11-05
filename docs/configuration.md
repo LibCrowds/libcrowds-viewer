@@ -22,7 +22,7 @@ All of the following properties, apart from `task-opts`, are optional.
 | navigation            | Array    | [ ]           | Additional navigation links \(see [Navigation](configuration.md#navigation)\)                         |
 | confirm-on-submit     | Boolean  | false         | Show a confirmation box on submission                                                                 |
 | buttons               | Object   | See below     | Button configuration details (see [Buttons](configuration.md#buttons)\)                               |
-| selections-editable   | Boolean  | true          | Allow the editing of selections                                                                       |
+| selections-editable   | Boolean  | true          | Allow the editing of selections from the sidebar                                                      |
 | browsable             | Boolean  | true          | Allow browsing back and forth between tasks                                                           |
 | show-help-on-mount    | Boolean  | false         | Show the help modal when the component is mounted                                                     |
 | before-submit         | Promise  | Empty promise | A function that recieves the task data as an argument and should return a promise that resolves if the submission should go ahead and rejects otherwise |
