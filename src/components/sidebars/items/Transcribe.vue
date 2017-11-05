@@ -119,7 +119,10 @@ export default {
       this.form = this.copyForm()
       this.addEventListeners()
       if (typeof document !== 'undefined') {
-        document.querySelector('.form-control').focus()
+        let field = document.querySelector('.form-control')
+        if (field) {
+          field.focus()
+        }
       }
     }
   },
