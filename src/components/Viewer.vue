@@ -786,8 +786,6 @@ export default {
         this.generateTasks()
         if (this.tasks.length) {
           this.setCurrentTask(this.tasks[0])
-        } else {
-          console.warn('No tasks loaded')
         }
       },
       deep: true
@@ -799,8 +797,6 @@ export default {
     this.generateTasks()
     if (this.tasks.length) {
       this.setCurrentTask(this.tasks[0])
-    } else {
-      console.warn('No tasks loaded')
     }
 
     if (typeof window !== 'undefined') {
