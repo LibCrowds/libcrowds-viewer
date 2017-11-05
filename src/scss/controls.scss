@@ -62,15 +62,19 @@
     border-radius: 50%;
     margin: 1rem;
     bottom: 0;
+    padding: 0;
 
     .lv-btn {
       display: flex;
       justify-content: center;
       position: absolute;
-      padding: 0.5rem;
 
       svg {
         position: absolute;
+      }
+
+      .fa-icon {
+        padding: 0.75rem ;
       }
     }
 
@@ -109,7 +113,7 @@
 
   @media screen and (min-width: 768px) {
     right: auto;
-    left: 10rem;
+    left: 8rem;
 
     .lv-btn:not(:nth-child(2)) svg {
       padding: 0.5rem;
