@@ -3,7 +3,7 @@
   padding: 8px 26px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  display: block;
   touch-action: manipulation;
 
   @each $color, $value in $btn-colors {

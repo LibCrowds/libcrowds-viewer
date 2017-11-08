@@ -29,17 +29,18 @@
   }
 
   .lv-sidebar-content {
-    display: block;
+    display: none;
     padding:  $lv-sidebar-padding-y $lv-sidebar-padding-x 0 $lv-sidebar-padding-x;
     flex: 1 1 auto;
     flex-direction: column;
     position: relative;
 
-    &:not(.display-xs) {
-      display: none;
+    &.display-xs {
+      display: block;
     }
 
     @media screen and (min-width: 768px) {
+      display: flex;
       overflow-y: auto;
       min-height: 100px;
       padding: $lv-sidebar-padding-y $lv-sidebar-padding-x;
@@ -95,10 +96,6 @@
     padding: $lv-sidebar-padding-y $lv-sidebar-padding-x;
     padding-top: 1rem;
     padding-bottom: 1rem;
-
-    @media screen and (min-width: 576px) {
-      position: sticky;
-    }
 
     @media screen and (min-width: 768px) {
       border-top: 1px solid lighten($lv-gray-dark, 10%);
