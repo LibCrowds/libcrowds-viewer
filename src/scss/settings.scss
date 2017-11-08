@@ -1,7 +1,7 @@
 /* Core colours */
 $lv-gray:                       #666666 !default;
-$lv-gray-dark:                  darken($lv-gray, 35%);
-$lv-gray-light:                 lighten($lv-gray, 40%);
+$lv-gray-dark:                  darken($lv-gray, 35%) !default;
+$lv-gray-light:                 lighten($lv-gray, 40%) !default;
 $lv-white:                      #FFFFFF !default;
 $lv-blue:                       #3498DB !default;
 $lv-yellow:                     #F5D76E !default;
@@ -11,25 +11,26 @@ $lv-main-bg:                    #000000 !default;
 $lv-hud-bg:                     rgba(0, 0, 0, 0.75) !default;
 
 /* Selection colours */
-$lv-selection-bg:               rgba($lv-blue, 0.2);
-$lv-selection-border:           $lv-blue;
-$lv-selection-confirmed-bg:     rgba($lv-green, 0.2);
-$lv-selection-confirmed-border: $lv-green;
-$lv-selection-related-bg:       rgba($lv-yellow, 0.2);
-$lv-selection-related-border:   $lv-yellow;
-$lv-selection-danger-bg:        rgba($lv-red, 0.2);
-$lv-selection-danger-border:    $lv-red;
-$lv-selection-active-bg:        rgba($lv-green, 0.45);
-$lv-selection-active-border:    $lv-green;
+$lv-selection-bg:               rgba($lv-blue, 0.2) !default;
+$lv-selection-border:           $lv-blue !default;
+$lv-selection-confirmed-bg:     rgba($lv-green, 0.2) !default;
+$lv-selection-confirmed-border: $lv-green !default;
+$lv-selection-related-bg:       rgba($lv-yellow, 0.2) !default;
+$lv-selection-related-border:   $lv-yellow !default;
+$lv-selection-danger-bg:        rgba($lv-red, 0.2) !default;
+$lv-selection-danger-border:    $lv-red !default;
+$lv-selection-active-bg:        rgba($lv-green, 0.35) !default;
+$lv-selection-active-border:    $lv-green !default;
 
 /* Button colors */
-$btn-colors: (
+$btn-colors: () !default;
+$btn-colors: map-merge((
   "white":  $lv-white,
   "blue":   $lv-blue,
   "yellow": $lv-yellow,
   "green":  $lv-green,
   "red":    $lv-red
-);
+), $btn-colors);
 
 /* Fonts */
 $lv-font-size-sm:         0.85rem !default;
@@ -38,8 +39,8 @@ $lv-font-family-base:     apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
 $lv-font-family-headings: inherit !default;
 
 /* Task Sidebar */
-$lv-sidebar-padding-x:    1.25rem;
+$lv-sidebar-padding-x:    1.25rem !default;
 $lv-sidebar-padding-y:    0.75rem;
 
 /* Toolbars */
-$lv-toolbar-xs-height:    30px;
+$lv-toolbar-xs-height:    30px !default;

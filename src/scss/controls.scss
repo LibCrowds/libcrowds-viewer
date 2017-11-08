@@ -34,7 +34,7 @@
       height: 1.25rem;
 
       @media screen and (min-width: 576px) {
-        padding: 0.75rem 1.25rem;
+        margin: 0.75rem 1.25rem;
         height: 1.35rem;
       }
     }
@@ -68,13 +68,14 @@
     border-radius: 50%;
     margin: 1rem;
     bottom: 0;
+    padding: 0;
 
     .lv-btn {
       position: absolute;
-      padding: 0.5rem;
+      justify-content: center;
 
-      svg {
-        position: absolute;
+      .fa-icon {
+        margin: 0.75rem ;
       }
     }
 
@@ -127,14 +128,14 @@
 
   @media screen and (min-width: 768px) {
     right: auto;
-    left: 10rem;
+    left: 8rem;
 
     .lv-btn:not(:nth-child(2)) svg {
-      padding: 0.5rem;
+      margin: 0.5rem;
     }
 
     .lv-btn:nth-child(2) svg {
-      padding: 0 0.5rem;
+      margin: 0 0.5rem;
     }
   }
 }

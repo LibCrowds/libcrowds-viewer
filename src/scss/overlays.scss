@@ -5,6 +5,7 @@
   &.selection, {
     background-color: $lv-selection-confirmed-bg;
     border: 1px solid $lv-selection-confirmed-border;
+    transition: background-color 800ms, border 800ms;
   }
 
   &.related {
@@ -15,7 +16,6 @@
   &.danger {
     background-color: $lv-selection-danger-bg !important;
     border: 1px solid $lv-selection-danger-border !important;
-    transition: background-color 500ms, border 800ms;
   }
 
   &.active {

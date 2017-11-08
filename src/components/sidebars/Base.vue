@@ -75,7 +75,10 @@ export default {
   data () {
     return {
       noteCollapsed: true,
-      showConfirmButtons: false
+      showConfirmButtons: false,
+      note: this.commentAnnotation
+        ? this.commentAnnotation.body.value
+        : ''
     }
   },
 
@@ -110,13 +113,6 @@ export default {
   },
 
   computed: {
-    note () {
-      if (!this.commentAnnotation) {
-        return ''
-      }
-      return this.commentAnnotation.body.value
-    },
-
     title () {
       return this.disableComplete && this.task.complete
         ? 'Task complete'
@@ -146,8 +142,8 @@ export default {
     /**
      * Emit the noteupdated event with the note value.
      */
-    updateNote (evt) {
-      this.$emit('noteupdated', this.task, evt.target.value)
+    updateNote () {
+      this.$emit('noteupdated', this.task, this.note)
     },
 
     /**

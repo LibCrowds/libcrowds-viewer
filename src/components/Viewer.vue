@@ -396,9 +396,7 @@ export default {
       const vpRect = vp.imageToViewportRectangle(imgRect)
       const overlay = drawOverlay(this.viewer, anno.id, vpRect, 'selection')
       overlay.addEventListener('click', (evt) => {
-        if (
-          (!task.complete || !this.disableComplete) &&
-          this.selectionsEditable) {
+        if (!task.complete && !this.disableComplete) {
           this.editTag(task, anno.id)
         }
       })
@@ -788,8 +786,6 @@ export default {
         this.generateTasks()
         if (this.tasks.length) {
           this.setCurrentTask(this.tasks[0])
-        } else {
-          console.warn('No tasks loaded')
         }
       },
       deep: true
@@ -801,8 +797,6 @@ export default {
     this.generateTasks()
     if (this.tasks.length) {
       this.setCurrentTask(this.tasks[0])
-    } else {
-      console.warn('No tasks loaded')
     }
 
     if (typeof window !== 'undefined') {
