@@ -5,6 +5,7 @@
   text-decoration: none;
   display: block;
   touch-action: manipulation;
+  border: none;
 
   @each $color, $value in $btn-colors {
     &.lv-btn-#{$color} {
