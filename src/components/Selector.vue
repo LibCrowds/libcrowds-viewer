@@ -31,26 +31,24 @@
     </span>
 
     <div class="lv-selection-buttons">
-      <div class="lv-selection-container">
-        <button
-          class="lv-btn lv-btn-red-inverse"
-          ref="cancelSelection"
-          @click="cancel">
-          <icon label="Cancel" scale="1.2">
-            <icon name="circle" scale="1.2"></icon>
-            <icon name="times" class="lv-icon-white" scale="0.8"></icon>
-          </icon>
-        </button>
-        <button
-          class="lv-btn lv-btn-green-inverse"
-          ref="confirmSelection"
-          @click="confirm">
-          <icon label="Confirm" scale="1.2">
-            <icon name="circle" scale="1.2"></icon>
-            <icon name="check" class="lv-icon-white" scale="0.8"></icon>
-          </icon>
-        </button>
-      </div>
+      <button
+        class="lv-btn lv-btn-red-inverse"
+        ref="cancelSelection"
+        @click="cancel">
+        <icon label="Cancel" scale="1.2">
+          <icon name="circle" scale="1.2"></icon>
+          <icon name="times" class="lv-icon-white" scale="0.8"></icon>
+        </icon>
+      </button>
+      <button
+        class="lv-btn lv-btn-green-inverse"
+        ref="confirmSelection"
+        @click="confirm">
+        <icon label="Confirm" scale="1.2">
+          <icon name="circle" scale="1.2"></icon>
+          <icon name="check" class="lv-icon-white" scale="0.8"></icon>
+        </icon>
+      </button>
     </div>
   </div>
 </template>

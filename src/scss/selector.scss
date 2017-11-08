@@ -94,20 +94,15 @@
 }
 
 .lv-selection-buttons {
-  height: 100%;
-  width: 100%;
   position: relative;
+  bottom: 0;
+  right: 0;
+  margin-right: auto;
+  transform: translateY(105%);
+  position: absolute;
+  text-align: center;
+  display: block;
 
-  .lv-selection-container {
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    margin-right: auto;
-    transform: translateY(105%);
-    position: absolute;
-    text-align: center;
-    display: block;
-  }
 
   @media screen and (min-width: 576px) {
     width: auto;
