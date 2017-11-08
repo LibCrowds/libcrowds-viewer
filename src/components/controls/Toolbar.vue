@@ -144,12 +144,24 @@ export default {
      * Download the current canvas.
      */
     download () {
+      const filename = 'task.png'
       const canvas = this.viewer.drawer.canvas
       const data = canvas.toDataURL()
       const link = document.createElement('a')
-      link.download = 'task.png'
+      link.setAttribute('type', 'hidden')
+      link.download = filename
       link.href = data
-      link.click()
+      document.body.appendChild(link)
+
+      if (navigator.msSaveBlob)
+      {
+        // IE 10+ partial fix
+        navigator.msSaveBlob(new Blob([data], {
+          type: 'image/png'
+        }), filename)
+      } else {
+        link.click()
+      }
     }
   }
 }
