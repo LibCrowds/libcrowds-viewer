@@ -76,9 +76,7 @@ export default {
     return {
       noteCollapsed: true,
       showConfirmButtons: false,
-      note: this.commentAnnotation
-        ? this.commentAnnotation.body.value
-        : ''
+      note: null
     }
   },
 
@@ -180,6 +178,9 @@ export default {
   watch: {
     task () {
       this.noteCollapsed = true
+      this.note = this.commentAnnotation
+        ? this.commentAnnotation.body.value
+        : ''
     }
   }
 }
