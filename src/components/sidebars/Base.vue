@@ -6,7 +6,7 @@
     ref="sidebar">
 
     <header key="header" class="lv-sidebar-header">
-      <h3>{{ title }}</h3>
+      <h3>Task</h3>
       <h4 key="objective">{{ task.objective }}</h4>
       <p key="guidance">{{ task.guidance }}</p>
     </header>
@@ -111,12 +111,6 @@ export default {
   },
 
   computed: {
-    title () {
-      return this.disableComplete && this.task.complete
-        ? 'Task complete'
-        : 'Task'
-    },
-
     contentClass () {
       return {
         'lv-sidebar-content': true,
