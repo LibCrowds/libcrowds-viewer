@@ -97,6 +97,7 @@
     padding: $lv-sidebar-padding-y $lv-sidebar-padding-x;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    width: 100%;
 
     @media screen and (min-width: 768px) {
       border-top: 1px solid lighten($lv-gray-dark, 10%);
