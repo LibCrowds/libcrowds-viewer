@@ -153,8 +153,7 @@ export default {
       link.href = data
       document.body.appendChild(link)
 
-      if (navigator.msSaveBlob)
-      {
+      if (navigator.msSaveBlob) {
         // IE 10+ partial fix
         navigator.msSaveBlob(new Blob([data], {
           type: 'image/png'
