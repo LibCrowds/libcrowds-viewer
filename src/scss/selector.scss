@@ -94,33 +94,34 @@
 }
 
 .lv-selection-buttons {
-  position: relative;
-  bottom: 0;
-  right: 0;
-  margin-right: auto;
-  transform: translateY(105%);
   position: absolute;
-  text-align: center;
-  display: block;
-
-
-  @media screen and (min-width: 576px) {
-    width: auto;
-  }
+  left: 0;
+  right: 0;
+  top: 100%;
+  text-align: end;
 
   .lv-btn {
-    display: inline-block;
     padding: 2px;
-    margin-left: 5px;
     border: none;
+    display: inline-block;
+
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      width: 100%; // Unfortunate IE hack to sort out button placement
+    }
+
+    svg {
+      margin-left: auto;
+    }
 
     /* Scale icon size dynamically */
     .fa-icon {
       width: auto;
       height: 42px;
+      min-height: 42px;
 
       @media screen and (min-width: 576px) {
         height: 28px;
+        min-height: 28px;
         display: flex;
         flex-direction: row;
       }

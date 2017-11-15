@@ -6,6 +6,7 @@
   display: block;
   touch-action: manipulation;
   border: none;
+  transition: 250ms opacity;
 
   @each $color, $value in $btn-colors {
     &.lv-btn-#{$color} {
@@ -18,24 +19,35 @@
         background-color: darken($value, 10%);
         border-color: darken($value, 10%);
       }
+
+      &:disabled,
+      &:disabled:hover,
+      &:disabled:focus,
+      &[disabled],
+      &[disabled]:hover,
+      &[disabled]:focus {
+        cursor: not-allowed;
+        opacity: 0.6;
+        background-color: $value;
+        border-color: $value;
+      }
+
     }
     &.lv-btn-#{$color}-inverse {
       color: $value;
       background-color: transparent;
       border: 1px solid $value;
-    }
-  }
 
-  &:disabled,
-  &:disabled:hover,
-  &:disabled:focus,
-  &[disabled],
-  &[disabled]:hover,
-  &[disabled]:focus {
-    cursor: not-allowed;
-    border: 1px solid $lv-gray;
-    background-color: $lv-gray-light;
-    color: $lv-gray;
+      &:disabled,
+      &:disabled:hover,
+      &:disabled:focus,
+      &[disabled],
+      &[disabled]:hover,
+      &[disabled]:focus {
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+    }
   }
 
   &.lv-btn-control {
