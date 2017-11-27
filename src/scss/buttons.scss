@@ -6,6 +6,7 @@
   display: block;
   touch-action: manipulation;
   border: none;
+  border-radius: 0;
   transition: 250ms opacity;
 
   @each $color, $value in $btn-colors {
