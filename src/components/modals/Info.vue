@@ -1,24 +1,25 @@
 <template>
   <div id="lv-info-modal">
     <modal-base :show="show" title="Information" @hide="$emit('hide')">
-
-      <span v-if="hasInfo">
-        <ul>
-          <li v-for="item in metadata" :key="item.label">
-            <strong>{{ item.label }}:</strong>
-            <span v-html="item.value"></span></li>
-        </ul>
-        <div id="lv-attribution-details">
-          <img v-if="logo" :src="logo">
-          <p v-if="attribution" v-html="attribution"></p>
-          <a :href="license" v-if="license" v-html="license"></a>
-      </div>
-    </span>
-
-    <span v-else>
-      <p class="center">No task info available</p>
-    </span>
-
+      <slot>
+        <span v-if="hasInfo">
+          <ul>
+            <li v-for="item in metadata" :key="item.label">
+              <strong>{{ item.label }}:</strong>
+              <span v-html="item.value"></span></li>
+          </ul>
+          <div
+            v-if="logo || attribution || license"
+            id="lv-attribution-details">
+            <img v-if="logo" :src="logo">
+            <p v-if="attribution" v-html="attribution"></p>
+            <a v-if="license" :href="license" v-html="license"></a>
+          </div>
+        </span>
+        <span v-else>
+          <p class="center">No task info available</p>
+        </span>
+      </slot>
     </modal-base>
   </div>
 </template>
@@ -104,16 +105,16 @@ export default {
       this.attribution = null
       this.license = null
 
-      if (!this.task.info) {
+      if (!this.task.manifest) {
         return
       }
 
-      if (typeof this.task.info === 'string') {
-        this.fetchTaskInfo(this.task.info).then(data => {
+      if (typeof this.task.manifest === 'string') {
+        this.fetchTaskInfo(this.task.manifest).then(data => {
           this.updateInfo(data)
         })
-      } else if (typeof this.task.info === 'object') {
-        this.updateInfo(this.task.info)
+      } else if (typeof this.task.manifest === 'object') {
+        this.updateInfo(this.task.manifest)
       }
     }
   },

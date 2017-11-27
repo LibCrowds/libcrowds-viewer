@@ -35,28 +35,30 @@
           </zoom-controls>
 
           <info-modal
-            v-if="currentTask"
+            v-if="($slots.info || currentTask) && mergedButtons.info"
             :task="currentTask"
             :show="showInfoModal"
             @hide="showInfoModal = false">
+            <slot name="info"></slot>
           </info-modal>
 
           <help-modal
-            v-if="currentTask && mergedButtons.help"
+            v-if="($slots.help || currentTask) && mergedButtons.help"
+            :task="currentTask"
             :buttons="mergedButtons"
             :show="showHelpModal"
             :browsable="browsable"
             :selections-editable="selectionsEditable"
             :disableComplete="disableComplete"
-            @hide="showHelpModal = false"
-            :task="currentTask">
+            @hide="showHelpModal = false">
+            <slot name="help"></slot>
           </help-modal>
 
           <share-modal
-            v-if="currentTask && mergedButtons.share && currentTask.shareUrl"
-            :task="currentTask"
+            v-if="$slots.share && mergedButtons.share"
             :show="showShareModal"
             @hide="showShareModal = false">
+            <slot name="share"></slot>
           </share-modal>
 
           <browse-modal
@@ -346,6 +348,9 @@ export default {
       }
       if (!this.browsable) {
         merged.browse = false
+      }
+      if (!this.$slots.share) {
+        merged.share = false
       }
       return merged
     }

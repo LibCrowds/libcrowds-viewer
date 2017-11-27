@@ -9,8 +9,8 @@ class Task {
     mode = errors.throwIfMissing('mode'),
     tileSource = errors.throwIfMissing('tileSource'),
     target = errors.throwIfMissing('target'),
+    manifest = null,
     id = null,
-    info = null,
     objective = '',
     guidance = '',
     tag,
@@ -20,17 +20,14 @@ class Task {
     liked = false,
     annotations = [],
     complete = false,
-    shareUrl = null,
-    shareText = null,
     thumbnailUrl = null,
-    help = null,
     bounds = null
   }) {
     this.mode = mode
     this.target = target
+    this.manifest = manifest
     this.tileSource = tileSource
     this.id = id
-    this.info = info
     this.objective = objective
     this.guidance = guidance
     this.tag = tag
@@ -40,10 +37,7 @@ class Task {
     this.liked = liked
     this.annotations = annotations
     this.complete = complete
-    this.shareUrl = shareUrl
-    this.shareText = shareText
     this.thumbnailUrl = thumbnailUrl
-    this.help = help
     this.bounds = bounds
 
     // Validate

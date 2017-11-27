@@ -56,6 +56,9 @@
         @update="handleUpdate"
         @delete="handleDelete"
         @submit="handleSubmit">
+        <div slot="share">
+          Custom share content can go here.
+        </div>
       </libcrowds-viewer>
     </div>
 
@@ -72,6 +75,9 @@
         @update="handleUpdate"
         @delete="handleDelete"
         @submit="handleSubmit">
+        <div slot="share">
+          Custom share content can go here.
+        </div>
       </libcrowds-viewer>
     </div>
 
@@ -88,6 +94,9 @@
         @update="handleUpdate"
         @delete="handleDelete"
         @submit="handleSubmit">
+        <div slot="share">
+          Custom share content can go here.
+        </div>
       </libcrowds-viewer>
     </div>
 

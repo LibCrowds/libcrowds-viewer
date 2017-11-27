@@ -1,6 +1,9 @@
 # Data Model
 
-The annotations emitted from LibCrowds Viewer are based on the [Web Annotations Data Model](https://www.w3.org/TR/annotation-model/), see See [Annotations](/annotations/README.md) for specific examples for each type of task.
+The annotations emitted from LibCrowds Viewer are based on the
+[Web Annotations Data Model](https://www.w3.org/TR/annotation-model/),
+see See [Annotations](/annotations/README.md) for specific examples for each
+type of task.
 
 
 | Property       | Type             | Description                                                                                                                       |
@@ -19,9 +22,11 @@ The annotations emitted from LibCrowds Viewer are based on the [Web Annotations 
 
 ## target
 
-The target is specified via the `target` property of each [task configuration](configuration.md#tasks).
+The target is specified via the `target` property of each
+[task configuration](configuration.md#tasks).
 
-The String passed as the `target` will be used directly, unless a specific fragment of the image is selected, in which case the target will be specified
+The String passed as the `target` will be used directly, unless a specific
+fragment of the image is selected, in which case the target will be specified
 with the following properties.
 
 | Property            | Type             | Description                                                                                                                       |
@@ -47,17 +52,18 @@ with the following properties.
 
 ## body
 
-The Annotation body will differ depending on the [task configuration](configuration.md#tasks).
+The Annotation body will differ depending on the
+[task configuration](configuration.md#tasks).
 
 ### Tags
 
 Tags are used to associate some label, generally as plain text, with the target.
 
-| Property       | Type             | Description                                                                                                                       |
-|----------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| type           | String           | The type of the resource (always 'TextualBody')                                                                                   |
-| purpose        | String           | The reason for the inclusion (always 'tagging')                                                                                   |
-| value          | String           | The tag text                                                                                                                      |
+| Property       | Type             | Description                                     |
+|----------------|------------------|-------------------------------------------------|
+| type           | String           | The type of the resource (always 'TextualBody') |
+| purpose        | String           | The reason for the inclusion (always 'tagging') |
+| value          | String           | The tag text                                    |
 
 #### Example
 
@@ -71,13 +77,14 @@ Tags are used to associate some label, generally as plain text, with the target.
 
 ### Semantic Tags
 
-Semantic Tags are used to link the annotation to a URI that identifies a specific resource.
+Semantic Tags are used to link the annotation to a URI that identifies a
+specific resource.
 
-| Property       | Type             | Description                                                                                                                       |
-|----------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| type           | String           | The type of the resource (always 'SpecificResource')                                                                              |
-| purpose        | String           | The reason for the inclusion (always 'classifying')                                                                               |
-| source         | String           | A URI identifying the specific resource                                                                                         |
+| Property       | Type             | Description                                          |
+|----------------|------------------|------------------------------------------------------|
+| type           | String           | The type of the resource (always 'SpecificResource') |
+| purpose        | String           | The reason for the inclusion (always 'classifying')  |
+| source         | String           | A URI identifying the specific resource              |
 
 #### Example
 
@@ -93,12 +100,12 @@ Semantic Tags are used to link the annotation to a URI that identifies a specifi
 
 Descriptions are used to describe the target in plain text.
 
-| Property       | Type             | Description                                                                                                                       |
-|----------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| type           | String           | The type of the resource (always 'TextualBody')                                                                                   |
-| purpose        | String           | The reason for the inclusion (always 'describing')                                                                                |
-| format         | String           | The format of the description (always 'text/plain')                                                                               |
-| value          | String           | The description text                                                                                                              |
+| Property       | Type             | Description                                         |
+|----------------|------------------|-----------------------------------------------------|
+| type           | String           | The type of the resource (always 'TextualBody')     |
+| purpose        | String           | The reason for the inclusion (always 'describing')  |
+| format         | String           | The format of the description (always 'text/plain') |
+| value          | String           | The description text                                |
 
 #### Example
 

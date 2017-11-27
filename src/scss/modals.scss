@@ -183,27 +183,6 @@
   }
 }
 
-#lv-share-modal {
-  #lv-share-controls {
-    margin: 25px 0;
-
-    input {
-      font-size: $lv-font-size-sm;
-      margin: 0 1rem 0 0;
-      padding: 0.5rem;
-      margin-bottom: 0.6rem;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      width: 100%;
-    }
-
-    .lv-btn {
-      width: 100%;
-    }
-  }
-}
-
 #lv-info-modal {
   #lv-attribution-details {
     text-align: center;

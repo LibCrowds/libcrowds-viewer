@@ -2,10 +2,13 @@
   <div id="lv-help-modal">
     <modal-base :show="show" title="Help" @hide="$emit('hide')">
 
-      <span v-if="task.help" v-html="marked(task.help)"></span>
+      <slot></slot>
 
       <h4>Viewer controls</h4>
-      <p>Use the pan buttons on the lower left or your keyboard's arrow keys to move the image around the screen.</p>
+      <p>
+        Use the pan buttons on the lower left or your keyboard's arrow keys to
+        move the image around the screen.
+      </p>
       <p>On the top-left of the viewer:</p>
       <ul>
         <li>
@@ -81,7 +84,6 @@
 </template>
 
 <script>
-import marked from 'marked'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/plus-circle'
 import 'vue-awesome/icons/minus-circle'
@@ -136,10 +138,6 @@ export default {
       type: Boolean,
       requried: true
     }
-  },
-
-  methods: {
-    marked
   },
 
   components: {

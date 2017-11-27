@@ -27,11 +27,9 @@
     "demo:deploy": "npm run demo:clean && npm run demo:build && gh-pages -d demo/dist/"
   },
   "dependencies": {
-    "clipboard": "^1.7.1",
     "es6-object-assign": "^1.1.0",
     "es6-promise": "^4.1.1",
     "hint.css": "^2.5.0",
-    "marked": "^0.3.6",
     "normalize.css": "^7.0.0",
     "openseadragon": "~2.3.1",
     "uuid": "^3.1.0",
