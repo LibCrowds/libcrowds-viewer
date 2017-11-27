@@ -35,10 +35,11 @@
           </zoom-controls>
 
           <info-modal
-            v-if="currentTask"
+            v-if="($slots.info || currentTask) && mergedButtons.info"
             :task="currentTask"
             :show="showInfoModal"
             @hide="showInfoModal = false">
+            <slot name="info"></slot>
           </info-modal>
 
           <help-modal

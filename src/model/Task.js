@@ -9,6 +9,7 @@ class Task {
     mode = errors.throwIfMissing('mode'),
     tileSource = errors.throwIfMissing('tileSource'),
     target = errors.throwIfMissing('target'),
+    manifest = null,
     id = null,
     objective = '',
     guidance = '',
@@ -24,6 +25,7 @@ class Task {
   }) {
     this.mode = mode
     this.target = target
+    this.manifest = manifest
     this.tileSource = tileSource
     this.id = id
     this.objective = objective

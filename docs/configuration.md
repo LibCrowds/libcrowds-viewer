@@ -49,23 +49,23 @@ To hide a particular button set its property to `false`, or to change its toolti
 
 Tasks are created from an array of objects with the following properties. These objects are passed to the viewer via `task-opts`.
 
-| Property       | Type              | Attributes | Description                                                                                                    |
-|----------------|-------------------|------------|----------------------------------------------------------------------------------------------------------------|
-| mode           | String            |            | The task more (see [Annotation Modes](annotations/README.md))                                                  |
-| tileSource     | String or Object  |            | The tile source specifier (see [Tile Sources](tile_sources.md))                                                |
-| target         | String            |            | The target of the annotation (see [Data Model](data_model.md))                                                 |
-| manifest       | Object            |  optional  | A IIIF manifest used to generate content for the info modal                                           |
-| objective      | String            |  optional  | The main objective                                                                                             |
-| guidance       | String            |  optional  | Additional guidance                                                                                            |
-| thumbnailUrl   | String            |  optional  | URL for a thumbnail image to use in the browse modal                                                           |
-| id             | String            |  optional  | Task identifier                                                                                                |
-| form           | Object            |  optional  | Form properties (see [Forms](configuration.md#forms))                                                          |
-| highlights     | Array             |  optional  | Coordinates identifying regions of the image to highlight                                                      |
-| tag            | String            |  optional  | A tag                                                                                                          |
-| liked          | Boolean           |  optional  | Highlight the task liked button                                                                                |
-| classification | String            |  optional  | A Semantic Tag (e.g. [http://purl.org/dc/terms/title](http://purl.org/dc/terms/title))                         |
-| complete       | Boolean           |  optional  | Mark the task as complete                                                                                      |
-| bounds         | Object            |  optional  | Parameters to fit screen to when task loaded (`x`, `y`, `width` and `height`)                                  |
+| Property       | Type              | Attributes | Description                                                                            |
+|----------------|-------------------|------------|----------------------------------------------------------------------------------------|
+| mode           | String            |            | The task more (see [Annotation Modes](annotations/README.md))                          |
+| tileSource     | String or Object  |            | The tile source specifier (see [Tile Sources](tile_sources.md))                        |
+| target         | String            |            | The target of the annotation (see [Data Model](data_model.md))                         |
+| manifest       | String            |  optional  | A IIIF manifest URI used to fill the info modal                                        |
+| objective      | String            |  optional  | The main objective                                                                     |
+| guidance       | String            |  optional  | Additional guidance                                                                    |
+| thumbnailUrl   | String            |  optional  | URL for a thumbnail image to use in the browse modal                                   |
+| id             | String            |  optional  | Task identifier                                                                        |
+| form           | Object            |  optional  | Form properties (see [Forms](configuration.md#forms))                                  |
+| highlights     | Array             |  optional  | Coordinates identifying regions of the image to highlight                              |
+| tag            | String            |  optional  | A tag                                                                                  |
+| liked          | Boolean           |  optional  | Highlight the task liked button                                                        |
+| classification | String            |  optional  | A Semantic Tag (e.g. [http://purl.org/dc/terms/title](http://purl.org/dc/terms/title)) |
+| complete       | Boolean           |  optional  | Mark the task as complete                                                              |
+| bounds         | Object            |  optional  | Parameters to fit screen to when task loaded (`x`, `y`, `width` and `height`)          |
 
 See the [Annotations](annotations/README.md) section for some examples.
 
@@ -98,7 +98,7 @@ The following slots are available:
 |-------|------------------------------------------------------------------|
 | share | Content for the share model                                      |
 | help  | Slots in above the viewer controls section in the help model     |
-| info  | Content for the info modal                                       |
+| info  | Content for the info modal (overwrites `task.manifest`)          |
 
 
 ## Styles
