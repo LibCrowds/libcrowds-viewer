@@ -53,10 +53,10 @@
           </help-modal>
 
           <share-modal
-            v-if="currentTask && mergedButtons.share && currentTask.shareUrl"
-            :task="currentTask"
+            v-if="$slots.share && mergedButtons.share"
             :show="showShareModal"
             @hide="showShareModal = false">
+            <slot name="share"></slot>
           </share-modal>
 
           <browse-modal
@@ -346,6 +346,9 @@ export default {
       }
       if (!this.browsable) {
         merged.browse = false
+      }
+      if (!this.$slots.share) {
+        merged.share = false
       }
       return merged
     }

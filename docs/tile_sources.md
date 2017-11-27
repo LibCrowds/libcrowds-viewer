@@ -1,8 +1,12 @@
 # Tile Sources
 
-Tile sources are specified via the `tileSource` option requried in each [task configuration](configuration.md#tasks).
+Tile sources are specified via the `tileSource` option requried in each
+[task configuration](configuration.md#tasks).
 
-A String implies a URL used to determine the `tileSource` implementation based on the file extension of the URL, whereas an Object implies an inline configuration which has a single property sufficient for being able to determine the `tileSource` implementation.
+A String implies a URL used to determine the `tileSource` implementation based
+on the file extension of the URL, whereas an Object implies an inline
+configuration which has a single property sufficient for being able to
+determine the `tileSource` implementation.
 
 ## Examples
 

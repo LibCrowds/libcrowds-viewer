@@ -1,61 +1,24 @@
 <template>
   <div id="lv-share-modal">
     <modal-base :show="show" title="Share" @hide="$emit('hide')">
-      <span v-if="task.shareText" v-html="marked(task.shareText)"></span>
-      <div id="lv-share-controls">
-        <input :value="task.shareUrl" readonly>
-        <button
-          ref="copybtn"
-          aria-label="URL copied!"
-          class="lv-btn lv-btn-blue">
-          Copy to clipboard
-        </button>
-      </div>
+      <slot></slot>
     </modal-base>
   </div>
 </template>
 
 <script>
-import Clipboard from 'clipboard'
-import marked from 'marked'
-import Icon from 'vue-awesome/components/Icon'
 import ModalBase from '@/components/modals/Base'
-import Task from '@/model/Task'
 
 export default {
   props: {
     show: {
       type: Boolean,
       requried: true
-    },
-    task: {
-      type: Task,
-      requried: true
     }
   },
 
-  methods: {
-    marked
-  },
-
   components: {
-    Icon,
     ModalBase
-  },
-
-  mounted () {
-    let btn = this.$refs.copybtn
-
-    /* eslint-disable no-new */
-    new Clipboard(btn, {
-      text: (trigger) => {
-        btn.classList.add('hint--top')
-        trigger.addEventListener('mouseleave', () => {
-          btn.classList.remove('hint--top')
-        })
-        return this.task.shareUrl
-      }
-    })
   }
 }
 </script>

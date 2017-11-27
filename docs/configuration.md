@@ -1,6 +1,8 @@
 # Configuration
 
-LibCrowds Viewer provides a range of configuration options that are passed as properties. Most of these are optional but allow for more flexible implementations where required.
+LibCrowds Viewer provides a range of configuration options that are passed as
+properties. Most of these are optional but allow for more flexible
+implementations where required.
 
 ## Viewer
 
@@ -52,10 +54,10 @@ Tasks are created from an array of objects with the following properties. These 
 | mode           | String            |            | The task more (see [Annotation Modes](annotations/README.md))                                                  |
 | tileSource     | String or Object  |            | The tile source specifier (see [Tile Sources](tile_sources.md))                                                |
 | target         | String            |            | The target of the annotation (see [Data Model](data_model.md))                                                 |
+| manifest       | Object            |  optional  | A IIIF manifest used to generate content for the info modal                                           |
 | objective      | String            |  optional  | The main objective                                                                                             |
 | guidance       | String            |  optional  | Additional guidance                                                                                            |
 | thumbnailUrl   | String            |  optional  | URL for a thumbnail image to use in the browse modal                                                           |
-| info           | String or Object  |  optional  | Content for the info modal (see [Info](configuration.md#info))                                                 |
 | id             | String            |  optional  | Task identifier                                                                                                |
 | form           | Object            |  optional  | Form properties (see [Forms](configuration.md#forms))                                                          |
 | highlights     | Array             |  optional  | Coordinates identifying regions of the image to highlight                                                      |
@@ -63,9 +65,6 @@ Tasks are created from an array of objects with the following properties. These 
 | liked          | Boolean           |  optional  | Highlight the task liked button                                                                                |
 | classification | String            |  optional  | A Semantic Tag (e.g. [http://purl.org/dc/terms/title](http://purl.org/dc/terms/title))                         |
 | complete       | Boolean           |  optional  | Mark the task as complete                                                                                      |
-| shareUrl       | String            |  optional  | URL for the 'share' modal input                                                                                |
-| shareText      | String            |  optional  | Text for the share modal                                                                                       |
-| help           | String            |  optional  | Additional help loaded as Markdown into the top of the help modal                                              |
 | bounds         | Object            |  optional  | Parameters to fit screen to when task loaded (`x`, `y`, `width` and `height`)                                  |
 
 See the [Annotations](annotations/README.md) section for some examples.
@@ -81,17 +80,6 @@ In `transcribe` mode the form can be configured with the following properties.
 | classifications | Object  |  optional  | A SpecificResource IRI for each model key                              |
 | fragments       | Object  |  optional  | A fragment to highlight for each model key                             |
 
-## Info
-
-The content of the info modal is taken from the `info` task property. An Object can be passed with the following properties and a String implies a URL that will return a JSON Object with the same properties (e.g. an IIIF manifest URI).
-
-| Property    | Type    | Description                                                    |
-|-------------|---------|----------------------------------------------------------------|
-| metadata    | Array   | List of objects containings the properties `label` and `value` |
-| logo        | String  | The source for a logo image                                    |
-| attribution | String  | Attribution for the resource                                   |
-| license     | String  | URL to an external resource containing rights information      |
-
 ## Navigation
 
 Additional navigation links (for example, for the rest of your website) can be passed to the viewer via the `navigation` property. These links will be appended to a responsive navbar that will still visible in full screen mode.
@@ -101,6 +89,17 @@ Additional navigation links (for example, for the rest of your website) can be p
 | label    | String  | A label for the link |
 | url      | String  | The link url         |
 | brand    | Boolean | Add brand styling    |
+
+## Slots
+
+The following slots are available:
+
+| Name  | Description                                                      |
+|-------|------------------------------------------------------------------|
+| share | Content for the share model                                      |
+| help  | Slots in above the viewer controls section in the help model     |
+| info  | Content for the info modal                                       |
+
 
 ## Styles
 
