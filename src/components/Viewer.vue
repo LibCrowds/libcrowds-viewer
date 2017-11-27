@@ -43,14 +43,15 @@
           </info-modal>
 
           <help-modal
-            v-if="currentTask && mergedButtons.help"
+            v-if="($slots.help || currentTask) && mergedButtons.help"
+            :task="currentTask"
             :buttons="mergedButtons"
             :show="showHelpModal"
             :browsable="browsable"
             :selections-editable="selectionsEditable"
             :disableComplete="disableComplete"
-            @hide="showHelpModal = false"
-            :task="currentTask">
+            @hide="showHelpModal = false">
+            <slot name="help"></slot>
           </help-modal>
 
           <share-modal
