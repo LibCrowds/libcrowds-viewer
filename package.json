@@ -65,7 +65,7 @@
     "imports-loader": "^0.7.1",
     "in-publish": "^2.0.0",
     "jasmine-core": "^2.6.4",
-    "jest": "^21.2.1",
+    "jest": "^22.1.4",
     "jest-vue-preprocessor": "^1.0.1",
     "node-sass": "^4.5.0",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
