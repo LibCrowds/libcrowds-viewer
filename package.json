@@ -30,7 +30,7 @@
     "es6-object-assign": "^1.1.0",
     "es6-promise": "^4.1.1",
     "hint.css": "^2.5.0",
-    "normalize.css": "^7.0.0",
+    "normalize.css": "^8.0.0",
     "openseadragon": "~2.3.1",
     "uuid": "^3.1.0",
     "vue-awesome": "^2.3.1",
