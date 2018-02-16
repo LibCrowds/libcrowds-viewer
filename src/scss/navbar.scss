@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: row;
   overflow: hidden;
-  background-color: $lv-gray-dark;
+  background-color: $lv-navbar-bg;
   border-bottom: 1px solid #000;
 
   .lv-navbar-container {
@@ -56,7 +56,7 @@
       top: 0;
       right: 0;
       padding: 1rem;
-      color: lighten($lv-gray-dark, 20%);
+      color: lighten($lv-navbar-bg, 20%);
 
       @media screen and (min-width: 768px) {
         display: none;
@@ -66,7 +66,7 @@
     a {
       position: relative;
       text-decoration: none;
-      color: $lv-gray-dark;
+      color: $lv-navbar-bg;
       transition: color 200ms ease;
       padding: 0.5rem;
 
