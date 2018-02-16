@@ -52,7 +52,7 @@
         <li><icon name="chevron-left"></icon>Previous task</li>
         <li><icon name="chevron-right"></icon>Next task</li>
       </ul>
-      <div v-if="task.mode === 'select'">
+      <div v-if="task && task.mode === 'select'">
         <h4>Select mode</h4>
         <p>
           When using the viewer in select mode an area of the image can
