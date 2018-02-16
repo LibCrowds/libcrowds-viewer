@@ -10,7 +10,7 @@
         move the image around the screen.
       </p>
       <p>On the top-left of the viewer:</p>
-      <ul>
+      <ul class="lv-modal-list">
         <li>
           <icon name="expand"></icon>Fullscreen
         </li>
@@ -34,7 +34,7 @@
         </li>
       </ul>
       <p>On the bottom-left of the viewer:</p>
-      <ul>
+      <ul class="lv-modal-list">
         <li><icon name="arrow-circle-up"></icon>Pan up</li>
         <li><icon name="arrow-circle-down"></icon>Pan down</li>
         <li><icon name="arrow-circle-left"></icon>Pan left</li>
@@ -48,7 +48,7 @@
         To the left and right of the viewer are buttons to browse available
         tasks:
       </p>
-      <ul v-if="browsable">
+      <ul class="lv-modal-list" v-if="browsable">
         <li><icon name="chevron-left"></icon>Previous task</li>
         <li><icon name="chevron-right"></icon>Next task</li>
       </ul>
@@ -59,7 +59,7 @@
           be selected by clicking (or tapping) on the image. The following
           controls are provided to the right of the selection box:
         </p>
-        <ul>
+        <ul class="lv-modal-list">
           <li><icon name="check-circle"></icon>Confirm selection</li>
           <li><icon name="times-circle"></icon>Cancel selection</li>
         </ul>
@@ -68,7 +68,7 @@
           selections sidebar to the right of the screen, where the following
           controls are provided:
         </p>
-        <ul>
+        <ul class="lv-modal-list">
           <li v-if="selectionsEditable">
             <icon name="pencil"></icon>
             Edit selection
