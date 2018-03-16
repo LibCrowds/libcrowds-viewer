@@ -14,18 +14,6 @@ Comment Annotations are intended for comments about the image, as opposed to spe
   "motivation": "commenting",
   "created": "2017-07-16T00:44:28.454Z",
   "generated": "2017-07-16T00:44:28.454Z",
-  "creator": {
-    "id": "http://example.org/user1",
-    "type": "Person",
-    "name": "My Pseudonym",
-    "nickname": "pseudo"
-  },
-  "generator": {
-    "id": "http://example.org/client1",
-    "type": "Software",
-    "name": "Code v2.1",
-    "homepage": "http://example.org/client1/homepage1"
-  },
   "target": "http://example.org/iiif/book1/canvas/p1"
   "body": {
     "type": "TextualBody",

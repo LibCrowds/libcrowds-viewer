@@ -9,10 +9,6 @@ import errors from '@/utils/errors'
  *   Plain text value for the tag.
  * @param {String} fragment
  *   The media fragment selector value (see https://www.w3.org/TR/media-frags/).
- * @param {Object} creator
- *   The Annotation creator.
- * @param {Object} generator
- *   The Annotation generator.
  * @param {String} classification
  *   A classification.
  */
@@ -21,15 +17,11 @@ class SelectAnnotation extends Annotation {
     target = errors.throwIfMissing('target'),
     tag = errors.throwIfMissing('tag'),
     fragment = errors.throwIfMissing('fragment'),
-    creator = null,
-    generator = null,
     classification = null
   }) {
     super({
       motivation: 'tagging',
-      target: target,
-      creator: creator,
-      generator: generator
+      target: target
     })
     this.addTag(tag, fragment)
     if (classification) {
