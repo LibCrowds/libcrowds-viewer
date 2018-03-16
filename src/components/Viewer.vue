@@ -614,7 +614,9 @@ export default {
           this.nextTask()
         }
         this.$emit('submit', task)
-      }).catch(err => {})
+      }).catch(err => {
+        console.debug(err)
+      })
     },
 
     /**

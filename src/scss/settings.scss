@@ -41,6 +41,15 @@ $lv-font-family-headings: inherit !default;
 /* Task Sidebar */
 $lv-sidebar-padding-x:    1.25rem !default;
 $lv-sidebar-padding-y:    0.75rem;
+$lv-sidebar-bg:           $lv-gray-dark;
+$lv-sidebar-border:       $lv-gray;
 
 /* Toolbars */
 $lv-toolbar-xs-height:    30px !default;
+
+/* Modals */
+$lv-modal-bg:             $lv-gray-dark;
+$lv-modal-border:         $lv-gray-light;
+
+/* Settings */
+$lv-navbar-bg:            $lv-gray-dark;
