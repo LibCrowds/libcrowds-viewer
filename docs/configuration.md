@@ -47,7 +47,8 @@ To hide a particular button set its property to `false`, or to change its toolti
 
 ## Tasks
 
-Tasks are created from an array of objects with the following properties. These objects are passed to the viewer via `task-opts`.
+Tasks are created from an array of objects with the following properties. These
+objects are passed to the viewer via `task-opts`.
 
 | Property       | Type              | Attributes | Description                                                                            |
 |----------------|-------------------|------------|----------------------------------------------------------------------------------------|
@@ -67,11 +68,11 @@ Tasks are created from an array of objects with the following properties. These 
 | complete       | Boolean           |  optional  | Mark the task as complete                                                              |
 | bounds         | Object            |  optional  | Parameters to fit screen to when task loaded (`x`, `y`, `width` and `height`)          |
 
-See the [Annotations](annotations/README.md) section for some examples.
+See the [Annotations](annotations/README.md) section for some examples of using the above options to configure tasks.
 
 ## Forms
 
-In `transcribe` mode the form can be configured with the following properties.
+In `transcribe` mode, the form can be configured with the following properties.
 
 | Property        | Type    | Attributes | Description                                                            |
 |-----------------|---------|------------|------------------------------------------------------------------------|
@@ -92,7 +93,7 @@ Additional navigation links (for example, for the rest of your website) can be p
 
 ## Slots
 
-The following slots are available:
+The following slots are available.
 
 | Name  | Description                                                      |
 |-------|------------------------------------------------------------------|
@@ -103,6 +104,9 @@ The following slots are available:
 
 ## Styles
 
-To customise the appearance of the viewer, the following Sass variables can be overridden before importing the libcrowds-viewer.scss file.
+To customise the appearance of the viewer, the following Sass variables can be
+overridden, before importing the *libcrowds-viewer.scss* file.
+
+The defaults are shown below.
 
 {% codesnippet "../src/scss/settings.scss", language="scss" %}{% endcodesnippet %}
