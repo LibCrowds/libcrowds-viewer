@@ -1,6 +1,15 @@
 <template>
   <div id="app">
 
+    <!-- Basic navigation to go back to the demo homepage -->
+    <nav
+      id="lv-demo-navbar"
+      v-if="showSelectViewer || showTranscribeViewer">
+      <button @click="hideViewer">
+        &lt; Go back
+      </button>
+    </nav>
+
     <!-- Demo home page -->
     <div
       id="homepage"
@@ -160,6 +169,10 @@ export default {
     handleSubmit (task) {
       console.log('Task submitted', task)
       console.log(JSON.stringify(task.annotations, null, 2))
+    },
+    hideViewer () {
+      this.showSelectViewer = false
+      this.showTranscribeViewer = false
     }
   }
 }
@@ -274,6 +287,19 @@ export default {
   #mode-buttons {
     display:flex;
     flex-direction: column;
+  }
+}
+
+#lv-demo-navbar {
+  background: $lv-sidebar-bg;
+  padding: 0.75em 1.5em;
+
+  button {
+    background: transparent;
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    font-family: $lv-font-family-base;
   }
 }
 </style>
