@@ -3,7 +3,7 @@
     <modal-base :show="show" title="Information" @hide="$emit('hide')">
       <slot>
         <span v-if="hasInfo">
-          <ul>
+          <ul class="lv-modal-list">
             <li v-for="item in metadata" :key="item.label">
               <strong>{{ item.label }}:</strong>
               <span v-html="item.value"></span></li>
