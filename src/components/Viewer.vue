@@ -16,7 +16,6 @@
             @browseclicked="showBrowseModal = true"
             @shareclicked="showShareModal = true"
             @fullscreenclicked="toggleFullScreen">
-            <slot name="button"></slot>
           </toolbar-controls>
 
           <pan-controls

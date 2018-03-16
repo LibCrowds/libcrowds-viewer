@@ -41,6 +41,15 @@ To hide a particular button set its property to `false`, or to change its toolti
 | note                  | Boolean or String | 'Add a note'       | The note button                 |
 | submit                | Boolean or String | 'Submit'           | The note button                 |
 
+Any key-value pairs added to the `buttons` object that are not listed above will be rendered as additional
+buttons. The key will be used as the name of the icon and the value as the tooltip text. When any additional
+buttons are clicked the **toolbarclick** event will be emited with the key as the only argument. You will also
+need to import your required [Font Awesome](https://fontawesome.com/v4.7.0/cheatsheet/) icon by name, like so:
+
+```
+import vue-awesome/icons/your-icon
+```
+
 ## Tasks
 
 Tasks are created from an array of objects with the following properties. These
@@ -66,7 +75,6 @@ objects are passed to the viewer via `task-opts`.
 See the [Annotations](annotations/README.md) section for some examples of using the above options to configure tasks.
 
 ## Forms
-
 In `transcribe` mode, the form can be configured with the following properties.
 
 | Property        | Type    | Attributes | Description                                                            |
@@ -85,7 +93,6 @@ The following slots are available.
 | share  | Content for the share model                                      |
 | help   | Slots in above the viewer controls section in the help model     |
 | info   | Content for the info modal (overwrites `task.manifest`)          |
-| button | Additional button for the main toolbar                           |
 
 ## Styles
 

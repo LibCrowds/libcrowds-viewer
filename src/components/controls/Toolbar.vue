@@ -8,11 +8,6 @@
       :callback="button.callback">
       <icon :name="button.icon"></icon>
     </control-button>
-
-    <control-button slot-scope>
-      <slot></slot>
-    </control-button>
-
   </div>
 </template>
 

@@ -67,9 +67,6 @@
         <div slot="share">
           Custom share content can go here.
         </div>
-        <div slot="button" @click="demoButtonSlotAlert">
-          <icon name="tags"></icon>
-        </div>
       </libcrowds-viewer>
     </div>
 
@@ -88,9 +85,6 @@
         <div slot="share">
           Custom share content can go here.
         </div>
-        <div slot="button" @click="demoButtonSlotAlert">
-          <icon name="tags"></icon>
-        </div>
       </libcrowds-viewer>
     </div>
 
@@ -108,9 +102,6 @@
         @submit="handleSubmit">
         <div slot="share">
           Custom share content can go here.
-        </div>
-        <div slot="button" @click="demoButtonSlotAlert">
-          <icon name="tags"></icon>
         </div>
       </libcrowds-viewer>
     </div>
