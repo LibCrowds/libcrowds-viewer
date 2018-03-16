@@ -15,4 +15,3 @@ Annotation server).
 | create     | task, annotation | Annotation created   |
 | delete     | task, annotation | Annotation deleted   |
 | taskchange | oldTask, newTask | Task changed         |
-| taskliked  | task             | Task liked/unliked   |

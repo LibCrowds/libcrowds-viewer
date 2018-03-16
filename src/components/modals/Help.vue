@@ -23,9 +23,6 @@
         <li v-if="buttons.browse">
           <icon name="list"></icon>Browse Tasks
         </li>
-        <li v-if="buttons.like">
-          <icon name="thumbs-up"></icon>Like this image
-        </li>
         <li v-if="buttons.share">
           <icon name="share-alt"></icon>Copy and share the image URL
         </li>

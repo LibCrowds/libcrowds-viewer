@@ -28,7 +28,7 @@ All of the following properties, apart from `task-opts`, are optional.
 
 ## Buttons
 
-To hide a particular button set its property to `false`, or to change its tooltip enter a String (or an Array in the case of the `like` button).
+To hide a particular button set its property to `false`, or to change its tooltip enter a String.
 
 | Property              | Type              | Default            | Description                     |
 |-----------------------|-------------------|--------------------|---------------------------------|
@@ -36,7 +36,6 @@ To hide a particular button set its property to `false`, or to change its toolti
 | help                  | Boolean or String | 'Help'             | The help button                 |
 | info                  | Boolean or String | 'Details'          | The info button                 |
 | browse                | Boolean or String | 'Browse Tasks'     | The browse tasks button         |
-| like                  | Boolean or Array  | ['Like', 'Unlike'] | The like button                 |
 | share                 | Boolean or String | 'Share'            | The share button                |
 | download              | Boolean or String | 'Download'         | The download button             |
 | note                  | Boolean or String | 'Add a note'       | The note button                 |
@@ -60,7 +59,6 @@ objects are passed to the viewer via `task-opts`.
 | form           | Object            |  optional  | Form properties (see [Forms](configuration.md#forms))                                  |
 | highlights     | Array             |  optional  | Coordinates identifying regions of the image to highlight                              |
 | tag            | String            |  optional  | A tag                                                                                  |
-| liked          | Boolean           |  optional  | Highlight the task liked button                                                        |
 | classification | String            |  optional  | A Semantic Tag (e.g. [http://purl.org/dc/terms/title](http://purl.org/dc/terms/title)) |
 | complete       | Boolean           |  optional  | Mark the task as complete                                                              |
 | bounds         | Object            |  optional  | Parameters to fit screen to when task loaded (`x`, `y`, `width` and `height`)          |

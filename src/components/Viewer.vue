@@ -15,7 +15,6 @@
             @infoclicked="showInfoModal = true"
             @browseclicked="showBrowseModal = true"
             @shareclicked="showShareModal = true"
-            @likeclicked="emitTaskLiked"
             @fullscreenclicked="toggleFullScreen">
             <slot name="button"></slot>
           </toolbar-controls>
@@ -191,7 +190,6 @@ export default {
         help: 'Help',
         info: 'Details',
         browse: 'Browse Tasks',
-        like: ['Like', 'Unlike'],
         share: 'Share',
         download: 'Download',
         note: 'Add a note',
@@ -335,14 +333,6 @@ export default {
   },
 
   methods: {
-    /**
-     * Emit the taskliked event.
-     */
-    emitTaskLiked (task, status) {
-      task.liked = status
-      this.$emit('taskliked', task)
-    },
-
     /**
      * Toggle fullscreen mode.
      */
