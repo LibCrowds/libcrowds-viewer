@@ -1,11 +1,6 @@
 <template>
   <div id="lv-viewer" ref="container">
 
-    <navbar
-      v-if="navigation.length > 0"
-      :navigation="navigation">
-    </navbar>
-
     <main class="lv-container">
       <div id="lv-viewer-wrapper">
         <div id="hud" ref="hud">
@@ -157,7 +152,6 @@ import ToolbarControls from '@/components/controls/Toolbar'
 import PanControls from '@/components/controls/Pan'
 import ZoomControls from '@/components/controls/Zoom'
 import BaseSidebar from '@/components/sidebars/Base'
-import Navbar from '@/components/navigation/Navbar'
 import SelectSidebarItem from '@/components/sidebars/items/Select'
 import TranscribeSidebarItem from '@/components/sidebars/items/Transcribe'
 import Selector from '@/components/Selector'
@@ -180,7 +174,6 @@ export default {
       viewerOpts: {
         id: 'lv-viewer-container',
         crossOriginPolicy: 'Anonymous',
-        showNavigationControl: false,
         helpButton: 'show-help',
         infoButton: 'show-info',
         panVertical: false,
@@ -262,10 +255,6 @@ export default {
       type: Boolean,
       default: true
     },
-    navigation: {
-      type: Array,
-      default: () => []
-    },
     confirmOnSubmit: {
       type: Boolean,
       default: false
@@ -301,7 +290,6 @@ export default {
     PanControls,
     ZoomControls,
     BaseSidebar,
-    Navbar,
     Selector,
     SelectSidebarItem,
     TranscribeSidebarItem,

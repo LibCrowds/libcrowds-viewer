@@ -49,7 +49,6 @@
     <div class="viewer-container" v-else-if="showSelectViewer">
       <libcrowds-viewer
         :task-opts="selectTaskOpts"
-        :navigation="navigation"
         :before-submit="beforeSubmit"
         @taskchange="handleTaskChange"
         @create="handleCreate"
@@ -68,7 +67,6 @@
         :show-related-tasks="true"
         :buttons="{browse: false}"
         :task-opts="transcribeTaskOpts"
-        :navigation="navigation"
         :before-submit="beforeSubmit"
         @taskchange="handleTaskChange"
         @create="handleCreate"
@@ -87,7 +85,6 @@
         :show-related-tasks="true"
         :buttons="{browse: false}"
         :task-opts="customTaskOpts"
-        :navigation="navigation"
         :before-submit="beforeSubmit"
         @taskchange="handleTaskChange"
         @create="handleCreate"
@@ -120,10 +117,6 @@ export default {
       showTranscribeViewer: false,
       showCustomiseTextArea: false,
       customTaskOpts: [],
-      navigation: [
-        { label: 'LibCrowds Viewer', url: window.location.href, brand: true },
-        { label: 'Home', url: window.location.href }
-      ],
       beforeSubmit: (taskData) => new Promise((resolve, reject) => {
         if (!taskData.annotations.length) {
           const confirm = window.confirm(
