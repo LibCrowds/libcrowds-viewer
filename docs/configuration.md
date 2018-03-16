@@ -21,7 +21,6 @@ All of the following properties, apart from `task-opts`, are optional.
 | creator               | Object   | null          | The Annotation creator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\)   |
 | generator             | Object   | null          | The Annotation generator \(see [Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)\) |
 | next-on-submit        | Object   | true          | Move to the next task on after submission                                                             |
-| navigation            | Array    | [ ]           | Additional navigation links \(see [Navigation](configuration.md#navigation)\)                         |
 | confirm-on-submit     | Boolean  | false         | Show a confirmation box on submission                                                                 |
 | buttons               | Object   | See below     | Button configuration details (see [Buttons](configuration.md#buttons)\)                               |
 | selections-editable   | Boolean  | true          | Allow the editing of selections from the sidebar                                                      |
@@ -80,16 +79,6 @@ In `transcribe` mode, the form can be configured with the following properties.
 | schema          | Object  |            | See [vue-form-generator](https://github.com/icebob/vue-form-generator) |
 | classifications | Object  |  optional  | A SpecificResource IRI for each model key                              |
 | fragments       | Object  |  optional  | A fragment to highlight for each model key                             |
-
-## Navigation
-
-Additional navigation links (for example, for the rest of your website) can be passed to the viewer via the `navigation` property. These links will be appended to a responsive navbar that will still visible in full screen mode.
-
-| Property | Type    | Description          |
-|----------|---------|----------------------|
-| label    | String  | A label for the link |
-| url      | String  | The link url         |
-| brand    | Boolean | Add brand styling    |
 
 ## Slots
 
