@@ -167,10 +167,7 @@ export default {
     return {
       viewer: {},
       selectionRect: {},
-      annotator: new Annotator({
-        creator: this.creator,
-        generator: this.generator
-      }),
+      annotator: new Annotator(),
       viewerOpts: {
         id: 'lv-viewer-container',
         crossOriginPolicy: 'Anonymous',
@@ -238,14 +235,6 @@ export default {
     zoomBy: {
       type: Number,
       default: 0.2
-    },
-    creator: {
-      type: Object,
-      default: null
-    },
-    generator: {
-      type: Object,
-      default: null
     },
     showRelatedTasks: {
       type: Boolean,

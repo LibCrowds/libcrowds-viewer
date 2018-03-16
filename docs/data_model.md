@@ -8,14 +8,12 @@ type of task.
 
 | Property       | Type             | Description                                                                                                                       |
 |----------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| @context       | String           | The JSON-LD context (always '[http://www.w3.org/ns/anno.jsonld](http://www.w3.org/ns/anno.jsonld)')                                 |
+| @context       | String           | The JSON-LD context (always '[http://www.w3.org/ns/anno.jsonld](http://www.w3.org/ns/anno.jsonld)')                               |
 | id             | String           | An automatically generated UUID (to be replaced with an IRI by the client when the Annotation is stored)                          |
 | type           | String           | The class for Web Annotations (always 'Annotation')                                                                               |
 | motivation     | String           | The relationship between the Annotation and a Motivation                                                                          |
 | created        | String           | The time at which the Annotation was created                                                                                      |
-| creator        | String or Object | The agent responsible for creating the resource (generally a human)                                                               |
 | generated      | String           | The time at which the Annotation serialization was generated                                                                      |
-| generator      | String or Object | The agent responsible for generating the serialization of the Annotation (typically software)                                     |
 | modified       | String           | The time at which the Annotation was modified, after its creation                                                                 |
 | target         | String or Object | The target of the Annotation                                                                                                      |
 | body           | Object           | The relationship between the Annotation and its Body                                                                              |

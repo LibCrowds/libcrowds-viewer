@@ -15,17 +15,11 @@ import errors from '@/utils/errors'
  *   https://www.w3.org/TR/annotation-model/#motivation-and-purpose
  * @param {String} target
  *   The URL of the resource being annotated
- * @param {Object} creator
- *   The Annotation creator.
- * @param {Object} generator
- *   The Annotation generator.
  */
 class Annotation {
   constructor ({
     motivation = errors.throwIfMissing('motivation'),
-    target = errors.throwIfMissing('target'),
-    creator = null,
-    generator = null
+    target = errors.throwIfMissing('target')
   }) {
     this['@context'] = 'http://www.w3.org/ns/anno.jsonld'
     this['id'] = uuid()
@@ -35,12 +29,6 @@ class Annotation {
     this.target = target
     this.created = new Date().toISOString()
     this.generated = new Date().toISOString()
-    if (creator) {
-      this.creator = creator
-    }
-    if (generator) {
-      this.generator = generator
-    }
   }
 
   /**

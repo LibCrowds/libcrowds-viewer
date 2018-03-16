@@ -6,19 +6,6 @@ import CommentAnnotation from '@/model/CommentAnnotation'
  * Represents an annotator responsible for managing all task annotations.
  */
 class Annotator {
-  constructor (
-    {
-      creator = null,
-      generator = null
-    } = {
-      creator: null,
-      generator: null
-    }
-  ) {
-    this.creator = creator
-    this.generator = generator
-  }
-
   /**
    * Check if a section of an object contains another.
    * @param {Object} find
@@ -228,8 +215,6 @@ class Annotator {
         transcription: transcription,
         tag: key,
         fragment: fragment,
-        creator: this.creator,
-        generator: this.generator,
         classification: task.form.classification[key]
       })
       this.storeAnnotation(task, anno)
@@ -258,9 +243,7 @@ class Annotator {
     if (anno === null) {
       anno = new CommentAnnotation({
         target: task.target,
-        comment: comment,
-        creator: this.creator,
-        generator: this.generator
+        comment: comment
       })
       this.storeAnnotation(task, anno)
     } else {
@@ -283,8 +266,6 @@ class Annotator {
       target: task.target,
       tag: task.tag,
       fragment: fragment,
-      creator: this.creator,
-      generator: this.generator,
       classification: task.classification
     })
     this.storeAnnotation(task, anno)

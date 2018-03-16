@@ -54,18 +54,6 @@ Note that the `form` task property is required when in `transcribe` mode. The `t
   "motivation": "describing",
   "created": "2017-07-16T13:53:18.795Z",
   "generated": "2017-07-16T13:53:18.795Z",
-  "creator": {
-    "id": "http://example.org/user1",
-    "type": "Person",
-    "name": "My Pseudonym",
-    "nickname": "pseudo"
-  },
-  "generator": {
-    "id": "http://example.org/client1",
-    "type": "Software",
-    "name": "Code v2.1",
-    "homepage": "http://example.org/client1/homepage1"
-  },
   "target": {
     "source": "http://example.org/iiif/book1/canvas/p1"
     "selector": {

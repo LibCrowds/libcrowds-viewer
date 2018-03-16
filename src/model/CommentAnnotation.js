@@ -7,23 +7,15 @@ import errors from '@/utils/errors'
  *   The URL of the resource being annotated
  * @param {String} comment
  *   The comment value.
- * @param {Object} creator
- *   The Annotation creator.
- * @param {Object} generator
- *   The Annotation generator.
  */
 class CommentAnnotation extends Annotation {
   constructor ({
     target = errors.throwIfMissing('target'),
-    comment = errors.throwIfMissing('comment'),
-    creator = null,
-    generator = null
+    comment = errors.throwIfMissing('comment')
   }) {
     super({
       motivation: 'commenting',
-      target: target,
-      creator: creator,
-      generator: generator
+      target: target
     })
     this.addComment(comment)
   }
