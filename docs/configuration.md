@@ -82,12 +82,12 @@ In `transcribe` mode, the form can be configured with the following properties.
 
 The following slots are available.
 
-| Name  | Description                                                      |
-|-------|------------------------------------------------------------------|
-| share | Content for the share model                                      |
-| help  | Slots in above the viewer controls section in the help model     |
-| info  | Content for the info modal (overwrites `task.manifest`)          |
-
+| Name   | Description                                                      |
+|--------|------------------------------------------------------------------|
+| share  | Content for the share model                                      |
+| help   | Slots in above the viewer controls section in the help model     |
+| info   | Content for the info modal (overwrites `task.manifest`)          |
+| button | Additional button for the main toolbar                           |
 
 ## Styles
 

@@ -67,6 +67,9 @@
         <div slot="share">
           Custom share content can go here.
         </div>
+        <div slot="button" @click="demoButtonSlotAlert">
+          <icon name="tags"></icon>
+        </div>
       </libcrowds-viewer>
     </div>
 
@@ -84,6 +87,9 @@
         @submit="handleSubmit">
         <div slot="share">
           Custom share content can go here.
+        </div>
+        <div slot="button" @click="demoButtonSlotAlert">
+          <icon name="tags"></icon>
         </div>
       </libcrowds-viewer>
     </div>
@@ -103,6 +109,9 @@
         <div slot="share">
           Custom share content can go here.
         </div>
+        <div slot="button" @click="demoButtonSlotAlert">
+          <icon name="tags"></icon>
+        </div>
       </libcrowds-viewer>
     </div>
 
@@ -110,8 +119,8 @@
 </template>
 
 <script>
+import 'vue-awesome/icons/tags'
 import Icon from 'vue-awesome/components/Icon'
-import 'vue-awesome/icons/github'
 import selectTasks from './selectTasks'
 import transcribeTasks from './transcribeTasks'
 
@@ -173,6 +182,11 @@ export default {
     hideViewer () {
       this.showSelectViewer = false
       this.showTranscribeViewer = false
+    },
+    demoButtonSlotAlert () {
+      const msg = 'This is an example of an additional button being added ' +
+        'using the button slot'
+      alert(msg)
     }
   }
 }

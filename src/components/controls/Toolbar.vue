@@ -5,11 +5,14 @@
       :key="button.id"
       :id="button.id"
       :tooltip="button.tooltip"
-      :callback="button.callback"
-      position="bottom"
-      hint-position="bottom">
-      <icon :name="button.icon" :class="button.iconClass" scale="1.35"></icon>
+      :callback="button.callback">
+      <icon :name="button.icon"></icon>
     </control-button>
+
+    <control-button slot-scope>
+      <slot></slot>
+    </control-button>
+
   </div>
 </template>
 
@@ -101,19 +104,6 @@ export default {
         })
       }
 
-      if (this.buttons.like) {
-        tbButtons.push({
-          tooltip: !this.task.liked
-            ? this.buttons.like[0]
-            : this.buttons.like[1],
-          icon: 'thumbs-up',
-          iconClass: this.task.liked ? 'active' : null,
-          callback: () => {
-            this.$emit('likeclicked', this.task, !this.task.liked)
-          }
-        })
-      }
-
       if (this.buttons.share) {
         let tooltip = this.buttons.share
         tbButtons.push({
@@ -162,3 +152,14 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+#lv-main-controls {
+  .fa-icon {
+    width: auto;
+    font-size: 1.35em;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+</style>

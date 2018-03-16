@@ -17,6 +17,7 @@
             @shareclicked="showShareModal = true"
             @likeclicked="emitTaskLiked"
             @fullscreenclicked="toggleFullScreen">
+            <slot name="button"></slot>
           </toolbar-controls>
 
           <pan-controls
