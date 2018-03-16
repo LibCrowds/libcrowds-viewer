@@ -12,7 +12,6 @@ module.exports = {
     library: 'libcrowds-viewer',
     libraryTarget: 'umd'
   },
-  mode: 'development',  // Overridden in webpack.prod.config
   module: {
     rules: [
       {

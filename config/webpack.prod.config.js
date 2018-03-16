@@ -7,11 +7,16 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = merge(baseWebpackConfig, {
   devtool: '#source-map',
-  mode: 'production',
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false
       }
     }),
     new webpack.LoaderOptionsPlugin({
