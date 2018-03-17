@@ -18,6 +18,7 @@
     <footer key="footer" class="lv-sidebar-footer">
       <span v-if="!showConfirmButtons">
         <button
+          v-if="buttons.note"
           :disabled="disableComplete && task.complete"
           class="lv-btn lv-btn-block lv-btn-white-inverse lv-btn-note"
           @click="toggleNoteCollapse"
@@ -26,7 +27,6 @@
 
         <transition
           name="fade-height"
-          v-show="showNote"
           v-if="!noteCollapsed">
           <textarea
             v-if="!(disableComplete && task.complete)"
@@ -39,6 +39,7 @@
         </transition>
 
         <button
+          v-if="buttons.submit"
           :disabled="disableComplete && task.complete"
           class="lv-btn lv-btn-block lv-btn-green"
           @click="submit(false)"
@@ -86,10 +87,6 @@ export default {
       required: true
     },
     commentAnnotation: {
-      required: true
-    },
-    showNote: {
-      type: Boolean,
       required: true
     },
     buttons: {
