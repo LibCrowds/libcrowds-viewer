@@ -4,7 +4,14 @@
     "objective": "Transcribe the title",
     "guidance": "Transcribe the title exactly as you see on the page.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
-    "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x00007e",
+    "target": {
+      "source": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x00007e",
+      "selector": {
+        "conformsTo": "http://www.w3.org/TR/media-frags/",
+        "type": "FragmentSelector",
+        "value": "?xywh=296,620,1711,194"
+      }
+    },
     "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
@@ -25,20 +32,6 @@
           }
         ]
       }
-    },
-    "highlights": [
-      {
-        "x": 296,
-        "y": 620,
-        "width": 1711,
-        "height": 194
-      }
-    ],
-    "bounds": {
-      "x": 96,
-      "y": 620,
-      "width": 2111,
-      "height": 194
     }
   },
   {
@@ -46,7 +39,14 @@
     "objective": "Transcribe the title",
     "guidance": "Transcribe the title exactly as you see on the page.",
     "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
-    "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x00007e",
+    "target": {
+      "source": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x00007e",
+      "selector": {
+        "conformsTo": "http://www.w3.org/TR/media-frags/",
+        "type": "FragmentSelector",
+        "value": "?xywh=303,1500,1708,323"
+      }
+    },
     "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
     "form": {
       "model": {
@@ -67,20 +67,6 @@
           }
         ]
       }
-    },
-    "highlights": [
-      {
-        "x": 303,
-        "y": 1500,
-        "width": 1708,
-        "height": 323
-      }
-    ],
-    "bounds": {
-      "x": 103,
-      "y": 1500,
-      "width": 2108,
-      "height": 323
     }
   },
   {
