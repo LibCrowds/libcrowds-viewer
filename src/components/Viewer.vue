@@ -9,8 +9,6 @@
             :task="currentTask"
             :viewer="viewer"
             :buttons="mergedToolbarButtons"
-            :helpButton="viewerOpts.helpButton"
-            :infoButton="viewerOpts.infoButton"
             @click="handleToolbarBtnClick">
           </toolbar-controls>
 
@@ -166,8 +164,6 @@ export default {
       viewerOpts: {
         id: 'lv-viewer-container',
         crossOriginPolicy: 'Anonymous',
-        helpButton: 'show-help',
-        infoButton: 'show-info',
         panVertical: false,
         panHorizontal: false,
         gestureSettingsMouse: {

@@ -51,7 +51,6 @@ export default {
         const iconName = key in replacementIcons
           ? replacementIcons[key]
           : key
-        console.log(key, iconName)
 
         // Attempt to import the icon
         try {
