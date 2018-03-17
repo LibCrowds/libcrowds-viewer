@@ -39,13 +39,24 @@
       <libcrowds-viewer
         :task-opts="taskOpts"
         :before-submit="beforeSubmit"
+        :toolbar-buttons="extraToolbarButtons"
         @create="logEvent('Annotation Created', arguments)"
         @update="logEvent('Annotation Updated', arguments)"
         @delete="logEvent('Annotation Deleted', arguments)"
         @taskchange="logEvent('Task Changed', arguments)"
-        @submit="logEvent('Task Submitted', arguments)">
+        @submit="logEvent('Task Submitted', arguments)"
+        @toolbarbtnclick="handleToolbarBtnClick">
       </libcrowds-viewer>
 
+      <lv-modal
+        :show="showExampleModal"
+        title="Example Modal"
+        @hide="showExampleModal = false">
+        <p>
+          This is an example of a custom button being used to show a custom
+          modal.
+        </p>
+      </lv-modal>
     </div>
   </div>
 </template>
@@ -61,7 +72,11 @@ export default {
       githubUrl: 'https://github.com/LibCrowds/libcrowds-viewer',
       docsUrl: 'https://libcrowds.gitbooks.io/libcrowds-viewer-docs/content/',
       taskOpts: [],
-      showViewer: false
+      showViewer: false,
+      showExampleModal: false,
+      extraToolbarButtons: {
+        tags: 'Tags'
+      }
     }
   },
 
@@ -99,8 +114,10 @@ export default {
 
     /**
      * Show an example beforeSubmit alert.
+     * @param {Object} taskData
+     *   The task data.
      */
-    beforeSubmit(taskData) {
+    beforeSubmit (taskData) {
       return new Promise((resolve, reject) => {
         if (!taskData.annotations.length) {
           const confirm = window.confirm(
@@ -113,6 +130,17 @@ export default {
         }
         resolve()
       })
+    },
+
+    /**
+     * Handle a toolbar button click.
+     * @param {String} key
+     *   The button key
+     */
+    handleToolbarBtnClick (key) {
+      if (key === 'tags') {
+        this.showExampleModal = true
+      }
     }
   }
 }
