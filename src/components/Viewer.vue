@@ -176,6 +176,7 @@ export default {
       viewerOpts: {
         id: 'lv-viewer-container',
         crossOriginPolicy: 'Anonymous',
+        showNavigationControl: false,
         panVertical: false,
         panHorizontal: false,
         gestureSettingsMouse: {
