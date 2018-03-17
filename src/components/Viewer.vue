@@ -30,7 +30,7 @@
           <lv-modal
             title="Information"
             v-model="showInfoModal"
-            v-if="($slots.info || currentTask) && mergedToolbarButtons.info">
+            v-if="($slots.info || currentTask) && !disableModals">
             <info-modal-content
               :task="currentTask">
               <slot name="info"></slot>
@@ -41,7 +41,7 @@
           <lv-modal
             title="Help"
             v-model="showHelpModal"
-            v-if="($slots.help || currentTask) && mergedToolbarButtons.help">
+            v-if="($slots.help || currentTask) && !disableModals">
             <help-modal-content
               :task="currentTask"
               :buttons="mergedToolbarButtons"
@@ -56,7 +56,7 @@
           <lv-modal
             title="Browse"
             v-model="showBrowseModal"
-            v-if="mergedToolbarButtons.browse && browsable">
+            v-if="mergedToolbarButtons.browse && browsable && !disableModals">
             <browse-modal-content
               :tasks="tasks"
               :disableComplete="disableComplete"
@@ -270,6 +270,10 @@ export default {
     beforeSubmit: {
       type: Function,
       default: () => new Promise((resolve, reject) => resolve())
+    },
+    disableModals: {
+      type: Boolean,
+      default: false
     }
   },
 

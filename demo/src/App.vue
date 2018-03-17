@@ -138,6 +138,7 @@ export default {
       if (key === 'tags') {
         this.showExampleModal = true
       }
+      console.log('Toolbar button clicked', arguments)
     }
   }
 }
