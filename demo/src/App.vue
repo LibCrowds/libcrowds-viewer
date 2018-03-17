@@ -74,7 +74,6 @@
     <div class="viewer-container" v-else-if="showTranscribeViewer">
       <libcrowds-viewer
         :show-related-tasks="true"
-        :buttons="{browse: false}"
         :task-opts="transcribeTaskOpts"
         :before-submit="beforeSubmit"
         @taskchange="handleTaskChange"
@@ -92,7 +91,6 @@
     <div class="viewer-container" v-else-if="customTaskOpts.length">
       <libcrowds-viewer
         :show-related-tasks="true"
-        :buttons="{browse: false}"
         :task-opts="customTaskOpts"
         :before-submit="beforeSubmit"
         @taskchange="handleTaskChange"
@@ -111,7 +109,6 @@
 
 <script>
 import Icon from 'vue-awesome/components/Icon'
-import 'vue-awesome/icons/github'
 import selectTasks from './selectTasks'
 import transcribeTasks from './transcribeTasks'
 
@@ -154,25 +151,37 @@ export default {
         alert(err)
       }
     },
+
     handleTaskChange (oldTask, newTask) {
       console.log('Task changed', oldTask, newTask)
     },
+
     handleCreate (task, annotation) {
       console.log('Annotation created', task, annotation)
     },
+
     handleUpdate (task, annotation) {
       console.log('Annotation updated', task, annotation)
     },
+
     handleDelete (task, annotation) {
       console.log('Annotation deleted', task, annotation)
     },
+
     handleSubmit (task) {
       console.log('Task submitted', task)
       console.log(JSON.stringify(task.annotations, null, 2))
     },
+
     hideViewer () {
       this.showSelectViewer = false
       this.showTranscribeViewer = false
+    },
+
+    demoButtonSlotAlert () {
+      const msg = 'This is an example of an additional button being added ' +
+        'using the button slot'
+      alert(msg)
     }
   }
 }
@@ -181,9 +190,11 @@ export default {
 <style lang="scss">
 @import 'libcrowds-viewer/dist/scss/libcrowds-viewer.scss';
 
+$lv-demo-navbar-height: 50px;
+
 .viewer-container {
   margin: 0;
-  height: 100vh;
+  height: calc(100vh - #{$lv-demo-navbar-height});
 }
 
 /* The styles below apply to the demo homepage only */
@@ -292,7 +303,8 @@ export default {
 
 #lv-demo-navbar {
   background: $lv-sidebar-bg;
-  padding: 0.75em 1.5em;
+  padding: 0 1.5em;
+  height: $lv-demo-navbar-height;
 
   button {
     background: transparent;

@@ -17,7 +17,6 @@ class Task {
     classification,
     form = null,
     highlights = [],
-    liked = false,
     annotations = [],
     complete = false,
     thumbnailUrl = null,
@@ -34,7 +33,6 @@ class Task {
     this.classification = classification
     this.form = form
     this.highlights = highlights
-    this.liked = liked
     this.annotations = annotations
     this.complete = complete
     this.thumbnailUrl = thumbnailUrl

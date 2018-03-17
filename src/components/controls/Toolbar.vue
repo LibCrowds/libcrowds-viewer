@@ -1,38 +1,21 @@
 <template>
   <div class="lv-toolbar" id="lv-main-controls">
     <control-button
-      v-for="button in toolbarButtons"
-      :key="button.id"
-      :id="button.id"
+      v-for="(button, index) in toolbarButtons"
+      :key="index"
       :tooltip="button.tooltip"
-      :callback="button.callback"
-      position="bottom"
-      hint-position="bottom">
-      <icon :name="button.icon" :class="button.iconClass" scale="1.35"></icon>
+      :callback="button.callback">
+      <icon :name="button.icon"></icon>
     </control-button>
   </div>
 </template>
 
 <script>
 import Icon from 'vue-awesome/components/Icon'
-import 'vue-awesome/icons/expand'
-import 'vue-awesome/icons/question-circle'
-import 'vue-awesome/icons/info-circle'
-import 'vue-awesome/icons/thumbs-up'
-import 'vue-awesome/icons/share-alt'
-import 'vue-awesome/icons/eye'
-import 'vue-awesome/icons/comments'
-import 'vue-awesome/icons/download'
 import Task from '@/model/Task'
 import ControlButton from '@/components/controls/ControlButton'
 
 export default {
-  data () {
-    return {
-      imgLink: null
-    }
-  },
-
   props: {
     task: {
       type: Task,
@@ -54,111 +37,51 @@ export default {
   },
 
   computed: {
-    // We're handling the zoom and fullscreen functionality ourselves here
-    // as other controls rely on the current task being passed in and therefore
-    // this component could be rendered after the viewer and the default method
-    // of passing the button IDs won't work.
     toolbarButtons () {
-      let tbButtons = []
+      // Declare different icons for some of the default button names
+      const replacementIcons = {
+        help: 'question-circle',
+        info: 'info-circle',
+        browse: 'eye',
+        share: 'share-alt',
+        fullscreen: 'expand'
+      }
 
-      if (this.buttons.fullscreen) {
-        tbButtons.push({
-          tooltip: this.buttons.fullscreen,
-          icon: 'expand',
+      return Object.keys(this.buttons).map(key => {
+        const iconName = key in replacementIcons
+          ? replacementIcons[key]
+          : key
+        console.log(key, iconName)
+
+        // Attempt to import the icon
+        try {
+          require(`vue-awesome/icons/${iconName}`)
+        } catch (err) {
+          // If it doesn't exist, don't load the button
+          console.warn(`Icon not found: vue-awesome/icons/${iconName}`)
+          return null
+        }
+
+        return {
+          tooltip: this.buttons[key],
+          icon: iconName,
           callback: () => {
-            this.$emit('fullscreenclicked')
+            this.$emit('click', key)
           }
-        })
-      }
-
-      if (this.buttons.help) {
-        tbButtons.push({
-          tooltip: this.buttons.help,
-          icon: 'question-circle',
-          callback: () => {
-            this.$emit('helpclicked')
-          }
-        })
-      }
-
-      if (this.buttons.info) {
-        tbButtons.push({
-          tooltip: this.buttons.info,
-          icon: 'info-circle',
-          callback: () => {
-            this.$emit('infoclicked')
-          }
-        })
-      }
-
-      if (this.buttons.browse) {
-        tbButtons.push({
-          tooltip: this.buttons.browse,
-          icon: 'eye',
-          callback: () => {
-            this.$emit('browseclicked')
-          }
-        })
-      }
-
-      if (this.buttons.like) {
-        tbButtons.push({
-          tooltip: !this.task.liked
-            ? this.buttons.like[0]
-            : this.buttons.like[1],
-          icon: 'thumbs-up',
-          iconClass: this.task.liked ? 'active' : null,
-          callback: () => {
-            this.$emit('likeclicked', this.task, !this.task.liked)
-          }
-        })
-      }
-
-      if (this.buttons.share) {
-        let tooltip = this.buttons.share
-        tbButtons.push({
-          id: 'lv-share-btn',
-          tooltip: tooltip,
-          icon: 'share-alt',
-          callback: () => {
-            this.$emit('shareclicked')
-          }
-        })
-      }
-
-      if (this.buttons.download) {
-        tbButtons.push({
-          tooltip: this.buttons.download,
-          id: 'lv-download-btn',
-          icon: 'download',
-          callback: this.download
-        })
-      }
-
-      return tbButtons
-    }
-  },
-
-  methods: {
-    /**
-     * Download the current canvas.
-     */
-    download () {
-      const filename = 'task.png'
-      const canvas = this.viewer.drawer.canvas
-      const data = canvas.toDataURL()
-      const link = document.createElement('a')
-      link.setAttribute('type', 'hidden')
-      link.download = filename
-      link.href = data
-      document.body.appendChild(link)
-
-      if (navigator.msSaveBlob) { // IE
-        navigator.msSaveBlob(canvas.msToBlob(), filename)
-      } else {
-        link.click()
-      }
+        }
+      }).filter(btn => (btn !== null))
     }
   }
 }
 </script>
+
+<style lang="scss">
+#lv-main-controls {
+  .fa-icon {
+    width: auto;
+    font-size: 1.35em;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+</style>

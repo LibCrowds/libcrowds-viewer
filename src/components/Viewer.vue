@@ -8,15 +8,10 @@
             v-if="currentTask"
             :task="currentTask"
             :viewer="viewer"
-            :buttons="mergedButtons"
+            :buttons="mergedToolbarButtons"
             :helpButton="viewerOpts.helpButton"
             :infoButton="viewerOpts.infoButton"
-            @helpclicked="showHelpModal = true"
-            @infoclicked="showInfoModal = true"
-            @browseclicked="showBrowseModal = true"
-            @shareclicked="showShareModal = true"
-            @likeclicked="emitTaskLiked"
-            @fullscreenclicked="toggleFullScreen">
+            @click="handleToolbarBtnClick">
           </toolbar-controls>
 
           <pan-controls
@@ -30,7 +25,7 @@
           </zoom-controls>
 
           <info-modal
-            v-if="($slots.info || currentTask) && mergedButtons.info"
+            v-if="($slots.info || currentTask) && mergedToolbarButtons.info"
             :task="currentTask"
             :show="showInfoModal"
             @hide="showInfoModal = false">
@@ -38,9 +33,9 @@
           </info-modal>
 
           <help-modal
-            v-if="($slots.help || currentTask) && mergedButtons.help"
+            v-if="($slots.help || currentTask) && mergedToolbarButtons.help"
             :task="currentTask"
-            :buttons="mergedButtons"
+            :buttons="mergedToolbarButtons"
             :show="showHelpModal"
             :browsable="browsable"
             :selections-editable="selectionsEditable"
@@ -50,14 +45,14 @@
           </help-modal>
 
           <share-modal
-            v-if="$slots.share && mergedButtons.share"
+            v-if="$slots.share && mergedToolbarButtons.share"
             :show="showShareModal"
             @hide="showShareModal = false">
             <slot name="share"></slot>
           </share-modal>
 
           <browse-modal
-            v-if="mergedButtons.browse && browsable"
+            v-if="mergedToolbarButtons.browse && browsable"
             :tasks="tasks"
             :show="showBrowseModal"
             :disableComplete="disableComplete"
@@ -106,7 +101,7 @@
         :commentAnnotation="commentAnnotation"
         :disableComplete="disableComplete"
         :confirmOnSubmit="confirmOnSubmit"
-        :buttons="mergedButtons"
+        :buttons="mergedSidebarButtons"
         :display-xs="currentTask.mode === 'transcribe'"
         @noteupdated="updateNote"
         @submit="submitTask"
@@ -158,6 +153,7 @@ import Selector from '@/components/Selector'
 import Task from '@/model/Task'
 import Annotator from '@/model/Annotator'
 import getRectFromFragment from '@/utils/getRectFromFragment'
+import downloadCurrentCanvas from '@/utils/downloadCurrentCanvas'
 import toggleFullScreen from '@/utils/toggleFullScreen'
 import drawOverlay from '@/utils/drawOverlay'
 import deleteOverlay from '@/utils/deleteOverlay'
@@ -185,16 +181,17 @@ export default {
           dblClickToZoom: false
         }
       },
-      defaultButtons: {
+      defaultToolbarButtons: {
         fullscreen: 'Fullscreen',
         help: 'Help',
         info: 'Details',
         browse: 'Browse Tasks',
-        like: ['Like', 'Unlike'],
         share: 'Share',
-        download: 'Download',
+        download: 'Download'
+      },
+      defaultSidebarButtons: {
         note: 'Add a note',
-        submit: 'Save'
+        submit: 'Submit'
       },
       showInfoModal: false,
       showHelpModal: this.showHelpOnMount,
@@ -248,9 +245,13 @@ export default {
       type: Boolean,
       default: false
     },
-    buttons: {
+    toolbarButtons: {
       type: Object,
       default: () => ({}) // Defaults set in defaultToolbarButtons
+    },
+    sidebarButtons: {
+      type: Object,
+      default: () => ({}) // Defaults set in defaultSidebarButtons
     },
     selectionsEditable: {
       type: Boolean,
@@ -316,13 +317,9 @@ export default {
       )
     },
 
-    mergedButtons () {
-      let merged = JSON.parse(JSON.stringify(this.defaultButtons))
-      for (let key in merged) {
-        if (this.buttons.hasOwnProperty(key)) {
-          merged[key] = this.buttons[key]
-        }
-      }
+    mergedToolbarButtons () {
+      let merged = JSON.parse(JSON.stringify(this.defaultToolbarButtons))
+      merged = Object.assign(this.toolbarButtons, merged)
       if (!this.browsable) {
         merged.browse = false
       }
@@ -330,26 +327,15 @@ export default {
         merged.share = false
       }
       return merged
+    },
+
+    mergedSidebarButtons () {
+      let defaults = JSON.parse(JSON.stringify(this.defaultSidebarButtons))
+      return Object.assign(this.sidebarButtons, defaults)
     }
   },
 
   methods: {
-    /**
-     * Emit the taskliked event.
-     */
-    emitTaskLiked (task, status) {
-      task.liked = status
-      this.$emit('taskliked', task)
-    },
-
-    /**
-     * Toggle fullscreen mode.
-     */
-    toggleFullScreen () {
-      const el = this.$refs.container
-      toggleFullScreen(el)
-    },
-
     /**
      * Draw overlay and add tag when a selection is made.
      * @param {Task} task
@@ -730,6 +716,29 @@ export default {
         const vpRect = this.viewer.viewport.imageToViewportRectangle(imgRect)
         this.viewer.viewport.fitBounds(vpRect)
       }
+    },
+
+    /**
+     * Handle a toolbar button being clicked.
+     * @param {String} name
+     *   The name of the button.
+     */
+    handleToolbarBtnClick (name) {
+      if (name === 'help') {
+        this.showHelpModal = true
+      } else if (name === 'info') {
+        this.showInfoModal = true
+      } else if (name === 'browse') {
+        this.showBrowseModal = true
+      } else if (name === 'share') {
+        this.showShareModal = true
+      } else if (name === 'fullscreen') {
+        toggleFullScreen(this.$refs.container)
+      } else if (name === 'download') {
+        downloadCurrentCanvas(this.viewer)
+      }
+
+      this.$emit('toolbarbtnclick', name)
     }
   },
 
