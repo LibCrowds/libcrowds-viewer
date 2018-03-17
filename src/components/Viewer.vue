@@ -314,7 +314,7 @@ export default {
 
     mergedToolbarButtons () {
       let merged = JSON.parse(JSON.stringify(this.defaultToolbarButtons))
-      merged = Object.assign(this.toolbarButtons, merged)
+      merged = Object.assign(merged, this.toolbarButtons)
       if (!this.browsable) {
         merged.browse = false
       }
