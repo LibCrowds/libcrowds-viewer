@@ -21,7 +21,7 @@
           <icon name="info-circle"></icon>View information about the item
         </li>
         <li v-if="buttons.browse">
-          <icon name="list"></icon>Browse Tasks
+          <icon name="eye"></icon>Browse Tasks
         </li>
         <li v-if="buttons.share">
           <icon name="share-alt"></icon>Copy and share the image URL
@@ -98,7 +98,7 @@ import 'vue-awesome/icons/arrow-circle-left'
 import 'vue-awesome/icons/arrow-circle-right'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
-import 'vue-awesome/icons/list'
+import 'vue-awesome/icons/eye'
 import 'vue-awesome/icons/download'
 import ModalBase from '@/components/modals/Base'
 import Task from '@/model/Task'
