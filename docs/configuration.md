@@ -28,7 +28,9 @@ All of the following properties, apart from `task-opts`, are optional.
 
 ## Buttons
 
-To hide a particular button set its property to `false`, or to change its tooltip enter a String.
+The buttons object contains the following default options. To hide a particular
+button set its property to `false`. To change a button's tooltip enter a
+String.
 
 | Property              | Type              | Default            | Description                     |
 |-----------------------|-------------------|--------------------|---------------------------------|
@@ -39,16 +41,13 @@ To hide a particular button set its property to `false`, or to change its toolti
 | share                 | Boolean or String | 'Share'            | The share button                |
 | download              | Boolean or String | 'Download'         | The download button             |
 | note                  | Boolean or String | 'Add a note'       | The note button                 |
-| submit                | Boolean or String | 'Submit'           | The note button                 |
+| submit                | Boolean or String | 'Submit'           | The submit button               |
 
-Any key-value pairs added to the `buttons` object that are not listed above will be rendered as additional
-buttons. The key will be used as the name of the icon and the value as the tooltip text. When any additional
-buttons are clicked the **toolbarclick** event will be emited with the key as the only argument. You will also
-need to import your required [Font Awesome](https://fontawesome.com/v4.7.0/cheatsheet/) icon by name, like so:
-
-```
-import vue-awesome/icons/your-icon
-```
+Any key-value pairs added to the `buttons` object that are not listed above
+will be rendered as additional buttons. The key should be the name of a
+[Font Awesome](https://fontawesome.com/v4.7.0/cheatsheet/) icon, whereas the
+value will be used as the tooltip text. When the button is clicked
+the **toolbarclick** event will be emited with the key as the only argument.
 
 ## Tasks
 
