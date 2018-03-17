@@ -42,13 +42,6 @@
             <slot name="help"></slot>
           </help-modal>
 
-          <share-modal
-            v-if="$slots.share && mergedToolbarButtons.share"
-            :show="showShareModal"
-            @hide="showShareModal = false">
-            <slot name="share"></slot>
-          </share-modal>
-
           <browse-modal
             v-if="mergedToolbarButtons.browse && browsable"
             :tasks="tasks"
@@ -138,7 +131,6 @@ import 'vue-awesome/icons/chevron-right'
 import OpenSeadragon from 'openseadragon'
 import InfoModal from '@/components/modals/Info'
 import HelpModal from '@/components/modals/Help'
-import ShareModal from '@/components/modals/Share'
 import BrowseModal from '@/components/modals/Browse'
 import ToolbarControls from '@/components/controls/Toolbar'
 import PanControls from '@/components/controls/Pan'
@@ -181,7 +173,6 @@ export default {
         help: 'Help',
         info: 'Details',
         browse: 'Browse Tasks',
-        share: 'Share',
         download: 'Download'
       },
       defaultSidebarButtons: {
@@ -190,7 +181,6 @@ export default {
       },
       showInfoModal: false,
       showHelpModal: this.showHelpOnMount,
-      showShareModal: false,
       showBrowseModal: false,
       viewerDisabled: false,
       tasks: [],
@@ -265,7 +255,6 @@ export default {
   components: {
     InfoModal,
     HelpModal,
-    ShareModal,
     BrowseModal,
     ToolbarControls,
     PanControls,
@@ -313,9 +302,6 @@ export default {
       merged = Object.assign(merged, this.toolbarButtons)
       if (!this.browsable) {
         merged.browse = false
-      }
-      if (!this.$slots.share) {
-        merged.share = false
       }
       return merged
     },
@@ -721,8 +707,6 @@ export default {
         this.showInfoModal = true
       } else if (name === 'browse') {
         this.showBrowseModal = true
-      } else if (name === 'share') {
-        this.showShareModal = true
       } else if (name === 'fullscreen') {
         toggleFullScreen(this.$refs.container)
       } else if (name === 'download') {

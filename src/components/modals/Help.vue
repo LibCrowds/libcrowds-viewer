@@ -23,9 +23,6 @@
         <li v-if="buttons.browse">
           <icon name="eye"></icon>Browse Tasks
         </li>
-        <li v-if="buttons.share">
-          <icon name="share-alt"></icon>Copy and share the image URL
-        </li>
         <li v-if="buttons.download">
           <icon name="download"></icon>Download this image
         </li>
