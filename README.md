@@ -85,5 +85,9 @@ npm run demo:deploy
 
 # test
 npm run test
+
+# serve docs
+gitbook install
+gitbook serve
 ```
 
