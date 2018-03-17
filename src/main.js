@@ -3,14 +3,17 @@ import 'es6-promise/auto'
 import 'es6-object-assign/auto'
 
 import Viewer from './components/Viewer.vue'
+import ModalBase from './components/modals/Base.vue'
 
 export default {
   install (Vue) {
-    if (this.installed) {
+    if (this._libcrowds_viewer_installed) {
       return
     }
 
-    this.installed = true
+    this._libcrowds_viewer_installed = true
+
+    Vue.component('lv-modal', ModalBase)
 
     Vue.component('libcrowds-viewer', Viewer)
   }

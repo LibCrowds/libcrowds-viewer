@@ -6,7 +6,7 @@ Generate Select Annotations by setting the task options `type` to  `select`, see
 
 Note that the `tag` property is required when in `select` mode.
 
-### Example task
+#### Example task
 
 ```json
 {
@@ -19,7 +19,7 @@ Note that the `tag` property is required when in `select` mode.
 }
 ```
 
-### Example annotation
+#### Example annotation
 
 ```jsonld
 {

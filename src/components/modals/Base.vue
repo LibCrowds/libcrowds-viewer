@@ -1,6 +1,6 @@
 <template>
   <transition name="lv-modal-fade">
-    <div class="lv-modal" v-show="show">
+    <div class="lv-modal" v-show="value">
         <div class="lv-modal-mask" @click="hide">
           <div class="lv-modal-wrapper">
             <div class="lv-modal-container" @click.stop>
@@ -35,19 +35,22 @@
 <script>
 export default {
   props: {
-    title: String,
-    show: {
+    value: {
       type: Boolean,
-      requried: true
+      default: false
+    },
+    title: {
+      type: String,
+      default: ''
     }
   },
 
   methods: {
     /**
-     * Emit the hide event.
+     * Emit the input event with false to hide the modal.
      */
     hide () {
-      this.$emit('hide')
+      this.$emit('input', false)
     },
 
     /**

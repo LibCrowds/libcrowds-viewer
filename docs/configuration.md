@@ -27,6 +27,7 @@ All of the following properties, apart from `task-opts`, are optional.
 | browsable             | Boolean  | true          | Allow browsing back and forth between tasks                                                           |
 | show-help-on-mount    | Boolean  | false         | Show the help modal when the component is mounted                                                     |
 | before-submit         | Promise  | Empty promise | A function that recieves the task data as an argument and should return a promise that resolves if the submission should go ahead and rejects otherwise |
+| disable-modals        | Boolean  | false         | Disable display of the default modals                                                                 |
 
 
 ## Toolbar Buttons

@@ -4,7 +4,7 @@ Generate Comment Annotations by setting the viewer property `show-note` to  `tru
 
 Comment Annotations are intended for comments about the image, as opposed to specific content on the image.
 
-### Example annotation
+#### Example annotation
 
 ```jsonld
 {

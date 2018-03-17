@@ -4,6 +4,8 @@
     <main class="lv-container">
       <div id="lv-viewer-wrapper">
         <div id="hud" ref="hud">
+
+          <!-- Toolbar controls -->
           <toolbar-controls
             v-if="currentTask"
             :task="currentTask"
@@ -12,45 +14,57 @@
             @click="handleToolbarBtnClick">
           </toolbar-controls>
 
+          <!-- Pan controls -->
           <pan-controls
             :viewer="viewer"
             :panBy="panBy">
           </pan-controls>
 
+          <!-- Zoom controls -->
           <zoom-controls
             :viewer="viewer"
             :zoomBy="zoomBy">
           </zoom-controls>
 
-          <info-modal
-            v-if="($slots.info || currentTask) && mergedToolbarButtons.info"
-            :task="currentTask"
-            :show="showInfoModal"
-            @hide="showInfoModal = false">
-            <slot name="info"></slot>
-          </info-modal>
+          <!-- Info modal -->
+          <lv-modal
+            title="Information"
+            v-model="showInfoModal"
+            v-if="($slots.info || currentTask) && !disableModals">
+            <info-modal-content
+              :task="currentTask">
+              <slot name="info"></slot>
+            </info-modal-content>
+          </lv-modal>
 
-          <help-modal
-            v-if="($slots.help || currentTask) && mergedToolbarButtons.help"
-            :task="currentTask"
-            :buttons="mergedToolbarButtons"
-            :show="showHelpModal"
-            :browsable="browsable"
-            :selections-editable="selectionsEditable"
-            :disableComplete="disableComplete"
-            @hide="showHelpModal = false">
-            <slot name="help"></slot>
-          </help-modal>
+          <!-- Help modal -->
+          <lv-modal
+            title="Help"
+            v-model="showHelpModal"
+            v-if="($slots.help || currentTask) && !disableModals">
+            <help-modal-content
+              :task="currentTask"
+              :buttons="mergedToolbarButtons"
+              :browsable="browsable"
+              :selections-editable="selectionsEditable"
+              :disableComplete="disableComplete">
+              <slot name="help"></slot>
+            </help-modal-content>
+          </lv-modal>
 
-          <browse-modal
-            v-if="mergedToolbarButtons.browse && browsable"
-            :tasks="tasks"
-            :show="showBrowseModal"
-            :disableComplete="disableComplete"
-            @hide="showBrowseModal = false"
-            @taskclick="setCurrentTask">
-          </browse-modal>
+          <!-- Browse modal -->
+          <lv-modal
+            title="Browse"
+            v-model="showBrowseModal"
+            v-if="mergedToolbarButtons.browse && browsable && !disableModals">
+            <browse-modal-content
+              :tasks="tasks"
+              :disableComplete="disableComplete"
+              @taskclick="setCurrentTask">
+            </browse-modal-content>
+          </lv-modal>
 
+          <!-- Browse buttons -->
           <button
             v-if="browsable"
             :disabled="previousBtnDisabled"
@@ -67,14 +81,18 @@
             @click="nextTask">
             <icon name="chevron-right" scale="1.5"></icon>
           </button>
+
         </div>
 
+        <!-- Viewer -->
         <div :id="viewerOpts.id"></div>
 
+        <!-- Viewer overlay -->
         <transition name="fade">
           <div id="lv-viewer-disabled-overlay" v-if="viewerDisabled"></div>
         </transition>
 
+        <!-- Area selector -->
         <selector
           v-if="selectorEnabled"
           :viewer="viewer"
@@ -85,6 +103,7 @@
 
       </div>
 
+      <!-- Sidebar -->
       <base-sidebar
         v-if="currentTask"
         :task="currentTask"
@@ -118,6 +137,7 @@
           @inputfocus="onTranscribeInputFocus"
           @inputblur="onTranscribeInputBlur">
         </transcribe-sidebar-item>
+
       </base-sidebar>
     </main>
 
@@ -129,9 +149,9 @@ import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
 import OpenSeadragon from 'openseadragon'
-import InfoModal from '@/components/modals/Info'
-import HelpModal from '@/components/modals/Help'
-import BrowseModal from '@/components/modals/Browse'
+import InfoModalContent from '@/components/modals/content/Info'
+import HelpModalContent from '@/components/modals/content/Help'
+import BrowseModalContent from '@/components/modals/content/Browse'
 import ToolbarControls from '@/components/controls/Toolbar'
 import PanControls from '@/components/controls/Pan'
 import ZoomControls from '@/components/controls/Zoom'
@@ -156,6 +176,7 @@ export default {
       viewerOpts: {
         id: 'lv-viewer-container',
         crossOriginPolicy: 'Anonymous',
+        showNavigationControl: false,
         panVertical: false,
         panHorizontal: false,
         gestureSettingsMouse: {
@@ -249,13 +270,17 @@ export default {
     beforeSubmit: {
       type: Function,
       default: () => new Promise((resolve, reject) => resolve())
+    },
+    disableModals: {
+      type: Boolean,
+      default: false
     }
   },
 
   components: {
-    InfoModal,
-    HelpModal,
-    BrowseModal,
+    InfoModalContent,
+    HelpModalContent,
+    BrowseModalContent,
     ToolbarControls,
     PanControls,
     ZoomControls,

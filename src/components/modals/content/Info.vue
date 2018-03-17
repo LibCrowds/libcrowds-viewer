@@ -1,32 +1,29 @@
 <template>
   <div id="lv-info-modal">
-    <modal-base :show="show" title="Information" @hide="$emit('hide')">
-      <slot>
-        <span v-if="hasInfo">
-          <ul class="lv-modal-list">
-            <li v-for="item in metadata" :key="item.label">
-              <strong>{{ item.label }}:</strong>
-              <span v-html="item.value"></span></li>
-          </ul>
-          <div
-            v-if="logo || attribution || license"
-            id="lv-attribution-details">
-            <img v-if="logo" :src="logo">
-            <p v-if="attribution" v-html="attribution"></p>
-            <a v-if="license" :href="license" v-html="license"></a>
-          </div>
-        </span>
-        <span v-else>
-          <p class="center">No task info available</p>
-        </span>
-      </slot>
-    </modal-base>
+    <slot>
+      <span v-if="hasInfo">
+        <ul class="lv-modal-list">
+          <li v-for="item in metadata" :key="item.label">
+            <strong>{{ item.label }}:</strong>
+            <span v-html="item.value"></span></li>
+        </ul>
+        <div
+          v-if="logo || attribution || license"
+          id="lv-attribution-details">
+          <img v-if="logo" :src="logo">
+          <p v-if="attribution" v-html="attribution"></p>
+          <a v-if="license" :href="license" v-html="license"></a>
+        </div>
+      </span>
+      <span v-else>
+        <p class="center">No task info available</p>
+      </span>
+    </slot>
   </div>
 </template>
 
 <script>
 import Task from '@/model/Task'
-import ModalBase from '@/components/modals/Base'
 
 export default {
   data () {
@@ -39,18 +36,10 @@ export default {
   },
 
   props: {
-    show: {
-      type: Boolean,
-      requried: true
-    },
     task: {
       type: Task,
       required: true
     }
-  },
-
-  components: {
-    ModalBase
   },
 
   computed: {
@@ -131,3 +120,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+#lv-info-modal-content {
+  #lv-attribution-details {
+    text-align: center;
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+</style>
