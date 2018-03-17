@@ -9,7 +9,9 @@ export default {
     if (this.installed) {
       return
     }
+
     this.installed = true
+
     Vue.component('libcrowds-viewer', Viewer)
   }
 }
