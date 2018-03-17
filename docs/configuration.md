@@ -4,6 +4,7 @@ LibCrowds Viewer provides a range of configuration options that are passed as
 properties. Most of these are optional but allow for more flexible
 implementations where required.
 
+
 ## Viewer
 
 All of the following properties, apart from `task-opts`, are optional.
@@ -20,13 +21,15 @@ All of the following properties, apart from `task-opts`, are optional.
 | show-related-tasks    | Boolean  | false         | Show all tasks related to the same image                                                              |
 | next-on-submit        | Object   | true          | Move to the next task on after submission                                                             |
 | confirm-on-submit     | Boolean  | false         | Show a confirmation box on submission                                                                 |
-| buttons               | Object   | See below     | Button configuration details (see [Buttons](configuration.md#buttons)\)                               |
+| toolbar-buttons       | Object   | See below     | Toolbar button configuration details (see [Toolbar Buttons](configuration.md#toolbar-buttons)\)       |
+| sidebar-buttons       | Object   | See below     | Sidebar button configuration details (see [Sidebar Buttons](configuration.md#sidebar-buttons)\)       |
 | selections-editable   | Boolean  | true          | Allow the editing of selections from the sidebar                                                      |
 | browsable             | Boolean  | true          | Allow browsing back and forth between tasks                                                           |
 | show-help-on-mount    | Boolean  | false         | Show the help modal when the component is mounted                                                     |
 | before-submit         | Promise  | Empty promise | A function that recieves the task data as an argument and should return a promise that resolves if the submission should go ahead and rejects otherwise |
 
-## Buttons
+
+## Toolbar Buttons
 
 The buttons object contains the following default options. To hide a particular
 button set its property to `false`. To change a button's tooltip enter a
@@ -40,14 +43,25 @@ String.
 | browse                | Boolean or String | 'Browse Tasks'     | The browse tasks button         |
 | share                 | Boolean or String | 'Share'            | The share button                |
 | download              | Boolean or String | 'Download'         | The download button             |
-| note                  | Boolean or String | 'Add a note'       | The note button                 |
-| submit                | Boolean or String | 'Submit'           | The submit button               |
 
 Any key-value pairs added to the `buttons` object that are not listed above
 will be rendered as additional buttons. The key should be the name of a
 [Font Awesome](https://fontawesome.com/v4.7.0/cheatsheet/) icon, whereas the
 value will be used as the tooltip text. When the button is clicked
-the **toolbarclick** event will be emited with the key as the only argument.
+the **toolbarbtnclick** event will be emited with the key as the only argument.
+
+
+## Sidebar Buttons
+
+The buttons object contains the following default options. To hide a particular
+button set its property to `false`. To change a button's text enter a
+String.
+
+| Property              | Type              | Default            | Description                     |
+|-----------------------|-------------------|--------------------|---------------------------------|
+| note                  | Boolean or String | 'Add a note'       | The note button                 |
+| submit                | Boolean or String | 'Submit'           | The submit button               |
+
 
 ## Tasks
 
@@ -73,7 +87,9 @@ objects are passed to the viewer via `task-opts`.
 
 See the [Annotations](annotations/README.md) section for some examples of using the above options to configure tasks.
 
+
 ## Forms
+
 In `transcribe` mode, the form can be configured with the following properties.
 
 | Property        | Type    | Attributes | Description                                                            |
@@ -82,6 +98,7 @@ In `transcribe` mode, the form can be configured with the following properties.
 | schema          | Object  |            | See [vue-form-generator](https://github.com/icebob/vue-form-generator) |
 | classifications | Object  |  optional  | A SpecificResource IRI for each model key                              |
 | fragments       | Object  |  optional  | A fragment to highlight for each model key                             |
+
 
 ## Slots
 
@@ -92,6 +109,7 @@ The following slots are available.
 | share  | Content for the share model                                      |
 | help   | Slots in above the viewer controls section in the help model     |
 | info   | Content for the info modal (overwrites `task.manifest`)          |
+
 
 ## Styles
 
