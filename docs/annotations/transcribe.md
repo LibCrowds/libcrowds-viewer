@@ -7,7 +7,7 @@ Generate Transcribe Annotations by setting the task options `type` to `transcrib
 
 Note that the `form` task property is required when in `transcribe` mode. The `tag` and `classification` task properties are ignored and are instead taken from `form.model` and `form.classification`, respectively.
 
-### Example task
+#### Example task
 
 ```json
 {
@@ -44,7 +44,7 @@ Note that the `form` task property is required when in `transcribe` mode. The `t
 }
 ```
 
-### Example annotation
+#### Example annotation
 
 ```jsonld
 {
