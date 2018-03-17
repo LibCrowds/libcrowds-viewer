@@ -72,14 +72,14 @@ objects are passed to the viewer via `task-opts`.
 |----------------|-------------------|------------|----------------------------------------------------------------------------------------|
 | mode           | String            |            | The task more (see [Annotation Modes](annotations/README.md))                          |
 | tileSource     | String or Object  |            | The tile source specifier (see [Tile Sources](tile_sources.md))                        |
-| target         | String            |            | The target of the annotation (see [Data Model](data_model.md))                         |
+| target         | String or Object  |            | The target of the annotation (see [Data Model](data_model.md))                         |
 | manifest       | String            |  optional  | A IIIF manifest URI used to fill the info modal                                        |
 | objective      | String            |  optional  | The main objective                                                                     |
 | guidance       | String            |  optional  | Additional guidance                                                                    |
 | thumbnailUrl   | String            |  optional  | URL for a thumbnail image to use in the browse modal                                   |
 | id             | String            |  optional  | Task identifier                                                                        |
 | form           | Object            |  optional  | Form properties (see [Forms](configuration.md#forms))                                  |
-| highlights     | Array             |  optional  | Coordinates identifying regions of the image to highlight                              |
+| highlights     | Array             |  optional  | Coordinates identifying regions of the image to highlight. This can also be achived by passing a `FragmentSelector` as part of the `target` object, see the [Data Model](data_model.md) |
 | tag            | String            |  optional  | A tag                                                                                  |
 | classification | String            |  optional  | A Semantic Tag (e.g. [http://purl.org/dc/terms/title](http://purl.org/dc/terms/title)) |
 | complete       | Boolean           |  optional  | Mark the task as complete                                                              |

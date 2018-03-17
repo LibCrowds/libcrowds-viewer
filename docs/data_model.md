@@ -20,12 +20,13 @@ type of task.
 
 ## target
 
-The target is specified via the `target` property of each
+The annotation target is specified via the `target` property of each
 [task configuration](configuration.md#tasks).
 
-The String passed as the `target` will be used directly, unless a specific
-fragment of the image is selected, in which case the target will be specified
-with the following properties.
+If a String is passed as the task `target` and a specific fragment is
+subsequently selected, as is the case in select mode, then the target will be
+modified according to the properties below.
+
 
 | Property            | Type             | Description                                                                                                                       |
 |---------------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------|

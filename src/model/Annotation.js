@@ -73,7 +73,7 @@ class Annotation {
   }
 
   /**
-   * Add a tag to the Body and set the fragement selector, if provided.
+   * Add a tag to the Body and set the fragment selector, if provided.
    * @param {String} value
    *   A plain text value.
    * @param {String} fragment
