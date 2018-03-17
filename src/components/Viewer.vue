@@ -404,6 +404,24 @@ export default {
       for (let i = 0; i < task.highlights.length; i++) {
         this.drawHighlight(task.highlights[i], `highlight-${i}`)
       }
+
+      if (this.targetHasFragmentSelector(task)) {
+        const rect = getRectFromFragment(task.target.selector.value)
+        this.drawHighlight(rect, `highlight-${task.highlights.length}`)
+      }
+    },
+
+    /**
+     * Check if a task's target includes a FragmentSelector.
+     * @param {Task} task
+     *   The task.
+     */
+    targetHasFragmentSelector (task) {
+      return (
+        typeof task.target === 'object' &&
+        task.target.hasOwnProperty('selector') &&
+        task.target.selector.type === 'FragmentSelector'
+      )
     },
 
     /**
@@ -708,13 +726,21 @@ export default {
      *   The task.
      */
     fitToBounds (task) {
+      let imgRect = null
       if (task.bounds) {
-        const imgRect = new OpenSeadragon.Rect(
+        imgRect = new OpenSeadragon.Rect(
           task.bounds.x,
           task.bounds.y,
           task.bounds.width,
           task.bounds.height
         )
+      } else if (this.targetHasFragmentSelector(task)) {
+        imgRect = getRectFromFragment(task.target.selector.value)
+        imgRect.x = imgRect.x - 200
+        imgRect.width = imgRect.width + 400
+      }
+
+      if (imgRect) {
         const vpRect = this.viewer.viewport.imageToViewportRectangle(imgRect)
         this.viewer.viewport.fitBounds(vpRect)
       }
