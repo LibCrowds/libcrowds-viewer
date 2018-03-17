@@ -24,7 +24,6 @@
 
 <script>
 import Task from '@/model/Task'
-import ModalBase from '@/components/modals/Base'
 
 export default {
   data () {
@@ -41,10 +40,6 @@ export default {
       type: Task,
       required: true
     }
-  },
-
-  components: {
-    ModalBase
   },
 
   computed: {

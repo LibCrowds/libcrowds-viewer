@@ -27,7 +27,7 @@
           </zoom-controls>
 
           <!-- Info modal -->
-          <modal-base
+          <lv-modal
             title="Information"
             v-model="showInfoModal"
             v-if="($slots.info || currentTask) && mergedToolbarButtons.info">
@@ -35,10 +35,10 @@
               :task="currentTask">
               <slot name="info"></slot>
             </info-modal-content>
-          </modal-base>
+          </lv-modal>
 
           <!-- Help modal -->
-          <modal-base
+          <lv-modal
             title="Help"
             v-model="showHelpModal"
             v-if="($slots.help || currentTask) && mergedToolbarButtons.help">
@@ -50,10 +50,10 @@
               :disableComplete="disableComplete">
               <slot name="help"></slot>
             </help-modal-content>
-          </modal-base>
+          </lv-modal>
 
           <!-- Browse modal -->
-          <modal-base
+          <lv-modal
             title="Browse"
             v-model="showBrowseModal"
             v-if="mergedToolbarButtons.browse && browsable">
@@ -62,7 +62,7 @@
               :disableComplete="disableComplete"
               @taskclick="setCurrentTask">
             </browse-modal-content>
-          </modal-base>
+          </lv-modal>
 
           <!-- Browse buttons -->
           <button
@@ -149,7 +149,6 @@ import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/chevron-left'
 import 'vue-awesome/icons/chevron-right'
 import OpenSeadragon from 'openseadragon'
-import ModalBase from '@/components/modals/Base'
 import InfoModalContent from '@/components/modals/content/Info'
 import HelpModalContent from '@/components/modals/content/Help'
 import BrowseModalContent from '@/components/modals/content/Browse'
@@ -274,7 +273,6 @@ export default {
   },
 
   components: {
-    ModalBase,
     InfoModalContent,
     HelpModalContent,
     BrowseModalContent,

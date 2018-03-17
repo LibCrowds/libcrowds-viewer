@@ -13,7 +13,8 @@ export default {
 
     this._libcrowds_viewer_installed = true
 
-    Vue.component('libcrowds-viewer', Viewer)
     Vue.component('lv-modal', ModalBase)
+
+    Vue.component('libcrowds-viewer', Viewer)
   }
 }
