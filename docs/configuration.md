@@ -41,7 +41,6 @@ String.
 | help                  | Boolean or String | 'Help'             | The help button                 |
 | info                  | Boolean or String | 'Details'          | The info button                 |
 | browse                | Boolean or String | 'Browse Tasks'     | The browse tasks button         |
-| share                 | Boolean or String | 'Share'            | The share button                |
 | download              | Boolean or String | 'Download'         | The download button             |
 
 Any key-value pairs added to the `buttons` object that are not listed above
@@ -106,7 +105,6 @@ The following slots are available.
 
 | Name   | Description                                                      |
 |--------|------------------------------------------------------------------|
-| share  | Content for the share model                                      |
 | help   | Slots in above the viewer controls section in the help model     |
 | info   | Content for the info modal (overwrites `task.manifest`)          |
 

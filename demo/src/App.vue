@@ -1,49 +1,21 @@
 <template>
   <div id="app">
 
-    <!-- Basic navigation to go back to the demo homepage -->
-    <nav
-      id="lv-demo-navbar"
-      v-if="showSelectViewer || showTranscribeViewer">
-      <button @click="hideViewer">
-        &lt; Go back
-      </button>
-    </nav>
-
     <!-- Demo home page -->
-    <div
-      id="homepage"
-      v-if="(
-        !showSelectViewer &&
-        !showTranscribeViewer &&
-        !customTaskOpts.length)">
+    <div id="homepage" v-if="!showViewer">
       <div class="container">
         <h1>LibCrowds Viewer</h1>
         <p class="lead">
           A Vue component for crowdsourcing Web Annotations.
         </p>
         <div id="mode-buttons">
-          <button @click="showSelectViewer = true">
+          <button @click="loadSelectTasks">
             Select Mode
           </button>
-          <button @click="showTranscribeViewer = true">
+          <button @click="loadTranscribeTasks">
             Transcribe Mode
           </button>
-          <button @click="showCustomiseTextArea = !showCustomiseTextArea">
-            Customise
-          </button>
         </div>
-        <transition name="fade-text-area">
-          <div id="customise" v-show="showCustomiseTextArea">
-            <textarea
-              ref="custom"
-              rows="10">
-            </textarea>
-            <button @click="loadCustomTaskOpts">
-              Try it out
-            </button>
-          </div>
-        </transition>
         <p id="instructions">
           <small>(watch the console for events)</small>
         </p>
@@ -54,56 +26,27 @@
       </div>
     </div>
 
-    <!-- Viewer used for the select tasks -->
-    <div class="viewer-container" v-else-if="showSelectViewer">
-      <libcrowds-viewer
-        :task-opts="selectTaskOpts"
-        :before-submit="beforeSubmit"
-        @taskchange="handleTaskChange"
-        @create="handleCreate"
-        @update="handleUpdate"
-        @delete="handleDelete"
-        @submit="handleSubmit">
-        <div slot="share">
-          Custom share content can go here.
-        </div>
-      </libcrowds-viewer>
-    </div>
+    <!-- Viewer -->
+    <div class="viewer-container" v-else>
 
-    <!-- Viewer used for the transcribe tasks -->
-    <div class="viewer-container" v-else-if="showTranscribeViewer">
-      <libcrowds-viewer
-        :show-related-tasks="true"
-        :task-opts="transcribeTaskOpts"
-        :before-submit="beforeSubmit"
-        @taskchange="handleTaskChange"
-        @create="handleCreate"
-        @update="handleUpdate"
-        @delete="handleDelete"
-        @submit="handleSubmit">
-        <div slot="share">
-          Custom share content can go here.
-        </div>
-      </libcrowds-viewer>
-    </div>
+      <nav
+        id="lv-demo-navbar">
+        <button @click="showViewer = false">
+          &lt; Go back
+        </button>
+      </nav>
 
-    <!-- Viewer used for the custom tasks -->
-    <div class="viewer-container" v-else-if="customTaskOpts.length">
       <libcrowds-viewer
-        :show-related-tasks="true"
-        :task-opts="customTaskOpts"
+        :task-opts="taskOpts"
         :before-submit="beforeSubmit"
-        @taskchange="handleTaskChange"
-        @create="handleCreate"
-        @update="handleUpdate"
-        @delete="handleDelete"
-        @submit="handleSubmit">
-        <div slot="share">
-          Custom share content can go here.
-        </div>
+        @create="logEvent('Annotation Created', arguments)"
+        @update="logEvent('Annotation Updated', arguments)"
+        @delete="logEvent('Annotation Deleted', arguments)"
+        @taskchange="logEvent('Task Changed', arguments)"
+        @submit="logEvent('Task Submitted', arguments)">
       </libcrowds-viewer>
-    </div>
 
+    </div>
   </div>
 </template>
 
@@ -117,24 +60,8 @@ export default {
     return {
       githubUrl: 'https://github.com/LibCrowds/libcrowds-viewer',
       docsUrl: 'https://libcrowds.gitbooks.io/libcrowds-viewer-docs/content/',
-      selectTaskOpts: selectTasks,
-      transcribeTaskOpts: transcribeTasks,
-      showSelectViewer: false,
-      showTranscribeViewer: false,
-      showCustomiseTextArea: false,
-      customTaskOpts: [],
-      beforeSubmit: (taskData) => new Promise((resolve, reject) => {
-        if (!taskData.annotations.length) {
-          const confirm = window.confirm(
-            'EXAMPLE ALERT\n\n' +
-            'No annotations have been saved, do you want to continue?'
-          )
-          if (!confirm) {
-            reject(new Error())
-          }
-        }
-        resolve()
-      })
+      taskOpts: [],
+      showViewer: false
     }
   },
 
@@ -143,45 +70,49 @@ export default {
   },
 
   methods: {
-    loadCustomTaskOpts () {
-      try {
-        this.customTaskOpts = JSON.parse(this.$refs.custom.value)
-      } catch (err) {
-        this.customTaskOpts = []
-        alert(err)
-      }
+    /**
+     * Log an event for testing purposes.
+     * @param {String} message
+     *   A message.
+     * @param {Array} args
+     *   The arguments.
+     */
+    logEvent (message, args) {
+      console.log(message, args)
     },
 
-    handleTaskChange (oldTask, newTask) {
-      console.log('Task changed', oldTask, newTask)
+    /**
+     * Load the demo select tasks.
+     */
+    loadSelectTasks () {
+      this.taskOpts = selectTasks
+      this.showViewer = true
     },
 
-    handleCreate (task, annotation) {
-      console.log('Annotation created', task, annotation)
+    /**
+     * Load the demo transcribe tasks.
+     */
+    loadTranscribeTasks () {
+      this.taskOpts = transcribeTasks
+      this.showViewer = true
     },
 
-    handleUpdate (task, annotation) {
-      console.log('Annotation updated', task, annotation)
-    },
-
-    handleDelete (task, annotation) {
-      console.log('Annotation deleted', task, annotation)
-    },
-
-    handleSubmit (task) {
-      console.log('Task submitted', task)
-      console.log(JSON.stringify(task.annotations, null, 2))
-    },
-
-    hideViewer () {
-      this.showSelectViewer = false
-      this.showTranscribeViewer = false
-    },
-
-    demoButtonSlotAlert () {
-      const msg = 'This is an example of an additional button being added ' +
-        'using the button slot'
-      alert(msg)
+    /**
+     * Show an example beforeSubmit alert.
+     */
+    beforeSubmit(taskData) {
+      return new Promise((resolve, reject) => {
+        if (!taskData.annotations.length) {
+          const confirm = window.confirm(
+            'EXAMPLE BEFORE SUBMISSION ALERT\n\n' +
+            'No annotations have been saved, do you want to continue?'
+          )
+          if (!confirm) {
+            reject(new Error())
+          }
+        }
+        resolve()
+      })
     }
   }
 }
@@ -242,21 +173,6 @@ $lv-demo-navbar-height: 50px;
     border: none;
   }
 
-  #customise {
-    width: 75%;
-    display: block;
-    text-align: center;
-
-    textarea {
-      width: 100%;
-      margin: 1rem;
-    }
-
-    button {
-      background: #26A65B !important;
-    }
-  }
-
   #links {
     display: flex;
     flex-direction: column;
@@ -302,6 +218,7 @@ $lv-demo-navbar-height: 50px;
 }
 
 #lv-demo-navbar {
+  display: flex;
   background: $lv-sidebar-bg;
   padding: 0 1.5em;
   height: $lv-demo-navbar-height;

@@ -43,7 +43,6 @@ export default {
         help: 'question-circle',
         info: 'info-circle',
         browse: 'eye',
-        share: 'share-alt',
         fullscreen: 'expand'
       }
 
