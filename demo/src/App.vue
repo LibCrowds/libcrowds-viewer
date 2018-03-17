@@ -48,10 +48,7 @@
         @toolbarbtnclick="handleToolbarBtnClick">
       </libcrowds-viewer>
 
-      <lv-modal
-        :show="showExampleModal"
-        title="Example Modal"
-        @hide="showExampleModal = false">
+      <lv-modal v-model="showExampleModal" title="Example Modal">
         <p>
           This is an example of a custom button being used to show a custom
           modal.
