@@ -97,7 +97,6 @@
       <base-sidebar
         v-if="currentTask"
         :task="currentTask"
-        :showNote="showNote"
         :commentAnnotation="commentAnnotation"
         :disableComplete="disableComplete"
         :confirmOnSubmit="confirmOnSubmit"
@@ -217,10 +216,6 @@ export default {
       type: Boolean,
       default: true
     },
-    showNote: {
-      type: Boolean,
-      default: true
-    },
     showFormErrors: {
       type: Boolean,
       default: true
@@ -319,7 +314,7 @@ export default {
 
     mergedToolbarButtons () {
       let merged = JSON.parse(JSON.stringify(this.defaultToolbarButtons))
-      merged = Object.assign(this.toolbarButtons, merged)
+      merged = Object.assign(merged, this.toolbarButtons)
       if (!this.browsable) {
         merged.browse = false
       }
@@ -331,7 +326,7 @@ export default {
 
     mergedSidebarButtons () {
       let defaults = JSON.parse(JSON.stringify(this.defaultSidebarButtons))
-      return Object.assign(this.sidebarButtons, defaults)
+      return Object.assign(defaults, this.sidebarButtons)
     }
   },
 
