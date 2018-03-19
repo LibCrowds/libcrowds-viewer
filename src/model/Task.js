@@ -10,7 +10,6 @@ class Task {
     tileSource = errors.throwIfMissing('tileSource'),
     target = errors.throwIfMissing('target'),
     manifest = null,
-    id = null,
     objective = '',
     guidance = '',
     tag,
@@ -26,7 +25,6 @@ class Task {
     this.target = target
     this.manifest = manifest
     this.tileSource = tileSource
-    this.id = id
     this.objective = objective
     this.guidance = guidance
     this.tag = tag
