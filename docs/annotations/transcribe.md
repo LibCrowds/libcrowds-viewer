@@ -61,7 +61,7 @@ taken from `form.model` and `form.classification`, respectively.
   "created": "2017-07-16T13:53:18.795Z",
   "generated": "2017-07-16T13:53:18.795Z",
   "target": {
-    "source": "http://example.org/iiif/book1/canvas/p1"
+    "source": "http://example.org/iiif/book1/canvas/p1",
     "selector": {
       "conformsTo": "http://www.w3.org/TR/media-frags/",
       "type": "FragmentSelector",

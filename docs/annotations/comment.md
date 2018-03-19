@@ -14,7 +14,7 @@ task types.
   "motivation": "commenting",
   "created": "2017-07-16T00:44:28.454Z",
   "generated": "2017-07-16T00:44:28.454Z",
-  "target": "http://example.org/iiif/book1/canvas/p1"
+  "target": "http://example.org/iiif/book1/canvas/p1",
   "body": {
     "type": "TextualBody",
     "value": "My fascinating comment",
