@@ -1,8 +1,10 @@
 # Select Annotations
 
-In select mode users can tag areas of the image (semantically or otherwise), potentially preparing them for subsequent transcription.
+In select mode, users can tag areas of the image (semantically or otherwise),
+potentially preparing them for subsequent transcription.
 
-Generate Select Annotations by setting the task options `type` to  `select`, see [Configuration](../configuration.md) for details.
+Generate Select Annotations by setting the task options `type` to `select`;
+see the [Configuration](../configuration.md) section for details.
 
 Note that the `tag` property is required when in `select` mode.
 

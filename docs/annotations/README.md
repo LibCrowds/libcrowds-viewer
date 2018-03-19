@@ -1,6 +1,6 @@
-# Annotation Modes
+# Annotation Types
 
-The LibCrowds Viewer interface and the annotations emitted are configured according to the properties passed to the viewer.
+LibCrowds Viewer generates the following types of annotation:
 
 * [Select Annotations](/annotations/select.md)
 * [Transcribe Annotations](/annotations/transcribe.md)

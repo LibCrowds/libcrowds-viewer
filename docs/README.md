@@ -4,9 +4,9 @@ LibCrowds Viewer is a [Vue.js](https://vuejs.org/v2/guide/) component for
 crowdsourcing annotations, which are generated according to the
 [Web Annotations Data Model](https://www.w3.org/TR/annotation-model/).
 
-Tasks are fed into the viewer via properties and the resulting annotations
+Tasks are fed into the viewer as properties and the resulting annotations
 emitted as events. It is up to the client to decide how to store these
-annotations (probably by sending them to an annotations server).
+annotations, for example, by sending them to an annotations server.
 
 ## Installation
 

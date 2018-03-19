@@ -16,7 +16,6 @@ All of the following properties, apart from `task-opts`, are optional.
 | zoom-by               | Number   | 0.2           | Multiplier by which to zoom                                                                           |
 | confirm-before-unload | Boolean  | true          | Confirm before leaving the page                                                                       |
 | disable-complete      | Boolean  | true          | Disable completed tasks to prevent multiple submission                                                |
-| show-note             | Boolean  | true          | Include the note input                                                                                |
 | show-form-errors      | Boolean  | true          | Show form errors on submit                                                                            |
 | show-related-tasks    | Boolean  | false         | Show all tasks related to the same image                                                              |
 | next-on-submit        | Object   | true          | Move to the next task on after submission                                                             |
@@ -68,22 +67,22 @@ String.
 Tasks are created from an array of objects with the following properties. These
 objects are passed to the viewer via `task-opts`.
 
-| Property       | Type              | Attributes | Description                                                                            |
-|----------------|-------------------|------------|----------------------------------------------------------------------------------------|
-| mode           | String            |            | The task more (see [Annotation Modes](annotations/README.md))                          |
-| tileSource     | String or Object  |            | The tile source specifier (see [Tile Sources](tile_sources.md))                        |
-| target         | String or Object  |            | The target of the annotation (see [Data Model](data_model.md))                         |
-| manifest       | String            |  optional  | A IIIF manifest URI used to fill the info modal                                        |
-| objective      | String            |  optional  | The main objective                                                                     |
-| guidance       | String            |  optional  | Additional guidance                                                                    |
-| thumbnailUrl   | String            |  optional  | URL for a thumbnail image to use in the browse modal                                   |
-| id             | String            |  optional  | Task identifier                                                                        |
-| form           | Object            |  optional  | Form properties (see [Forms](configuration.md#forms))                                  |
+| Property       | Type              | Attributes | Description                                                                               |
+|----------------|-------------------|------------|-------------------------------------------------------------------------------------------|
+| mode           | String            |            | Either `select`, `transcribe` or `review` (see [Task Modes](task_modes.md))               |
+| tileSource     | String or Object  |            | The tile source specifier (see [Tile Sources](tile_sources.md))                           |
+| target         | String or Object  |            | The target of any annotations generated for the task (see [Data Model](data_model.md))    |
+| manifest       | String            |  optional  | A IIIF manifest URI used to fill the info modal                                           |
+| objective      | String            |  optional  | The main objective                                                                        |
+| guidance       | String            |  optional  | Additional guidance                                                                       |
+| thumbnailUrl   | String            |  optional  | URL for a thumbnail image to use in the browse modal                                      |
+| id             | String            |  optional  | Task identifier                                                                           |
+| form           | Object            |  optional  | Form properties (see [Forms](configuration.md#forms))                                     |
 | highlights     | Array             |  optional  | Coordinates identifying regions of the image to highlight. This can also be achived by passing a `FragmentSelector` as part of the `target` object, see the [Data Model](data_model.md) |
-| tag            | String            |  optional  | A tag                                                                                  |
-| classification | String            |  optional  | A Semantic Tag (e.g. [http://purl.org/dc/terms/title](http://purl.org/dc/terms/title)) |
-| complete       | Boolean           |  optional  | Mark the task as complete                                                              |
-| bounds         | Object            |  optional  | Parameters to fit screen to when task loaded (`x`, `y`, `width` and `height`)          |
+| tag            | String            |  optional  | A tag                                                                                     |
+| classification | String            |  optional  | A Semantic Tag (e.g. [http://purl.org/dc/terms/title](http://purl.org/dc/terms/title))    |
+| complete       | Boolean           |  optional  | Mark the task as complete                                                                 |
+| bounds         | Object            |  optional  | Parameters to fit screen to when task loaded (`x`, `y`, `width` and `height`)             |
 
 See the [Annotations](annotations/README.md) section for some examples of using the above options to configure tasks.
 
