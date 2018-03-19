@@ -6,7 +6,6 @@
     ref="sidebar">
 
     <header key="header" class="lv-sidebar-header">
-      <h3>Task</h3>
       <h4 key="objective">{{ task.objective }}</h4>
       <p key="guidance">{{ task.guidance }}</p>
     </header>
