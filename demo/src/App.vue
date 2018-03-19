@@ -15,6 +15,9 @@
           <button @click="loadTranscribeTasks">
             Transcribe Mode
           </button>
+          <button @click="loadReviewTasks">
+            Review Mode
+          </button>
         </div>
         <p id="instructions">
           <small>(watch the console for events)</small>
@@ -62,6 +65,7 @@
 import Icon from 'vue-awesome/components/Icon'
 import selectTasks from './selectTasks'
 import transcribeTasks from './transcribeTasks'
+import reviewTasks from './reviewTasks'
 
 export default {
   data () {
@@ -98,6 +102,14 @@ export default {
      */
     loadSelectTasks () {
       this.taskOpts = selectTasks
+      this.showViewer = true
+    },
+
+    /**
+     * Load the demo review tasks.
+     */
+    loadReviewTasks () {
+      this.taskOpts = reviewTasks
       this.showViewer = true
     },
 

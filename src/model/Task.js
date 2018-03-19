@@ -39,7 +39,7 @@ class Task {
     this.bounds = bounds
 
     // Validate
-    const validModes = ['select', 'transcribe']
+    const validModes = ['select', 'transcribe', 'review']
 
     if (validModes.indexOf(this.mode) < 0) {
       throw new Error(`Mode must be one of ${validModes}`)

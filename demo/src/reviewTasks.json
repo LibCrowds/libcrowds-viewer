@@ -1,0 +1,62 @@
+[
+  {
+    "mode": "review",
+    "objective": "Details",
+    "guidance": "Click the next or previous buttons to cycle through the plays transcribed for this sheet.",
+    "tileSource": "https://api.bl.uk/image/iiif/ark:/81055/vdc_100022589157.0x000005/info.json",
+    "target": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x00007e",
+    "manifest": "https://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json",
+    "form": {
+      "model": {
+        "title": null
+      },
+      "classification": {
+        "title": "http://purl.org/dc/terms/title"
+      },
+      "schema": {
+        "fields": [
+          {
+            "type": "input",
+            "inputType": "text",
+            "label": "Title",
+            "model": "title",
+            "placeholder": "Enter the title",
+            "required": true
+          }
+        ]
+      }
+    },
+    "annotations": [
+      {
+        "@context": "http://www.w3.org/ns/anno.jsonld",
+        "id": "45e07a8b-82c2-4fb3-a746-068aad1fab11",
+        "type": "Annotation",
+        "motivation": "describing",
+        "created": "2017-07-16T13:53:18.795Z",
+        "generated": "2017-07-16T13:53:18.795Z",
+        "target": {
+          "source": "http://example.org/iiif/book1/canvas/p1",
+          "selector": {
+            "conformsTo": "http://www.w3.org/TR/media-frags/",
+            "type": "FragmentSelector",
+            "value": "?xywh=100,100,100,100"
+          }
+        },
+        "body": [
+          {
+            "type": "TextualBody",
+            "purpose": "describing",
+            "value": "The Devil to Pay",
+            "format": "text/plain"
+          },
+          {
+            "type": "TextualBody",
+            "purpose": "tagging",
+            "value": "title"
+          }
+        ],
+        "modified": "2017-07-16T14:25:18.795Z"
+      }
+    ]
+  }
+]
