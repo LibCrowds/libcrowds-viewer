@@ -1,11 +1,12 @@
 <template>
   <div class="lv-toolbar" id="lv-main-controls">
     <control-button
-      v-for="(button, index) in toolbarButtons"
+      v-for="(btn, index) in toolbarButtons"
+      v-if="btn.tooltip"
       :key="index"
-      :tooltip="button.tooltip"
-      :callback="button.callback">
-      <icon :name="button.icon"></icon>
+      :tooltip="btn.tooltip"
+      :callback="btn.callback">
+      <icon :name="btn.icon"></icon>
     </control-button>
   </div>
 </template>
