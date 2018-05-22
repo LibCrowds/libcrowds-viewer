@@ -104,10 +104,11 @@ In `transcribe` mode, the form can be configured with the following properties.
 
 The following slots are available.
 
-| Name   | Description                                                      |
-|--------|------------------------------------------------------------------|
-| help   | Slots in above the viewer controls section in the help model     |
-| info   | Content for the info modal (overwrites `task.manifest`)          |
+| Name   | Description                                                          |
+|--------|----------------------------------------------------------------------|
+| help   | Slots in above the viewer controls section in the help model         |
+| info   | Content for the info modal (overwrites `task.manifest`)              |
+| footer | Add items into the sidebar footer, above the submit and note buttons |
 
 
 ## Styles
