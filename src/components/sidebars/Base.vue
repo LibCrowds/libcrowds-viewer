@@ -11,10 +11,14 @@
     </header>
 
     <main key="content" :class="contentClass">
-      <slot></slot>
+      <slot name="content"></slot>
     </main>
 
     <footer key="footer" class="lv-sidebar-footer">
+
+      <!-- Passed from main viewer's footer slot -->
+      <slot></slot>
+
       <span v-if="!showConfirmButtons">
         <button
           v-if="buttons.note"

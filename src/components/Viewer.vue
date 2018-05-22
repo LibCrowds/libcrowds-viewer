@@ -118,6 +118,7 @@
         @enableviewer="viewerDisabled = false">
 
         <select-sidebar-item
+          slot="content"
           v-if="taskLoaded && currentTask.mode === 'select'"
           :task="currentTask"
           :tags="tags"
@@ -129,6 +130,7 @@
         </select-sidebar-item>
 
         <transcribe-sidebar-item
+          slot="content"
           v-if="currentTask.mode === 'transcribe'"
           :task="currentTask"
           :disableComplete="disableComplete"
@@ -137,6 +139,8 @@
           @inputfocus="onTranscribeInputFocus"
           @inputblur="onTranscribeInputBlur">
         </transcribe-sidebar-item>
+
+        <slot name="footer"></slot>
 
       </base-sidebar>
     </main>
