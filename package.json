@@ -1,7 +1,7 @@
 {
   "name": "libcrowds-viewer",
   "description": "A Vue component for crowdsourcing Web Annotations.",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "main": "dist/main.js",
   "author": "Alex Mendes <alexanderhmendes@gmail.com>",
   "license": "MIT",
