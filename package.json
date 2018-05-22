@@ -72,7 +72,7 @@
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.6",
     "semver": "^5.4.1",
-    "style-loader": "^0.20.0",
+    "style-loader": "^0.21.0",
     "vue": "^2.5.16",
     "vue-loader": "^15.1.0",
     "vue-template-compiler": "^2.5.0",
