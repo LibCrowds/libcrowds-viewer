@@ -1,13 +1,15 @@
 <template>
-  <vue-form-generator
-    class="lv-form"
-    ref="form"
-    v-if="form"
-    :schema="form.schema"
-    :model="form.model"
-    :options="formOptions"
-    @validated="onValidated">
-  </vue-form-generator>
+  <form v-on:submit.prevent="onSubmit">
+    <vue-form-generator
+      class="lv-form"
+      ref="form"
+      v-if="form"
+      :schema="form.schema"
+      :model="form.model"
+      :options="formOptions"
+      @validated="onValidated">
+    </vue-form-generator>
+  </form>
 </template>
 
 <script>
@@ -76,12 +78,10 @@ export default {
     },
 
     /**
-     * Emit the submit event on enter.
+     * Emit the submit event.
      */
-    onKeyup (evt) {
-      if (evt.keyCode === 13) {
-        this.$emit('submit', this.task)
-      }
+    onSubmit () {
+      this.$emit('submit', this.task)
     },
 
     /**
@@ -93,7 +93,6 @@ export default {
         for (let i = 0; i < fieldElems.length; i++) {
           fieldElems[i].addEventListener('focus', this.onInputFocus)
           fieldElems[i].addEventListener('blur', this.onInputBlur)
-          fieldElems[i].addEventListener('keyup', this.onKeyup)
         }
       }
     },
