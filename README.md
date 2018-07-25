@@ -1,6 +1,5 @@
 # LibCrowds Viewer
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/LibCrowds/libcrowds-viewer.svg)](https://greenkeeper.io/)
 [![npm version](https://badge.fury.io/js/libcrowds-viewer.svg)](https://badge.fury.io/js/libcrowds-viewer)
 [![npm downloads](https://img.shields.io/npm/dt/libcrowds-viewer.svg)](https://badge.fury.io/js/libcrowds-viewer)
 [![Build Status](https://travis-ci.org/LibCrowds/libcrowds-viewer.svg?branch=master)](https://travis-ci.org/LibCrowds/libcrowds-viewer)
