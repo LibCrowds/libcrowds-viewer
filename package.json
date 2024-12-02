@@ -31,7 +31,7 @@
     "es6-promise": "^4.1.1",
     "hint.css": "^2.5.0",
     "normalize.css": "^8.0.0",
-    "openseadragon": "~2.3.1",
+    "openseadragon": "~2.4.0",
     "uuid": "^3.1.0",
     "vue-awesome": "^2.3.1",
     "vue-form-generator": "^2.0.0"
